@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.WebService", "Rld.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.WebService.Contract", "Rld.Acs.WebService.Contract\Rld.Acs.WebService.Contract.csproj", "{4164ECC9-3EE1-41B3-89A4-70AF086AC321}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Device.Webserivce", "Rld.Device.Webserivce\Rld.Device.Webserivce.csproj", "{727348B1-767F-4DC0-B10E-E0BEB0068322}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem.Webserivce", "Rld.DeviceSystem.Webserivce\Rld.DeviceSystem.Webserivce.csproj", "{727348B1-767F-4DC0-B10E-E0BEB0068322}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.Service", "Rld.Acs.Service\Rld.Acs.Service.csproj", "{29AFBDE7-3B35-4164-B14B-609DBE784A8E}"
 EndProject
@@ -23,7 +23,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.Repository.Mybatis.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.Repository.Mybatis.Oracle", "Rld.Acs.Repository.Mybatis.Oracle\Rld.Acs.Repository.Mybatis.Oracle.csproj", "{BBE00324-9433-4D7F-A6B7-085EFF851184}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Device.Webserivce.Contract", "Rld.Device.Webserivce.Contract\Rld.Device.Webserivce.Contract.csproj", "{B36810C2-544A-4CD9-886B-1302ADBE6C86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem.Webserivce.Contract", "Rld.DeviceSystem.Webserivce.Contract\Rld.DeviceSystem.Webserivce.Contract.csproj", "{B36810C2-544A-4CD9-886B-1302ADBE6C86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{1982FDA8-367A-45EC-86CD-41F03CE029D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,5 +80,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{090002E5-AB29-4FF1-B6F0-2EA8AA8BCC9D} = {1982FDA8-367A-45EC-86CD-41F03CE029D3}
+		{5BD9C61A-740D-4099-ADE2-9E583B43DF85} = {1982FDA8-367A-45EC-86CD-41F03CE029D3}
+		{C2908D59-EC4F-4CCA-9DAE-4D26D0E6B1E5} = {1982FDA8-367A-45EC-86CD-41F03CE029D3}
+		{BBE00324-9433-4D7F-A6B7-085EFF851184} = {1982FDA8-367A-45EC-86CD-41F03CE029D3}
 	EndGlobalSection
 EndGlobal
