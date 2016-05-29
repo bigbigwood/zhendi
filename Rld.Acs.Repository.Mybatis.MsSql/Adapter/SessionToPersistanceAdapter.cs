@@ -17,13 +17,15 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
 
         public void Close()
         {
-            _session.CloseConnection();
+            if (_session.IsSessionStarted)
+                _session.CloseConnection();
         }
 
         public void Dispose()
         {
             _notifier.Invoke();
-            _session.CloseConnection();
+
+            Close();
         }
 
         public ISqlMapper GetUndelayingSession()

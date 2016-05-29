@@ -21,8 +21,15 @@ namespace Rld.Acs.WebService
             {
                 try
                 {
-                    var s = RepositoryManager.GetRepository<ICustomerRepository>();
-                    var c = s.GetByKey(1);
+                    var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
+                    var customer1 = customerRepo.GetByKey(1);
+
+                    customerRepo.Insert(customer1);
+
+                    customer1.FirstName = "firstName";
+                    customer1.LastName = "lastName";
+                    customerRepo.Update(customer1);
+
                     transaction.Commit();
                 }
                 catch (Exception ex)

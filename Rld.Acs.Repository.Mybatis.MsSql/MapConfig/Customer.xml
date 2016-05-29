@@ -16,7 +16,22 @@
   <statements>
     <select id="Customer.GetByKey" parameterClass="Int64" resultMap="Customer">
       SELECT * 
-      FROM Customer where CustomerId =  #value#
+      FROM Customer 
+      where CustomerId =  #value#
     </select>
+    <insert id="Customer.Insert" parameterClass="Rld.Acs.Model.Customer">
+      INSERT INTO Customer
+      (FirstName,LastName,MSIDSN,Balance,ResigterDateTime,Address)
+      VALUES(#FirstName#,#LastName#,#MSIDSN#,#Balance#,#ResigterDateTime#,#Address#)
+    </insert>
+    <update id="Customer.Update" parameterClass="Rld.Acs.Model.Customer">
+      UPDATE Customer
+      SET FirstName=#FirstName#,LastName=#LastName#,MSIDSN=#MSIDSN#,Balance=#Balance#,ResigterDateTime=#ResigterDateTime#,Address=#Address#
+      WHERE CustomerId = #CustomerId#
+    </update>
+    <delete id="Customer.Delete"  parameterClass="Int64">
+      DELETE FROM Customer
+      where CustomerId =  #value#
+    </delete>
   </statements>
 </sqlMap>

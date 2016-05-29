@@ -82,9 +82,7 @@
       <Name>Rld.Acs.Repository</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Factory\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Customer.xml" />
   </ItemGroup>
