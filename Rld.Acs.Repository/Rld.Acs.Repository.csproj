@@ -36,8 +36,8 @@
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MyBatis.Common">
-      <HintPath>..\packages\MyBatis.Common.3.0.0\lib\MyBatis.Common.dll</HintPath>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,10 +48,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ConnectionAlreadyOpened.cs" />
+    <Compile Include="Exceptions\ConnectionNotOpened.cs" />
+    <Compile Include="Framework\IConnectionProvider.cs" />
+    <Compile Include="Framework\IPersistanceConnection.cs" />
+    <Compile Include="Framework\IPersistanceTransaction.cs" />
+    <Compile Include="Framework\IRepository.cs" />
+    <Compile Include="Interfaces\IDictUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Rld.Acs.Model\Rld.Acs.Model.csproj">
+      <Project>{1f0d7445-70c1-48be-8ecd-68f9b3a07d83}</Project>
+      <Name>Rld.Acs.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

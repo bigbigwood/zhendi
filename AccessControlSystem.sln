@@ -27,6 +27,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem.Webserivce
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{1982FDA8-367A-45EC-86CD-41F03CE029D3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{660A3DCB-05BB-405D-A8A7-B87DDCEC4C1A}"
+	ProjectSection(SolutionItems) = preProject
+		lib\IBatisNet.Common.dll = lib\IBatisNet.Common.dll
+		lib\IBatisNet.Common.Logging.Log4Net.dll = lib\IBatisNet.Common.Logging.Log4Net.dll
+		lib\IBatisNet.DataAccess.dll = lib\IBatisNet.DataAccess.dll
+		lib\IBatisNet.DataMapper.dll = lib\IBatisNet.DataMapper.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

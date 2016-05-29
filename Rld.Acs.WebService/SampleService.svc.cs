@@ -1,4 +1,6 @@
-﻿using Rld.Acs.WebService.Contract;
+﻿using Rld.Acs.Repository;
+using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.WebService.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,24 @@ namespace Rld.Acs.WebService
     {
         public void DoSomething()
         {
+            using (var conn = RepositoryManager.GetNewConnection())
+            using (var transaction = conn.BeginTransaction())
+            {
+                try
+                {
+                    var s = RepositoryManager.GetRepository<ICustomerRepository>();
+                    var c = s.GetByKey(1);
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    // transaction rollback
+                    if (transaction != null)
+                    {
+                        transaction.Rollback();
+                    }
+                }
+            }
         }
     }
 }

@@ -46,6 +46,10 @@
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -81,6 +85,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Rld.Acs.Model\Rld.Acs.Model.csproj">
+      <Project>{1f0d7445-70c1-48be-8ecd-68f9b3a07d83}</Project>
+      <Name>Rld.Acs.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Repository.Mybatis.MsSql\Rld.Acs.Repository.Mybatis.MsSql.csproj">
+      <Project>{5bd9c61a-740d-4099-ade2-9e583b43df85}</Project>
+      <Name>Rld.Acs.Repository.Mybatis.MsSql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Repository\Rld.Acs.Repository.csproj">
+      <Project>{090002e5-ab29-4ff1-b6f0-2ea8aa8bcc9d}</Project>
+      <Name>Rld.Acs.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rld.Acs.WebService.Contract\Rld.Acs.WebService.Contract.csproj">
       <Project>{4164ecc9-3ee1-41b3-89a4-70af086ac321}</Project>
       <Name>Rld.Acs.WebService.Contract</Name>
@@ -88,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="providers.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlMap.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

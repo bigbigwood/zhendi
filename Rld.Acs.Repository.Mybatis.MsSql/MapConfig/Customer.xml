@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <resultMaps>
+    <resultMap id="Customer" class="Rld.Acs.Model.Customer">
+      <result property="CustomerId" column="CustomerId" />
+      <result property="FirstName" column="FirstName" />
+      <result property="LastName" column="LastName" />
+      <result property="MSIDSN" column="MSIDSN" />
+      <result property="Balance" column="Balance" />
+      <result property="ResigterDateTime" column="ResigterDateTime" />
+      <result property="Address" column="Address" />
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="Customer.GetByKey" parameterClass="Int64" resultMap="Customer">
+      SELECT * 
+      FROM Customer where CustomerId =  #value#
+    </select>
+  </statements>
+</sqlMap>

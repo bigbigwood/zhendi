@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1F0D7445-70C1-48BE-8ECD-68F9B3A07D83}</ProjectGuid>
+    <ProjectGuid>{6CA5AFC1-88F0-4C7C-9512-28E80F47126B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Rld.Acs.Model</RootNamespace>
-    <AssemblyName>Rld.Acs.Model</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>Rld.Acs.Repository.Facade</RootNamespace>
+    <AssemblyName>Rld.Acs.Repository.Facade</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +20,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,9 +28,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net40\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,8 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
+    <Compile Include="NinjectBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rld.Acs.Model\Rld.Acs.Model.csproj">
+      <Project>{1f0d7445-70c1-48be-8ecd-68f9b3a07d83}</Project>
+      <Name>Rld.Acs.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Repository.Mybatis.MsSql\Rld.Acs.Repository.Mybatis.MsSql.csproj">
+      <Project>{5bd9c61a-740d-4099-ade2-9e583b43df85}</Project>
+      <Name>Rld.Acs.Repository.Mybatis.MsSql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Repository\Rld.Acs.Repository.csproj">
+      <Project>{090002e5-ab29-4ff1-b6f0-2ea8aa8bcc9d}</Project>
+      <Name>Rld.Acs.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

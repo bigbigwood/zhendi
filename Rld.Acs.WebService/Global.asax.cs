@@ -15,6 +15,8 @@ namespace Rld.Acs.WebService
         {
             log4net.Config.XmlConfigurator.Configure();
             Log.Info("Application start");
+
+            Repository.RepositoryManager.AddAssemby(typeof(Repository.Mybatis.MsSql.NinjectBinder).Assembly);
         }
 
         protected void Session_Start(object sender, EventArgs e)
