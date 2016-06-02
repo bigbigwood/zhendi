@@ -43,8 +43,10 @@
         <StackPanel Background="Red" Width="55" Grid.Row="1" Visibility="{Binding Path=SimpleMenuShow, Converter={StaticResource ToggleExpandToVisibility}}">
             <cc:ImageButton x:Name="testToggle" Width="55"  Height="44" ImgPath="/Images/threeSlash.jpg"  Template="{StaticResource ImageButtonTemplate}" Command="{Binding ShowMenu}" CommandParameter="{Binding Path=AllMenuShow}"/>
             <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/user.jpg" Template="{StaticResource ImageButtonTemplate}" Command="{Binding ShowUserMainWindow}"/>
-            <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/device.jpg" Template="{StaticResource ImageButtonTemplate}" Visibility="Collapsed"/>
+            <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/device.jpg" Template="{StaticResource ImageButtonTemplate}"/>
             <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/info.jpg" Template="{StaticResource ImageButtonTemplate}" />
+            <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/setting.jpg" Template="{StaticResource ImageButtonTemplate}" />
+            <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/backService.jpg" Template="{StaticResource ImageButtonTemplate}" />
         </StackPanel>
         <StackPanel Background="Red" Width="100" Grid.Row="1" Visibility="{Binding Path=AllMenuShow, Converter={StaticResource ToggleExpandToVisibility}}">
             <cc:ImageButton x:Name="testToggle1" Width="100"  Height="44" ImgPath="/Images/threeSlash.jpg" Template="{StaticResource ImageButtonTemplate}"  Command="{Binding ShowMenu}" CommandParameter="{Binding Path=AllMenuShow}"/>

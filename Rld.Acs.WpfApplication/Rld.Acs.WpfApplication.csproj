@@ -123,10 +123,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\SimpleMenu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -178,6 +174,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\user.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\backService.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\setting.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
