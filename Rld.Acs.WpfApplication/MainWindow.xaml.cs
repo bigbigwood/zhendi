@@ -1,4 +1,6 @@
 ﻿using MahApps.Metro.Controls;
+using Rld.Acs.WpfApplication.CustomerControl;
+using Rld.Acs.WpfApplication.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,18 @@ namespace Rld.Acs.WpfApplication
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleButton toggleButton = (ToggleButton)sender;
+            toggleButton.Expand = !toggleButton.Expand;
+        }
+
+        private void ImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserMainWindow page = new UserMainWindow();
+            MainFrame.Content = page;
         }
     }
 }
