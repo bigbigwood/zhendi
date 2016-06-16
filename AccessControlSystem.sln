@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{660A3DCB-05B
 		lib\IBatisNet.Common.Logging.Log4Net.dll = lib\IBatisNet.Common.Logging.Log4Net.dll
 		lib\IBatisNet.DataAccess.dll = lib\IBatisNet.DataAccess.dll
 		lib\IBatisNet.DataMapper.dll = lib\IBatisNet.DataMapper.dll
+		lib\log4net.dll = lib\log4net.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.WebApi", "Rld.Acs.WebApi\Rld.Acs.WebApi.csproj", "{C633CD4F-21BF-4DD8-BD83-C361F5BD2D54}"
