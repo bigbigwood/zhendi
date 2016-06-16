@@ -2,6 +2,7 @@
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.WebApi.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,104 +32,61 @@ namespace Rld.Acs.WebApi.Controllers
         }
 
         // GET api/customers/5
-        public IHttpActionResult GetById(int id)
+        public HttpResponseMessage GetById(int id)
         {
-            using (var conn = RepositoryManager.GetNewConnection())
+            return Processor.webHandle(id, new Func<HttpResponseMessage>(() =>
             {
                 var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
                 var customer = customerRepo.GetByKey(id);
-                if (customer == null)
-                     return NotFound();
 
-                return Ok(customer);
-            }
+                if (customer == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+
+                return Request.CreateResponse(HttpStatusCode.OK, customer);
+
+            }), this);
         }
 
         // POST api/customers
-        public IHttpActionResult Post([FromBody]Customer customerDto)
+        public HttpResponseMessage Post([FromBody]Customer customerDto)
         {
-            using (var conn = RepositoryManager.GetNewConnection())
-            using (var transaction = conn.BeginTransaction())
+            return Processor.webHandle(customerDto, new Func<HttpResponseMessage>(() =>
             {
-                try
-                {
-                    var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
-                    customerRepo.Insert(customerDto);
+                var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
+                customerRepo.Insert(customerDto);
 
-                    transaction.Commit();
+                return Request.CreateResponse(HttpStatusCode.OK);
 
-                }
-                catch (Exception ex)
-                {
-                    // transaction rollback
-                    if (transaction != null)
-                    {
-                        transaction.Rollback();
-                    }
-                }
-
-
-                return Ok();
-            }
+            }), this);
         }
 
         // PUT api/customers/5
-        public IHttpActionResult Put(int id, [FromBody]Customer customerDto)
+        public HttpResponseMessage Put(int id, [FromBody]Customer customerDto)
         {
-            using (var conn = RepositoryManager.GetNewConnection())
-            using (var transaction = conn.BeginTransaction())
+            return Processor.webHandle(customerDto, new Func<HttpResponseMessage>(() =>
             {
-                try
-                {
-                    var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
+                var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
 
-                    var customer = customerDto;
-                    customer.CustomerId = id;
-                    customerRepo.Update(customer);
+                var customer = customerDto;
+                customer.CustomerId = id;
+                customerRepo.Update(customer);
 
-                    transaction.Commit();
+                return Request.CreateResponse(HttpStatusCode.OK);
 
-                }
-                catch (Exception ex)
-                {
-                    // transaction rollback
-                    if (transaction != null)
-                    {
-                        transaction.Rollback();
-                    }
-                }
-
-                return Ok();
-            }
+            }), this);
         }
 
         // DELETE api/customer/5
-        public IHttpActionResult Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            using (var conn = RepositoryManager.GetNewConnection())
-            using (var transaction = conn.BeginTransaction())
+            return Processor.webHandle(id, new Func<HttpResponseMessage>(() =>
             {
-                try
-                {
-                    var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
-                    bool isSuccess = customerRepo.Delete(id);
+                var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
+                customerRepo.Delete(id);
 
-                    transaction.Commit();
+                return Request.CreateResponse(HttpStatusCode.OK);
 
-
-                }
-                catch (Exception ex)
-                {
-                    // transaction rollback
-                    if (transaction != null)
-                    {
-                        transaction.Rollback();
-                    }
-                }
-
-                return Ok();
-            }
-
+            }), this);
         }
     }
 }
