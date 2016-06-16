@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Rld.Acs.WebApi
@@ -17,6 +18,8 @@ namespace Rld.Acs.WebApi
             Log.Info("Application start");
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
+
+            AreaRegistration.RegisterAllAreas();
 
             Repository.RepositoryManager.AddAssemby(typeof(Repository.Mybatis.MsSql.NinjectBinder).Assembly);
         }
