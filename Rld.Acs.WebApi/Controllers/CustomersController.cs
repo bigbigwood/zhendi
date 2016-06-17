@@ -18,23 +18,28 @@ namespace Rld.Acs.WebApi.Controllers
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         // GET api/customers
-        public IEnumerable<Customer> Get()
+        public HttpResponseMessage Get()
         {
-            //var allUrlKeyValues = ControllerContext.Request.GetQueryNameValuePairs();
+            var conditions = new Customer();
+            var allUrlKeyValues = ControllerContext.Request.GetQueryNameValuePairs();
+            conditions.FirstName = allUrlKeyValues.SingleOrDefault(x => x.Key == "FirstName").Value;
+            conditions.LastName = allUrlKeyValues.SingleOrDefault(x => x.Key == "LastName").Value;
+            conditions.MSIDSN = allUrlKeyValues.SingleOrDefault(x => x.Key == "MSIDSN").Value;
 
-            //string p1Val = allUrlKeyValues.SingleOrDefault(x => x.Key == "p1").Value;
-            //string p2Val = allUrlKeyValues.SingleOrDefault(x => x.Key == "p2").Value;
-            //string p3Val = allUrlKeyValues.SingleOrDefault(x => x.Key == "p3").Value;
+            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            {
+                var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
+                var customer = customerRepo.Query(conditions);
 
-            //return new string[] { "value1", "value2", p1Val, p2Val, p3Val };
+                return Request.CreateResponse(HttpStatusCode.OK, customer.ToList());
 
-            throw new NotImplementedException();
+            }), this);
         }
 
         // GET api/customers/5
         public HttpResponseMessage GetById(int id)
         {
-            return Processor.webHandle(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
                 var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
                 var customer = customerRepo.GetByKey(id);
@@ -50,7 +55,7 @@ namespace Rld.Acs.WebApi.Controllers
         // POST api/customers
         public HttpResponseMessage Post([FromBody]Customer customerDto)
         {
-            return Processor.webHandle(customerDto, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(customerDto, new Func<HttpResponseMessage>(() =>
             {
                 var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
                 customerRepo.Insert(customerDto);
@@ -63,7 +68,7 @@ namespace Rld.Acs.WebApi.Controllers
         // PUT api/customers/5
         public HttpResponseMessage Put(int id, [FromBody]Customer customerDto)
         {
-            return Processor.webHandle(customerDto, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(customerDto, new Func<HttpResponseMessage>(() =>
             {
                 var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
 
@@ -79,7 +84,7 @@ namespace Rld.Acs.WebApi.Controllers
         // DELETE api/customer/5
         public HttpResponseMessage Delete(int id)
         {
-            return Processor.webHandle(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
                 var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
                 customerRepo.Delete(id);

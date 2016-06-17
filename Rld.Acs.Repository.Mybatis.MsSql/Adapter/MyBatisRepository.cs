@@ -5,6 +5,7 @@ using Rld.Acs.Repository.Framework;
 using IBatisNet.DataMapper;
 using IBatisNet.DataMapper.MappedStatements;
 using IBatisNet.DataMapper.Scope;
+using System.Collections.Generic;
 
 namespace Rld.Acs.Repository.Mybatis.MsSql
 {
@@ -35,7 +36,7 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
         /// <summary>  
         /// 单查  
         /// </summary>  
-        protected abstract string QueryObjectStatement { get; }
+        protected abstract string GetByKeyStatement { get; }
         /// <summary>  
         /// Count  
         /// </summary>  
@@ -43,7 +44,7 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
         /// <summary>  
         /// Full Query  
         /// </summary>  
-        protected abstract string QueryAllStatement { get; }
+        protected abstract string QueryStatement { get; }
 
         public virtual bool Insert(TEntity entity)
         {
@@ -62,7 +63,12 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
 
         public virtual TEntity GetByKey(TKey key)
         {
-            return _sqlMapper.QueryForObject<TEntity>(this.QueryObjectStatement, key);
+            return _sqlMapper.QueryForObject<TEntity>(this.GetByKeyStatement, key);
+        }
+
+        public virtual IEnumerable<TEntity> Query(TEntity entityCondition)
+        {
+            return _sqlMapper.QueryForList<TEntity>(this.QueryStatement, entityCondition);
         }
 
         public DataSet SelectDS(string statementName, object paramObject)

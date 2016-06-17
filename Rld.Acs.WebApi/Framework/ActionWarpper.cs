@@ -10,11 +10,11 @@ using System.Web.Http;
 
 namespace Rld.Acs.WebApi.Framework
 {
-    public class Processor
+    public class ActionWarpper
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static HttpResponseMessage webHandle<T>(T t, Func<HttpResponseMessage> fun, ApiController controller)
+        public static HttpResponseMessage Process<T>(T t, Func<HttpResponseMessage> fun, ApiController controller)
         {
             var sw = Stopwatch.StartNew();
 
@@ -34,20 +34,18 @@ namespace Rld.Acs.WebApi.Framework
                 {
                     Log.Error("Unhandled error", ex);
 
-                    // transaction rollback
                     if (transaction != null)
                     {
                         Log.Warn("Rollback transaction!");
                         transaction.Rollback();
                     }
 
-                    return controller.Request.CreateErrorResponse(System.Net.HttpStatusCode.InternalServerError, "", ex);
+                    return controller.Request.CreateErrorResponse(System.Net.HttpStatusCode.InternalServerError, "Internal Error", ex);
                 }
                 finally
                 {
-                    Log.InfoFormat("Finish processing {0}, cost {1} milliseconds", controller.ToString(), sw.ElapsedMilliseconds);
-
-                    // release session
+                    Log.InfoFormat("Finish processing request, cost {0} milliseconds.",  sw.ElapsedMilliseconds);
+                    Log.InfoFormat("Http Method: {0}, Request Uri: {1}.", controller.Request.Method, controller.Request.RequestUri);
                 }
             }
         }

@@ -22,19 +22,19 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             get { return "Customer.Delete"; }
         }
 
-        protected override string QueryObjectStatement
+        protected override string GetByKeyStatement
         {
             get { return "Customer.GetByKey"; }
         }
 
         protected override string QueryCountStatement
         {
-            get { return "Customer.Count"; }
+            get { return null; }
         }
 
-        protected override string QueryAllStatement
+        protected override string QueryStatement
         {
-            get { return "Customer.GetAll"; }
+            get { return "Customer.Query"; }
         }
         #endregion
     }

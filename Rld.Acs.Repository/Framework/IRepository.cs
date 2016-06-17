@@ -32,5 +32,11 @@ namespace Rld.Acs.Repository.Framework
         /// <param name="key"></param>  
         /// <returns></returns>  
         TEntity GetByKey(TKey key);
+        /// <summary>  
+        /// 模糊查询  
+        /// </summary>  
+        /// <param name="key"></param>  
+        /// <returns></returns>  
+        IEnumerable<TEntity> Query(TEntity entityCondition);
     }  
 }

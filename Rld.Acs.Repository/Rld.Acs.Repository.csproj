@@ -54,7 +54,7 @@
     <Compile Include="Framework\IPersistanceConnection.cs" />
     <Compile Include="Framework\IPersistanceTransaction.cs" />
     <Compile Include="Framework\IRepository.cs" />
-    <Compile Include="Interfaces\IDictUserRepository.cs" />
+    <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryManager.cs" />
   </ItemGroup>
