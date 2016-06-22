@@ -6,7 +6,7 @@
         xmlns:cv="clr-namespace:Rld.Acs.WpfApplication.Converter"
         xmlns:vm="clr-namespace:Rld.Acs.WpfApplication.ViewModel"
         Title="MainWindow" Height="800" Width="1200" TitlebarHeight="50"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding Main, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen">
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>

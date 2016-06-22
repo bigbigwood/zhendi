@@ -46,6 +46,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<AllCustomersViewModel>();
         }
 
         private static void SetupNavigation()
@@ -59,10 +60,12 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         public MainViewModel Main
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
+            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
+        }
+
+        public AllCustomersViewModel AllCustomersViewModel
+        {
+            get { return ServiceLocator.Current.GetInstance<AllCustomersViewModel>(); }
         }
         
         public static void Cleanup()

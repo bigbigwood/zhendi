@@ -18,8 +18,8 @@
         </ResourceDictionary>
         <ResourceDictionary Source="/Resources/ButtonControlTemplate.xaml">
         </ResourceDictionary>
-        <ResourceDictionary Source="/Resources/SimpleMenu.xaml">
-        </ResourceDictionary>
+        <!--<ResourceDictionary Source="/Resources/SimpleMenu.xaml">
+        </ResourceDictionary>-->
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:Rld.Acs.WpfApplication.ViewModel" />
         </ResourceDictionary>

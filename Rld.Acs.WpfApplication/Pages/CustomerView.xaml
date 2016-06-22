@@ -1,0 +1,59 @@
+﻿<Controls:MetroWindow x:Class="Rld.Acs.WpfApplication.Pages.CustomerView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel" 
+      mc:Ignorable="d" 
+      Title="CustomerView" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
+    <Grid Margin="5">
+        <DockPanel>
+            <Grid DockPanel.Dock="Bottom" Margin="0,0,0,5">
+                <StackPanel FlowDirection="RightToLeft" Orientation="Horizontal">
+                    <Button Command="{Binding Path=CloseCommand}" Content="_Close" Width="50" Margin="0,0,5,0" />
+                    <Button Command="{Binding Path=SaveCommand}" Content="_Save" Width="50" Margin="0,0,5,0" />
+                </StackPanel>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="6" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!-- FIRST NAME-->
+                <Label Grid.Row="1" Grid.Column="0" Content="First _name:" HorizontalAlignment="Right" Target="{Binding ElementName=firstNameTxt}" />
+                <TextBox x:Name="firstNameTxt" Grid.Row="1" Grid.Column="2" Text="{Binding Path=FirstName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{x:Null}" />
+
+                <!-- LAST NAME-->
+                <Label Grid.Row="2" Grid.Column="0" Content="_Last name:" HorizontalAlignment="Right" Target="{Binding ElementName=lastNameTxt}" />
+                <TextBox x:Name="lastNameTxt" Grid.Row="2" Grid.Column="2" Text="{Binding Path=LastName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{x:Null}"/>
+
+                <!-- MSIDSN-->
+                <Label Grid.Row="3" Grid.Column="0" Content="MSIDSN:" HorizontalAlignment="Right"/>
+                <TextBox x:Name="emailTxt" Grid.Row="3" Grid.Column="2" Text="{Binding Path=MSIDSN, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{x:Null}" />
+
+                <!-- Balance-->
+                <Label  Grid.Row="4" Grid.Column="0" Content="Balance:" HorizontalAlignment="Right"/>
+                <TextBox x:Name="balanceTxt" Grid.Row="4" Grid.Column="2" Text="{Binding Path=Balance, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{x:Null}" />
+
+                <!-- Address-->
+                <Label  Grid.Row="5" Grid.Column="0"  Content="Address:"  HorizontalAlignment="Right" />
+                <TextBox x:Name="addressTxt" Grid.Row="5" Grid.Column="2"  Text="{Binding Path=Address, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{x:Null}" />
+            </Grid>
+        </DockPanel>
+    </Grid>
+
+</Controls:MetroWindow>
