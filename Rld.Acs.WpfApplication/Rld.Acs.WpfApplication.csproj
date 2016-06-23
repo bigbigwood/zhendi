@@ -66,6 +66,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
@@ -94,8 +97,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Messages\CustomerViewMessage.cs" />
-    <Compile Include="Messages\Notifications.cs" />
+    <Compile Include="Messages\OpenWindowMessage.cs" />
+    <Compile Include="Messages\Tokens.cs" />
     <Compile Include="Navigation\FrameNavigationService.cs" />
     <Compile Include="Navigation\IFrameNavigationService.cs" />
     <Compile Include="Pages\CustomerView.xaml.cs">
@@ -106,6 +109,7 @@
     </Compile>
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
+    <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="ViewModel\AllCustomersViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -176,6 +180,10 @@
     <ProjectReference Include="..\Rld.Acs.Model\Rld.Acs.Model.csproj">
       <Project>{1f0d7445-70c1-48be-8ecd-68f9b3a07d83}</Project>
       <Name>Rld.Acs.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Repository\Rld.Acs.Repository.csproj">
+      <Project>{090002e5-ab29-4ff1-b6f0-2ea8aa8bcc9d}</Project>
+      <Name>Rld.Acs.Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

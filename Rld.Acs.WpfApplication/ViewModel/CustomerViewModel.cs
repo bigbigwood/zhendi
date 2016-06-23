@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using Rld.Acs.Model;
+using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using System;
@@ -15,83 +16,53 @@ namespace Rld.Acs.WpfApplication.ViewModel
 {
     public class CustomerViewModel : ViewModelBase
     {
-        private Customer _customer = null;
+        public Customer Customer { get; set; }
         public RelayCommand SaveCommand { get; private set; }
         public RelayCommand CloseCommand { get; private set; }
-        private CustomerRepository _customerRepository = new CustomerRepository();
+        private ICustomerRepository _customerRepository = NinjectBinder.GetRepository<ICustomerRepository>();
 
         #region fields
 
-        public Int64 Id
+        public int Id
         {
-            get { return _customer.CustomerId; }
+            get { return Customer.CustomerId; }
         }
 
         public string FirstName
         {
-            get { return _customer.FirstName; }
-            set
-            {
-                if (_customer.FirstName != value)
-                {
-                    _customer.FirstName = value;
-                }
-            }
+            get { return Customer.FirstName; }
+            set { Customer.FirstName = value;}
         }
 
         public string LastName
         {
-            get { return _customer.LastName; }
-            set
-            {
-                if (_customer.LastName != value)
-                {
-                    _customer.LastName = value;
-                }
-            }
+            get { return Customer.LastName; }
+            set {Customer.LastName = value;}
         }
 
         public string MSIDSN
         {
-            get { return _customer.MSIDSN; }
-            set
-            {
-                if (_customer.MSIDSN != value)
-                {
-                    _customer.MSIDSN = value;
-                }
-            }
+            get { return Customer.MSIDSN; }
+            set {Customer.MSIDSN = value;}
         }
 
         public decimal Balance
         {
-            get { return _customer.Balance; }
-            set
-            {
-                if (_customer.Balance != value)
-                {
-                    _customer.Balance = value;
-                }
-            }
+            get { return Customer.Balance; }
+            set {  Customer.Balance = value;}
         }
 
         public string Address
         {
-            get { return _customer.Address; }
-            set
-            {
-                if (_customer.Address != value)
-                {
-                    _customer.Address = value;
-                }
-            }
+            get { return Customer.Address; }
+            set { Customer.Address = value;}
         }
 
         #endregion
 
-        public CustomerViewModel(Customer customer)
+        public CustomerViewModel()
         {
-            _customer = customer;
+            Customer = new Customer();
             SaveCommand = new RelayCommand(Save, () => CanSave());
             CloseCommand = new RelayCommand(Close);
         }
@@ -101,14 +72,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
         /// </summary>
         public void Save()
         {
-            if (_customer.CustomerId == 0)
+            if (Customer.CustomerId == 0)
             {
-                _customer.ResigterDateTime = DateTime.Now;
-                _customerRepository.Insert(_customer);
+                Customer.ResigterDateTime = DateTime.Now;
+                _customerRepository.Insert(Customer);
             }
             else
             {
-                _customerRepository.Update(_customer);
+                _customerRepository.Update(Customer);
             }
 
             Close();
@@ -124,7 +95,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         public void Close()
         {
-            Messenger.Default.Send<CustomerViewMessage>(null, "Close");
+            Messenger.Default.Send<NotificationMessage>(new NotificationMessage(Tokens.CloseCustomerView), Tokens.CloseCustomerView);
         }
     }
 }

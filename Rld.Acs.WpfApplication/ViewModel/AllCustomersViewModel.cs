@@ -9,6 +9,9 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Rld.Acs.Model;
 using Rld.Acs.WpfApplication.Repository;
+using GalaSoft.MvvmLight.Messaging;
+using Rld.Acs.WpfApplication.Messages;
+using Rld.Acs.Repository.Interfaces;
 
 namespace Rld.Acs.WpfApplication.ViewModel
 {
@@ -19,8 +22,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public RelayCommand DeleteCommand { get; private set; }
         public CustomerViewModel SelectedCustomerVM { get; private set; }
 
-        private ObservableCollection<CustomerViewModel> _allCustomers = null;
-        private CustomerRepository _customerRepository = new CustomerRepository();
+        private ObservableCollection<CustomerViewModel> _allCustomers = new ObservableCollection<CustomerViewModel>();
+        private ICustomerRepository _customerRepository = NinjectBinder.GetRepository<ICustomerRepository>();
 
         public ObservableCollection<CustomerViewModel> AllCustomers
         {
@@ -40,7 +43,6 @@ namespace Rld.Acs.WpfApplication.ViewModel
             AddCommand = new RelayCommand(AddCustomer);
             ModifyCommand = new RelayCommand(ModifyCustomer, () => HasSelectedCustomer());
             DeleteCommand = new RelayCommand(DeleteCustomer, () => HasSelectedCustomer());
-            _allCustomers = new ObservableCollection<CustomerViewModel>();
 
             Refresh();
         }
@@ -48,8 +50,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public void Refresh()
         {
             var getAllCustomers = new ObservableCollection<CustomerViewModel>();
-            var customers = _customerRepository.GetAll().ToList();
-            customers.ForEach(c => getAllCustomers.Add(new CustomerViewModel(c)));
+            var customers = _customerRepository.Query(new Customer()).ToList();
+            customers.ForEach(c => getAllCustomers.Add(new CustomerViewModel() { Customer = c}));
 
             AllCustomers = getAllCustomers;
         }
@@ -61,18 +63,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         public void AddCustomer()
         {
-            var customerView = new Pages.CustomerView();
-            customerView.DataContext = new CustomerViewModel(new Customer());
-            customerView.ShowDialog();
+            Messenger.Default.Send<OpenWindowMessage>(new OpenWindowMessage() {DataContext = new CustomerViewModel() }, Tokens.OpenCustomerView);
 
             Refresh();
         }
 
         public void ModifyCustomer()
         {
-            var customerView = new Pages.CustomerView();
-            customerView.DataContext = SelectedCustomerVM;
-            customerView.ShowDialog();
+            Messenger.Default.Send<OpenWindowMessage>(new OpenWindowMessage() { DataContext = SelectedCustomerVM }, Tokens.OpenCustomerView);
 
             Refresh();
         }

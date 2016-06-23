@@ -26,7 +26,7 @@ namespace Rld.Acs.WpfApplication.Pages
         {
             InitializeComponent();
 
-            Messenger.Default.Register<CustomerViewMessage>(this, "Close", msg => Close());
+            Messenger.Default.Register<NotificationMessage>(this, Tokens.CloseCustomerView, new Action<NotificationMessage>((msg) => { Close(); }));
         }
     }
 }

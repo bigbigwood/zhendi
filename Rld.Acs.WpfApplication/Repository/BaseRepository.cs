@@ -1,83 +1,82 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Net;
-//using System.Net.Http;
-//using System.Net.Http.Headers;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using Rld.Acs.Repository.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace Rld.Acs.WpfApplication.Repository
-//{
-//    public class BaseRepository<TEntity, TKey>
-//        where TEntity : class
-//    {
-//        private Uri url = new Uri("http://localhost:18827/api/values");
+namespace Rld.Acs.WpfApplication.Repository
+{
+    public abstract class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey>
+        where TEntity : class
+    {
+        protected readonly string BASE_ADDRESS = @"http://localhost:7362";
+        protected string RelevantUri { get; set; }
 
-//        public virtual bool Insert(TEntity entity)
-//        {
-//            string url = "http://localhost:52824/api/register";
-//            using (var http = new HttpClient())
-//            {
-//                //使用FormUrlEncodedContent做HttpContent
-//                var content = new FormUrlEncodedContent(new Dictionary<string, string>()       
-//                {    {"Id","6"},
-//                     {"Name","添加zzl"},
-//                     {"Info", "添加动作"}//键名必须为空
-//                 });
+        public virtual bool Insert(TEntity entity)
+        {
+            using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
+            {
+                var response = httpClient.PostAsync<TEntity>(RelevantUri, entity, new JsonMediaTypeFormatter()).Result;
+                response.EnsureSuccessStatusCode(); // Throw on error code. 
+                return true;
+            }
 
+            return false;
+        }
 
-//                var response = await http.PostAsync(url, content);
+        public virtual bool Update(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
 
-//                response.EnsureSuccessStatusCode();
+        public virtual bool Update(TEntity entity, TKey key)
+        {
+            using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
+            {
+                var response = httpClient.PutAsync<TEntity>(string.Format("{0}/{1}", RelevantUri, key), entity, new JsonMediaTypeFormatter()).Result;
+                response.EnsureSuccessStatusCode(); // Throw on error code. 
+                return true;
+            }
 
-//                Console.WriteLine(await response.Content.ReadAsStringAsync());
-//            }
+            return false;
+        }
 
+        public virtual bool Delete(TKey key)
+        {
+            using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
+            {
+                var response = httpClient.DeleteAsync(string.Format("{0}/{1}", RelevantUri, key)).Result;
+                response.EnsureSuccessStatusCode(); // Throw on error code. 
+                return true;
+            }
+            return false;
+        }
 
+        public virtual TEntity GetByKey(TKey key)
+        {
+            using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
+            {
+                var response = httpClient.GetAsync(string.Format("{0}/{1}", RelevantUri, key)).Result;
+                response.EnsureSuccessStatusCode(); // Throw on error code. 
+                var entity = response.Content.ReadAsAsync<TEntity>().Result;
+                return entity;
+            }
+        }
 
-//            HttpClient client = new HttpClient();
-//            client.BaseAddress = new Uri("http://localhost:1121/");
-//            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-//            ErrorMessage = "";
-//            bool fail = false;
-
-//            HttpResponseMessage resp = client.PutAsync<TEntity>("api/Customers", entity, new JsonMediaTypeFormatter()).Result;
-
-//                if (!resp.IsSuccessStatusCode)
-//                {
-//                    ErrorMessage += "Adding new item \n";
-//                    HttpResponseMessage resp2 = client.PostAsync<Comment>("api/Comment", c, new JsonMediaTypeFormatter()).Result;
-//                    if (!resp2.IsSuccessStatusCode)
-//                    {
-//                        ErrorMessage += "Error in updating " + c.ID.ToString() + "\n";
-//                        fail = true;
-//                    }
-//                    else
-//                    {
-//                        Comment addedComment = resp2.Content.ReadAsAsync<Comment>().Result;
-//                        c.ID = addedComment.ID;
-//                    }
-//                }
-
-//            if (!fail)
-//                ErrorMessage += "Update is successful\n";
-//        }
-
-//        public virtual bool Update(TEntity entity)
-//        {
-//        }
-
-//        public virtual bool Delete(TKey key)
-//        {
-//        }
-
-//        public virtual TEntity GetByKey(TKey key)
-//        {
-//        }
-
-//        public virtual IEnumerable<TEntity> Query(TEntity entityCondition)
-//        {
-//        }
-//    }
-//}
+        public virtual IEnumerable<TEntity> Query(TEntity entityCondition)
+        {
+            using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
+            {
+                var response = httpClient.GetAsync(RelevantUri).Result;
+                response.EnsureSuccessStatusCode(); // Throw on error code. 
+                var entities = response.Content.ReadAsAsync<IEnumerable<TEntity>>().Result;
+                return entities;
+            }
+        }
+    }
+}

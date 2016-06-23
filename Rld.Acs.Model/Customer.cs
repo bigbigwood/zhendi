@@ -8,7 +8,7 @@ namespace Rld.Acs.Model
 {
     public class Customer
     {
-        public Int64 CustomerId { get; set; }
+        public int CustomerId { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String MSIDSN { get; set; }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Rld.Acs.WpfApplication.Messages
 {
-    public class CustomerViewMessage
+    public class OpenWindowMessage
     {
+        public object DataContext { get; set; }
     }
 }

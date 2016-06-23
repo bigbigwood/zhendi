@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using Rld.Acs.WpfApplication.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,15 @@ namespace Rld.Acs.WpfApplication.Pages
         public UserMainWindow()
         {
             InitializeComponent();
+
+            Messenger.Default.Register<OpenWindowMessage>(this, Tokens.OpenCustomerView, (msg) => OpenCustomerView(msg));
+        }
+
+        private void OpenCustomerView(OpenWindowMessage msg)
+        {
+            var customerView = new CustomerView();
+            customerView.DataContext = msg.DataContext;
+            customerView.ShowDialog();
         }
     }
 }

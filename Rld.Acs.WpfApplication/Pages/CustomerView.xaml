@@ -6,8 +6,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel" 
       mc:Ignorable="d" 
+      d:DataContext= "{d:DesignInstance Type=vm:CustomerViewModel, IsDesignTimeCreatable=True}"
       Title="CustomerView" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow"
                       Height="300" Width="500">
+    <!--<Window.Resources >
+        <vm:CustomerViewModel x:Key="customerViewModel"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Source="{StaticResource customerViewModel}"/>
+    </Window.DataContext>-->
     <Grid Margin="5">
         <DockPanel>
             <Grid DockPanel.Dock="Bottom" Margin="0,0,0,5">
