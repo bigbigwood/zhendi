@@ -1,15 +1,8 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     6/28/2016 6:22:08 PM                         */
+/* Created on:     6/28/2016 6:39:53 PM                         */
 /*==============================================================*/
 
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('DEVICE_CONTROLLERS_PARAMETERS') and o.name = 'FK_DEVICE_C_REFERENCE_DEVICE_C')
-alter table DEVICE_CONTROLLERS_PARAMETERS
-   drop constraint FK_DEVICE_C_REFERENCE_DEVICE_C
-go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
@@ -88,12 +81,6 @@ alter table SYS_USER
    drop constraint FK_SYS_USER_REFERENCE_SYS_DEPA
 go
 
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SYS_USER_AUTHENTICATION') and o.name = 'FK_AUTHENTICATION_USERID')
-alter table SYS_USER_AUTHENTICATION
-   drop constraint FK_AUTHENTICATION_USERID
-go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
@@ -116,12 +103,6 @@ alter table SYS_USER_OPERATOR
    drop constraint FK_OPERATOR_USERID
 go
 
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SYS_USER_PROPERTY') and o.name = 'FK_PROPERTY_USERID')
-alter table SYS_USER_PROPERTY
-   drop constraint FK_PROPERTY_USERID
-go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
@@ -372,12 +353,12 @@ go
 /* Table: DEVICE_CONTROLLERS                                    */
 /*==============================================================*/
 create table DEVICE_CONTROLLERS (
-   DeviceID             int                  not null,
+   DeviceID             int                  identity(1,1),
    Mac                  nvarchar(100)        not null,
    DeviceCode           nvarchar(100)        not null,
    SN                   nvarchar(100)        not null,
    Mode                 nvarchar(100)        null,
-   CommunitionType      int                  not null,
+   CommunicationType      int                  not null,
    BaudRate             nvarchar(100)        null,
    SerialPort           nvarchar(100)        null,
    Password             nvarchar(100)        null,
@@ -392,6 +373,7 @@ create table DEVICE_CONTROLLERS (
    Status               int                  not null,
    UpdateUserID         datetime             null,
    UpdateDate           datetime             null,
+   DeviceParameterID    int                  not null,
    constraint PK_DEVICE_CONTROLLERS primary key nonclustered (DEVICEID)
 )
 go
@@ -400,8 +382,7 @@ go
 /* Table: DEVICE_CONTROLLERS_PARAMETERS                         */
 /*==============================================================*/
 create table DEVICE_CONTROLLERS_PARAMETERS (
-   DeviceParameterID    int                  not null,
-   DeviceID             int                  null,
+   DeviceParameterID    int                  identity(1,1),
    AuthticationType     int                  not null,
    AutoOpenTimeZone     int                  null,
    IsSneak              bit                  null,
@@ -420,7 +401,7 @@ go
 /* Table: DEVICE_DOORS                                          */
 /*==============================================================*/
 create table DEVICE_DOORS (
-   DeviceDoorID         int                  not null,
+   DeviceDoorID         int                  identity(1,1),
    DeviceRoleID         int                  null,
    DeviceID             int                  not null,
    Name                 nvarchar(100)        not null,
@@ -447,7 +428,7 @@ go
 /* Table: DEVICE_HEADREADINGS                                   */
 /*==============================================================*/
 create table DEVICE_HEADREADINGS (
-   DeviceHeadReadingID  int                  not null,
+   DeviceHeadReadingID  int                  identity(1,1),
    DeviceRoleID         int                  null,
    DeviceID             int                  not null,
    Mac                  nvarchar(100)        not null,
@@ -463,7 +444,7 @@ go
 /* Table: DEVICE_OPERATION_LOG                                  */
 /*==============================================================*/
 create table DEVICE_OPERATION_LOG (
-   LogID                int                  not null,
+   LogID                int                  identity(1,1),
    RegisterID           int                  null,
    DeviceID             int                  not null,
    DeviceType           int                  not null,
@@ -480,7 +461,7 @@ go
 /* Table: DEVICE_PERMISSIONS                                    */
 /*==============================================================*/
 create table DEVICE_PERMISSIONS (
-   DevicePermissionID   int                  not null,
+   DevicePermissionID   int                  identity(1,1),
    DeviceID             int                  not null,
    Enable               bit                  not null,
    Remark               nvarchar(1024)       null,
@@ -497,7 +478,7 @@ go
 /* Table: DEVICE_ROLES                                          */
 /*==============================================================*/
 create table DEVICE_ROLES (
-   DeviceRoleID         int                  not null,
+   DeviceRoleID         int                  identity(1,1),
    RoleName             nvarchar(100)        not null,
    CreateUserID         int                  not null,
    CreateDate           datetime             not null,
@@ -512,7 +493,7 @@ go
 /* Table: DEVICE_ROLES_PERMISSIONS                              */
 /*==============================================================*/
 create table DEVICE_ROLES_PERMISSIONS (
-   DeviceRolePermissionID int                  not null,
+   DeviceRolePermissionID int                  identity(1,1),
    DeviceRoleID         int                  not null,
    DevicePermissionID   int                  not null,
    constraint PK_DEVICE_ROLES_PERMISSIONS primary key nonclustered (DEVICEROLEPERMISSIONID)
@@ -523,7 +504,7 @@ go
 /* Table: DEVICE_STATE_HISTORY                                  */
 /*==============================================================*/
 create table DEVICE_STATE_HISTORY (
-   DeviceStateHistoryID int                  not null,
+   DeviceStateHistoryID int                  identity(1,1),
    DeviceID             int                  not null,
    DeviceType           int                  not null,
    DeviceSN             nvarchar(100)        not null,
@@ -539,7 +520,7 @@ go
 /* Table: DEVICE_TRAFFIC_LOG                                    */
 /*==============================================================*/
 create table DEVICE_TRAFFIC_LOG (
-   TrafficID            int                  not null,
+   TrafficID            int                  identity(1,1),
    DeviceID             int                  not null,
    DeviceType           int                  not null,
    DeviceSN             nvarchar(100)        not null,
@@ -556,7 +537,7 @@ go
 /* Table: SYS_DEPARTMENT                                        */
 /*==============================================================*/
 create table SYS_DEPARTMENT (
-   DepartmentID         int                  not null,
+   DepartmentID         int                  identity(1,1),
    Name                 nvarchar(100)        not null,
    DepartmentCode       nvarchar(25)         not null,
    ParentID             int                  not null,
@@ -575,7 +556,7 @@ go
 /* Table: SYS_DEPARTMENT_DEVICES                                */
 /*==============================================================*/
 create table SYS_DEPARTMENT_DEVICES (
-   DepartmentDeviceID   int                  not null,
+   DepartmentDeviceID   int                  identity(1,1),
    DepartmentID         int                  not null,
    DeviceID             int                  not null,
    Remark               nvarchar(1024)       null,
@@ -592,7 +573,7 @@ go
 /* Table: SYS_DICTIONARY                                        */
 /*==============================================================*/
 create table SYS_DICTIONARY (
-   DictionaryID         int                  not null,
+   DictionaryID         int                  identity(1,1),
    Name                 nvarchar(100)        not null,
    TypeID               int                  null,
    TypeName             nvarchar(100)        null,
@@ -617,7 +598,7 @@ go
 /* Table: SYS_MODULE                                            */
 /*==============================================================*/
 create table SYS_MODULE (
-   ModuleID             int                  not null,
+   ModuleID             int                  identity(1,1),
    ModuleName           nvarchar(100)        not null,
    Description          nvarchar(1024)       null,
    ParentID             int                  not null,
@@ -638,7 +619,7 @@ go
 /* Table: SYS_MODULE_ELEMENTS                                   */
 /*==============================================================*/
 create table SYS_MODULE_ELEMENTS (
-   ElementID            int                  not null,
+   ElementID            int                  identity(1,1),
    ModuleID             int                  not null,
    Visible              bit                  not null,
    Enabled              bit                  not null,
@@ -657,7 +638,7 @@ go
 /* Table: SYS_OPERATION_LOG                                     */
 /*==============================================================*/
 create table SYS_OPERATION_LOG (
-   LogID                int                  not null,
+   LogID                int                  identity(1,1),
    DepartmentID         int                  null,
    UserID               int                  null,
    UserName             nvarchar(100)        null,
@@ -674,7 +655,7 @@ go
 /* Table: SYS_ROLE                                              */
 /*==============================================================*/
 create table SYS_ROLE (
-   RoleID               int                  not null,
+   RoleID               int                  identity(1,1),
    RoleName             nvarchar(100)        not null,
    Description          nvarchar(1024)       null,
    Remark               nvarchar(1024)       null,
@@ -691,7 +672,7 @@ go
 /* Table: SYS_ROLE_MODULEELEMENT                                */
 /*==============================================================*/
 create table SYS_ROLE_MODULEELEMENT (
-   SysRoleElementID     int                  not null,
+   SysRoleElementID     int                  identity(1,1),
    ElementID            int                  not null,
    RoleID               int                  not null,
    constraint PK_SYS_ROLE_MODULEELEMENT primary key nonclustered (SYSROLEELEMENTID)
@@ -702,7 +683,7 @@ go
 /* Table: SYS_USER                                              */
 /*==============================================================*/
 create table SYS_USER (
-   UserID               int                  not null,
+   UserID               int                  identity(1,1),
    DepartmentID         int                  null,
    Type                 int                  not null,
    UserCode             nvarchar(25)         not null,
@@ -715,6 +696,8 @@ create table SYS_USER (
    Remark               nvarchar(1024)       null,
    StartDate            datetime             not null,
    EndDate              datetime             null,
+   UserAuthenticationID int                  not null,
+   UserPropertyID       int                  not null,
    constraint PK_SYS_USER primary key nonclustered (USERID)
 )
 go
@@ -723,8 +706,7 @@ go
 /* Table: SYS_USER_AUTHENTICATION                               */
 /*==============================================================*/
 create table SYS_USER_AUTHENTICATION (
-   UserAuthenticationID int                  not null,
-   UserID               int                  not null,
+   UserAuthenticationID int                  identity(1,1),
    DeviceUserID         int                  not null,
    DeviceType           int                  not null,
    AuthenticationType   int                  not null,
@@ -741,18 +723,11 @@ create table SYS_USER_AUTHENTICATION (
 )
 go
 
-declare @CurrentUser sysname
-select @CurrentUser = user_name()
-execute sp_addextendedproperty 'MS_Description', 
-   '1:?? 2:?? 3:?? 4:??  ???????????,0-9??,10 ????',
-   'user', @CurrentUser, 'table', 'SYS_USER_AUTHENTICATION', 'column', 'AUTHENTICATIONTYPE'
-go
-
 /*==============================================================*/
 /* Table: SYS_USER_DEVICE_ROLES                                 */
 /*==============================================================*/
 create table SYS_USER_DEVICE_ROLES (
-   UserDeviceRoleID     int                  not null,
+   UserDeviceRoleID     int                  identity(1,1),
    UserID               int                  not null,
    DeviceRoleID         int                  not null,
    CreateUserID         int                  not null,
@@ -768,7 +743,7 @@ go
 /* Table: SYS_USER_OPERATOR                                     */
 /*==============================================================*/
 create table SYS_USER_OPERATOR (
-   OperatorID           int                  not null,
+   OperatorID           int                  identity(1,1),
    UserID               int                  not null,
    LoginName            nvarchar(100)        not null,
    Password             nvarchar(1024)       not null,
@@ -786,8 +761,7 @@ go
 /* Table: SYS_USER_PROPERTY                                     */
 /*==============================================================*/
 create table SYS_USER_PROPERTY (
-   UserPropertyID       int                  not null,
-   UserID               int                  not null,
+   UserPropertyID       int                  identity(1,1),
    LastName             nvarchar(25)         not null,
    FirstName            nvarchar(25)         not null,
    Nationality          nvarchar(10)         not null,
@@ -816,7 +790,7 @@ go
 /* Table: SYS_USER_ROLE                                         */
 /*==============================================================*/
 create table SYS_USER_ROLE (
-   SysUserRoleID        int                  not null,
+   SysUserRoleID        int                  identity(1,1),
    UserID               int                  not null,
    RoleID               int                  not null,
    constraint PK_SYS_USER_ROLE primary key nonclustered (SYSUSERROLEID)
@@ -827,7 +801,7 @@ go
 /* Table: TIME_GROUPS                                           */
 /*==============================================================*/
 create table TIME_GROUPS (
-   TimeGroupID          int                  not null,
+   TimeGroupID          int                  identity(1,1),
    TimeGroupName        nvarchar(100)        not null,
    CreateUserID         int                  not null,
    CreateDate           datetime             not null,
@@ -842,7 +816,7 @@ go
 /* Table: TIME_GROUP_SEGMENT                                    */
 /*==============================================================*/
 create table TIME_GROUP_SEGMENT (
-   TimeGroupSegmentID   int                  not null,
+   TimeGroupSegmentID   int                  identity(1,1),
    TimeGroupID          int                  not null,
    TimeSegmentID        int                  not null,
    constraint PK_TIME_GROUP_SEGMENT primary key nonclustered (TIMEGROUPSEGMENTID)
@@ -853,7 +827,7 @@ go
 /* Table: TIME_SEGMENTS                                         */
 /*==============================================================*/
 create table TIME_SEGMENTS (
-   TimeSegmentID        int                  not null,
+   TimeSegmentID        int                  identity(1,1),
    BeginTime            datetime             not null,
    EndTime              datetime             not null,
    CreateUserID         int                  not null,
@@ -869,7 +843,7 @@ go
 /* Table: TIME_ZONE                                             */
 /*==============================================================*/
 create table TIME_ZONE (
-   TimeZoneID           int                  not null,
+   TimeZoneID           int                  identity(1,1),
    TimeZoneName         nvarchar(100)        not null,
    CreateUserID         int                  not null,
    CreateDate           datetime             not null,
@@ -884,17 +858,13 @@ go
 /* Table: TIME_ZONE_GROUP                                       */
 /*==============================================================*/
 create table TIME_ZONE_GROUP (
-   TimeZoneGroupID      int                  not null,
+   TimeZoneGroupID      int                  identity(1,1),
    TimeZoneID           int                  not null,
    TimeGroupID          int                  not null,
    constraint PK_TIME_ZONE_GROUP primary key nonclustered (TIMEZONEGROUPID)
 )
 go
 
-alter table DEVICE_CONTROLLERS_PARAMETERS
-   add constraint FK_DEVICE_C_REFERENCE_DEVICE_C foreign key (DEVICEID)
-      references DEVICE_CONTROLLERS (DEVICEID)
-go
 
 alter table DEVICE_DOORS
    add constraint FK_DEVICE_D_REFERENCE_DEVICE_R foreign key (DEVICEROLEID)
@@ -951,10 +921,6 @@ alter table SYS_USER
       references SYS_DEPARTMENT (DEPARTMENTID)
 go
 
-alter table SYS_USER_AUTHENTICATION
-   add constraint FK_AUTHENTICATION_USERID foreign key (USERID)
-      references SYS_USER (USERID)
-go
 
 alter table SYS_USER_DEVICE_ROLES
    add constraint FK_SYS_USER_REFERENCE_DEVICE_R foreign key (DEVICEROLEID)
@@ -971,10 +937,6 @@ alter table SYS_USER_OPERATOR
       references SYS_USER (USERID)
 go
 
-alter table SYS_USER_PROPERTY
-   add constraint FK_PROPERTY_USERID foreign key (USERID)
-      references SYS_USER (USERID)
-go
 
 alter table SYS_USER_ROLE
    add constraint FK_SYS_USER_REFERENCE_SYS_ROLE foreign key (ROLEID)
