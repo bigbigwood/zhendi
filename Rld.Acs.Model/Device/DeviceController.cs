@@ -11,7 +11,7 @@ namespace Rld.Acs.Model
         public String DeviceCode { get; set; }
         public String SN { get; set; }
         public String Mode { get; set; }
-        public Int32? CommunitionType { get; set; }
+        public CommunicationType CommunicationType { get; set; }
         public String BaudRate { get; set; }
         public String SerialPort { get; set; }
         public String Password { get; set; }
@@ -23,14 +23,17 @@ namespace Rld.Acs.Model
         public String Remark { get; set; }
         public Int32 CreateUserID { get; set; }
         public DateTime CreateDate { get; set; }
-        public Int32 Status { get; set; }
+        public GeneralStatus Status { get; set; }
         public Int32? UpdateUserID { get; set; }
         public DateTime? UpdateDate { get; set; }
         public DeviceControllerParameter DeviceControllerParameter { get; set; }
+        public List<DeviceDoor> DeviceDoors { get; set; }
+        public List<DeviceHeadReading> DeviceHeadReadings { get; set; }
 
         public DeviceController()
         {
-            DeviceControllerParameter = new DeviceControllerParameter();
+            DeviceDoors= new List<DeviceDoor>();
+            DeviceHeadReadings = new List<DeviceHeadReading>();
         }
     }
 }

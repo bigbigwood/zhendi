@@ -7,7 +7,7 @@ namespace Rld.Acs.Model
     public class TimeGroupSegment
     {
         public Int32 TimeGroupSegmentID { get; set; }
-        public Int32 TimeGroupID { get; set; }
-        public Int32 TimeSegmentID { get; set; }
+        public TimeGroup TimeGroup { get; set; }
+        public TimeSegment TimeSegment { get; set; }
     }
 }

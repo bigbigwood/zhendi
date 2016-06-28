@@ -7,7 +7,7 @@ namespace Rld.Acs.Model
     public class DeviceDoor
     {
         public Int32 DeviceDoorID { get; set; }
-        public Int32 DeviceID { get; set; }
+        public DeviceController Device { get; set; }
         public String Name { get; set; }
         public Int32? ElectricalAppliances { get; set; }
         public Int32? OpenType { get; set; }

@@ -7,7 +7,7 @@ namespace Rld.Acs.Model
     public class UserRole
     {
         public Int32 SysUserRoleID { get; set; }
-        public Int32 UserID { get; set; }
-        public Int32 RoleID { get; set; }
+        public User User { get; set; }
+        public SysRole SysRole { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace Rld.Acs.Model
         public DateTime EndTime { get; set; }
         public Int32 CreateUserID { get; set; }
         public DateTime CreateDate { get; set; }
-        public Int32 Status { get; set; }
+        public GeneralStatus Status { get; set; }
         public Int32? UpdateUserID { get; set; }
         public DateTime? UpdateDate { get; set; }
     }

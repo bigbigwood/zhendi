@@ -7,7 +7,6 @@ namespace Rld.Acs.Model
     public class UserProperty
     {
         public Int32 UserPropertyID { get; set; }
-        public Int32 UserID { get; set; }
         public String LastName { get; set; }
         public String FirstName { get; set; }
         public String Nationality { get; set; }
