@@ -58,9 +58,9 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(customerDto, new Func<HttpResponseMessage>(() =>
             {
                 var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();
-                customerRepo.Insert(customerDto);
+                var customer = customerRepo.Insert(customerDto);
 
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.OK, customer);
 
             }), this);
         }

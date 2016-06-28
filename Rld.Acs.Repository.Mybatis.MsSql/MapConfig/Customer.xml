@@ -27,6 +27,9 @@
       INSERT INTO Customer
       (FirstName,LastName,MSIDSN,Balance,ResigterDateTime,Address)
       VALUES(#FirstName#,#LastName#,#MSIDSN#,#Balance#,#ResigterDateTime#,#Address#)
+      <selectKey resultClass="int" type="post" property="CustomerId" >
+        select @@IDENTITY as value
+      </selectKey>
     </insert>
     <update id="Customer.Update" parameterClass="Customer">
       UPDATE Customer

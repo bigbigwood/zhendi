@@ -17,16 +17,17 @@ namespace Rld.Acs.WpfApplication.Repository
         protected readonly string BASE_ADDRESS = @"http://localhost:7362";
         protected string RelevantUri { get; set; }
 
-        public virtual bool Insert(TEntity entity)
+        public virtual TEntity Insert(TEntity entity)
         {
             using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
             {
                 var response = httpClient.PostAsync<TEntity>(RelevantUri, entity, new JsonMediaTypeFormatter()).Result;
                 response.EnsureSuccessStatusCode(); // Throw on error code. 
-                return true;
+                var newEntity = response.Content.ReadAsAsync<TEntity>().Result;
+                return newEntity;
             }
 
-            return false;
+            return null;
         }
 
         public virtual bool Update(TEntity entity)

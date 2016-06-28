@@ -46,9 +46,10 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
         /// </summary>  
         protected abstract string QueryStatement { get; }
 
-        public virtual bool Insert(TEntity entity)
+        public virtual TEntity Insert(TEntity entity)
         {
-            return _sqlMapper.Insert(this.InsertStatement, entity) != null;
+            _sqlMapper.Insert(this.InsertStatement, entity);
+            return entity;
         }
 
         public virtual bool Update(TEntity entity)

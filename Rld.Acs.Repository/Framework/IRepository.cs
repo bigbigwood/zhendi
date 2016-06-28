@@ -13,7 +13,7 @@ namespace Rld.Acs.Repository.Framework
         /// </summary>  
         /// <param name="entity"></param>  
         /// <returns></returns>  
-        bool Insert(TEntity entity);
+        TEntity Insert(TEntity entity);
         /// <summary>  
         /// 编辑  
         /// </summary>  
