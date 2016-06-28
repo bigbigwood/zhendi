@@ -16,3 +16,4 @@ NuGet.exe
 *.mmap
 _ReSharper.PhysicalExamination_VS2010
 EXTERNAL-BIN
+_ReSharper*
