@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      Microsoft SQL Server 2008                    */
-/* Created on:     6/28/2016 5:57:27 PM                         */
+/* Created on:     6/28/2016 6:22:08 PM                         */
 /*==============================================================*/
 
 
@@ -372,26 +372,26 @@ go
 /* Table: DEVICE_CONTROLLERS                                    */
 /*==============================================================*/
 create table DEVICE_CONTROLLERS (
-   DEVICEID             int                  not null,
-   MAC                  nvarchar(100)        not null,
-   DEVICECODE           nvarchar(100)        not null,
+   DeviceID             int                  not null,
+   Mac                  nvarchar(100)        not null,
+   DeviceCode           nvarchar(100)        not null,
    SN                   nvarchar(100)        not null,
-   MODE                 nvarchar(100)        null,
-   COMMUNITIONTYPE      int                  not null,
-   BAUDRATE             nvarchar(100)        null,
-   SERIALPORT           nvarchar(100)        null,
-   PASSWORD             nvarchar(100)        null,
+   Mode                 nvarchar(100)        null,
+   CommunitionType      int                  not null,
+   BaudRate             nvarchar(100)        null,
+   SerialPort           nvarchar(100)        null,
+   Password             nvarchar(100)        null,
    IP                   nvarchar(100)        null,
-   PORT                 nvarchar(100)        null,
-   PROTOCOL             nvarchar(100)        null,
-   LABEL                nvarchar(1024)       null,
-   SERVERURL            nvarchar(1024)       null,
-   REMARK               nvarchar(1024)       null,
-   CREATEUSERID         int                  not null,
-   CREATEDATE           datetime             not null,
-   STATUS               int                  not null,
-   UPDATEUSERID         datetime             null,
-   UPDATEDATE           datetime             null,
+   Port                 nvarchar(100)        null,
+   protocol             nvarchar(100)        null,
+   Label                nvarchar(1024)       null,
+   ServerURL            nvarchar(1024)       null,
+   Remark               nvarchar(1024)       null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   Status               int                  not null,
+   UpdateUserID         datetime             null,
+   UpdateDate           datetime             null,
    constraint PK_DEVICE_CONTROLLERS primary key nonclustered (DEVICEID)
 )
 go
@@ -400,18 +400,18 @@ go
 /* Table: DEVICE_CONTROLLERS_PARAMETERS                         */
 /*==============================================================*/
 create table DEVICE_CONTROLLERS_PARAMETERS (
-   DEVICEPARAMETERID    int                  not null,
-   DEVICEID             int                  null,
-   AUTHTICATIONTYPE     int                  not null,
-   AUTOOPENTIMEZONE     int                  null,
-   ISSNEAK              bit                  null,
-   MULTIPERSONLOCK      bit                  null,
-   LINKAGE              bit                  null,
-   LAUNCHDURESS_        bit                  null,
-   DURESSFINGERPRINT    int                  null,
-   DURESSOPEN           bit                  null,
-   DURESSALARM          bit                  null,
-   DURESSPASSWORD       nvarchar(100)        null,
+   DeviceParameterID    int                  not null,
+   DeviceID             int                  null,
+   AuthticationType     int                  not null,
+   AutoOpenTimeZone     int                  null,
+   IsSneak              bit                  null,
+   MultiPersonLock      bit                  null,
+   Linkage              bit                  null,
+   LaunchDuress         bit                  null,
+   DuressFingerPrint    int                  null,
+   DuressOpen           bit                  null,
+   DuressAlarm          bit                  null,
+   DuressPassword       nvarchar(100)        null,
    constraint PK_DEVICE_CONTROLLERS_PARAMETE primary key nonclustered (DEVICEPARAMETERID)
 )
 go
@@ -420,25 +420,25 @@ go
 /* Table: DEVICE_DOORS                                          */
 /*==============================================================*/
 create table DEVICE_DOORS (
-   DEVICEDOORID         int                  not null,
-   DEVICEROLEID         int                  null,
-   DEVICEID             int                  not null,
-   NAME                 nvarchar(100)        not null,
-   ELECTRICALAPPLIANCES int                  null,
-   OPENTYPE             int                  null,
-   STATUS               int                  null,
-   REMARK               nvarchar(1024)       null,
-   DELAYTIME            int                  null,
-   ALERTTYPE            int                  null,
-   OVERTIMEOPEN         int                  null,
-   ISOVERTIME           bit                  null,
-   FORCEOPEN            bit                  null,
-   CONNECTIONALERM      bit                  null,
-   LAUNCHDURESS_        bit                  null,
-   DURESSFINGERPRINT    int                  null,
-   DURESSOPEN           bit                  null,
-   DURESSALARM          bit                  null,
-   DURESSPASSWORD       nvarchar(100)        null,
+   DeviceDoorID         int                  not null,
+   DeviceRoleID         int                  null,
+   DeviceID             int                  not null,
+   Name                 nvarchar(100)        not null,
+   ElectricalAppliances int                  null,
+   OpenType             int                  null,
+   Status               int                  null,
+   Remark               nvarchar(1024)       null,
+   DelayTime            int                  null,
+   AlertType            int                  null,
+   OverTimeOpen         int                  null,
+   IsOverTime           bit                  null,
+   ForceOpen            bit                  null,
+   ConnectionAlerm      bit                  null,
+   LaunchDuress         bit                  null,
+   DuressFingerPrint    int                  null,
+   DuressOpen           bit                  null,
+   DuressAlarm          bit                  null,
+   DuressPassword       nvarchar(100)        null,
    constraint PK_DEVICE_DOORS primary key nonclustered (DEVICEDOORID)
 )
 go
@@ -447,14 +447,14 @@ go
 /* Table: DEVICE_HEADREADINGS                                   */
 /*==============================================================*/
 create table DEVICE_HEADREADINGS (
-   DEVICEHEADREADINGID  int                  not null,
-   DEVICEROLEID         int                  null,
-   DEVICEID             int                  not null,
-   MAC                  nvarchar(100)        not null,
-   HEADREADINGSN        nvarchar(100)        not null,
-   HEADREADINGTYPE      int                  not null,
-   HEADREADINGPERFORMANCE nvarchar(100)        null,
-   STATUS               int                  not null,
+   DeviceHeadReadingID  int                  not null,
+   DeviceRoleID         int                  null,
+   DeviceID             int                  not null,
+   Mac                  nvarchar(100)        not null,
+   HeadReadingSN        nvarchar(100)        not null,
+   HeadReadingType      int                  not null,
+   HeadReadingPerformance nvarchar(100)        null,
+   Status               int                  not null,
    constraint PK_DEVICE_HEADREADINGS primary key nonclustered (DEVICEHEADREADINGID)
 )
 go
@@ -463,15 +463,15 @@ go
 /* Table: DEVICE_OPERATION_LOG                                  */
 /*==============================================================*/
 create table DEVICE_OPERATION_LOG (
-   LOGID                int                  not null,
-   REGISTERID           int                  null,
-   DEVICEID             int                  not null,
-   DEVICETYPE           int                  not null,
-   OPERATIONTYPE        int                  not null,
-   OPERATORID           int                  not null,
-   OPERATIONCONTENT     nvarchar(1024)       null,
-   OPERATIONTIME        nvarchar(1024)       not null,
-   OPERATIONUPLOADTIME  nvarchar(1024)       null,
+   LogID                int                  not null,
+   RegisterID           int                  null,
+   DeviceID             int                  not null,
+   DeviceType           int                  not null,
+   OperationType        int                  not null,
+   OperatorID           int                  not null,
+   OperationContent     nvarchar(1024)       null,
+   OperationTime        nvarchar(1024)       not null,
+   OperationUploadTime  nvarchar(1024)       null,
    constraint PK_DEVICE_OPERATION_LOG primary key nonclustered (LOGID)
 )
 go
@@ -480,15 +480,15 @@ go
 /* Table: DEVICE_PERMISSIONS                                    */
 /*==============================================================*/
 create table DEVICE_PERMISSIONS (
-   DEVICEPERMISSIONID   int                  not null,
-   DEVICEID             int                  not null,
-   ENABLE               bit                  not null,
-   REMARK               nvarchar(1024)       null,
-   PERMISSIONACTION     int                  not null,
-   USERGROUPVM          nvarchar(1024)       null,
-   ACCESSTIMEZONE       int                  not null,
+   DevicePermissionID   int                  not null,
+   DeviceID             int                  not null,
+   Enable               bit                  not null,
+   Remark               nvarchar(1024)       null,
+   PermissionAction     int                  not null,
+   UserGroupVM          nvarchar(1024)       null,
+   AccessTimeZone       int                  not null,
    STARTDATE            datetime             not null,
-   ENDDATE              datetime             null,
+   Enddate              datetime             null,
    constraint PK_DEVICE_PERMISSIONS primary key nonclustered (DEVICEPERMISSIONID)
 )
 go
@@ -497,13 +497,13 @@ go
 /* Table: DEVICE_ROLES                                          */
 /*==============================================================*/
 create table DEVICE_ROLES (
-   DEVICEROLEID         int                  not null,
-   ROLENAME             nvarchar(100)        not null,
-   CREATEUSERID         int                  not null,
-   CREATEDATE           datetime             not null,
-   STATUS               int                  not null,
-   UPDATEUSERID         int                  null,
-   UPDATEDATE           datetime             null,
+   DeviceRoleID         int                  not null,
+   RoleName             nvarchar(100)        not null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   Status               int                  not null,
+   UpdateUserID         int                  null,
+   UpdateDate           datetime             null,
    constraint PK_DEVICE_ROLES primary key nonclustered (DEVICEROLEID)
 )
 go
@@ -512,9 +512,9 @@ go
 /* Table: DEVICE_ROLES_PERMISSIONS                              */
 /*==============================================================*/
 create table DEVICE_ROLES_PERMISSIONS (
-   DEVICEROLEPERMISSIONID int                  not null,
-   DEVICEROLEID         int                  not null,
-   DEVICEPERMISSIONID   int                  not null,
+   DeviceRolePermissionID int                  not null,
+   DeviceRoleID         int                  not null,
+   DevicePermissionID   int                  not null,
    constraint PK_DEVICE_ROLES_PERMISSIONS primary key nonclustered (DEVICEROLEPERMISSIONID)
 )
 go
@@ -523,14 +523,14 @@ go
 /* Table: DEVICE_STATE_HISTORY                                  */
 /*==============================================================*/
 create table DEVICE_STATE_HISTORY (
-   DEVICESTATEHISTORYID int                  not null,
-   DEVICEID             int                  not null,
-   DEVICETYPE           int                  not null,
-   DEVICESN             nvarchar(100)        not null,
-   RECORDTYPE           int                  null,
-   RECORDTIME           datetime             null,
-   DOORSTATUS           int                  not null,
-   REMARK               nvarchar(1024)       null,
+   DeviceStateHistoryID int                  not null,
+   DeviceID             int                  not null,
+   DeviceType           int                  not null,
+   DeviceSN             nvarchar(100)        not null,
+   RecordType           int                  null,
+   RecordTime           datetime             null,
+   DoorStatus           int                  not null,
+   Remark               nvarchar(1024)       null,
    constraint PK_DEVICE_STATE_HISTORY primary key nonclustered (DEVICESTATEHISTORYID)
 )
 go
@@ -539,15 +539,15 @@ go
 /* Table: DEVICE_TRAFFIC_LOG                                    */
 /*==============================================================*/
 create table DEVICE_TRAFFIC_LOG (
-   TRAFFICID            int                  not null,
-   DEVICEID             int                  not null,
-   DEVICETYPE           int                  not null,
-   DEVICESN             nvarchar(100)        not null,
-   RECORDTYPE           nvarchar(1024)       null,
-   RECORDTIME           datetime             null,
-   RECORDUPLOADTIME     datetime             null,
-   AUTHENTICATIONTYPE   int                  null,
-   REMARK               nvarchar(1024)       null,
+   TrafficID            int                  not null,
+   DeviceID             int                  not null,
+   DeviceType           int                  not null,
+   DeviceSN             nvarchar(100)        not null,
+   RecordType           nvarchar(1024)       null,
+   RecordTime           datetime             null,
+   RecordUploadTime     datetime             null,
+   AuthenticationType   int                  null,
+   Remark               nvarchar(1024)       null,
    constraint PK_DEVICE_TRAFFIC_LOG primary key nonclustered (TRAFFICID)
 )
 go
@@ -556,17 +556,17 @@ go
 /* Table: SYS_DEPARTMENT                                        */
 /*==============================================================*/
 create table SYS_DEPARTMENT (
-   DEPARTMENTID         int                  not null,
-   NAME                 nvarchar(100)        not null,
-   DEPARTMENTCODE       nvarchar(25)         not null,
-   PARENTID             int                  not null,
-   DEVICEROLEID         int                  not null,
-   REMARK               nvarchar(1024)       null,
-   CREATEUSERID         int                  not null,
-   CREATEDATE           datetime             not null,
-   STATUS               int                  not null,
-   UPDATEUSERID         int                  null,
-   UPDATEDATE           datetime             null,
+   DepartmentID         int                  not null,
+   Name                 nvarchar(100)        not null,
+   DepartmentCode       nvarchar(25)         not null,
+   ParentID             int                  not null,
+   DeviceRoleID         int                  not null,
+   Remark               nvarchar(1024)       null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   Status               int                  not null,
+   UpdateUserID         int                  null,
+   UpdateDate           datetime             null,
    constraint PK_SYS_DEPARTMENT primary key nonclustered (DEPARTMENTID)
 )
 go
@@ -575,15 +575,15 @@ go
 /* Table: SYS_DEPARTMENT_DEVICES                                */
 /*==============================================================*/
 create table SYS_DEPARTMENT_DEVICES (
-   DEPARTMENTDEVICEID   int                  not null,
-   DEPARTMENTID         int                  not null,
-   DEVICEID             int                  not null,
-   REMARK               nvarchar(1024)       null,
-   CREATEUSERID         int                  not null,
-   CREATEDATE           datetime             not null,
-   STATUS               int                  not null,
-   UPDATEUSERID         int                  null,
-   UPDATEDATE           datetime             null,
+   DepartmentDeviceID   int                  not null,
+   DepartmentID         int                  not null,
+   DeviceID             int                  not null,
+   Remark               nvarchar(1024)       null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   Status               int                  not null,
+   UpdateUserID         int                  null,
+   UpdateDate           datetime             null,
    constraint PK_SYS_DEPARTMENT_DEVICES primary key nonclustered (DEPARTMENTDEVICEID)
 )
 go
@@ -592,23 +592,23 @@ go
 /* Table: SYS_DICTIONARY                                        */
 /*==============================================================*/
 create table SYS_DICTIONARY (
-   DICTIONARYID         int                  not null,
-   NAME                 nvarchar(100)        not null,
-   TYPEID               int                  null,
-   TYPENAME             nvarchar(100)        null,
-   PARENTID             int                  null,
-   LANGUAGEID           int                  null,
-   LEVEL                int                  null,
-   ITEMID               int                  null,
-   ITEMPROPERTY         nvarchar(1024)       null,
-   ITEMVALUE            nvarchar(1024)       null,
-   DESCRIPTION          nvarchar(1024)       null,
-   REMARK               nvarchar(1024)       null,
-   CREATEDATE           datetime             not null,
-   CREATEUSERID         int                  not null,
-   STATUS               int                  not null,
-   UPDATEDATE           datetime             null,
-   UPDATEUSERID         int                  null,
+   DictionaryID         int                  not null,
+   Name                 nvarchar(100)        not null,
+   TypeID               int                  null,
+   TypeName             nvarchar(100)        null,
+   ParentID             int                  null,
+   LanguageID           int                  null,
+   Level                int                  null,
+   ItemID               int                  null,
+   ItemProperty         nvarchar(1024)       null,
+   ItemValue            nvarchar(1024)       null,
+   Description          nvarchar(1024)       null,
+   Remark               nvarchar(1024)       null,
+   CreateDate           datetime             not null,
+   CreateUserID         int                  not null,
+   Status               int                  not null,
+   UpdateDate           datetime             null,
+   UpdateUserID         int                  null,
    constraint PK_SYS_DICTIONARY primary key nonclustered (DICTIONARYID)
 )
 go
@@ -617,19 +617,19 @@ go
 /* Table: SYS_MODULE                                            */
 /*==============================================================*/
 create table SYS_MODULE (
-   MODULEID             int                  not null,
-   MODULENAME           nvarchar(100)        not null,
-   DESCRIPTION          nvarchar(1024)       null,
-   PARENTID             int                  not null,
-   LINKURL              nvarchar(1024)       null,
-   FULLCLASSNAME        nvarchar(1024)       not null,
-   MODULELEVEL          int                  not null,
-   REMARK               nvarchar(1024)       null,
-   CREATEDATE           datetime             not null,
-   CREATEUSERID         int                  not null,
-   STATUS               int                  not null,
-   UPDATEDATE           datetime             null,
-   UPDATEUSERID         int                  null,
+   ModuleID             int                  not null,
+   ModuleName           nvarchar(100)        not null,
+   Description          nvarchar(1024)       null,
+   ParentID             int                  not null,
+   LinkURL              nvarchar(1024)       null,
+   FullClassName        nvarchar(1024)       not null,
+   ModuleLevel          int                  not null,
+   Remark               nvarchar(1024)       null,
+   CreateDate           datetime             not null,
+   CreateUserID         int                  not null,
+   Status               int                  not null,
+   UpdateDate           datetime             null,
+   UpdateUserID         int                  null,
    constraint PK_SYS_MODULE primary key nonclustered (MODULEID)
 )
 go
@@ -638,17 +638,17 @@ go
 /* Table: SYS_MODULE_ELEMENTS                                   */
 /*==============================================================*/
 create table SYS_MODULE_ELEMENTS (
-   ELEMENTID            int                  not null,
-   MODULEID             int                  not null,
-   VISIBLE              bit                  not null,
-   ENABLED              bit                  not null,
-   DESCRIPTION          nvarchar(1024)       null,
-   REMARK               nvarchar(1024)       null,
-   CREATEDATE           datetime             not null,
-   CREATEUSERID         int                  not null,
-   STATUS               int                  not null,
-   UPDATEDATE           datetime             null,
-   UPDATEUSERID         int                  null,
+   ElementID            int                  not null,
+   ModuleID             int                  not null,
+   Visible              bit                  not null,
+   Enabled              bit                  not null,
+   Description          nvarchar(1024)       null,
+   Remark               nvarchar(1024)       null,
+   CreateDate           datetime             not null,
+   CreateUserID         int                  not null,
+   Status               int                  not null,
+   UpdateDate           datetime             null,
+   UpdateUserID         int                  null,
    constraint PK_SYS_MODULE_ELEMENTS primary key nonclustered (ELEMENTID)
 )
 go
@@ -657,15 +657,15 @@ go
 /* Table: SYS_OPERATION_LOG                                     */
 /*==============================================================*/
 create table SYS_OPERATION_LOG (
-   LOGID                int                  not null,
-   DEPARTMENTID         int                  null,
-   USERID               int                  null,
-   USERNAME             nvarchar(100)        null,
-   OPERATIONCODE        nvarchar(100)        null,
-   OPERATIONNAME        nvarchar(1024)       null,
-   DETAIL               nvarchar(1024)       null,
-   REMARK               nvarchar(1024)       null,
-   CREATEDATE           datetime             null,
+   LogID                int                  not null,
+   DepartmentID         int                  null,
+   UserID               int                  null,
+   UserName             nvarchar(100)        null,
+   OperationCode        nvarchar(100)        null,
+   OperationName        nvarchar(1024)       null,
+   Detail               nvarchar(1024)       null,
+   Remark               nvarchar(1024)       null,
+   CreateDate           datetime             null,
    constraint PK_SYS_OPERATION_LOG primary key nonclustered (LOGID)
 )
 go
@@ -674,15 +674,15 @@ go
 /* Table: SYS_ROLE                                              */
 /*==============================================================*/
 create table SYS_ROLE (
-   ROLEID               int                  not null,
-   ROLENAME             nvarchar(100)        not null,
-   DESCRIPTION          nvarchar(1024)       null,
-   REMARK               nvarchar(1024)       null,
-   CREATEDATE           datetime             not null,
-   CREATEUSERID         int                  not null,
-   STATUS               int                  not null,
-   UPDATEDATE           datetime             null,
-   UPDATEUSERID         int                  null,
+   RoleID               int                  not null,
+   RoleName             nvarchar(100)        not null,
+   Description          nvarchar(1024)       null,
+   Remark               nvarchar(1024)       null,
+   CreateDate           datetime             not null,
+   CreateUserID         int                  not null,
+   Status               int                  not null,
+   UpdateDate           datetime             null,
+   UpdateUserID         int                  null,
    constraint PK_SYS_ROLE primary key nonclustered (ROLEID)
 )
 go
@@ -691,9 +691,9 @@ go
 /* Table: SYS_ROLE_MODULEELEMENT                                */
 /*==============================================================*/
 create table SYS_ROLE_MODULEELEMENT (
-   SYSROLEELEMENTID     int                  not null,
-   ELEMENTID            int                  not null,
-   ROLEID               int                  not null,
+   SysRoleElementID     int                  not null,
+   ElementID            int                  not null,
+   RoleID               int                  not null,
    constraint PK_SYS_ROLE_MODULEELEMENT primary key nonclustered (SYSROLEELEMENTID)
 )
 go
@@ -702,19 +702,19 @@ go
 /* Table: SYS_USER                                              */
 /*==============================================================*/
 create table SYS_USER (
-   USERID               int                  not null,
-   DEPARTMENTID         int                  null,
-   TYPE                 int                  not null,
-   USERCODE             nvarchar(25)         not null,
-   NAME                 nvarchar(100)        not null,
-   GENDER               int                  not null,
-   PHONE                nvarchar(255)        null,
-   DEPORTMENTID         int                  not null,
-   PHOTO                nvarchar(1024)       null,
-   STATUS               int                  not null,
-   REMARK               nvarchar(1024)       null,
-   STARTDATE            datetime             not null,
-   ENDDATE              datetime             null,
+   UserID               int                  not null,
+   DepartmentID         int                  null,
+   Type                 int                  not null,
+   UserCode             nvarchar(25)         not null,
+   Name                 nvarchar(100)        not null,
+   Gender               int                  not null,
+   Phone                nvarchar(255)        null,
+   DeportmentID         int                  not null,
+   Photo                nvarchar(1024)       null,
+   Status               int                  not null,
+   Remark               nvarchar(1024)       null,
+   StartDate            datetime             not null,
+   EndDate              datetime             null,
    constraint PK_SYS_USER primary key nonclustered (USERID)
 )
 go
@@ -723,20 +723,20 @@ go
 /* Table: SYS_USER_AUTHENTICATION                               */
 /*==============================================================*/
 create table SYS_USER_AUTHENTICATION (
-   USERAUTHENTICATIONID int                  not null,
-   USERID               int                  not null,
-   DEVICEUSERID         int                  not null,
-   DEVICETYPE           int                  not null,
-   AUTHENTICATIONTYPE   int                  not null,
-   AUTHENTICATIONDATA   nvarchar(1024)       not null,
-   VERSION              nvarchar(50)         null,
-   ISDURESS_            bit                  not null,
-   REMARK               nvarchar(1024)       null,
-   CREATEUSERID         int                  not null,
-   CREATEDATE           datetime             not null,
-   STATUS               int                  not null,
-   UPDATEUSERID         int                  null,
-   UPDATEDATE           datetime             null,
+   UserAuthenticationID int                  not null,
+   UserID               int                  not null,
+   DeviceUserID         int                  not null,
+   DeviceType           int                  not null,
+   AuthenticationType   int                  not null,
+   AuthenticationData   nvarchar(1024)       not null,
+   Version              nvarchar(50)         null,
+   IsDuress             bit                  not null,
+   Remark               nvarchar(1024)       null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   Status               int                  not null,
+   UpdateUserID         int                  null,
+   UpdateDate           datetime             null,
    constraint PK_SYS_USER_AUTHENTICATION primary key nonclustered (USERAUTHENTICATIONID)
 )
 go
@@ -752,14 +752,14 @@ go
 /* Table: SYS_USER_DEVICE_ROLES                                 */
 /*==============================================================*/
 create table SYS_USER_DEVICE_ROLES (
-   USERDEVICEROLEID     int                  not null,
-   USERID               int                  not null,
-   DEVICEROLEID         int                  not null,
-   CREATEUSERID         int                  not null,
-   CREATEDATE           datetime             not null,
-   STATUS               int                  not null,
-   UPDATEUSERID         datetime             null,
-   UPDATEDATE           datetime             null,
+   UserDeviceRoleID     int                  not null,
+   UserID               int                  not null,
+   DeviceRoleID         int                  not null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   Status               int                  not null,
+   UpdateUserID         datetime             null,
+   UpdateDate           datetime             null,
    constraint PK_SYS_USER_DEVICE_ROLES primary key nonclustered (USERDEVICEROLEID)
 )
 go
@@ -768,16 +768,16 @@ go
 /* Table: SYS_USER_OPERATOR                                     */
 /*==============================================================*/
 create table SYS_USER_OPERATOR (
-   OPERATORID           int                  not null,
-   USERID               int                  not null,
-   LOGINNAME            nvarchar(100)        not null,
-   PASSWORD             nvarchar(1024)       not null,
-   LANGUAGEID           int                  not null,
-   CREATEUSERID         int                  not null,
-   CREATEDATE           datetime             not null,
-   STATUS               int                  not null,
-   UPDATEUSERID         int                  null,
-   UPDATEDATE           datetime             null,
+   OperatorID           int                  not null,
+   UserID               int                  not null,
+   LoginName            nvarchar(100)        not null,
+   Password             nvarchar(1024)       not null,
+   LanguageID           int                  not null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   Status               int                  not null,
+   UpdateUserID         int                  null,
+   UpdateDate           datetime             null,
    constraint PK_SYS_USER_OPERATOR primary key nonclustered (OPERATORID)
 )
 go
@@ -786,29 +786,29 @@ go
 /* Table: SYS_USER_PROPERTY                                     */
 /*==============================================================*/
 create table SYS_USER_PROPERTY (
-   _USERPROPERTYID      int                  not null,
-   USERID               int                  not null,
-   LASTNAME             nvarchar(25)         not null,
-   FIRSTNAME            nvarchar(25)         not null,
-   NATIONALITY          nvarchar(10)         not null,
-   NATIVEPLACE          nvarchar(100)        null,
-   BIRTHDAY             datetime             not null,
-   MARRIAGE             int                  null,
-   POLITICALSTATUS      int                  null,
-   DEGREE               int                  null,
-   HOMENUMBER           nvarchar(50)         null,
-   ENGLISHNAME          nvarchar(50)         null,
-   COMPANY              nvarchar(100)        null,
-   TECHNICALTITLE       nvarchar(50)         null,
-   TECHNICALLEVEL       nvarchar(50)         null,
-   IDTYPE               int                  not null,
-   IDNUMBER             nvarchar(50)         not null,
-   SOCIALNUMBER         nvarchar(50)         null,
-   EMAIL                nvarchar(100)        null,
-   ADDRESS              nvarchar(1024)       null,
-   POSTCODE             nvarchar(50)         null,
-   REMARK               nvarchar(1024)       null,
-   constraint PK_SYS_USER_PROPERTY primary key nonclustered (_USERPROPERTYID)
+   UserPropertyID       int                  not null,
+   UserID               int                  not null,
+   LastName             nvarchar(25)         not null,
+   FirstName            nvarchar(25)         not null,
+   Nationality          nvarchar(10)         not null,
+   NativePlace          nvarchar(100)        null,
+   Birthday             datetime             not null,
+   Marriage             int                  null,
+   PoliticalStatus      int                  null,
+   Degree               int                  null,
+   HomeNumber           nvarchar(50)         null,
+   EnglishName          nvarchar(50)         null,
+   Company              nvarchar(100)        null,
+   TechnicalTitle       nvarchar(50)         null,
+   TechnicalLevel       nvarchar(50)         null,
+   IDType               int                  not null,
+   IDNumber             nvarchar(50)         not null,
+   SocialNumber         nvarchar(50)         null,
+   Email                nvarchar(100)        null,
+   Address              nvarchar(1024)       null,
+   Postcode             nvarchar(50)         null,
+   Remark               nvarchar(1024)       null,
+   constraint PK_SYS_USER_PROPERTY primary key nonclustered (USERPROPERTYID)
 )
 go
 
@@ -816,9 +816,9 @@ go
 /* Table: SYS_USER_ROLE                                         */
 /*==============================================================*/
 create table SYS_USER_ROLE (
-   SYSUSERROLEID        int                  not null,
-   USERID               int                  not null,
-   ROLEID               int                  not null,
+   SysUserRoleID        int                  not null,
+   UserID               int                  not null,
+   RoleID               int                  not null,
    constraint PK_SYS_USER_ROLE primary key nonclustered (SYSUSERROLEID)
 )
 go
@@ -827,13 +827,13 @@ go
 /* Table: TIME_GROUPS                                           */
 /*==============================================================*/
 create table TIME_GROUPS (
-   TIMEGROUPID          int                  not null,
-   TIMEGROUPNAME        nvarchar(100)        not null,
-   CREATEUSERID         int                  not null,
-   CREATEDATE           datetime             not null,
-   STATUS               int                  not null,
-   UPDATEUSERID         int                  null,
-   UPDATEDATE           datetime             null,
+   TimeGroupID          int                  not null,
+   TimeGroupName        nvarchar(100)        not null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   Status               int                  not null,
+   UpdateUserID         int                  null,
+   UpdateDate           datetime             null,
    constraint PK_TIME_GROUPS primary key nonclustered (TIMEGROUPID)
 )
 go
@@ -842,10 +842,10 @@ go
 /* Table: TIME_GROUP_SEGMENT                                    */
 /*==============================================================*/
 create table TIME_GROUP_SEGMENT (
-   TIMEZONEGROUPID      int                  not null,
-   TIMEGROUPID          int                  not null,
-   TIMESEGMENTID        int                  not null,
-   constraint PK_TIME_GROUP_SEGMENT primary key nonclustered (TIMEZONEGROUPID)
+   TimeGroupSegmentID   int                  not null,
+   TimeGroupID          int                  not null,
+   TimeSegmentID        int                  not null,
+   constraint PK_TIME_GROUP_SEGMENT primary key nonclustered (TIMEGROUPSEGMENTID)
 )
 go
 
@@ -853,14 +853,14 @@ go
 /* Table: TIME_SEGMENTS                                         */
 /*==============================================================*/
 create table TIME_SEGMENTS (
-   TIMESEGMENTID        int                  not null,
-   BEGINTIME            datetime             not null,
-   ENDTIME              datetime             not null,
-   CREATEUSERID         int                  not null,
-   CREATEDATE           datetime             not null,
-   STATUS               int                  not null,
-   UPDATEUSERID         int                  null,
-   UPDATEDATE           datetime             null,
+   TimeSegmentID        int                  not null,
+   BeginTime            datetime             not null,
+   EndTime              datetime             not null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   Status               int                  not null,
+   UpdateUserID         int                  null,
+   UpdateDate           datetime             null,
    constraint PK_TIME_SEGMENTS primary key nonclustered (TIMESEGMENTID)
 )
 go
@@ -869,13 +869,13 @@ go
 /* Table: TIME_ZONE                                             */
 /*==============================================================*/
 create table TIME_ZONE (
-   TIMEZONEID           int                  not null,
-   TIMEZONENAME         nvarchar(100)        not null,
-   CREATEUSERID         int                  not null,
-   CREATEDATE           datetime             not null,
-   STATUS               int                  not null,
-   UPDATEUSERID         int                  null,
-   UPDATEDATE           datetime             null,
+   TimeZoneID           int                  not null,
+   TimeZoneName         nvarchar(100)        not null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   Status               int                  not null,
+   UpdateUserID         int                  null,
+   UpdateDate           datetime             null,
    constraint PK_TIME_ZONE primary key nonclustered (TIMEZONEID)
 )
 go
@@ -884,9 +884,9 @@ go
 /* Table: TIME_ZONE_GROUP                                       */
 /*==============================================================*/
 create table TIME_ZONE_GROUP (
-   TIMEZONEGROUPID      int                  not null,
-   TIMEZONEID           int                  not null,
-   TIMEGROUPID          int                  not null,
+   TimeZoneGroupID      int                  not null,
+   TimeZoneID           int                  not null,
+   TimeGroupID          int                  not null,
    constraint PK_TIME_ZONE_GROUP primary key nonclustered (TIMEZONEGROUPID)
 )
 go
