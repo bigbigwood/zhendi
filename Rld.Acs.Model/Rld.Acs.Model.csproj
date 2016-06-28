@@ -43,8 +43,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Customer.cs" />
+    <Compile Include="Department\Department.cs" />
+    <Compile Include="Department\DepartmentDevice.cs" />
+    <Compile Include="Device\DeviceController.cs" />
+    <Compile Include="Device\DeviceControllerParameter.cs" />
+    <Compile Include="Device\DeviceDoor.cs" />
+    <Compile Include="Device\DeviceHeadReading.cs" />
+    <Compile Include="Device\DeviceOperationLog.cs" />
+    <Compile Include="Device\DevicePermission.cs" />
+    <Compile Include="Device\DeviceRole.cs" />
+    <Compile Include="Device\DeviceRolePermission.cs" />
+    <Compile Include="Device\DeviceStateHistory.cs" />
+    <Compile Include="Device\DeviceTrafficLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\SysDictionary.cs" />
+    <Compile Include="System\SysModule.cs" />
+    <Compile Include="System\SysModuleElement.cs" />
+    <Compile Include="System\SysOperationLog.cs" />
+    <Compile Include="System\SysRole.cs" />
+    <Compile Include="System\SysRoleModuleElement.cs" />
+    <Compile Include="Time\TimeGroup.cs" />
+    <Compile Include="Time\TimeGroupSegment.cs" />
+    <Compile Include="Time\TimeSegment.cs" />
+    <Compile Include="Time\TimeZone.cs" />
+    <Compile Include="Time\TimeZoneGroup.cs" />
+    <Compile Include="User\User.cs" />
+    <Compile Include="User\UserAuthentication.cs" />
+    <Compile Include="User\UserDeviceRole.cs" />
+    <Compile Include="User\Operator.cs" />
+    <Compile Include="User\UserProperty.cs" />
+    <Compile Include="User\UserRole.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
