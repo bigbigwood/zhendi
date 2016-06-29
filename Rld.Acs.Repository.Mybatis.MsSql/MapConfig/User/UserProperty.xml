@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="UserProperty" type="Rld.Acs.Model.UserProperty" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="UserPropertyResult" class="Rld.Acs.Model.UserProperty">
+      <result property="UserPropertyID" column="UserPropertyID"/>
+      <result property="LastName" column="LastName"/>
+      <result property="FirstName" column="FirstName"/>
+      <result property="Nationality" column="Nationality"/>
+      <result property="NativePlace" column="NativePlace"/>
+      <result property="Birthday" column="Birthday"/>
+      <result property="Marriage" column="Marriage"/>
+      <result property="PoliticalStatus" column="PoliticalStatus"/>
+      <result property="Degree" column="Degree"/>
+      <result property="HomeNumber" column="HomeNumber"/>
+      <result property="EnglishName" column="EnglishName"/>
+      <result property="Company" column="Company"/>
+      <result property="TechnicalTitle" column="TechnicalTitle"/>
+      <result property="TechnicalLevel" column="TechnicalLevel"/>
+      <result property="IDType" column="IDType"/>
+      <result property="IDNumber" column="IDNumber"/>
+      <result property="SocialNumber" column="SocialNumber"/>
+      <result property="Email" column="Email"/>
+      <result property="Address" column="Address"/>
+      <result property="Postcode" column="Postcode"/>
+      <result property="Remark" column="Remark"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="UserProperty.GetByKey" parameterClass="int" resultMap="UserPropertyResult">
+      SELECT *
+      FROM SYS_USER_PROPERTY
+      where UserPropertyID =  #value#
+    </select>
+
+    <insert id="UserProperty.Insert" parameterClass="UserProperty">
+      INSERT INTO [SYS_USER_PROPERTY] (
+      [LastName]
+      , [FirstName]
+      , [Nationality]
+      , [NativePlace]
+      , [Birthday]
+      , [Marriage]
+      , [PoliticalStatus]
+      , [Degree]
+      , [HomeNumber]
+      , [EnglishName]
+      , [Company]
+      , [TechnicalTitle]
+      , [TechnicalLevel]
+      , [IDType]
+      , [IDNumber]
+      , [SocialNumber]
+      , [Email]
+      , [Address]
+      , [Postcode]
+      , [Remark]
+      ) VALUES (
+      #LastName#
+      , #FirstName#
+      , #Nationality#
+      , #NativePlace#
+      , #Birthday#
+      , #Marriage#
+      , #PoliticalStatus#
+      , #Degree#
+      , #HomeNumber#
+      , #EnglishName#
+      , #Company#
+      , #TechnicalTitle#
+      , #TechnicalLevel#
+      , #IDType#
+      , #IDNumber#
+      , #SocialNumber#
+      , #Email#
+      , #Address#
+      , #Postcode#
+      , #Remark#
+      )
+      <selectKey resultClass="int" type="post" property="UserPropertyID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="UserProperty.Update" parameterClass="UserProperty">
+      UPDATE [SYS_USER_PROPERTY] SET
+      [LastName] = #LastName#
+      , [FirstName] = #FirstName#
+      , [Nationality] = #Nationality#
+      , [NativePlace] = #NativePlace#
+      , [Birthday] = #Birthday#
+      , [Marriage] = #Marriage#
+      , [PoliticalStatus] = #PoliticalStatus#
+      , [Degree] = #Degree#
+      , [HomeNumber] = #HomeNumber#
+      , [EnglishName] = #EnglishName#
+      , [Company] = #Company#
+      , [TechnicalTitle] = #TechnicalTitle#
+      , [TechnicalLevel] = #TechnicalLevel#
+      , [IDType] = #IDType#
+      , [IDNumber] = #IDNumber#
+      , [SocialNumber] = #SocialNumber#
+      , [Email] = #Email#
+      , [Address] = #Address#
+      , [Postcode] = #Postcode#
+      , [Remark] = #Remark#
+      WHERE
+      ([UserPropertyID] = #UserPropertyID#)
+    </update>
+
+    <delete id="UserProperty.Delete"  parameterClass="int">
+      DELETE FROM [SYS_USER_PROPERTY]
+      WHERE
+      ([UserPropertyID] = #UserPropertyID#)
+    </delete>
+
+    <select id="UserProperty.Query" parameterClass="UserProperty" resultMap="UserPropertyResult">
+      SELECT *
+      FROM SYS_USER_PROPERTY
+      where 1=1
+    </select>
+  </statements>
+</sqlMap>

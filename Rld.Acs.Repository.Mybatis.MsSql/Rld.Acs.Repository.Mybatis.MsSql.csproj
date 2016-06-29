@@ -65,6 +65,11 @@
     <Compile Include="Adapter\MyBatisConnectionProvider.cs" />
     <Compile Include="Adapter\MyBatisRepository.cs" />
     <Compile Include="Impl\CustomerRepositoryMB.cs" />
+    <Compile Include="Impl\System\SysOperatorRepositoryMB.cs" />
+    <Compile Include="Impl\Time\TimeSegmentRepositoryMB.cs" />
+    <Compile Include="Impl\User\UserPropertyRepositoryMB.cs" />
+    <Compile Include="Impl\User\UserAuthenticationRepositoryMB.cs" />
+    <Compile Include="Impl\User\UserRepositoryMB.cs" />
     <Compile Include="NinjectBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Adapter\SessionToPersistanceAdapter.cs" />
@@ -83,9 +88,29 @@
       <Name>Rld.Acs.Repository</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Impl\Department\" />
+    <Folder Include="Impl\Device\" />
+    <Folder Include="MapConfig\Department\" />
+    <Folder Include="MapConfig\Device\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Customer.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Time\TimeSegment.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\System\SysOperator.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\User\User.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\User\UserProperty.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\User\UserAuthentication.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

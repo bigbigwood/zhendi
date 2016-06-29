@@ -7,7 +7,7 @@ namespace Rld.Acs.Model
     public class User
     {
         public Int32 UserID { get; set; }
-        public Department Department { get; set; }
+        public Int32 DepartmentID { get; set; }
         public UserType Type { get; set; }
         public String UserCode { get; set; }
         public String Name { get; set; }

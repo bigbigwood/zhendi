@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Rld.Acs.Model
 {
-    public class Operator
+    public class SysOperator
     {
         public Int32 OperatorID { get; set; }
         public User User { get; set; }

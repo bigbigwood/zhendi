@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="TimeSegment" type="Rld.Acs.Model.TimeSegment" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="TimeSegmentResult" class="Rld.Acs.Model.TimeSegment">
+      <result property="TimeSegmentID" column="TimeSegmentID"/>
+      <result property="BeginTime" column="BeginTime"/>
+      <result property="EndTime" column="EndTime"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="TimeSegment.GetByKey" parameterClass="int" resultMap="TimeSegmentResult">
+      SELECT *
+      FROM TIME_SEGMENTS
+      where TimeSegmentID =  #value#
+    </select>
+    
+    <insert id="TimeSegment.Insert" parameterClass="TimeSegment">
+      INSERT INTO [TIME_SEGMENTS] (
+      [BeginTime]
+      , [EndTime]
+      , [CreateUserID]
+      , [CreateDate]
+      , [Status]
+      , [UpdateUserID]
+      , [UpdateDate]
+      ) VALUES (
+      #BeginTime#
+      , #EndTime#
+      , #CreateUserID#
+      , #CreateDate#
+      , #Status#
+      , #UpdateUserID#
+      , #UpdateDate#
+      )
+      <selectKey resultClass="int" type="post" property="TimeSegmentID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="TimeSegment.Update" parameterClass="TimeSegment">
+      UPDATE [TIME_SEGMENTS] SET
+      [BeginTime] = #BeginTime#
+      , [EndTime] = #EndTime#
+      , [CreateUserID] = #CreateUserID#
+      , [CreateDate] = #CreateDate#
+      , [Status] = #Status#
+      , [UpdateUserID] = #UpdateUserID#
+      , [UpdateDate] = #UpdateDate#
+      WHERE
+      ([TimeSegmentID] = #TimeSegmentID#)
+    </update>
+
+    <delete id="TimeSegment.Delete"  parameterClass="int">
+      DELETE FROM TIME_SEGMENTS
+      where TimeSegmentID =  #value#
+    </delete>
+
+    <select id="TimeSegment.Query" parameterClass="TimeSegment" resultMap="TimeSegmentResult">
+      SELECT *
+      FROM TIME_SEGMENTS
+      where 1=1
+      <isNotEmpty prepend="and" property="Status">
+        Status=#Status#
+      </isNotEmpty>
+      <isNotNull prepend="and" property="CreateUserID">
+        CreateUserID=#CreateUserID#
+      </isNotNull>
+      <isNotEmpty prepend="and" property="UpdateUserID">
+        UpdateUserID=#UpdateUserID#
+      </isNotEmpty>
+    </select>
+  </statements>
+</sqlMap>

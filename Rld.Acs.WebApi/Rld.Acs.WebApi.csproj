@@ -145,6 +145,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\System\SysOperatorsController.cs" />
+    <Compile Include="Controllers\Time\TimeSegmentsController.cs" />
+    <Compile Include="Controllers\User\UserPropertiesController.cs" />
+    <Compile Include="Controllers\User\UserAuthenticationsController.cs" />
+    <Compile Include="Controllers\User\UsersController.cs" />
     <Compile Include="Framework\ActionWarpper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -183,6 +188,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controllers\Department\" />
+    <Folder Include="Controllers\Device\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

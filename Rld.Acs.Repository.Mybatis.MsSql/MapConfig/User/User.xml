@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="User" type="Rld.Acs.Model.User" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="UserResult" class="Rld.Acs.Model.User">
+      <result property="UserID" column="UserID"/>
+      <result property="DepartmentID" column="DepartmentID"/>
+      <result property="Type" column="Type"/>
+      <result property="UserCode" column="UserCode"/>
+      <result property="Name" column="Name"/>
+      <result property="Gender" column="Gender"/>
+      <result property="Phone" column="Phone"/>
+      <result property="Photo" column="Photo"/>
+      <result property="Status" column="Status"/>
+      <result property="Remark" column="Remark"/>
+      <result property="StartDate" column="StartDate"/>
+      <result property="EndDate" column="EndDate"/>
+      <result property="UserAuthentication" column="UserAuthentication.GetByKey"/>
+      <result property="UserProperty" column="UserProperty.GetByKey"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="User.GetByKey" parameterClass="int" resultMap="UserResult">
+      SELECT *
+      FROM SYS_USER
+      where UserID =  #value#
+    </select>
+    
+    <insert id="User.Insert" parameterClass="User">
+      INSERT INTO [SYS_USER] (
+      [DepartmentID]
+      , [Type]
+      , [UserCode]
+      , [Name]
+      , [Gender]
+      , [Phone]
+      , [Photo]
+      , [Status]
+      , [Remark]
+      , [StartDate]
+      , [EndDate]
+      , [UserAuthenticationID]
+      , [UserPropertyID]
+      ) VALUES (
+      #DepartmentID#
+      , #Type#
+      , #UserCode#
+      , #Name#
+      , #Gender#
+      , #Phone#
+      , #Photo#
+      , #Status#
+      , #Remark#
+      , #StartDate#
+      , #EndDate#
+      , #UserAuthentication.UserAuthenticationID#
+      , #UserProperty.UserPropertyID#
+      )
+      <selectKey resultClass="int" type="post" property="UserID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="User.Update" parameterClass="User">
+      UPDATE [SYS_USER] SET
+      [DepartmentID] = #DepartmentID#
+      , [Type] = #Type#
+      , [UserCode] = #UserCode#
+      , [Name] = #Name#
+      , [Gender] = #Gender#
+      , [Phone] = #Phone#
+      , [Photo] = #Photo#
+      , [Status] = #Status#
+      , [Remark] = #Remark#
+      , [StartDate] = #StartDate#
+      , [EndDate] = #EndDate#
+      , [UserAuthenticationID] = #UserAuthentication.UserAuthenticationID#
+      , [UserPropertyID] = #UserProperty.UserPropertyID#
+      WHERE
+      ([UserID] = #UserID#)
+    </update>
+
+    <delete id="User.Delete"  parameterClass="int">
+      DELETE FROM [SYS_USER]
+      WHERE
+      ([UserID] = #UserID#)
+    </delete>
+
+    <select id="User.Query" parameterClass="User" resultMap="UserResult">
+      SELECT *
+      FROM SYS_USER
+      where 1=1
+    </select>
+  </statements>
+</sqlMap>

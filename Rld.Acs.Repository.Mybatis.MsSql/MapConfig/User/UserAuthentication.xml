@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="UserAuthentication" type="Rld.Acs.Model.UserAuthentication" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="UserAuthenticationResult" class="Rld.Acs.Model.UserAuthentication">
+      <result property="UserAuthenticationID" column="UserAuthenticationID"/>
+      <result property="DeviceUserID" column="DeviceUserID"/>
+      <result property="DeviceType" column="DeviceType"/>
+      <result property="AuthenticationType" column="AuthenticationType"/>
+      <result property="AuthenticationData" column="AuthenticationData"/>
+      <result property="Version" column="Version"/>
+      <result property="IsDuress" column="IsDuress"/>
+      <result property="Remark" column="Remark"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="UserAuthentication.GetByKey" parameterClass="int" resultMap="UserAuthenticationResult">
+      SELECT *
+      FROM SYS_USER_AUTHENTICATION
+      where UserAuthenticationID =  #value#
+    </select>
+    
+    <insert id="UserAuthentication.Insert" parameterClass="UserAuthentication">
+      INSERT INTO [SYS_USER_AUTHENTICATION] (
+ [DeviceUserID]
+      , [DeviceType]
+      , [AuthenticationType]
+      , [AuthenticationData]
+      , [Version]
+      , [IsDuress]
+      , [Remark]
+      , [CreateUserID]
+      , [CreateDate]
+      , [Status]
+      , [UpdateUserID]
+      , [UpdateDate]
+      ) VALUES (
+ #DeviceUserID#
+      , #DeviceType#
+      , #AuthenticationType#
+      , #AuthenticationData#
+      , #Version#
+      , #IsDuress#
+      , #Remark#
+      , #CreateUserID#
+      , #CreateDate#
+      , #Status#
+      , #UpdateUserID#
+      , #UpdateDate#
+      )
+      <selectKey resultClass="int" type="post" property="UserAuthenticationID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="UserAuthentication.Update" parameterClass="UserAuthentication">
+      UPDATE [SYS_USER_AUTHENTICATION] SET
+      [DeviceUserID] = #DeviceUserID#
+      , [DeviceType] = #DeviceType#
+      , [AuthenticationType] = #AuthenticationType#
+      , [AuthenticationData] = #AuthenticationData#
+      , [Version] = #Version#
+      , [IsDuress] = #IsDuress#
+      , [Remark] = #Remark#
+      , [CreateUserID] = #CreateUserID#
+      , [CreateDate] = #CreateDate#
+      , [Status] = #Status#
+      , [UpdateUserID] = #UpdateUserID#
+      , [UpdateDate] = #UpdateDate#
+      WHERE
+      ([UserAuthenticationID] = #UserAuthenticationID#)
+    </update>
+
+    <delete id="UserAuthentication.Delete"  parameterClass="int">
+      DELETE FROM [SYS_USER_AUTHENTICATION]
+      WHERE
+      ([UserAuthenticationID] = #UserAuthenticationID#)
+    </delete>
+
+    <select id="UserAuthentication.Query" parameterClass="UserAuthentication" resultMap="UserAuthenticationResult">
+      SELECT *
+      FROM SYS_USER_AUTHENTICATION
+      where 1=1
+    </select>
+  </statements>
+</sqlMap>

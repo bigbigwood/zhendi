@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="SysOperator" type="Rld.Acs.Model.SysOperator" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SysOperatorResult" class="Rld.Acs.Model.SysOperator">
+      <result property="OperatorID" column="OperatorID"/>
+      <result property="LoginName" column="LoginName"/>
+      <result property="Password" column="Password"/>
+      <result property="LanguageID" column="LanguageID"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="User" column="UserID" select="User.GetByKey"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="SysOperator.GetByKey" parameterClass="int" resultMap="SysOperatorResult">
+      SELECT *
+      FROM SYS_OPERATOR
+      where OperatorID =  #value#
+    </select>
+    
+    <insert id="SysOperator.Insert" parameterClass="SysOperator">
+      INSERT INTO [SYS_USER_OPERATOR] (
+      [UserID]
+      , [LoginName]
+      , [Password]
+      , [LanguageID]
+      , [CreateUserID]
+      , [CreateDate]
+      , [Status]
+      , [UpdateUserID]
+      , [UpdateDate]
+      ) VALUES (
+      #User.UserID#
+      , #LoginName#
+      , #Password#
+      , #LanguageID#
+      , #CreateUserID#
+      , #CreateDate#
+      , #Status#
+      , #UpdateUserID#
+      , #UpdateDate#
+      )
+      <selectKey resultClass="int" type="post" property="OperatorID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="SysOperator.Update" parameterClass="SysOperator">
+      UPDATE [SYS_USER_OPERATOR] SET
+      [UserID] = #User.UserID#
+      , [LoginName] = #LoginName#
+      , [Password] = #Password#
+      , [LanguageID] = #LanguageID#
+      , [CreateUserID] = #CreateUserID#
+      , [CreateDate] = #CreateDate#
+      , [Status] = #Status#
+      , [UpdateUserID] = #UpdateUserID#
+      , [UpdateDate] = #UpdateDate#
+      WHERE
+      ([OperatorID] = #OperatorID#)
+    </update>
+
+    <delete id="SysOperator.Delete"  parameterClass="int">
+      DELETE FROM [SYS_USER_OPERATOR]
+      WHERE
+      ([OperatorID] = #OperatorID#)
+    </delete>
+
+    <select id="SysOperator.Query" parameterClass="SysOperator" resultMap="SysOperatorResult">
+      SELECT *
+      FROM SYS_OPERATOR
+      where 1=1
+    </select>
+  </statements>
+</sqlMap>

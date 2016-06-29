@@ -96,13 +96,6 @@ alter table SYS_USER_DEVICE_ROLES
    drop constraint FK_DEVICE_ROLE_USERID
 go
 
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SYS_USER_OPERATOR') and o.name = 'FK_OPERATOR_USERID')
-alter table SYS_USER_OPERATOR
-   drop constraint FK_OPERATOR_USERID
-go
-
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
@@ -295,9 +288,9 @@ go
 
 if exists (select 1
             from  sysobjects
-           where  id = object_id('SYS_USER_OPERATOR')
+           where  id = object_id('SYS_OPERATOR')
             and   type = 'U')
-   drop table SYS_USER_OPERATOR
+   drop table SYS_OPERATOR
 go
 
 if exists (select 1
@@ -690,7 +683,6 @@ create table SYS_USER (
    Name                 nvarchar(100)        not null,
    Gender               int                  not null,
    Phone                nvarchar(255)        null,
-   DeportmentID         int                  not null,
    Photo                nvarchar(1024)       null,
    Status               int                  not null,
    Remark               nvarchar(1024)       null,
@@ -740,9 +732,9 @@ create table SYS_USER_DEVICE_ROLES (
 go
 
 /*==============================================================*/
-/* Table: SYS_USER_OPERATOR                                     */
+/* Table: SYS_OPERATOR                                     */
 /*==============================================================*/
-create table SYS_USER_OPERATOR (
+create table SYS_OPERATOR (
    OperatorID           int                  identity(1,1),
    UserID               int                  not null,
    LoginName            nvarchar(100)        not null,
@@ -753,7 +745,7 @@ create table SYS_USER_OPERATOR (
    Status               int                  not null,
    UpdateUserID         int                  null,
    UpdateDate           datetime             null,
-   constraint PK_SYS_USER_OPERATOR primary key nonclustered (OPERATORID)
+   constraint PK_SYS_OPERATOR primary key nonclustered (OPERATORID)
 )
 go
 
@@ -929,11 +921,6 @@ go
 
 alter table SYS_USER_DEVICE_ROLES
    add constraint FK_DEVICE_ROLE_USERID foreign key (USERID)
-      references SYS_USER (USERID)
-go
-
-alter table SYS_USER_OPERATOR
-   add constraint FK_OPERATOR_USERID foreign key (USERID)
       references SYS_USER (USERID)
 go
 

@@ -18,6 +18,13 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             Bind<IPersistanceTransaction>().To<TransactionToPersistanceTransaction>();
 
             Bind<ICustomerRepository>().To<CustomerRepositoryMB>();
+            Bind<ITimeSegmentRepository>().To<TimeSegmentRepositoryMB>();
+
+            Bind<ISysOperatorRepository>().To<SysOperatorRepositoryMB>();
+
+            Bind<IUserRepository>().To<UserRepositoryMB>();
+            Bind<IUserPropertyRepository>().To<UserPropertyRepositoryMB>();
+            Bind<IUserAuthenticationRepository>().To<UserAuthenticationRepositoryMB>();
         }
     }
 }

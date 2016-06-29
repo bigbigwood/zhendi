@@ -71,7 +71,7 @@
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserAuthentication.cs" />
     <Compile Include="User\UserDeviceRole.cs" />
-    <Compile Include="User\Operator.cs" />
+    <Compile Include="System\SysOperator.cs" />
     <Compile Include="User\UserProperty.cs" />
     <Compile Include="User\UserRole.cs" />
   </ItemGroup>
