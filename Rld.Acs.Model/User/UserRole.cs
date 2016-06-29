@@ -6,8 +6,8 @@ namespace Rld.Acs.Model
 {
     public class UserRole
     {
-        public Int32 SysUserRoleID { get; set; }
-        public User User { get; set; }
-        public SysRole SysRole { get; set; }
+        public virtual Int32 SysUserRoleID { get; set; }
+        public virtual User User { get; set; }
+        public virtual SysRole SysRole { get; set; }
     }
 }

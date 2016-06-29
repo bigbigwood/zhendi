@@ -736,7 +736,7 @@ go
 /*==============================================================*/
 create table SYS_OPERATOR (
    OperatorID           int                  identity(1,1),
-   UserID               int                  not null,
+   UserID               int                  null,
    LoginName            nvarchar(100)        not null,
    Password             nvarchar(1024)       not null,
    LanguageID           int                  not null,

@@ -6,13 +6,13 @@ namespace Rld.Acs.Model
 {
     public class TimeSegment
     {
-        public Int32 TimeSegmentID { get; set; }
-        public DateTime BeginTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public Int32 CreateUserID { get; set; }
-        public DateTime CreateDate { get; set; }
-        public GeneralStatus Status { get; set; }
-        public Int32? UpdateUserID { get; set; }
-        public DateTime? UpdateDate { get; set; }
+        public virtual Int32 TimeSegmentID { get; set; }
+        public virtual DateTime BeginTime { get; set; }
+        public virtual DateTime EndTime { get; set; }
+        public virtual Int32 CreateUserID { get; set; }
+        public virtual DateTime CreateDate { get; set; }
+        public virtual GeneralStatus Status { get; set; }
+        public virtual Int32? UpdateUserID { get; set; }
+        public virtual DateTime? UpdateDate { get; set; }
     }
 }

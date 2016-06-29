@@ -16,7 +16,7 @@
       <result property="Status" column="Status"/>
       <result property="UpdateUserID" column="UpdateUserID"/>
       <result property="UpdateDate" column="UpdateDate"/>
-      <result property="User" column="UserID" select="User.GetByKey"/>
+      <result property="UserID" column="UserID"/>
     </resultMap>
   </resultMaps>
 
@@ -28,7 +28,7 @@
     </select>
     
     <insert id="SysOperator.Insert" parameterClass="SysOperator">
-      INSERT INTO [SYS_USER_OPERATOR] (
+      INSERT INTO [SYS_OPERATOR] (
       [UserID]
       , [LoginName]
       , [Password]
@@ -39,7 +39,7 @@
       , [UpdateUserID]
       , [UpdateDate]
       ) VALUES (
-      #User.UserID#
+      #UserID#
       , #LoginName#
       , #Password#
       , #LanguageID#
@@ -55,8 +55,8 @@
     </insert>
 
     <update id="SysOperator.Update" parameterClass="SysOperator">
-      UPDATE [SYS_USER_OPERATOR] SET
-      [UserID] = #User.UserID#
+      UPDATE [SYS_OPERATOR] SET
+      [UserID] = #UserID#
       , [LoginName] = #LoginName#
       , [Password] = #Password#
       , [LanguageID] = #LanguageID#
@@ -70,15 +70,26 @@
     </update>
 
     <delete id="SysOperator.Delete"  parameterClass="int">
-      DELETE FROM [SYS_USER_OPERATOR]
+      DELETE FROM [SYS_OPERATOR]
       WHERE
       ([OperatorID] = #OperatorID#)
     </delete>
 
-    <select id="SysOperator.Query" parameterClass="SysOperator" resultMap="SysOperatorResult">
+    <select id="SysOperator.Query" parameterClass="Hashtable" resultMap="SysOperatorResult">
       SELECT *
       FROM SYS_OPERATOR
       where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="LoginName">
+          LoginName = #LoginName#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Status">
+          Status = #Status#
+        </isNotEmpty>
+        <isNotNull prepend="AND" property="UserID">
+          UserID = #UserID#
+        </isNotNull>
+      </dynamic>
     </select>
   </statements>
 </sqlMap>

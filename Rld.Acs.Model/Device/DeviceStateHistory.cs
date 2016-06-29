@@ -6,13 +6,13 @@ namespace Rld.Acs.Model
 {
     public class DeviceStateHistory
     {
-        public Int32 DeviceStateHistoryID { get; set; }
-        public Int32 DeviceID { get; set; }
-        public Int32 DeviceType { get; set; }
-        public String DeviceSN { get; set; }
-        public Int32? RecordType { get; set; }
-        public DateTime? RecordTime { get; set; }
-        public Int32 DoorStatus { get; set; }
-        public String Remark { get; set; }
+        public virtual Int32 DeviceStateHistoryID { get; set; }
+        public virtual Int32 DeviceID { get; set; }
+        public virtual Int32 DeviceType { get; set; }
+        public virtual String DeviceSN { get; set; }
+        public virtual Int32? RecordType { get; set; }
+        public virtual DateTime? RecordTime { get; set; }
+        public virtual Int32 DoorStatus { get; set; }
+        public virtual String Remark { get; set; }
     }
 }

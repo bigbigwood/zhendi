@@ -8,12 +8,12 @@ namespace Rld.Acs.Model
 {
     public class Customer
     {
-        public int CustomerId { get; set; }
-        public String FirstName { get; set; }
-        public String LastName { get; set; }
-        public String MSIDSN { get; set; }
-        public decimal Balance { get; set; }
-        public DateTime ResigterDateTime { get; set; }
-        public String Address { get; set; }
+        public virtual int CustomerId { get; set; }
+        public virtual String FirstName { get; set; }
+        public virtual String LastName { get; set; }
+        public virtual String MSIDSN { get; set; }
+        public virtual decimal Balance { get; set; }
+        public virtual DateTime ResigterDateTime { get; set; }
+        public virtual String Address { get; set; }
     }
 }

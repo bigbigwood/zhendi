@@ -6,14 +6,14 @@ namespace Rld.Acs.Model
 {
     public class DeviceOperationLog
     {
-        public Int32 LogID { get; set; }
-        public Int32? RegisterID { get; set; }
-        public Int32 DeviceID { get; set; }
-        public Int32 DeviceType { get; set; }
-        public Int32 OperationType { get; set; }
-        public Int32 OperatorID { get; set; }
-        public String OperationContent { get; set; }
-        public String OperationTime { get; set; }
-        public String OperationUploadTime { get; set; }
+        public virtual Int32 LogID { get; set; }
+        public virtual Int32? RegisterID { get; set; }
+        public virtual Int32 DeviceID { get; set; }
+        public virtual Int32 DeviceType { get; set; }
+        public virtual Int32 OperationType { get; set; }
+        public virtual Int32 OperatorID { get; set; }
+        public virtual String OperationContent { get; set; }
+        public virtual String OperationTime { get; set; }
+        public virtual String OperationUploadTime { get; set; }
     }
 }

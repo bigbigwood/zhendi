@@ -6,14 +6,14 @@ namespace Rld.Acs.Model
 {
     public class DevicePermission
     {
-        public Int32 DevicePermissionID { get; set; }
-        public DeviceController Device { get; set; }
-        public Boolean Enable { get; set; }
-        public String Remark { get; set; }
-        public DevicePermissionAction PermissionAction { get; set; }
-        public String UserGroupVM { get; set; }
-        public TimeZone AllowedAccessTimeZone { get; set; }
-        public DateTime STARTDATE { get; set; }
-        public DateTime? Enddate { get; set; }
+        public virtual Int32 DevicePermissionID { get; set; }
+        public virtual DeviceController Device { get; set; }
+        public virtual Boolean Enable { get; set; }
+        public virtual String Remark { get; set; }
+        public virtual DevicePermissionAction PermissionAction { get; set; }
+        public virtual String UserGroupVM { get; set; }
+        public virtual TimeZone AllowedAccessTimeZone { get; set; }
+        public virtual DateTime STARTDATE { get; set; }
+        public virtual DateTime? Enddate { get; set; }
     }
 }

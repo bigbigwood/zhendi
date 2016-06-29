@@ -6,12 +6,12 @@ namespace Rld.Acs.Model
 {
     public class TimeZone
     {
-        public Int32 TimeZoneID { get; set; }
-        public String TimeZoneName { get; set; }
-        public Int32 CreateUserID { get; set; }
-        public DateTime CreateDate { get; set; }
-        public GeneralStatus Status { get; set; }
-        public Int32? UpdateUserID { get; set; }
-        public DateTime? UpdateDate { get; set; }
+        public virtual Int32 TimeZoneID { get; set; }
+        public virtual String TimeZoneName { get; set; }
+        public virtual Int32 CreateUserID { get; set; }
+        public virtual DateTime CreateDate { get; set; }
+        public virtual GeneralStatus Status { get; set; }
+        public virtual Int32? UpdateUserID { get; set; }
+        public virtual DateTime? UpdateDate { get; set; }
     }
 }

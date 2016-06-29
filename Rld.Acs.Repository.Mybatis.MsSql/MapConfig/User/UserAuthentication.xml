@@ -87,7 +87,7 @@
       ([UserAuthenticationID] = #UserAuthenticationID#)
     </delete>
 
-    <select id="UserAuthentication.Query" parameterClass="UserAuthentication" resultMap="UserAuthenticationResult">
+    <select id="UserAuthentication.Query" parameterClass="Hashtable" resultMap="UserAuthenticationResult">
       SELECT *
       FROM SYS_USER_AUTHENTICATION
       where 1=1

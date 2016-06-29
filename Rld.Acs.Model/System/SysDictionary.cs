@@ -6,22 +6,22 @@ namespace Rld.Acs.Model
 {
     public class SysDictionary
     {
-        public Int32 DictionaryID { get; set; }
-        public String Name { get; set; }
-        public Int32? TypeID { get; set; }
-        public String TypeName { get; set; }
-        public Int32? ParentID { get; set; }
-        public Int32? LanguageID { get; set; }
-        public Int32? Level { get; set; }
-        public Int32? ItemID { get; set; }
-        public String ItemProperty { get; set; }
-        public String ItemValue { get; set; }
-        public String Description { get; set; }
-        public String Remark { get; set; }
-        public DateTime CreateDate { get; set; }
-        public Int32 CreateUserID { get; set; }
-        public GeneralStatus Status { get; set; }
-        public DateTime? UpdateDate { get; set; }
-        public Int32? UpdateUserID { get; set; }
+        public virtual Int32 DictionaryID { get; set; }
+        public virtual String Name { get; set; }
+        public virtual Int32? TypeID { get; set; }
+        public virtual String TypeName { get; set; }
+        public virtual Int32? ParentID { get; set; }
+        public virtual Int32? LanguageID { get; set; }
+        public virtual Int32? Level { get; set; }
+        public virtual Int32? ItemID { get; set; }
+        public virtual String ItemProperty { get; set; }
+        public virtual String ItemValue { get; set; }
+        public virtual String Description { get; set; }
+        public virtual String Remark { get; set; }
+        public virtual DateTime CreateDate { get; set; }
+        public virtual Int32 CreateUserID { get; set; }
+        public virtual GeneralStatus Status { get; set; }
+        public virtual DateTime? UpdateDate { get; set; }
+        public virtual Int32? UpdateUserID { get; set; }
     }
 }

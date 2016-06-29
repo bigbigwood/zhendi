@@ -6,26 +6,26 @@ namespace Rld.Acs.Model
 {
     public class UserProperty
     {
-        public Int32 UserPropertyID { get; set; }
-        public String LastName { get; set; }
-        public String FirstName { get; set; }
-        public String Nationality { get; set; }
-        public String NativePlace { get; set; }
-        public DateTime Birthday { get; set; }
-        public Int32? Marriage { get; set; }
-        public Int32? PoliticalStatus { get; set; }
-        public Int32? Degree { get; set; }
-        public String HomeNumber { get; set; }
-        public String EnglishName { get; set; }
-        public String Company { get; set; }
-        public String TechnicalTitle { get; set; }
-        public String TechnicalLevel { get; set; }
-        public Int32 IDType { get; set; }
-        public String IDNumber { get; set; }
-        public String SocialNumber { get; set; }
-        public String Email { get; set; }
-        public String Address { get; set; }
-        public String Postcode { get; set; }
-        public String Remark { get; set; }
+        public virtual Int32 UserPropertyID { get; set; }
+        public virtual String LastName { get; set; }
+        public virtual String FirstName { get; set; }
+        public virtual String Nationality { get; set; }
+        public virtual String NativePlace { get; set; }
+        public virtual DateTime Birthday { get; set; }
+        public virtual Int32? Marriage { get; set; }
+        public virtual Int32? PoliticalStatus { get; set; }
+        public virtual Int32? Degree { get; set; }
+        public virtual String HomeNumber { get; set; }
+        public virtual String EnglishName { get; set; }
+        public virtual String Company { get; set; }
+        public virtual String TechnicalTitle { get; set; }
+        public virtual String TechnicalLevel { get; set; }
+        public virtual Int32 IDType { get; set; }
+        public virtual String IDNumber { get; set; }
+        public virtual String SocialNumber { get; set; }
+        public virtual String Email { get; set; }
+        public virtual String Address { get; set; }
+        public virtual String Postcode { get; set; }
+        public virtual String Remark { get; set; }
     }
 }

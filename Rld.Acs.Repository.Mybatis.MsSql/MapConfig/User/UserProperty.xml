@@ -119,7 +119,7 @@
       ([UserPropertyID] = #UserPropertyID#)
     </delete>
 
-    <select id="UserProperty.Query" parameterClass="UserProperty" resultMap="UserPropertyResult">
+    <select id="UserProperty.Query" parameterClass="Hashtable" resultMap="UserPropertyResult">
       SELECT *
       FROM SYS_USER_PROPERTY
       where 1=1

@@ -6,14 +6,14 @@ namespace Rld.Acs.Model
 {
     public class DepartmentDevice
     {
-        public Int32 DepartmentDeviceID { get; set; }
-        public Department Department { get; set; }
-        public DeviceController Device { get; set; }
-        public String Remark { get; set; }
-        public Int32 CreateUserID { get; set; }
-        public DateTime CreateDate { get; set; }
-        public GeneralStatus Status { get; set; }
-        public Int32? UpdateUserID { get; set; }
-        public DateTime? UpdateDate { get; set; }
+        public virtual Int32 DepartmentDeviceID { get; set; }
+        public virtual Department Department { get; set; }
+        public virtual DeviceController Device { get; set; }
+        public virtual String Remark { get; set; }
+        public virtual Int32 CreateUserID { get; set; }
+        public virtual DateTime CreateDate { get; set; }
+        public virtual GeneralStatus Status { get; set; }
+        public virtual Int32? UpdateUserID { get; set; }
+        public virtual DateTime? UpdateDate { get; set; }
     }
 }

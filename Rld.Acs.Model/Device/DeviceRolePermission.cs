@@ -6,8 +6,8 @@ namespace Rld.Acs.Model
 {
     public class DeviceRolePermission
     {
-        public Int32 DeviceRolePermissionID { get; set; }
-        public DeviceRole DeviceRole { get; set; }
-        public DevicePermission DevicePermission { get; set; }
+        public virtual Int32 DeviceRolePermissionID { get; set; }
+        public virtual DeviceRole DeviceRole { get; set; }
+        public virtual DevicePermission DevicePermission { get; set; }
     }
 }

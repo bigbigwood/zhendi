@@ -6,23 +6,23 @@ namespace Rld.Acs.Model
 {
     public class DeviceDoor
     {
-        public Int32 DeviceDoorID { get; set; }
-        public DeviceController Device { get; set; }
-        public String Name { get; set; }
-        public Int32? ElectricalAppliances { get; set; }
-        public Int32? OpenType { get; set; }
-        public Int32? Status { get; set; }
-        public String Remark { get; set; }
-        public Int32? DelayTime { get; set; }
-        public Int32? AlertType { get; set; }
-        public Int32? OverTimeOpen { get; set; }
-        public Boolean? IsOverTime { get; set; }
-        public Boolean? ForceOpen { get; set; }
-        public Boolean? ConnectionAlerm { get; set; }
-        public Boolean? LaunchDuress { get; set; }
-        public Int32? DuressFingerPrint { get; set; }
-        public Boolean? DuressOpen { get; set; }
-        public Boolean? DuressAlarm { get; set; }
-        public String DuressPassword { get; set; }
+        public virtual Int32 DeviceDoorID { get; set; }
+        public virtual DeviceController Device { get; set; }
+        public virtual String Name { get; set; }
+        public virtual Int32? ElectricalAppliances { get; set; }
+        public virtual Int32? OpenType { get; set; }
+        public virtual Int32? Status { get; set; }
+        public virtual String Remark { get; set; }
+        public virtual Int32? DelayTime { get; set; }
+        public virtual Int32? AlertType { get; set; }
+        public virtual Int32? OverTimeOpen { get; set; }
+        public virtual Boolean? IsOverTime { get; set; }
+        public virtual Boolean? ForceOpen { get; set; }
+        public virtual Boolean? ConnectionAlerm { get; set; }
+        public virtual Boolean? LaunchDuress { get; set; }
+        public virtual Int32? DuressFingerPrint { get; set; }
+        public virtual Boolean? DuressOpen { get; set; }
+        public virtual Boolean? DuressAlarm { get; set; }
+        public virtual String DuressPassword { get; set; }
     }
 }

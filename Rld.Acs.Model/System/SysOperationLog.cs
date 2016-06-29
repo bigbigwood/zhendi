@@ -6,14 +6,14 @@ namespace Rld.Acs.Model
 {
     public class SysOperationLog
     {
-        public Int32 LogID { get; set; }
-        public Int32? DepartmentID { get; set; }
-        public Int32? UserID { get; set; }
-        public String UserName { get; set; }
-        public String OperationCode { get; set; }
-        public String OperationName { get; set; }
-        public String Detail { get; set; }
-        public String Remark { get; set; }
-        public DateTime? CreateDate { get; set; }
+        public virtual Int32 LogID { get; set; }
+        public virtual Int32? DepartmentID { get; set; }
+        public virtual Int32? UserID { get; set; }
+        public virtual String UserName { get; set; }
+        public virtual String OperationCode { get; set; }
+        public virtual String OperationName { get; set; }
+        public virtual String Detail { get; set; }
+        public virtual String Remark { get; set; }
+        public virtual DateTime? CreateDate { get; set; }
     }
 }

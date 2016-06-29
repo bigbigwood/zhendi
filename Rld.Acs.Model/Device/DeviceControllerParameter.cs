@@ -6,16 +6,16 @@ namespace Rld.Acs.Model
 {
     public class DeviceControllerParameter
     {
-        public Int32 DeviceParameterID { get; set; }
-        public Int32 AuthticationType { get; set; }
-        public Int32? AutoOpenTimeZone { get; set; }
-        public Boolean? IsSneak { get; set; }
-        public Boolean? MultiPersonLock { get; set; }
-        public Boolean? Linkage { get; set; }
-        public Boolean? LaunchDuress { get; set; }
-        public Int32? DuressFingerPrint { get; set; }
-        public Boolean? DuressOpen { get; set; }
-        public Boolean? DuressAlarm { get; set; }
-        public String DuressPassword { get; set; }
+        public virtual Int32 DeviceParameterID { get; set; }
+        public virtual Int32 AuthticationType { get; set; }
+        public virtual Int32? AutoOpenTimeZone { get; set; }
+        public virtual Boolean? IsSneak { get; set; }
+        public virtual Boolean? MultiPersonLock { get; set; }
+        public virtual Boolean? Linkage { get; set; }
+        public virtual Boolean? LaunchDuress { get; set; }
+        public virtual Int32? DuressFingerPrint { get; set; }
+        public virtual Boolean? DuressOpen { get; set; }
+        public virtual Boolean? DuressAlarm { get; set; }
+        public virtual String DuressPassword { get; set; }
     }
 }

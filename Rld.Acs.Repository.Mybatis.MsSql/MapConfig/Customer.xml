@@ -41,7 +41,7 @@
       where CustomerId =  #value#
     </delete>
 
-    <select id="Customer.Query" parameterClass="Customer" resultMap="CustomerResult">
+    <select id="Customer.Query" parameterClass="Hashtable" resultMap="CustomerResult">
       SELECT *
       FROM Customer
       where 1=1

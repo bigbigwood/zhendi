@@ -6,13 +6,13 @@ namespace Rld.Acs.Model
 {
     public class UserDeviceRole
     {
-        public Int32 UserDeviceRoleID { get; set; }
-        public User User { get; set; }
-        public DeviceRole DeviceRole { get; set; }
-        public Int32 CreateUserID { get; set; }
-        public DateTime CreateDate { get; set; }
-        public GeneralStatus Status { get; set; }
-        public DateTime? UpdateUserID { get; set; }
-        public DateTime? UpdateDate { get; set; }
+        public virtual Int32 UserDeviceRoleID { get; set; }
+        public virtual User User { get; set; }
+        public virtual DeviceRole DeviceRole { get; set; }
+        public virtual Int32 CreateUserID { get; set; }
+        public virtual DateTime CreateDate { get; set; }
+        public virtual GeneralStatus Status { get; set; }
+        public virtual DateTime? UpdateUserID { get; set; }
+        public virtual DateTime? UpdateDate { get; set; }
     }
 }
