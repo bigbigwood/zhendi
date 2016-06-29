@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using System.Collections;
+using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
@@ -20,12 +21,7 @@ namespace Rld.Acs.WebApi.Controllers
         // GET api/customers
         public HttpResponseMessage Get()
         {
-            var conditions = new Customer();
-            var allUrlKeyValues = ControllerContext.Request.GetQueryNameValuePairs();
-            conditions.FirstName = allUrlKeyValues.SingleOrDefault(x => x.Key == "FirstName").Value;
-            conditions.LastName = allUrlKeyValues.SingleOrDefault(x => x.Key == "LastName").Value;
-            conditions.MSIDSN = allUrlKeyValues.SingleOrDefault(x => x.Key == "MSIDSN").Value;
-
+            var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
                 var customerRepo = RepositoryManager.GetRepository<ICustomerRepository>();

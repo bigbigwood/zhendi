@@ -6,18 +6,18 @@ namespace Rld.Acs.Model
 {
     public class UserAuthentication
     {
-        public Int32 UserAuthenticationID { get; set; }
-        public Int32 DeviceUserID { get; set; }
-        public DeviceType DeviceType { get; set; }
-        public AuthenticationType AuthenticationType { get; set; }
-        public String AuthenticationData { get; set; }
-        public String Version { get; set; }
-        public Boolean IsDuress { get; set; }
-        public String Remark { get; set; }
-        public Int32 CreateUserID { get; set; }
-        public DateTime CreateDate { get; set; }
-        public GeneralStatus Status { get; set; }
-        public Int32? UpdateUserID { get; set; }
-        public DateTime? UpdateDate { get; set; }
+        public virtual Int32 UserAuthenticationID { get; set; }
+        public virtual Int32 DeviceUserID { get; set; }
+        public virtual DeviceType DeviceType { get; set; }
+        public virtual AuthenticationType AuthenticationType { get; set; }
+        public virtual String AuthenticationData { get; set; }
+        public virtual String Version { get; set; }
+        public virtual Boolean IsDuress { get; set; }
+        public virtual String Remark { get; set; }
+        public virtual Int32 CreateUserID { get; set; }
+        public virtual DateTime CreateDate { get; set; }
+        public virtual GeneralStatus Status { get; set; }
+        public virtual Int32? UpdateUserID { get; set; }
+        public virtual DateTime? UpdateDate { get; set; }
     }
 }

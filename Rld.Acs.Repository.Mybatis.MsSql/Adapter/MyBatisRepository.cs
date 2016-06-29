@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
 using log4net;
 using Rld.Acs.Repository.Framework;
@@ -67,9 +68,9 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             return _sqlMapper.QueryForObject<TEntity>(this.GetByKeyStatement, key);
         }
 
-        public virtual IEnumerable<TEntity> Query(TEntity entityCondition)
+        public virtual IEnumerable<TEntity> Query(Hashtable conditions)
         {
-            return _sqlMapper.QueryForList<TEntity>(this.QueryStatement, entityCondition);
+            return _sqlMapper.QueryForList<TEntity>(this.QueryStatement, conditions);
         }
 
         public DataSet SelectDS(string statementName, object paramObject)

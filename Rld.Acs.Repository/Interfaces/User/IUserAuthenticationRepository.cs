@@ -10,5 +10,6 @@ namespace Rld.Acs.Repository.Interfaces
 {
     public interface IUserAuthenticationRepository : IRepository<UserAuthentication, Int32>
     {
+        void SaveOrUpdate(UserAuthentication entity);
     }
 }

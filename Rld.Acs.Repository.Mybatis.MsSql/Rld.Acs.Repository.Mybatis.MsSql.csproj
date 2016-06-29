@@ -33,6 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.DynamicProxy">
+      <HintPath>..\lib\Castle.DynamicProxy.dll</HintPath>
+    </Reference>
     <Reference Include="IBatisNet.Common">
       <HintPath>..\lib\IBatisNet.Common.dll</HintPath>
     </Reference>

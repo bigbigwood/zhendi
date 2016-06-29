@@ -1,4 +1,5 @@
-﻿using Rld.Acs.Repository.Framework;
+﻿using System.Collections;
+using Rld.Acs.Repository.Framework;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -62,7 +63,7 @@ namespace Rld.Acs.WpfApplication.Repository
             }
         }
 
-        public virtual IEnumerable<TEntity> Query(TEntity entityCondition)
+        public virtual IEnumerable<TEntity> Query(Hashtable conditions)
         {
             using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
             {

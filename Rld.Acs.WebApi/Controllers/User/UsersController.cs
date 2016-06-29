@@ -4,6 +4,7 @@ using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WebApi.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -19,12 +20,7 @@ namespace Rld.Acs.WebApi.Controllers
 
         public HttpResponseMessage Get()
         {
-            var conditions = new User();
-            var allUrlKeyValues = ControllerContext.Request.GetQueryNameValuePairs();
-            //conditions.Status = allUrlKeyValues.SingleOrDefault(x => x.Key == "Status").Value;
-            //conditions.CreateUserID = allUrlKeyValues.SingleOrDefault(x => x.Key == "CreateUserID").Value;
-            //conditions.UpdateUserID = allUrlKeyValues.SingleOrDefault(x => x.Key == "UpdateUserID").Value;
-
+            var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
                 var repo = RepositoryManager.GetRepository<IUserRepository>();
@@ -54,8 +50,19 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(userInfo, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<IUserRepository>();
-                repo.Insert(userInfo);
+                if (userInfo.UserAuthenticationInfo == null)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "UserAuthenticationInfo property cannot be null.");
+
+                if (userInfo.UserPropertyInfo == null)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "UserPropertyInfo property cannot be null.");
+
+                var userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
+                var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
+                var userRepo = RepositoryManager.GetRepository<IUserRepository>();
+
+                userAuthenticationRepo.SaveOrUpdate(userInfo.UserAuthenticationInfo);
+                userPropertyRepo.SaveOrUpdate(userInfo.UserPropertyInfo);
+                userRepo.Insert(userInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, userInfo);
 
@@ -67,8 +74,24 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(userInfo, new Func<HttpResponseMessage>(() =>
             {
                 userInfo.UserID = id;
-                var repo = RepositoryManager.GetRepository<IUserRepository>();
-                repo.Update(userInfo);
+
+                var userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
+                var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
+                var userRepo = RepositoryManager.GetRepository<IUserRepository>();
+
+                var tryFindUserInfo = userRepo.GetByKey(id);
+                if (tryFindUserInfo == null)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("User Id={0} does not exist.", id));
+
+                if (userInfo.UserAuthenticationInfo != null)
+                {
+                    userAuthenticationRepo.SaveOrUpdate(userInfo.UserAuthenticationInfo);
+                }
+                if (userInfo.UserPropertyInfo != null)
+                {
+                    userPropertyRepo.SaveOrUpdate(userInfo.UserPropertyInfo);
+                }
+                userRepo.Update(userInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -79,8 +102,17 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<IUserRepository>();
-                repo.Delete(id);
+                var userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
+                var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
+                var userRepo = RepositoryManager.GetRepository<IUserRepository>();
+
+                var userInfo = userRepo.GetByKey(id);
+                if (userInfo != null)
+                {
+                    userAuthenticationRepo.Delete(userInfo.UserAuthenticationInfo.UserAuthenticationID);
+                    userPropertyRepo.Delete(userInfo.UserPropertyInfo.UserPropertyID);
+                    userRepo.Delete(id);
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 

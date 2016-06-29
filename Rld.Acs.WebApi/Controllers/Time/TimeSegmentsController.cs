@@ -4,6 +4,7 @@ using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WebApi.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -20,12 +21,7 @@ namespace Rld.Acs.WebApi.Controllers
         // GET api/customers
         public HttpResponseMessage Get()
         {
-            var conditions = new TimeSegment();
-            var allUrlKeyValues = ControllerContext.Request.GetQueryNameValuePairs();
-            //conditions.Status = allUrlKeyValues.SingleOrDefault(x => x.Key == "Status").Value;
-            //conditions.CreateUserID = allUrlKeyValues.SingleOrDefault(x => x.Key == "CreateUserID").Value;
-            //conditions.UpdateUserID = allUrlKeyValues.SingleOrDefault(x => x.Key == "UpdateUserID").Value;
-
+            var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
                 var repo = RepositoryManager.GetRepository<ITimeSegmentRepository>();

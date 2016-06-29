@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -37,6 +38,6 @@ namespace Rld.Acs.Repository.Framework
         /// </summary>  
         /// <param name="key"></param>  
         /// <returns></returns>  
-        IEnumerable<TEntity> Query(TEntity entityCondition);
+        IEnumerable<TEntity> Query(Hashtable conditions);
     }  
 }

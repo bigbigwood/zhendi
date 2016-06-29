@@ -37,5 +37,13 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             get { return "UserProperty.Query"; }
         }
         #endregion
+
+        public void SaveOrUpdate(UserProperty entity)
+        {
+            if (entity.UserPropertyID == 0)
+                Insert(entity);
+            else
+                Update(entity);
+        }
     }
 }

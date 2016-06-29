@@ -10,5 +10,6 @@ namespace Rld.Acs.Repository.Interfaces
 {
     public interface IUserPropertyRepository : IRepository<UserProperty, Int32>
     {
+        void SaveOrUpdate(UserProperty entity);
     }
 }

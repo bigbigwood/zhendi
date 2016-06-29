@@ -19,8 +19,8 @@
       <result property="Remark" column="Remark"/>
       <result property="StartDate" column="StartDate"/>
       <result property="EndDate" column="EndDate"/>
-      <result property="UserAuthentication" column="UserAuthentication.GetByKey"/>
-      <result property="UserProperty" column="UserProperty.GetByKey"/>
+      <result property="UserAuthenticationInfo" column="UserAuthenticationID" select="UserAuthentication.GetByKey"/>
+      <result property="UserPropertyInfo" column="UserPropertyID" select="UserProperty.GetByKey"/>
     </resultMap>
   </resultMaps>
 
@@ -30,7 +30,7 @@
       FROM SYS_USER
       where UserID =  #value#
     </select>
-    
+
     <insert id="User.Insert" parameterClass="User">
       INSERT INTO [SYS_USER] (
       [DepartmentID]
@@ -58,8 +58,8 @@
       , #Remark#
       , #StartDate#
       , #EndDate#
-      , #UserAuthentication.UserAuthenticationID#
-      , #UserProperty.UserPropertyID#
+      , #UserAuthenticationInfo.UserAuthenticationID#
+      , #UserPropertyInfo.UserPropertyID#
       )
       <selectKey resultClass="int" type="post" property="UserID" >
         select @@IDENTITY as value
@@ -79,8 +79,12 @@
       , [Remark] = #Remark#
       , [StartDate] = #StartDate#
       , [EndDate] = #EndDate#
-      , [UserAuthenticationID] = #UserAuthentication.UserAuthenticationID#
-      , [UserPropertyID] = #UserProperty.UserPropertyID#
+      <isNotNull property="UserAuthenticationInfo">
+        , [UserAuthenticationID] = #UserAuthenticationInfo.UserAuthenticationID#
+      </isNotNull>
+      <isNotNull property="UserPropertyInfo">
+        , [UserPropertyID] = #UserPropertyInfo.UserPropertyID#
+      </isNotNull>
       WHERE
       ([UserID] = #UserID#)
     </update>
@@ -91,10 +95,21 @@
       ([UserID] = #UserID#)
     </delete>
 
-    <select id="User.Query" parameterClass="User" resultMap="UserResult">
+    <select id="User.Query" parameterClass="Hashtable" resultMap="UserResult">
       SELECT *
       FROM SYS_USER
       where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="Name">
+          Name = #Name#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Status">
+          Status = #Status#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DepartmentID">
+          DepartmentID = #DepartmentID#
+        </isNotEmpty>
+      </dynamic>
     </select>
   </statements>
 </sqlMap>

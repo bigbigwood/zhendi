@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using System.Collections;
+using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
@@ -19,12 +20,7 @@ namespace Rld.Acs.WebApi.Controllers
 
         public HttpResponseMessage Get()
         {
-            var conditions = new SysOperator();
-            var allUrlKeyValues = ControllerContext.Request.GetQueryNameValuePairs();
-            //conditions.Status = allUrlKeyValues.SingleOrDefault(x => x.Key == "Status").Value;
-            //conditions.CreateUserID = allUrlKeyValues.SingleOrDefault(x => x.Key == "CreateUserID").Value;
-            //conditions.UpdateUserID = allUrlKeyValues.SingleOrDefault(x => x.Key == "UpdateUserID").Value;
-
+            var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
                 var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();

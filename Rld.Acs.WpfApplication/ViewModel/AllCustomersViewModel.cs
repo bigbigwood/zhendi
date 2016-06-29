@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,7 +51,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public void Refresh()
         {
             var getAllCustomers = new ObservableCollection<CustomerViewModel>();
-            var customers = _customerRepository.Query(new Customer()).ToList();
+            var customers = _customerRepository.Query(new Hashtable()).ToList();
             customers.ForEach(c => getAllCustomers.Add(new CustomerViewModel() { Customer = c}));
 
             AllCustomers = getAllCustomers;
