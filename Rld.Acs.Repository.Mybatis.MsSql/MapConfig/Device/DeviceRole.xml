@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DeviceRole" type="Rld.Acs.Model.DeviceRole" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DeviceRoleResult" class="Rld.Acs.Model.DeviceRole">
+      <result property="DeviceRoleID" column="DeviceRoleID"/>
+      <result property="RoleName" column="RoleName"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DeviceRole.GetByKey" parameterClass="int" resultMap="DeviceRoleResult">
+      SELECT *
+      FROM DEVICE_ROLES
+      where DeviceRoleID =  #value#
+    </select>
+
+    <insert id="DeviceRole.Insert" parameterClass="DeviceRole">
+      INSERT INTO [DEVICE_ROLES] (
+      [RoleName]
+      , [CreateUserID]
+      , [CreateDate]
+      , [Status]
+      , [UpdateUserID]
+      , [UpdateDate]
+      ) VALUES (
+      #RoleName#
+      , #CreateUserID#
+      , #CreateDate#
+      , #Status#
+      , #UpdateUserID#
+      , #UpdateDate#
+      )
+      <selectKey resultClass="int" type="post" property="DeviceRoleID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DeviceRole.Update" parameterClass="DeviceRole">
+      UPDATE [DEVICE_ROLES] SET
+      [RoleName] = #RoleName#
+      , [CreateUserID] = #CreateUserID#
+      , [CreateDate] = #CreateDate#
+      , [Status] = #Status#
+      , [UpdateUserID] = #UpdateUserID#
+      , [UpdateDate] = #UpdateDate#
+      WHERE
+      ([DeviceRoleID] = #DeviceRoleID#)
+    </update>
+
+    <delete id="DeviceRole.Delete"  parameterClass="int">
+      DELETE FROM [DEVICE_ROLES]
+      WHERE
+      ([DeviceRoleID] = #DeviceRoleID#)
+    </delete>
+
+    <select id="DeviceRole.Query" parameterClass="Hashtable" resultMap="DeviceRoleResult">
+      SELECT *
+      FROM DEVICE_ROLES
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="RoleName">
+          RoleName = #RoleName#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Status">
+          Status = #Status#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

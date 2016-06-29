@@ -68,6 +68,8 @@
     <Compile Include="Adapter\MyBatisConnectionProvider.cs" />
     <Compile Include="Adapter\MyBatisRepository.cs" />
     <Compile Include="Impl\CustomerRepositoryMB.cs" />
+    <Compile Include="Impl\Department\DepartmentRepositoryMB.cs" />
+    <Compile Include="Impl\Device\DeviceRoleRepositoryMB.cs" />
     <Compile Include="Impl\System\SysOperatorRepositoryMB.cs" />
     <Compile Include="Impl\Time\TimeSegmentRepositoryMB.cs" />
     <Compile Include="Impl\User\UserPropertyRepositoryMB.cs" />
@@ -91,12 +93,7 @@
       <Name>Rld.Acs.Repository</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Impl\Department\" />
-    <Folder Include="Impl\Device\" />
-    <Folder Include="MapConfig\Department\" />
-    <Folder Include="MapConfig\Device\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Customer.xml" />
   </ItemGroup>
@@ -114,6 +111,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\User\UserAuthentication.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Department\Department.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Device\DeviceRole.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

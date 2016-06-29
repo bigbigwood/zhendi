@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="Department" type="Rld.Acs.Model.Department" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DepartmentResult" class="Rld.Acs.Model.Department">
+      <result property="DepartmentID" column="DepartmentID"/>
+      <result property="Name" column="Name"/>
+      <result property="DepartmentCode" column="DepartmentCode"/>
+      <result property="Remark" column="Remark"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="Parent" column="ParentID" select="Department.GetByKey"/>
+      <result property="DeviceRole" column="DeviceRoleID" select="DeviceRole.GetByKey"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="Department.GetByKey" parameterClass="int" resultMap="DepartmentResult">
+      SELECT *
+      FROM SYS_DEPARTMENT
+      where DepartmentID =  #value#
+    </select>
+    
+    <insert id="Department.Insert" parameterClass="Department">
+      INSERT INTO [SYS_DEPARTMENT] (
+      [Name]
+      , [DepartmentCode]
+      , [ParentID]
+      , [DeviceRoleID]
+      , [Remark]
+      , [CreateUserID]
+      , [CreateDate]
+      , [Status]
+      , [UpdateUserID]
+      , [UpdateDate]
+      ) VALUES (
+      #Name#
+      , #DepartmentCode#
+      , #Parent.DepartmentID#
+      , #DeviceRole.DeviceRoleID#
+      , #Remark#
+      , #CreateUserID#
+      , #CreateDate#
+      , #Status#
+      , #UpdateUserID#
+      , #UpdateDate#
+      )
+      <selectKey resultClass="int" type="post" property="DepartmentID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="Department.Update" parameterClass="Department">
+      UPDATE [SYS_DEPARTMENT] SET
+      [Name] = #Name#
+      , [DepartmentCode] = #DepartmentCode#
+      , [ParentID] = #Parent.DepartmentID#
+      , [DeviceRoleID] = #DeviceRole.DeviceRoleID#
+      , [Remark] = #Remark#
+      , [CreateUserID] = #CreateUserID#
+      , [CreateDate] = #CreateDate#
+      , [Status] = #Status#
+      , [UpdateUserID] = #UpdateUserID#
+      , [UpdateDate] = #UpdateDate#
+      WHERE
+      ([DepartmentID] = #DepartmentID#)
+    </update>
+
+    <delete id="Department.Delete"  parameterClass="int">
+      DELETE FROM [SYS_DEPARTMENT]
+      WHERE
+      ([DepartmentID] = #DepartmentID#)
+    </delete>
+
+    <select id="Department.Query" parameterClass="Hashtable" resultMap="DepartmentResult">
+      SELECT *
+      FROM SYS_DEPARTMENT
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="DepartmentCode">
+          DepartmentCode = #DepartmentCode#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Status">
+          Status = #Status#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

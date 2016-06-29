@@ -21,6 +21,8 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             Bind<ITimeSegmentRepository>().To<TimeSegmentRepositoryMB>();
 
             Bind<ISysOperatorRepository>().To<SysOperatorRepositoryMB>();
+            Bind<IDepartmentRepository>().To<DepartmentRepositoryMB>();
+            Bind<IDeviceRoleRepository>().To<DeviceRoleRepositoryMB>();
 
             Bind<IUserRepository>().To<UserRepositoryMB>();
             Bind<IUserPropertyRepository>().To<UserPropertyRepositoryMB>();

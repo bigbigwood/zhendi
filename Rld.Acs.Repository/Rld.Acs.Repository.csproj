@@ -54,6 +54,8 @@
     <Compile Include="Framework\IPersistanceConnection.cs" />
     <Compile Include="Framework\IPersistanceTransaction.cs" />
     <Compile Include="Framework\IRepository.cs" />
+    <Compile Include="Interfaces\Department\IDepartmentRepository.cs" />
+    <Compile Include="Interfaces\Device\IDeviceRoleRepository.cs" />
     <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Interfaces\System\ISysOperatorRepository.cs" />
     <Compile Include="Interfaces\Time\ITimeSegmentRepository.cs" />
@@ -66,10 +68,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\Department\" />
-    <Folder Include="Interfaces\Device\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Rld.Acs.Model\Rld.Acs.Model.csproj">
       <Project>{1f0d7445-70c1-48be-8ecd-68f9b3a07d83}</Project>
