@@ -55,6 +55,11 @@
     <Compile Include="Framework\IPersistanceTransaction.cs" />
     <Compile Include="Framework\IRepository.cs" />
     <Compile Include="Interfaces\Department\IDepartmentRepository.cs" />
+    <Compile Include="Interfaces\Device\IDeviceControllerRepository.cs" />
+    <Compile Include="Interfaces\Device\IDeviceControllerParameterRepository.cs" />
+    <Compile Include="Interfaces\Device\IDeviceDoorRepository.cs" />
+    <Compile Include="Interfaces\Device\IDeviceHeadReadingRepository.cs" />
+    <Compile Include="Interfaces\Device\IDevicePermissionRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceRoleRepository.cs" />
     <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Interfaces\System\ISysOperatorRepository.cs" />

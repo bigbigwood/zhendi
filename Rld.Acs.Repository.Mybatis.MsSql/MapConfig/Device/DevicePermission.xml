@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DevicePermission" type="Rld.Acs.Model.DevicePermission" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DevicePermissionResult" class="Rld.Acs.Model.DevicePermission">
+      <result property="DevicePermissionID" column="DevicePermissionID"/>
+      <result property="Enable" column="Enable"/>
+      <result property="Remark" column="Remark"/>
+      <result property="PermissionAction" column="PermissionAction"/>
+      <result property="UserGroupVM" column="UserGroupVM"/>
+      <result property="AccessTimeZone" column="AccessTimeZone"/>
+      <result property="STARTDATE" column="STARTDATE"/>
+      <result property="Enddate" column="Enddate"/>
+      <result property="Device" column="DeviceID" select="DeviceController.GetByKey"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DevicePermission.GetByKey" parameterClass="int" resultMap="DevicePermissionResult">
+      SELECT *
+      FROM [DEVICE_PERMISSIONS]
+      WHERE
+      [DevicePermissionID] = #value#
+    </select>
+
+    <insert id="DevicePermission.Insert" parameterClass="DevicePermission">
+      INSERT INTO [DEVICE_PERMISSIONS] (
+      [DeviceID]
+      , [Enable]
+      , [Remark]
+      , [PermissionAction]
+      , [UserGroupVM]
+      , [AccessTimeZone]
+      , [STARTDATE]
+      , [Enddate]
+      ) VALUES (
+      #Device.DeviceID#
+      , #Enable#
+      , #Remark#
+      , #PermissionAction#
+      , #UserGroupVM#
+      , #AccessTimeZone#
+      , #STARTDATE#
+      , #Enddate#
+      )
+      <selectKey resultClass="int" type="post" property="DevicePermissionID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DevicePermission.Update" parameterClass="DevicePermission">
+      UPDATE [DEVICE_PERMISSIONS] SET
+      [DeviceID] = #Device.DeviceID#
+      , [Enable] = #Enable#
+      , [Remark] = #Remark#
+      , [PermissionAction] = #PermissionAction#
+      , [UserGroupVM] = #UserGroupVM#
+      , [AccessTimeZone] = #AccessTimeZone#
+      , [STARTDATE] = #STARTDATE#
+      , [Enddate] = #Enddate#
+      WHERE
+      [DevicePermissionID] = #DevicePermissionID#
+    </update>
+
+    <delete id="DevicePermission.Delete"  parameterClass="int">
+      DELETE FROM [DEVICE_PERMISSIONS]
+      WHERE
+      [DevicePermissionID] = #DevicePermissionID#
+    </delete>
+
+    <select id="DevicePermission.Query" parameterClass="Hashtable" resultMap="DevicePermissionResult">
+      SELECT *
+      FROM DEVICE_PERMISSIONS
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="Enable">
+          Enable = #Enable#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

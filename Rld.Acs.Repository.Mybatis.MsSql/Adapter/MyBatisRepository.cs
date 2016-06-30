@@ -22,30 +22,14 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             _sqlMapper = session.GetUndelayingSession();
         }
 
-        /// <summary>  
-        /// 新增  
-        /// </summary>  
-        protected abstract string InsertStatement { get; }
-        /// <summary>  
-        /// 编辑  
-        /// </summary>  
-        protected abstract string UpdateStatement { get; }
-        /// <summary>  
-        /// 删除  
-        /// </summary>  
-        protected abstract string DeleteStatement { get; }
-        /// <summary>  
-        /// 单查  
-        /// </summary>  
-        protected abstract string GetByKeyStatement { get; }
-        /// <summary>  
-        /// Count  
-        /// </summary>  
-        protected abstract string QueryCountStatement { get; }
-        /// <summary>  
-        /// Full Query  
-        /// </summary>  
-        protected abstract string QueryStatement { get; }
+        protected abstract string EntityCode { get; }
+
+        protected string InsertStatement { get { return string.Format("{0}.Insert", EntityCode); } }
+        protected string UpdateStatement { get { return string.Format("{0}.Update", EntityCode); } }
+        protected string DeleteStatement { get { return string.Format("{0}.Delete", EntityCode); } }
+        protected string GetByKeyStatement { get { return string.Format("{0}.GetByKey", EntityCode); } }
+        protected string QueryCountStatement { get { return string.Format("{0}.Count", EntityCode); } }
+        protected string QueryStatement { get { return string.Format("{0}.Query", EntityCode); } }
 
         public virtual TEntity Insert(TEntity entity)
         {

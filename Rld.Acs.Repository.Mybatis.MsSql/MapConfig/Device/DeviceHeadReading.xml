@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DeviceHeadReading" type="Rld.Acs.Model.DeviceHeadReading" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DeviceHeadReadingResult" class="Rld.Acs.Model.DeviceHeadReading">
+      <result property="DeviceHeadReadingID" column="DeviceHeadReadingID"/>
+      <result property="Mac" column="Mac"/>
+      <result property="HeadReadingSN" column="HeadReadingSN"/>
+      <result property="HeadReadingType" column="HeadReadingType"/>
+      <result property="HeadReadingPerformance" column="HeadReadingPerformance"/>
+      <result property="Status" column="Status"/>
+      <result property="Device" column="DeviceID" select="DeviceController.GetByKey"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DeviceHeadReading.GetByKey" parameterClass="int" resultMap="DeviceHeadReadingResult">
+      SELECT *
+      FROM DEVICE_HEADREADINGS
+      where DeviceHeadReadingID =  #value#
+    </select>
+
+    <insert id="DeviceHeadReading.Insert" parameterClass="DeviceHeadReading">
+      INSERT INTO [DEVICE_HEADREADINGS] (
+      [DeviceID]
+      , [Mac]
+      , [HeadReadingSN]
+      , [HeadReadingType]
+      , [HeadReadingPerformance]
+      , [Status]
+      ) VALUES (
+      #Device.DeviceID#
+      , #Mac#
+      , #HeadReadingSN#
+      , #HeadReadingType#
+      , #HeadReadingPerformance#
+      , #Status#
+      )
+      <selectKey resultClass="int" type="post" property="DeviceHeadReadingID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DeviceHeadReading.Update" parameterClass="DeviceHeadReading">
+      UPDATE [DEVICE_HEADREADINGS] SET
+      [DeviceID] = #Device.DeviceID#
+      , [Mac] = #Mac#
+      , [HeadReadingSN] = #HeadReadingSN#
+      , [HeadReadingType] = #HeadReadingType#
+      , [HeadReadingPerformance] = #HeadReadingPerformance#
+      , [Status] = #Status#
+      WHERE
+      ([DeviceHeadReadingID] = #DeviceHeadReadingID#)
+    </update>
+
+    <delete id="DeviceHeadReading.Delete"  parameterClass="int">
+      DELETE FROM [DEVICE_HEADREADINGS]
+      WHERE
+      ([DeviceHeadReadingID] = #DeviceHeadReadingID#)
+    </delete>
+
+    <select id="DeviceHeadReading.Query" parameterClass="Hashtable" resultMap="DeviceHeadReadingResult">
+      SELECT *
+      FROM DEVICE_HEADREADINGS
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="Status">
+          Status = #Status#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

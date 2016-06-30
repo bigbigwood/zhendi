@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DeviceDoor" type="Rld.Acs.Model.DeviceDoor" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DeviceDoorResult" class="Rld.Acs.Model.DeviceDoor">
+      <result property="DeviceDoorID" column="DeviceDoorID"/>
+      <result property="Name" column="Name"/>
+      <result property="ElectricalAppliances" column="ElectricalAppliances"/>
+      <result property="OpenType" column="OpenType"/>
+      <result property="Status" column="Status"/>
+      <result property="Remark" column="Remark"/>
+      <result property="DelayTime" column="DelayTime"/>
+      <result property="AlertType" column="AlertType"/>
+      <result property="OverTimeOpen" column="OverTimeOpen"/>
+      <result property="IsOverTime" column="IsOverTime"/>
+      <result property="ForceOpen" column="ForceOpen"/>
+      <result property="ConnectionAlerm" column="ConnectionAlerm"/>
+      <result property="LaunchDuress" column="LaunchDuress"/>
+      <result property="DuressFingerPrint" column="DuressFingerPrint"/>
+      <result property="DuressOpen" column="DuressOpen"/>
+      <result property="DuressAlarm" column="DuressAlarm"/>
+      <result property="DuressPassword" column="DuressPassword"/>
+      <result property="Device" column="DeviceID" select="DeviceController.GetByKey"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DeviceDoor.GetByKey" parameterClass="int" resultMap="DeviceDoorResult">
+      SELECT *
+      FROM DEVICE_DOORS
+      where DeviceDoorID =  #value#
+    </select>
+
+    <insert id="DeviceDoor.Insert" parameterClass="DeviceDoor">
+      INSERT INTO [DEVICE_DOORS] (
+      [DeviceID]
+      , [Name]
+      , [ElectricalAppliances]
+      , [OpenType]
+      , [Status]
+      , [Remark]
+      , [DelayTime]
+      , [AlertType]
+      , [OverTimeOpen]
+      , [IsOverTime]
+      , [ForceOpen]
+      , [ConnectionAlerm]
+      , [LaunchDuress]
+      , [DuressFingerPrint]
+      , [DuressOpen]
+      , [DuressAlarm]
+      , [DuressPassword]
+      ) VALUES (
+      #Device.DeviceID#
+      , #Name#
+      , #ElectricalAppliances#
+      , #OpenType#
+      , #Status#
+      , #Remark#
+      , #DelayTime#
+      , #AlertType#
+      , #OverTimeOpen#
+      , #IsOverTime#
+      , #ForceOpen#
+      , #ConnectionAlerm#
+      , #LaunchDuress#
+      , #DuressFingerPrint#
+      , #DuressOpen#
+      , #DuressAlarm#
+      , #DuressPassword#
+      )
+      <selectKey resultClass="int" type="post" property="DeviceDoorID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DeviceDoor.Update" parameterClass="DeviceDoor">
+      UPDATE [DEVICE_DOORS] SET
+      [DeviceID] = #Device.DeviceID#
+      , [Name] = #Name#
+      , [ElectricalAppliances] = #ElectricalAppliances#
+      , [OpenType] = #OpenType#
+      , [Status] = #Status#
+      , [Remark] = #Remark#
+      , [DelayTime] = #DelayTime#
+      , [AlertType] = #AlertType#
+      , [OverTimeOpen] = #OverTimeOpen#
+      , [IsOverTime] = #IsOverTime#
+      , [ForceOpen] = #ForceOpen#
+      , [ConnectionAlerm] = #ConnectionAlerm#
+      , [LaunchDuress] = #LaunchDuress#
+      , [DuressFingerPrint] = #DuressFingerPrint#
+      , [DuressOpen] = #DuressOpen#
+      , [DuressAlarm] = #DuressAlarm#
+      , [DuressPassword] = #DuressPassword#
+      WHERE
+      ([DeviceDoorID] = #DeviceDoorID#)
+    </update>
+
+    <delete id="DeviceDoor.Delete"  parameterClass="int">
+      DELETE FROM [DEVICE_DOORS]
+      WHERE
+      ([DeviceDoorID] = #DeviceDoorID#)
+    </delete>
+
+    <select id="DeviceDoor.Query" parameterClass="Hashtable" resultMap="DeviceDoorResult">
+      SELECT *
+      FROM DEVICE_DOORS
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="Name">
+          Name = #Name#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Status">
+          Status = #Status#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

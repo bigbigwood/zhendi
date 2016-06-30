@@ -7,34 +7,9 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
     public class UserPropertyRepositoryMB : MyBatisRepository<UserProperty, int>, IUserPropertyRepository
     {
         #region Repository
-        protected override string InsertStatement
+        protected override string EntityCode
         {
-            get { return "UserProperty.Insert"; }
-        }
-
-        protected override string UpdateStatement
-        {
-            get { return "UserProperty.Update"; }
-        }
-
-        protected override string DeleteStatement
-        {
-            get { return "UserProperty.Delete"; }
-        }
-
-        protected override string GetByKeyStatement
-        {
-            get { return "UserProperty.GetByKey"; }
-        }
-
-        protected override string QueryCountStatement
-        {
-            get { return null; }
-        }
-
-        protected override string QueryStatement
-        {
-            get { return "UserProperty.Query"; }
+            get { return "UserProperty"; }
         }
         #endregion
 

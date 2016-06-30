@@ -69,6 +69,11 @@
     <Compile Include="Adapter\MyBatisRepository.cs" />
     <Compile Include="Impl\CustomerRepositoryMB.cs" />
     <Compile Include="Impl\Department\DepartmentRepositoryMB.cs" />
+    <Compile Include="Impl\Device\DevicePermissionRepositoryMB.cs" />
+    <Compile Include="Impl\Device\DeviceHeadReadingRepositoryMB.cs" />
+    <Compile Include="Impl\Device\DeviceDoorRepositoryMB.cs" />
+    <Compile Include="Impl\Device\DeviceControllerRepositoryMB.cs" />
+    <Compile Include="Impl\Device\DeviceControllerParameterRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceRoleRepositoryMB.cs" />
     <Compile Include="Impl\System\SysOperatorRepositoryMB.cs" />
     <Compile Include="Impl\Time\TimeSegmentRepositoryMB.cs" />
@@ -93,7 +98,9 @@
       <Name>Rld.Acs.Repository</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Device\DeviceHeadReading.xml" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Customer.xml" />
   </ItemGroup>
@@ -117,6 +124,20 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Device\DeviceRole.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Device\DeviceDoor.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Device\DeviceController.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Device\DeviceControllerParameter.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Device\DevicePermission.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

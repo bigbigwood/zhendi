@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DeviceControllerParameter" type="Rld.Acs.Model.DeviceControllerParameter" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DeviceControllerParameterResult" class="Rld.Acs.Model.DeviceControllerParameter">
+      <result property="DeviceParameterID" column="DeviceParameterID"/>
+      <result property="AuthticationType" column="AuthticationType"/>
+      <result property="AutoOpenTimeZone" column="AutoOpenTimeZone"/>
+      <result property="IsSneak" column="IsSneak"/>
+      <result property="MultiPersonLock" column="MultiPersonLock"/>
+      <result property="Linkage" column="Linkage"/>
+      <result property="LaunchDuress" column="LaunchDuress"/>
+      <result property="DuressFingerPrint" column="DuressFingerPrint"/>
+      <result property="DuressOpen" column="DuressOpen"/>
+      <result property="DuressAlarm" column="DuressAlarm"/>
+      <result property="DuressPassword" column="DuressPassword"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DeviceControllerParameter.GetByKey" parameterClass="int" resultMap="DeviceControllerParameterResult">
+      SELECT *
+      FROM [DEVICE_CONTROLLERS_PARAMETERS]
+      WHERE
+      [DeviceParameterID] = #value#
+    </select>
+
+    <insert id="DeviceControllerParameter.Insert" parameterClass="DeviceControllerParameter">
+      INSERT INTO [DEVICE_CONTROLLERS_PARAMETERS] (
+      [AuthticationType]
+      , [AutoOpenTimeZone]
+      , [IsSneak]
+      , [MultiPersonLock]
+      , [Linkage]
+      , [LaunchDuress]
+      , [DuressFingerPrint]
+      , [DuressOpen]
+      , [DuressAlarm]
+      , [DuressPassword]
+      ) VALUES (
+      #AuthticationType#
+      , #AutoOpenTimeZone#
+      , #IsSneak#
+      , #MultiPersonLock#
+      , #Linkage#
+      , #LaunchDuress#
+      , #DuressFingerPrint#
+      , #DuressOpen#
+      , #DuressAlarm#
+      , #DuressPassword#
+      )
+      <selectKey resultClass="int" type="post" property="DeviceParameterID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DeviceControllerParameter.Update" parameterClass="DeviceControllerParameter">
+      UPDATE [DEVICE_CONTROLLERS_PARAMETERS] SET
+      [AuthticationType] = #AuthticationType#
+      , [AutoOpenTimeZone] = #AutoOpenTimeZone#
+      , [IsSneak] = #IsSneak#
+      , [MultiPersonLock] = #MultiPersonLock#
+      , [Linkage] = #Linkage#
+      , [LaunchDuress] = #LaunchDuress#
+      , [DuressFingerPrint] = #DuressFingerPrint#
+      , [DuressOpen] = #DuressOpen#
+      , [DuressAlarm] = #DuressAlarm#
+      , [DuressPassword] = #DuressPassword#
+      WHERE
+      ([DeviceParameterID] = #DeviceParameterID#)
+    </update>
+
+    <delete id="DeviceControllerParameter.Delete"  parameterClass="int">
+      DELETE FROM [DEVICE_CONTROLLERS_PARAMETERS]
+      WHERE
+      ([DeviceParameterID] = #DeviceParameterID#)
+    </delete>
+
+    <select id="DeviceControllerParameter.Query" parameterClass="Hashtable" resultMap="DeviceControllerParameterResult">
+      SELECT *
+      FROM DEVICE_CONTROLLERS_PARAMETERS
+      where 1=1
+    </select>
+  </statements>
+</sqlMap>

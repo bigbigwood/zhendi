@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DeviceController" type="Rld.Acs.Model.DeviceController" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DeviceControllerResult" class="Rld.Acs.Model.DeviceController">
+      <result property="DeviceID" column="DeviceID"/>
+      <result property="Mac" column="Mac"/>
+      <result property="DeviceCode" column="DeviceCode"/>
+      <result property="SN" column="SN"/>
+      <result property="Mode" column="Mode"/>
+      <result property="CommunicationType" column="CommunicationType"/>
+      <result property="BaudRate" column="BaudRate"/>
+      <result property="SerialPort" column="SerialPort"/>
+      <result property="Password" column="Password"/>
+      <result property="IP" column="IP"/>
+      <result property="Port" column="Port"/>
+      <result property="Protocol" column="protocol"/>
+      <result property="Label" column="Label"/>
+      <result property="ServerURL" column="ServerURL"/>
+      <result property="Remark" column="Remark"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="DeviceControllerParameter" column="DeviceParameterID" select="DeviceParameter.GetByKey"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DeviceController.GetByKey" parameterClass="int" resultMap="DeviceControllerResult">
+      SELECT *
+      FROM [DEVICE_CONTROLLERS]
+      WHERE
+      [DeviceID] = #value#
+    </select>
+
+    <insert id="DeviceController.Insert" parameterClass="DeviceController">
+      INSERT INTO [DEVICE_CONTROLLERS] (
+      [Mac]
+      , [DeviceCode]
+      , [SN]
+      , [Mode]
+      , [CommunicationType]
+      , [BaudRate]
+      , [SerialPort]
+      , [Password]
+      , [IP]
+      , [Port]
+      , [protocol]
+      , [Label]
+      , [ServerURL]
+      , [Remark]
+      , [CreateUserID]
+      , [CreateDate]
+      , [Status]
+      , [UpdateUserID]
+      , [UpdateDate]
+      , [DeviceParameterID]
+      ) VALUES (
+      #Mac#
+      , #DeviceCode#
+      , #SN#
+      , #Mode#
+      , #CommunicationType#
+      , #BaudRate#
+      , #SerialPort#
+      , #Password#
+      , #IP#
+      , #Port#
+      , #Protocol#
+      , #Label#
+      , #ServerURL#
+      , #Remark#
+      , #CreateUserID#
+      , #CreateDate#
+      , #Status#
+      , #UpdateUserID#
+      , #UpdateDate#
+      , #DeviceControllerParameter.DeviceParameterID#
+      )
+      <selectKey resultClass="int" type="post" property="DeviceID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DeviceController.Update" parameterClass="DeviceController">
+      UPDATE [DEVICE_CONTROLLERS] SET
+      [Mac] = #Mac#
+      , [DeviceCode] = #DeviceCode#
+      , [SN] = #SN#
+      , [Mode] = #Mode#
+      , [CommunicationType] = #CommunicationType#
+      , [BaudRate] = #BaudRate#
+      , [SerialPort] = #SerialPort#
+      , [Password] = #Password#
+      , [IP] = #IP#
+      , [Port] = #Port#
+      , [protocol] = #Protocol#
+      , [Label] = #Label#
+      , [ServerURL] = #ServerURL#
+      , [Remark] = #Remark#
+      , [CreateUserID] = #CreateUserID#
+      , [CreateDate] = #CreateDate#
+      , [Status] = #Status#
+      , [UpdateUserID] = #UpdateUserID#
+      , [UpdateDate] = #UpdateDate#
+      , [DeviceParameterID] = #DeviceControllerParameter.DeviceParameterID#
+      WHERE
+      [DeviceID] = #DeviceID#
+    </update>
+
+    <delete id="DeviceController.Delete"  parameterClass="int">
+      DELETE FROM [DEVICE_CONTROLLERS]
+      WHERE
+      [DeviceID] = #DeviceID#
+    </delete>
+
+    <select id="DeviceController.Query" parameterClass="Hashtable" resultMap="DeviceControllerResult">
+      SELECT *
+      FROM [DEVICE_CONTROLLERS]
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="Mac">
+          Mac = #Mac#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceCode">
+          DeviceCode = #DeviceCode#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Status">
+          Status = #Status#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

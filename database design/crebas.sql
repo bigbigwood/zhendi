@@ -395,7 +395,6 @@ go
 /*==============================================================*/
 create table DEVICE_DOORS (
    DeviceDoorID         int                  identity(1,1),
-   DeviceRoleID         int                  null,
    DeviceID             int                  not null,
    Name                 nvarchar(100)        not null,
    ElectricalAppliances int                  null,
@@ -422,7 +421,6 @@ go
 /*==============================================================*/
 create table DEVICE_HEADREADINGS (
    DeviceHeadReadingID  int                  identity(1,1),
-   DeviceRoleID         int                  null,
    DeviceID             int                  not null,
    Mac                  nvarchar(100)        not null,
    HeadReadingSN        nvarchar(100)        not null,
@@ -859,13 +857,13 @@ go
 
 
 alter table DEVICE_DOORS
-   add constraint FK_DEVICE_D_REFERENCE_DEVICE_R foreign key (DEVICEROLEID)
-      references DEVICE_ROLES (DEVICEROLEID)
+   add constraint FK_DEVICE_D_REFERENCE_DEVICE_R foreign key (DEVICEID)
+      references DEVICE_CONTROLLERS (DEVICEID)
 go
 
 alter table DEVICE_HEADREADINGS
-   add constraint FK_DEVICE_H_REFERENCE_DEVICE_R foreign key (DEVICEROLEID)
-      references DEVICE_ROLES (DEVICEROLEID)
+   add constraint FK_DEVICE_H_REFERENCE_DEVICE_R foreign key (DEVICEID)
+      references DEVICE_CONTROLLERS (DEVICEID)
 go
 
 alter table DEVICE_PERMISSIONS

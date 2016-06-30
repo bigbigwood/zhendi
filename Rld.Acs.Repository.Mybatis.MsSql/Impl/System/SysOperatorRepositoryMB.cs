@@ -7,34 +7,9 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
     public class SysOperatorRepositoryMB : MyBatisRepository<SysOperator, int>, ISysOperatorRepository
     {
         #region Repository
-        protected override string InsertStatement
+        protected override string EntityCode
         {
-            get { return "SysOperator.Insert"; }
-        }
-
-        protected override string UpdateStatement
-        {
-            get { return "SysOperator.Update"; }
-        }
-
-        protected override string DeleteStatement
-        {
-            get { return "SysOperator.Delete"; }
-        }
-
-        protected override string GetByKeyStatement
-        {
-            get { return "SysOperator.GetByKey"; }
-        }
-
-        protected override string QueryCountStatement
-        {
-            get { return null; }
-        }
-
-        protected override string QueryStatement
-        {
-            get { return "SysOperator.Query"; }
+            get { return "SysOperator"; }
         }
         #endregion
     }
