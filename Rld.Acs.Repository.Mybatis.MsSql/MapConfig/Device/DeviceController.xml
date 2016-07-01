@@ -27,7 +27,9 @@
       <result property="Status" column="Status"/>
       <result property="UpdateUserID" column="UpdateUserID"/>
       <result property="UpdateDate" column="UpdateDate"/>
-      <result property="DeviceControllerParameter" column="DeviceParameterID" select="DeviceParameter.GetByKey"/>
+      <result property="DeviceControllerParameter" column="DeviceParameterID" select="DeviceControllerParameter.GetByKey"/>
+      <result property="DeviceDoors" column="DeviceID" select="DeviceDoor.GetByDeviceID"/>
+      <result property="DeviceHeadReadings" column="DeviceID" select="DeviceHeadReading.GetByDeviceID"/>
     </resultMap>
   </resultMaps>
 

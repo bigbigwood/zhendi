@@ -24,7 +24,7 @@
       <result property="DuressOpen" column="DuressOpen"/>
       <result property="DuressAlarm" column="DuressAlarm"/>
       <result property="DuressPassword" column="DuressPassword"/>
-      <result property="Device" column="DeviceID" select="DeviceController.GetByKey"/>
+      <result property="DeviceID" column="DeviceID"/>
     </resultMap>
   </resultMaps>
 
@@ -33,6 +33,11 @@
       SELECT *
       FROM DEVICE_DOORS
       where DeviceDoorID =  #value#
+    </select>
+    <select id="DeviceDoor.GetByDeviceID" parameterClass="int" resultMap="DeviceDoorResult">
+      SELECT *
+      FROM DEVICE_DOORS
+      where DeviceID =  #DeviceID#
     </select>
 
     <insert id="DeviceDoor.Insert" parameterClass="DeviceDoor">
@@ -55,7 +60,7 @@
       , [DuressAlarm]
       , [DuressPassword]
       ) VALUES (
-      #Device.DeviceID#
+      #DeviceID#
       , #Name#
       , #ElectricalAppliances#
       , #OpenType#
@@ -80,7 +85,7 @@
 
     <update id="DeviceDoor.Update" parameterClass="DeviceDoor">
       UPDATE [DEVICE_DOORS] SET
-      [DeviceID] = #Device.DeviceID#
+      [DeviceID] = #DeviceID#
       , [Name] = #Name#
       , [ElectricalAppliances] = #ElectricalAppliances#
       , [OpenType] = #OpenType#
@@ -98,13 +103,13 @@
       , [DuressAlarm] = #DuressAlarm#
       , [DuressPassword] = #DuressPassword#
       WHERE
-      ([DeviceDoorID] = #DeviceDoorID#)
+      [DeviceDoorID] = #DeviceDoorID#
     </update>
 
     <delete id="DeviceDoor.Delete"  parameterClass="int">
       DELETE FROM [DEVICE_DOORS]
       WHERE
-      ([DeviceDoorID] = #DeviceDoorID#)
+      [DeviceDoorID] = #DeviceDoorID#
     </delete>
 
     <select id="DeviceDoor.Query" parameterClass="Hashtable" resultMap="DeviceDoorResult">

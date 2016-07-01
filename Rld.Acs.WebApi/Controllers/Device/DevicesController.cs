@@ -50,8 +50,24 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(deviceInfo, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
-                repo.Insert(deviceInfo);
+                if (deviceInfo.DeviceControllerParameter == null)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "DeviceControllerParameter property cannot be null.");
+
+                if (deviceInfo.DeviceDoors == null || deviceInfo.DeviceDoors.Count == 0)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "At least has 1 DeviceDoor instance for Device.");
+
+                if (deviceInfo.DeviceHeadReadings == null || deviceInfo.DeviceHeadReadings.Count == 0)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "At least has 1 DeviceHeadReadings instance for Device.");
+
+                var deviceControllerParameterRepo = RepositoryManager.GetRepository<IDeviceControllerParameterRepository>();
+                var deviceDoorRepo = RepositoryManager.GetRepository<IDeviceDoorRepository>();
+                var deviceHeadReadingRepo = RepositoryManager.GetRepository<IDeviceHeadReadingRepository>();
+                var deviceRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
+
+                deviceControllerParameterRepo.Insert(deviceInfo.DeviceControllerParameter);
+                deviceInfo.DeviceDoors.ForEach(d => deviceDoorRepo.Insert(d));
+                deviceInfo.DeviceHeadReadings.ForEach(h => deviceHeadReadingRepo.Insert(h));
+                deviceRepo.Insert(deviceInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceInfo);
 
@@ -63,8 +79,29 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(deviceInfo, new Func<HttpResponseMessage>(() =>
             {
                 deviceInfo.DeviceID = id;
-                var repo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
-                repo.Update(deviceInfo);
+
+                var deviceControllerParameterRepo = RepositoryManager.GetRepository<IDeviceControllerParameterRepository>();
+                var deviceDoorRepo = RepositoryManager.GetRepository<IDeviceDoorRepository>();
+                var deviceHeadReadingRepo = RepositoryManager.GetRepository<IDeviceHeadReadingRepository>();
+                var deviceRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
+
+                var tryFinddeviceInfoInfo = deviceRepo.GetByKey(id);
+                if (tryFinddeviceInfoInfo == null)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("Device Id={0} does not exist.", id));
+
+                if (deviceInfo.DeviceControllerParameter != null)
+                {
+                    deviceControllerParameterRepo.Update(deviceInfo.DeviceControllerParameter);
+                }
+                if (deviceInfo.DeviceDoors != null && deviceInfo.DeviceDoors.Count > 0)
+                {
+                    deviceInfo.DeviceDoors.ForEach(r => deviceDoorRepo.Update(r));
+                }
+                if (deviceInfo.DeviceHeadReadings != null && deviceInfo.DeviceHeadReadings.Count > 0)
+                {
+                    deviceInfo.DeviceHeadReadings.ForEach(h => deviceHeadReadingRepo.Update(h));
+                }
+                deviceRepo.Update(deviceInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -75,8 +112,24 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
-                repo.Delete(id);
+                var deviceControllerParameterRepo = RepositoryManager.GetRepository<IDeviceControllerParameterRepository>();
+                var deviceDoorRepo = RepositoryManager.GetRepository<IDeviceDoorRepository>();
+                var deviceHeadReadingRepo = RepositoryManager.GetRepository<IDeviceHeadReadingRepository>();
+                var deviceRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
+
+                var deviceInfo = deviceRepo.GetByKey(id);
+                if (deviceInfo != null)
+                {
+                    deviceControllerParameterRepo.Delete(deviceInfo.DeviceControllerParameter.DeviceParameterID);
+
+                    if (deviceInfo.DeviceDoors.Any())
+                        deviceInfo.DeviceDoors.ForEach(r => deviceDoorRepo.Delete(r.DeviceDoorID));
+
+                    if (deviceInfo.DeviceHeadReadings.Any())
+                        deviceInfo.DeviceHeadReadings.ForEach(h => deviceHeadReadingRepo.Delete(h.DeviceHeadReadingID));
+
+                    deviceRepo.Delete(id);
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 

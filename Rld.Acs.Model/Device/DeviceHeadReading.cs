@@ -7,7 +7,7 @@ namespace Rld.Acs.Model
     public class DeviceHeadReading
     {
         public virtual Int32 DeviceHeadReadingID { get; set; }
-        public virtual DeviceController Device { get; set; }
+        public virtual Int32 DeviceID { get; set; }
         public virtual String Mac { get; set; }
         public virtual String HeadReadingSN { get; set; }
         public virtual Int32 HeadReadingType { get; set; }

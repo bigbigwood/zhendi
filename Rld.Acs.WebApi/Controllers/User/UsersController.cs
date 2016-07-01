@@ -60,8 +60,8 @@ namespace Rld.Acs.WebApi.Controllers
                 var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
                 var userRepo = RepositoryManager.GetRepository<IUserRepository>();
 
-                userAuthenticationRepo.SaveOrUpdate(userInfo.UserAuthenticationInfo);
-                userPropertyRepo.SaveOrUpdate(userInfo.UserPropertyInfo);
+                userAuthenticationRepo.Insert(userInfo.UserAuthenticationInfo);
+                userPropertyRepo.Insert(userInfo.UserPropertyInfo);
                 userRepo.Insert(userInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, userInfo);
@@ -85,11 +85,11 @@ namespace Rld.Acs.WebApi.Controllers
 
                 if (userInfo.UserAuthenticationInfo != null)
                 {
-                    userAuthenticationRepo.SaveOrUpdate(userInfo.UserAuthenticationInfo);
+                    userAuthenticationRepo.Update(userInfo.UserAuthenticationInfo);
                 }
                 if (userInfo.UserPropertyInfo != null)
                 {
-                    userPropertyRepo.SaveOrUpdate(userInfo.UserPropertyInfo);
+                    userPropertyRepo.Update(userInfo.UserPropertyInfo);
                 }
                 userRepo.Update(userInfo);
 

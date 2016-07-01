@@ -13,7 +13,7 @@
       <result property="HeadReadingType" column="HeadReadingType"/>
       <result property="HeadReadingPerformance" column="HeadReadingPerformance"/>
       <result property="Status" column="Status"/>
-      <result property="Device" column="DeviceID" select="DeviceController.GetByKey"/>
+      <result property="DeviceID" column="DeviceID"/>
     </resultMap>
   </resultMaps>
 
@@ -22,6 +22,11 @@
       SELECT *
       FROM DEVICE_HEADREADINGS
       where DeviceHeadReadingID =  #value#
+    </select>
+    <select id="DeviceHeadReading.GetByDeviceID" parameterClass="int" resultMap="DeviceHeadReadingResult">
+      SELECT *
+      FROM DEVICE_HEADREADINGS
+      where DeviceID =  #DeviceID#
     </select>
 
     <insert id="DeviceHeadReading.Insert" parameterClass="DeviceHeadReading">
@@ -33,7 +38,7 @@
       , [HeadReadingPerformance]
       , [Status]
       ) VALUES (
-      #Device.DeviceID#
+      #DeviceID#
       , #Mac#
       , #HeadReadingSN#
       , #HeadReadingType#
@@ -47,7 +52,7 @@
 
     <update id="DeviceHeadReading.Update" parameterClass="DeviceHeadReading">
       UPDATE [DEVICE_HEADREADINGS] SET
-      [DeviceID] = #Device.DeviceID#
+      [DeviceID] = #DeviceID#
       , [Mac] = #Mac#
       , [HeadReadingSN] = #HeadReadingSN#
       , [HeadReadingType] = #HeadReadingType#
