@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="SysDictionary" type="Rld.Acs.Model.SysDictionary" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SysDictionaryResult" class="Rld.Acs.Model.SysDictionary">
+      <result property="DictionaryID" column="DictionaryID"/>
+      <result property="Name" column="Name"/>
+      <result property="TypeID" column="TypeID"/>
+      <result property="TypeName" column="TypeName"/>
+      <result property="ParentID" column="ParentID"/>
+      <result property="LanguageID" column="LanguageID"/>
+      <result property="Level" column="Level"/>
+      <result property="ItemID" column="ItemID"/>
+      <result property="ItemProperty" column="ItemProperty"/>
+      <result property="ItemValue" column="ItemValue"/>
+      <result property="Description" column="Description"/>
+      <result property="Remark" column="Remark"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="SysDictionary.GetByKey" parameterClass="int" resultMap="SysDictionaryResult">
+      SELECT *
+      FROM [SYS_DICTIONARY]
+      WHERE
+      [DictionaryID] = #value#
+    </select>
+    
+    <insert id="SysDictionary.Insert" parameterClass="SysDictionary">
+      INSERT INTO [SYS_DICTIONARY] (
+      [Name]
+      , [TypeID]
+      , [TypeName]
+      , [ParentID]
+      , [LanguageID]
+      , [Level]
+      , [ItemID]
+      , [ItemProperty]
+      , [ItemValue]
+      , [Description]
+      , [Remark]
+      , [CreateDate]
+      , [CreateUserID]
+      , [Status]
+      , [UpdateDate]
+      , [UpdateUserID]
+      ) VALUES (
+      #Name#
+      , #TypeID#
+      , #TypeName#
+      , #ParentID#
+      , #LanguageID#
+      , #Level#
+      , #ItemID#
+      , #ItemProperty#
+      , #ItemValue#
+      , #Description#
+      , #Remark#
+      , #CreateDate#
+      , #CreateUserID#
+      , #Status#
+      , #UpdateDate#
+      , #UpdateUserID#
+      )
+      <selectKey resultClass="int" type="post" property="DictionaryID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="SysDictionary.Update" parameterClass="SysDictionary">
+      UPDATE [SYS_DICTIONARY] SET
+      [Name] = #Name#
+      , [TypeID] = #TypeID#
+      , [TypeName] = #TypeName#
+      , [ParentID] = #ParentID#
+      , [LanguageID] = #LanguageID#
+      , [Level] = #Level#
+      , [ItemID] = #ItemID#
+      , [ItemProperty] = #ItemProperty#
+      , [ItemValue] = #ItemValue#
+      , [Description] = #Description#
+      , [Remark] = #Remark#
+      , [CreateDate] = #CreateDate#
+      , [CreateUserID] = #CreateUserID#
+      , [Status] = #Status#
+      , [UpdateDate] = #UpdateDate#
+      , [UpdateUserID] = #UpdateUserID#
+      WHERE
+      [DictionaryID] = #DictionaryID#
+    </update>
+
+    <delete id="SysDictionary.Delete"  parameterClass="int">
+      DELETE FROM [SYS_DICTIONARY]
+      WHERE
+      [DictionaryID] = #DictionaryID#
+    </delete>
+
+    <select id="SysDictionary.Query" parameterClass="Hashtable" resultMap="SysDictionaryResult">
+      SELECT *
+      FROM [SYS_DICTIONARY]
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="Name">
+          Name = #Name#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Status">
+          Status = #Status#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="TypeID">
+          TypeID = #TypeID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="TypeName">
+          TypeName = #TypeName#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ParentID">
+          ParentID = #ParentID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="LanguageID">
+          LanguageID = #LanguageID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ItemID">
+          ItemID = #ItemID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ItemProperty">
+          ItemProperty = #ItemProperty#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ItemValue">
+          ItemValue = #ItemValue#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

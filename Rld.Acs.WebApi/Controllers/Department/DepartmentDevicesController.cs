@@ -14,7 +14,7 @@ using System.Web.Http.Results;
 
 namespace Rld.Acs.WebApi.Controllers
 {
-    public class SysOperatorsController : ApiController
+    public class DepartmentDevicesController : ApiController
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -23,10 +23,10 @@ namespace Rld.Acs.WebApi.Controllers
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                var operatorInfos = repo.Query(conditions);
+                var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
+                var departmentDeviceInfos = repo.Query(conditions);
 
-                return Request.CreateResponse(HttpStatusCode.OK, operatorInfos.ToList());
+                return Request.CreateResponse(HttpStatusCode.OK, departmentDeviceInfos.ToList());
 
             }), this);
         }
@@ -35,36 +35,36 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                var sysOperatorInfo = repo.GetByKey(id);
+                var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
+                var departmentDeviceInfo = repo.GetByKey(id);
 
-                if (sysOperatorInfo == null)
+                if (departmentDeviceInfo == null)
                     return Request.CreateResponse(HttpStatusCode.NotFound);
 
-                return Request.CreateResponse(HttpStatusCode.OK, sysOperatorInfo);
+                return Request.CreateResponse(HttpStatusCode.OK, departmentDeviceInfo);
 
             }), this);
         }
 
-        public HttpResponseMessage Post([FromBody]SysOperator sysOperatorInfo)
+        public HttpResponseMessage Post([FromBody]DepartmentDevice departmentDeviceInfo)
         {
-            return ActionWarpper.Process(sysOperatorInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(departmentDeviceInfo, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                repo.Insert(sysOperatorInfo);
+                var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
+                repo.Insert(departmentDeviceInfo);
 
-                return Request.CreateResponse(HttpStatusCode.OK, sysOperatorInfo);
+                return Request.CreateResponse(HttpStatusCode.OK, departmentDeviceInfo);
 
             }), this);
         }
 
-        public HttpResponseMessage Put(int id, [FromBody]SysOperator sysOperatorInfo)
+        public HttpResponseMessage Put(int id, [FromBody]DepartmentDevice departmentDeviceInfo)
         {
-            return ActionWarpper.Process(sysOperatorInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(departmentDeviceInfo, new Func<HttpResponseMessage>(() =>
             {
-                sysOperatorInfo.OperatorID = id;
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                repo.Update(sysOperatorInfo);
+                departmentDeviceInfo.DepartmentDeviceID = id;
+                var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
+                repo.Update(departmentDeviceInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -75,7 +75,7 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
+                var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);

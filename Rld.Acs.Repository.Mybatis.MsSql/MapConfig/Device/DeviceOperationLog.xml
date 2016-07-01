@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DeviceOperationLog" type="Rld.Acs.Model.DeviceOperationLog" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DeviceOperationLogResult" class="Rld.Acs.Model.DeviceOperationLog">
+      <result property="LogID" column="LogID"/>
+      <result property="RegisterID" column="RegisterID"/>
+      <result property="DeviceID" column="DeviceID"/>
+      <result property="DeviceType" column="DeviceType"/>
+      <result property="OperationType" column="OperationType"/>
+      <result property="OperatorID" column="OperatorID"/>
+      <result property="OperationContent" column="OperationContent"/>
+      <result property="OperationTime" column="OperationTime"/>
+      <result property="OperationUploadTime" column="OperationUploadTime"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DeviceOperationLog.GetByKey" parameterClass="int" resultMap="DeviceOperationLogResult">
+      SELECT *
+      FROM [DEVICE_OPERATION_LOG]
+      WHERE
+      [LogID] = #value#
+    </select>
+
+    <insert id="DeviceOperationLog.Insert" parameterClass="DeviceOperationLog">
+      INSERT INTO [DEVICE_OPERATION_LOG] (
+      [RegisterID]
+      , [DeviceID]
+      , [DeviceType]
+      , [OperationType]
+      , [OperatorID]
+      , [OperationContent]
+      , [OperationTime]
+      , [OperationUploadTime]
+      ) VALUES (
+      #RegisterID#
+      , #DeviceID#
+      , #DeviceType#
+      , #OperationType#
+      , #OperatorID#
+      , #OperationContent#
+      , #OperationTime#
+      , #OperationUploadTime#
+      )
+      <selectKey resultClass="int" type="post" property="LogID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DeviceOperationLog.Update" parameterClass="DeviceOperationLog">
+      UPDATE [DEVICE_OPERATION_LOG] SET
+      [RegisterID] = #RegisterID#
+      , [DeviceID] = #DeviceID#
+      , [DeviceType] = #DeviceType#
+      , [OperationType] = #OperationType#
+      , [OperatorID] = #OperatorID#
+      , [OperationContent] = #OperationContent#
+      , [OperationTime] = #OperationTime#
+      , [OperationUploadTime] = #OperationUploadTime#
+      WHERE
+      [LogID] = #LogID#
+    </update>
+
+    <delete id="DeviceOperationLog.Delete"  parameterClass="int">
+      DELETE FROM [DEVICE_OPERATION_LOG]
+      WHERE
+      [LogID] = #LogID#
+    </delete>
+
+    <select id="DeviceOperationLog.Query" parameterClass="Hashtable" resultMap="DeviceOperationLogResult">
+      SELECT *
+      FROM DEVICE_OPERATION_LOG
+      where 1=1
+    </select>
+  </statements>
+</sqlMap>

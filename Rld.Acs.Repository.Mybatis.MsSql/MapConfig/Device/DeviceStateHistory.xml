@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DeviceStateHistory" type="Rld.Acs.Model.DeviceStateHistory" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DeviceStateHistoryResult" class="Rld.Acs.Model.DeviceStateHistory">
+      <result property="DeviceStateHistoryID" column="DeviceStateHistoryID"/>
+      <result property="DeviceID" column="DeviceID"/>
+      <result property="DeviceType" column="DeviceType"/>
+      <result property="DeviceSN" column="DeviceSN"/>
+      <result property="RecordType" column="RecordType"/>
+      <result property="RecordTime" column="RecordTime"/>
+      <result property="DoorStatus" column="DoorStatus"/>
+      <result property="Remark" column="Remark"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DeviceStateHistory.GetByKey" parameterClass="int" resultMap="DeviceStateHistoryResult">
+      SELECT *
+      FROM [DEVICE_STATE_HISTORY]
+      WHERE
+      [DeviceStateHistoryID] = #value#
+    </select>
+
+    <insert id="DeviceStateHistory.Insert" parameterClass="DeviceStateHistory">
+      INSERT INTO [DEVICE_STATE_HISTORY] (
+      [DeviceID]
+      , [DeviceType]
+      , [DeviceSN]
+      , [RecordType]
+      , [RecordTime]
+      , [DoorStatus]
+      , [Remark]
+      ) VALUES (
+      #DeviceID#
+      , #DeviceType#
+      , #DeviceSN#
+      , #RecordType#
+      , #RecordTime#
+      , #DoorStatus#
+      , #Remark#
+      )
+      <selectKey resultClass="int" type="post" property="DeviceStateHistoryID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DeviceStateHistory.Update" parameterClass="DeviceStateHistory">
+      UPDATE [DEVICE_STATE_HISTORY] SET
+      [DeviceID] = #DeviceID#
+      , [DeviceType] = #DeviceType#
+      , [DeviceSN] = #DeviceSN#
+      , [RecordType] = #RecordType#
+      , [RecordTime] = #RecordTime#
+      , [DoorStatus] = #DoorStatus#
+      , [Remark] = #Remark#
+      WHERE
+      [DeviceStateHistoryID] = #DeviceStateHistoryID#
+    </update>
+
+    <delete id="DeviceStateHistory.Delete"  parameterClass="int">
+      DELETE FROM [DEVICE_STATE_HISTORY]
+      WHERE
+      [DeviceStateHistoryID] = #DeviceStateHistoryID#
+    </delete>
+
+    <select id="DeviceStateHistory.Query" parameterClass="Hashtable" resultMap="DeviceStateHistoryResult">
+      SELECT *
+      FROM DEVICE_STATE_HISTORY
+      where 1=1
+    </select>
+  </statements>
+</sqlMap>

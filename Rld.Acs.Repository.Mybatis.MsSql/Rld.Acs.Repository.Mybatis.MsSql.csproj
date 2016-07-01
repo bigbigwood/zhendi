@@ -68,13 +68,19 @@
     <Compile Include="Adapter\MyBatisConnectionProvider.cs" />
     <Compile Include="Adapter\MyBatisRepository.cs" />
     <Compile Include="Impl\CustomerRepositoryMB.cs" />
+    <Compile Include="Impl\Department\DepartmentDeviceRepositoryMB.cs" />
     <Compile Include="Impl\Department\DepartmentRepositoryMB.cs" />
+    <Compile Include="Impl\Device\DeviceOperationLogRepositoryMB.cs" />
+    <Compile Include="Impl\Device\DeviceStateHistoryRepositoryMB.cs" />
+    <Compile Include="Impl\Device\DeviceTrafficLogRepositoryMB.cs" />
     <Compile Include="Impl\Device\DevicePermissionRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceHeadReadingRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceDoorRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceControllerRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceControllerParameterRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceRoleRepositoryMB.cs" />
+    <Compile Include="Impl\System\SysDictionaryRepositoryMB.cs" />
+    <Compile Include="Impl\System\SysOperationLogRepositoryMB.cs" />
     <Compile Include="Impl\System\SysOperatorRepositoryMB.cs" />
     <Compile Include="Impl\Time\TimeSegmentRepositoryMB.cs" />
     <Compile Include="Impl\User\UserPropertyRepositoryMB.cs" />
@@ -138,6 +144,29 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Device\DevicePermission.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Device\DeviceRolePermission.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Department\DepartmentDevice.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\System\SysDictionary.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\System\SysOperationLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Device\DeviceTrafficLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Device\DeviceStateHistory.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Device\DeviceOperationLog.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

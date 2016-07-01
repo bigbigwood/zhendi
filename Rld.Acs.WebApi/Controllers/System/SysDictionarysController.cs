@@ -14,7 +14,7 @@ using System.Web.Http.Results;
 
 namespace Rld.Acs.WebApi.Controllers
 {
-    public class SysOperatorsController : ApiController
+    public class SysDictionarysController : ApiController
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -23,10 +23,10 @@ namespace Rld.Acs.WebApi.Controllers
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                var operatorInfos = repo.Query(conditions);
+                var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
+                var sysDictionaryInfos = repo.Query(conditions);
 
-                return Request.CreateResponse(HttpStatusCode.OK, operatorInfos.ToList());
+                return Request.CreateResponse(HttpStatusCode.OK, sysDictionaryInfos.ToList());
 
             }), this);
         }
@@ -35,36 +35,36 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                var sysOperatorInfo = repo.GetByKey(id);
+                var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
+                var sysDictionaryInfo = repo.GetByKey(id);
 
-                if (sysOperatorInfo == null)
+                if (sysDictionaryInfo == null)
                     return Request.CreateResponse(HttpStatusCode.NotFound);
 
-                return Request.CreateResponse(HttpStatusCode.OK, sysOperatorInfo);
+                return Request.CreateResponse(HttpStatusCode.OK, sysDictionaryInfo);
 
             }), this);
         }
 
-        public HttpResponseMessage Post([FromBody]SysOperator sysOperatorInfo)
+        public HttpResponseMessage Post([FromBody]SysDictionary sysDictionaryInfo)
         {
-            return ActionWarpper.Process(sysOperatorInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysDictionaryInfo, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                repo.Insert(sysOperatorInfo);
+                var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
+                repo.Insert(sysDictionaryInfo);
 
-                return Request.CreateResponse(HttpStatusCode.OK, sysOperatorInfo);
+                return Request.CreateResponse(HttpStatusCode.OK, sysDictionaryInfo);
 
             }), this);
         }
 
-        public HttpResponseMessage Put(int id, [FromBody]SysOperator sysOperatorInfo)
+        public HttpResponseMessage Put(int id, [FromBody]SysDictionary sysDictionaryInfo)
         {
-            return ActionWarpper.Process(sysOperatorInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysDictionaryInfo, new Func<HttpResponseMessage>(() =>
             {
-                sysOperatorInfo.OperatorID = id;
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                repo.Update(sysOperatorInfo);
+                sysDictionaryInfo.DictionaryID = id;
+                var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
+                repo.Update(sysDictionaryInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -75,7 +75,7 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
+                var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);

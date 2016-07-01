@@ -12,7 +12,7 @@
       <result property="Remark" column="Remark"/>
       <result property="PermissionAction" column="PermissionAction"/>
       <result property="UserGroupVM" column="UserGroupVM"/>
-      <result property="AccessTimeZone" column="AccessTimeZone"/>
+      <result property="AllowedAccessTimeZone" column="AccessTimeZone"/>
       <result property="STARTDATE" column="STARTDATE"/>
       <result property="Enddate" column="Enddate"/>
       <result property="Device" column="DeviceID" select="DeviceController.GetByKey"/>
@@ -43,7 +43,7 @@
       , #Remark#
       , #PermissionAction#
       , #UserGroupVM#
-      , #AccessTimeZone#
+      , #AllowedAccessTimeZone#
       , #STARTDATE#
       , #Enddate#
       )
@@ -59,7 +59,7 @@
       , [Remark] = #Remark#
       , [PermissionAction] = #PermissionAction#
       , [UserGroupVM] = #UserGroupVM#
-      , [AccessTimeZone] = #AccessTimeZone#
+      , [AccessTimeZone] = #AllowedAccessTimeZone#
       , [STARTDATE] = #STARTDATE#
       , [Enddate] = #Enddate#
       WHERE

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DepartmentDevice" type="Rld.Acs.Model.DepartmentDevice" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DepartmentDeviceResult" class="Rld.Acs.Model.DepartmentDevice">
+      <result property="DepartmentDeviceID" column="DepartmentDeviceID"/>
+      <result property="Remark" column="Remark"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="Device" column="DeviceID" select="DeviceController.GetByKey"/>
+      <result property="Department" column="DepartmentID" select="Department.GetByKey"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DepartmentDevice.GetByKey" parameterClass="int" resultMap="DepartmentDeviceResult">
+      SELECT *
+      FROM [SYS_DEPARTMENT_DEVICES]
+      WHERE
+      [DepartmentDeviceID] = #value#
+    </select>
+    
+    <insert id="DepartmentDevice.Insert" parameterClass="DepartmentDevice">
+      INSERT INTO [SYS_DEPARTMENT_DEVICES] (
+      [DepartmentID]
+      , [DeviceID]
+      , [Remark]
+      , [CreateUserID]
+      , [CreateDate]
+      , [Status]
+      , [UpdateUserID]
+      , [UpdateDate]
+      ) VALUES (
+      #Department.DepartmentID#
+      , #Device.DeviceID#
+      , #Remark#
+      , #CreateUserID#
+      , #CreateDate#
+      , #Status#
+      , #UpdateUserID#
+      , #UpdateDate#
+      )
+      <selectKey resultClass="int" type="post" property="DepartmentDeviceID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DepartmentDevice.Update" parameterClass="DepartmentDevice">
+      UPDATE [SYS_DEPARTMENT_DEVICES] SET
+      [DepartmentID] = #Department.DepartmentID#
+      , [DeviceID] = #Device.DeviceID#
+      , [Remark] = #Remark#
+      , [CreateUserID] = #CreateUserID#
+      , [CreateDate] = #CreateDate#
+      , [Status] = #Status#
+      , [UpdateUserID] = #UpdateUserID#
+      , [UpdateDate] = #UpdateDate#
+      WHERE
+      [DepartmentDeviceID] = #DepartmentDeviceID#
+    </update>
+
+    <delete id="DepartmentDevice.Delete"  parameterClass="int">
+      DELETE FROM [SYS_DEPARTMENT_DEVICES]
+      WHERE
+      [DepartmentDeviceID] = #DepartmentDeviceID#
+    </delete>
+
+    <select id="DepartmentDevice.Query" parameterClass="Hashtable" resultMap="DepartmentDeviceResult">
+      SELECT *
+      FROM [SYS_DEPARTMENT_DEVICES]
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="Status">
+          Status = #Status#
+        </isNotEmpty>
+        <isNotNull prepend="AND" property="Department">
+          [DepartmentID] = #Department.DepartmentID#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Device">
+          [DeviceID] = #Device.DeviceID#
+        </isNotNull>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

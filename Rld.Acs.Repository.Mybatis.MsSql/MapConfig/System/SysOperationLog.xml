@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="SysOperationLog" type="Rld.Acs.Model.SysOperationLog" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SysOperationLogResult" class="Rld.Acs.Model.SysOperationLog">
+      <result property="LogID" column="LogID"/>
+      <result property="DepartmentID" column="DepartmentID"/>
+      <result property="UserID" column="UserID"/>
+      <result property="UserName" column="UserName"/>
+      <result property="OperationCode" column="OperationCode"/>
+      <result property="OperationName" column="OperationName"/>
+      <result property="Detail" column="Detail"/>
+      <result property="Remark" column="Remark"/>
+      <result property="CreateDate" column="CreateDate"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="SysOperationLog.GetByKey" parameterClass="int" resultMap="SysOperationLogResult">
+      SELECT *
+      FROM [SYS_OPERATION_LOG]
+      WHERE
+      [LogID] = #value#
+    </select>
+    
+    <insert id="SysOperationLog.Insert" parameterClass="SysOperationLog">
+      INSERT INTO [SYS_OPERATION_LOG] (
+      [DepartmentID]
+      , [UserID]
+      , [UserName]
+      , [OperationCode]
+      , [OperationName]
+      , [Detail]
+      , [Remark]
+      , [CreateDate]
+      ) VALUES (
+      #DepartmentID#
+      , #UserID#
+      , #UserName#
+      , #OperationCode#
+      , #OperationName#
+      , #Detail#
+      , #Remark#
+      , #CreateDate#
+      )
+      <selectKey resultClass="int" type="post" property="LogID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="SysOperationLog.Update" parameterClass="SysOperationLog">
+      UPDATE [SYS_OPERATION_LOG] SET
+      [DepartmentID] = #DepartmentID#
+      , [UserID] = #UserID#
+      , [UserName] = #UserName#
+      , [OperationCode] = #OperationCode#
+      , [OperationName] = #OperationName#
+      , [Detail] = #Detail#
+      , [Remark] = #Remark#
+      , [CreateDate] = #CreateDate#
+      WHERE
+      [LogID] = #LogID#
+    </update>
+
+    <delete id="SysOperationLog.Delete"  parameterClass="int">
+      DELETE FROM [SYS_OPERATION_LOG]
+      WHERE
+      [LogID] = #LogID#
+    </delete>
+
+    <select id="SysOperationLog.Query" parameterClass="Hashtable" resultMap="SysOperationLogResult">
+      SELECT *
+      FROM [SYS_OPERATION_LOG]
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="DepartmentID">
+          DepartmentID = #DepartmentID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="UserID">
+          UserID = #UserID#
+        </isNotEmpty>
+        <isNotNull prepend="AND" property="UserName">
+          UserName = #UserName#
+        </isNotNull>
+        <isNotEmpty prepend="AND" property="OperationCode">
+          OperationCode = #OperationCode#
+        </isNotEmpty>
+        <isNotNull prepend="AND" property="OperationName">
+          OperationName = #OperationName#
+        </isNotNull>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

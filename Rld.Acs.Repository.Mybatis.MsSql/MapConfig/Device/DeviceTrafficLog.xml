@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DeviceTrafficLog" type="Rld.Acs.Model.DeviceTrafficLog" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DeviceTrafficLogResult" class="Rld.Acs.Model.DeviceTrafficLog">
+      <result property="TrafficID" column="TrafficID"/>
+      <result property="DeviceID" column="DeviceID"/>
+      <result property="DeviceType" column="DeviceType"/>
+      <result property="DeviceSN" column="DeviceSN"/>
+      <result property="RecordType" column="RecordType"/>
+      <result property="RecordTime" column="RecordTime"/>
+      <result property="RecordUploadTime" column="RecordUploadTime"/>
+      <result property="AuthenticationType" column="AuthenticationType"/>
+      <result property="Remark" column="Remark"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DeviceTrafficLog.GetByKey" parameterClass="int" resultMap="DeviceTrafficLogResult">
+      SELECT *
+      FROM [DEVICE_TRAFFIC_LOG]
+      WHERE
+      [TrafficID] = #value#
+    </select>
+
+    <insert id="DeviceTrafficLog.Insert" parameterClass="DeviceTrafficLog">
+      INSERT INTO [DEVICE_TRAFFIC_LOG] (
+      [DeviceID]
+      , [DeviceType]
+      , [DeviceSN]
+      , [RecordType]
+      , [RecordTime]
+      , [RecordUploadTime]
+      , [AuthenticationType]
+      , [Remark]
+      ) VALUES (
+      #DeviceID#
+      , #DeviceType#
+      , #DeviceSN#
+      , #RecordType#
+      , #RecordTime#
+      , #RecordUploadTime#
+      , #AuthenticationType#
+      , #Remark#
+      )
+      <selectKey resultClass="int" type="post" property="TrafficID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DeviceTrafficLog.Update" parameterClass="DeviceTrafficLog">
+      UPDATE [DEVICE_TRAFFIC_LOG] SET
+      [DeviceID] = #DeviceID#
+      , [DeviceType] = #DeviceType#
+      , [DeviceSN] = #DeviceSN#
+      , [RecordType] = #RecordType#
+      , [RecordTime] = #RecordTime#
+      , [RecordUploadTime] = #RecordUploadTime#
+      , [AuthenticationType] = #AuthenticationType#
+      , [Remark] = #Remark#
+      WHERE
+      [TrafficID] = #TrafficID#
+    </update>
+
+    <delete id="DeviceTrafficLog.Delete"  parameterClass="int">
+      DELETE FROM [DEVICE_TRAFFIC_LOG]
+      WHERE
+      [TrafficID] = #TrafficID#
+    </delete>
+
+    <select id="DeviceTrafficLog.Query" parameterClass="Hashtable" resultMap="DeviceTrafficLogResult">
+      SELECT *
+      FROM DEVICE_TRAFFIC_LOG
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="DeviceID">
+          DeviceID = #DeviceID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceType">
+          DeviceType = #DeviceType#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

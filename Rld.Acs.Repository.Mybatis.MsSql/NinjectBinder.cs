@@ -18,17 +18,24 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             Bind<IPersistanceTransaction>().To<TransactionToPersistanceTransaction>();
 
             Bind<ICustomerRepository>().To<CustomerRepositoryMB>();
-            Bind<ITimeSegmentRepository>().To<TimeSegmentRepositoryMB>();
-
-            Bind<ISysOperatorRepository>().To<SysOperatorRepositoryMB>();
+            //Department
             Bind<IDepartmentRepository>().To<DepartmentRepositoryMB>();
+            Bind<IDepartmentDeviceRepository>().To<DepartmentDeviceRepositoryMB>();
+            //Device
             Bind<IDeviceRoleRepository>().To<DeviceRoleRepositoryMB>();
             Bind<IDevicePermissionRepository>().To<DevicePermissionRepositoryMB>();
             Bind<IDeviceControllerRepository>().To<DeviceControllerRepositoryMB>();
             Bind<IDeviceControllerParameterRepository>().To<DeviceControllerParameterRepositoryMB>();
             Bind<IDeviceDoorRepository>().To<DeviceDoorRepositoryMB>();
             Bind<IDeviceHeadReadingRepository>().To<DeviceHeadReadingRepositoryMB>();
-
+            Bind<IDeviceOperationLogRepository>().To<DeviceOperationLogRepositoryMB>();
+            Bind<IDeviceStateHistoryRepository>().To<DeviceStateHistoryRepositoryMB>();
+            Bind<IDeviceTrafficLogRepository>().To<DeviceTrafficLogRepositoryMB>();
+            //System
+            Bind<ISysOperatorRepository>().To<SysOperatorRepositoryMB>();
+            //Time
+            Bind<ITimeSegmentRepository>().To<TimeSegmentRepositoryMB>();
+            //User
             Bind<IUserRepository>().To<UserRepositoryMB>();
             Bind<IUserPropertyRepository>().To<UserPropertyRepositoryMB>();
             Bind<IUserAuthenticationRepository>().To<UserAuthenticationRepositoryMB>();

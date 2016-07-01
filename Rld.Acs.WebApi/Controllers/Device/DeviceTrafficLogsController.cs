@@ -14,7 +14,7 @@ using System.Web.Http.Results;
 
 namespace Rld.Acs.WebApi.Controllers
 {
-    public class SysOperatorsController : ApiController
+    public class DeviceTrafficLogsController : ApiController
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -23,10 +23,10 @@ namespace Rld.Acs.WebApi.Controllers
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                var operatorInfos = repo.Query(conditions);
+                var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
+                var deviceTrafficInfos = repo.Query(conditions);
 
-                return Request.CreateResponse(HttpStatusCode.OK, operatorInfos.ToList());
+                return Request.CreateResponse(HttpStatusCode.OK, deviceTrafficInfos.ToList());
 
             }), this);
         }
@@ -35,36 +35,36 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                var sysOperatorInfo = repo.GetByKey(id);
+                var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
+                var deviceTrafficInfo = repo.GetByKey(id);
 
-                if (sysOperatorInfo == null)
+                if (deviceTrafficInfo == null)
                     return Request.CreateResponse(HttpStatusCode.NotFound);
 
-                return Request.CreateResponse(HttpStatusCode.OK, sysOperatorInfo);
+                return Request.CreateResponse(HttpStatusCode.OK, deviceTrafficInfo);
 
             }), this);
         }
 
-        public HttpResponseMessage Post([FromBody]SysOperator sysOperatorInfo)
+        public HttpResponseMessage Post([FromBody]DeviceTrafficLog deviceTrafficInfo)
         {
-            return ActionWarpper.Process(sysOperatorInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(deviceTrafficInfo, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                repo.Insert(sysOperatorInfo);
+                var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
+                repo.Insert(deviceTrafficInfo);
 
-                return Request.CreateResponse(HttpStatusCode.OK, sysOperatorInfo);
+                return Request.CreateResponse(HttpStatusCode.OK, deviceTrafficInfo);
 
             }), this);
         }
 
-        public HttpResponseMessage Put(int id, [FromBody]SysOperator sysOperatorInfo)
+        public HttpResponseMessage Put(int id, [FromBody]DeviceTrafficLog deviceTrafficInfo)
         {
-            return ActionWarpper.Process(sysOperatorInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(deviceTrafficInfo, new Func<HttpResponseMessage>(() =>
             {
-                sysOperatorInfo.OperatorID = id;
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                repo.Update(sysOperatorInfo);
+                deviceTrafficInfo.TrafficID = id;
+                var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
+                repo.Update(deviceTrafficInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -75,7 +75,7 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
+                var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
