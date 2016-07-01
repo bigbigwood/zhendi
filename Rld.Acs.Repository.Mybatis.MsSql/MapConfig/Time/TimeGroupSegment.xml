@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="TimeGroupSegment" type="Rld.Acs.Model.TimeGroupSegment" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="TimeGroupSegmentResult" class="Rld.Acs.Model.TimeGroupSegment">
+      <result property="TimeGroupSegmentID" column="TimeGroupSegmentID"/>
+      <result property="TimeGroupID" column="TimeGroupID"/>
+      <result property="TimeSegmentID" column="TimeSegmentID"/>
+    </resultMap>
+    <resultMap id="TimeSegmentResult" class="Rld.Acs.Model.TimeSegment">
+      <result property="TimeSegmentID" column="TimeSegmentID"/>
+      <result property="BeginTime" column="BeginTime"/>
+      <result property="EndTime" column="EndTime"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="TimeGroupSegment.GetByKey" parameterClass="int" resultMap="TimeGroupSegmentResult">
+      SELECT *
+      FROM [TIME_GROUP_SEGMENT]
+      WHERE
+      [TimeGroupSegmentID] = #value#
+    </select>
+    <select id="TimeGroupSegment.GetSegmentsByGroupID" parameterClass="int" resultMap="TimeSegmentResult">
+      SELECT TS.*
+      FROM [TIME_GROUP_SEGMENT] TGS
+      LEFT JOIN [TIME_SEGMENTS] TS ON TGS.TimeSegmentID = TS.TimeSegmentID
+      WHERE
+      TGS.TimeGroupID = #TimeGroupID#
+    </select>
+
+
+    <insert id="TimeGroupSegment.Insert" parameterClass="TimeGroupSegment">
+      INSERT INTO [TIME_GROUP_SEGMENT] (
+      [TimeGroupID]
+      , [TimeSegmentID]
+      ) VALUES (
+      #TimeGroupID#
+      , #TimeSegmentID#
+      )
+      <selectKey resultClass="int" type="post" property="TimeGroupSegmentID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="TimeGroupSegment.Update" parameterClass="TimeGroupSegment">
+      UPDATE [TIME_GROUP_SEGMENT] SET
+      [TimeGroupID] = #TimeGroupID#
+      , [TimeSegmentID] = #TimeSegmentID#
+      WHERE
+      [TimeGroupSegmentID] = #TimeGroupSegmentID#
+    </update>
+
+    <delete id="TimeGroupSegment.Delete"  parameterClass="int">
+      DELETE FROM [TIME_GROUP_SEGMENT]
+      WHERE
+      [TimeGroupSegmentID] = #TimeGroupSegmentID#
+    </delete>
+
+    <select id="TimeGroupSegment.Query" parameterClass="Hashtable" resultMap="TimeGroupSegmentResult">
+      SELECT *
+      FROM [TIME_GROUP_SEGMENT]
+    </select>
+  </statements>
+</sqlMap>

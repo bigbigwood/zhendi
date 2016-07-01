@@ -82,6 +82,10 @@
     <Compile Include="Impl\System\SysDictionaryRepositoryMB.cs" />
     <Compile Include="Impl\System\SysOperationLogRepositoryMB.cs" />
     <Compile Include="Impl\System\SysOperatorRepositoryMB.cs" />
+    <Compile Include="Impl\Time\TimeGroupRepositoryMB.cs" />
+    <Compile Include="Impl\Time\TimeGroupSegmentRepositoryMB.cs" />
+    <Compile Include="Impl\Time\TimeZoneRepositoryMB.cs" />
+    <Compile Include="Impl\Time\TimeZoneGroupRepositoryMB.cs" />
     <Compile Include="Impl\Time\TimeSegmentRepositoryMB.cs" />
     <Compile Include="Impl\User\UserPropertyRepositoryMB.cs" />
     <Compile Include="Impl\User\UserAuthenticationRepositoryMB.cs" />
@@ -167,6 +171,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Device\DeviceOperationLog.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Time\TimeZone.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Time\TimeGroup.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Time\TimeZoneGroup.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\Time\TimeGroupSegment.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

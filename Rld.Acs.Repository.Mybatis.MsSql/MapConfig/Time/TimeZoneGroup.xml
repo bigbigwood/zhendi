@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="TimeZoneGroup" type="Rld.Acs.Model.TimeZoneGroup" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="TimeZoneGroupResult" class="Rld.Acs.Model.TimeZoneGroup">
+      <result property="TimeZoneGroupID" column="TimeZoneGroupID"/>
+      <result property="TimeZoneID" column="TimeZoneID"/>
+      <result property="TimeGroupID" column="TimeGroupID"/>
+    </resultMap>
+    <resultMap id="TimeGroupResult" class="Rld.Acs.Model.TimeGroup">
+      <result property="TimeGroupID" column="TimeGroupID"/>
+      <result property="TimeGroupName" column="TimeGroupName"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="TimeSegments" column="TimeGroupID" select="TimeGroupSegment.GetSegmentsByGroupID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="TimeZoneGroup.GetByKey" parameterClass="int" resultMap="TimeZoneGroupResult">
+      SELECT *
+      FROM [TIME_ZONE_GROUP]
+      WHERE
+      [TimeZoneGroupID] = #value#
+    </select>
+    <select id="TimeZoneGroup.GetGroupsByZoneID" parameterClass="int" resultMap="TimeGroupResult">
+      SELECT TG.*
+      FROM [TIME_ZONE_GROUP] TZG
+      LEFT JOIN [TIME_GROUPS] TG ON TZG.TimeGroupID = TG.TimeGroupID
+      WHERE
+      TZG.TimeZoneID = #TimeZoneID#
+    </select>
+
+    <insert id="TimeZoneGroup.Insert" parameterClass="TimeZoneGroup">
+      INSERT INTO [TIME_ZONE_GROUP] (
+      [TimeZoneID]
+      , [TimeGroupID]
+      ) VALUES (
+      #TimeZoneID#
+      , #TimeGroupID#
+      )
+      <selectKey resultClass="int" type="post" property="TimeZoneGroupID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="TimeZoneGroup.Update" parameterClass="TimeZoneGroup">
+      UPDATE [TIME_ZONE_GROUP] SET
+      [TimeZoneID] = #TimeZoneID#
+      , [TimeGroupID] = #TimeGroupID#
+      WHERE
+      [TimeZoneGroupID] = #TimeZoneGroupID#
+    </update>
+
+    <delete id="TimeZoneGroup.Delete"  parameterClass="int">
+      DELETE FROM [TIME_ZONE_GROUP]
+      WHERE
+      [TimeZoneGroupID] = #TimeZoneGroupID#
+    </delete>
+
+    <select id="TimeZoneGroup.Query" parameterClass="Hashtable" resultMap="TimeZoneGroupResult">
+      SELECT *
+      FROM [TIME_ZONE_GROUP]
+    </select>
+  </statements>
+</sqlMap>

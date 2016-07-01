@@ -7,7 +7,7 @@ namespace Rld.Acs.Model
     public class TimeZoneGroup
     {
         public virtual Int32 TimeZoneGroupID { get; set; }
-        public virtual TimeZone TimeZone { get; set; }
-        public virtual TimeGroup TimeGroup { get; set; }
+        public virtual Int32 TimeZoneID { get; set; }
+        public virtual Int32 TimeGroupID { get; set; }
     }
 }

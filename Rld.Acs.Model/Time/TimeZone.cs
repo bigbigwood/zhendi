@@ -13,5 +13,11 @@ namespace Rld.Acs.Model
         public virtual GeneralStatus Status { get; set; }
         public virtual Int32? UpdateUserID { get; set; }
         public virtual DateTime? UpdateDate { get; set; }
+        public virtual List<TimeGroup> TimeGroups { get; set; }
+
+        public TimeZone()
+        {
+            TimeGroups = new List<TimeGroup>();
+        }
     }
 }

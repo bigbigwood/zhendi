@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="TimeGroup" type="Rld.Acs.Model.TimeGroup" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="TimeGroupResult" class="Rld.Acs.Model.TimeGroup">
+      <result property="TimeGroupID" column="TimeGroupID"/>
+      <result property="TimeGroupName" column="TimeGroupName"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="TimeSegments" column="TimeGroupID" select="TimeGroupSegment.GetSegmentsByGroupID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="TimeGroup.GetByKey" parameterClass="int" resultMap="TimeGroupResult">
+      SELECT *
+      FROM [TIME_GROUPS]
+      WHERE
+      [TimeGroupID] = #value#
+    </select>
+
+    <insert id="TimeGroup.Insert" parameterClass="TimeGroup">
+      INSERT INTO [TIME_GROUPS] (
+      [TimeGroupName]
+      , [CreateUserID]
+      , [CreateDate]
+      , [Status]
+      , [UpdateUserID]
+      , [UpdateDate]
+      ) VALUES (
+      #TimeGroupName#
+      , #CreateUserID#
+      , #CreateDate#
+      , #Status#
+      , #UpdateUserID#
+      , #UpdateDate#
+      )
+      <selectKey resultClass="int" type="post" property="TimeGroupID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="TimeGroup.Update" parameterClass="TimeGroup">
+      UPDATE [TIME_GROUPS] SET
+      [TimeGroupName] = #TimeGroupName#
+      , [CreateUserID] = #CreateUserID#
+      , [CreateDate] = #CreateDate#
+      , [Status] = #Status#
+      , [UpdateUserID] = #UpdateUserID#
+      , [UpdateDate] = #UpdateDate#
+      WHERE
+      [TimeGroupID] = #TimeGroupID#
+    </update>
+
+    <delete id="TimeGroup.Delete"  parameterClass="int">
+      DELETE FROM [TIME_GROUPS]
+      WHERE
+      [TimeGroupID] = #TimeGroupID#
+    </delete>
+
+    <select id="TimeGroup.Query" parameterClass="Hashtable" resultMap="TimeGroupResult">
+      SELECT *
+      FROM [TIME_GROUPS]
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="Status">
+          Status=#Status#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

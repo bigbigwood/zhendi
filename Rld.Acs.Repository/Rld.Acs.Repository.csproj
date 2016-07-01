@@ -69,6 +69,10 @@
     <Compile Include="Interfaces\System\ISysDictionaryRepository.cs" />
     <Compile Include="Interfaces\System\ISysOperationLogRepository.cs" />
     <Compile Include="Interfaces\System\ISysOperatorRepository.cs" />
+    <Compile Include="Interfaces\Time\ITimeGroupRepository.cs" />
+    <Compile Include="Interfaces\Time\ITimeGroupSegmentRepository.cs" />
+    <Compile Include="Interfaces\Time\ITimeZoneRepository.cs" />
+    <Compile Include="Interfaces\Time\ITimeZoneGroupRepository.cs" />
     <Compile Include="Interfaces\Time\ITimeSegmentRepository.cs" />
     <Compile Include="Interfaces\User\IUserPropertyRepository.cs" />
     <Compile Include="Interfaces\User\IUserAuthenticationRepository.cs" />

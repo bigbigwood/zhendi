@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="TimeZone" type="Rld.Acs.Model.TimeZone" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="TimeZoneResult" class="Rld.Acs.Model.TimeZone">
+      <result property="TimeZoneID" column="TimeZoneID"/>
+      <result property="TimeZoneName" column="TimeZoneName"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="TimeGroups" column="TimeZoneID" select="TimeZoneGroup.GetGroupsByZoneID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="TimeZone.GetByKey" parameterClass="int" resultMap="TimeZoneResult">
+      SELECT *
+      FROM [TIME_ZONE]
+      WHERE
+      [TimeZoneID] = #value#
+    </select>
+
+    <insert id="TimeZone.Insert" parameterClass="TimeZone">
+      INSERT INTO [TIME_ZONE] (
+      [TimeZoneName]
+      , [CreateUserID]
+      , [CreateDate]
+      , [Status]
+      , [UpdateUserID]
+      , [UpdateDate]
+      ) VALUES (
+      #TimeZoneName#
+      , #CreateUserID#
+      , #CreateDate#
+      , #Status#
+      , #UpdateUserID#
+      , #UpdateDate#
+      )
+      <selectKey resultClass="int" type="post" property="TimeZoneID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="TimeZone.Update" parameterClass="TimeZone">
+      UPDATE [TIME_ZONE] SET
+      [TimeZoneName] = #TimeZoneName#
+      , [CreateUserID] = #CreateUserID#
+      , [CreateDate] = #CreateDate#
+      , [Status] = #Status#
+      , [UpdateUserID] = #UpdateUserID#
+      , [UpdateDate] = #UpdateDate#
+      WHERE
+      [TimeZoneID] = #TimeZoneID#
+    </update>
+
+    <delete id="TimeZone.Delete"  parameterClass="int">
+      DELETE FROM [TIME_ZONE]
+      WHERE
+      [TimeZoneID] = #TimeZoneID#
+    </delete>
+
+    <select id="TimeZone.Query" parameterClass="Hashtable" resultMap="TimeZoneResult">
+      SELECT *
+      FROM [TIME_ZONE]
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="Status">
+          Status=#Status#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

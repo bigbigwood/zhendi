@@ -156,6 +156,8 @@
     <Compile Include="Controllers\System\SysDictionarysController.cs" />
     <Compile Include="Controllers\System\SysOperationLogsController.cs" />
     <Compile Include="Controllers\System\SysOperatorsController.cs" />
+    <Compile Include="Controllers\Time\TimeZonesController.cs" />
+    <Compile Include="Controllers\Time\TimeGroupsController.cs" />
     <Compile Include="Controllers\Time\TimeSegmentsController.cs" />
     <Compile Include="Controllers\User\UsersController.cs" />
     <Compile Include="Framework\ActionWarpper.cs" />

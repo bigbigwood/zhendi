@@ -11,7 +11,7 @@
       <result property="DeviceRoleID" column="DeviceRoleID"/>
       <result property="DevicePermissionID" column="DevicePermissionID"/>
     </resultMap>
-      <resultMap id="DevicePermissionResult" class="Rld.Acs.Model.DevicePermission">
+    <resultMap id="DevicePermissionResult" class="Rld.Acs.Model.DevicePermission">
       <result property="DevicePermissionID" column="DevicePermissionID"/>
       <result property="Enable" column="Enable"/>
       <result property="Remark" column="Remark"/>
@@ -30,18 +30,6 @@
       FROM [DEVICE_ROLES_PERMISSIONS]
       WHERE
       [DeviceRolePermissionID] = #value#
-    </select>
-    <select id="DeviceRolePermission.GetByDeviceRole" parameterClass="int" resultMap="DeviceRolePermissionResult">
-      SELECT *
-      FROM [DEVICE_ROLES_PERMISSIONS]
-      WHERE
-      [DeviceRoleID] = #DeviceRoleID#
-    </select>
-    <select id="DeviceRolePermission.GetByDevicePermission" parameterClass="int" resultMap="DeviceRolePermissionResult">
-      SELECT *
-      FROM [DEVICE_ROLES_PERMISSIONS]
-      WHERE
-      [DevicePermissionID] = #DevicePermissionID#
     </select>
     <select id="DeviceRolePermission.GetRolesByPermissionID" parameterClass="int" resultMap="DeviceRoleResult">
       SELECT DR.*
