@@ -69,6 +69,14 @@
     <select id="TimeGroupSegment.Query" parameterClass="Hashtable" resultMap="TimeGroupSegmentResult">
       SELECT *
       FROM [TIME_GROUP_SEGMENT]
+    <dynamic prepend="WHERE">
+      <isNotNull prepend="and" property="TimeGroupID">
+        TimeGroupID=#TimeGroupID#
+      </isNotNull>
+      <isNotNull prepend="and" property="TimeSegmentID">
+        TimeSegmentID=#TimeSegmentID#
+      </isNotNull>
+    </dynamic>
     </select>
   </statements>
 </sqlMap>

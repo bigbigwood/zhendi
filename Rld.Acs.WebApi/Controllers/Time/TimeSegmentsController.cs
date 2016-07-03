@@ -80,8 +80,16 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
-                repo.Delete(id);
+                var timeSegmentRepo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
+                var timeGroupSegmentRepo = RepositoryManager.GetRepository<ITimeGroupSegmentRepository>();
+
+                var timeGroupSegmentBindings = timeGroupSegmentRepo.Query(new Hashtable { { "TimeSegmentID", id } });
+                if (timeGroupSegmentBindings.Any())
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadGateway, "TimeSegment has binding to TimeGroup, cannot be deleted utill the bindings are clean.");
+                }
+
+                timeSegmentRepo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 

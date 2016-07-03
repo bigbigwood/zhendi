@@ -68,6 +68,14 @@
     <select id="TimeZoneGroup.Query" parameterClass="Hashtable" resultMap="TimeZoneGroupResult">
       SELECT *
       FROM [TIME_ZONE_GROUP]
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="and" property="TimeGroupID">
+          TimeGroupID=#TimeGroupID#
+        </isNotNull>
+        <isNotNull prepend="and" property="TimeZoneID">
+          TimeZoneID=#TimeZoneID#
+        </isNotNull>
+      </dynamic>
     </select>
   </statements>
 </sqlMap>

@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using System.ComponentModel;
+using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
@@ -53,8 +54,25 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(timeZoneInfo, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ITimeZoneRepository>();
-                repo.Insert(timeZoneInfo);
+                var timeZoneRepo = RepositoryManager.GetRepository<ITimeZoneRepository>();
+                var timeZoneGroupRepo = RepositoryManager.GetRepository<ITimeZoneGroupRepository>();
+                var timeGroupRepo = RepositoryManager.GetRepository<ITimeGroupRepository>();
+
+                if (timeZoneInfo == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "timeZoneInfo is null");
+                }
+
+                if (timeZoneInfo.TimeGroups != null && timeZoneInfo.TimeGroups.Any())
+                {
+                    foreach (var timeGroup in timeZoneInfo.TimeGroups.Where(timeGroup => timeGroupRepo.GetByKey(timeGroup.TimeGroupID) == null))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeGroup Id = {0} does not exist yet.", timeGroup.TimeGroupID));
+                    }
+                }
+
+                timeZoneRepo.Insert(timeZoneInfo);
+                timeZoneInfo.TimeGroups.ForEach(g => timeZoneGroupRepo.Insert(new TimeZoneGroup { TimeZoneID = timeZoneInfo.TimeZoneID, TimeGroupID = g.TimeGroupID }));
 
                 return Request.CreateResponse(HttpStatusCode.OK, timeZoneInfo);
 
@@ -66,9 +84,56 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(timeZoneInfo, new Func<HttpResponseMessage>(() =>
             {
+                if (timeZoneInfo == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "timeZoneInfo is null");
+                }
                 timeZoneInfo.TimeZoneID = id;
-                var repo = RepositoryManager.GetRepository<ITimeZoneRepository>();
-                repo.Update(timeZoneInfo);
+
+                var timeZoneRepo = RepositoryManager.GetRepository<ITimeZoneRepository>();
+                var timeZoneGroupRepo = RepositoryManager.GetRepository<ITimeZoneGroupRepository>();
+                var timeGroupRepo = RepositoryManager.GetRepository<ITimeGroupRepository>();
+
+                var originalTimeZoneInfo = timeZoneRepo.GetByKey(id);
+                if (originalTimeZoneInfo == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeZone Id={0} does not exist.", id));
+                }
+
+                var addedTimeGroups = new List<TimeGroup>();
+                var deletedTimeGroups = new List<TimeGroup>();
+
+                if (timeZoneInfo.TimeGroups != null && timeZoneInfo.TimeGroups.Any())
+                {
+                    var originalTimeGroupsIds = originalTimeZoneInfo.TimeGroups.Select(g => g.TimeGroupID);
+                    var targetTimeGroupsIds = timeZoneInfo.TimeGroups.Select(g => g.TimeGroupID);
+
+                    addedTimeGroups =
+                        timeZoneInfo.TimeGroups.FindAll(g => originalTimeGroupsIds.Contains(g.TimeGroupID) == false);
+
+                    deletedTimeGroups =
+                        originalTimeZoneInfo.TimeGroups.FindAll(g => targetTimeGroupsIds.Contains(g.TimeGroupID) == false);
+
+                    foreach (var addedtimeGroup in addedTimeGroups.Where(tg => timeGroupRepo.GetByKey(tg.TimeGroupID) == null))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeGroup Id = {0} does not exist yet.", addedtimeGroup.TimeGroupID));
+                    }
+                }
+                else
+                {
+                    deletedTimeGroups = originalTimeZoneInfo.TimeGroups;
+                }
+
+                foreach (var deletedTimeGroup in deletedTimeGroups)
+                {
+                    var binding = timeZoneGroupRepo.Query(new Hashtable { { "TimeZoneID", id }, { "TimeGroupID", deletedTimeGroup.TimeGroupID } }).ToList();
+                    binding.ForEach(b => timeZoneGroupRepo.Delete(b.TimeZoneGroupID));
+                }
+                foreach (var addedTimeGroup in addedTimeGroups)
+                {
+                    timeZoneGroupRepo.Insert(new TimeZoneGroup { TimeZoneID = id, TimeGroupID = addedTimeGroup.TimeGroupID });
+                }
+                timeZoneRepo.Update(timeZoneInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -80,8 +145,16 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ITimeZoneRepository>();
-                repo.Delete(id);
+                var timeZoneRepo = RepositoryManager.GetRepository<ITimeZoneRepository>();
+                var timeZoneGroupRepo = RepositoryManager.GetRepository<ITimeZoneGroupRepository>();
+
+                var timeZoneInfo = timeZoneRepo.GetByKey(id);
+                if (timeZoneInfo != null)
+                {
+                    var bindings = timeZoneGroupRepo.Query(new Hashtable { {"TimeZoneID", id} }).ToList();
+                    bindings.ForEach(b => timeZoneGroupRepo.Delete(b.TimeZoneGroupID));
+                    timeZoneRepo.Delete(id);
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 

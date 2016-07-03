@@ -53,8 +53,26 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(timeGroupInfo, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ITimeGroupRepository>();
-                repo.Insert(timeGroupInfo);
+                var timeGroupRepo = RepositoryManager.GetRepository<ITimeGroupRepository>();
+                var timeGroupSegmentRepo = RepositoryManager.GetRepository<ITimeGroupSegmentRepository>();
+                var timeSegmentRepo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
+
+                if (timeGroupInfo == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "TimeGroupInfo is null");
+                }
+
+                if (timeGroupInfo.TimeSegments != null && timeGroupInfo.TimeSegments.Any())
+                {
+                    foreach (var timeSegment in timeGroupInfo.TimeSegments.Where(s => timeSegmentRepo.GetByKey(s.TimeSegmentID) == null))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeSegment Id = {0} does not exist yet.", timeSegment.TimeSegmentID));
+                    }
+                }
+
+                timeGroupRepo.Insert(timeGroupInfo);
+                timeGroupInfo.TimeSegments.ForEach(g => timeGroupSegmentRepo.Insert(new TimeGroupSegment { TimeGroupID = timeGroupInfo.TimeGroupID, TimeSegmentID = g.TimeSegmentID }));
+
 
                 return Request.CreateResponse(HttpStatusCode.OK, timeGroupInfo);
 
@@ -66,9 +84,56 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(timeGroupInfo, new Func<HttpResponseMessage>(() =>
             {
+                if (timeGroupInfo == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "timeGroupInfo is null");
+                }
                 timeGroupInfo.TimeGroupID = id;
-                var repo = RepositoryManager.GetRepository<ITimeGroupRepository>();
-                repo.Update(timeGroupInfo);
+
+                var timeGroupRepo = RepositoryManager.GetRepository<ITimeGroupRepository>();
+                var timeGroupSegmentRepo = RepositoryManager.GetRepository<ITimeGroupSegmentRepository>();
+                var timeSegmentRepo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
+
+                var originaltimeGroupInfo = timeGroupRepo.GetByKey(id);
+                if (originaltimeGroupInfo == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeGroup Id={0} does not exist.", id));
+                }
+
+                var addedTimeSegments = new List<TimeSegment>();
+                var deletedTimeSegments = new List<TimeSegment>();
+
+                if (timeGroupInfo.TimeSegments != null && timeGroupInfo.TimeSegments.Any())
+                {
+                    var originalTimeSegmentIds = originaltimeGroupInfo.TimeSegments.Select(s => s.TimeSegmentID);
+                    var targetTimeSegmentds = timeGroupInfo.TimeSegments.Select(s => s.TimeSegmentID);
+
+                    addedTimeSegments =
+                        timeGroupInfo.TimeSegments.FindAll(s => originalTimeSegmentIds.Contains(s.TimeSegmentID) == false);
+
+                    deletedTimeSegments =
+                        originaltimeGroupInfo.TimeSegments.FindAll(s => targetTimeSegmentds.Contains(s.TimeSegmentID) == false);
+
+                    foreach (var addedtimeSegment in addedTimeSegments.Where(s => timeSegmentRepo.GetByKey(s.TimeSegmentID) == null))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeSegment Id = {0} does not exist yet.", addedtimeSegment.TimeSegmentID));
+                    }
+                }
+                else
+                {
+                    deletedTimeSegments = originaltimeGroupInfo.TimeSegments;
+                }
+
+                foreach (var deletedTimeSegment in deletedTimeSegments)
+                {
+                    var binding = timeGroupSegmentRepo.Query(new Hashtable { { "TimeGroupID", id }, { "TimeSegmentID", deletedTimeSegment.TimeSegmentID } }).ToList();
+                    binding.ForEach(b => timeGroupSegmentRepo.Delete(b.TimeGroupSegmentID));
+                }
+                foreach (var addedTimeSegment in addedTimeSegments)
+                {
+                    timeGroupSegmentRepo.Insert(new TimeGroupSegment() { TimeGroupID = id, TimeSegmentID = addedTimeSegment.TimeSegmentID });
+                }
+                timeGroupRepo.Update(timeGroupInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -80,8 +145,23 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ITimeGroupRepository>();
-                repo.Delete(id);
+                var timeGroupRepo = RepositoryManager.GetRepository<ITimeGroupRepository>();
+                var timeGroupSegmentRepo = RepositoryManager.GetRepository<ITimeGroupSegmentRepository>();
+                var timeZoneGroupRepo = RepositoryManager.GetRepository<ITimeZoneGroupRepository>();
+
+                var timeZoneGroupBindings = timeZoneGroupRepo.Query(new Hashtable { { "TimeGroupID", id } });
+                if (timeZoneGroupBindings.Any())
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadGateway, "TimeGroup has binding to TimeZone, cannot be deleted utill the bindings are clean.");
+                }
+
+                var timeGroupInfo = timeGroupRepo.GetByKey(id);
+                if (timeGroupInfo != null)
+                {
+                    var bindings = timeGroupSegmentRepo.Query(new Hashtable { { "TimeGroupID", id } }).ToList();
+                    bindings.ForEach(b => timeZoneGroupRepo.Delete(b.TimeGroupSegmentID));
+                    timeGroupRepo.Delete(id);
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
