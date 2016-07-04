@@ -62,7 +62,7 @@
     <Compile Include="System\SysModuleElement.cs" />
     <Compile Include="System\SysOperationLog.cs" />
     <Compile Include="System\SysRole.cs" />
-    <Compile Include="System\SysRoleModuleElement.cs" />
+    <Compile Include="System\SysRolePermission.cs" />
     <Compile Include="Time\TimeGroup.cs" />
     <Compile Include="Time\TimeGroupSegment.cs" />
     <Compile Include="Time\TimeSegment.cs" />

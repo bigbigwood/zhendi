@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="SysRolePermission" type="Rld.Acs.Model.SysRolePermission" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SysRolePermissionResult" class="Rld.Acs.Model.SysRolePermission">
+      <result property="SysRolePermissionID" column="SysRolePermissionID"/>
+      <result property="Visible" column="Visible"/>
+      <result property="Enabled" column="Enabled"/>
+      <result property="RoleInfo" column="RoleID" select="SysRole.GetByKey"/>
+      <result property="ModuleInfo" column="ElementID" select="SysModule.GetByKey"/>
+      <result property="ElementInfo" column="ModuleID" select="SysModuleElement.GetByKey"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="SysRolePermission.GetByKey" parameterClass="int" resultMap="SysRolePermissionResult">
+      SELECT *
+      FROM [SYS_ROLE_PERMISSIONS]
+      WHERE
+      [SysRolePermissionID] = #value#
+    </select>
+    
+    <insert id="SysRolePermission.Insert" parameterClass="SysRolePermission">
+      INSERT INTO [SYS_ROLE_PERMISSIONS] (
+      [RoleID]
+      , [ElementID]
+      , [ModuleID]
+      , [Visible]
+      , [Enabled]
+      ) VALUES (
+      #RoleInfo.RoleID#
+      , #ElementInfo.ElementID#
+      , #ModuleInfo.ModuleID#
+      , #Visible#
+      , #Enabled#
+      )
+      <selectKey resultClass="int" type="post" property="SysRolePermissionID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="SysRolePermission.Update" parameterClass="SysRolePermission">
+      UPDATE [SYS_ROLE_PERMISSIONS] SET
+      [RoleID] = #RoleInfo.RoleID#
+      , [ElementID] = #ElementInfo.ElementID#
+      , [ModuleID] = #ModuleInfo.ModuleID#
+      , [Visible] = #Visible#
+      , [Enabled] = #Enabled#
+      WHERE
+      [SysRolePermissionID] = #SysRolePermissionID#
+    </update>
+
+    <delete id="SysRolePermission.Delete"  parameterClass="int">
+      DELETE FROM [SYS_ROLE_PERMISSIONS]
+      WHERE
+      [SysRolePermissionID] = #SysRolePermissionID#
+    </delete>
+
+    <select id="SysRolePermission.Query" parameterClass="Hashtable" resultMap="SysRolePermissionResult">
+      SELECT *
+      FROM SYS_ROLE_PERMISSIONS
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="AND" property="RoleID">
+          RoleID = #RoleID#
+        </isNotNull>
+        <isNotNull prepend="AND" property="ModuleID">
+          ModuleID = #ModuleID#
+        </isNotNull>
+        <isNotNull prepend="AND" property="ModuleID">
+          ModuleID = #ModuleID#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Visible">
+          Visible = #Visible#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Enabled">
+          Enabled = #Enabled#
+        </isNotNull>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

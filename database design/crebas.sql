@@ -62,20 +62,6 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SYS_ROLE_MODULEELEMENT') and o.name = 'FK_SYS_ROLE_REFERENCE_SYS_MODU')
-alter table SYS_ROLE_MODULEELEMENT
-   drop constraint FK_SYS_ROLE_REFERENCE_SYS_MODU
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SYS_ROLE_MODULEELEMENT') and o.name = 'FK_SYS_ROLE_REFERENCE_SYS_ROLE')
-alter table SYS_ROLE_MODULEELEMENT
-   drop constraint FK_SYS_ROLE_REFERENCE_SYS_ROLE
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
    where r.fkeyid = object_id('SYS_USER') and o.name = 'FK_SYS_USER_REFERENCE_SYS_DEPA')
 alter table SYS_USER
    drop constraint FK_SYS_USER_REFERENCE_SYS_DEPA
@@ -260,9 +246,9 @@ go
 
 if exists (select 1
             from  sysobjects
-           where  id = object_id('SYS_ROLE_MODULEELEMENT')
+           where  id = object_id('SYS_ROLE_PERMISSIONS')
             and   type = 'U')
-   drop table SYS_ROLE_MODULEELEMENT
+   drop table SYS_ROLE_PERMISSIONS
 go
 
 if exists (select 1
@@ -611,9 +597,8 @@ go
 /*==============================================================*/
 create table SYS_MODULE_ELEMENTS (
    ElementID            int                  identity(1,1),
+   ElementName          nvarchar(100)        not null,
    ModuleID             int                  not null,
-   Visible              bit                  not null,
-   Enabled              bit                  not null,
    Description          nvarchar(1024)       null,
    Remark               nvarchar(1024)       null,
    CreateDate           datetime             not null,
@@ -660,13 +645,16 @@ create table SYS_ROLE (
 go
 
 /*==============================================================*/
-/* Table: SYS_ROLE_MODULEELEMENT                                */
+/* Table: SYS_ROLE_PERMISSIONS                                */
 /*==============================================================*/
-create table SYS_ROLE_MODULEELEMENT (
-   SysRoleElementID     int                  identity(1,1),
-   ElementID            int                  not null,
+create table SYS_ROLE_PERMISSIONS (
+   SysRolePermissionID     int                  identity(1,1),
    RoleID               int                  not null,
-   constraint PK_SYS_ROLE_MODULEELEMENT primary key nonclustered (SYSROLEELEMENTID)
+   ElementID            int                  not null,
+   ModuleID             int                  not null,
+   Visible              bit                  not null,
+   Enabled              bit                  not null,
+   constraint PK_SYS_ROLE_MODULEELEMENT primary key nonclustered (SysRolePermissionID)
 )
 go
 
@@ -686,7 +674,6 @@ create table SYS_USER (
    Remark               nvarchar(1024)       null,
    StartDate            datetime             not null,
    EndDate              datetime             null,
-   UserAuthenticationID int                  not null,
    UserPropertyID       int                  not null,
    constraint PK_SYS_USER primary key nonclustered (USERID)
 )
@@ -697,7 +684,9 @@ go
 /*==============================================================*/
 create table SYS_USER_AUTHENTICATION (
    UserAuthenticationID int                  identity(1,1),
+   UserID               int                  not null,
    DeviceUserID         int                  not null,
+   DeviceID             int                  not null,
    DeviceType           int                  not null,
    AuthenticationType   int                  not null,
    AuthenticationData   nvarchar(1024)       not null,
@@ -818,8 +807,8 @@ go
 /*==============================================================*/
 create table TIME_SEGMENTS (
    TimeSegmentID        int                  identity(1,1),
-   BeginTime            datetime             not null,
-   EndTime              datetime             not null,
+   BeginTime            nvarchar(100)        not null,
+   EndTime              nvarchar(100)        not null,
    CreateUserID         int                  not null,
    CreateDate           datetime             not null,
    Status               int                  not null,
@@ -894,16 +883,6 @@ go
 alter table SYS_MODULE_ELEMENTS
    add constraint FK_SYS_MODU_REFERENCE_SYS_MODU foreign key (MODULEID)
       references SYS_MODULE (MODULEID)
-go
-
-alter table SYS_ROLE_MODULEELEMENT
-   add constraint FK_SYS_ROLE_REFERENCE_SYS_MODU foreign key (ELEMENTID)
-      references SYS_MODULE_ELEMENTS (ELEMENTID)
-go
-
-alter table SYS_ROLE_MODULEELEMENT
-   add constraint FK_SYS_ROLE_REFERENCE_SYS_ROLE foreign key (ROLEID)
-      references SYS_ROLE (ROLEID)
 go
 
 alter table SYS_USER

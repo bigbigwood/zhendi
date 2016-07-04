@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="SysModule" type="Rld.Acs.Model.SysModule" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SysModuleResult" class="Rld.Acs.Model.SysModule">
+      <result property="ModuleID" column="ModuleID"/>
+      <result property="ModuleName" column="ModuleName"/>
+      <result property="Description" column="Description"/>
+      <result property="LinkURL" column="LinkURL"/>
+      <result property="FullClassName" column="FullClassName"/>
+      <result property="ModuleLevel" column="ModuleLevel"/>
+      <result property="Remark" column="Remark"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="Parent" column="ParentID" select="SysModule.GetByKey"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="SysModule.GetByKey" parameterClass="int" resultMap="SysModuleResult">
+      SELECT *
+      FROM [SYS_MODULE]
+      WHERE
+      [ModuleID] = #value#
+    </select>
+    
+    <insert id="SysModule.Insert" parameterClass="SysModule">
+      INSERT INTO [SYS_MODULE] (
+      [ModuleName]
+      , [Description]
+      , [ParentID]
+      , [LinkURL]
+      , [FullClassName]
+      , [ModuleLevel]
+      , [Remark]
+      , [CreateDate]
+      , [CreateUserID]
+      , [Status]
+      , [UpdateDate]
+      , [UpdateUserID]
+      ) VALUES (
+      #ModuleName#
+      , #Description#
+      , #Parent.ModuleID#
+      , #LinkURL#
+      , #FullClassName#
+      , #ModuleLevel#
+      , #Remark#
+      , #CreateDate#
+      , #CreateUserID#
+      , #Status#
+      , #UpdateDate#
+      , #UpdateUserID#
+      )
+      <selectKey resultClass="int" type="post" property="ModuleID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="SysModule.Update" parameterClass="SysModule">
+      UPDATE [SYS_MODULE] SET
+      [ModuleName] = #ModuleName#
+      , [Description] = #Description#
+      , [ParentID] = #Parent.ModuleID#
+      , [LinkURL] = #LinkURL#
+      , [FullClassName] = #FullClassName#
+      , [ModuleLevel] = #ModuleLevel#
+      , [Remark] = #Remark#
+      , [CreateDate] = #CreateDate#
+      , [CreateUserID] = #CreateUserID#
+      , [Status] = #Status#
+      , [UpdateDate] = #UpdateDate#
+      , [UpdateUserID] = #UpdateUserID#
+      WHERE
+      [ModuleID] = #ModuleID#
+    </update>
+
+    <delete id="SysModule.Delete"  parameterClass="int">
+      DELETE FROM [SYS_MODULE]
+      WHERE
+      [ModuleID] = #ModuleID#
+    </delete>
+
+    <select id="SysModule.Query" parameterClass="Hashtable" resultMap="SysModuleResult">
+      SELECT *
+      FROM [SYS_MODULE]
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="and" property="ModuleName">
+          ModuleName=#ModuleName#
+        </isNotNull>
+        <isNotNull prepend="and" property="ParentID">
+          ParentID=#ParentID#
+        </isNotNull>
+        <isNotNull prepend="and" property="FullClassName">
+          FullClassName=#FullClassName#
+        </isNotNull>
+        <isNotNull prepend="and" property="ModuleLevel">
+          ModuleLevel=#ModuleLevel#
+        </isNotNull>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

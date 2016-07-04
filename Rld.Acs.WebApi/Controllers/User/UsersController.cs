@@ -50,7 +50,7 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(userInfo, new Func<HttpResponseMessage>(() =>
             {
-                if (userInfo.UserAuthenticationInfo == null)
+                if (userInfo.UserAuthentications == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "UserAuthenticationInfo property cannot be null.");
 
                 if (userInfo.UserPropertyInfo == null)
@@ -60,7 +60,7 @@ namespace Rld.Acs.WebApi.Controllers
                 var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
                 var userRepo = RepositoryManager.GetRepository<IUserRepository>();
 
-                userAuthenticationRepo.Insert(userInfo.UserAuthenticationInfo);
+                userInfo.UserAuthentications.ForEach(a => userAuthenticationRepo.Insert(a));
                 userPropertyRepo.Insert(userInfo.UserPropertyInfo);
                 userRepo.Insert(userInfo);
 
@@ -83,9 +83,9 @@ namespace Rld.Acs.WebApi.Controllers
                 if (tryFindUserInfo == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("User Id={0} does not exist.", id));
 
-                if (userInfo.UserAuthenticationInfo != null)
+                if (userInfo.UserAuthentications != null)
                 {
-                    userAuthenticationRepo.Update(userInfo.UserAuthenticationInfo);
+                    userInfo.UserAuthentications.ForEach(a => userAuthenticationRepo.SaveOrUpdate(a));
                 }
                 if (userInfo.UserPropertyInfo != null)
                 {
@@ -109,7 +109,7 @@ namespace Rld.Acs.WebApi.Controllers
                 var userInfo = userRepo.GetByKey(id);
                 if (userInfo != null)
                 {
-                    userAuthenticationRepo.Delete(userInfo.UserAuthenticationInfo.UserAuthenticationID);
+                    userInfo.UserAuthentications.ForEach(a => userAuthenticationRepo.Delete(a.UserAuthenticationID));
                     userPropertyRepo.Delete(userInfo.UserPropertyInfo.UserPropertyID);
                     userRepo.Delete(id);
                 }

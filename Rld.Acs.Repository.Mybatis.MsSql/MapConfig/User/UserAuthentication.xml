@@ -9,6 +9,7 @@
     <resultMap id="UserAuthenticationResult" class="Rld.Acs.Model.UserAuthentication">
       <result property="UserAuthenticationID" column="UserAuthenticationID"/>
       <result property="DeviceUserID" column="DeviceUserID"/>
+      <result property="DeviceID" column="DeviceID"/>
       <result property="DeviceType" column="DeviceType"/>
       <result property="AuthenticationType" column="AuthenticationType"/>
       <result property="AuthenticationData" column="AuthenticationData"/>
@@ -29,10 +30,17 @@
       FROM SYS_USER_AUTHENTICATION
       where UserAuthenticationID =  #value#
     </select>
+    <select id="UserAuthentication.GetByUserID" parameterClass="int" resultMap="UserAuthenticationResult">
+      SELECT *
+      FROM SYS_USER_AUTHENTICATION
+      where UserAuthenticationID =  #UserID#
+    </select>
     
     <insert id="UserAuthentication.Insert" parameterClass="UserAuthentication">
       INSERT INTO [SYS_USER_AUTHENTICATION] (
- [DeviceUserID]
+      [UserID]
+      , [DeviceUserID]
+      , [DeviceID]
       , [DeviceType]
       , [AuthenticationType]
       , [AuthenticationData]
@@ -45,7 +53,9 @@
       , [UpdateUserID]
       , [UpdateDate]
       ) VALUES (
- #DeviceUserID#
+      #UserID#
+      , #DeviceUserID#
+      , #DeviceID#
       , #DeviceType#
       , #AuthenticationType#
       , #AuthenticationData#
@@ -65,7 +75,9 @@
 
     <update id="UserAuthentication.Update" parameterClass="UserAuthentication">
       UPDATE [SYS_USER_AUTHENTICATION] SET
-      [DeviceUserID] = #DeviceUserID#
+      [UserID] = #UserID#
+      , [DeviceUserID] = #DeviceUserID#
+      , [DeviceID] = #DeviceID#
       , [DeviceType] = #DeviceType#
       , [AuthenticationType] = #AuthenticationType#
       , [AuthenticationData] = #AuthenticationData#
@@ -78,7 +90,7 @@
       , [UpdateUserID] = #UpdateUserID#
       , [UpdateDate] = #UpdateDate#
       WHERE
-      ([UserAuthenticationID] = #UserAuthenticationID#)
+      [UserAuthenticationID] = #UserAuthenticationID#
     </update>
 
     <delete id="UserAuthentication.Delete"  parameterClass="int">
@@ -90,7 +102,6 @@
     <select id="UserAuthentication.Query" parameterClass="Hashtable" resultMap="UserAuthenticationResult">
       SELECT *
       FROM SYS_USER_AUTHENTICATION
-      where 1=1
     </select>
   </statements>
 </sqlMap>

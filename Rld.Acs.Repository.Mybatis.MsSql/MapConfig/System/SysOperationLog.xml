@@ -75,8 +75,7 @@
     <select id="SysOperationLog.Query" parameterClass="Hashtable" resultMap="SysOperationLogResult">
       SELECT *
       FROM [SYS_OPERATION_LOG]
-      where 1=1
-      <dynamic prepend="AND">
+      <dynamic prepend="WHERE">
         <isNotEmpty prepend="AND" property="DepartmentID">
           DepartmentID = #DepartmentID#
         </isNotEmpty>

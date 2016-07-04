@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="SysRole" type="Rld.Acs.Model.SysRole" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SysRoleResult" class="Rld.Acs.Model.SysRole">
+      <result property="RoleID" column="RoleID"/>
+      <result property="RoleName" column="RoleName"/>
+      <result property="Description" column="Description"/>
+      <result property="Remark" column="Remark"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="SysRole.GetByKey" parameterClass="int" resultMap="SysRoleResult">
+      SELECT *
+      FROM [SYS_ROLE]
+      WHERE
+      [RoleID] = #value#
+    </select>
+    
+    <insert id="SysRole.Insert" parameterClass="SysRole">
+      INSERT INTO [SYS_ROLE] (
+      [RoleName]
+      , [Description]
+      , [Remark]
+      , [CreateDate]
+      , [CreateUserID]
+      , [Status]
+      , [UpdateDate]
+      , [UpdateUserID]
+      ) VALUES (
+      #RoleName#
+      , #Description#
+      , #Remark#
+      , #CreateDate#
+      , #CreateUserID#
+      , #Status#
+      , #UpdateDate#
+      , #UpdateUserID#
+      )
+      <selectKey resultClass="int" type="post" property="RoleID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="SysRole.Update" parameterClass="SysRole">
+      UPDATE [SYS_ROLE] SET
+      [RoleName] = #RoleName#
+      , [Description] = #Description#
+      , [Remark] = #Remark#
+      , [CreateDate] = #CreateDate#
+      , [CreateUserID] = #CreateUserID#
+      , [Status] = #Status#
+      , [UpdateDate] = #UpdateDate#
+      , [UpdateUserID] = #UpdateUserID#
+      WHERE
+      [RoleID] = #RoleID#
+    </update>
+
+    <delete id="SysRole.Delete"  parameterClass="int">
+      DELETE FROM [SYS_ROLE]
+      WHERE
+      [RoleID] = #RoleID#
+    </delete>
+
+    <select id="SysRole.Query" parameterClass="Hashtable" resultMap="SysRoleResult">
+      SELECT *
+      FROM SYS_ROLE
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="AND" property="RoleName">
+          RoleName = #RoleName#
+        </isNotNull>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

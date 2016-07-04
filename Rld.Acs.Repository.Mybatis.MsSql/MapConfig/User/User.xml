@@ -19,7 +19,7 @@
       <result property="Remark" column="Remark"/>
       <result property="StartDate" column="StartDate"/>
       <result property="EndDate" column="EndDate"/>
-      <result property="UserAuthenticationInfo" column="UserAuthenticationID" select="UserAuthentication.GetByKey"/>
+      <result property="UserAuthentications" column="UserID" select="UserAuthentication.GetByUserID"/>
       <result property="UserPropertyInfo" column="UserPropertyID" select="UserProperty.GetByKey"/>
     </resultMap>
   </resultMaps>
@@ -44,7 +44,6 @@
       , [Remark]
       , [StartDate]
       , [EndDate]
-      , [UserAuthenticationID]
       , [UserPropertyID]
       ) VALUES (
       #DepartmentID#
@@ -58,7 +57,6 @@
       , #Remark#
       , #StartDate#
       , #EndDate#
-      , #UserAuthenticationInfo.UserAuthenticationID#
       , #UserPropertyInfo.UserPropertyID#
       )
       <selectKey resultClass="int" type="post" property="UserID" >
@@ -79,9 +77,6 @@
       , [Remark] = #Remark#
       , [StartDate] = #StartDate#
       , [EndDate] = #EndDate#
-      <isNotNull property="UserAuthenticationInfo">
-        , [UserAuthenticationID] = #UserAuthenticationInfo.UserAuthenticationID#
-      </isNotNull>
       <isNotNull property="UserPropertyInfo">
         , [UserPropertyID] = #UserPropertyInfo.UserPropertyID#
       </isNotNull>

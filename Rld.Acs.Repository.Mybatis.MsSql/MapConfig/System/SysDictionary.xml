@@ -34,7 +34,7 @@
       WHERE
       [DictionaryID] = #value#
     </select>
-    
+
     <insert id="SysDictionary.Insert" parameterClass="SysDictionary">
       INSERT INTO [SYS_DICTIONARY] (
       [Name]
@@ -107,8 +107,8 @@
     <select id="SysDictionary.Query" parameterClass="Hashtable" resultMap="SysDictionaryResult">
       SELECT *
       FROM [SYS_DICTIONARY]
-      where 1=1
-      <dynamic prepend="AND">
+
+      <dynamic prepend="WHERE">
         <isNotEmpty prepend="AND" property="Name">
           Name = #Name#
         </isNotEmpty>

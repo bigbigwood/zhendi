@@ -78,14 +78,13 @@
     <select id="SysOperator.Query" parameterClass="Hashtable" resultMap="SysOperatorResult">
       SELECT *
       FROM SYS_OPERATOR
-      where 1=1
-      <dynamic prepend="AND">
-        <isNotEmpty prepend="AND" property="LoginName">
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="AND" property="LoginName">
           LoginName = #LoginName#
-        </isNotEmpty>
-        <isNotEmpty prepend="AND" property="Status">
+        </isNotNull>
+        <isNotNull prepend="AND" property="Status">
           Status = #Status#
-        </isNotEmpty>
+        </isNotNull>
         <isNotNull prepend="AND" property="UserID">
           UserID = #UserID#
         </isNotNull>

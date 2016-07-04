@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="SysModuleElement" type="Rld.Acs.Model.SysModuleElement" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SysModuleElementResult" class="Rld.Acs.Model.SysModuleElement">
+      <result property="ElementID" column="ElementID"/>
+      <result property="ElementName" column="ElementName"/>
+      <result property="ModuleID" column="ModuleID"/>
+      <result property="Description" column="Description"/>
+      <result property="Remark" column="Remark"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="Status" column="Status"/>
+      <result property="UpdateDate" column="UpdateDate"/>
+      <result property="UpdateUserID" column="UpdateUserID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="SysModuleElement.GetByKey" parameterClass="int" resultMap="SysModuleElementResult">
+      SELECT *
+      FROM [SYS_MODULE_ELEMENTS]
+      WHERE
+      [ElementID] = #value#
+    </select>
+    
+    <insert id="SysModuleElement.Insert" parameterClass="SysModuleElement">
+      INSERT INTO [SYS_MODULE_ELEMENTS] (
+      [ModuleID]
+      , [ElementName]
+      , [Description]
+      , [Remark]
+      , [CreateDate]
+      , [CreateUserID]
+      , [Status]
+      , [UpdateDate]
+      , [UpdateUserID]
+      ) VALUES (
+      #ModuleID#
+      , #ElementName#
+      , #Description#
+      , #Remark#
+      , #CreateDate#
+      , #CreateUserID#
+      , #Status#
+      , #UpdateDate#
+      , #UpdateUserID#
+      )
+      <selectKey resultClass="int" type="post" property="ElementID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="SysModuleElement.Update" parameterClass="SysModuleElement">
+      UPDATE [SYS_MODULE_ELEMENTS] SET
+      [ModuleID] = #ModuleID#
+      , [ElementName] = #ElementName#
+      , [Description] = #Description#
+      , [Remark] = #Remark#
+      , [CreateDate] = #CreateDate#
+      , [CreateUserID] = #CreateUserID#
+      , [Status] = #Status#
+      , [UpdateDate] = #UpdateDate#
+      , [UpdateUserID] = #UpdateUserID#
+      WHERE
+      [ElementID] = #ElementID#
+    </update>
+
+    <delete id="SysModuleElement.Delete"  parameterClass="int">
+      DELETE FROM [SYS_MODULE_ELEMENTS]
+      WHERE
+      [ElementID] = #ElementID#
+    </delete>
+
+    <select id="SysModuleElement.Query" parameterClass="Hashtable" resultMap="SysModuleElementResult">
+      SELECT *
+      FROM [SYS_MODULE_ELEMENTS]
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="and" property="ModuleID">
+          ModuleID=#ModuleID#
+        </isNotNull>
+        <isNotNull prepend="and" property="ElementName">
+          ElementName=#ElementName#
+        </isNotNull>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

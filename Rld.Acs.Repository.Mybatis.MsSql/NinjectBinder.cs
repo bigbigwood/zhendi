@@ -32,7 +32,13 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             Bind<IDeviceStateHistoryRepository>().To<DeviceStateHistoryRepositoryMB>();
             Bind<IDeviceTrafficLogRepository>().To<DeviceTrafficLogRepositoryMB>();
             //System
+            Bind<ISysDictionaryRepository>().To<SysDictionaryRepositoryMB>();
+            Bind<ISysModuleElementRepository>().To<SysModuleElementRepositoryMB>();
+            Bind<ISysModuleRepository>().To<SysModuleRepositoryMB>();
+            Bind<ISysOperationLogRepository>().To<SysOperationLogRepositoryMB>();
             Bind<ISysOperatorRepository>().To<SysOperatorRepositoryMB>();
+            Bind<ISysRoleRepository>().To<SysRoleRepositoryMB>();
+            Bind<ISysRolePermissionRepository>().To<SysRolePermissionRepositoryMB>();
             //Time
             Bind<ITimeGroupRepository>().To<TimeGroupRepositoryMB>();
             Bind<ITimeGroupSegmentRepository>().To<TimeGroupSegmentRepositoryMB>();

@@ -19,7 +19,12 @@ namespace Rld.Acs.Model
         public virtual DateTime StartDate { get; set; }
         public virtual DateTime? EndDate { get; set; }
 
-        public virtual UserAuthentication UserAuthenticationInfo { get; set; }
+        public virtual List<UserAuthentication> UserAuthentications{ get; set; }
         public virtual UserProperty UserPropertyInfo { get; set; }
+
+        public User()
+        {
+            UserAuthentications = new List<UserAuthentication>();
+        }
     }
 }

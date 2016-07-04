@@ -80,6 +80,10 @@
     <Compile Include="Impl\Device\DeviceControllerParameterRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceRoleRepositoryMB.cs" />
     <Compile Include="Impl\System\SysDictionaryRepositoryMB.cs" />
+    <Compile Include="Impl\System\SysRoleRepositoryMB.cs" />
+    <Compile Include="Impl\System\SysRolePermissionRepositoryMB.cs" />
+    <Compile Include="Impl\System\SysModuleRepositoryMB.cs" />
+    <Compile Include="Impl\System\SysModuleElementRepositoryMB.cs" />
     <Compile Include="Impl\System\SysOperationLogRepositoryMB.cs" />
     <Compile Include="Impl\System\SysOperatorRepositoryMB.cs" />
     <Compile Include="Impl\Time\TimeGroupRepositoryMB.cs" />
@@ -183,6 +187,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Time\TimeGroupSegment.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\System\SysModule.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\System\SysModuleElement.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\System\SysRole.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\System\SysRolePermission.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
