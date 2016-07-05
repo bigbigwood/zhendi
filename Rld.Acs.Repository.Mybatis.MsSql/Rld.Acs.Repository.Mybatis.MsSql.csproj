@@ -131,7 +131,9 @@
     <EmbeddedResource Include="MapConfig\User\UserProperty.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MapConfig\User\UserAuthentication.xml" />
+    <EmbeddedResource Include="MapConfig\User\UserAuthentication.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Department\Department.xml" />
@@ -174,7 +176,9 @@
     <EmbeddedResource Include="MapConfig\Device\DeviceStateHistory.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MapConfig\Device\DeviceOperationLog.xml" />
+    <EmbeddedResource Include="MapConfig\Device\DeviceOperationLog.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Time\TimeZone.xml" />

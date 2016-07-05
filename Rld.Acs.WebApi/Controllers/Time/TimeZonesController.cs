@@ -3,6 +3,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.WebApi.Framework;
 using System;
 using System.Collections;
@@ -100,8 +101,8 @@ namespace Rld.Acs.WebApi.Controllers
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeZone Id={0} does not exist.", id));
                 }
 
-                var addedTimeGroups = new List<TimeGroup>();
-                var deletedTimeGroups = new List<TimeGroup>();
+                IList<TimeGroup> addedTimeGroups = new List<TimeGroup>();
+                IList<TimeGroup> deletedTimeGroups = new List<TimeGroup>();
 
                 if (timeZoneInfo.TimeGroups != null && timeZoneInfo.TimeGroups.Any())
                 {

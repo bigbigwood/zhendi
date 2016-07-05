@@ -153,6 +153,8 @@
     <Compile Include="Controllers\Device\DeviceStateHistorysController.cs" />
     <Compile Include="Controllers\Device\DeviceRolesController.cs" />
     <Compile Include="Controllers\Device\DevicesController.cs" />
+    <Compile Include="Controllers\System\SysModulesController.cs" />
+    <Compile Include="Controllers\System\SysModuleElementsController.cs" />
     <Compile Include="Controllers\System\SysDictionarysController.cs" />
     <Compile Include="Controllers\System\SysOperationLogsController.cs" />
     <Compile Include="Controllers\System\SysOperatorsController.cs" />
@@ -215,6 +217,10 @@
     <ProjectReference Include="..\Rld.Acs.Repository\Rld.Acs.Repository.csproj">
       <Project>{090002e5-ab29-4ff1-b6f0-2ea8aa8bcc9d}</Project>
       <Name>Rld.Acs.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Unility\Rld.Acs.Unility.csproj">
+      <Project>{56cd6cfe-8104-4b3f-997c-d84e6788f259}</Project>
+      <Name>Rld.Acs.Unility</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

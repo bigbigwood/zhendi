@@ -2,6 +2,7 @@
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.WebApi.Framework;
 using System;
 using System.Collections;
@@ -39,7 +40,7 @@ namespace Rld.Acs.WebApi.Controllers
             {
                 var repo = RepositoryManager.GetRepository<ITimeGroupRepository>();
                 var timeGroupInfo = repo.GetByKey(id);
-
+                var s = timeGroupInfo.TimeSegments.ToList();
                 if (timeGroupInfo == null)
                     return Request.CreateResponse(HttpStatusCode.NotFound);
 
@@ -100,8 +101,8 @@ namespace Rld.Acs.WebApi.Controllers
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeGroup Id={0} does not exist.", id));
                 }
 
-                var addedTimeSegments = new List<TimeSegment>();
-                var deletedTimeSegments = new List<TimeSegment>();
+                IList<TimeSegment> addedTimeSegments = new List<TimeSegment>();
+                IList<TimeSegment> deletedTimeSegments = new List<TimeSegment>();
 
                 if (timeGroupInfo.TimeSegments != null && timeGroupInfo.TimeSegments.Any())
                 {

@@ -13,7 +13,7 @@ namespace Rld.Acs.Model
         public virtual GeneralStatus Status { get; set; }
         public virtual Int32? UpdateUserID { get; set; }
         public virtual DateTime? UpdateDate { get; set; }
-        public virtual List<DevicePermission> DevicePermissions { get; set; }
+        public virtual IList<DevicePermission> DevicePermissions { get; set; }
 
         public DeviceRole()
         {

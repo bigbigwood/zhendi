@@ -12,10 +12,10 @@
       <result property="Remark" column="Remark"/>
       <result property="PermissionAction" column="PermissionAction"/>
       <result property="UserGroupVM" column="UserGroupVM"/>
-      <result property="AllowedAccessTimeZone" column="AccessTimeZone"/>
+      <result property="AllowedAccessTimeZoneID" column="AllowedAccessTimeZoneID"/>
       <result property="STARTDATE" column="STARTDATE"/>
       <result property="Enddate" column="Enddate"/>
-      <result property="Device" column="DeviceID" select="DeviceController.GetByKey"/>
+      <result property="DeviceID" column="DeviceID"/>
     </resultMap>
   </resultMaps>
 
@@ -34,16 +34,16 @@
       , [Remark]
       , [PermissionAction]
       , [UserGroupVM]
-      , [AccessTimeZone]
+      , [AllowedAccessTimeZoneID]
       , [STARTDATE]
       , [Enddate]
       ) VALUES (
-      #Device.DeviceID#
+      #DeviceID#
       , #Enable#
       , #Remark#
       , #PermissionAction#
       , #UserGroupVM#
-      , #AllowedAccessTimeZone#
+      , #AllowedAccessTimeZoneID#
       , #STARTDATE#
       , #Enddate#
       )
@@ -54,12 +54,12 @@
 
     <update id="DevicePermission.Update" parameterClass="DevicePermission">
       UPDATE [DEVICE_PERMISSIONS] SET
-      [DeviceID] = #Device.DeviceID#
+      [DeviceID] = #DeviceID#
       , [Enable] = #Enable#
       , [Remark] = #Remark#
       , [PermissionAction] = #PermissionAction#
       , [UserGroupVM] = #UserGroupVM#
-      , [AccessTimeZone] = #AllowedAccessTimeZone#
+      , [AllowedAccessTimeZoneID] = #AllowedAccessTimeZoneID#
       , [STARTDATE] = #STARTDATE#
       , [Enddate] = #Enddate#
       WHERE

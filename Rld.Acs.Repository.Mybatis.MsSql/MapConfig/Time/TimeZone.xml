@@ -14,7 +14,7 @@
       <result property="Status" column="Status"/>
       <result property="UpdateUserID" column="UpdateUserID"/>
       <result property="UpdateDate" column="UpdateDate"/>
-      <result property="TimeGroups" column="TimeZoneID" select="TimeZoneGroup.GetGroupsByZoneID"/>
+      <result property="TimeGroups" column="TimeZoneID" select="TimeZoneGroup.GetGroupsByZoneID" lazyLoad="true"/>
     </resultMap>
   </resultMaps>
 

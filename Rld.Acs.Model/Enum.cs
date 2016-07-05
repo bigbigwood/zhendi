@@ -14,8 +14,8 @@ namespace Rld.Acs.Model
 
     public enum DevicePermissionAction
     {
-        Pass,
-        ReadLog,
+        Pass = 1,
+        ReadLog = 2,
     }
 
     public enum CommunicationType

@@ -350,7 +350,7 @@ create table DEVICE_CONTROLLERS (
    CreateUserID         int                  not null,
    CreateDate           datetime             not null,
    Status               int                  not null,
-   UpdateUserID         datetime             null,
+   UpdateUserID         int                   null,
    UpdateDate           datetime             null,
    DeviceParameterID    int                  not null,
    constraint PK_DEVICE_CONTROLLERS primary key nonclustered (DEVICEID)
@@ -444,7 +444,7 @@ create table DEVICE_PERMISSIONS (
    Remark               nvarchar(1024)       null,
    PermissionAction     int                  not null,
    UserGroupVM          nvarchar(1024)       null,
-   AccessTimeZone       int                  not null,
+   AllowedAccessTimeZoneID       int                  not null,
    STARTDATE            datetime             not null,
    Enddate              datetime             null,
    constraint PK_DEVICE_PERMISSIONS primary key nonclustered (DEVICEPERMISSIONID)
