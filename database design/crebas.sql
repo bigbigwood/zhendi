@@ -20,16 +20,9 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('DEVICE_PERMISSIONS') and o.name = 'FK_DEVICE_P_REFERENCE_DEVICE_C')
-alter table DEVICE_PERMISSIONS
-   drop constraint FK_DEVICE_P_REFERENCE_DEVICE_C
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('DEVICE_ROLES_PERMISSIONS') and o.name = 'FK_DEVICE_R_REFERENCE_DEVICE_P')
+   where r.fkeyid = object_id('DEVICE_ROLES_PERMISSIONS') and o.name = 'FK_DEVICE_P_REFERENCE_DEVICE_C')
 alter table DEVICE_ROLES_PERMISSIONS
-   drop constraint FK_DEVICE_R_REFERENCE_DEVICE_P
+   drop constraint FK_DEVICE_P_REFERENCE_DEVICE_C
 go
 
 if exists (select 1
@@ -160,12 +153,6 @@ if exists (select 1
    drop table DEVICE_OPERATION_LOG
 go
 
-if exists (select 1
-            from  sysobjects
-           where  id = object_id('DEVICE_PERMISSIONS')
-            and   type = 'U')
-   drop table DEVICE_PERMISSIONS
-go
 
 if exists (select 1
             from  sysobjects
@@ -435,10 +422,11 @@ create table DEVICE_OPERATION_LOG (
 go
 
 /*==============================================================*/
-/* Table: DEVICE_PERMISSIONS                                    */
+/* Table: DEVICE_ROLES_PERMISSIONS                                    */
 /*==============================================================*/
-create table DEVICE_PERMISSIONS (
-   DevicePermissionID   int                  identity(1,1),
+create table DEVICE_ROLES_PERMISSIONS (
+   DeviceRolePermissionID   int                  identity(1,1),
+   DeviceRoleID         int                  not null,
    DeviceID             int                  not null,
    Enable               bit                  not null,
    Remark               nvarchar(1024)       null,
@@ -447,7 +435,7 @@ create table DEVICE_PERMISSIONS (
    AllowedAccessTimeZoneID       int                  not null,
    STARTDATE            datetime             not null,
    Enddate              datetime             null,
-   constraint PK_DEVICE_PERMISSIONS primary key nonclustered (DEVICEPERMISSIONID)
+   constraint PK_DEVICE_ROLES_PERMISSIONS primary key nonclustered (DeviceRolePermissionID)
 )
 go
 
@@ -466,16 +454,6 @@ create table DEVICE_ROLES (
 )
 go
 
-/*==============================================================*/
-/* Table: DEVICE_ROLES_PERMISSIONS                              */
-/*==============================================================*/
-create table DEVICE_ROLES_PERMISSIONS (
-   DeviceRolePermissionID int                  identity(1,1),
-   DeviceRoleID         int                  not null,
-   DevicePermissionID   int                  not null,
-   constraint PK_DEVICE_ROLES_PERMISSIONS primary key nonclustered (DEVICEROLEPERMISSIONID)
-)
-go
 
 /*==============================================================*/
 /* Table: DEVICE_STATE_HISTORY                                  */
@@ -650,8 +628,8 @@ go
 create table SYS_ROLE_PERMISSIONS (
    SysRolePermissionID     int                  identity(1,1),
    RoleID               int                  not null,
-   ElementID            int                  not null,
-   ModuleID             int                  not null,
+   ElementID            int                  null,
+   ModuleID             int                  null,
    Visible              bit                  not null,
    Enabled              bit                  not null,
    constraint PK_SYS_ROLE_MODULEELEMENT primary key nonclustered (SysRolePermissionID)
@@ -709,11 +687,6 @@ create table SYS_USER_DEVICE_ROLES (
    UserDeviceRoleID     int                  identity(1,1),
    UserID               int                  not null,
    DeviceRoleID         int                  not null,
-   CreateUserID         int                  not null,
-   CreateDate           datetime             not null,
-   Status               int                  not null,
-   UpdateUserID         datetime             null,
-   UpdateDate           datetime             null,
    constraint PK_SYS_USER_DEVICE_ROLES primary key nonclustered (USERDEVICEROLEID)
 )
 go
@@ -855,15 +828,11 @@ alter table DEVICE_HEADREADINGS
       references DEVICE_CONTROLLERS (DEVICEID)
 go
 
-alter table DEVICE_PERMISSIONS
+alter table DEVICE_ROLES_PERMISSIONS
    add constraint FK_DEVICE_P_REFERENCE_DEVICE_C foreign key (DEVICEID)
       references DEVICE_CONTROLLERS (DEVICEID)
 go
 
-alter table DEVICE_ROLES_PERMISSIONS
-   add constraint FK_DEVICE_R_REFERENCE_DEVICE_P foreign key (DEVICEPERMISSIONID)
-      references DEVICE_PERMISSIONS (DEVICEPERMISSIONID)
-go
 
 alter table DEVICE_ROLES_PERMISSIONS
    add constraint FK_DEVICE_R_REFERENCE_DEVICE_R foreign key (DEVICEROLEID)

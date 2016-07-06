@@ -14,7 +14,7 @@
       <result property="Status" column="Status"/>
       <result property="UpdateUserID" column="UpdateUserID"/>
       <result property="UpdateDate" column="UpdateDate"/>
-      <result property="DevicePermissions" column="DeviceRoleID" select="DeviceRolePermission.GetPermissionsByRoleID"/>
+      <result property="DeviceRolePermissions" column="DeviceRoleID" select="DeviceRolePermission.GetByRoleID"/>
     </resultMap>
   </resultMaps>
 

@@ -16,6 +16,7 @@
       <result property="Status" column="Status"/>
       <result property="UpdateDate" column="UpdateDate"/>
       <result property="UpdateUserID" column="UpdateUserID"/>
+      <result property="SysRolePermissions" column="RoleID" select="SysRolePermission.GetPermissionsByRoleID"/>
     </resultMap>
   </resultMaps>
 

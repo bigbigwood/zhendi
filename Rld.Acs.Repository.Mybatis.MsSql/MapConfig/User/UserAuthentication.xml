@@ -8,6 +8,7 @@
   <resultMaps>
     <resultMap id="UserAuthenticationResult" class="Rld.Acs.Model.UserAuthentication">
       <result property="UserAuthenticationID" column="UserAuthenticationID"/>
+      <result property="UserID" column="UserID"/>
       <result property="DeviceUserID" column="DeviceUserID"/>
       <result property="DeviceID" column="DeviceID"/>
       <result property="DeviceType" column="DeviceType"/>
@@ -33,7 +34,7 @@
     <select id="UserAuthentication.GetByUserID" parameterClass="int" resultMap="UserAuthenticationResult">
       SELECT *
       FROM SYS_USER_AUTHENTICATION
-      where UserAuthenticationID =  #UserID#
+      where UserID =  #UserID#
     </select>
     
     <insert id="UserAuthentication.Insert" parameterClass="UserAuthentication">

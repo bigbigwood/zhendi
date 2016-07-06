@@ -9,18 +9,14 @@
     <resultMap id="DeviceRolePermissionResult" class="Rld.Acs.Model.DeviceRolePermission">
       <result property="DeviceRolePermissionID" column="DeviceRolePermissionID"/>
       <result property="DeviceRoleID" column="DeviceRoleID"/>
-      <result property="DevicePermissionID" column="DevicePermissionID"/>
-    </resultMap>
-    <resultMap id="DevicePermissionResult" class="Rld.Acs.Model.DevicePermission">
-      <result property="DevicePermissionID" column="DevicePermissionID"/>
+      <result property="DeviceID" column="DeviceID"/>
       <result property="Enable" column="Enable"/>
       <result property="Remark" column="Remark"/>
       <result property="PermissionAction" column="PermissionAction"/>
       <result property="UserGroupVM" column="UserGroupVM"/>
-      <result property="AccessTimeZone" column="AccessTimeZone"/>
+      <result property="AllowedAccessTimeZoneID" column="AllowedAccessTimeZoneID"/>
       <result property="STARTDATE" column="STARTDATE"/>
       <result property="Enddate" column="Enddate"/>
-      <result property="Device" column="DeviceID" select="DeviceController.GetByKey"/>
     </resultMap>
   </resultMaps>
 
@@ -31,28 +27,34 @@
       WHERE
       [DeviceRolePermissionID] = #value#
     </select>
-    <select id="DeviceRolePermission.GetRolesByPermissionID" parameterClass="int" resultMap="DeviceRoleResult">
-      SELECT DR.*
-      FROM [DEVICE_ROLES_PERMISSIONS] DRP
-      LEFT JOIN DEVICE_ROLES DR ON DRP.DeviceRoleID = DR.DeviceRoleID
+    <select id="DeviceRolePermission.GetByRoleID" parameterClass="int" resultMap="DeviceRolePermissionResult">
+      SELECT *
+      FROM [DEVICE_ROLES_PERMISSIONS]
       WHERE
-      DRP.DevicePermissionID = #DevicePermissionID#
-    </select>
-    <select id="DeviceRolePermission.GetPermissionsByRoleID" parameterClass="int" resultMap="DevicePermissionResult">
-      SELECT DP.*
-      FROM [DEVICE_ROLES_PERMISSIONS] DRP
-      LEFT JOIN DEVICE_PERMISSIONS DP ON DRP.DevicePermissionID = DP.DevicePermissionID
-      WHERE
-      DRP.DeviceRoleID = #DeviceRoleID#
+      [DeviceRoleID] = #DeviceRoleID#
     </select>
 
     <insert id="DeviceRolePermission.Insert" parameterClass="DeviceRolePermission">
       INSERT INTO [DEVICE_ROLES_PERMISSIONS] (
       [DeviceRoleID]
-      , [DevicePermissionID]
+      , [DeviceID]
+      , [Enable]
+      , [Remark]
+      , [PermissionAction]
+      , [UserGroupVM]
+      , [AllowedAccessTimeZoneID]
+      , [STARTDATE]
+      , [Enddate]
       ) VALUES (
       #DeviceRoleID#
-      , #DevicePermissionID#
+      , #DeviceID#
+      , #Enable#
+      , #Remark#
+      , #PermissionAction#
+      , #UserGroupVM#
+      , #AllowedAccessTimeZoneID#
+      , #STARTDATE#
+      , #Enddate#
       )
       <selectKey resultClass="int" type="post" property="DeviceRolePermissionID" >
         select @@IDENTITY as value
@@ -62,7 +64,14 @@
     <update id="DeviceRolePermission.Update" parameterClass="DeviceRolePermission">
       UPDATE [DEVICE_ROLES_PERMISSIONS] SET
       [DeviceRoleID] = #DeviceRoleID#
-      , [DevicePermissionID] = #DevicePermissionID#
+      , [DeviceID] = #DeviceID#
+      , [Enable] = #Enable#
+      , [Remark] = #Remark#
+      , [PermissionAction] = #PermissionAction#
+      , [UserGroupVM] = #UserGroupVM#
+      , [AllowedAccessTimeZoneID] = #AllowedAccessTimeZoneID#
+      , [STARTDATE] = #STARTDATE#
+      , [Enddate] = #Enddate#
       WHERE
       [DeviceRolePermissionID] = #DeviceRolePermissionID#
     </update>
@@ -76,6 +85,17 @@
     <select id="DeviceRolePermission.Query" parameterClass="Hashtable" resultMap="DeviceRolePermissionResult">
       SELECT *
       FROM DEVICE_ROLES_PERMISSIONS
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="and" property="DeviceRoleID">
+          DeviceRoleID=#DeviceRoleID#
+        </isNotNull>
+        <isNotNull prepend="and" property="DeviceID">
+          DeviceID=#DeviceID#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Enable">
+          Enable = #Enable#
+        </isNotNull>
+      </dynamic>
     </select>
   </statements>
 </sqlMap>

@@ -8,7 +8,7 @@ using Rld.Acs.Model;
 
 namespace Rld.Acs.Repository.Interfaces
 {
-    public interface IDevicePermissionRepository : IRepository<DevicePermission, Int32>
+    public interface IDeviceRolePermissionRepository : IRepository<DeviceRolePermission, Int32>
     {
     }
 }

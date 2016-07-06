@@ -50,7 +50,6 @@
     <Compile Include="Device\DeviceDoor.cs" />
     <Compile Include="Device\DeviceHeadReading.cs" />
     <Compile Include="Device\DeviceOperationLog.cs" />
-    <Compile Include="Device\DevicePermission.cs" />
     <Compile Include="Device\DeviceRole.cs" />
     <Compile Include="Device\DeviceRolePermission.cs" />
     <Compile Include="Device\DeviceStateHistory.cs" />

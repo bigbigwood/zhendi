@@ -4,12 +4,12 @@ using Rld.Acs.Repository.Interfaces;
 
 namespace Rld.Acs.Repository.Mybatis.MsSql
 {
-    public class DevicePermissionRepositoryMB : MyBatisRepository<DevicePermission, int>, IDevicePermissionRepository
+    public class DeviceRolePermissionRepositoryMB : MyBatisRepository<DeviceRolePermission, int>, IDeviceRolePermissionRepository
     {
         #region Repository
         protected override string EntityCode
         {
-            get { return "DevicePermission"; }
+            get { return "DeviceRolePermission"; }
         }
         #endregion
     }

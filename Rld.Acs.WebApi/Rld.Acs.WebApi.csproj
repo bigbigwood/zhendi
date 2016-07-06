@@ -147,12 +147,14 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\Department\DepartmentDevicesController.cs" />
     <Compile Include="Controllers\Department\DepartmentsController.cs" />
-    <Compile Include="Controllers\Device\DevicePermissionsController.cs" />
+    <Compile Include="Controllers\Device\DeviceRolePermissionsController.cs" />
     <Compile Include="Controllers\Device\DeviceOperationLogsController.cs" />
     <Compile Include="Controllers\Device\DeviceTrafficLogsController.cs" />
     <Compile Include="Controllers\Device\DeviceStateHistorysController.cs" />
     <Compile Include="Controllers\Device\DeviceRolesController.cs" />
     <Compile Include="Controllers\Device\DevicesController.cs" />
+    <Compile Include="Controllers\System\SysRolePermissionsController.cs" />
+    <Compile Include="Controllers\System\SysRolesController.cs" />
     <Compile Include="Controllers\System\SysModulesController.cs" />
     <Compile Include="Controllers\System\SysModuleElementsController.cs" />
     <Compile Include="Controllers\System\SysDictionarysController.cs" />

@@ -14,7 +14,7 @@ using System.Web.Http.Results;
 
 namespace Rld.Acs.WebApi.Controllers
 {
-    public class DevicePermissionsController : ApiController
+    public class SysRolesController : ApiController
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -23,10 +23,10 @@ namespace Rld.Acs.WebApi.Controllers
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<IDevicePermissionRepository>();
-                var devicePermissionInfos = repo.Query(conditions);
+                var repo = RepositoryManager.GetRepository<ISysRoleRepository>();
+                var sysRoleInfos = repo.Query(conditions);
 
-                return Request.CreateResponse(HttpStatusCode.OK, devicePermissionInfos.ToList());
+                return Request.CreateResponse(HttpStatusCode.OK, sysRoleInfos.ToList());
 
             }), this);
         }
@@ -35,36 +35,36 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<IDevicePermissionRepository>();
-                var devicePermissionInfo = repo.GetByKey(id);
+                var repo = RepositoryManager.GetRepository<ISysRoleRepository>();
+                var sysRoleInfo = repo.GetByKey(id);
 
-                if (devicePermissionInfo == null)
+                if (sysRoleInfo == null)
                     return Request.CreateResponse(HttpStatusCode.NotFound);
 
-                return Request.CreateResponse(HttpStatusCode.OK, devicePermissionInfo);
+                return Request.CreateResponse(HttpStatusCode.OK, sysRoleInfo);
 
             }), this);
         }
 
-        public HttpResponseMessage Post([FromBody]DevicePermission devicePermissionInfo)
+        public HttpResponseMessage Post([FromBody]SysRole sysRoleInfo)
         {
-            return ActionWarpper.Process(devicePermissionInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysRoleInfo, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<IDevicePermissionRepository>();
-                repo.Insert(devicePermissionInfo);
+                var repo = RepositoryManager.GetRepository<ISysRoleRepository>();
+                repo.Insert(sysRoleInfo);
 
-                return Request.CreateResponse(HttpStatusCode.OK, devicePermissionInfo);
+                return Request.CreateResponse(HttpStatusCode.OK, sysRoleInfo);
 
             }), this);
         }
 
-        public HttpResponseMessage Put(int id, [FromBody]DevicePermission devicePermissionInfo)
+        public HttpResponseMessage Put(int id, [FromBody]SysRole sysRoleInfo)
         {
-            return ActionWarpper.Process(devicePermissionInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysRoleInfo, new Func<HttpResponseMessage>(() =>
             {
-                devicePermissionInfo.DevicePermissionID = id;
-                var repo = RepositoryManager.GetRepository<IDevicePermissionRepository>();
-                repo.Update(devicePermissionInfo);
+                sysRoleInfo.RoleID = id;
+                var repo = RepositoryManager.GetRepository<ISysRoleRepository>();
+                repo.Update(sysRoleInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -75,7 +75,7 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<IDevicePermissionRepository>();
+                var repo = RepositoryManager.GetRepository<ISysRoleRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);

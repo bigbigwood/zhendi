@@ -63,7 +63,7 @@
     <Compile Include="Interfaces\Device\IDeviceOperationLogRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceDoorRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceHeadReadingRepository.cs" />
-    <Compile Include="Interfaces\Device\IDevicePermissionRepository.cs" />
+    <Compile Include="Interfaces\Device\IDeviceRolePermissionRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceRoleRepository.cs" />
     <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Interfaces\System\ISysDictionaryRepository.cs" />

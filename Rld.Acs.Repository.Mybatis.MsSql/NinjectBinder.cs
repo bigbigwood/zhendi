@@ -23,7 +23,7 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             Bind<IDepartmentDeviceRepository>().To<DepartmentDeviceRepositoryMB>();
             //Device
             Bind<IDeviceRoleRepository>().To<DeviceRoleRepositoryMB>();
-            Bind<IDevicePermissionRepository>().To<DevicePermissionRepositoryMB>();
+            Bind<IDeviceRolePermissionRepository>().To<DeviceRolePermissionRepositoryMB>();
             Bind<IDeviceControllerRepository>().To<DeviceControllerRepositoryMB>();
             Bind<IDeviceControllerParameterRepository>().To<DeviceControllerParameterRepositoryMB>();
             Bind<IDeviceDoorRepository>().To<DeviceDoorRepositoryMB>();

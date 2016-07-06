@@ -73,7 +73,7 @@
     <Compile Include="Impl\Device\DeviceOperationLogRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceStateHistoryRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceTrafficLogRepositoryMB.cs" />
-    <Compile Include="Impl\Device\DevicePermissionRepositoryMB.cs" />
+    <Compile Include="Impl\Device\DeviceRolePermissionRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceHeadReadingRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceDoorRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceControllerRepositoryMB.cs" />
@@ -151,9 +151,6 @@
     <EmbeddedResource Include="MapConfig\Device\DeviceControllerParameter.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MapConfig\Device\DevicePermission.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Device\DeviceRolePermission.xml">

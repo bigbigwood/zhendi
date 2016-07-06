@@ -10,9 +10,9 @@
       <result property="SysRolePermissionID" column="SysRolePermissionID"/>
       <result property="Visible" column="Visible"/>
       <result property="Enabled" column="Enabled"/>
-      <result property="RoleInfo" column="RoleID" select="SysRole.GetByKey"/>
-      <result property="ModuleInfo" column="ElementID" select="SysModule.GetByKey"/>
-      <result property="ElementInfo" column="ModuleID" select="SysModuleElement.GetByKey"/>
+      <result property="RoleID" column="RoleID"/>
+      <result property="ModuleInfo" column="ModuleID" select="SysModule.GetByKey"/>
+      <result property="ElementInfo" column="ElementID" select="SysModuleElement.GetByKey"/>
     </resultMap>
   </resultMaps>
 
@@ -24,6 +24,13 @@
       [SysRolePermissionID] = #value#
     </select>
     
+    <select id="SysRolePermission.GetPermissionsByRoleID" parameterClass="int" resultMap="SysRolePermissionResult">
+      SELECT *
+      FROM [SYS_ROLE_PERMISSIONS]
+      WHERE
+      [RoleID] = #RoleID#
+    </select>
+    
     <insert id="SysRolePermission.Insert" parameterClass="SysRolePermission">
       INSERT INTO [SYS_ROLE_PERMISSIONS] (
       [RoleID]
@@ -32,7 +39,7 @@
       , [Visible]
       , [Enabled]
       ) VALUES (
-      #RoleInfo.RoleID#
+      #RoleID#
       , #ElementInfo.ElementID#
       , #ModuleInfo.ModuleID#
       , #Visible#
@@ -45,7 +52,7 @@
 
     <update id="SysRolePermission.Update" parameterClass="SysRolePermission">
       UPDATE [SYS_ROLE_PERMISSIONS] SET
-      [RoleID] = #RoleInfo.RoleID#
+      [RoleID] = #RoleID#
       , [ElementID] = #ElementInfo.ElementID#
       , [ModuleID] = #ModuleInfo.ModuleID#
       , [Visible] = #Visible#
@@ -67,8 +74,8 @@
         <isNotNull prepend="AND" property="RoleID">
           RoleID = #RoleID#
         </isNotNull>
-        <isNotNull prepend="AND" property="ModuleID">
-          ModuleID = #ModuleID#
+        <isNotNull prepend="AND" property="ElementID">
+          ElementID = #ElementID#
         </isNotNull>
         <isNotNull prepend="AND" property="ModuleID">
           ModuleID = #ModuleID#
