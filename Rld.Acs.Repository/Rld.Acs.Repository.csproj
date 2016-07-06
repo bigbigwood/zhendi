@@ -80,6 +80,8 @@
     <Compile Include="Interfaces\Time\ITimeSegmentRepository.cs" />
     <Compile Include="Interfaces\User\IUserPropertyRepository.cs" />
     <Compile Include="Interfaces\User\IUserAuthenticationRepository.cs" />
+    <Compile Include="Interfaces\User\IUserRoleRepository.cs" />
+    <Compile Include="Interfaces\User\IUserDeviceRoleRepository.cs" />
     <Compile Include="Interfaces\User\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryManager.cs" />

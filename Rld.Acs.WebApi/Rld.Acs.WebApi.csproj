@@ -204,9 +204,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Rld.Acs.Model\Rld.Acs.Model.csproj">
       <Project>{1f0d7445-70c1-48be-8ecd-68f9b3a07d83}</Project>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="UserDeviceRole" type="Rld.Acs.Model.UserDeviceRole" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="UserDeviceRoleResult" class="Rld.Acs.Model.UserDeviceRole">
+      <result property="UserDeviceRoleID" column="UserDeviceRoleID"/>
+      <result property="UserID" column="UserID"/>
+      <result property="DeviceRoleID" column="DeviceRoleID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="UserDeviceRole.GetByKey" parameterClass="int" resultMap="UserDeviceRoleResult">
+      SELECT *
+      FROM [SYS_USER_DEVICE_ROLES]
+      WHERE
+      [UserDeviceRoleID] = #value#
+    </select>
+
+    <insert id="UserDeviceRole.Insert" parameterClass="UserDeviceRole">
+      INSERT INTO [SYS_USER_DEVICE_ROLES] (
+      [UserID]
+      , [DeviceRoleID]
+      ) VALUES (
+      #UserID#
+      , #DeviceRoleID#
+      )
+      <selectKey resultClass="int" type="post" property="UserDeviceRoleID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="UserDeviceRole.Update" parameterClass="UserDeviceRole">
+      UPDATE [SYS_USER_DEVICE_ROLES] SET
+      [UserID] = #UserID#
+      , [DeviceRoleID] = #DeviceRoleID#
+      WHERE
+      [UserDeviceRoleID] = #UserDeviceRoleID#
+    </update>
+
+    <delete id="UserDeviceRole.Delete"  parameterClass="int">
+      DELETE FROM [SYS_USER_DEVICE_ROLES]
+      WHERE
+      [UserDeviceRoleID] = #UserDeviceRoleID#
+    </delete>
+
+    <select id="UserDeviceRole.Query" parameterClass="Hashtable" resultMap="UserDeviceRoleResult">
+      SELECT *
+      FROM SYS_USER_DEVICE_ROLES
+      <dynamic prepend="WHERE">
+      <isNotNull prepend="and" property="UserID">
+        UserID=#UserID#
+      </isNotNull>
+        <isNotNull prepend="and" property="DeviceRoleID">
+          DeviceRoleID=#DeviceRoleID#
+        </isNotNull>
+    </dynamic>
+    </select>
+  </statements>
+</sqlMap>

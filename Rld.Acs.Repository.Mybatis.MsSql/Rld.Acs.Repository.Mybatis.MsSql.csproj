@@ -93,6 +93,8 @@
     <Compile Include="Impl\Time\TimeSegmentRepositoryMB.cs" />
     <Compile Include="Impl\User\UserPropertyRepositoryMB.cs" />
     <Compile Include="Impl\User\UserAuthenticationRepositoryMB.cs" />
+    <Compile Include="Impl\User\UserDeviceRoleRepositoryMB.cs" />
+    <Compile Include="Impl\User\UserRoleRepositoryMB.cs" />
     <Compile Include="Impl\User\UserRepositoryMB.cs" />
     <Compile Include="NinjectBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -200,6 +202,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\System\SysRolePermission.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\User\UserRole.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\User\UserDeviceRole.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
