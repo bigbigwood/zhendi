@@ -1,0 +1,57 @@
+﻿<Page x:Class="Rld.Acs.WpfApplication.Pages.SummaryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      mc:Ignorable="d" 
+      DataContext="{Binding SummaryPage, Source={StaticResource Locator}}"
+	Title="SummaryPage">
+
+    <Grid Margin="30,25,3,3">
+        <WrapPanel Grid.Row="1"
+                       Grid.Column="1"
+                       Width="800"
+                       Height="300"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top">
+            <Controls:Tile Title="Stuff -70"
+                               Style="{StaticResource LargeTileStyle}"
+                               Command="{Binding Path=GotoStuffCommand}"
+                               Margin="3" Background="#FFD76C1F" >
+
+                <Grid Width="40" Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                    <Grid.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_email}" />
+                    </Grid.OpacityMask>
+                </Grid>
+            </Controls:Tile>
+            <Controls:Tile Title="Department"
+                               Style="{StaticResource LargeTileStyle}"
+                               Background="#FFB71A1A" 
+                           Command="{Binding Path=GotoDepartmentCommand}"
+                            Count="20"/>
+            <Controls:Tile Title="Device"
+                               Style="{StaticResource LargeTileStyle}"
+                               Background="#FF5D83C6" 
+                           Command="{Binding Path=GotoDeviceCommand}" >
+            <Grid Width="40" Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                <Grid.OpacityMask>
+                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_email}" />
+                </Grid.OpacityMask>
+            </Grid>
+            </Controls:Tile>
+            <Controls:Tile Title="Door"
+                               Style="{StaticResource LargeTileStyle}"
+                               Background="#FFC8AE12"
+                           Command="{Binding Path=GotoDoorCommand}"
+                           Count="5">
+            <Grid Width="40" Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                <Grid.OpacityMask>
+                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_email}" />
+                </Grid.OpacityMask>
+            </Grid>
+            </Controls:Tile>
+        </WrapPanel>
+    </Grid>
+</Page>

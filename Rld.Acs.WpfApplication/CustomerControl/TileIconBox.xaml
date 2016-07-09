@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Rld.Acs.WpfApplication.CustomerControl.TileIconBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d">
+    <Grid Width="100" Height="50">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="Gray">
+            <Grid.OpacityMask>
+                <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_email}" />
+            </Grid.OpacityMask>
+        </Grid>
+        <Grid Grid.Column="1" Background="Gray">
+            <Grid.OpacityMask>
+                <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_email}" />
+            </Grid.OpacityMask>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -5,8 +5,23 @@
         xmlns:cc="clr-namespace:Rld.Acs.WpfApplication.CustomerControl"
         xmlns:cv="clr-namespace:Rld.Acs.WpfApplication.Converter"
         xmlns:vm="clr-namespace:Rld.Acs.WpfApplication.ViewModel"
-        Title="MainWindow" Height="800" Width="1200" TitlebarHeight="50"
+        Title="MainWindow" Width="1000" Height="600" TitlebarHeight="50"
         DataContext="{Binding Main, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen">
+
+    <Controls:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Thickness x:Key="ControlMargin">0 5 0 0</Thickness>
+            <Style x:Key="QuickMenuImageStyle" TargetType="Image">
+                <Setter Property="Width" Value="32" />
+                <Setter Property="Height" Value="32" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </Controls:MetroWindow.Resources>
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
@@ -41,12 +56,24 @@
         </Grid.RowDefinitions>
         <StackPanel Background="Red" Grid.Row="0" Grid.ColumnSpan="2"></StackPanel>
         <StackPanel Background="Red" Width="55" Grid.Row="1" Visibility="{Binding Path=SimpleMenuShow, Converter={StaticResource ToggleExpandToVisibility}}">
-            <cc:ImageButton x:Name="testToggle" Width="55"  Height="44" ImgPath="/Images/threeSlash.jpg"  Template="{StaticResource ImageButtonTemplate}" Command="{Binding ShowMenu}" CommandParameter="{Binding Path=AllMenuShow}"/>
-            <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/user.jpg" Template="{StaticResource ImageButtonTemplate}" Command="{Binding ShowUserMainWindow}"/>
-            <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/device.jpg" Template="{StaticResource ImageButtonTemplate}"/>
-            <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/info.jpg" Template="{StaticResource ImageButtonTemplate}" />
-            <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/setting.jpg" Template="{StaticResource ImageButtonTemplate}" />
-            <cc:ImageButton Width="55"  Height="44" ImgPath="/Images/backService.jpg" Template="{StaticResource ImageButtonTemplate}" />
+            <Button Background="Red" Margin="{DynamicResource ControlMargin}" Command="{Binding ShowMenu}" CommandParameter="{Binding Path=AllMenuShow}">
+                <Image Style="{StaticResource QuickMenuImageStyle}" Source="{StaticResource QuickMenu_threeSlash}"/>
+            </Button>
+            <Button Background="Red" Margin="{DynamicResource ControlMargin}"  Command="{Binding ShowUserMainWindow}">
+                <Image Style="{StaticResource QuickMenuImageStyle}" Source="{StaticResource QuickMenu_user}" />
+            </Button>
+            <Button Background="Red" Margin="{DynamicResource ControlMargin}" Command="{Binding GotoDepartmentWindowCommand}">
+                <Image Style="{StaticResource QuickMenuImageStyle}" Source="{StaticResource QuickMenu_device}"/>
+            </Button>
+            <Button Background="Red" Margin="{DynamicResource ControlMargin}" >
+                <Image Style="{StaticResource QuickMenuImageStyle}" Source="{StaticResource QuickMenu_info}"/>
+            </Button>
+            <Button Background="Red" Margin="{DynamicResource ControlMargin}" >
+                <Image Style="{StaticResource QuickMenuImageStyle}" Source="{StaticResource QuickMenu_setting}"/>
+            </Button>
+            <Button Background="Red" Margin="{DynamicResource ControlMargin}" >
+                <Image Style="{StaticResource QuickMenuImageStyle}" Source="{StaticResource QuickMenu_backService}"/>
+            </Button>
         </StackPanel>
         <StackPanel Background="Red" Width="100" Grid.Row="1" Visibility="{Binding Path=AllMenuShow, Converter={StaticResource ToggleExpandToVisibility}}">
             <cc:ImageButton x:Name="testToggle1" Width="100"  Height="44" ImgPath="/Images/threeSlash.jpg" Template="{StaticResource ImageButtonTemplate}"  Command="{Binding ShowMenu}" CommandParameter="{Binding Path=AllMenuShow}"/>

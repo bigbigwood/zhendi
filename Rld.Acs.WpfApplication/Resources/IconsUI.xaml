@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ImageSource x:Key="QuickMenu_backService">/Images/backService.png</ImageSource>
+    <ImageSource x:Key="QuickMenu_device">/Images/device.png</ImageSource>
+    <ImageSource x:Key="QuickMenu_info">/Images/info.png</ImageSource>
+    <ImageSource x:Key="QuickMenu_setting">/Images/setting.png</ImageSource>
+    <ImageSource x:Key="QuickMenu_threeSlash">/Images/threeSlash.png</ImageSource>
+    <ImageSource x:Key="QuickMenu_user">/Images/user.png</ImageSource>
+</ResourceDictionary>

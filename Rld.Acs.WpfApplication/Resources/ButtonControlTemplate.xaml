@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Rld.Acs.WpfApplication.Resources"
                     xmlns:cc="clr-namespace:Rld.Acs.WpfApplication.CustomerControl">
 
     <ControlTemplate x:Key="ImageButtonTemplate" TargetType="{x:Type cc:ImageButton}">

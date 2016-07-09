@@ -26,6 +26,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public MainViewModel(IFrameNavigationService navigationService)
         {
             this.navigationService = navigationService;
+            GotoDepartmentWindowCommand = new RelayCommand(GotoDepartmentWindow);
             ////if (IsInDesignMode)
             ////{
             ////    // Code runs in Blend --> create design time data.
@@ -92,6 +93,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
             }
         }
 
+        
+
         private void changeMenu(bool showSimpleMenu)
         {
             if (showSimpleMenu)
@@ -125,7 +128,13 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         private void changeFrameToUserMainWindow()
         {
-            this.navigationService.NavigateTo("UserMainWindow");
+            this.navigationService.NavigateTo("SummaryPage");
+        }
+
+        public RelayCommand GotoDepartmentWindowCommand { get; set; }
+        private void GotoDepartmentWindow()
+        {
+            navigationService.NavigateTo("DepartmentPage");
         }
     }
 }

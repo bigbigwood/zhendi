@@ -71,6 +71,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -97,12 +98,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomerControl\TileIconBox.xaml.cs">
+      <DependentUpon>TileIconBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Messages\OpenWindowMessage.cs" />
     <Compile Include="Messages\Tokens.cs" />
     <Compile Include="Navigation\FrameNavigationService.cs" />
     <Compile Include="Navigation\IFrameNavigationService.cs" />
     <Compile Include="Pages\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DepartmentPage.xaml.cs">
+      <DependentUpon>DepartmentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SummaryPage.xaml.cs">
+      <DependentUpon>SummaryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UserMainWindow.xaml.cs">
       <DependentUpon>UserMainWindow.xaml</DependentUpon>
@@ -111,9 +121,15 @@
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="ViewModel\AllCustomersViewModel.cs" />
+    <Compile Include="ViewModel\DepartmentPageViewModel.cs" />
+    <Compile Include="ViewModel\SummaryPageViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="CustomerControl\TileIconBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -133,6 +149,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\DepartmentPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SummaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\UserMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,6 +172,14 @@
     <Page Include="Resources\IconsNonShared.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\IconsUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\TileStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -190,22 +222,15 @@
     <Resource Include="Resources\WindowsIcons-license.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\device.jpg" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\threeSlash.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\info.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\user.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\backService.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\setting.jpg" />
+    <Resource Include="Images\backService.png" />
+    <Resource Include="Images\device.png" />
+    <Resource Include="Images\info.png" />
+    <Resource Include="Images\setting.png" />
+    <Resource Include="Images\threeSlash.png" />
+    <Resource Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

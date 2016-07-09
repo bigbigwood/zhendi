@@ -47,6 +47,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AllCustomersViewModel>();
+            SimpleIoc.Default.Register<SummaryPageViewModel>();
         }
 
         private static void SetupNavigation()
@@ -54,6 +55,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Unregister<IFrameNavigationService>();
             var navigationService = new FrameNavigationService();
             navigationService.Configure("UserMainWindow", new Uri("../Pages/UserMainWindow.xaml", UriKind.Relative));
+            navigationService.Configure("SummaryPage", new Uri("../Pages/SummaryPage.xaml", UriKind.Relative));
+            navigationService.Configure("DepartmentPage", new Uri("../Pages/DepartmentPage.xaml", UriKind.Relative));
 
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
@@ -67,7 +70,17 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<AllCustomersViewModel>(); }
         }
-        
+
+        public SummaryPageViewModel SummaryPage
+        {
+            get { return ServiceLocator.Current.GetInstance<SummaryPageViewModel>(); }
+        }
+
+        public SummaryPageViewModel DepartmentPage
+        {
+            get { return ServiceLocator.Current.GetInstance<SummaryPageViewModel>(); }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels
