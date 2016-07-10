@@ -5,4 +5,10 @@
     <sys:String x:Key="DepartmentPage_Toolbar_ModifyBtn">Modify Department</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_DeleteBtn">Delete Department</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_SyncDataBtn">Sync Data</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentID">Department ID:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentName">Department Name:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentCode">Department Code:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentRole">Department Role:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDevices">Department Owned Devices:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedStuffCount">Stuff Count:</sys:String>
 </ResourceDictionary>

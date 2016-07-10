@@ -5,4 +5,10 @@
     <sys:String x:Key="DepartmentPage_Toolbar_ModifyBtn">修改部门</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_DeleteBtn">删除部门</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_SyncDataBtn">同步数据到设备</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentID">部门ID:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentName">部门名称:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentCode">部门编号:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentRole">设备权限角色:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDevices">部门设备:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedStuffCount">部门人数:</sys:String>
 </ResourceDictionary>

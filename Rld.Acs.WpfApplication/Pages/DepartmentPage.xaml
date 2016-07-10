@@ -71,58 +71,55 @@
         </StackPanel>
         <DockPanel Grid.Row="1" Grid.Column="0">
             <TreeView ItemsSource="{Binding TreeViewRoots}">
+                <TreeView.Resources>
+                    <Style x:Key="ExpandingImageStyle" TargetType="{x:Type Image}">
+                        <Setter Property="Source" Value="{DynamicResource icon_treeitem_closed}"/>
+                        <Setter Property="Width" Value="12" />
+                        <Setter Property="Height" Value="12" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="Margin" Value="0,0,3,0" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsExpanded}" Value="True">
+                                <Setter Property="Source" Value="{DynamicResource icon_treeitem_opened}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeView.Resources>
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type models:TreeViewNode}" ItemsSource="{Binding Path=Children}">
                         <StackPanel Orientation="Horizontal">
-                            <Image VerticalAlignment="Center" Source="{StaticResource icon_treeitem_closed}" Width="12" Height="12" Margin="0,0,2,2"></Image>
+                            <Image Style="{StaticResource ExpandingImageStyle}"/>
                             <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
         </DockPanel>
-        <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50" />
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="15" />
-                    <RowDefinition Height="25" />
-                    <RowDefinition Height="25" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-            <TextBlock FontSize="30"
-                                   Grid.Row="0"
-                                   Grid.ColumnSpan="3">Department A</TextBlock>
-                <TextBlock FontSize="16"
-                                   Grid.Row="1">You are logged in as:</TextBlock>
-                <TextBlock FontSize="16"
-                                   Grid.Row="1"
-                                   Grid.Column="1"
-                                   Text="Wood" />
-                <TextBlock FontSize="16"
-                                   Grid.Row="2"
-                                   Grid.ColumnSpan="2" Height="26" Margin="0,0,188.4,15.6" Grid.RowSpan="2" VerticalAlignment="Bottom">Ship state</TextBlock>
-                <TextBlock FontSize="16"
-                                   Grid.Row="2"
-                                   Grid.Column="1">IO</TextBlock>
-                <Separator Grid.Row="3"
-                                   Grid.ColumnSpan="2"
-                                   Margin="5" />
-                <TextBlock FontSize="16"
-                                   Grid.Row="4">Ship commander</TextBlock>
-                <TextBlock FontSize="16"
-                                   Grid.Row="4"
-                                   Grid.Column="1">Captain James T. Kirk</TextBlock>
-                <TextBlock FontSize="16"
-                                   Grid.Row="5">Ship name</TextBlock>
-                <TextBlock FontSize="16"
-                                   Grid.Row="5"
-                                   Grid.Column="1">Enterprise (NCC-1701)</TextBlock>
+        <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="15" />
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">Department A</TextBlock>
+            <TextBlock FontSize="12" Grid.Row="1" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentCode}" />
+            <TextBlock FontSize="12" Grid.Row="1" Grid.Column="1" Text="D01" />
+            <TextBlock FontSize="12" Grid.Row="2" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentOwnedStuffCount}" />
+            <TextBlock FontSize="12" Grid.Row="2" Grid.Column="1" Text="20" />
+            <TextBlock FontSize="12" Grid.Row="3" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentRole}" />
+            <TextBlock FontSize="12" Grid.Row="3" Grid.Column="1" Text="Role 1" />
+            <TextBlock FontSize="12" Grid.Row="5" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentOwnedDevices}" />
+
+
+            <Separator Grid.Row="4" Grid.ColumnSpan="2" />
         </Grid>
     </Grid>
 </Page>
