@@ -67,7 +67,18 @@ namespace Rld.Acs.WpfApplication.Repository
         {
             using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
             {
-                var response = httpClient.GetAsync(RelevantUri).Result;
+                string queryString = "";
+                if (conditions.Count > 0)
+                {
+                    queryString += "?";
+                    foreach (DictionaryEntry c in conditions)
+                    {
+                        queryString += string.Format("{0}={1}&", c.Key, c.Value);
+                    }
+                    queryString.Trim('&');
+                }
+
+                var response = httpClient.GetAsync(RelevantUri + queryString).Result;
                 response.EnsureSuccessStatusCode(); // Throw on error code. 
                 var entities = response.Content.ReadAsAsync<IEnumerable<TEntity>>().Result;
                 return entities;

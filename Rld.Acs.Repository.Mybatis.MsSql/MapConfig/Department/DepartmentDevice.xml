@@ -14,8 +14,8 @@
       <result property="Status" column="Status"/>
       <result property="UpdateUserID" column="UpdateUserID"/>
       <result property="UpdateDate" column="UpdateDate"/>
-      <result property="Device" column="DeviceID" select="DeviceController.GetByKey"/>
-      <result property="Department" column="DepartmentID" select="Department.GetByKey"/>
+      <result property="DeviceID" column="DeviceID"/>
+      <result property="DepartmentID" column="DepartmentID"/>
     </resultMap>
   </resultMaps>
 
@@ -38,8 +38,8 @@
       , [UpdateUserID]
       , [UpdateDate]
       ) VALUES (
-      #Department.DepartmentID#
-      , #Device.DeviceID#
+      #DepartmentID#
+      , #DeviceID#
       , #Remark#
       , #CreateUserID#
       , #CreateDate#
@@ -54,8 +54,8 @@
 
     <update id="DepartmentDevice.Update" parameterClass="DepartmentDevice">
       UPDATE [SYS_DEPARTMENT_DEVICES] SET
-      [DepartmentID] = #Department.DepartmentID#
-      , [DeviceID] = #Device.DeviceID#
+      [DepartmentID] = #DepartmentID#
+      , [DeviceID] = #DeviceID#
       , [Remark] = #Remark#
       , [CreateUserID] = #CreateUserID#
       , [CreateDate] = #CreateDate#
@@ -80,11 +80,11 @@
         <isNotEmpty prepend="AND" property="Status">
           Status = #Status#
         </isNotEmpty>
-        <isNotNull prepend="AND" property="Department">
-          [DepartmentID] = #Department.DepartmentID#
+        <isNotNull prepend="AND" property="DepartmentID">
+          [DepartmentID] = #DepartmentID#
         </isNotNull>
-        <isNotNull prepend="AND" property="Device">
-          [DeviceID] = #Device.DeviceID#
+        <isNotNull prepend="AND" property="DeviceID">
+          [DeviceID] = #DeviceID#
         </isNotNull>
       </dynamic>
     </select>

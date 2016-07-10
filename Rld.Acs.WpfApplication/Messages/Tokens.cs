@@ -15,5 +15,8 @@ namespace Rld.Acs.WpfApplication.Messages
         public static readonly string Summary_GotoDepartment = Guid.NewGuid().ToString();
         public static readonly string Summary_GotoDevice = Guid.NewGuid().ToString();
         public static readonly string Summary_GotoDoor = Guid.NewGuid().ToString();
+
+        public static readonly string DepartmentPage_DeleteDepartmentAction = Guid.NewGuid().ToString();
+        public static readonly string DepartmentPage_DepartmentDeletd = Guid.NewGuid().ToString();
     }
 }

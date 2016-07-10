@@ -5,30 +5,34 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
       xmlns:models="clr-namespace:Rld.Acs.WpfApplication.Models"
+      xmlns:views="clr-namespace:Rld.Acs.WpfApplication.Views"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:command="http://www.galasoft.ch/mvvmlight"
       DataContext="{Binding DepartmentPage, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="600"
 	Title="DepartmentPage">
     <Page.Resources>
         <ResourceDictionary>
+            <Brush x:Key="backagroud_brush">LightGray</Brush>
             <ControlTemplate x:Key="ToolBarTemplate">
                 <ToolBarTray>
                     <ToolBar>
-                        <Button>
+                        <Button Name="AddBtn" Click="AddBtn_OnClick">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_AddBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button>
+                        <Button Name="ModifyBtn" Click="ModifyBtn_OnClick">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_ModifyBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button>
+                        <Button Name="DeleteBtn" Click="DeleteBtn_OnClick">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_DeleteBtn}" />
@@ -61,16 +65,17 @@
         <StackPanel Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" >
             <ContentControl Template="{DynamicResource ToolBarTemplate}"/>
         </StackPanel>
-        <StackPanel Grid.Row="0" Grid.Column="2" Background="LightGray">
-            <TextBox Margin="0,0,20,0"
+        <DockPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
+            <TextBox Margin="0,0,5,0"
+                     Width="200"
                          Name="SearchDepartmentTextBox"
                          Controls:TextBoxHelper.Watermark="Search department..."
                          Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmdWithParameter, Mode=OneWay}"
                          Controls:TextBoxHelper.ButtonCommandParameter="{Binding ElementName=test2, Path=Text}"
                          Style="{DynamicResource SearchMetroTextBox}" />
-        </StackPanel>
+        </DockPanel>
         <DockPanel Grid.Row="1" Grid.Column="0">
-            <TreeView ItemsSource="{Binding TreeViewRoots}">
+            <TreeView Name="lstDepartment" ItemsSource="{Binding TreeViewRoots}">
                 <TreeView.Resources>
                     <Style x:Key="ExpandingImageStyle" TargetType="{x:Type Image}">
                         <Setter Property="Source" Value="{DynamicResource icon_treeitem_closed}"/>
@@ -85,6 +90,11 @@
                         </Style.Triggers>
                     </Style>
                 </TreeView.Resources>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectedItemChanged">
+                        <command:EventToCommand Command="{Binding SelectedTreeNodeChangedCmd}" CommandParameter="{Binding ElementName=lstDepartment,Path=SelectedValue}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type models:TreeViewNode}" ItemsSource="{Binding Path=Children}">
                         <StackPanel Orientation="Horizontal">
@@ -96,30 +106,7 @@
             </TreeView>
         </DockPanel>
         <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="25" />
-                <RowDefinition Height="15" />
-                <RowDefinition Height="25" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <TextBlock FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">Department A</TextBlock>
-            <TextBlock FontSize="12" Grid.Row="1" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentCode}" />
-            <TextBlock FontSize="12" Grid.Row="1" Grid.Column="1" Text="D01" />
-            <TextBlock FontSize="12" Grid.Row="2" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentOwnedStuffCount}" />
-            <TextBlock FontSize="12" Grid.Row="2" Grid.Column="1" Text="20" />
-            <TextBlock FontSize="12" Grid.Row="3" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentRole}" />
-            <TextBlock FontSize="12" Grid.Row="3" Grid.Column="1" Text="Role 1" />
-            <TextBlock FontSize="12" Grid.Row="5" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentOwnedDevices}" />
-
-
-            <Separator Grid.Row="4" Grid.ColumnSpan="2" />
+            <views:DepartmentDetailView x:Name="departmentDetailView"  DataContext="{Binding DepartmentDetailViewModel}" />
         </Grid>
     </Grid>
 </Page>

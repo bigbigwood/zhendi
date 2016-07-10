@@ -23,6 +23,9 @@ namespace Rld.Acs.WpfApplication.Repository
         {
             InjectionKernel.Bind<ICustomerRepository>().To<CustomerRepository>();
             InjectionKernel.Bind<IDepartmentRepository>().To<DepartmentRepository>();
+            InjectionKernel.Bind<IDepartmentDeviceRepository>().To<DepartmentDeviceRepository>();
+            InjectionKernel.Bind<IDeviceRoleRepository>().To<DeviceRoleRepository>();
+            InjectionKernel.Bind<IDeviceControllerRepository>().To<DeviceControllerRepository>();
         }
 
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()
