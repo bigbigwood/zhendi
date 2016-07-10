@@ -663,6 +663,107 @@ VALUES  ( N'Secure Dept' , -- Name - nvarchar(100)
           NULL  -- UpdateDate - datetime
         )
 		
+
+	
+INSERT SYS_DEPARTMENT
+        ( Name ,
+          DepartmentCode ,
+          ParentID ,
+          DeviceRoleID ,
+          Remark ,
+          CreateUserID ,
+          CreateDate ,
+          Status ,
+          UpdateUserID ,
+          UpdateDate
+        )
+VALUES  ( N'Development Team 1' , -- Name - nvarchar(100)
+          N'RDD1' , -- DepartmentCode - nvarchar(25)
+          1 , -- ParentID - int
+          3 , -- DeviceRoleID - int
+          N'' , -- Remark - nvarchar(1024)
+          1 , -- CreateUserID - int
+          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
+          1 , -- Status - int
+          NULL , -- UpdateUserID - int
+          NULL  -- UpdateDate - datetime
+        )
+
+
+INSERT SYS_DEPARTMENT
+        ( Name ,
+          DepartmentCode ,
+          ParentID ,
+          DeviceRoleID ,
+          Remark ,
+          CreateUserID ,
+          CreateDate ,
+          Status ,
+          UpdateUserID ,
+          UpdateDate
+        )
+VALUES  ( N'Development Team 2' , -- Name - nvarchar(100)
+          N'RDD2' , -- DepartmentCode - nvarchar(25)
+          1 , -- ParentID - int
+          3 , -- DeviceRoleID - int
+          N'' , -- Remark - nvarchar(1024)
+          1 , -- CreateUserID - int
+          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
+          1 , -- Status - int
+          NULL , -- UpdateUserID - int
+          NULL  -- UpdateDate - datetime
+        )
+
+
+INSERT SYS_DEPARTMENT
+        ( Name ,
+          DepartmentCode ,
+          ParentID ,
+          DeviceRoleID ,
+          Remark ,
+          CreateUserID ,
+          CreateDate ,
+          Status ,
+          UpdateUserID ,
+          UpdateDate
+        )
+VALUES  ( N'Tester Team 1' , -- Name - nvarchar(100)
+          N'RDT1' , -- DepartmentCode - nvarchar(25)
+          1 , -- ParentID - int
+          3 , -- DeviceRoleID - int
+          N'' , -- Remark - nvarchar(1024)
+          1 , -- CreateUserID - int
+          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
+          1 , -- Status - int
+          NULL , -- UpdateUserID - int
+          NULL  -- UpdateDate - datetime
+        )
+
+
+INSERT SYS_DEPARTMENT
+        ( Name ,
+          DepartmentCode ,
+          ParentID ,
+          DeviceRoleID ,
+          Remark ,
+          CreateUserID ,
+          CreateDate ,
+          Status ,
+          UpdateUserID ,
+          UpdateDate
+        )
+VALUES  ( N'Tester Team 2' , -- Name - nvarchar(100)
+          N'RDT2' , -- DepartmentCode - nvarchar(25)
+          1 , -- ParentID - int
+          3 , -- DeviceRoleID - int
+          N'' , -- Remark - nvarchar(1024)
+          1 , -- CreateUserID - int
+          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
+          1 , -- Status - int
+          NULL , -- UpdateUserID - int
+          NULL  -- UpdateDate - datetime
+        )
+		
 INSERT SYS_DEPARTMENT_DEVICES
         ( DepartmentID ,
           DeviceID ,

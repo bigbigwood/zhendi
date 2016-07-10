@@ -4,6 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:models="clr-namespace:Rld.Acs.WpfApplication.Models"
+      DataContext="{Binding DepartmentPage, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="600"
 	Title="DepartmentPage">
@@ -12,10 +14,34 @@
             <ControlTemplate x:Key="ToolBarTemplate">
                 <ToolBarTray>
                     <ToolBar>
-                        <Button Content="Add"/>
-                        <Button Content="Delete"/>
-                        <Button Content="Save"/>
-                        <Button Content="Cancel"/>
+                        <Button>
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
+                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_AddBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                        <Button>
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
+                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_ModifyBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                        <Button>
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
+                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_DeleteBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                        <Button>
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_SyncDataBtn_img}" />
+                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_SyncDataBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
                     </ToolBar>
                 </ToolBarTray>
             </ControlTemplate>
@@ -44,28 +70,15 @@
                          Style="{DynamicResource SearchMetroTextBox}" />
         </StackPanel>
         <DockPanel Grid.Row="1" Grid.Column="0">
-            <TreeView>
-                <TreeViewItem Header="Item 1">
-                    <TreeViewItem Header="Item 1.1">
-                        <TreeViewItem Header="Item 1.1.1" />
-                        <TreeViewItem Header="Item 1.1.2" />
-                    </TreeViewItem>
-                    <TreeViewItem Header="Item 1.2" />
-                    <TreeViewItem Header="Item 1.3" />
-                </TreeViewItem>
-                <TreeViewItem Header="Item 22" />
-                <TreeViewItem Header="Item 3"
-                                  IsExpanded="True"
-                                  IsSelected="True">
-                    <TreeViewItem Header="Item 3.1"
-                                      IsExpanded="True">
-                        <TreeViewItem Header="Item 3.1.1"
-                                          IsExpanded="True" />
-                        <TreeViewItem Header="Item 3.1.2" />
-                    </TreeViewItem>
-                    <TreeViewItem Header="Item 3.2" />
-                    <TreeViewItem Header="Item 3.3" />
-                </TreeViewItem>
+            <TreeView ItemsSource="{Binding TreeViewRoots}">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type models:TreeViewNode}" ItemsSource="{Binding Path=Children}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image VerticalAlignment="Center" Source="{StaticResource icon_treeitem_closed}" Width="12" Height="12" Margin="0,0,2,2"></Image>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
             </TreeView>
         </DockPanel>
         <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="20">

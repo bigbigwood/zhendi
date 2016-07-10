@@ -48,6 +48,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AllCustomersViewModel>();
             SimpleIoc.Default.Register<SummaryPageViewModel>();
+            SimpleIoc.Default.Register<DepartmentPageViewModel>();
         }
 
         private static void SetupNavigation()
@@ -76,9 +77,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
             get { return ServiceLocator.Current.GetInstance<SummaryPageViewModel>(); }
         }
 
-        public SummaryPageViewModel DepartmentPage
+        public DepartmentPageViewModel DepartmentPage
         {
-            get { return ServiceLocator.Current.GetInstance<SummaryPageViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<DepartmentPageViewModel>(); }
         }
 
         public static void Cleanup()

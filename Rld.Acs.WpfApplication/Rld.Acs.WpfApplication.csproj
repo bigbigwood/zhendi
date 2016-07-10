@@ -98,11 +98,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CustomerControl\TileIconBox.xaml.cs">
+    <Compile Include="CustomControls\TileIconBox.xaml.cs">
       <DependentUpon>TileIconBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Messages\OpenWindowMessage.cs" />
     <Compile Include="Messages\Tokens.cs" />
+    <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Navigation\FrameNavigationService.cs" />
     <Compile Include="Navigation\IFrameNavigationService.cs" />
     <Compile Include="Pages\CustomerView.xaml.cs">
@@ -118,6 +119,7 @@
       <DependentUpon>UserMainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repository\BaseRepository.cs" />
+    <Compile Include="Repository\DepartmentRepository.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="ViewModel\AllCustomersViewModel.cs" />
@@ -126,7 +128,7 @@
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="CustomerControl\TileIconBox.xaml">
+    <Page Include="CustomControls\TileIconBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,8 +141,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converter\ToggleExpandToVisibility.cs" />
-    <Compile Include="CustomerControl\ImageButton.cs" />
-    <Compile Include="CustomerControl\ToggleButton.cs" />
+    <Compile Include="CustomControls\ImageButton.cs" />
+    <Compile Include="CustomControls\ToggleButton.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -217,6 +219,10 @@
       <Project>{090002e5-ab29-4ff1-b6f0-2ea8aa8bcc9d}</Project>
       <Name>Rld.Acs.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.WpfApplication.Resources\Rld.Acs.WpfApplication.Resources.csproj">
+      <Project>{311ed256-edc1-491f-8118-60f98bb3c53f}</Project>
+      <Name>Rld.Acs.WpfApplication.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WindowsIcons-license.txt" />
@@ -231,6 +237,25 @@
     <Resource Include="Images\setting.png" />
     <Resource Include="Images\threeSlash.png" />
     <Resource Include="Images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add_department.png" />
+    <Resource Include="Images\add_person.png" />
+    <Resource Include="Images\currentPerson.png" />
+    <Resource Include="Images\delete_department.png" />
+    <Resource Include="Images\delete_person.png" />
+    <Resource Include="Images\department_summary.png" />
+    <Resource Include="Images\device_summary.png" />
+    <Resource Include="Images\door_summary.png" />
+    <Resource Include="Images\edit_department.png" />
+    <Resource Include="Images\modify_person.png" />
+    <Resource Include="Images\move_person.png" />
+    <Resource Include="Images\path.png" />
+    <Resource Include="Images\search.png" />
+    <Resource Include="Images\syn_data.png" />
+    <Resource Include="Images\time.png" />
+    <Resource Include="Images\treeitem_closed.png" />
+    <Resource Include="Images\treeitem_opened.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

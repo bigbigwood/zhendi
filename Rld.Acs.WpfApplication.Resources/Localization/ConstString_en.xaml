@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="DepartmentPage_Toolbar_AddBtn">Add Department</sys:String>
+    <sys:String x:Key="DepartmentPage_Toolbar_ModifyBtn">Modify Department</sys:String>
+    <sys:String x:Key="DepartmentPage_Toolbar_DeleteBtn">Delete Department</sys:String>
+    <sys:String x:Key="DepartmentPage_Toolbar_SyncDataBtn">Sync Data</sys:String>
+</ResourceDictionary>

@@ -22,6 +22,7 @@ namespace Rld.Acs.WpfApplication.Repository
         private static void InitBinding()
         {
             InjectionKernel.Bind<ICustomerRepository>().To<CustomerRepository>();
+            InjectionKernel.Bind<IDepartmentRepository>().To<DepartmentRepository>();
         }
 
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()
