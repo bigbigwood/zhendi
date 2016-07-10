@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="Rld.Acs.WpfApplication.Views.DepartmentDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel" 
+             mc:Ignorable="d" 
+              d:DataContext= "{d:DesignInstance Type=vm:DepartmentDetailViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="400" d:DesignWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="15" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock FontSize="12" Grid.Row="0" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentName}" Margin="3" />
+        <TextBox   FontSize="12" Grid.Row="0" Grid.Column="1" Text="{Binding DepartmentName}" Name="TextBlock_DepartmentName" Margin="3"/>
+        <TextBlock FontSize="12" Grid.Row="1" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentCode}"  Margin="3"/>
+        <TextBox   FontSize="12" Grid.Row="1" Grid.Column="1" Text="{Binding DepartmentCode}"  Margin="3"/>
+        <TextBlock FontSize="12" Grid.Row="2" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentOwnedStuffCount}" Margin="3" />
+        <TextBox   FontSize="12" Grid.Row="2" Grid.Column="1" Text="{Binding StuffCount}"  Margin="3"/>
+        <TextBlock FontSize="12" Grid.Row="3" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentRole}" Margin="3" />
+        <ComboBox  FontSize="12" Grid.Row="3" Grid.Column="1" Text="{Binding DeviceRole}" Margin="2"
+                   ItemsSource="{Binding DeviceRoleList, Mode=OneWay}" 
+                   SelectedItem="{Binding DeviceRole}" 
+                   SelectedValuePath="DeviceRoleID" 
+                   DisplayMemberPath="RoleName"  />
+
+        <Separator Grid.Row="4" Grid.ColumnSpan="2" />
+        <TextBlock FontSize="12" Grid.Row="5" Grid.Column="0" Text="{StaticResource DepartmentDetail_Label_DepartmentOwnedDevices}"  Margin="3"/>
+
+        <DockPanel Grid.Row="6" Grid.ColumnSpan="3">
+            <ListBox Margin="10" ItemsSource="{Binding DeviceListBoxSource}" BorderBrush="LightGray">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="3">
+                            <CheckBox IsChecked="{Binding IsSelected}" />
+                            <TextBlock Text="{Binding Path=DisplayName}" Width="120" />
+                            <TextBlock Text="{Binding Path=Description}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+        </Grid>
+</UserControl>
