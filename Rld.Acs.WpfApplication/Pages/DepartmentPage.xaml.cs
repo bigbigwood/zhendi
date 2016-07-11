@@ -16,6 +16,7 @@ using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls.Dialogs;
 using Rld.Acs.WpfApplication.Extension;
 using Rld.Acs.WpfApplication.Messages;
+using Rld.Acs.WpfApplication.Views;
 
 namespace Rld.Acs.WpfApplication.Pages
 {
@@ -27,16 +28,10 @@ namespace Rld.Acs.WpfApplication.Pages
         public DepartmentPage()
         {
             InitializeComponent();
-        }
 
-        private void AddBtn_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ModifyBtn_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+            Messenger.Default.Register(this, Tokens.DepartmentPage_NoDepartmentIsSelected, 
+                new Action<NotificationMessage>((msg) => ProcessNoDepartmentIsSelectedMessage()));
+            Messenger.Default.Register<OpenWindowMessage>(this, Tokens.OpenDepartmentView, OpenDepartmentView);
         }
 
         private void DeleteBtn_OnClick(object sender, RoutedEventArgs e)
@@ -58,6 +53,17 @@ namespace Rld.Acs.WpfApplication.Pages
         private void ShowDepartmentDeletedDoneMessage()
         {
             MessageBoxSingleton.Instance.ShowDialog("删除部门成功！", "删除部门");
+        }
+
+        private void ProcessNoDepartmentIsSelectedMessage()
+        {
+            MessageBoxSingleton.Instance.ShowDialog("请先选择部门!", "");
+        }
+
+        private void OpenDepartmentView(OpenWindowMessage msg)
+        {
+            var view = new DepartmentView {DataContext = msg.DataContext};
+            view.ShowDialog();
         }
     }
 }

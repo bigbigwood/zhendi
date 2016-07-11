@@ -305,119 +305,26 @@ VALUES  ( 1 , -- AuthticationType - int
           N'000000'  -- DuressPassword - nvarchar(100)
         )
 
-INSERT DEVICE_CONTROLLERS
-        ( Mac ,
-          DeviceCode ,
-          SN ,
-          Mode ,
-          CommunicationType ,
-          BaudRate ,
-          SerialPort ,
-          Password ,
-          IP ,
-          Port ,
-          protocol ,
-          Label ,
-          ServerURL ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate ,
-          DeviceParameterID
-        )
-VALUES  ( N'00-00-00-00-00-00' , -- Mac - nvarchar(100)
-          N'D1' , -- DeviceCode - nvarchar(100)
-          N'000000' , -- SN - nvarchar(100)
-          N'AUTO' , -- Mode - nvarchar(100)
-          1 , -- CommunicationType - int
-          N'' , -- BaudRate - nvarchar(100)
-          N'' , -- SerialPort - nvarchar(100)
-          N'' , -- Password - nvarchar(100)
-          N'' , -- IP - nvarchar(100)
-          N'' , -- Port - nvarchar(100)
-          N'' , -- protocol - nvarchar(100)
-          N'' , -- Label - nvarchar(1024)
-          N'' , -- ServerURL - nvarchar(1024)
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - datetime
-          NULL , -- UpdateDate - datetime
-          1  -- DeviceParameterID - int
-        )
 		
-
-INSERT DEVICE_CONTROLLERS_PARAMETERS
-        ( AuthticationType ,
-          AutoOpenTimeZone ,
-          IsSneak ,
-          MultiPersonLock ,
-          Linkage ,
-          LaunchDuress ,
-          DuressFingerPrint ,
-          DuressOpen ,
-          DuressAlarm ,
-          DuressPassword
-        )
-VALUES  ( 1 , -- AuthticationType - int
-          1 , -- AutoOpenTimeZone - int
-          1 , -- IsSneak - bit
-          1 , -- MultiPersonLock - bit
-          1 , -- Linkage - bit
-          1 , -- LaunchDuress - bit
-          1 , -- DuressFingerPrint - int
-          1 , -- DuressOpen - bit
-          1 , -- DuressAlarm - bit
-          N'000000'  -- DuressPassword - nvarchar(100)
-        )
-
-INSERT DEVICE_CONTROLLERS
-        ( Mac ,
-          DeviceCode ,
-          SN ,
-          Mode ,
-          CommunicationType ,
-          BaudRate ,
-          SerialPort ,
-          Password ,
-          IP ,
-          Port ,
-          protocol ,
-          Label ,
-          ServerURL ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate ,
-          DeviceParameterID
-        )
-VALUES  ( N'00-00-00-00-00-00' , -- Mac - nvarchar(100)
-          N'D2' , -- DeviceCode - nvarchar(100)
-          N'000000' , -- SN - nvarchar(100)
-          N'MANUAL' , -- Mode - nvarchar(100)
-          1 , -- CommunicationType - int
-          N'' , -- BaudRate - nvarchar(100)
-          N'' , -- SerialPort - nvarchar(100)
-          N'' , -- Password - nvarchar(100)
-          N'' , -- IP - nvarchar(100)
-          N'' , -- Port - nvarchar(100)
-          N'' , -- protocol - nvarchar(100)
-          N'' , -- Label - nvarchar(1024)
-          N'' , -- ServerURL - nvarchar(1024)
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - datetime
-          NULL , -- UpdateDate - datetime
-          2  -- DeviceParameterID - int
-        )
-		
+INSERT DEVICE_CONTROLLERS_PARAMETERS VALUES  ( 1, 1,1,1,1,1,1,1,1, N'000000')
+INSERT DEVICE_CONTROLLERS VALUES (N'00-00-00-00-00-00', N'Device 1', N'000000', N'AUTO',1, N'', N'', N'', N'', N'', N'', N'', N'', N'',1,'2016-01-01 00:00:00.000',1,NULL,NULL,1)
+INSERT DEVICE_CONTROLLERS_PARAMETERS VALUES  ( 1, 1,1,1,1,1,1,1,1, N'000000')
+INSERT DEVICE_CONTROLLERS VALUES (N'00-00-00-00-00-00', N'Device 2', N'000000', N'AUTO',1, N'', N'', N'', N'', N'', N'', N'', N'', N'',1,'2016-01-01 00:00:00.000',1,NULL,NULL,2)
+INSERT DEVICE_CONTROLLERS_PARAMETERS VALUES  ( 1, 1,1,1,1,1,1,1,1, N'000000')
+INSERT DEVICE_CONTROLLERS VALUES (N'00-00-00-00-00-00', N'Device 3', N'000000', N'AUTO',1, N'', N'', N'', N'', N'', N'', N'', N'', N'',1,'2016-01-01 00:00:00.000',1,NULL,NULL,3)
+INSERT DEVICE_CONTROLLERS_PARAMETERS VALUES  ( 1, 1,1,1,1,1,1,1,1, N'000000')
+INSERT DEVICE_CONTROLLERS VALUES (N'00-00-00-00-00-00', N'Device 4', N'000000', N'AUTO',1, N'', N'', N'', N'', N'', N'', N'', N'', N'',1,'2016-01-01 00:00:00.000',1,NULL,NULL,4)
+INSERT DEVICE_CONTROLLERS_PARAMETERS VALUES  ( 1, 1,1,1,1,1,1,1,1, N'000000')
+INSERT DEVICE_CONTROLLERS VALUES (N'00-00-00-00-00-00', N'Device 5', N'000000', N'AUTO',1, N'', N'', N'', N'', N'', N'', N'', N'', N'',1,'2016-01-01 00:00:00.000',1,NULL,NULL,5)
+INSERT DEVICE_CONTROLLERS_PARAMETERS VALUES  ( 1, 1,1,1,1,1,1,1,1, N'000000')
+INSERT DEVICE_CONTROLLERS VALUES (N'00-00-00-00-00-00', N'Device 6', N'000000', N'AUTO',1, N'', N'', N'', N'', N'', N'', N'', N'', N'',1,'2016-01-01 00:00:00.000',1,NULL,NULL,6)
+INSERT DEVICE_CONTROLLERS_PARAMETERS VALUES  ( 1, 1,1,1,1,1,1,1,1, N'000000')
+INSERT DEVICE_CONTROLLERS VALUES (N'00-00-00-00-00-00', N'Device 7', N'000000', N'AUTO',1, N'', N'', N'', N'', N'', N'', N'', N'', N'',1,'2016-01-01 00:00:00.000',1,NULL,NULL,7)
+INSERT DEVICE_CONTROLLERS_PARAMETERS VALUES  ( 1, 1,1,1,1,1,1,1,1, N'000000')
+INSERT DEVICE_CONTROLLERS VALUES (N'00-00-00-00-00-00', N'Device 8', N'000000', N'AUTO',1, N'', N'', N'', N'', N'', N'', N'', N'', N'',1,'2016-01-01 00:00:00.000',1,NULL,NULL,8)
+INSERT DEVICE_CONTROLLERS_PARAMETERS VALUES  ( 1, 1,1,1,1,1,1,1,1, N'000000')
+INSERT DEVICE_CONTROLLERS VALUES (N'00-00-00-00-00-00', N'Device 9', N'000000', N'AUTO',1, N'', N'', N'', N'', N'', N'', N'', N'', N'',1,'2016-01-01 00:00:00.000',1,NULL,NULL,9)
+				
 
 INSERT DEVICE_DOORS
         ( DeviceID ,
@@ -763,87 +670,11 @@ VALUES  ( N'Tester Team 2' , -- Name - nvarchar(100)
           NULL , -- UpdateUserID - int
           NULL  -- UpdateDate - datetime
         )
-		
-INSERT SYS_DEPARTMENT_DEVICES
-        ( DepartmentID ,
-          DeviceID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( 1 , -- DepartmentID - int
-          1 , -- DeviceID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
 
-		
-INSERT SYS_DEPARTMENT_DEVICES
-        ( DepartmentID ,
-          DeviceID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( 2 , -- DepartmentID - int
-          1 , -- DeviceID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-
-INSERT SYS_DEPARTMENT_DEVICES
-        ( DepartmentID ,
-          DeviceID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( 2 , -- DepartmentID - int
-          2 , -- DeviceID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-
-INSERT SYS_DEPARTMENT_DEVICES
-        ( DepartmentID ,
-          DeviceID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( 3 , -- DepartmentID - int
-          1 , -- DeviceID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
+INSERT SYS_DEPARTMENT_DEVICES VALUES (1, 1)
+INSERT SYS_DEPARTMENT_DEVICES VALUES (2, 1)
+INSERT SYS_DEPARTMENT_DEVICES VALUES (2, 2)
+INSERT SYS_DEPARTMENT_DEVICES VALUES (3, 1)
 		
 INSERT SYS_USER_PROPERTY
         ( LastName ,

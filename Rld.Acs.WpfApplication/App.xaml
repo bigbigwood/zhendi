@@ -6,16 +6,18 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <!-- Accent and AppTheme setting -->
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/steel.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
+
+                <!-- Rld application resource-->
                 <ResourceDictionary Source="/Resources/IconsUI.xaml" />
                 <ResourceDictionary Source="/Resources/ButtonControlTemplate.xaml" />
                 <ResourceDictionary Source="/Resources/TileStyles.xaml" />
-                <!--<ResourceDictionary Source="/Resources/SimpleMenu.xaml">
-        </ResourceDictionary>-->
+                <ResourceDictionary Source="/Resources/Converter.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Rld.Acs.WpfApplication.Resources;component/Localization/ConstString_zh_cn.xaml" />
+
+                <!-- mvvm light viewmodel locator-->
                 <ResourceDictionary>
                     <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:Rld.Acs.WpfApplication.ViewModel" />
                 </ResourceDictionary>

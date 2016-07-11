@@ -514,12 +514,6 @@ create table SYS_DEPARTMENT_DEVICES (
    DepartmentDeviceID   int                  identity(1,1),
    DepartmentID         int                  not null,
    DeviceID             int                  not null,
-   Remark               nvarchar(1024)       null,
-   CreateUserID         int                  not null,
-   CreateDate           datetime             not null,
-   Status               int                  not null,
-   UpdateUserID         int                  null,
-   UpdateDate           datetime             null,
    constraint PK_SYS_DEPARTMENT_DEVICES primary key nonclustered (DEPARTMENTDEVICEID)
 )
 go

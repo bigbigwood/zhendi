@@ -18,14 +18,14 @@
             <ControlTemplate x:Key="ToolBarTemplate">
                 <ToolBarTray>
                     <ToolBar>
-                        <Button Name="AddBtn" Click="AddBtn_OnClick">
+                        <Button Name="AddBtn" Command="{Binding AddDepartmentCmd}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_AddBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="ModifyBtn" Click="ModifyBtn_OnClick">
+                        <Button Name="ModifyBtn" Command="{Binding ModifyDepartmentCmd}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_ModifyBtn}" />
@@ -105,8 +105,9 @@
                 </TreeView.ItemTemplate>
             </TreeView>
         </DockPanel>
-        <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0">
-            <views:DepartmentDetailView x:Name="departmentDetailView"  DataContext="{Binding DepartmentDetailViewModel}" />
+        <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0" Visibility="{Binding HasSelectedDepartment, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <views:DepartmentDetailView x:Name="departmentDetailView"
+                                        DataContext="{Binding SelectedDepartmentDetailViewModel}" />
         </Grid>
     </Grid>
 </Page>

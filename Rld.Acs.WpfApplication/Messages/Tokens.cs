@@ -18,5 +18,11 @@ namespace Rld.Acs.WpfApplication.Messages
 
         public static readonly string DepartmentPage_DeleteDepartmentAction = Guid.NewGuid().ToString();
         public static readonly string DepartmentPage_DepartmentDeletd = Guid.NewGuid().ToString();
+        
+        public static readonly string OpenDepartmentView = Guid.NewGuid().ToString();
+        public static readonly string CloseDepartmentView = Guid.NewGuid().ToString();
+
+        public static readonly string DepartmentPage_NoDepartmentIsSelected = Guid.NewGuid().ToString();
+        public static readonly string DepartmentPage_AddDepartment = Guid.NewGuid().ToString();
     }
 }

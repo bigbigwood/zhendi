@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="Ok">确认</sys:String>
+    <sys:String x:Key="Cancel">取消</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_AddBtn">增加部门</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_ModifyBtn">修改部门</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_DeleteBtn">删除部门</sys:String>
@@ -11,4 +13,5 @@
     <sys:String x:Key="DepartmentDetail_Label_DepartmentRole">设备权限角色:</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDevices">部门设备:</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedStuffCount">部门人数:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_ParentDepartment">上级部门:</sys:String>
 </ResourceDictionary>

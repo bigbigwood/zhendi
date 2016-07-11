@@ -10,6 +10,7 @@
       <result property="DepartmentID" column="DepartmentID"/>
       <result property="Name" column="Name"/>
       <result property="DepartmentCode" column="DepartmentCode"/>
+      <result property="DeviceRoleID" column="DeviceRoleID"/>
       <result property="Remark" column="Remark"/>
       <result property="CreateUserID" column="CreateUserID"/>
       <result property="CreateDate" column="CreateDate"/>
@@ -17,7 +18,7 @@
       <result property="UpdateUserID" column="UpdateUserID"/>
       <result property="UpdateDate" column="UpdateDate"/>
       <result property="Parent" column="ParentID" select="Department.GetByKey"/>
-      <result property="DeviceRole" column="DeviceRoleID" select="DeviceRole.GetByKey"/>
+      <result property="DeviceAssociations" column="DepartmentID" select="DepartmentDevice.GetByDepartmentID"/>
     </resultMap>
   </resultMaps>
 
@@ -44,7 +45,7 @@
       #Name#
       , #DepartmentCode#
       , #Parent.DepartmentID#
-      , #DeviceRole.DeviceRoleID#
+      , #DeviceRoleID#
       , #Remark#
       , #CreateUserID#
       , #CreateDate#
@@ -62,7 +63,7 @@
       [Name] = #Name#
       , [DepartmentCode] = #DepartmentCode#
       , [ParentID] = #Parent.DepartmentID#
-      , [DeviceRoleID] = #DeviceRole.DeviceRoleID#
+      , [DeviceRoleID] = #DeviceRoleID#
       , [Remark] = #Remark#
       , [CreateUserID] = #CreateUserID#
       , [CreateDate] = #CreateDate#
@@ -82,14 +83,22 @@
     <select id="Department.Query" parameterClass="Hashtable" resultMap="DepartmentResult">
       SELECT *
       FROM SYS_DEPARTMENT
-      where 1=1
-      <dynamic prepend="AND">
-        <isNotEmpty prepend="AND" property="DepartmentCode">
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="AND" property="DepartmentCode">
           DepartmentCode = #DepartmentCode#
-        </isNotEmpty>
-        <isNotEmpty prepend="AND" property="Status">
+        </isNotNull>
+        <isNotNull prepend="AND" property="Status">
           Status = #Status#
-        </isNotEmpty>
+        </isNotNull>
+        <isNotNull prepend="AND" property="ParentID">
+          ParentID = #ParentID#
+        </isNotNull>
+        <isNotNull prepend="AND" property="DeviceRoleID">
+          DeviceRoleID = #DeviceRoleID#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Name">
+          Name like #%Name%#
+        </isNotNull>
       </dynamic>
     </select>
   </statements>

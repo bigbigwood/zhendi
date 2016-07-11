@@ -8,14 +8,8 @@
   <resultMaps>
     <resultMap id="DepartmentDeviceResult" class="Rld.Acs.Model.DepartmentDevice">
       <result property="DepartmentDeviceID" column="DepartmentDeviceID"/>
-      <result property="Remark" column="Remark"/>
-      <result property="CreateUserID" column="CreateUserID"/>
-      <result property="CreateDate" column="CreateDate"/>
-      <result property="Status" column="Status"/>
-      <result property="UpdateUserID" column="UpdateUserID"/>
-      <result property="UpdateDate" column="UpdateDate"/>
-      <result property="DeviceID" column="DeviceID"/>
       <result property="DepartmentID" column="DepartmentID"/>
+      <result property="DeviceID" column="DeviceID"/>
     </resultMap>
   </resultMaps>
 
@@ -26,26 +20,21 @@
       WHERE
       [DepartmentDeviceID] = #value#
     </select>
+
+    <select id="DepartmentDevice.GetByDepartmentID" parameterClass="int" resultMap="DepartmentDeviceResult">
+      SELECT *
+      FROM [SYS_DEPARTMENT_DEVICES]
+      WHERE
+      [DepartmentID] = #DepartmentID#
+    </select>
     
     <insert id="DepartmentDevice.Insert" parameterClass="DepartmentDevice">
       INSERT INTO [SYS_DEPARTMENT_DEVICES] (
       [DepartmentID]
       , [DeviceID]
-      , [Remark]
-      , [CreateUserID]
-      , [CreateDate]
-      , [Status]
-      , [UpdateUserID]
-      , [UpdateDate]
       ) VALUES (
       #DepartmentID#
       , #DeviceID#
-      , #Remark#
-      , #CreateUserID#
-      , #CreateDate#
-      , #Status#
-      , #UpdateUserID#
-      , #UpdateDate#
       )
       <selectKey resultClass="int" type="post" property="DepartmentDeviceID" >
         select @@IDENTITY as value
@@ -56,12 +45,6 @@
       UPDATE [SYS_DEPARTMENT_DEVICES] SET
       [DepartmentID] = #DepartmentID#
       , [DeviceID] = #DeviceID#
-      , [Remark] = #Remark#
-      , [CreateUserID] = #CreateUserID#
-      , [CreateDate] = #CreateDate#
-      , [Status] = #Status#
-      , [UpdateUserID] = #UpdateUserID#
-      , [UpdateDate] = #UpdateDate#
       WHERE
       [DepartmentDeviceID] = #DepartmentDeviceID#
     </update>
@@ -75,11 +58,7 @@
     <select id="DepartmentDevice.Query" parameterClass="Hashtable" resultMap="DepartmentDeviceResult">
       SELECT *
       FROM [SYS_DEPARTMENT_DEVICES]
-      where 1=1
-      <dynamic prepend="AND">
-        <isNotEmpty prepend="AND" property="Status">
-          Status = #Status#
-        </isNotEmpty>
+      <dynamic prepend="WHERE">
         <isNotNull prepend="AND" property="DepartmentID">
           [DepartmentID] = #DepartmentID#
         </isNotNull>
