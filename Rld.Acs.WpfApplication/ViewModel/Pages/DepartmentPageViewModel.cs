@@ -111,7 +111,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
-                if (AuthorizationDepartments.Any(d => d.Parent == SelectedDepartmentDetailViewModel.CurrentDepartment))
+                if (AuthorizationDepartments.Any(d => d.Parent != null && d.Parent.DepartmentID == SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID))
                 {
                     Messenger.Default.Send(new NotificationMessage("选中部门存在子部门，请先删除所属子部门!"), Tokens.DepartmentPage_ShowNotification);
                     return;

@@ -65,7 +65,8 @@ namespace Rld.Acs.WebApi.Controllers
                 }
 
                 departmentRepo.Insert(departmentInfo);
-                departmentInfo.DeviceAssociations.ForEach(d => departmentDeviceRepo.Insert(new DepartmentDevice() {DepartmentID = departmentInfo.DepartmentID, DeviceID = d.DeviceID}) );
+                departmentInfo.DeviceAssociations.ForEach(d => d.DepartmentID = departmentInfo.DepartmentID);
+                departmentInfo.DeviceAssociations.ForEach(d => departmentDeviceRepo.Insert(d));
 
                 return Request.CreateResponse(HttpStatusCode.OK, departmentInfo);
 
@@ -92,18 +93,21 @@ namespace Rld.Acs.WebApi.Controllers
                 }
 
                 var addedDevices = new List<DepartmentDevice>();
-                var deletedDevices = new List<DepartmentDevice>();
+                var deletedDevicesIds = new List<int>();
                 if (departmentInfo.DeviceAssociations != null && departmentInfo.DeviceAssociations.Any())
                 {
-                    deletedDevices = originalDepartmentInfo.DeviceAssociations.FindAll(d => departmentInfo.DeviceAssociations.Contains(d) == false);
+                    var originalDeviceAssociationIDs = originalDepartmentInfo.DeviceAssociations.Select(d => d.DepartmentDeviceID);
+                    var deviceAssociationIDs = departmentInfo.DeviceAssociations.Select(d => d.DepartmentDeviceID);
+                    deletedDevicesIds = originalDeviceAssociationIDs.Except(deviceAssociationIDs).ToList();
+
                     addedDevices = departmentInfo.DeviceAssociations.FindAll(d => d.DepartmentDeviceID == 0);
                 }
                 else
                 {
-                    deletedDevices = originalDepartmentInfo.DeviceAssociations.ToList();
+                    deletedDevicesIds = originalDepartmentInfo.DeviceAssociations.Select(d => d.DepartmentDeviceID).ToList();
                 }
 
-                deletedDevices.ForEach(d => departmentDeviceRepo.Delete(d.DepartmentDeviceID));
+                deletedDevicesIds.ForEach(d => departmentDeviceRepo.Delete(d));
                 addedDevices.ForEach(d => departmentDeviceRepo.Insert(d));
                 departmentRepo.Update(departmentInfo);
 
