@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              d:DataContext= "{d:DesignInstance Type=vm:DepartmentDetailViewModel, IsDesignTimeCreatable=True}"
              d:DesignHeight="400" d:DesignWidth="400" MinHeight="400" MaxHeight="400" MinWidth="400" MaxWidth="400"
-             WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen"  Title="{Binding Title}">
+             WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen"  Title="{Binding Title}" Unloaded="MetroWindow_Unloaded">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <command:EventToCommand Command="{Binding PrepareDataCmd}"/>
@@ -27,6 +27,9 @@
             <Style TargetType="TextBox" BasedOn="{StaticResource ResourceKey={x:Type TextBox}}" >
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="Margin" Value="3" />
+            </Style>
+            <Style TargetType="Button" BasedOn="{StaticResource ResourceKey={x:Type Button}}" >
+                <Setter Property="FontSize" Value="12"/>
             </Style>
             <Style TargetType="GroupBox">
             </Style>
@@ -57,17 +60,25 @@
         <TextBlock Grid.Row="1" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_DepartmentCode}" />
         <TextBox   Grid.Row="1" Grid.Column="2" Text="{Binding DepartmentCode}" />
         <TextBlock Grid.Row="2" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_ParentDepartment}" />
-        <ComboBox  Grid.Row="2" Grid.Column="2" Text="{Binding DeviceRole}"  Margin="2"
-                   ItemsSource="{Binding AuthorizationDeviceRoles, Mode=OneWay}" 
-                   SelectedItem="{Binding DeviceRole}" 
-                   SelectedValuePath="DeviceRoleID" 
-                   DisplayMemberPath="RoleName"  />
+        <ComboBox  Grid.Row="2" Grid.Column="2" Margin="2"
+                   Style="{DynamicResource VirtualisedMetroComboBox}"
+                   controls:TextBoxHelper.Watermark="请选择上级部门"
+                   IsEditable="True"
+                   MaxDropDownHeight="100"
+                   ItemsSource="{Binding AuthorizationDepartments, Mode=OneWay}" 
+                   SelectedItem="{Binding ParentDepartment}" 
+                   SelectedValuePath="DepartmentID" 
+                   DisplayMemberPath="Name" />
         <TextBlock Grid.Row="3" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_DepartmentRole}" />
-        <ComboBox  Grid.Row="3" Grid.Column="2" Text="{Binding DeviceRole}"  Margin="2"
+        <ComboBox  Grid.Row="3" Grid.Column="2" Margin="2"
+                   Style="{DynamicResource VirtualisedMetroComboBox}"
+                   controls:TextBoxHelper.Watermark="请选择默认设备权限角色"
+                   IsEditable="True"
+                   MaxDropDownHeight="100"
                    ItemsSource="{Binding AuthorizationDeviceRoles, Mode=OneWay}" 
                    SelectedItem="{Binding DeviceRole}" 
                    SelectedValuePath="DeviceRoleID" 
-                   DisplayMemberPath="RoleName"  />
+                   DisplayMemberPath="RoleName" />
 
         <DockPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="6">
             <GroupBox Header="{StaticResource DepartmentDetail_Label_DepartmentOwnedDevices}" Margin="0,5,0,0">
@@ -84,7 +95,7 @@
             </GroupBox>
         </DockPanel>
 
-        <Button Grid.Row="11" Grid.Column="1" Content="{StaticResource Ok}" Command="{Binding SaveCmd}" Width="100" Margin="0,0,5,0" />
-        <Button Grid.Row="11" Grid.Column="2" Content="{StaticResource Cancel}" Command="{Binding CancelCmd}" Width="100" Margin="0,0,5,0"/>
+        <Button Grid.Row="11" Grid.Column="1" Content="{StaticResource Ok}" Command="{Binding SaveCmd}" Width="100"/>
+        <Button Grid.Row="11" Grid.Column="2" Content="{StaticResource Cancel}" Command="{Binding CancelCmd}" Width="100"/>
     </Grid>
 </controls:MetroWindow>

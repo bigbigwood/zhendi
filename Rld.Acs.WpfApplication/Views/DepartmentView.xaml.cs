@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
+using Rld.Acs.WpfApplication.Extension;
 using Rld.Acs.WpfApplication.Messages;
 
 namespace Rld.Acs.WpfApplication.Views
@@ -25,7 +26,22 @@ namespace Rld.Acs.WpfApplication.Views
         {
             InitializeComponent();
 
-            Messenger.Default.Register(this, Tokens.CloseDepartmentView, new Action<NotificationMessage>((msg) => { Close(); }));
+            Messenger.Default.Register(this, Tokens.CloseDepartmentView, new Action<NotificationMessage>((msg) => { ProcessCloseDepartmentViewMessage(msg); }));
+        }
+
+        private void ProcessCloseDepartmentViewMessage(NotificationMessage msg)
+        {
+            if (!string.IsNullOrWhiteSpace(msg.Notification))
+            {
+                MessageBoxSingleton.Instance.ShowDialog(msg.Notification, "");
+            }
+
+            Close();
+        }
+
+        private void MetroWindow_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Unregister(this);
         }
     }
 }

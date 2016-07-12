@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
+using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Messages;
@@ -18,12 +20,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
 {
     public class DepartmentPageViewModel : ViewModelBase
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public RelayCommand<TreeViewNode> SelectedTreeNodeChangedCmd { get; private set; }
         public RelayCommand AddDepartmentCmd { get; private set; }
         public RelayCommand ModifyDepartmentCmd { get; private set; }
+        public RelayCommand DeleteDepartmentCmd { get; private set; }
         public RelayCommand SyncDataCmd { get; private set; }
 
-        public TreeViewNode SelectedTreeNode{ get; private set; }
+        public TreeViewNode SelectedTreeNode { get; private set; }
         public List<TreeViewNode> TreeViewRoots { get; set; }
         public List<Department> AuthorizationDepartments { get; set; }
         public List<DeviceController> AuthorizationDevices { get; set; }
@@ -38,14 +42,17 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         public DepartmentPageViewModel()
         {
-            Messenger.Default.Register(this, Tokens.DepartmentPage_DeleteDepartmentAction, new Action<NotificationMessageAction>((msg) => { DeleteDepartment(msg); }));
-
             SelectedTreeNodeChangedCmd = new RelayCommand<TreeViewNode>(UpdateDepartmentDetailViewModel);
             AddDepartmentCmd = new RelayCommand(AddDepartment);
             ModifyDepartmentCmd = new RelayCommand(ModifyDepartment);
+            DeleteDepartmentCmd = new RelayCommand(ProcessDeleteDepartmentCmd);
             //SyncDataCmd = new RelayCommand();
 
             AuthorizationDepartments = _departmentRepository.Query(new Hashtable()).ToList();
+            var topDepartment = new Department() { DepartmentID = -1, Name = "总经办" };
+            AuthorizationDepartments.Insert(0, topDepartment);
+            AuthorizationDepartments.FindAll(d => d.Parent == null && d.DepartmentID != -1).ForEach(d => d.Parent = topDepartment);
+
             AuthorizationDevices = _deviceControllerRepository.Query(new Hashtable { { "Status", 1 } }).ToList();
             AuthorizationDeviceRoles = _deviceRoleRepository.Query(new Hashtable { { "Status", 1 } }).ToList();
 
@@ -54,7 +61,13 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         private void UpdateDepartmentDetailViewModel(TreeViewNode selectedNode)
         {
+            if (selectedNode.ID == -1)
+                return;
+
             var dept = AuthorizationDepartments.FirstOrDefault(d => d.DepartmentID == selectedNode.ID);
+            var parentDept =
+                AuthorizationDepartments.FirstOrDefault(
+                    d => dept.Parent != null && d.DepartmentID == dept.Parent.DepartmentID);
 
             SelectedDepartmentDetailViewModel = new DepartmentDetailViewModel()
             {
@@ -63,6 +76,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 DepartmentCode = dept.DepartmentCode,
                 OwnedDevices = dept.DeviceAssociations.ToList(),
                 DeviceRole = AuthorizationDeviceRoles.First(r => r.DeviceRoleID == dept.DeviceRoleID),
+                ParentDepartment = parentDept,
+                CurrentDepartment = dept,
+                AuthorizationDepartments = AuthorizationDepartments,
                 AuthorizationDeviceRoles = AuthorizationDeviceRoles,
                 AuthorizationDevices = AuthorizationDevices,
                 StuffCount = 10,
@@ -72,48 +88,87 @@ namespace Rld.Acs.WpfApplication.ViewModel
             RaisePropertyChanged("HasSelectedDepartment");
         }
 
-        private void DeleteDepartment(NotificationMessageAction msg)
+        private void ProcessDeleteDepartmentCmd()
         {
-            if (SelectedDepartmentDetailViewModel != null)
+            try
             {
-                if (_departmentRepository.Delete(SelectedDepartmentDetailViewModel.ID))
-                    msg.Execute();
+                if (SelectedDepartmentDetailViewModel == null)
+                {
+                    Messenger.Default.Send(new NotificationMessage("请先选择部门!"), Tokens.DepartmentPage_ShowNotification);
+                    return;
+                }
+
+                string question = string.Format("确定删除部门:{0}吗？", SelectedDepartmentDetailViewModel.DepartmentName);
+                Messenger.Default.Send(new NotificationMessageAction(this, question, DeleteDepartment), Tokens.DepartmentPage_ShowQuestion);
+
+                // refresh UI
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
             }
         }
 
+        private void DeleteDepartment()
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                string message = "";
+                try
+                {
+                    _departmentRepository.Delete(SelectedDepartmentDetailViewModel.ID);
+                    message = "删除部门成功!";
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                    message = "删除部门失败！";
+                }
+                Messenger.Default.Send(new NotificationMessage(message), Tokens.DepartmentPage_ShowNotification);
+            });
+        }
+
+
         private void ModifyDepartment()
         {
-            if (SelectedDepartmentDetailViewModel == null)
+            try
             {
-                Messenger.Default.Send(new NotificationMessage(Tokens.DepartmentPage_NoDepartmentIsSelected),
-                    Tokens.DepartmentPage_NoDepartmentIsSelected);
-                return;
+                if (SelectedDepartmentDetailViewModel == null)
+                {
+                    Messenger.Default.Send(new NotificationMessage("请先选择部门!"), Tokens.DepartmentPage_ShowNotification);
+                    return;
+                }
+
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = SelectedDepartmentDetailViewModel }, Tokens.OpenDepartmentView);
+
+                // refresh UI
             }
-
-            Messenger.Default.Send(new OpenWindowMessage() { DataContext = SelectedDepartmentDetailViewModel }, Tokens.OpenDepartmentView);
-
-            // refresh UI
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
 
         private void AddDepartment()
         {
-            if (SelectedDepartmentDetailViewModel == null)
+            try
             {
-                Messenger.Default.Send(new NotificationMessage(Tokens.DepartmentPage_NoDepartmentIsSelected),
-                    Tokens.DepartmentPage_NoDepartmentIsSelected);
-                return;
-            }
-
-            Messenger.Default.Send(new OpenWindowMessage()
-            {
-                DataContext = new DepartmentDetailViewModel()
+                Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    AuthorizationDevices = AuthorizationDevices,
-                    AuthorizationDeviceRoles = AuthorizationDeviceRoles,
-                }
-            }, Tokens.OpenDepartmentView);
+                    DataContext = new DepartmentDetailViewModel()
+                    {
+                        AuthorizationDepartments = AuthorizationDepartments,
+                        AuthorizationDeviceRoles = AuthorizationDeviceRoles,
+                        AuthorizationDevices = AuthorizationDevices,
+                    }
+                }, Tokens.OpenDepartmentView);
 
-            // refresh UI
+                // refresh UI
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
 
 
@@ -134,7 +189,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         private TreeViewNode BuildTreeNode(List<Department> departments, Department rootDepartment)
         {
-            var currentNode = new TreeViewNode() {ID = rootDepartment.DepartmentID, Name = rootDepartment.Name};
+            var currentNode = new TreeViewNode() { ID = rootDepartment.DepartmentID, Name = rootDepartment.Name };
             var children = departments.FindAll(d => (d.Parent != null && d.Parent.DepartmentID == rootDepartment.DepartmentID));
             foreach (var subDept in children)
             {

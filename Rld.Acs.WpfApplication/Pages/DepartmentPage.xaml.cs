@@ -29,41 +29,43 @@ namespace Rld.Acs.WpfApplication.Pages
         {
             InitializeComponent();
 
-            Messenger.Default.Register(this, Tokens.DepartmentPage_NoDepartmentIsSelected, 
-                new Action<NotificationMessage>((msg) => ProcessNoDepartmentIsSelectedMessage()));
             Messenger.Default.Register<OpenWindowMessage>(this, Tokens.OpenDepartmentView, OpenDepartmentView);
+            Messenger.Default.Register(this, Tokens.DepartmentPage_ShowNotification, new Action<NotificationMessage>((msg) => { ShowNotification(msg); }));
+            Messenger.Default.Register(this, Tokens.DepartmentPage_ShowQuestion, new Action<NotificationMessageAction>((msg) => { ProcessShowNotificationAction(msg); }));
         }
 
         private void DeleteBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            if (lstDepartment.SelectedItem == null)
-            {
-                MessageBoxSingleton.Instance.ShowDialog("请先选择部门!", "");
-                return;
-            }
 
-            string questionMessage = string.Format("确定删除部门: \"{0}\" 吗？", this.departmentDetailView.TextBlock_DepartmentName.Text);
-            var message = new NotificationMessageAction(Tokens.DepartmentPage_DeleteDepartmentAction,
-                ShowDepartmentDeletedDoneMessage);
-            
-            MessageBoxSingleton.Instance.ShowYesNo(questionMessage, "删除部门",
-                () => Messenger.Default.Send(message, Tokens.DepartmentPage_DeleteDepartmentAction));
+
+            //string questionMessage = string.Format("确定删除部门: \"{0}\" 吗？", this.departmentDetailView.TextBlock_DepartmentName.Text);
+            //var message = new NotificationMessageAction(Tokens.DepartmentPage_DeleteDepartmentAction,
+            //    ShowDepartmentDeletedDoneMessage);
+
+            //MessageBoxSingleton.Instance.ShowYesNo(questionMessage, "删除部门",
+            //    () => Messenger.Default.Send(message, Tokens.DepartmentPage_DeleteDepartmentAction));
         }
 
-        private void ShowDepartmentDeletedDoneMessage()
+        private void ProcessShowNotificationAction(NotificationMessageAction msg)
         {
-            MessageBoxSingleton.Instance.ShowDialog("删除部门成功！", "删除部门");
+            MessageBoxSingleton.Instance.ShowYesNo(msg.Notification, "删除部门", () => { msg.Execute(); });
         }
 
-        private void ProcessNoDepartmentIsSelectedMessage()
+        private void ShowNotification(NotificationMessage msg)
         {
-            MessageBoxSingleton.Instance.ShowDialog("请先选择部门!", "");
+            if (!string.IsNullOrWhiteSpace(msg.Notification))
+                MessageBoxSingleton.Instance.ShowDialog(msg.Notification, "");
         }
 
         private void OpenDepartmentView(OpenWindowMessage msg)
         {
             var view = new DepartmentView {DataContext = msg.DataContext};
             view.ShowDialog();
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Unregister(this);
         }
     }
 }

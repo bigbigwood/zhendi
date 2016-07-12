@@ -23,5 +23,7 @@ namespace Rld.Acs.Model
         {
             DeviceAssociations = new List<DepartmentDevice>();
         }
+
+        public object TimeGroups { get; set; }
     }
 }

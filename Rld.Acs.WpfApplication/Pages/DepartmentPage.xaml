@@ -11,7 +11,7 @@
       DataContext="{Binding DepartmentPage, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="600"
-	Title="DepartmentPage">
+	Title="DepartmentPage" Unloaded="Page_Unloaded">
     <Page.Resources>
         <ResourceDictionary>
             <Brush x:Key="backagroud_brush">LightGray</Brush>
@@ -32,7 +32,7 @@
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="DeleteBtn" Click="DeleteBtn_OnClick">
+                        <Button Name="DeleteBtn"  Command="{Binding DeleteDepartmentCmd}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_DeleteBtn}" />
