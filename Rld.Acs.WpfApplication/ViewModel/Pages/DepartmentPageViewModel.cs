@@ -28,7 +28,17 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public RelayCommand SyncDataCmd { get; private set; }
 
         public TreeViewNode SelectedTreeNode { get; private set; }
-        public List<TreeViewNode> TreeViewRoots { get; set; }
+        private List<TreeViewNode> _treeViewSource;
+
+        public List<TreeViewNode> TreeViewSource
+        {
+            get { return _treeViewSource; }
+            set
+            {
+                _treeViewSource = value;
+                RaisePropertyChanged("TreeViewSource");
+            }
+        }
         public List<Department> AuthorizationDepartments { get; set; }
         public List<DeviceController> AuthorizationDevices { get; set; }
         public List<DeviceRole> AuthorizationDeviceRoles { get; set; }
@@ -37,7 +47,6 @@ namespace Rld.Acs.WpfApplication.ViewModel
         private IDepartmentRepository _departmentRepository = NinjectBinder.GetRepository<IDepartmentRepository>();
         private IDeviceRoleRepository _deviceRoleRepository = NinjectBinder.GetRepository<IDeviceRoleRepository>();
         private IDeviceControllerRepository _deviceControllerRepository = NinjectBinder.GetRepository<IDeviceControllerRepository>();
-        private IDepartmentDeviceRepository _departmentDeviceRepository = NinjectBinder.GetRepository<IDepartmentDeviceRepository>();
 
 
         public DepartmentPageViewModel()
@@ -56,36 +65,40 @@ namespace Rld.Acs.WpfApplication.ViewModel
             AuthorizationDevices = _deviceControllerRepository.Query(new Hashtable { { "Status", 1 } }).ToList();
             AuthorizationDeviceRoles = _deviceRoleRepository.Query(new Hashtable { { "Status", 1 } }).ToList();
 
-            TreeViewRoots = GetTreeViewSource();
+            TreeViewSource = BuildTreeViewSource();
         }
 
         private void UpdateDepartmentDetailViewModel(TreeViewNode selectedNode)
         {
-            if (selectedNode.ID == -1)
-                return;
-
-            var dept = AuthorizationDepartments.FirstOrDefault(d => d.DepartmentID == selectedNode.ID);
-            var parentDept =
-                AuthorizationDepartments.FirstOrDefault(
-                    d => dept.Parent != null && d.DepartmentID == dept.Parent.DepartmentID);
-
-            SelectedDepartmentDetailViewModel = new DepartmentDetailViewModel()
+            try
             {
-                ID = dept.DepartmentID,
-                DepartmentName = dept.Name,
-                DepartmentCode = dept.DepartmentCode,
-                OwnedDevices = dept.DeviceAssociations.ToList(),
-                DeviceRole = AuthorizationDeviceRoles.First(r => r.DeviceRoleID == dept.DeviceRoleID),
-                ParentDepartment = parentDept,
-                CurrentDepartment = dept,
-                AuthorizationDepartments = AuthorizationDepartments,
-                AuthorizationDeviceRoles = AuthorizationDeviceRoles,
-                AuthorizationDevices = AuthorizationDevices,
-                StuffCount = 10,
-            };
+                if (selectedNode.ID == -1)
+                    return;
 
-            RaisePropertyChanged("SelectedDepartmentDetailViewModel");
-            RaisePropertyChanged("HasSelectedDepartment");
+                var dept = AuthorizationDepartments.FirstOrDefault(d => d.DepartmentID == selectedNode.ID);
+                var parentDept = AuthorizationDepartments.FirstOrDefault(d => dept.Parent != null && d.DepartmentID == dept.Parent.DepartmentID);
+
+                SelectedDepartmentDetailViewModel = new DepartmentDetailViewModel()
+                {
+                    ID = dept.DepartmentID,
+                    DepartmentName = dept.Name,
+                    DepartmentCode = dept.DepartmentCode,
+                    OwnedDevices = dept.DeviceAssociations.ToList(),
+                    DeviceRole = AuthorizationDeviceRoles.First(r => r.DeviceRoleID == dept.DeviceRoleID),
+                    ParentDepartment = parentDept,
+                    CurrentDepartment = dept,
+                    AuthorizationDepartments = AuthorizationDepartments,
+                    AuthorizationDeviceRoles = AuthorizationDeviceRoles,
+                    AuthorizationDevices = AuthorizationDevices,
+                };
+
+                RaisePropertyChanged("SelectedDepartmentDetailViewModel");
+                RaisePropertyChanged("HasSelectedDepartment");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
 
         private void ProcessDeleteDepartmentCmd()
@@ -98,10 +111,16 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
+                if (AuthorizationDepartments.Any(d => d.Parent == SelectedDepartmentDetailViewModel.CurrentDepartment))
+                {
+                    Messenger.Default.Send(new NotificationMessage("选中部门存在子部门，请先删除所属子部门!"), Tokens.DepartmentPage_ShowNotification);
+                    return;
+                }
+
                 string question = string.Format("确定删除部门:{0}吗？", SelectedDepartmentDetailViewModel.DepartmentName);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, DeleteDepartment), Tokens.DepartmentPage_ShowQuestion);
 
-                // refresh UI
+                TreeViewSource = BuildTreeViewSource();
             }
             catch (Exception ex)
             {
@@ -118,6 +137,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 {
                     _departmentRepository.Delete(SelectedDepartmentDetailViewModel.ID);
                     message = "删除部门成功!";
+
+                    AuthorizationDepartments.Remove(SelectedDepartmentDetailViewModel.CurrentDepartment);
+                    TreeViewSource = BuildTreeViewSource();
                 }
                 catch (Exception ex)
                 {
@@ -141,7 +163,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
                 Messenger.Default.Send(new OpenWindowMessage() { DataContext = SelectedDepartmentDetailViewModel }, Tokens.OpenDepartmentView);
 
-                // refresh UI
+                TreeViewSource = BuildTreeViewSource();
             }
             catch (Exception ex)
             {
@@ -153,17 +175,24 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             try
             {
+                var departmentDetailViewModel = new DepartmentDetailViewModel()
+                {
+                    AuthorizationDepartments = AuthorizationDepartments,
+                    AuthorizationDeviceRoles = AuthorizationDeviceRoles,
+                    AuthorizationDevices = AuthorizationDevices,
+                };
+
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = new DepartmentDetailViewModel()
-                    {
-                        AuthorizationDepartments = AuthorizationDepartments,
-                        AuthorizationDeviceRoles = AuthorizationDeviceRoles,
-                        AuthorizationDevices = AuthorizationDevices,
-                    }
+                    DataContext = departmentDetailViewModel
+                
                 }, Tokens.OpenDepartmentView);
 
-                // refresh UI
+                if (departmentDetailViewModel.CurrentDepartment.DepartmentID != 0)
+                {
+                    AuthorizationDepartments.Add(departmentDetailViewModel.CurrentDepartment);
+                }
+                TreeViewSource = BuildTreeViewSource();
             }
             catch (Exception ex)
             {
@@ -172,12 +201,11 @@ namespace Rld.Acs.WpfApplication.ViewModel
         }
 
 
-        private List<TreeViewNode> GetTreeViewSource()
+        private List<TreeViewNode> BuildTreeViewSource()
         {
-            List<TreeViewNode> treeViewRoots = new List<TreeViewNode>();
+            var treeViewRoots = new List<TreeViewNode>();
 
             var rootDepartments = AuthorizationDepartments.FindAll(d => d.Parent == null);
-
             foreach (var rootDepartment in rootDepartments)
             {
                 var rootNode = BuildTreeNode(AuthorizationDepartments, rootDepartment);

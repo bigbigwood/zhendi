@@ -75,7 +75,7 @@
                          Style="{DynamicResource SearchMetroTextBox}" />
         </DockPanel>
         <DockPanel Grid.Row="1" Grid.Column="0">
-            <TreeView Name="lstDepartment" ItemsSource="{Binding TreeViewRoots}">
+            <TreeView Name="lstDepartment" ItemsSource="{Binding TreeViewSource}">
                 <TreeView.Resources>
                     <Style x:Key="ExpandingImageStyle" TargetType="{x:Type Image}">
                         <Setter Property="Source" Value="{DynamicResource icon_treeitem_closed}"/>
@@ -106,8 +106,7 @@
             </TreeView>
         </DockPanel>
         <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0" Visibility="{Binding HasSelectedDepartment, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <views:DepartmentDetailView x:Name="departmentDetailView"
-                                        DataContext="{Binding SelectedDepartmentDetailViewModel}" />
+            <views:DepartmentDetailPanel DataContext="{Binding SelectedDepartmentDetailViewModel}" />
         </Grid>
     </Grid>
 </Page>

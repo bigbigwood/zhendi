@@ -19,4 +19,7 @@
         <Setter Property="Height" Value="44" />
         <Setter Property="TitleFontSize" Value="12" />
     </Style>
+
+    <Style x:Key="DefaultGroupBoxStyle"  TargetType="GroupBox">
+    </Style>
 </ResourceDictionary>

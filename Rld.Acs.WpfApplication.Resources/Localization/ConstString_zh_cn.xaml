@@ -13,5 +13,6 @@
     <sys:String x:Key="DepartmentDetail_Label_DepartmentRole">设备权限角色:</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDevices">部门设备:</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedStuffCount">部门人数:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDeviceCount">部门设备数量:</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_ParentDepartment">上级部门:</sys:String>
 </ResourceDictionary>

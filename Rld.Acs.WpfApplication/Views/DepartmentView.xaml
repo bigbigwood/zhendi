@@ -31,8 +31,6 @@
             <Style TargetType="Button" BasedOn="{StaticResource ResourceKey={x:Type Button}}" >
                 <Setter Property="FontSize" Value="12"/>
             </Style>
-            <Style TargetType="GroupBox">
-            </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="28" />
@@ -81,7 +79,7 @@
                    DisplayMemberPath="RoleName" />
 
         <DockPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="6">
-            <GroupBox Header="{StaticResource DepartmentDetail_Label_DepartmentOwnedDevices}" Margin="0,5,0,0">
+            <GroupBox Style="{StaticResource DefaultGroupBoxStyle}" Header="{StaticResource DepartmentDetail_Label_DepartmentOwnedDevices}" Margin="0,5,0,0">
                 <ListBox ItemsSource="{Binding DeviceListBoxSource}" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>

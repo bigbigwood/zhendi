@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Rld.Acs.WpfApplication.Views
 {
     /// <summary>
-    /// Interaction logic for DepartmentDetailView.xaml
+    /// Interaction logic for DepartmentDetailPanel.xaml
     /// </summary>
-    public partial class DepartmentDetailView : UserControl
+    public partial class DepartmentDetailPanel : UserControl
     {
-        public DepartmentDetailView()
+        public DepartmentDetailPanel()
         {
             InitializeComponent();
         }

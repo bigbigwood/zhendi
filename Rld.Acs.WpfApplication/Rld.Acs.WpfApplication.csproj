@@ -144,8 +144,8 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\Views\DepartmentDetailViewModel.cs" />
-    <Compile Include="Views\DepartmentDetailView.xaml.cs">
-      <DependentUpon>DepartmentDetailView.xaml</DependentUpon>
+    <Compile Include="Views\DepartmentDetailPanel.xaml.cs">
+      <DependentUpon>DepartmentDetailPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentView.xaml.cs">
       <DependentUpon>DepartmentView.xaml</DependentUpon>
@@ -205,11 +205,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\TileStyles.xaml">
+    <Page Include="Resources\StyleExtension.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\DepartmentDetailView.xaml">
+    <Page Include="Views\DepartmentDetailPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

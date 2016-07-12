@@ -137,9 +137,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     CurrentDepartment.DeviceAssociations = OwnedDevices;
                     CurrentDepartment.CreateUserID = 1;
                     CurrentDepartment.CreateDate = DateTime.Now;
+                    CurrentDepartment = _departmentRepository.Insert(CurrentDepartment);
 
-                    _departmentRepository.Insert(CurrentDepartment);
                     message = "增加部门成功!";
+                    
                 }
                 else
                 {
@@ -151,8 +152,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     CurrentDepartment.DeviceAssociations = OwnedDevices;
                     CurrentDepartment.UpdateUserID = 1;
                     CurrentDepartment.UpdateDate = DateTime.Now;
-
                     _departmentRepository.Update(CurrentDepartment);
+
                     message = "修改部门成功!";
                 }
             }
