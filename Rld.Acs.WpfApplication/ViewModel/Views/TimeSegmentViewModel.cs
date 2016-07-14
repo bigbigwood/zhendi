@@ -17,15 +17,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-        public RelayCommand ModifyCmd { get; private set; }
-        public RelayCommand DeleteCmd { get; private set; }
 
         public TimeSegmentViewModel(TimeSegment timeSegment)
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
-            ModifyCmd = new RelayCommand(() => Close(""));
-            DeleteCmd = new RelayCommand(() => Close(""));
 
             CurrentTimeSegment = timeSegment;
             if (timeSegment.TimeSegmentID != 0)
@@ -36,8 +32,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 StartMinute = timeSegment.BeginTime.Substring(3, 2);
                 EndHour = timeSegment.EndTime.Substring(0, 2);
                 EndMinute = timeSegment.EndTime.Substring(3, 2);
-
             }
+
             Title = (timeSegment.TimeSegmentID == 0) ? "新增时间段" : "修改时间段";
         }
 
