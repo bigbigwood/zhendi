@@ -21,7 +21,6 @@ namespace Rld.Acs.WpfApplication.Repository
 
         private static void InitBinding()
         {
-            InjectionKernel.Bind<ICustomerRepository>().To<CustomerRepository>();
             InjectionKernel.Bind<IDepartmentRepository>().To<DepartmentRepository>();
             InjectionKernel.Bind<IDepartmentDeviceRepository>().To<DepartmentDeviceRepository>();
             InjectionKernel.Bind<IDeviceRoleRepository>().To<DeviceRoleRepository>();

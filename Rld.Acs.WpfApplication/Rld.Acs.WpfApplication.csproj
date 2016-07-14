@@ -119,9 +119,6 @@
     <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Navigation\FrameNavigationService.cs" />
     <Compile Include="Navigation\IFrameNavigationService.cs" />
-    <Compile Include="Pages\CustomerView.xaml.cs">
-      <DependentUpon>CustomerView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\DepartmentPage.xaml.cs">
       <DependentUpon>DepartmentPage.xaml</DependentUpon>
     </Compile>
@@ -131,9 +128,6 @@
     <Compile Include="Pages\TimeSegmentPage.xaml.cs">
       <DependentUpon>TimeSegmentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UserMainWindow.xaml.cs">
-      <DependentUpon>UserMainWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\DepartmentRepository.cs" />
     <Compile Include="Repository\TimeGroupRepository.cs" />
@@ -142,15 +136,12 @@
     <Compile Include="Repository\DeviceRoleRepository.cs" />
     <Compile Include="Repository\DeviceControllerRepository.cs" />
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
-    <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
-    <Compile Include="ViewModel\AllCustomersViewModel.cs" />
     <Compile Include="ViewModel\Pages\DepartmentPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\TimeGroupPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\TimeZonePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\TimeSegmentPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SummaryPageViewModel.cs" />
-    <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\Views\DepartmentDetailViewModel.cs" />
@@ -177,16 +168,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converter\ToggleExpandToVisibility.cs" />
-    <Compile Include="CustomControls\ImageButton.cs" />
-    <Compile Include="CustomControls\ToggleButton.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\CustomerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\DepartmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -196,14 +181,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TimeSegmentPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\UserMainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\ButtonControlTemplate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

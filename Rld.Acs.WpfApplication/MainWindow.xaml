@@ -181,7 +181,7 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="{Binding Path=MenuWidth}"></ColumnDefinition>
+            <ColumnDefinition Width="55"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -271,7 +271,7 @@
                                     <Image Style="{StaticResource menu_image_t}" Source="/Rld.Acs.WpfApplication;component/Images/minImage/人员管理.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem x:Name="depart2_manage"  FontSize="12" Width="180"  Header="部门管理" IsCheckable="False">
+                            <MenuItem x:Name="depart2_manage"  FontSize="12" Width="180"  Header="部门管理" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="DepartmentPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}" Source="/Rld.Acs.WpfApplication;component/Images/minImage/部门管理.png"/>
                                 </MenuItem.Icon>
@@ -305,7 +305,7 @@
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/门状态管理.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem x:Name="dev2_timeduan" FontSize="12" Width="180"  Header="时间段" IsCheckable="False">
+                            <MenuItem x:Name="dev2_timeduan" FontSize="12" Width="180"  Header="时间段" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="TimeSegmentPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/时间段.png"/>
                                 </MenuItem.Icon>

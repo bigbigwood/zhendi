@@ -20,10 +20,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private IFrameNavigationService navigationService;
-
-        public RelayCommand InitDataCmd { get; set; }
-        public RelayCommand GotoDepartmentWindowCommand { get; set; }
-        public RelayCommand ShowUserMainWindow { get; set; }
+        public RelayCommand<string> NatigatePageCmd { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -31,96 +28,12 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public MainViewModel(IFrameNavigationService navigationService)
         {
             this.navigationService = navigationService;
-
-            InitDataCmd = new RelayCommand(InitializeData);
-            GotoDepartmentWindowCommand = new RelayCommand(() => NatigateToPage("DepartmentPage"));
-            ShowUserMainWindow = new RelayCommand(() => NatigateToPage("TimeSegmentPage"));
+            NatigatePageCmd = new RelayCommand<string>(NatigateToPage);
         }
-
-        private bool simpleMenuShow = true;
-        private bool allMenuShow;
-        private int menuWidth = 55;
-
-        public bool SimpleMenuShow
-        {
-            get
-            {
-                return simpleMenuShow;
-            }
-            set
-            {
-                simpleMenuShow = value;
-                RaisePropertyChanged("SimpleMenuShow");
-            }
-        }
-
-        public bool AllMenuShow
-        {
-            get
-            {
-                return allMenuShow;
-            }
-            set
-            {
-                allMenuShow = value;
-                RaisePropertyChanged("AllMenuShow");
-            }
-        }
-
-        public int MenuWidth
-        {
-            get
-            {
-                return menuWidth;
-            }
-            set
-            {
-                menuWidth = value;
-                RaisePropertyChanged("MenuWidth");
-             
-            }
-        }
-
-        private RelayCommand<bool> showMenu;
-
-        public RelayCommand<bool> ShowMenu
-        {
-            get
-            {
-                if(showMenu == null)
-                 showMenu = new RelayCommand<bool>(b => changeMenu(b));
-                return showMenu;
-            }
-        }
-
-        
-
-        private void changeMenu(bool showSimpleMenu)
-        {
-            if (showSimpleMenu)
-            {
-                SimpleMenuShow = true;
-                AllMenuShow = false;
-                MenuWidth = 50;
-            }
-            else
-            {
-                SimpleMenuShow = false;
-                AllMenuShow = true;
-                MenuWidth = 100;
-                
-            }
-        }
-
 
         private void NatigateToPage(string pageKey)
         {
             navigationService.NavigateTo(pageKey);
-        }
-
-        private void InitializeData()
-        {
-            NatigateToPage("SummaryPage");
         }
     }
 }
