@@ -32,17 +32,7 @@ namespace Rld.Acs.WpfApplication
             InitMessageBoxSingleton();
         }
 
-        private void ToggleButton_Click(object sender, RoutedEventArgs e)
-        {
-            ToggleButton toggleButton = (ToggleButton)sender;
-            toggleButton.Expand = !toggleButton.Expand;
-        }
-
-        private void ImageButton_Click(object sender, RoutedEventArgs e)
-        {
-            UserMainWindow page = new UserMainWindow();
-            MainFrame.Content = page;
-        }
+        #region MessageBox Singleton
 
         private void InitMessageBoxSingleton()
         {
@@ -57,7 +47,8 @@ namespace Rld.Acs.WpfApplication
                 AffirmativeButtonText = "关闭",
                 ColorScheme = MetroDialogColorScheme.Theme
             };
-            MessageDialogResult result = await this.ShowMessageAsync(title, message, MessageDialogStyle.Affirmative, mySettings);
+            MessageDialogResult result =
+                await this.ShowMessageAsync(title, message, MessageDialogStyle.Affirmative, mySettings);
         }
 
         public async void ShowYesNo(string message, string title, Action action)
@@ -68,9 +59,187 @@ namespace Rld.Acs.WpfApplication
                 NegativeButtonText = "取消",
                 ColorScheme = MetroDialogColorScheme.Theme
             };
-            MessageDialogResult result = await this.ShowMessageAsync(title, message, MessageDialogStyle.AffirmativeAndNegative, mySettings);
+            MessageDialogResult result =
+                await this.ShowMessageAsync(title, message, MessageDialogStyle.AffirmativeAndNegative, mySettings);
             if (result == MessageDialogResult.Affirmative)
                 await Task.Factory.StartNew(action);
+        }
+
+        #endregion
+
+
+        public void PopSubMenus(object sender, RoutedEventArgs e)
+        {
+            FullMenusPanelsContainer.Children.Clear();
+            Button fireBtn = sender as Button;
+
+            if (PopSubMenuPanel.Visibility == Visibility.Visible)
+            {
+                PopSubMenuPanelsContainer.Children.Clear();
+            }
+
+            if (fireBtn == organzationBtn)
+            {
+                PopSubMenuPanelsContainer.Children.Add(peopleMenu_panel);
+            }
+            else if (fireBtn == deviceBtn)
+            {
+                PopSubMenuPanelsContainer.Children.Add(devieMenu_panel);
+            }
+            else if (fireBtn == reportBtn)
+            {
+                PopSubMenuPanelsContainer.Children.Add(pubMenu_panel);
+            }
+            else if (fireBtn == systemBtn)
+            {
+                PopSubMenuPanelsContainer.Children.Add(syswhMenu_panel);
+            }
+            else if (fireBtn == backendBtn)
+            {
+                PopSubMenuPanelsContainer.Children.Add(supporMenu_panel);
+            }
+
+            if (PopSubMenuPanel.Visibility != Visibility.Visible)
+            {
+                PopSubMenuPanel.Visibility = Visibility.Visible;
+            }
+        }
+
+
+        //逐项关闭子对象(通用) 
+        private void hide_toolmuSecond_people(object sender, RoutedEventArgs e)
+        {
+            this.PopSubMenuPanelsContainer.Children.Clear();
+            this.PopSubMenuPanel.Visibility = Visibility.Hidden;
+        }
+
+
+
+
+
+        //显示全选_右边框
+        private void PopFullMenus(object sender, RoutedEventArgs e)
+        {
+
+            //清除二引用的对象,关闭二，三重新加载。
+            this.PopSubMenuPanelsContainer.Children.Clear();
+            this.PopSubMenuPanel.Visibility = Visibility.Hidden;
+            //清除三重加载头部功能
+            this.FullMenusPanelsContainer.Children.Clear();
+            this.FullMenusPanelsContainer.Children.Add(toolmuright_top);
+
+            //重加载对象
+            this.FullMenusPanelsContainer.Children.Add(peopleMenu_panel);
+            this.FullMenusPanelsContainer.Children.Add(devieMenu_panel);
+            this.FullMenusPanelsContainer.Children.Add(pubMenu_panel);
+            this.FullMenusPanelsContainer.Children.Add(syswhMenu_panel);
+            this.FullMenusPanelsContainer.Children.Add(supporMenu_panel);
+            this.FullMenusPanel.Visibility = Visibility.Visible;
+        }
+
+
+
+
+        //关闭全选_右边框
+        public void toolmuright_close(object sender, RoutedEventArgs e)
+        {
+            //this.toolmuright.Visibility = Visibility.Hidden;
+            this.FullMenusPanel.Visibility = Visibility.Hidden;
+        }
+
+
+
+
+        //控制仿树对象显示隐藏。
+        public void tree_showHide_menu(object sender, RoutedEventArgs e)
+        {
+            MenuItem mi = sender as MenuItem;
+            //人员管理
+            if (mi == peo_menu_right)
+            {
+                if (peo_control.Visibility == Visibility.Hidden)
+                {
+                    Style myStyle = (Style)this.FindResource("stack_tree_open");
+                    this.peo_control.Style = myStyle;
+                }
+
+                else
+                {
+                    Style myStyle = (Style)this.FindResource("stack_tree_close");
+                    this.peo_control.Style = myStyle;
+                }
+
+            }
+
+            //设备管理
+            if (mi == dev_menu_right)
+            {
+                if (dev_control.Visibility == Visibility.Hidden)
+                {
+                    Style myStyle = (Style)this.FindResource("stack_tree_open");
+                    this.dev_control.Style = myStyle;
+                }
+
+                else
+                {
+                    Style myStyle = (Style)this.FindResource("stack_tree_close");
+                    this.dev_control.Style = myStyle;
+                }
+
+            }
+
+            //综合信息展示
+            if (mi == pub_menu_right)
+            {
+                if (pub_control.Visibility == Visibility.Hidden)
+                {
+                    Style myStyle = (Style)this.FindResource("stack_tree_open");
+                    this.pub_control.Style = myStyle;
+                }
+
+                else
+                {
+                    Style myStyle = (Style)this.FindResource("stack_tree_close");
+                    this.pub_control.Style = myStyle;
+                }
+
+            }
+            //系统维护
+            if (mi == syswh_menu_right)
+            {
+                if (syswh_control.Visibility == Visibility.Hidden)
+                {
+                    Style myStyle = (Style)this.FindResource("stack_tree_open");
+                    this.syswh_control.Style = myStyle;
+                }
+
+                else
+                {
+                    Style myStyle = (Style)this.FindResource("stack_tree_close");
+                    this.syswh_control.Style = myStyle;
+                }
+
+            }
+
+            //后台服务
+            if (mi == suppor_menu_right)
+            {
+                if (suppor_control.Visibility == Visibility.Hidden)
+                {
+                    Style myStyle = (Style)this.FindResource("stack_tree_open");
+                    this.suppor_control.Style = myStyle;
+                }
+
+                else
+                {
+                    Style myStyle = (Style)this.FindResource("stack_tree_close");
+                    this.suppor_control.Style = myStyle;
+                }
+
+            }
+
+
+
         }
     }
 }

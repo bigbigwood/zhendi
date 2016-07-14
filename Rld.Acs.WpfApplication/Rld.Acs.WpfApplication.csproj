@@ -280,7 +280,52 @@
       <Name>Rld.Acs.WpfApplication.Resources</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\centerImage\cen_all.png" />
+    <Resource Include="Images\centerImage\cen_all_light.png" />
+    <Resource Include="Images\centerImage\cen_close.png" />
+    <Resource Include="Images\centerImage\cen_dev.png" />
+    <Resource Include="Images\centerImage\cen_peo.png" />
+    <Resource Include="Images\centerImage\cen_pub.png" />
+    <Resource Include="Images\centerImage\cen_test.png" />
+    <Resource Include="Images\centerImage\cen_tool.png" />
+    <Resource Include="Images\centerImage\close.png" />
+    <Resource Include="Images\centerImage\light_all.png" />
+    <Resource Include="Images\loginImage\bg.png" />
+    <Resource Include="Images\loginImage\LoginGround.PNG" />
+    <Resource Include="Images\loginImage\登录框.png" />
+    <Resource Include="Images\loginImage\背景.png" />
+    <Resource Include="Images\loginImage\输入框.png" />
+    <Resource Include="Images\loginImage\验证码.png" />
+    <Resource Include="Images\maxImage\max_all.png" />
+    <Resource Include="Images\maxImage\max_dev.png" />
+    <Resource Include="Images\maxImage\max_other.png" />
+    <Resource Include="Images\maxImage\max_peo.png" />
+    <Resource Include="Images\maxImage\max_pub.png" />
+    <Resource Include="Images\maxImage\max_tool.png" />
+    <Resource Include="Images\minImage\人员管理.png" />
+    <Resource Include="Images\minImage\异常记录.png" />
+    <Resource Include="Images\minImage\操作日志.png" />
+    <Resource Include="Images\minImage\数据同步.png" />
+    <Resource Include="Images\minImage\数据字典维护.png" />
+    <Resource Include="Images\minImage\数据监控.png" />
+    <Resource Include="Images\minImage\数据维护.png" />
+    <Resource Include="Images\minImage\时间区.png" />
+    <Resource Include="Images\minImage\时间段.png" />
+    <Resource Include="Images\minImage\时间组.png" />
+    <Resource Include="Images\minImage\用户.png" />
+    <Resource Include="Images\minImage\角色.png" />
+    <Resource Include="Images\minImage\警告记录.png" />
+    <Resource Include="Images\minImage\设备权限管理.png" />
+    <Resource Include="Images\minImage\设备管理.png" />
+    <Resource Include="Images\minImage\访问记录.png" />
+    <Resource Include="Images\minImage\部门管理.png" />
+    <Resource Include="Images\minImage\门状态管理.png" />
+    <Resource Include="Images\wintop\tooltip.png" />
+    <Resource Include="Images\wintop\win_close.png" />
+    <Resource Include="Images\wintop\win_max.png" />
+    <Resource Include="Images\wintop\win_min.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\backService.png" />
     <Resource Include="Images\device.png" />
@@ -307,6 +352,9 @@
     <Resource Include="Images\time.png" />
     <Resource Include="Images\treeitem_closed.png" />
     <Resource Include="Images\treeitem_opened.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\MinImages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
