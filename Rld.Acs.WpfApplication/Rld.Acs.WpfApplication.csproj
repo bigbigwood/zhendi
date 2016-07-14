@@ -108,6 +108,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\RowToIndexConverter.cs" />
     <Compile Include="CustomControls\TileIconBox.xaml.cs">
       <DependentUpon>TileIconBox.xaml</DependentUpon>
     </Compile>
@@ -127,11 +128,17 @@
     <Compile Include="Pages\SummaryPage.xaml.cs">
       <DependentUpon>SummaryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TimeSegmentPage.xaml.cs">
+      <DependentUpon>TimeSegmentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\UserMainWindow.xaml.cs">
       <DependentUpon>UserMainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\DepartmentRepository.cs" />
+    <Compile Include="Repository\TimeGroupRepository.cs" />
+    <Compile Include="Repository\TimeZoneRepository.cs" />
+    <Compile Include="Repository\TimeSegmentRepository.cs" />
     <Compile Include="Repository\DeviceRoleRepository.cs" />
     <Compile Include="Repository\DeviceControllerRepository.cs" />
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
@@ -139,16 +146,23 @@
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="ViewModel\AllCustomersViewModel.cs" />
     <Compile Include="ViewModel\Pages\DepartmentPageViewModel.cs" />
+    <Compile Include="ViewModel\Pages\TimeGroupPageViewModel.cs" />
+    <Compile Include="ViewModel\Pages\TimeZonePageViewModel.cs" />
+    <Compile Include="ViewModel\Pages\TimeSegmentPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SummaryPageViewModel.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\Views\DepartmentDetailViewModel.cs" />
+    <Compile Include="ViewModel\Views\TimeSegmentViewModel.cs" />
     <Compile Include="Views\DepartmentDetailPanel.xaml.cs">
       <DependentUpon>DepartmentDetailPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentView.xaml.cs">
       <DependentUpon>DepartmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimeSegmentView.xaml.cs">
+      <DependentUpon>TimeSegmentView.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\TileIconBox.xaml">
       <SubType>Designer</SubType>
@@ -178,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SummaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TimeSegmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DepartmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimeSegmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

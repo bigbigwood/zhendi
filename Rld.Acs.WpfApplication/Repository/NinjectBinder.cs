@@ -26,6 +26,10 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<IDepartmentDeviceRepository>().To<DepartmentDeviceRepository>();
             InjectionKernel.Bind<IDeviceRoleRepository>().To<DeviceRoleRepository>();
             InjectionKernel.Bind<IDeviceControllerRepository>().To<DeviceControllerRepository>();
+
+            InjectionKernel.Bind<ITimeSegmentRepository>().To<TimeSegmentRepository>();
+            InjectionKernel.Bind<ITimeGroupRepository>().To<TimeGroupRepository>();
+            InjectionKernel.Bind<ITimeZoneRepository>().To<TimeZoneRepository>();
         }
 
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()

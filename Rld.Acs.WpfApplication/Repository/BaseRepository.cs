@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Configuration;
 using Rld.Acs.Repository.Framework;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Rld.Acs.WpfApplication.Repository
     public abstract class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : class
     {
-        protected readonly string BASE_ADDRESS = @"http://localhost:7362";
+        protected readonly string BASE_ADDRESS = ConfigurationSettings.AppSettings.Get("BaseUri");
         protected string RelevantUri { get; set; }
 
         public virtual TEntity Insert(TEntity entity)

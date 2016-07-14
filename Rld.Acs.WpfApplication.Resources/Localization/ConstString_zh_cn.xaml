@@ -15,4 +15,19 @@
     <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedStuffCount">部门人数:</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDeviceCount">部门设备数量:</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_ParentDepartment">上级部门:</sys:String>
+
+    <sys:String x:Key="TimeSegmentPage_AddBtn">增加时间段</sys:String>
+    <sys:String x:Key="TimeSegmentPage_ModifyBtn">修改时间段</sys:String>
+    <sys:String x:Key="TimeSegmentPage_DeleteBtn">删除时间段</sys:String>
+    <sys:String x:Key="TimeSegmentView_Label_Name">时间段名称</sys:String>
+    <sys:String x:Key="TimeSegmentView_Label_Setting">时间段设置</sys:String>
+    <sys:String x:Key="TimeSegmentView_Label_Hour">时</sys:String>
+    <sys:String x:Key="TimeSegmentView_Label_Minute">分</sys:String>
+
+    <sys:String x:Key="TimeGroupPage_AddBtn">增加时间组</sys:String>
+    <sys:String x:Key="TimeGroupPage_ModifyBtn">修改时间组</sys:String>
+    <sys:String x:Key="TimeGroupPage_DeleteBtn">删除时间组</sys:String>
+    <sys:String x:Key="TimeZonePage_AddBtn">增加时间区</sys:String>
+    <sys:String x:Key="TimeZonePage_ModifyBtn">修改时间区</sys:String>
+    <sys:String x:Key="TimeZonePage_DeleteBtn">删除时间区</sys:String>
 </ResourceDictionary>

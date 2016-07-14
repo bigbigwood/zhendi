@@ -20,21 +20,21 @@ namespace Rld.Acs.WpfApplication.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private IFrameNavigationService navigationService;
+
+        public RelayCommand InitDataCmd { get; set; }
+        public RelayCommand GotoDepartmentWindowCommand { get; set; }
+        public RelayCommand ShowUserMainWindow { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public MainViewModel(IFrameNavigationService navigationService)
         {
             this.navigationService = navigationService;
-            GotoDepartmentWindowCommand = new RelayCommand(GotoDepartmentWindow);
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
+
+            InitDataCmd = new RelayCommand(InitializeData);
+            GotoDepartmentWindowCommand = new RelayCommand(() => NatigateToPage("DepartmentPage"));
+            ShowUserMainWindow = new RelayCommand(() => NatigateToPage("TimeSegmentPage"));
         }
 
         private bool simpleMenuShow = true;
@@ -112,29 +112,15 @@ namespace Rld.Acs.WpfApplication.ViewModel
             }
         }
 
-        private RelayCommand showUserMainWindow;
 
-        public RelayCommand ShowUserMainWindow
+        private void NatigateToPage(string pageKey)
         {
-            get
-            {
-                if (showUserMainWindow == null)
-                {
-                    showUserMainWindow = new RelayCommand(changeFrameToUserMainWindow);
-                }
-                return showUserMainWindow;
-            }
+            navigationService.NavigateTo(pageKey);
         }
 
-        private void changeFrameToUserMainWindow()
+        private void InitializeData()
         {
-            this.navigationService.NavigateTo("SummaryPage");
-        }
-
-        public RelayCommand GotoDepartmentWindowCommand { get; set; }
-        private void GotoDepartmentWindow()
-        {
-            navigationService.NavigateTo("DepartmentPage");
+            NatigateToPage("SummaryPage");
         }
     }
 }

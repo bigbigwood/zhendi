@@ -121,7 +121,9 @@
     <EmbeddedResource Include="MapConfig\Customer.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MapConfig\Time\TimeSegment.xml" />
+    <EmbeddedResource Include="MapConfig\Time\TimeSegment.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\System\SysOperator.xml" />

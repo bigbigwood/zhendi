@@ -5,6 +5,8 @@
         xmlns:cc="clr-namespace:Rld.Acs.WpfApplication.CustomerControl"
         xmlns:cv="clr-namespace:Rld.Acs.WpfApplication.Converter"
         xmlns:vm="clr-namespace:Rld.Acs.WpfApplication.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:command="http://www.galasoft.ch/mvvmlight"
         Title="MainWindow" Width="1000" Height="600" TitlebarHeight="50"
         DataContext="{Binding Main, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen">
 
@@ -22,7 +24,11 @@
             </Style>
         </ResourceDictionary>
     </Controls:MetroWindow.Resources>
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding InitDataCmd}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="settings" />

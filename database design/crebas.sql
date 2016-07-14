@@ -774,6 +774,7 @@ go
 /*==============================================================*/
 create table TIME_SEGMENTS (
    TimeSegmentID        int                  identity(1,1),
+   TimeSegmentName      nvarchar(100)        not null,
    BeginTime            nvarchar(100)        not null,
    EndTime              nvarchar(100)        not null,
    CreateUserID         int                  not null,

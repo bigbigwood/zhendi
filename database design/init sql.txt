@@ -1,14 +1,7 @@
 
 INSERT TIME_SEGMENTS
-        ( BeginTime ,
-          EndTime ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( N'08:30' , -- BeginTime - nvarchar(100)
+VALUES  (  N'Time segment 1' , 
+ N'08:30' , -- BeginTime - nvarchar(100)
           N'12:00' , -- EndTime - nvarchar(100)
           1 , -- CreateUserID - int
           '2016-01-01 00:00:00.000' , -- CreateDate - datetime
@@ -18,16 +11,22 @@ VALUES  ( N'08:30' , -- BeginTime - nvarchar(100)
         )
 		
 INSERT TIME_SEGMENTS
-        ( BeginTime ,
-          EndTime ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
+VALUES  (
+ N'Time segment 2' , 
+N'14:30' , -- BeginTime - nvarchar(100)
+          N'17:00' , -- EndTime - nvarchar(100)
+          1 , -- CreateUserID - int
+          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
+          1 , -- Status - int
+          NULL , -- UpdateUserID - int
+          NULL  -- UpdateDate - datetime
         )
-VALUES  ( N'2:30' , -- BeginTime - nvarchar(100)
-          N'5:00' , -- EndTime - nvarchar(100)
+		
+INSERT TIME_SEGMENTS
+VALUES  (
+ N'Time segment 3' ,
+ N'19:00' , -- BeginTime - nvarchar(100)
+          N'21:00' , -- EndTime - nvarchar(100)
           1 , -- CreateUserID - int
           '2016-01-01 00:00:00.000' , -- CreateDate - datetime
           1 , -- Status - int

@@ -7,6 +7,7 @@ namespace Rld.Acs.Model
     public class TimeSegment
     {
         public virtual Int32 TimeSegmentID { get; set; }
+        public virtual String TimeSegmentName { get; set; }
         public virtual String BeginTime { get; set; }
         public virtual String EndTime { get; set; }
         public virtual Int32 CreateUserID { get; set; }

@@ -49,6 +49,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Register<AllCustomersViewModel>();
             SimpleIoc.Default.Register<SummaryPageViewModel>();
             SimpleIoc.Default.Register<DepartmentPageViewModel>();
+
+            SimpleIoc.Default.Register<TimeSegmentPageViewModel>();
+            SimpleIoc.Default.Register<TimeGroupPageViewModel>();
+            SimpleIoc.Default.Register<TimeZonePageViewModel>();
         }
 
         private static void SetupNavigation()
@@ -58,6 +62,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
             navigationService.Configure("UserMainWindow", new Uri("../Pages/UserMainWindow.xaml", UriKind.Relative));
             navigationService.Configure("SummaryPage", new Uri("../Pages/SummaryPage.xaml", UriKind.Relative));
             navigationService.Configure("DepartmentPage", new Uri("../Pages/DepartmentPage.xaml", UriKind.Relative));
+
+            navigationService.Configure("TimeSegmentPage", new Uri("../Pages/TimeSegmentPage.xaml", UriKind.Relative));
+            navigationService.Configure("TimeGroupPage", new Uri("../Pages/TimeGroupPage.xaml", UriKind.Relative));
+            navigationService.Configure("TimeZonePage", new Uri("../Pages/TimeZonePage.xaml", UriKind.Relative));
 
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
@@ -80,6 +88,19 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public DepartmentPageViewModel DepartmentPage
         {
             get { return ServiceLocator.Current.GetInstance<DepartmentPageViewModel>(); }
+        }
+
+        public TimeSegmentPageViewModel TimeSegmentPage
+        {
+            get { return ServiceLocator.Current.GetInstance<TimeSegmentPageViewModel>(); }
+        }
+        public TimeGroupPageViewModel TimeGroupPage
+        {
+            get { return ServiceLocator.Current.GetInstance<TimeGroupPageViewModel>(); }
+        }
+        public TimeZonePageViewModel TimeZonePage
+        {
+            get { return ServiceLocator.Current.GetInstance<TimeZonePageViewModel>(); }
         }
 
         public static void Cleanup()
