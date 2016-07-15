@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Rld.Acs.WpfApplication.Extension;
 using Rld.Acs.WpfApplication.Messages;
@@ -60,6 +61,9 @@ namespace Rld.Acs.WpfApplication.Pages
         private void OpenDepartmentView(OpenWindowMessage msg)
         {
             var view = new DepartmentView {DataContext = msg.DataContext};
+            view.BorderThickness = new Thickness(1);
+            view.GlowBrush = null;
+            view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
             view.ShowDialog();
         }
 

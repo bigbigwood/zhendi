@@ -12,92 +12,96 @@
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="600" Unloaded="Page_Unloaded">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="170"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" >
-            <ToolBarTray>
-                <ToolBar>
-                    <Button Name="AddBtn" Command="{Binding AddDepartmentCmd}">
-                        <StackPanel Orientation="Horizontal" >
-                            <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
-                            <TextBlock Text="{StaticResource DepartmentPage_Toolbar_AddBtn}" />
-                        </StackPanel>
-                    </Button>
-                    <Separator/>
-                    <Button Name="ModifyBtn" Command="{Binding ModifyDepartmentCmd}">
-                        <StackPanel Orientation="Horizontal" >
-                            <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
-                            <TextBlock Text="{StaticResource DepartmentPage_Toolbar_ModifyBtn}" />
-                        </StackPanel>
-                    </Button>
-                    <Separator/>
-                    <Button Name="DeleteBtn"  Command="{Binding DeleteDepartmentCmd}">
-                        <StackPanel Orientation="Horizontal" >
-                            <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
-                            <TextBlock Text="{StaticResource DepartmentPage_Toolbar_DeleteBtn}" />
-                        </StackPanel>
-                    </Button>
-                    <Separator/>
-                    <Button>
-                        <StackPanel Orientation="Horizontal" >
-                            <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_SyncDataBtn_img}" />
-                            <TextBlock Text="{StaticResource DepartmentPage_Toolbar_SyncDataBtn}" />
-                        </StackPanel>
-                    </Button>
-                    <Separator/>
-                </ToolBar>
-            </ToolBarTray>
-        </StackPanel>
-        <DockPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
-            <TextBox Margin="0,0,5,0"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" >
+                <ToolBarTray>
+                    <ToolBar>
+                        <Button Name="AddBtn" Command="{Binding AddDepartmentCmd}">
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
+                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_AddBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                        <Button Name="ModifyBtn" Command="{Binding ModifyDepartmentCmd}">
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
+                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_ModifyBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                        <Button Name="DeleteBtn"  Command="{Binding DeleteDepartmentCmd}">
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
+                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_DeleteBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                        <Button>
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_SyncDataBtn_img}" />
+                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_SyncDataBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                    </ToolBar>
+                </ToolBarTray>
+            </StackPanel>
+            <DockPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
+                <TextBox Margin="0,0,5,0"
                      Width="200"
                          Name="SearchDepartmentTextBox"
                          Controls:TextBoxHelper.Watermark="Search department..."
                          Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmdWithParameter, Mode=OneWay}"
                          Controls:TextBoxHelper.ButtonCommandParameter="{Binding ElementName=test2, Path=Text}"
                          Style="{DynamicResource SearchMetroTextBox}" />
-        </DockPanel>
-        <DockPanel Grid.Row="1" Grid.Column="0">
-            <TreeView Name="lstDepartment" ItemsSource="{Binding TreeViewSource}">
-                <TreeView.Resources>
-                    <Style x:Key="ExpandingImageStyle" TargetType="{x:Type Image}">
-                        <Setter Property="Source" Value="{DynamicResource icon_treeitem_closed}"/>
-                        <Setter Property="Width" Value="12" />
-                        <Setter Property="Height" Value="12" />
-                        <Setter Property="VerticalAlignment" Value="Center" />
-                        <Setter Property="Margin" Value="0,0,3,0" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsExpanded}" Value="True">
-                                <Setter Property="Source" Value="{DynamicResource icon_treeitem_opened}"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TreeView.Resources>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectedItemChanged">
-                        <command:EventToCommand Command="{Binding SelectedTreeNodeChangedCmd}" CommandParameter="{Binding ElementName=lstDepartment,Path=SelectedValue}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate DataType="{x:Type models:TreeViewNode}" ItemsSource="{Binding Path=Children}">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Style="{StaticResource ExpandingImageStyle}"/>
-                            <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
-                        </StackPanel>
-                    </HierarchicalDataTemplate>
-                </TreeView.ItemTemplate>
-            </TreeView>
-        </DockPanel>
-        <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0" Visibility="{Binding HasSelectedDepartment, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <views:DepartmentDetailPanel DataContext="{Binding SelectedDepartmentDetailViewModel}" />
+            </DockPanel>
+            <DockPanel Grid.Row="1" Grid.Column="0" >
+                <Border Margin="5" BorderBrush="LightGray" BorderThickness="2" VerticalAlignment="Stretch">
+                    <TreeView Name="lstDepartment" ItemsSource="{Binding TreeViewSource}">
+                        <TreeView.Resources>
+                            <Style x:Key="ExpandingImageStyle" TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="{DynamicResource icon_treeitem_closed}"/>
+                                <Setter Property="Width" Value="12" />
+                                <Setter Property="Height" Value="12" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="0,0,3,0" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsExpanded}" Value="True">
+                                        <Setter Property="Source" Value="{DynamicResource icon_treeitem_opened}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TreeView.Resources>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedItemChanged">
+                                <command:EventToCommand Command="{Binding SelectedTreeNodeChangedCmd}" CommandParameter="{Binding ElementName=lstDepartment,Path=SelectedValue}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate DataType="{x:Type models:TreeViewNode}" ItemsSource="{Binding Path=Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{StaticResource ExpandingImageStyle}"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Border>
+            </DockPanel>
+            <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="0" Visibility="{Binding HasSelectedDepartment, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Border Margin="5" BorderBrush="LightGray" BorderThickness="2" VerticalAlignment="Stretch">
+                    <views:DepartmentDetailPanel DataContext="{Binding SelectedDepartmentDetailViewModel}" />
+                </Border>
+            </Grid>
         </Grid>
-    </Grid>
 </Page>

@@ -45,7 +45,7 @@
                                Style="{StaticResource LargeTileStyle}"
                                Background="#FFC8AE12"
                            Command="{Binding Path=GotoDoorCommand}"
-                           Count="5">
+                           >
             <Grid Width="40" Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
                 <Grid.OpacityMask>
                     <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_email}" />

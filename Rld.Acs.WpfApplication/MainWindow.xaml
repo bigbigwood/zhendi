@@ -2,11 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="MainWindow" Width="1000" Height="600" TitlebarHeight="50" WindowTitleBrush="White"
-        DataContext="{Binding Main, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen"
+        TitlebarHeight="50" Width="1000" Height="600" 
+        NonActiveWindowTitleBrush="White" WindowTitleBrush="White"
         WindowCloseButtonStyle="{DynamicResource MetroWindowCloseButtonStyle}"
         WindowMaxButtonStyle="{DynamicResource MetroWindowCloseButtonStyle}"
-        WindowMinButtonStyle="{DynamicResource MetroWindowCloseButtonStyle}">
+        WindowMinButtonStyle="{DynamicResource MetroWindowCloseButtonStyle}"
+        DataContext="{Binding Main, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen">
 
     <Controls:MetroWindow.Resources>
         <ResourceDictionary>
@@ -96,7 +97,7 @@
 
         </ResourceDictionary>
     </Controls:MetroWindow.Resources>
-    
+
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
             <StackPanel HorizontalAlignment="Left">
@@ -112,20 +113,6 @@
             <Button Foreground="Black">
                 <Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />
             </Button>
-            <!--<Button Foreground="Black">
-                <StackPanel Orientation="Horizontal">
-                    <Rectangle Width="20"
-                   Height="20"
-                   Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_cupcake}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Margin="4 0 0 0"
-                   VerticalAlignment="Center"
-                   Text="deploy cupcakes" />
-                </StackPanel>
-            </Button>-->
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>
@@ -159,13 +146,14 @@
             </Button>
         </StackPanel>
 
+        
         <StackPanel x:Name="PopSubMenuPanel" Orientation="Horizontal" Visibility="Hidden"  MouseLeave="hide_toolmuSecond_people" 
-                    Grid.Row="1" Grid.Column="1" VerticalAlignment="Top"  HorizontalAlignment="Left"
-                    Height="600" Background="#fafafa"
+                    Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch"  HorizontalAlignment="Left"
+                     Background="#fafafa"
                     Width="200" ZIndex="2">
             <Border x:Name="second_border" Style="{StaticResource left_border}">
                 <!--MARGIN设置相对图一宽度右偏移(宽度Width="60"+ Margin="10,10,0,0")70到71左右-->
-                <StackPanel x:Name="PopSubMenuPanelsContainer" HorizontalAlignment="Left" Height="600"
+                <StackPanel x:Name="PopSubMenuPanelsContainer" HorizontalAlignment="Left" Height="800"
                         Style="{StaticResource stack_panel_S}" >
                 </StackPanel>
             </Border>
@@ -390,12 +378,14 @@
             </Border>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" ZIndex="1">
-            <Border Height="25"></Border>
-            <Separator />
-            <Frame Name="MainFrame" NavigationUIVisibility="Hidden"  ScrollViewer.CanContentScroll="False" 
-                   VerticalAlignment="Stretch" VerticalContentAlignment="Top" Source="/Rld.Acs.WpfApplication;component/Pages/SummaryPage.xaml">
+        <DockPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Frame Name="MainFrame" 
+                   NavigationUIVisibility="Hidden"  
+                   ScrollViewer.CanContentScroll="False" 
+                   Source="/Rld.Acs.WpfApplication;component/Pages/SummaryPage.xaml">
             </Frame>
-        </StackPanel>
+
+        </DockPanel>
+
     </Grid>
 </Controls:MetroWindow>
