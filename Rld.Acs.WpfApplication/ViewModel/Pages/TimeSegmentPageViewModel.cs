@@ -52,7 +52,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
                 }, Tokens.OpenTimeSegmentView);
 
-                if (timeSegmentViewModel.ID != 0)
+                if (timeSegmentViewModel.CurrentTimeSegment.TimeSegmentID != 0)
                     TimeSegmentViewModels.Add(timeSegmentViewModel);
             }
             catch (Exception ex)
@@ -77,8 +77,6 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
                 }, Tokens.OpenTimeSegmentView);
 
-                //var vm = TimeSegmentViewModels.First(s => s.ID == SelectedTimeSegmentViewModel.ID);
-                //vm = SelectedTimeSegmentViewModel;
             }
             catch (Exception ex)
             {

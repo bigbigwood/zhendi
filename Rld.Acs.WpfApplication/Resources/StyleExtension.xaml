@@ -2,6 +2,55 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
 
+    <Style x:Key="MetroWindowCloseButtonStyle"
+       TargetType="{x:Type Button}"
+       BasedOn="{StaticResource MetroWindowButtonStyle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid"
+                      Background="{TemplateBinding Background}">
+                        <ContentPresenter x:Name="contentPresenter"
+                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      RecognizesAccessKey="True"
+                                      Opacity="0.75" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                             Value="True">
+                            <Setter TargetName="contentPresenter"
+                                Property="Opacity"
+                                Value="1" />
+                            <Setter TargetName="grid"
+                                Property="Background"
+                                Value="#E04343" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver"
+                             Value="False">
+                            <Setter TargetName="contentPresenter"
+                                Property="Opacity"
+                                Value=".5" />
+                        </Trigger>
+                        <Trigger Property="IsPressed"
+                             Value="True">
+                            <Setter TargetName="grid"
+                                Property="Background"
+                                Value="#993D3D" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                             Value="True">
+                            <Setter Property="Foreground"
+                                Value="Black" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="LargeTileStyle" TargetType="controls:Tile">
         <Setter Property="Width" Value="180" />
         <Setter Property="Height" Value="100" />

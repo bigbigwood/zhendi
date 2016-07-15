@@ -137,6 +137,9 @@
     <Compile Include="Repository\DeviceControllerRepository.cs" />
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
+    <Compile Include="sysLogin.xaml.cs">
+      <DependentUpon>sysLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\Pages\DepartmentPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\TimeGroupPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\TimeZonePageViewModel.cs" />
@@ -203,6 +206,10 @@
     <Page Include="Resources\StyleExtension.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="sysLogin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DepartmentDetailPanel.xaml">
       <SubType>Designer</SubType>
@@ -332,6 +339,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\MinImages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ADMIN.jpg" />
+    <Resource Include="Images\Logo.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
