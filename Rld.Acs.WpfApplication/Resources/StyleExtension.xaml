@@ -19,31 +19,18 @@
                                       Opacity="0.75" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver"
-                             Value="True">
-                            <Setter TargetName="contentPresenter"
-                                Property="Opacity"
-                                Value="1" />
-                            <Setter TargetName="grid"
-                                Property="Background"
-                                Value="#E04343" />
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="contentPresenter" Property="Opacity"  Value="1" />
+                            <Setter TargetName="grid" Property="Background" Value="#E04343" />
                         </Trigger>
-                        <Trigger Property="IsMouseOver"
-                             Value="False">
-                            <Setter TargetName="contentPresenter"
-                                Property="Opacity"
-                                Value=".5" />
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
                         </Trigger>
-                        <Trigger Property="IsPressed"
-                             Value="True">
-                            <Setter TargetName="grid"
-                                Property="Background"
-                                Value="#993D3D" />
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="grid" Property="Background" Value="#993D3D" />
                         </Trigger>
-                        <Trigger Property="IsEnabled"
-                             Value="True">
-                            <Setter Property="Foreground"
-                                Value="Black" />
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter Property="Foreground" Value="Black" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

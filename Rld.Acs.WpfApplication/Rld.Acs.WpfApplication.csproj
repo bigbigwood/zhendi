@@ -14,6 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
+    <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -112,6 +113,9 @@
     <Compile Include="CustomControls\TileIconBox.xaml.cs">
       <DependentUpon>TileIconBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\TimeControl.xaml.cs">
+      <DependentUpon>TimeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extension\MessageBoxSingleton.cs" />
     <Compile Include="Messages\OpenWindowMessage.cs" />
     <Compile Include="Messages\Tokens.cs" />
@@ -124,6 +128,9 @@
     </Compile>
     <Compile Include="Pages\SummaryPage.xaml.cs">
       <DependentUpon>SummaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TimeZonePage.xaml.cs">
+      <DependentUpon>TimeZonePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TimeGroupPage.xaml.cs">
       <DependentUpon>TimeGroupPage.xaml</DependentUpon>
@@ -157,6 +164,9 @@
     <Compile Include="Views\DepartmentDetailPanel.xaml.cs">
       <DependentUpon>DepartmentDetailPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\TimeZoneView.xaml.cs">
+      <DependentUpon>TimeZoneView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TimeGroupView.xaml.cs">
       <DependentUpon>TimeGroupView.xaml</DependentUpon>
     </Compile>
@@ -169,6 +179,10 @@
     <Page Include="CustomControls\TileIconBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\TimeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -190,6 +204,10 @@
     <Page Include="Pages\SummaryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TimeZonePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\TimeGroupPage.xaml">
       <SubType>Designer</SubType>
@@ -226,6 +244,10 @@
     <Page Include="Views\DepartmentDetailPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimeZoneView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\TimeGroupView.xaml">
       <Generator>MSBuild:Compile</Generator>

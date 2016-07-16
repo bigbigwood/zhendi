@@ -3,6 +3,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="Ok">确认</sys:String>
     <sys:String x:Key="Cancel">取消</sys:String>
+    <sys:String x:Key="SettingDetail">设置详情</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_AddBtn">增加部门</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_ModifyBtn">修改部门</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_DeleteBtn">删除部门</sys:String>
