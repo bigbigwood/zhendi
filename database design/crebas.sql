@@ -90,33 +90,7 @@ alter table SYS_USER_ROLE
    drop constraint FK_SYS_USER_REFERENCE_SYS_USER
 go
 
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('TIME_GROUP_SEGMENT') and o.name = 'FK_TIME_GRO_REFERENCE_TIME_GRO')
-alter table TIME_GROUP_SEGMENT
-   drop constraint FK_TIME_GRO_REFERENCE_TIME_GRO
-go
 
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('TIME_GROUP_SEGMENT') and o.name = 'FK_TIME_GRO_REFERENCE_TIME_SEG')
-alter table TIME_GROUP_SEGMENT
-   drop constraint FK_TIME_GRO_REFERENCE_TIME_SEG
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('TIME_ZONE_GROUP') and o.name = 'FK_TIME_ZON_REFERENCE_TIME_ZON')
-alter table TIME_ZONE_GROUP
-   drop constraint FK_TIME_ZON_REFERENCE_TIME_ZON
-go
-
-if exists (select 1
-   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('TIME_ZONE_GROUP') and o.name = 'FK_TIME_ZON_REFERENCE_TIME_GRO')
-alter table TIME_ZONE_GROUP
-   drop constraint FK_TIME_ZON_REFERENCE_TIME_GRO
-go
 
 if exists (select 1
             from  sysobjects
@@ -876,23 +850,5 @@ alter table SYS_USER_ROLE
       references SYS_USER (USERID)
 go
 
-alter table TIME_GROUP_SEGMENT
-   add constraint FK_TIME_GRO_REFERENCE_TIME_GRO foreign key (TIMEGROUPID)
-      references TIME_GROUPS (TIMEGROUPID)
-go
 
-alter table TIME_GROUP_SEGMENT
-   add constraint FK_TIME_GRO_REFERENCE_TIME_SEG foreign key (TIMESEGMENTID)
-      references TIME_SEGMENTS (TIMESEGMENTID)
-go
-
-alter table TIME_ZONE_GROUP
-   add constraint FK_TIME_ZON_REFERENCE_TIME_ZON foreign key (TIMEZONEID)
-      references TIME_ZONE (TIMEZONEID)
-go
-
-alter table TIME_ZONE_GROUP
-   add constraint FK_TIME_ZON_REFERENCE_TIME_GRO foreign key (TIMEGROUPID)
-      references TIME_GROUPS (TIMEGROUPID)
-go
 

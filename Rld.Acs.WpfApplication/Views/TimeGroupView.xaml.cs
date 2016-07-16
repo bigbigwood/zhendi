@@ -12,27 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
-using MahApps.Metro.Controls;
 using Rld.Acs.WpfApplication.Extension;
 using Rld.Acs.WpfApplication.Messages;
 
 namespace Rld.Acs.WpfApplication.Views
 {
     /// <summary>
-    /// Interaction logic for TimeSegmentView.xaml
+    /// Interaction logic for TimeGroupView.xaml
     /// </summary>
-    public partial class TimeSegmentView
+    public partial class TimeGroupView
     {
-        public TimeSegmentView()
+        public TimeGroupView()
         {
             InitializeComponent();
 
-            Messenger.Default.Register(this, Tokens.CloseTimeSegmentView, new Action<NotificationMessage>(ProcessCloseViewMessage));
-        }
-
-        private void MetroWindow_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Messenger.Default.Unregister(this);
+            Messenger.Default.Register(this, Tokens.CloseTimeGroupView, new Action<NotificationMessage>(ProcessCloseViewMessage));
         }
 
         private void ProcessCloseViewMessage(NotificationMessage msg)
@@ -43,6 +37,11 @@ namespace Rld.Acs.WpfApplication.Views
             }
 
             Close();
+        }
+
+        private void MetroWindow_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Unregister(this);
         }
     }
 }

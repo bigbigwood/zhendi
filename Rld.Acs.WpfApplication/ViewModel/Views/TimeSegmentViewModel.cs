@@ -61,6 +61,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentTimeSegment.BeginTime = string.Format("{0}:{1}", StartHour, StartMinute);
                     CurrentTimeSegment.EndTime = string.Format("{0}:{1}", EndHour, EndMinute);
                     CurrentTimeSegment.TimeSegmentName = Name;
+                    CurrentTimeSegment.Status = GeneralStatus.Enabled;;
                     CurrentTimeSegment.CreateUserID = 1;
                     CurrentTimeSegment.CreateDate = DateTime.Now;
                     CurrentTimeSegment = _timeSegmentRepo.Insert(CurrentTimeSegment);
@@ -72,6 +73,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentTimeSegment.BeginTime = string.Format("{0}:{1}", StartHour, StartMinute);
                     CurrentTimeSegment.EndTime = string.Format("{0}:{1}", EndHour, EndMinute);
                     CurrentTimeSegment.TimeSegmentName = Name;
+                    CurrentTimeSegment.Status = GeneralStatus.Enabled; ;
                     CurrentTimeSegment.UpdateUserID = 1;
                     CurrentTimeSegment.UpdateDate = DateTime.Now;
                     _timeSegmentRepo.Update(CurrentTimeSegment);

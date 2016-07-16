@@ -115,7 +115,7 @@
     <Compile Include="Extension\MessageBoxSingleton.cs" />
     <Compile Include="Messages\OpenWindowMessage.cs" />
     <Compile Include="Messages\Tokens.cs" />
-    <Compile Include="Models\ListBoxItem.cs" />
+    <Compile Include="Models\SelectableItem.cs" />
     <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Navigation\FrameNavigationService.cs" />
     <Compile Include="Navigation\IFrameNavigationService.cs" />
@@ -124,6 +124,9 @@
     </Compile>
     <Compile Include="Pages\SummaryPage.xaml.cs">
       <DependentUpon>SummaryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TimeGroupPage.xaml.cs">
+      <DependentUpon>TimeGroupPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TimeSegmentPage.xaml.cs">
       <DependentUpon>TimeSegmentPage.xaml</DependentUpon>
@@ -148,9 +151,14 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\Views\DepartmentDetailViewModel.cs" />
+    <Compile Include="ViewModel\Views\TimeZoneViewModel.cs" />
+    <Compile Include="ViewModel\Views\TimeGroupViewModel.cs" />
     <Compile Include="ViewModel\Views\TimeSegmentViewModel.cs" />
     <Compile Include="Views\DepartmentDetailPanel.xaml.cs">
       <DependentUpon>DepartmentDetailPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimeGroupView.xaml.cs">
+      <DependentUpon>TimeGroupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartmentView.xaml.cs">
       <DependentUpon>DepartmentView.xaml</DependentUpon>
@@ -180,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SummaryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TimeGroupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +226,10 @@
     <Page Include="Views\DepartmentDetailPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimeGroupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DepartmentView.xaml">
       <SubType>Designer</SubType>

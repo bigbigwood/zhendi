@@ -247,12 +247,12 @@
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/时间段.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem x:Name="dev2_timezu" FontSize="12" Width="180"  Header="时间组" IsCheckable="False">
+                            <MenuItem x:Name="dev2_timezu" FontSize="12" Width="180"  Header="时间组" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="TimeGroupPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/时间组.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem x:Name="dev2_timequ" FontSize="12" Width="180"  Header="时间区" IsCheckable="False">
+                            <MenuItem x:Name="dev2_timequ" FontSize="12" Width="180"  Header="时间区" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="TimeZonePage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/时间区.png"/>
                                 </MenuItem.Icon>

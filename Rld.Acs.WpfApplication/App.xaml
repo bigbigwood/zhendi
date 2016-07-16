@@ -13,7 +13,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/steel.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="/Resources/Icons.xaml" />
-
+                
                 <!-- Rld application resource-->
                 <ResourceDictionary Source="/Resources/IconsUI.xaml" />
                 <ResourceDictionary Source="/Resources/StyleExtension.xaml" />

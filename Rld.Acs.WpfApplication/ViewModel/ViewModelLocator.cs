@@ -17,6 +17,7 @@ using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Rld.Acs.WpfApplication.Navigation;
 using System;
+using Rld.Acs.WpfApplication.ViewModel.Pages;
 
 namespace Rld.Acs.WpfApplication.ViewModel
 {

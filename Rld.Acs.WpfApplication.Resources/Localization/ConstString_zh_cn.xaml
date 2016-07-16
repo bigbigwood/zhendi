@@ -27,7 +27,12 @@
     <sys:String x:Key="TimeGroupPage_AddBtn">增加时间组</sys:String>
     <sys:String x:Key="TimeGroupPage_ModifyBtn">修改时间组</sys:String>
     <sys:String x:Key="TimeGroupPage_DeleteBtn">删除时间组</sys:String>
+    <sys:String x:Key="TimeGroupView_Label_Name">时间组名称</sys:String>
+    <sys:String x:Key="TimeGroupView_Label_SelectedSegment">已选择时间段</sys:String>
+    <sys:String x:Key="TimeGroupView_Label_SelectSegment">选择时间段</sys:String>
+    
     <sys:String x:Key="TimeZonePage_AddBtn">增加时间区</sys:String>
     <sys:String x:Key="TimeZonePage_ModifyBtn">修改时间区</sys:String>
     <sys:String x:Key="TimeZonePage_DeleteBtn">删除时间区</sys:String>
+    <sys:String x:Key="TimeZoneView_Label_Name">时间区名称</sys:String>
 </ResourceDictionary>
