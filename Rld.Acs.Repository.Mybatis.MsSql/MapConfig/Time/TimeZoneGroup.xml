@@ -10,16 +10,8 @@
       <result property="TimeZoneGroupID" column="TimeZoneGroupID"/>
       <result property="TimeZoneID" column="TimeZoneID"/>
       <result property="TimeGroupID" column="TimeGroupID"/>
-    </resultMap>
-    <resultMap id="TimeGroupResult" class="Rld.Acs.Model.TimeGroup">
-      <result property="TimeGroupID" column="TimeGroupID"/>
-      <result property="TimeGroupName" column="TimeGroupName"/>
-      <result property="CreateUserID" column="CreateUserID"/>
-      <result property="CreateDate" column="CreateDate"/>
-      <result property="Status" column="Status"/>
-      <result property="UpdateUserID" column="UpdateUserID"/>
-      <result property="UpdateDate" column="UpdateDate"/>
-      <result property="TimeSegments" column="TimeGroupID" select="TimeGroupSegment.GetSegmentsByGroupID"/>
+      <result property="MappingName" column="MappingName"/>
+      <result property="DisplayOrder" column="DisplayOrder"/>
     </resultMap>
   </resultMaps>
 
@@ -30,21 +22,24 @@
       WHERE
       [TimeZoneGroupID] = #value#
     </select>
-    <select id="TimeZoneGroup.GetGroupsByZoneID" parameterClass="int" resultMap="TimeGroupResult">
-      SELECT TG.*
-      FROM [TIME_ZONE_GROUP] TZG
-      LEFT JOIN [TIME_GROUPS] TG ON TZG.TimeGroupID = TG.TimeGroupID
+    <select id="TimeZoneGroup.GetByZoneID" parameterClass="int" resultMap="TimeZoneGroupResult">
+      SELECT *
+      FROM [TIME_ZONE_GROUP]
       WHERE
-      TZG.TimeZoneID = #TimeZoneID#
+      [TimeZoneID] = #TimeZoneID#
     </select>
 
     <insert id="TimeZoneGroup.Insert" parameterClass="TimeZoneGroup">
       INSERT INTO [TIME_ZONE_GROUP] (
       [TimeZoneID]
       , [TimeGroupID]
+      , [MappingName]
+      , [DisplayOrder]
       ) VALUES (
       #TimeZoneID#
       , #TimeGroupID#
+      , #MappingName#
+      , #DisplayOrder#
       )
       <selectKey resultClass="int" type="post" property="TimeZoneGroupID" >
         select @@IDENTITY as value
@@ -55,6 +50,8 @@
       UPDATE [TIME_ZONE_GROUP] SET
       [TimeZoneID] = #TimeZoneID#
       , [TimeGroupID] = #TimeGroupID#
+      , [MappingName] = #MappingName#
+      , [DisplayOrder] = #DisplayOrder#
       WHERE
       [TimeZoneGroupID] = #TimeZoneGroupID#
     </update>

@@ -22,6 +22,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public RelayCommand AddTimeZoneCmd { get; private set; }
         public RelayCommand ModifyTimeZoneCmd { get; private set; }
         public RelayCommand DeleteTimeZoneCmd { get; private set; }
+        public RelayCommand TimeZoneDashboardCmd { get; private set; }
 
         public ObservableCollection<TimeZoneViewModel> TimeZoneViewModels { get; set; }
         public TimeZoneViewModel SelectedTimeZoneViewModel { get; set; }
@@ -31,6 +32,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             AddTimeZoneCmd = new RelayCommand(AddTimeZone);
             ModifyTimeZoneCmd = new RelayCommand(ModifyTimeZone);
             DeleteTimeZoneCmd = new RelayCommand(DeleteTimeZone);
+            TimeZoneDashboardCmd = new RelayCommand(OpenTimeZoneDetail);
 
             TimeZoneViewModels = new ObservableCollection<TimeZoneViewModel>();
             var timezones = _timeZoneRepo.Query(new Hashtable()).ToList();
@@ -79,6 +81,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             }
         }
 
+
         private void DeleteTimeZone()
         {
             try
@@ -123,6 +126,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeGroupPage_ShowNotification);
             });
+        }
+
+
+        private void OpenTimeZoneDetail()
+        {
+            Messenger.Default.Send(new OpenWindowMessage()
+            {
+                DataContext = SelectedTimeZoneViewModel
+
+            }, Tokens.OpenTimeZoneDashboardView);
         }
     }
 }

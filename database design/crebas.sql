@@ -782,6 +782,8 @@ create table TIME_ZONE_GROUP (
    TimeZoneGroupID      int                  identity(1,1),
    TimeZoneID           int                  not null,
    TimeGroupID          int                  not null,
+   MappingName          nvarchar(100)        not null,
+   DisplayOrder         int                  not null,
    constraint PK_TIME_ZONE_GROUP primary key nonclustered (TIMEZONEGROUPID)
 )
 go

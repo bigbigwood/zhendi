@@ -50,6 +50,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 }
             }
 
+            SelectedFormattingTimeSegmentList = GetSelectedFormattingTimeSegmentList();
+
             Title = (timeGroup.TimeGroupID == 0) ? "新增时间组" : "修改时间组";
         }
 
@@ -57,6 +59,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public Int32 ID { get; set; }
         public string Name { get; set; }
         public TimeGroup CurrentTimeGroup { get; set; }
+        public ObservableCollection<string> SelectedFormattingTimeSegmentList { get; set; }
         public ObservableCollection<SelectableItem> TimeSegmentDtos { get; set; }
         public List<TimeSegment> AllTimeSegments { get; set; }
 
@@ -85,7 +88,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentTimeGroup.TimeSegments = GetSelectedTimeSegments();
                     _timeGroupRepo.Update(CurrentTimeGroup);
 
-                    RaisePropertyChanged(null);
                     message = "修改时间组成功!";
                 }
             }
@@ -95,6 +97,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 message = "保存时间组失败";
                 return;
             }
+
+            SelectedFormattingTimeSegmentList = GetSelectedFormattingTimeSegmentList();
+            RaisePropertyChanged(null);
 
             Close(message);
         }
@@ -108,6 +113,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             var selectedItems = TimeSegmentDtos.Where(t => t.IsSelected).ToList();
             return selectedItems.Select(item => AllTimeSegments.First(t => t.TimeSegmentID == item.ID)).ToList();
+        }
+
+        private ObservableCollection<string> GetSelectedFormattingTimeSegmentList()
+        {
+            var selected = new ObservableCollection<string>();
+            var selectedTimeSegments = GetSelectedTimeSegments();
+            foreach (var item in selectedTimeSegments)
+            {
+                selected.Add(string.Format("{0}-{1}", item.BeginTime, item.EndTime));
+            }
+
+            return selected;
         }
     }
 }

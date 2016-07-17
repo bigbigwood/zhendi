@@ -64,16 +64,9 @@ namespace Rld.Acs.WebApi.Controllers
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "timeZoneInfo is null");
                 }
 
-                if (timeZoneInfo.TimeGroups != null && timeZoneInfo.TimeGroups.Any())
-                {
-                    foreach (var timeGroup in timeZoneInfo.TimeGroups.Where(timeGroup => timeGroupRepo.GetByKey(timeGroup.TimeGroupID) == null))
-                    {
-                        return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeGroup Id = {0} does not exist yet.", timeGroup.TimeGroupID));
-                    }
-                }
-
                 timeZoneRepo.Insert(timeZoneInfo);
-                timeZoneInfo.TimeGroups.ForEach(g => timeZoneGroupRepo.Insert(new TimeZoneGroup { TimeZoneID = timeZoneInfo.TimeZoneID, TimeGroupID = g.TimeGroupID }));
+                timeZoneInfo.TimeGroupAssociations.ForEach(t => t.TimeZoneID = timeZoneInfo.TimeZoneID);
+                timeZoneInfo.TimeGroupAssociations.ForEach(t => timeZoneGroupRepo.Insert(t));
 
                 return Request.CreateResponse(HttpStatusCode.OK, timeZoneInfo);
 
@@ -101,39 +94,23 @@ namespace Rld.Acs.WebApi.Controllers
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeZone Id={0} does not exist.", id));
                 }
 
-                IList<TimeGroup> addedTimeGroups = new List<TimeGroup>();
-                IList<TimeGroup> deletedTimeGroups = new List<TimeGroup>();
-
-                if (timeZoneInfo.TimeGroups != null && timeZoneInfo.TimeGroups.Any())
+                var addedTimeGroups = new List<TimeZoneGroup>();
+                var deletedTimeGroupIds = new List<int>();
+                if (timeZoneInfo.TimeGroupAssociations != null && timeZoneInfo.TimeGroupAssociations.Any())
                 {
-                    var originalTimeGroupsIds = originalTimeZoneInfo.TimeGroups.Select(g => g.TimeGroupID);
-                    var targetTimeGroupsIds = timeZoneInfo.TimeGroups.Select(g => g.TimeGroupID);
+                    var originalTimeGroupAssociationIDs = originalTimeZoneInfo.TimeGroupAssociations.Select(d => d.TimeZoneGroupID);
+                    var timeGroupAssociationIDs = timeZoneInfo.TimeGroupAssociations.Select(d => d.TimeZoneGroupID);
+                    deletedTimeGroupIds = originalTimeGroupAssociationIDs.Except(timeGroupAssociationIDs).ToList();
 
-                    addedTimeGroups =
-                        timeZoneInfo.TimeGroups.FindAll(g => originalTimeGroupsIds.Contains(g.TimeGroupID) == false);
-
-                    deletedTimeGroups =
-                        originalTimeZoneInfo.TimeGroups.FindAll(g => targetTimeGroupsIds.Contains(g.TimeGroupID) == false);
-
-                    foreach (var addedtimeGroup in addedTimeGroups.Where(tg => timeGroupRepo.GetByKey(tg.TimeGroupID) == null))
-                    {
-                        return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeGroup Id = {0} does not exist yet.", addedtimeGroup.TimeGroupID));
-                    }
+                    addedTimeGroups = timeZoneInfo.TimeGroupAssociations.FindAll(d => d.TimeZoneGroupID == 0);
                 }
                 else
                 {
-                    deletedTimeGroups = originalTimeZoneInfo.TimeGroups;
+                    deletedTimeGroupIds = originalTimeZoneInfo.TimeGroupAssociations.Select(d => d.TimeZoneGroupID).ToList();
                 }
 
-                foreach (var deletedTimeGroup in deletedTimeGroups)
-                {
-                    var binding = timeZoneGroupRepo.Query(new Hashtable { { "TimeZoneID", id }, { "TimeGroupID", deletedTimeGroup.TimeGroupID } }).ToList();
-                    binding.ForEach(b => timeZoneGroupRepo.Delete(b.TimeZoneGroupID));
-                }
-                foreach (var addedTimeGroup in addedTimeGroups)
-                {
-                    timeZoneGroupRepo.Insert(new TimeZoneGroup { TimeZoneID = id, TimeGroupID = addedTimeGroup.TimeGroupID });
-                }
+                deletedTimeGroupIds.ForEach(d => timeZoneGroupRepo.Delete(d));
+                addedTimeGroups.ForEach(d => timeZoneGroupRepo.Insert(d));
                 timeZoneRepo.Update(timeZoneInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);

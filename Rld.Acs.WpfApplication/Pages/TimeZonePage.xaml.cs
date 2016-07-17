@@ -30,6 +30,7 @@ namespace Rld.Acs.WpfApplication.Pages
             InitializeComponent();
 
             Messenger.Default.Register<OpenWindowMessage>(this, Tokens.OpenTimeZoneView, ProcessOpenView);
+            Messenger.Default.Register<OpenWindowMessage>(this, Tokens.OpenTimeZoneDashboardView, ProcessOpenDashboardView);
             Messenger.Default.Register(this, Tokens.TimeZonePage_ShowNotification, new Action<NotificationMessage>(ShowNotification));
             Messenger.Default.Register(this, Tokens.TimeZonePage_ShowQuestion, new Action<NotificationMessageAction>(ProcessShowNotificationAction));
         }
@@ -54,6 +55,15 @@ namespace Rld.Acs.WpfApplication.Pages
         private void ProcessOpenView(OpenWindowMessage msg)
         {
             var view = new TimeZoneView() { DataContext = msg.DataContext };
+            view.BorderThickness = new Thickness(1);
+            view.GlowBrush = null;
+            view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
+            view.ShowDialog();
+        }
+
+        private void ProcessOpenDashboardView(OpenWindowMessage msg)
+        {
+            var view = new TimeZoneDashboardView() { DataContext = msg.DataContext };
             view.BorderThickness = new Thickness(1);
             view.GlowBrush = null;
             view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");

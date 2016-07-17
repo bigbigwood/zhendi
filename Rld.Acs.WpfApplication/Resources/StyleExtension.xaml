@@ -64,7 +64,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <TextBlock TextDecorations="Underline">
-                <ContentPresenter />
+                        <ContentPresenter />
                     </TextBlock>
                 </ControlTemplate>
             </Setter.Value>

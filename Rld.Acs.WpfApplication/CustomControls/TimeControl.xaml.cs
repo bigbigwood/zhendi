@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,5 +24,38 @@ namespace Rld.Acs.WpfApplication
 		{
 			this.InitializeComponent();
 		}
+
+        public static readonly DependencyProperty DurationsProperty =
+            DependencyProperty.Register("Durations", typeof(IEnumerable), typeof(TimeControl),
+            new FrameworkPropertyMetadata(null, new PropertyChangedCallback(DurationsPropertyChangedCallback)));
+
+        [Description("")]
+        [Category("")]
+        public IEnumerable Durations
+        {
+            get
+            {
+                return (IEnumerable)this.GetValue(DurationsProperty);
+            }
+            set
+            {
+                this.SetValue(DurationsProperty, value);
+            }
+        }
+
+        private static void DurationsPropertyChangedCallback(DependencyObject sender, DependencyPropertyChangedEventArgs arg)
+        {
+            if (sender != null && sender is TimeControl)
+            {
+                TimeControl clock = sender as TimeControl;
+
+                ReDraw((IEnumerable)arg.NewValue);
+            }
+        }
+
+        private static void ReDraw(IEnumerable newDurations)
+	    {
+	        
+	    }
 	}
 }

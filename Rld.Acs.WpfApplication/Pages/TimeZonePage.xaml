@@ -56,14 +56,16 @@
             </DockPanel>
             <DataGrid Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="0"
                     ItemsSource="{Binding TimeZoneViewModels}" SelectedItem="{Binding Path=SelectedTimeZoneViewModel}" 
-                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow">
+                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter:RowToIndexConverter}}" />
                     <DataGridTextColumn Header="{DynamicResource TimeZoneView_Label_Name}" Binding="{Binding Name}" Width="200" />
                     <DataGridTemplateColumn Header="{DynamicResource SettingDetail}" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Style="{StaticResource LinkButton}" Content="查看时间区设置"></Button>
+                                <Button Style="{StaticResource LinkButton}" Content="查看时间区设置" 
+                                        Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, 
+                                    Path=DataContext.TimeZoneDashboardCmd}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

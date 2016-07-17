@@ -64,7 +64,7 @@
                     <DataGridTemplateColumn Header="{DynamicResource TimeGroupView_Label_SelectedSegment}" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <wpfApplication:TimeControl HorizontalAlignment="Stretch"/>
+                                <wpfApplication:TimeControl HorizontalAlignment="Stretch" Durations="{Binding SelectedTimeSegments, Mode=TwoWay}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

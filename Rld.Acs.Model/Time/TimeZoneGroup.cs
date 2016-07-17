@@ -9,5 +9,7 @@ namespace Rld.Acs.Model
         public virtual Int32 TimeZoneGroupID { get; set; }
         public virtual Int32 TimeZoneID { get; set; }
         public virtual Int32 TimeGroupID { get; set; }
+        public virtual string MappingName { get; set; }
+        public virtual Int32 DisplayOrder { get; set; }
     }
 }

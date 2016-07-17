@@ -12,6 +12,21 @@ namespace Rld.Acs.WpfApplication.Models
         public Boolean IsSelected { get; set; }
         public string DisplayName { get; set; }
         public string Description { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+
+            return Equals(obj as SelectableItem);
+        }
+
+        public bool Equals(SelectableItem other)
+        {
+            if (other == null) return false;
+            return ID == other.ID;
+        }
     }
 
     public class ListBoxItem : SelectableItem
@@ -20,5 +35,19 @@ namespace Rld.Acs.WpfApplication.Models
 
     public class ComboBoxItem : SelectableItem
     {
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+
+            return Equals(obj as ComboBoxItem);
+        }
+
+        public bool Equals(ComboBoxItem other)
+        {
+            if (other == null) return false;
+            return ID == other.ID;
+        }
     }
 }

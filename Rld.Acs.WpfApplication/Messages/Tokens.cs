@@ -31,6 +31,7 @@ namespace Rld.Acs.WpfApplication.Messages
         public static readonly string TimeGroupPage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string TimeGroupPage_ShowQuestion = Guid.NewGuid().ToString();
 
+        public static readonly string OpenTimeZoneDashboardView = Guid.NewGuid().ToString();
         public static readonly string OpenTimeZoneView = Guid.NewGuid().ToString();
         public static readonly string CloseTimeZoneView = Guid.NewGuid().ToString();
         public static readonly string TimeZonePage_ShowNotification = Guid.NewGuid().ToString();

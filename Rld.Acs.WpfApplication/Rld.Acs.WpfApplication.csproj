@@ -138,6 +138,9 @@
     <Compile Include="Pages\TimeSegmentPage.xaml.cs">
       <DependentUpon>TimeSegmentPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\DepartmentRepository.cs" />
     <Compile Include="Repository\TimeGroupRepository.cs" />
@@ -156,13 +159,19 @@
     <Compile Include="ViewModel\Pages\TimeSegmentPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SummaryPageViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Pages\UserPageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\Views\DepartmentDetailViewModel.cs" />
+    <Compile Include="ViewModel\Views\TimeZoneGroupMappingInfo.cs" />
     <Compile Include="ViewModel\Views\TimeZoneViewModel.cs" />
     <Compile Include="ViewModel\Views\TimeGroupViewModel.cs" />
     <Compile Include="ViewModel\Views\TimeSegmentViewModel.cs" />
+    <Compile Include="ViewModel\Views\UserViewModel.cs" />
     <Compile Include="Views\DepartmentDetailPanel.xaml.cs">
       <DependentUpon>DepartmentDetailPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TimeZoneDashboardView.xaml.cs">
+      <DependentUpon>TimeZoneDashboardView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TimeZoneView.xaml.cs">
       <DependentUpon>TimeZoneView.xaml</DependentUpon>
@@ -217,6 +226,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\UserPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Converter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,6 +257,10 @@
     <Page Include="Views\DepartmentDetailPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TimeZoneDashboardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\TimeZoneView.xaml">
       <Generator>MSBuild:Compile</Generator>
