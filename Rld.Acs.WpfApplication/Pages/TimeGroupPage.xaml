@@ -6,6 +6,7 @@
       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
       xmlns:converter="clr-namespace:Rld.Acs.WpfApplication.Converter"
       xmlns:wpfApplication="clr-namespace:Rld.Acs.WpfApplication"
+      xmlns:vm="clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
       mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600"
       DataContext="{Binding TimeGroupPage, Source={StaticResource Locator}}" Unloaded="Page_Unloaded" >
     <Border Style="{StaticResource ContainerBorderStyle}">
@@ -63,8 +64,9 @@
                     <DataGridTextColumn Header="{DynamicResource TimeGroupView_Label_Name}" Binding="{Binding Name}" Width="200" />
                     <DataGridTemplateColumn Header="{DynamicResource TimeGroupView_Label_SelectedSegment}" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <wpfApplication:TimeControl HorizontalAlignment="Stretch" Durations="{Binding SelectedTimeSegments, Mode=TwoWay}"/>
+                            <DataTemplate DataType="{x:Type vm:TimeGroupViewModel}">
+                                <wpfApplication:TimeControl DurationsSource="{Binding SelectedFormattingTimeSegmentList}"
+                                    HorizontalAlignment="Stretch" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
