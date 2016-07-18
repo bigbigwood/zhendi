@@ -17,5 +17,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public Int32 DisplayOrder { get; set; }
         public string SelectedTimeGroupName { get; set; }
         public List<string> AllTimeGroupNames { get; set; }
+        public TimeGroupViewModel TimeGroupViewModel { get; set; }
     }
 }

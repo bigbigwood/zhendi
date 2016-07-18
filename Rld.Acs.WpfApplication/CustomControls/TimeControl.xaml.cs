@@ -32,7 +32,7 @@ namespace Rld.Acs.WpfApplication
             disabledBorderStyle = (Style)FindResource("GrayBorderStyle");
             enabledBorderStype = (Style)FindResource("GreenBorderStyle");
 
-            for (int i = 1; i < 73; i++)
+            for (int i = 1; i < 97; i++)
             {
                 var borderName = String.Format("B{0}", i);
                 var myBorder = (Border)this.FindName(borderName);
@@ -99,12 +99,12 @@ namespace Rld.Acs.WpfApplication
             int endMinute = int.Parse(duration.Substring(9, 2));
 
             //去除尾数
-            //int beginBorderIndex = (beginHour * 60 + beginMinute) / 20;
-            //int endBorderIndex = (endHour * 60 + endMinute) / 20;
+            //int beginBorderIndex = (beginHour * 60 + beginMinute) / 15 + 1;
+            //int endBorderIndex = (endHour * 60 + endMinute) / 15;
 
             //四舍五入
-            int beginBorderIndex = (int)((float)(beginHour * 60 + beginMinute) / 20 + 0.5);
-            int endBorderIndex = (int)((float)(endHour * 60 + endMinute) / 20 + 0.5);
+            int beginBorderIndex = (int)((float)(beginHour * 60 + beginMinute) / 15 + 0.5) + 1;
+            int endBorderIndex = (int)((float)(endHour * 60 + endMinute) / 15 + 0.5);
 
             return borderDictionary.Keys.Where(k => k >= beginBorderIndex && k <= endBorderIndex).
                 Select(index => borderDictionary[index]).ToList();

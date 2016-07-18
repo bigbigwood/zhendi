@@ -40,7 +40,8 @@
                             </ComboBox>
                         </DockPanel>
 
-                        <wpfApplication:TimeControl Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" />
+                        <wpfApplication:TimeControl Grid.Column="1" Grid.RowSpan="2" 
+                                                    HorizontalAlignment="Stretch" DurationsSource="{Binding TimeGroupViewModel.SelectedFormattingTimeSegmentList}"/>
                         <Separator Grid.Row="2" Grid.ColumnSpan="2" Background="LightGray" Margin="5,0,5,0" />
                     </Grid>
                 </Border>

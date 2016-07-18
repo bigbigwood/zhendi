@@ -139,6 +139,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 Name = name,
                 AllTimeGroupNames = AllTimeGroups.Select(t => t.TimeGroupName).ToList(),
                 SelectedTimeGroupName = timeGroup.TimeGroupName,
+                TimeGroupViewModel = new TimeGroupViewModel(timeGroup),
             };
         }
 

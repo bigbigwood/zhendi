@@ -18,7 +18,7 @@
             <Setter Property="Margin" Value="1,0" />
         </Style>
 
-        <Style x:Key="LittleGreenTextBlockStyle" TargetType="TextBlock">
+        <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="Green" />
             <Setter Property="FontSize" Value="8" />
         </Style>
@@ -28,24 +28,40 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="12" />
             <RowDefinition Height="16" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="12" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column ="0" Text="0" Style="{StaticResource LittleGreenTextBlockStyle}" />
-        <TextBlock Grid.Row="0" Grid.Column ="1" Text="6"  Style="{StaticResource LittleGreenTextBlockStyle}" />
-        <TextBlock Grid.Row="0" Grid.Column ="2" Text="12" Style="{StaticResource LittleGreenTextBlockStyle}" />
-        <DockPanel Grid.Row="0" Grid.Column ="3">
-            <TextBlock Text="18" Style="{StaticResource LittleGreenTextBlockStyle}"  HorizontalAlignment="Left" />
-            <TextBlock Text="24" Style="{StaticResource LittleGreenTextBlockStyle}"  HorizontalAlignment="Right" />
+        <TextBlock Grid.Row="0" Grid.Column ="0" Text="0" />
+        <TextBlock Grid.Row="0" Grid.Column ="1" Text="2" />
+        <TextBlock Grid.Row="0" Grid.Column ="2" Text="4" />
+        <TextBlock Grid.Row="0" Grid.Column ="3" Text="6" />
+        <TextBlock Grid.Row="0" Grid.Column ="4" Text="8" />
+        <TextBlock Grid.Row="0" Grid.Column ="5" Text="10" />
+        <TextBlock Grid.Row="0" Grid.Column ="6" Text="12" />
+        <TextBlock Grid.Row="0" Grid.Column ="7" Text="14" />
+        <TextBlock Grid.Row="0" Grid.Column ="8" Text="16" />
+        <TextBlock Grid.Row="0" Grid.Column ="9" Text="18" />
+        <TextBlock Grid.Row="0" Grid.Column ="10" Text="20" />
+        <DockPanel Grid.Row="0" Grid.Column ="11">
+            <TextBlock Text="22" HorizontalAlignment="Left" />
+            <TextBlock Text="24" HorizontalAlignment="Right" />
         </DockPanel>
 
-        <UniformGrid Grid.Row="1" Grid.ColumnSpan="4" Rows="1">
+        <UniformGrid Grid.Row="1" Grid.ColumnSpan="12" Rows="1">
             <UniformGrid Rows="1" Margin="2,0">
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B1" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B2" />
@@ -53,24 +69,23 @@
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B4" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B5" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B6" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B7"  />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B8"  />
             </UniformGrid>
             <UniformGrid Rows="1" Margin="2,0">
-                <Border Style="{StaticResource GrayBorderStyle}" Name="B7" />
-                <Border Style="{StaticResource GrayBorderStyle}" Name="B8" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B9" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B10" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B11" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B12" />
-            </UniformGrid >
-            <UniformGrid Rows="1" Margin="2,0">
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B13" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B14" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B15" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B16" />
+            </UniformGrid >
+            <UniformGrid Rows="1" Margin="2,0">
+
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B17" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B18" />
-            </UniformGrid>
-            <UniformGrid Rows="1" Margin="2,0">
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B19" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B20" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B21" />
@@ -85,30 +100,29 @@
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B28" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B29" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B30" />
-            </UniformGrid>
-            <UniformGrid Rows="1" Margin="2,0">
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B31"  />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B32" />
+            </UniformGrid>
+            <UniformGrid Rows="1" Margin="2,0">
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B33" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B34" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B35" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B36"  />
-            </UniformGrid>
-            <UniformGrid Rows="1" Margin="2,0">
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B37"  />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B38" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B39" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B40" />
-                <Border Style="{StaticResource GrayBorderStyle}" Name="B41" />
-                <Border Style="{StaticResource GrayBorderStyle}" Name="B42"  />
             </UniformGrid>
             <UniformGrid Rows="1" Margin="2,0">
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B41" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B42"  />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B43"  />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B44" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B45" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B46" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B47" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B48"  />
+
             </UniformGrid>
             <UniformGrid Rows="1" Margin="2,0">
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B49"  />
@@ -117,24 +131,22 @@
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B52" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B53" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B54"  />
-            </UniformGrid>
-            <UniformGrid Rows="1" Margin="2,0">
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B55"  />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B56" />
+            </UniformGrid>
+            <UniformGrid Rows="1" Margin="2,0">
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B57" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B58" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B59" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B60"  />
-            </UniformGrid>
-            <UniformGrid Rows="1" Margin="2,0">
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B61"  />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B62" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B63" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B64" />
-                <Border Style="{StaticResource GrayBorderStyle}" Name="B65" />
-                <Border Style="{StaticResource GrayBorderStyle}" Name="B66"  />
             </UniformGrid>
             <UniformGrid Rows="1" Margin="2,0">
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B65" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B66"  />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B67"  />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B68" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B69" />
@@ -142,6 +154,37 @@
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B71" />
                 <Border Style="{StaticResource GrayBorderStyle}" Name="B72"  />
             </UniformGrid>
+            <UniformGrid Rows="1" Margin="2,0">
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B73" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B74"  />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B75"  />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B76" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B77" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B78" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B79" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B80"  />
+            </UniformGrid>
+            <UniformGrid Rows="1" Margin="2,0">
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B81" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B82"  />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B83"  />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B84" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B85" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B86" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B87" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B88"  />
+            </UniformGrid>
+            <UniformGrid Rows="1" Margin="2,0">
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B89" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B90"  />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B91"  />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B92" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B93" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B94" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B95" />
+                <Border Style="{StaticResource GrayBorderStyle}" Name="B96"  />
+            </UniformGrid>
+
         </UniformGrid>
     </Grid>
 </UserControl>
