@@ -129,8 +129,7 @@ namespace Rld.Acs.WebApi.Controllers
                 var timeZoneInfo = timeZoneRepo.GetByKey(id);
                 if (timeZoneInfo != null)
                 {
-                    var bindings = timeZoneGroupRepo.Query(new Hashtable { {"TimeZoneID", id} }).ToList();
-                    bindings.ForEach(b => timeZoneGroupRepo.Delete(b.TimeZoneGroupID));
+                    timeZoneInfo.TimeGroupAssociations.ForEach(t => timeZoneGroupRepo.Delete(t.TimeZoneGroupID));
                     timeZoneRepo.Delete(id);
                 }
 

@@ -42,15 +42,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 Name = timeZone.TimeZoneName;
             }
 
-            var allTimeGroupDtos = GetAllTimeGroupDtos(AllTimeGroups);
             TimeGroupAssociationsDtos = new ObservableCollection<TimeZoneGroupMappingInfo>();
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, allTimeGroupDtos, 1));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, allTimeGroupDtos, 2));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, allTimeGroupDtos, 3));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, allTimeGroupDtos, 4));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, allTimeGroupDtos, 5));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, allTimeGroupDtos, 6));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, allTimeGroupDtos, 7));
+            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 1));
+            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 2));
+            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 3));
+            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 4));
+            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 5));
+            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 6));
+            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 7));
 
             Title = (timeZone.TimeZoneID == 0) ? "新增时间组" : "修改时间组";
         }
@@ -76,7 +75,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentTimeZone.Status = GeneralStatus.Enabled;
                     CurrentTimeZone.CreateUserID = 1;
                     CurrentTimeZone.CreateDate = DateTime.Now;
-                    //CurrentTimeZone.TimeSegments = GetSelectedTimeSegments();
+                    CurrentTimeZone.TimeGroupAssociations = GetTimeGroupAssociations();
                     CurrentTimeZone = _timeZoneRepo.Insert(CurrentTimeZone);
 
                     message = "增加时间区成功!";
@@ -87,10 +86,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentTimeZone.Status = GeneralStatus.Enabled;
                     CurrentTimeZone.UpdateUserID = 1;
                     CurrentTimeZone.UpdateDate = DateTime.Now;
-                    //CurrentTimeZone.TimeSegments = GetSelectedTimeSegments();
+                    CurrentTimeZone.TimeGroupAssociations = GetTimeGroupAssociations();
                     _timeZoneRepo.Update(CurrentTimeZone);
 
-                    RaisePropertyChanged(null);
                     message = "修改时间区成功!";
                 }
             }
@@ -101,6 +99,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 return;
             }
 
+            RaisePropertyChanged(null);
             Close(message);
         }
 
@@ -109,20 +108,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseTimeZoneView);
         }
 
-        private TimeZoneGroupMappingInfo BuildMappingInfo(RldModel.TimeZone timeZone, List<ComboBoxItem> allTimeGroupDtos, int index)
+        private TimeZoneGroupMappingInfo BuildMappingInfo(RldModel.TimeZone timeZone, int index)
         {
             int id = 0;
             string name = "";
             TimeGroup timeGroup = new TimeGroup();
-            ComboBoxItem selectedTimeGroupDto = new ComboBoxItem();
 
             var association = timeZone.TimeGroupAssociations.FirstOrDefault(t => t.DisplayOrder == index);
             if (association != null)
             {
                 id = association.TimeZoneGroupID;
-                selectedTimeGroupDto = allTimeGroupDtos.FirstOrDefault(t => t.ID == association.TimeZoneGroupID);
+                timeGroup = AllTimeGroups.FirstOrDefault(t => t.TimeGroupID == association.TimeGroupID);
             }
-
 
             switch (index)
             {
@@ -140,19 +137,27 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 ID = id,
                 DisplayOrder = index,
                 Name = name,
-                AllTimeGroupDtos = allTimeGroupDtos,
-                SelectedTimeGroupDto = selectedTimeGroupDto,
+                AllTimeGroupNames = AllTimeGroups.Select(t => t.TimeGroupName).ToList(),
+                SelectedTimeGroupName = timeGroup.TimeGroupName,
             };
         }
 
-        private List<ComboBoxItem> GetAllTimeGroupDtos(IEnumerable<TimeGroup> allTimeGroups)
+        private List<TimeZoneGroup> GetTimeGroupAssociations()
         {
-            Debug.Assert(allTimeGroups != null, "allTimeGroups != null");
-            var result = new List<ComboBoxItem>();
-            foreach (var timegroup in allTimeGroups)
+            var result = new List<TimeZoneGroup>();
+            foreach (var item in TimeGroupAssociationsDtos)
             {
-                result.Add(new ComboBoxItem(){IsSelected = false, ID = timegroup.TimeGroupID, DisplayName = timegroup.TimeGroupName});
+                var timegroup = AllTimeGroups.First(t => t.TimeGroupName == item.SelectedTimeGroupName);
+                result.Add(new TimeZoneGroup()
+                {
+                    TimeZoneGroupID = item.ID, 
+                    DisplayOrder = item.DisplayOrder, 
+                    MappingName = item.Name,
+                    TimeZoneID = this.ID, 
+                    TimeGroupID = timegroup.TimeGroupID,
+                });
             }
+
             return result;
         }
     }

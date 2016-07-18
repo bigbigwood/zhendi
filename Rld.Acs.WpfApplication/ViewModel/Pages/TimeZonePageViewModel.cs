@@ -114,7 +114,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 string message = "";
                 try
                 {
-                    _timeGroupRepo.Delete(SelectedTimeZoneViewModel.CurrentTimeZone.TimeZoneID);
+                    _timeZoneRepo.Delete(SelectedTimeZoneViewModel.CurrentTimeZone.TimeZoneID);
                     message = "删除时间区成功!";
 
                     TimeZoneViewModels.Remove(SelectedTimeZoneViewModel);
