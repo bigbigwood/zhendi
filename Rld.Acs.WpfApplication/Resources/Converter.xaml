@@ -4,4 +4,6 @@
 
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converter:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    <converter:EnumDescriptionTypeConverter x:Key="EnumDescriptionTypeConverter" />
+    <converter:RowToIndexConverter x:Key="RowToIndexConverter" />
 </ResourceDictionary>

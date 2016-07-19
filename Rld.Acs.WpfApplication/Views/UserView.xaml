@@ -6,10 +6,13 @@
              xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:model="clr-namespace:Rld.Acs.Model;assembly=Rld.Acs.Model"
+             xmlns:extension="clr-namespace:Rld.Acs.WpfApplication.Extension"
+             xmlns:AppModels="clr-namespace:Rld.Acs.WpfApplication.Models"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600"
              d:DataContext= "{d:DesignInstance Type= vm:UserViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-                      Unloaded="MetroWindow_Unloaded">
+             Height="400" Width="600" Unloaded="MetroWindow_Unloaded">
 
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
@@ -20,10 +23,26 @@
         </Style>
         <Style TargetType="TextBox" BasedOn="{StaticResource ResourceKey={x:Type TextBox}}" >
             <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Margin" Value="3" />
+            <Setter Property="Margin" Value="2,1" />
+        </Style>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource ResourceKey={x:Type ComboBox}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
+        </Style>
+        <Style TargetType="DatePicker" BasedOn="{StaticResource ResourceKey={x:Type DatePicker}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
         </Style>
         <Style TargetType="Button" BasedOn="{StaticResource ResourceKey={x:Type Button}}" >
             <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style TargetType="RadioButton" BasedOn="{StaticResource ResourceKey={x:Type RadioButton}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
+        </Style>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource ResourceKey={x:Type CheckBox}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
         </Style>
     </controls:MetroWindow.Resources>
     <Grid>
@@ -39,18 +58,18 @@
         <Separator Grid.Row="1"  Background="LightGray" />
         <TabControl Grid.Row="2" controls:TabControlHelper.IsUnderlined="True">
             <TabItem Header="基本信息" controls:ControlsHelper.HeaderFontSize="12" >
-                <Grid Margin="5" Background="LightGray" VerticalAlignment="Stretch">
+                <Grid Margin="5" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -82,11 +101,14 @@
                             Content="访客" GroupName="rb_userType" VerticalAlignment="Center" Margin="3"/>
                     </StackPanel>
                     <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Phone}"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding DepartmentID}"/>
+                    <ComboBox Grid.Row="4" Grid.Column="1" IsEnabled="{Binding IsAddMode}"
+                              ItemsSource="{Binding AuthorizationDepartments, Mode=OneWay}"  
+                              SelectedItem="{Binding DepartmentInfo}" SelectedValuePath="DepartmentID" DisplayMemberPath="Name" />
+
                     <CheckBox IsChecked="{Binding Status, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GeneralStatus.Enabled}}"
                         Grid.Row="5" Grid.Column="1" Content="启用"/>
-                    <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate ="{Binding StartDate}"/>
-                    <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate ="{Binding EndDate}"/>
+                    <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate ="{Binding StartDate}" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
+                    <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate ="{Binding EndDate}" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
                     
                     <Image Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Margin="10" Source="{Binding Avator}" />
                     <TextBox Grid.Row="5" Grid.Column="3"></TextBox>
@@ -97,19 +119,19 @@
                 </Grid>
             </TabItem>
             <TabItem Header="详细信息" controls:ControlsHelper.HeaderFontSize="12">
-                <Grid Margin="5" Background="LightGray" VerticalAlignment="Stretch">
+                <Grid Margin="5" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -130,14 +152,12 @@
                     <TextBlock Grid.Row="8" Grid.Column="0" Text="学历"/>
                     <TextBlock Grid.Row="9" Grid.Column="0" Text="技术等级"/>
                     <TextBlock Grid.Row="0" Grid.Column="2" Text="部门职称"/>
-                    <TextBlock Grid.Row="1" Grid.Column="2" Text="入职时间"/>
-                    <TextBlock Grid.Row="2" Grid.Column="2" Text="社保号码"/>
-                    <TextBlock Grid.Row="3" Grid.Column="2" Text="工作电话"/>
-                    <TextBlock Grid.Row="4" Grid.Column="2" Text="家庭电话"/>
-                    <TextBlock Grid.Row="5" Grid.Column="2" Text="电子邮箱"/>
-                    <TextBlock Grid.Row="6" Grid.Column="2" Text="通讯地址"/>
-                    <TextBlock Grid.Row="8" Grid.Column="2" Text="邮政编码"/>
-                    <TextBlock Grid.Row="9" Grid.Column="2" Text="备注"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="社保号码"/>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="家庭电话"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="电子邮箱"/>
+                    <TextBlock Grid.Row="4" Grid.Column="2" Text="通讯地址"/>
+                    <TextBlock Grid.Row="6" Grid.Column="2" Text="邮政编码"/>
+                    <TextBlock Grid.Row="7" Grid.Column="2" Text="备注"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding EnglishName}"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding UserCode}"/>
                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NativePlace}"/>
@@ -150,18 +170,20 @@
                         <RadioButton IsChecked="{Binding Marriage, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Marriage.Married}}"
                             Content="已婚" GroupName="rb_marriage" VerticalAlignment="Center" Margin="3"/>
                     </StackPanel>
-                    <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding PoliticalStatus}"/>
-                    <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Degree}"/>
+                    <ComboBox Grid.Row="7" Grid.Column="1" SelectedItem="{Binding PoliticalStatus}"
+                              ItemsSource="{Binding Source={extension:EnumBindingSource {x:Type AppModels:PoliticalStatus}}}" />
+                    <ComboBox Grid.Row="8" Grid.Column="1" SelectedItem="{Binding Degree}"
+                              ItemsSource="{Binding Source={extension:EnumBindingSource {x:Type AppModels:DegreeStatus}}}" />
                     <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding TechnicalLevel}"/>
                     <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding TechnicalTitle}"/>
-                    <DatePicker Grid.Row="1" Grid.Column="3" SelectedDate="{Binding StartDate}"/>
-                    <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding SocialNumber}"/>
-                    <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Phone}"/>
-                    <TextBox Grid.Row="4" Grid.Column="3" Text="{Binding HomeNumber}"/>
-                    <TextBox Grid.Row="5" Grid.Column="3" Text="{Binding Email}"/>
-                    <TextBox Grid.Row="6" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Address}"/>
-                    <TextBox Grid.Row="8" Grid.Column="3" Text="{Binding Postcode}"/>
-                    <TextBox Grid.Row="9" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Remark}"/>
+                    <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding SocialNumber}"/>
+                    <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding HomeNumber}"/>
+                    <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Email}"/>
+                    <TextBox Grid.Row="4" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Address}"
+                             TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                    <TextBox Grid.Row="6" Grid.Column="3" Text="{Binding Postcode}"/>
+                    <TextBox Grid.Row="7" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Remark}" 
+                             TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
                 </Grid>
             </TabItem>
             <TabItem Header="权限管理" controls:ControlsHelper.HeaderFontSize="12">

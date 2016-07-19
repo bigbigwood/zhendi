@@ -23,9 +23,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IUserRepository _userRepo = NinjectBinder.GetRepository<IUserRepository>();
-        private IDepartmentRepository _departmentRepository = NinjectBinder.GetRepository<IDepartmentRepository>();
-        private IDeviceRoleRepository _deviceRoleRepository = NinjectBinder.GetRepository<IDeviceRoleRepository>();
-        private IDeviceControllerRepository _deviceControllerRepository = NinjectBinder.GetRepository<IDeviceControllerRepository>();
 
         public RelayCommand AddUserCmd { get; private set; }
         public RelayCommand ModifyUserCmd { get; private set; }
@@ -34,17 +31,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public RelayCommand SyncUserCmd { get; private set; }
         public RelayCommand<TreeViewNode> SelectedTreeNodeChangedCmd { get; private set; }
 
-        //public string Avator { get; set; }
-        //public string Name { get; set; }
-        //public string Gender { get; set; }
-        //public string Position { get; set; }
-        //public string UserCode { get; set; }
-        //public string Phone { get; set; }
-        //public string TechnicalTitle { get; set; }
-
         public List<Department> AuthorizationDepartments { get; set; }
-        //public List<DeviceController> AuthorizationDevices { get; set; }
-        //public List<DeviceRole> AuthorizationDeviceRoles { get; set; }
         public TreeViewNode SelectedTreeNode { get; private set; }
         public List<TreeViewNode> TreeViewSource { get; private set; }
         public ObservableCollection<UserViewModel> UserViewModels { get; set; }
@@ -56,11 +43,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             ModifyUserCmd = new RelayCommand(ModifyUser);
             DeleteUserCmd = new RelayCommand(DeleteUser);
             SelectedTreeNodeChangedCmd = new RelayCommand<TreeViewNode>(ShowUserBySelectedDepartmentNode);
-
-            AuthorizationDepartments = _departmentRepository.Query(new Hashtable()).ToList();
-            var topDepartment = new Department() { DepartmentID = -1, Name = "总经办" };
-            AuthorizationDepartments.Insert(0, topDepartment);
-            AuthorizationDepartments.FindAll(d => d.Parent == null && d.DepartmentID != -1).ForEach(d => d.Parent = topDepartment);
+            AuthorizationDepartments = AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
 
             TreeViewSource = BuildTreeViewSource();
         }

@@ -12,7 +12,7 @@ namespace Rld.Acs.Model
         public virtual String Nationality { get; set; }
         public virtual String NativePlace { get; set; }
         public virtual DateTime Birthday { get; set; }
-        public virtual Int32? Marriage { get; set; }
+        public virtual Marriage Marriage { get; set; }
         public virtual Int32? PoliticalStatus { get; set; }
         public virtual Int32? Degree { get; set; }
         public virtual String HomeNumber { get; set; }

@@ -10,6 +10,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Messages;
+using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
@@ -22,9 +23,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
 
+        public List<Department> AuthorizationDepartments { get; set; }
+        public Boolean IsAddMode { get; set; }
         public string Title { get; set; }
         public string Avator { get; set; }
-        public virtual Int32 DepartmentID { get; set; }
+        public virtual Department DepartmentInfo { get; set; }
         public virtual UserType UserType { get; set; }
         public virtual String UserCode { get; set; }
         public virtual String Name { get; set; }
@@ -40,9 +43,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public virtual String Nationality { get; set; }
         public virtual String NativePlace { get; set; }
         public virtual DateTime Birthday { get; set; }
-        public virtual Int32? Marriage { get; set; }
-        public virtual Int32? PoliticalStatus { get; set; }
-        public virtual Int32? Degree { get; set; }
+        public virtual Marriage Marriage { get; set; }
+        public virtual PoliticalStatus PoliticalStatus { get; set; }
+        public virtual DegreeStatus Degree { get; set; }
         public virtual String HomeNumber { get; set; }
         public virtual String EnglishName { get; set; }
         public virtual String Company { get; set; }
@@ -59,50 +62,58 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public User CurrentUser { get; set; }
 
-        public UserViewModel(User user)
+        public UserViewModel(User userInfo)
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
 
-            CurrentUser = user;
+            CurrentUser = userInfo;
+            AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
 
-            if (user.UserID != 0)
+            IsAddMode = userInfo.UserID == 0;
+            StartDate = DateTime.Now;
+            Birthday = DateTime.Now;
+            Title = IsAddMode ? "新增人员" : "修改人员";
+
+
+            if (!IsAddMode) //Edit mode
             {
                 //Avator = user.Phone;
                 Avator = @"C:\Users\wood\Desktop\aaa.jpg";
-                DepartmentID = user.DepartmentID;
-                UserType = user.Type;
-                UserCode = user.UserCode;
-                Name = user.Name;
-                Gender = user.Gender;
-                Phone = user.Phone;
-                Status = user.Status;
-                StartDate = user.StartDate;
-                EndDate = user.EndDate;
+                //DepartmentID = user.DepartmentID;
+                UserType = userInfo.Type;
+                UserCode = userInfo.UserCode;
+                Name = userInfo.Name;
+                Gender = userInfo.Gender;
+                Phone = userInfo.Phone;
+                Status = userInfo.Status;
+                StartDate = userInfo.StartDate;
+                EndDate = userInfo.EndDate;
+                DepartmentInfo = AuthorizationDepartments.FirstOrDefault(d => d.DepartmentID == userInfo.DepartmentID);
 
-                LastName = user.UserPropertyInfo.LastName;
-                FirstName = user.UserPropertyInfo.FirstName;
-                Nationality = user.UserPropertyInfo.Nationality;
-                NativePlace = user.UserPropertyInfo.NativePlace;
-                Birthday = user.UserPropertyInfo.Birthday;
-                Marriage = user.UserPropertyInfo.Marriage;
-                PoliticalStatus = user.UserPropertyInfo.PoliticalStatus;
-                Degree = user.UserPropertyInfo.Degree;
-                HomeNumber = user.UserPropertyInfo.HomeNumber;
-                EnglishName = user.UserPropertyInfo.EnglishName;
-                Company = user.UserPropertyInfo.Company;
-                TechnicalTitle = user.UserPropertyInfo.TechnicalTitle;
-                TechnicalLevel = user.UserPropertyInfo.TechnicalLevel;
-                IDType = user.UserPropertyInfo.IDType;
-                IDNumber = user.UserPropertyInfo.IDNumber;
-                SocialNumber = user.UserPropertyInfo.SocialNumber;
-                Email = user.UserPropertyInfo.Email;
-                Address = user.UserPropertyInfo.Address;
-                Postcode = user.UserPropertyInfo.Postcode;
-                Remark = user.UserPropertyInfo.Remark;
+                LastName = userInfo.UserPropertyInfo.LastName;
+                FirstName = userInfo.UserPropertyInfo.FirstName;
+                Nationality = userInfo.UserPropertyInfo.Nationality;
+                NativePlace = userInfo.UserPropertyInfo.NativePlace;
+                Birthday = userInfo.UserPropertyInfo.Birthday;
+                Marriage = userInfo.UserPropertyInfo.Marriage;
+                PoliticalStatus = (userInfo.UserPropertyInfo.PoliticalStatus != null) 
+                    ? (PoliticalStatus)userInfo.UserPropertyInfo.PoliticalStatus : PoliticalStatus.Unknown;
+                Degree = (userInfo.UserPropertyInfo.Degree != null)
+                    ? (DegreeStatus)userInfo.UserPropertyInfo.Degree : DegreeStatus.Unknown;
+                HomeNumber = userInfo.UserPropertyInfo.HomeNumber;
+                EnglishName = userInfo.UserPropertyInfo.EnglishName;
+                Company = userInfo.UserPropertyInfo.Company;
+                TechnicalTitle = userInfo.UserPropertyInfo.TechnicalTitle;
+                TechnicalLevel = userInfo.UserPropertyInfo.TechnicalLevel;
+                IDType = userInfo.UserPropertyInfo.IDType;
+                IDNumber = userInfo.UserPropertyInfo.IDNumber;
+                SocialNumber = userInfo.UserPropertyInfo.SocialNumber;
+                Email = userInfo.UserPropertyInfo.Email;
+                Address = userInfo.UserPropertyInfo.Address;
+                Postcode = userInfo.UserPropertyInfo.Postcode;
+                Remark = userInfo.UserPropertyInfo.Remark;
             }
-
-            Title = (user.UserID != 0) ? "修改人员" : "新增人员";
         }
 
 

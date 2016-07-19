@@ -109,6 +109,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationManager.cs" />
+    <Compile Include="Converter\EnumDescriptionTypeConverter.cs" />
     <Compile Include="Converter\EnumToBooleanConverter.cs" />
     <Compile Include="Converter\RowToIndexConverter.cs" />
     <Compile Include="CustomControls\TileIconBox.xaml.cs">
@@ -117,9 +119,12 @@
     <Compile Include="CustomControls\TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extension\EnumBindingSourceExtension.cs" />
+    <Compile Include="Extension\LocalizedDescriptionAttribute.cs" />
     <Compile Include="Extension\MessageBoxSingleton.cs" />
     <Compile Include="Messages\OpenWindowMessage.cs" />
     <Compile Include="Messages\Tokens.cs" />
+    <Compile Include="Models\Enum.cs" />
     <Compile Include="Models\SelectableItem.cs" />
     <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Navigation\FrameNavigationService.cs" />

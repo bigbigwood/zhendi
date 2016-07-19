@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,14 +34,14 @@ namespace Rld.Acs.Model
 
     public enum GenderType
     {
-        Male,
-        Female,
+        Male = 0,
+        Female = 1,
     }
 
     public enum Marriage
     {
-        Single,
-        Married,
+        Single = 0,
+        Married = 1,
     }
 
     public enum DeviceType
