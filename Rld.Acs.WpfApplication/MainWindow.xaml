@@ -203,7 +203,7 @@
                             用另一正常样式，以此实现树的功能。
                             -->
                         <StackPanel x:Name="peo_control" Style="{StaticResource stack_tree_open}">
-                            <MenuItem x:Name="peo2_manage"  FontSize="12" Width="180" Header="人员管理" IsCheckable="False">
+                            <MenuItem x:Name="peo2_manage"  FontSize="12" Width="180" Header="人员管理" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="UserPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}" Source="/Rld.Acs.WpfApplication;component/Images/minImage/人员管理.png"/>
                                 </MenuItem.Icon>

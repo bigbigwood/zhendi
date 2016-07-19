@@ -8,13 +8,10 @@ namespace Rld.Acs.WpfApplication.Messages
 {
     public class Tokens
     {
-        public static readonly string OpenCustomerView = Guid.NewGuid().ToString();
-        public static readonly string CloseCustomerView = Guid.NewGuid().ToString();
-
-        public static readonly string Summary_GotoSutff = Guid.NewGuid().ToString();
-        public static readonly string Summary_GotoDepartment = Guid.NewGuid().ToString();
-        public static readonly string Summary_GotoDevice = Guid.NewGuid().ToString();
-        public static readonly string Summary_GotoDoor = Guid.NewGuid().ToString();
+        public static readonly string OpenUserView = Guid.NewGuid().ToString();
+        public static readonly string CloseUserView = Guid.NewGuid().ToString();
+        public static readonly string UserPage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string UserPage_ShowQuestion = Guid.NewGuid().ToString();
 
         public static readonly string OpenDepartmentView = Guid.NewGuid().ToString();
         public static readonly string CloseDepartmentView = Guid.NewGuid().ToString();

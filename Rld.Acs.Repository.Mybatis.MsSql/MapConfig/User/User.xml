@@ -93,17 +93,25 @@
     <select id="User.Query" parameterClass="Hashtable" resultMap="UserResult">
       SELECT *
       FROM SYS_USER
-      where 1=1
-      <dynamic prepend="AND">
-        <isNotEmpty prepend="AND" property="Name">
-          Name = #Name#
-        </isNotEmpty>
-        <isNotEmpty prepend="AND" property="Status">
-          Status = #Status#
-        </isNotEmpty>
-        <isNotEmpty prepend="AND" property="DepartmentID">
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="AND" property="DepartmentID">
           DepartmentID = #DepartmentID#
-        </isNotEmpty>
+        </isNotNull>
+        <isNotNull prepend="AND" property="Type">
+          Type = #Type#
+        </isNotNull>
+        <isNotNull prepend="AND" property="UserCode">
+          UserCode = #UserCode#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Name">
+          Name = #Name#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Photo">
+          Photo = #Photo#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Status">
+          Status = #Status#
+        </isNotNull>
       </dynamic>
     </select>
   </statements>

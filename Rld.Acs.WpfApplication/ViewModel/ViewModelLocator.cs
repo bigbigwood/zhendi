@@ -48,6 +48,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SummaryPageViewModel>();
+            SimpleIoc.Default.Register<UserPageViewModel>();
             SimpleIoc.Default.Register<DepartmentPageViewModel>();
 
             SimpleIoc.Default.Register<TimeSegmentPageViewModel>();
@@ -60,6 +61,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Unregister<IFrameNavigationService>();
             var navigationService = new FrameNavigationService();
             navigationService.Configure("SummaryPage", new Uri("../Pages/SummaryPage.xaml", UriKind.Relative));
+            navigationService.Configure("UserPage", new Uri("../Pages/UserPage.xaml", UriKind.Relative));
             navigationService.Configure("DepartmentPage", new Uri("../Pages/DepartmentPage.xaml", UriKind.Relative));
 
             navigationService.Configure("TimeSegmentPage", new Uri("../Pages/TimeSegmentPage.xaml", UriKind.Relative));
@@ -77,6 +79,11 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public SummaryPageViewModel SummaryPage
         {
             get { return ServiceLocator.Current.GetInstance<SummaryPageViewModel>(); }
+        }
+
+        public UserPageViewModel UserPage
+        {
+            get { return ServiceLocator.Current.GetInstance<UserPageViewModel>(); }
         }
 
         public DepartmentPageViewModel DepartmentPage

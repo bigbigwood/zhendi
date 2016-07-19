@@ -131,11 +131,19 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         private void OpenTimeZoneDetail()
         {
-            Messenger.Default.Send(new OpenWindowMessage()
+            try
             {
-                DataContext = SelectedTimeZoneViewModel
+                Messenger.Default.Send(new OpenWindowMessage()
+                {
+                    DataContext = SelectedTimeZoneViewModel
 
-            }, Tokens.OpenTimeZoneDashboardView);
+                }, Tokens.OpenTimeZoneDashboardView);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+
+            }
         }
     }
 }

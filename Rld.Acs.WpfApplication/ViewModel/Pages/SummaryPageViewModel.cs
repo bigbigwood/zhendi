@@ -23,27 +23,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         public SummaryPageViewModel()
         {
-            GotoStuffCommand = new RelayCommand(GotoStuff);
-            GotoDepartmentCommand = new RelayCommand(GotoDepartment);
-            GotoDeviceCommand = new RelayCommand(GotoDevice);
-            GotoDoorCommand = new RelayCommand(GotoDoor);
-        }
-
-        public void GotoStuff()
-        {
-            Messenger.Default.Send<NotificationMessage>(new NotificationMessage(Tokens.Summary_GotoSutff), Tokens.Summary_GotoSutff);
-        }
-        public void GotoDepartment()
-        {
-            Messenger.Default.Send<NotificationMessage>(new NotificationMessage(Tokens.Summary_GotoDepartment), Tokens.Summary_GotoDepartment);
-        }
-        public void GotoDevice()
-        {
-            Messenger.Default.Send<NotificationMessage>(new NotificationMessage(Tokens.Summary_GotoDevice), Tokens.Summary_GotoDevice);
-        }
-        public void GotoDoor()
-        {
-            Messenger.Default.Send<NotificationMessage>(new NotificationMessage(Tokens.Summary_GotoDoor), Tokens.Summary_GotoDoor);
+            //GotoStuffCommand = new RelayCommand(GotoStuff);
+            //GotoDepartmentCommand = new RelayCommand(GotoDepartment);
+            //GotoDeviceCommand = new RelayCommand(GotoDevice);
+            //GotoDoorCommand = new RelayCommand(GotoDoor);
         }
     }
 }
