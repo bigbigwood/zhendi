@@ -34,12 +34,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public RelayCommand SyncUserCmd { get; private set; }
         public RelayCommand<TreeViewNode> SelectedTreeNodeChangedCmd { get; private set; }
 
-        public string Avator { get; set; }
-        public string Name { get; set; }
-        public string Gender { get; set; }
-        public string Position { get; set; }
-        public string UserCode { get; set; }
-        public string Phone { get; set; }
+        //public string Avator { get; set; }
+        //public string Name { get; set; }
+        //public string Gender { get; set; }
+        //public string Position { get; set; }
+        //public string UserCode { get; set; }
+        //public string Phone { get; set; }
+        //public string TechnicalTitle { get; set; }
 
         public List<Department> AuthorizationDepartments { get; set; }
         //public List<DeviceController> AuthorizationDevices { get; set; }

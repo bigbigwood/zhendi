@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:model="clr-namespace:Rld.Acs.Model;assembly=Rld.Acs.Model"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600"
              d:DataContext= "{d:DesignInstance Type= vm:UserViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
@@ -67,20 +68,25 @@
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="人员状态"/>
                     <TextBlock Grid.Row="6" Grid.Column="0" Text="有效时间"/>
                     <TextBlock Grid.Row="7" Grid.Column="0" Text="至"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                        <RadioButton Content="男" GroupName="rb_gender" VerticalAlignment="Center" Margin="3"/>
-                        <RadioButton Content="女" GroupName="rb_gender" VerticalAlignment="Center" Margin="3"/>
+                        <RadioButton IsChecked="{Binding Gender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GenderType.Male}}"
+                            Content="男" GroupName="rb_gender" VerticalAlignment="Center" Margin="3"/>
+                        <RadioButton IsChecked="{Binding Gender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GenderType.Female}}"
+                            Content="女" GroupName="rb_gender" VerticalAlignment="Center" Margin="3"/>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-                        <RadioButton Content="职员" GroupName="rb_userType" VerticalAlignment="Center" Margin="3"/>
-                        <RadioButton Content="访客" GroupName="rb_userType" VerticalAlignment="Center" Margin="3"/>
+                        <RadioButton IsChecked="{Binding UserType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:UserType.Employee}}"
+                            Content="职员" GroupName="rb_userType" VerticalAlignment="Center" Margin="3"/>
+                        <RadioButton IsChecked="{Binding UserType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:UserType.Visitor}}"
+                            Content="访客" GroupName="rb_userType" VerticalAlignment="Center" Margin="3"/>
                     </StackPanel>
-                    <TextBox Grid.Row="3" Grid.Column="1" />
-                    <TextBox Grid.Row="4" Grid.Column="1" />
-                    <CheckBox Grid.Row="5" Grid.Column="1" Content="启用"/>
-                    <DatePicker Grid.Row="6" Grid.Column="1" />
-                    <DatePicker Grid.Row="7" Grid.Column="1" />
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Phone}"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding DepartmentID}"/>
+                    <CheckBox IsChecked="{Binding Status, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GeneralStatus.Enabled}}"
+                        Grid.Row="5" Grid.Column="1" Content="启用"/>
+                    <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate ="{Binding StartDate}"/>
+                    <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate ="{Binding EndDate}"/>
                     
                     <Image Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Margin="10" Source="{Binding Avator}" />
                     <TextBox Grid.Row="5" Grid.Column="3"></TextBox>
@@ -132,28 +138,30 @@
                     <TextBlock Grid.Row="6" Grid.Column="2" Text="通讯地址"/>
                     <TextBlock Grid.Row="8" Grid.Column="2" Text="邮政编码"/>
                     <TextBlock Grid.Row="9" Grid.Column="2" Text="备注"/>
-                    <TextBox Grid.Row="0" Grid.Column="1"/>
-                    <TextBox Grid.Row="1" Grid.Column="1"/>
-                    <TextBox Grid.Row="2" Grid.Column="1"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding EnglishName}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding UserCode}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NativePlace}"/>
                     <ComboBox  Grid.Row="3" Grid.Column="1"></ComboBox>
-                    <DatePicker Grid.Row="4" Grid.Column="1" />
-                    <TextBox Grid.Row="5" Grid.Column="1"/>
+                    <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Birthday}"/>
+                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding IDNumber}"/>
                     <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
-                        <RadioButton Content="未婚" GroupName="rb_marriage" VerticalAlignment="Center" Margin="3"/>
-                        <RadioButton Content="已婚" GroupName="rb_marriage" VerticalAlignment="Center" Margin="3"/>
+                        <RadioButton IsChecked="{Binding Marriage, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Marriage.Single}}"
+                            Content="未婚" GroupName="rb_marriage" VerticalAlignment="Center" Margin="3"/>
+                        <RadioButton IsChecked="{Binding Marriage, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Marriage.Married}}"
+                            Content="已婚" GroupName="rb_marriage" VerticalAlignment="Center" Margin="3"/>
                     </StackPanel>
-                    <TextBox Grid.Row="7" Grid.Column="1"/>
-                    <TextBox Grid.Row="8" Grid.Column="1"/>
-                    <TextBox Grid.Row="9" Grid.Column="1"/>
-                    <TextBox Grid.Row="0" Grid.Column="3"/>
-                    <DatePicker Grid.Row="1" Grid.Column="3" />
-                    <TextBox Grid.Row="2" Grid.Column="3"/>
-                    <TextBox Grid.Row="3" Grid.Column="3"/>
-                    <TextBox Grid.Row="4" Grid.Column="3"/>
-                    <TextBox Grid.Row="5" Grid.Column="3"/>
-                    <TextBox Grid.Row="6" Grid.Column="3" Grid.RowSpan="2"/>
-                    <TextBox Grid.Row="8" Grid.Column="3"/>
-                    <TextBox Grid.Row="9" Grid.Column="3" Grid.RowSpan="2"/>
+                    <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding PoliticalStatus}"/>
+                    <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Degree}"/>
+                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding TechnicalLevel}"/>
+                    <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding TechnicalTitle}"/>
+                    <DatePicker Grid.Row="1" Grid.Column="3" SelectedDate="{Binding StartDate}"/>
+                    <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding SocialNumber}"/>
+                    <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Phone}"/>
+                    <TextBox Grid.Row="4" Grid.Column="3" Text="{Binding HomeNumber}"/>
+                    <TextBox Grid.Row="5" Grid.Column="3" Text="{Binding Email}"/>
+                    <TextBox Grid.Row="6" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Address}"/>
+                    <TextBox Grid.Row="8" Grid.Column="3" Text="{Binding Postcode}"/>
+                    <TextBox Grid.Row="9" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Remark}"/>
                 </Grid>
             </TabItem>
             <TabItem Header="权限管理" controls:ControlsHelper.HeaderFontSize="12">

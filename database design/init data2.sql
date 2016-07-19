@@ -416,251 +416,41 @@ INSERT SYS_DEPARTMENT_DEVICES VALUES (1, 1)
 INSERT SYS_DEPARTMENT_DEVICES VALUES (2, 1)
 INSERT SYS_DEPARTMENT_DEVICES VALUES (2, 2)
 INSERT SYS_DEPARTMENT_DEVICES VALUES (3, 1)
+	
 		
-INSERT SYS_USER_PROPERTY
-        ( LastName ,
-          FirstName ,
-          Nationality ,
-          NativePlace ,
-          Birthday ,
-          Marriage ,
-          PoliticalStatus ,
-          Degree ,
-          HomeNumber ,
-          EnglishName ,
-          Company ,
-          TechnicalTitle ,
-          TechnicalLevel ,
-          IDType ,
-          IDNumber ,
-          SocialNumber ,
-          Email ,
-          Address ,
-          Postcode ,
-          Remark
-        )
-VALUES  ( N'AAA' , -- LastName - nvarchar(25)
-          N'BBB' , -- FirstName - nvarchar(25)
-          N'' , -- Nationality - nvarchar(10)
-          N'' , -- NativePlace - nvarchar(100)
-          '19880606' , -- Birthday - datetime
-          0 , -- Marriage - int
-          0 , -- PoliticalStatus - int
-          0 , -- Degree - int
-          N'' , -- HomeNumber - nvarchar(50)
-          N'' , -- EnglishName - nvarchar(50)
-          N'' , -- Company - nvarchar(100)
-          N'' , -- TechnicalTitle - nvarchar(50)
-          N'' , -- TechnicalLevel - nvarchar(50)
-          1, -- IDType - int
-          N'2222222222' , -- IDNumber - nvarchar(50)
-          N'' , -- SocialNumber - nvarchar(50)
-          N'' , -- Email - nvarchar(100)
-          N'' , -- Address - nvarchar(1024)
-          N'' , -- Postcode - nvarchar(50)
-          N''  -- Remark - nvarchar(1024)
-        )
 		
-INSERT SYS_USER_PROPERTY
-        ( LastName ,
-          FirstName ,
-          Nationality ,
-          NativePlace ,
-          Birthday ,
-          Marriage ,
-          PoliticalStatus ,
-          Degree ,
-          HomeNumber ,
-          EnglishName ,
-          Company ,
-          TechnicalTitle ,
-          TechnicalLevel ,
-          IDType ,
-          IDNumber ,
-          SocialNumber ,
-          Email ,
-          Address ,
-          Postcode ,
-          Remark
-        )
-VALUES  ( N'CCC' , -- LastName - nvarchar(25)
-          N'DDD' , -- FirstName - nvarchar(25)
-          N'' , -- Nationality - nvarchar(10)
-          N'' , -- NativePlace - nvarchar(100)
-          '19900606' , -- Birthday - datetime
-          0 , -- Marriage - int
-          0 , -- PoliticalStatus - int
-          0 , -- Degree - int
-          N'' , -- HomeNumber - nvarchar(50)
-          N'' , -- EnglishName - nvarchar(50)
-          N'' , -- Company - nvarchar(100)
-          N'' , -- TechnicalTitle - nvarchar(50)
-          N'' , -- TechnicalLevel - nvarchar(50)
-          1, -- IDType - int
-          N'1111111111' , -- IDNumber - nvarchar(50)
-          N'' , -- SocialNumber - nvarchar(50)
-          N'' , -- Email - nvarchar(100)
-          N'' , -- Address - nvarchar(1024)
-          N'' , -- Postcode - nvarchar(50)
-          N''  -- Remark - nvarchar(1024)
-        )
-		
+INSERT SYS_USER_PROPERTY VALUES (N'晓峰', N'张', N'中国', N'汉族', '19880608', 0, 0, 0, N'020-88888888', N'James', N'卓勤信息', N'测试主管', N'T3', 1,  N'440440440440440440448', N'88888888', N'xiaofeng.zhang@163.com', N'广州市海珠区', N'510000', N'')
+INSERT SYS_USER_PROPERTY VALUES (N'大仁', N'李', N'中国', N'汉族', '19880607', 0, 0, 0, N'020-77777777', N'Darren', N'卓勤信息', N'测试副主管', N'T3', 1,  N'440440440440440440447', N'77777777', N'daren.li@163.com', N'广州市海珠区', N'510000', N'')
+INSERT SYS_USER_PROPERTY VALUES (N'三炮', N'张', N'中国', N'汉族', '19880606', 0, 0, 0, N'020-66666666', N'SanPao', N'卓勤信息', N'测试副主管', N'T3', 1,  N'440440440440440440446', N'66666666', N'sanpao.zhang@163.com', N'广州市海珠区', N'510000', N'')
+INSERT SYS_USER_PROPERTY VALUES (N'明', N'黎', N'中国', N'汉族', '19880605', 0, 0, 0, N'020-55555555', N'leo', N'卓勤信息', N'高级测试工程师', N'T2', 1,  N'440440440440440440445', N'55555555', N'leo.li@163.com', N'广州市海珠区', N'510000', N'')
+INSERT SYS_USER_PROPERTY VALUES (N'学友', N'张', N'中国', N'汉族', '19880604', 0, 0, 0, N'020-44444444', N'Xueyou', N'卓勤信息', N'高级测试工程师', N'T2', 1,  N'440440440440440440444', N'44444444', N'xueyou.zhang@163.com', N'广州市海珠区', N'510000', N'')
+INSERT SYS_USER_PROPERTY VALUES (N'富城', N'郭', N'中国', N'汉族', '19880603', 0, 0, 0, N'020-33333333', N'Alan', N'卓勤信息', N'高级测试工程师', N'T2', 1,  N'440440440440440440443', N'33333333', N'alan.guo@163.com', N'广州市海珠区', N'510000', N'')
+INSERT SYS_USER_PROPERTY VALUES (N'德华', N'刘', N'中国', N'汉族', '19880602', 0, 0, 0, N'020-22222222', N'Andy', N'卓勤信息', N'高级测试工程师', N'T2', 1,  N'440440440440440440442', N'22222222', N'andy.lau@163.com', N'广州市海珠区', N'510000', N'')
+INSERT SYS_USER_PROPERTY VALUES (N'杰伦', N'周', N'中国', N'汉族', '19880601', 0, 0, 0, N'020-11111111', N'Jay', N'卓勤信息', N'测试工程师', N'T1', 1,  N'440440440440440440441', N'11111111', N'jay.zhou@163.com', N'广州市海珠区', N'510000', N'')
+INSERT SYS_USER_PROPERTY VALUES (N'英', N'那', N'中国', N'满族', '19880609', 0, 0, 0, N'020-99999999', N'Anna', N'卓勤信息', N'访客', N'T1', 1,  N'440440440440440440449', N'99999999', N'anna@163.com', N'广州市海珠区', N'510000', N'')
 
-INSERT SYS_USER
-        ( DepartmentID ,
-          Type ,
-          UserCode ,
-          Name ,
-          Gender ,
-          Phone ,
-          Photo ,
-          Status ,
-          Remark ,
-          StartDate ,
-          EndDate ,
-          UserPropertyID
-        )
-VALUES  ( 1 , -- DepartmentID - int
-          1 , -- Type - int
-          N'RD001' , -- UserCode - nvarchar(25)
-          N'AAA.BBB' , -- Name - nvarchar(100)
-          1 , -- Gender - int
-          N'18612340000' , -- Phone - nvarchar(255)
-          N'' , -- Photo - nvarchar(1024)
-          1 , -- Status - int
-          N'' , -- Remark - nvarchar(1024)
-          '2015-01-01' , -- StartDate - datetime
-          NULL , -- EndDate - datetime
-          1  -- UserPropertyID - int
-        )
+INSERT SYS_USER VALUES (1, 1, N'RD001', N'张晓峰', 0, N'18612340000', N'', 1, N'', '2015-01-01',NULL,1)
+INSERT SYS_USER VALUES (1, 1, N'RD002', N'李大仁', 0, N'18612340001', N'', 1, N'', '2015-01-01',NULL,2)
+INSERT SYS_USER VALUES (1, 1, N'RD003', N'张三炮', 0, N'18612340002', N'', 1, N'', '2015-01-01',NULL,3)
+INSERT SYS_USER VALUES (1, 1, N'RD004', N'黎明', 0, N'18612340003',   N'', 1, N'', '2015-01-01',NULL,4)
+INSERT SYS_USER VALUES (1, 1, N'RD005', N'张学友', 0, N'18612340004', N'', 1, N'', '2015-01-01',NULL,5)
+INSERT SYS_USER VALUES (1, 1, N'RD006', N'郭富城', 0, N'18612340005', N'', 1, N'', '2015-01-01','2017-01-01',6)
+INSERT SYS_USER VALUES (1, 1, N'RD007', N'刘德华', 0, N'18612340006', N'', 1, N'', '2015-01-01',NULL,7)
+INSERT SYS_USER VALUES (1, 1, N'RD008', N'周杰伦', 0, N'18612340007', N'', 1, N'', '2015-01-01',NULL,8)
+INSERT SYS_USER VALUES (1, 2, N'RD009', N'那英', 1, N'18612340008',   N'', 0, N'', '2015-01-01',NULL,9)
 
-INSERT SYS_USER
-        ( DepartmentID ,
-          Type ,
-          UserCode ,
-          Name ,
-          Gender ,
-          Phone ,
-          Photo ,
-          Status ,
-          Remark ,
-          StartDate ,
-          EndDate ,
-          UserPropertyID
-        )
-VALUES  ( 3 , -- DepartmentID - int
-          1 , -- Type - int
-          N'SD001' , -- UserCode - nvarchar(25)
-          N'CCC.DDD' , -- Name - nvarchar(100)
-          1 , -- Gender - int
-          N'18612341111' , -- Phone - nvarchar(255)
-          N'' , -- Photo - nvarchar(1024)
-          1 , -- Status - int
-          N'' , -- Remark - nvarchar(1024)
-          '2015-01-01' , -- StartDate - datetime
-          NULL , -- EndDate - datetime
-          2  -- UserPropertyID - int
-        )
-		
 
-INSERT SYS_USER_AUTHENTICATION
-        ( UserID ,
-          DeviceUserID ,
-          DeviceID ,
-          DeviceType ,
-          AuthenticationType ,
-          AuthenticationData ,
-          Version ,
-          IsDuress ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( 1 , -- UserID - int
-          1 , -- DeviceUserID - int
-          1 , -- DeviceID - int
-          1 , -- DeviceType - int
-          1 , -- AuthenticationType - int
-          N'123456' , -- AuthenticationData - nvarchar(1024)
-          N'' , -- Version - nvarchar(50)
-          1 , -- IsDuress - bit
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-
-INSERT SYS_USER_AUTHENTICATION
-        ( UserID ,
-          DeviceUserID ,
-          DeviceID ,
-          DeviceType ,
-          AuthenticationType ,
-          AuthenticationData ,
-          Version ,
-          IsDuress ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( 2 , -- UserID - int
-          2 , -- DeviceUserID - int
-          1 , -- DeviceID - int
-          1 , -- DeviceType - int
-          1 , -- AuthenticationType - int
-          N'123456' , -- AuthenticationData - nvarchar(1024)
-          N'' , -- Version - nvarchar(50)
-          1 , -- IsDuress - bit
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-
-INSERT SYS_USER_AUTHENTICATION
-        ( UserID ,
-          DeviceUserID ,
-          DeviceID ,
-          DeviceType ,
-          AuthenticationType ,
-          AuthenticationData ,
-          Version ,
-          IsDuress ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( 2 , -- UserID - int
-          2 , -- DeviceUserID - int
-          2 , -- DeviceID - int
-          2 , -- DeviceType - int
-          2 , -- AuthenticationType - int
-          N'######' , -- AuthenticationData - nvarchar(1024)
-          N'' , -- Version - nvarchar(50)
-          1 , -- IsDuress - bit
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-		
-		
-		
+INSERT SYS_USER_AUTHENTICATION VALUES  ( 1, 1, 1, 1, 1, N'123456', N'', 1, N'', 1, '2015-01-01', 1, NULL, NULL)
+INSERT SYS_USER_AUTHENTICATION VALUES  ( 1, 2, 2, 2, 2, N'123456', N'', 1, N'', 1, '2015-01-01', 1, NULL, NULL)
+INSERT SYS_USER_AUTHENTICATION VALUES  ( 2, 1, 1, 1, 1, N'123456', N'', 1, N'', 1, '2015-01-01', 1, NULL, NULL)
+INSERT SYS_USER_AUTHENTICATION VALUES  ( 3, 1, 1, 1, 1, N'123456', N'', 1, N'', 1, '2015-01-01', 1, NULL, NULL)
+INSERT SYS_USER_AUTHENTICATION VALUES  ( 4, 1, 1, 1, 1, N'123456', N'', 1, N'', 1, '2015-01-01', 1, NULL, NULL)
+INSERT SYS_USER_AUTHENTICATION VALUES  ( 5, 1, 1, 1, 1, N'123456', N'', 1, N'', 1, '2015-01-01', 1, NULL, NULL)
+INSERT SYS_USER_AUTHENTICATION VALUES  ( 6, 1, 1, 1, 1, N'123456', N'', 1, N'', 1, '2015-01-01', 1, NULL, NULL)
+INSERT SYS_USER_AUTHENTICATION VALUES  ( 7, 1, 1, 1, 1, N'123456', N'', 1, N'', 1, '2015-01-01', 1, NULL, NULL)
+INSERT SYS_USER_AUTHENTICATION VALUES  ( 8, 1, 1, 1, 1, N'123456', N'', 1, N'', 1, '2015-01-01', 1, NULL, NULL)
+INSERT SYS_USER_AUTHENTICATION VALUES  ( 9, 1, 1, 1, 1, N'123456', N'', 1, N'', 1, '2015-01-01', 1, NULL, NULL)
+	
 
 INSERT SYS_MODULE
         ( ModuleName ,

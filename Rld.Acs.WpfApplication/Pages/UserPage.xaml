@@ -7,7 +7,6 @@
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:command="http://www.galasoft.ch/mvvmlight"
       xmlns:models="clr-namespace:Rld.Acs.WpfApplication.Models"
-      xmlns:views="clr-namespace:Rld.Acs.WpfApplication.Views"
       xmlns:converter="clr-namespace:Rld.Acs.WpfApplication.Converter"
       mc:Ignorable="d"  d:DesignHeight="400" d:DesignWidth="800"
       DataContext="{Binding UserPage, Source={StaticResource Locator}}" Unloaded="Page_Unloaded" >
@@ -130,7 +129,7 @@
                             </DataGridTemplateColumn>
                             <DataGridTextColumn Header="{DynamicResource UserPage_Label_Name}" Binding="{Binding Name}" Width="*" />
                             <DataGridTextColumn Header="{DynamicResource UserPage_Label_Gender}" Binding="{Binding Gender}" Width="*" />
-                            <DataGridTextColumn Header="{DynamicResource UserPage_Label_Position}" Binding="{Binding Position}" Width="*" />
+                            <DataGridTextColumn Header="{DynamicResource UserPage_Label_Position}" Binding="{Binding TechnicalTitle}" Width="*" />
                             <DataGridTextColumn Header="{DynamicResource UserPage_Label_UserCode}" Binding="{Binding UserCode}" Width="*" />
                             <DataGridTextColumn Header="{DynamicResource UserPage_Label_Phone}" Binding="{Binding Phone}" Width="*" />
                             <DataGridTextColumn Width="*" />

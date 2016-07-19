@@ -37,6 +37,12 @@ namespace Rld.Acs.Model
         Female,
     }
 
+    public enum Marriage
+    {
+        Single,
+        Married,
+    }
+
     public enum DeviceType
     {
         Type1 = 1,
