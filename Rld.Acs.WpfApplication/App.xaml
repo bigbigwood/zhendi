@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="/Resources/IconsUI.xaml" />
                 <ResourceDictionary Source="/Resources/StyleExtension.xaml" />
                 <ResourceDictionary Source="/Resources/Converter.xaml" />
+                <ResourceDictionary Source="/Resources/IntResources.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Rld.Acs.WpfApplication.Resources;component/Localization/ConstString_zh_cn.xaml" />
 
                 <!-- mvvm light viewmodel locator-->

@@ -27,7 +27,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public List<Department> AuthorizationDepartments { get; set; }
         public List<SysDictionary> NationalityList { get; set; }
-        public SysDictionary GenderInfo { get; set; }
+        
         public Boolean IsAddMode { get; set; }
         public string Title { get; set; }
         public string Avator { get; set; }
@@ -35,7 +35,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public virtual UserType UserType { get; set; }
         public virtual String UserCode { get; set; }
         public virtual String Name { get; set; }
-        public virtual GenderType Gender { get; set; }
+        public SysDictionary GenderInfo { get; set; }
         public virtual String Phone { get; set; }
         public virtual String Photo { get; set; }
         public virtual GeneralStatus Status { get; set; }
@@ -90,7 +90,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 UserType = userInfo.Type;
                 UserCode = userInfo.UserCode;
                 Name = userInfo.Name;
-                Gender = userInfo.Gender;
+                GenderInfo = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender)
+                .FirstOrDefault(x => x.ItemID == (int)userInfo.Gender);
                 Phone = userInfo.Phone;
                 Status = userInfo.Status;
                 StartDate = userInfo.StartDate;
@@ -121,8 +122,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 Remark = userInfo.UserPropertyInfo.Remark;
             }
 
-            GenderInfo = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender)
-                .FirstOrDefault(x => x.ItemID == (int)userInfo.Gender);
+
         }
 
 
@@ -131,7 +131,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
-
                 ToUser();
 
                 var userValidator = NinjectBinder.GetValidator<UserValidator>();
@@ -139,6 +138,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 if (!results.IsValid)
                 {
                     message = string.Join(",", results.Errors);
+                    SendMessage(message);
                     return;
                 }
 
@@ -157,6 +157,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 Log.Error("Update user fails.", ex);
                 message = "保存人员失败";
+                SendMessage(message);
                 return;
             }
 
@@ -164,9 +165,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             Close(message);
         }
 
+        private void SendMessage(string message)
+        {
+            Messenger.Default.Send(new NotificationMessage(message), Tokens.UserPage_ShowNotification);
+        }
+
         private void Close(string message)
         {
-            Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseTimeZoneView);
+            Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseUserView);
         }
 
         private void ToUser()
@@ -177,7 +183,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             CurrentUser.Type = UserType;
             CurrentUser.UserCode = UserCode;
             CurrentUser.Name = Name;
-            CurrentUser.Gender =  Gender;
+            CurrentUser.Gender = (GenderType)GenderInfo.ItemID;
             CurrentUser.Phone = Phone;
             CurrentUser.Status =  Status;
             CurrentUser.StartDate =  StartDate;
