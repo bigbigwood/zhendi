@@ -150,14 +150,15 @@
                     <TextBlock Grid.Row="6" Grid.Column="0" Text="婚姻状况"/>
                     <TextBlock Grid.Row="7" Grid.Column="0" Text="政治面貌"/>
                     <TextBlock Grid.Row="8" Grid.Column="0" Text="学历"/>
-                    <TextBlock Grid.Row="9" Grid.Column="0" Text="技术等级"/>
-                    <TextBlock Grid.Row="0" Grid.Column="2" Text="部门职称"/>
-                    <TextBlock Grid.Row="1" Grid.Column="2" Text="社保号码"/>
-                    <TextBlock Grid.Row="2" Grid.Column="2" Text="家庭电话"/>
-                    <TextBlock Grid.Row="3" Grid.Column="2" Text="电子邮箱"/>
-                    <TextBlock Grid.Row="4" Grid.Column="2" Text="通讯地址"/>
-                    <TextBlock Grid.Row="6" Grid.Column="2" Text="邮政编码"/>
-                    <TextBlock Grid.Row="7" Grid.Column="2" Text="备注"/>
+                    <TextBlock Grid.Row="9" Grid.Column="0" Text="社保号码"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="公司名称"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2" Text="部门职称"/>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Text="技术等级"/>
+                    <TextBlock Grid.Row="3" Grid.Column="2" Text="家庭电话"/>
+                    <TextBlock Grid.Row="4" Grid.Column="2" Text="电子邮箱"/>
+                    <TextBlock Grid.Row="5" Grid.Column="2" Text="通讯地址"/>
+                    <TextBlock Grid.Row="7" Grid.Column="2" Text="邮政编码"/>
+                    <TextBlock Grid.Row="8" Grid.Column="2" Text="备注"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding EnglishName}"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding UserCode}"/>
                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NativePlace}"/>
@@ -175,15 +176,16 @@
                               ItemsSource="{Binding Source={extension:EnumBindingSource {x:Type AppModels:PoliticalStatus}}}" />
                     <ComboBox Grid.Row="8" Grid.Column="1" SelectedItem="{Binding Degree}"
                               ItemsSource="{Binding Source={extension:EnumBindingSource {x:Type AppModels:DegreeStatus}}}" />
-                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding TechnicalLevel}"/>
-                    <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding TechnicalTitle}"/>
-                    <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding SocialNumber}"/>
-                    <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding HomeNumber}"/>
-                    <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Email}"/>
-                    <TextBox Grid.Row="4" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Address}"
+                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding SocialNumber}"/>
+                    <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Company}"/>
+                    <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding TechnicalTitle}"/>
+                    <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding TechnicalLevel}"/>
+                    <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding HomeNumber}"/>
+                    <TextBox Grid.Row="4" Grid.Column="3" Text="{Binding Email}"/>
+                    <TextBox Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Address}"
                              TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-                    <TextBox Grid.Row="6" Grid.Column="3" Text="{Binding Postcode}"/>
-                    <TextBox Grid.Row="7" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Remark}" 
+                    <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding Postcode}"/>
+                    <TextBox Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Remark}" 
                              TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
                 </Grid>
             </TabItem>

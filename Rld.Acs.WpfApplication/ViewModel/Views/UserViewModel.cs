@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -12,6 +13,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Messages;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -25,6 +27,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public List<Department> AuthorizationDepartments { get; set; }
         public List<SysDictionary> NationalityList { get; set; }
+        public SysDictionary GenderInfo { get; set; }
         public Boolean IsAddMode { get; set; }
         public string Title { get; set; }
         public string Avator { get; set; }
@@ -72,6 +75,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
             NationalityList = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Nationality);
 
+            DepartmentInfo = new Department();
+
             IsAddMode = userInfo.UserID == 0;
             StartDate = DateTime.Now;
             Birthday = DateTime.Now;
@@ -92,7 +97,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 EndDate = userInfo.EndDate;
                 DepartmentInfo = AuthorizationDepartments.FirstOrDefault(d => d.DepartmentID == userInfo.DepartmentID);
 
-                LastName = userInfo.UserPropertyInfo.LastName;
+                LastName = userInfo.UserPropertyInfo.FirstName;
                 FirstName = userInfo.UserPropertyInfo.FirstName;
                 Nationality = userInfo.UserPropertyInfo.Nationality;
                 NativePlace = userInfo.UserPropertyInfo.NativePlace;
@@ -115,6 +120,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 Postcode = userInfo.UserPropertyInfo.Postcode;
                 Remark = userInfo.UserPropertyInfo.Remark;
             }
+
+            GenderInfo = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender)
+                .FirstOrDefault(x => x.ItemID == (int)userInfo.Gender);
         }
 
 
@@ -123,7 +131,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
+
                 ToUser();
+
+                var userValidator = NinjectBinder.GetValidator<UserValidator>();
+                var results = userValidator.Validate(CurrentUser);
+                if (!results.IsValid)
+                {
+                    message = string.Join(",", results.Errors);
+                    return;
+                }
 
                 if (CurrentUser.UserID == 0)
                 {

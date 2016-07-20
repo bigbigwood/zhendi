@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Rld.Acs.WpfApplication.Validator;
 
 namespace Rld.Acs.WpfApplication.Repository
 {
@@ -16,10 +17,12 @@ namespace Rld.Acs.WpfApplication.Repository
         static NinjectBinder()
         {
             InjectionKernel = new StandardKernel();
-            InitBinding();
+
+            BindRepository();
+            BindValidator();
         }
 
-        private static void InitBinding()
+        private static void BindRepository()
         {
             InjectionKernel.Bind<IUserRepository>().To<UserRepository>();
             InjectionKernel.Bind<IDepartmentRepository>().To<DepartmentRepository>();
@@ -34,9 +37,20 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<ISysDictionaryRepository>().To<SysDictionaryRepository>();
         }
 
+        private static void BindValidator()
+        {
+            InjectionKernel.Bind<UserValidator>().To<UserValidator>();
+            InjectionKernel.Bind<UserPropertyInfoValidator>().To<UserPropertyInfoValidator>();
+        }
+
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()
         {
             return (InjectionKernel.Get<TRepositoryOfEntity>());
+        }
+
+        public static TValidator GetValidator<TValidator>()
+        {
+            return (InjectionKernel.Get<TValidator>());
         }
     }
 }

@@ -43,6 +43,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             ModifyUserCmd = new RelayCommand(ModifyUser);
             DeleteUserCmd = new RelayCommand(DeleteUser);
             SelectedTreeNodeChangedCmd = new RelayCommand<TreeViewNode>(ShowUserBySelectedDepartmentNode);
+            UserViewModels = new ObservableCollection<UserViewModel>();
             AuthorizationDepartments = AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
 
             TreeViewSource = BuildTreeViewSource();

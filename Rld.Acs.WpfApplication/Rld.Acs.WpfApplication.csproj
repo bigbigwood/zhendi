@@ -38,6 +38,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
       <Private>True</Private>
@@ -162,6 +165,8 @@
     <Compile Include="sysLogin.xaml.cs">
       <DependentUpon>sysLogin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Validator\UserPropertyInfoValidator.cs" />
+    <Compile Include="Validator\UserValidator.cs" />
     <Compile Include="ViewModel\Pages\DepartmentPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\TimeGroupPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\TimeZonePageViewModel.cs" />
@@ -329,6 +334,10 @@
     <ProjectReference Include="..\Rld.Acs.Repository\Rld.Acs.Repository.csproj">
       <Project>{090002e5-ab29-4ff1-b6f0-2ea8aa8bcc9d}</Project>
       <Name>Rld.Acs.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Unility\Rld.Acs.Unility.csproj">
+      <Project>{56cd6cfe-8104-4b3f-997c-d84e6788f259}</Project>
+      <Name>Rld.Acs.Unility</Name>
     </ProjectReference>
     <ProjectReference Include="..\Rld.Acs.WpfApplication.Resources\Rld.Acs.WpfApplication.Resources.csproj">
       <Project>{311ed256-edc1-491f-8118-60f98bb3c53f}</Project>

@@ -62,5 +62,6 @@ namespace Rld.Acs.Model
     public enum DictionaryType
     {
         Nationality = 10001, //民族
+        Gender = 10002, //性别
     }
 }

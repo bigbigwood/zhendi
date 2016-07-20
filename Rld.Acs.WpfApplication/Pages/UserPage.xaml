@@ -128,7 +128,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTextColumn Header="{DynamicResource UserPage_Label_Name}" Binding="{Binding Name}" Width="*" />
-                            <DataGridTextColumn Header="{DynamicResource UserPage_Label_Gender}" Binding="{Binding Gender}" Width="*" />
+                            <DataGridTextColumn Header="{DynamicResource UserPage_Label_Gender}" Binding="{Binding GenderInfo.ItemValue}" Width="*" />
                             <DataGridTextColumn Header="{DynamicResource UserPage_Label_Position}" Binding="{Binding TechnicalTitle}" Width="*" />
                             <DataGridTextColumn Header="{DynamicResource UserPage_Label_UserCode}" Binding="{Binding UserCode}" Width="*" />
                             <DataGridTextColumn Header="{DynamicResource UserPage_Label_Phone}" Binding="{Binding Phone}" Width="*" />
