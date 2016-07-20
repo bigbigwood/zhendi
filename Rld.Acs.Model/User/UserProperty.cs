@@ -9,7 +9,7 @@ namespace Rld.Acs.Model
         public virtual Int32 UserPropertyID { get; set; }
         public virtual String LastName { get; set; }
         public virtual String FirstName { get; set; }
-        public virtual String Nationality { get; set; }
+        public virtual Int32 Nationality { get; set; }
         public virtual String NativePlace { get; set; }
         public virtual DateTime Birthday { get; set; }
         public virtual Marriage Marriage { get; set; }

@@ -161,7 +161,8 @@
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding EnglishName}"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding UserCode}"/>
                     <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NativePlace}"/>
-                    <ComboBox  Grid.Row="3" Grid.Column="1"></ComboBox>
+                    <ComboBox  Grid.Row="3" Grid.Column="1" ItemsSource="{Binding NationalityList, Mode=OneWay}" 
+                               SelectedValue="{Binding Nationality}" SelectedValuePath="ItemID" DisplayMemberPath="ItemValue"/>
                     <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Birthday}"/>
                     <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding IDNumber}"/>
                     <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
@@ -187,6 +188,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="权限管理" controls:ControlsHelper.HeaderFontSize="12">
+                <Button Content="Save" Command="{Binding SaveCmd}"></Button>
             </TabItem>
         </TabControl>
     </Grid>

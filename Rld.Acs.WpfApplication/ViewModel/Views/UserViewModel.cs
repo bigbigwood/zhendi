@@ -24,6 +24,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand CancelCmd { get; private set; }
 
         public List<Department> AuthorizationDepartments { get; set; }
+        public List<SysDictionary> NationalityList { get; set; }
         public Boolean IsAddMode { get; set; }
         public string Title { get; set; }
         public string Avator { get; set; }
@@ -40,7 +41,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public virtual String LastName { get; set; }
         public virtual String FirstName { get; set; }
-        public virtual String Nationality { get; set; }
+        public virtual Int32 Nationality { get; set; }
         public virtual String NativePlace { get; set; }
         public virtual DateTime Birthday { get; set; }
         public virtual Marriage Marriage { get; set; }
@@ -69,18 +70,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
             CurrentUser = userInfo;
             AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
+            NationalityList = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Nationality);
 
             IsAddMode = userInfo.UserID == 0;
             StartDate = DateTime.Now;
             Birthday = DateTime.Now;
+            Avator = @"C:\Users\wood\Desktop\bbb.jpg";
             Title = IsAddMode ? "新增人员" : "修改人员";
 
 
             if (!IsAddMode) //Edit mode
             {
-                //Avator = user.Phone;
                 Avator = @"C:\Users\wood\Desktop\aaa.jpg";
-                //DepartmentID = user.DepartmentID;
                 UserType = userInfo.Type;
                 UserCode = userInfo.UserCode;
                 Name = userInfo.Name;
@@ -122,26 +123,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
+                ToUser();
+
                 if (CurrentUser.UserID == 0)
                 {
-                    //CurrentUser.TimeZoneName = Name;
-                    //CurrentUser.Status = GeneralStatus.Enabled;
-                    //CurrentUser.CreateUserID = 1;
-                    //CurrentUser.CreateDate = DateTime.Now;
-                    //CurrentUser.TimeGroupAssociations = GetTimeGroupAssociations();
                     CurrentUser = _userRepo.Insert(CurrentUser);
-
                     message = "增加人员成功!";
                 }
                 else
                 {
-                    //CurrentUser.TimeZoneName = Name;
-                    //CurrentUser.Status = GeneralStatus.Enabled;
-                    //CurrentUser.UpdateUserID = 1;
-                    //CurrentUser.UpdateDate = DateTime.Now;
-                    //CurrentUser.TimeGroupAssociations = GetTimeGroupAssociations();
                     _userRepo.Update(CurrentUser);
-
                     message = "修改人员成功!";
                 }
             }
@@ -159,6 +150,43 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         private void Close(string message)
         {
             Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseTimeZoneView);
-        }   
+        }
+
+        private void ToUser()
+        {
+            //Avator = @"C:\Users\wood\Desktop\aaa.jpg";
+
+            CurrentUser.Photo = Avator;
+            CurrentUser.Type = UserType;
+            CurrentUser.UserCode = UserCode;
+            CurrentUser.Name = Name;
+            CurrentUser.Gender =  Gender;
+            CurrentUser.Phone = Phone;
+            CurrentUser.Status =  Status;
+            CurrentUser.StartDate =  StartDate;
+            CurrentUser.EndDate =  EndDate;
+            CurrentUser.DepartmentID = DepartmentInfo.DepartmentID;
+
+            CurrentUser.UserPropertyInfo.LastName =  LastName;
+            CurrentUser.UserPropertyInfo.FirstName =  FirstName;
+            CurrentUser.UserPropertyInfo.Nationality =  Nationality;
+            CurrentUser.UserPropertyInfo.NativePlace =  NativePlace;
+            CurrentUser.UserPropertyInfo.Birthday =  Birthday;
+            CurrentUser.UserPropertyInfo.Marriage =  Marriage;
+            CurrentUser.UserPropertyInfo.PoliticalStatus = (int)PoliticalStatus;
+            CurrentUser.UserPropertyInfo.Degree = (int) Degree;
+            CurrentUser.UserPropertyInfo.HomeNumber =  HomeNumber;
+            CurrentUser.UserPropertyInfo.EnglishName =  EnglishName;
+            CurrentUser.UserPropertyInfo.Company =  Company;
+            CurrentUser.UserPropertyInfo.TechnicalTitle =  TechnicalTitle;
+            CurrentUser.UserPropertyInfo.TechnicalLevel =  TechnicalLevel;
+            CurrentUser.UserPropertyInfo.IDType =  IDType;
+            CurrentUser.UserPropertyInfo.IDNumber =  IDNumber;
+            CurrentUser.UserPropertyInfo.SocialNumber =  SocialNumber;
+            CurrentUser.UserPropertyInfo.Email =  Email;
+            CurrentUser.UserPropertyInfo.Address =  Address;
+            CurrentUser.UserPropertyInfo.Postcode =  Postcode;
+            CurrentUser.UserPropertyInfo.Remark =  Remark;
+        }
     }
 }

@@ -24,6 +24,7 @@ namespace Rld.Acs.Model
 
         public User()
         {
+            UserPropertyInfo = new UserProperty();
             UserAuthentications = new List<UserAuthentication>();
         }
     }

@@ -23,6 +23,8 @@ namespace Rld.Acs.WpfApplication
             DispatcherHelper.Initialize();
 
             ApplicationManager.Initialize();
+
+            DictionaryManager.Initialize();
         }
     }
 }

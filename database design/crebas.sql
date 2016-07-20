@@ -684,7 +684,7 @@ create table SYS_USER_PROPERTY (
    UserPropertyID       int                  identity(1,1),
    LastName             nvarchar(25)         not null,
    FirstName            nvarchar(25)         not null,
-   Nationality          nvarchar(10)         not null,
+   Nationality          int                  not null,
    NativePlace          nvarchar(100)        null,
    Birthday             datetime             not null,
    Marriage             int                  null,

@@ -59,5 +59,8 @@ namespace Rld.Acs.Model
         FacePrint = 4,
     }
 
-
+    public enum DictionaryType
+    {
+        Nationality = 10001, //民族
+    }
 }

@@ -30,6 +30,8 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<ITimeSegmentRepository>().To<TimeSegmentRepository>();
             InjectionKernel.Bind<ITimeGroupRepository>().To<TimeGroupRepository>();
             InjectionKernel.Bind<ITimeZoneRepository>().To<TimeZoneRepository>();
+
+            InjectionKernel.Bind<ISysDictionaryRepository>().To<SysDictionaryRepository>();
         }
 
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()
