@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Win32;
 using Rld.Acs.WpfApplication.Extension;
 using Rld.Acs.WpfApplication.Messages;
 
@@ -49,6 +50,18 @@ namespace Rld.Acs.WpfApplication.Views
         private void MetroWindow_Unloaded(object sender, RoutedEventArgs e)
         {
             Messenger.Default.Unregister(this);
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "jpg文件(*.jpg)|*.jpg|png文件(*.png)|*.png|所有文件(*.*)|*.*";
+            openFileDialog.RestoreDirectory = true;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                tb_AvatorfilePath.Text = openFileDialog.FileName;
+                img_avator.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+            }
         }
     }
 }

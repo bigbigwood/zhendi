@@ -110,11 +110,11 @@
                     <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate ="{Binding StartDate}" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
                     <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate ="{Binding EndDate}" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
                     
-                    <Image Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Margin="10" Source="{Binding Avator}" />
-                    <TextBox Grid.Row="5" Grid.Column="3"></TextBox>
-                    <StackPanel Grid.Row="6" Grid.Column="3" Orientation="Horizontal">
-                        <Button Width="60" Content="浏览" Margin="3, 0"></Button>
-                        <Button Width="60" Content="上传" Margin="3, 0"></Button>
+                    <Image Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Margin="10" Source="{Binding Avator}" Name="img_avator"/>
+                    <TextBox Grid.Row="5" Grid.Column="3" Name="tb_AvatorfilePath"></TextBox>
+                    <StackPanel Grid.Row="6" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Width="60" Content="浏览" Margin="3, 0" Click="ButtonBase_OnClick" ></Button>
+                        <Button Width="60" Content="上传" Margin="3, 0" Command="{Binding UploadImageCmd}" CommandParameter="{Binding ElementName=tb_AvatorfilePath, Path=Text}"></Button>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -190,7 +190,33 @@
                 </Grid>
             </TabItem>
             <TabItem Header="权限管理" controls:ControlsHelper.HeaderFontSize="12">
-                <Button Content="Save" Command="{Binding SaveCmd}"></Button>
+                <Grid Margin="5" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Row="9" Grid.Column="1"
+                        Content="Save" Command="{Binding SaveCmd}" />
+                </Grid>
+                
             </TabItem>
         </TabControl>
     </Grid>

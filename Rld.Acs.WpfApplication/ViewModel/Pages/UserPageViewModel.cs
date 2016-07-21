@@ -15,6 +15,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Messages;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -56,6 +57,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 if (selectedNode.ID == -1)
                     return;
 
+                
                 UserViewModels = new ObservableCollection<UserViewModel>();
                 var users = _userRepo.Query(new Hashtable { { "DepartmentID", selectedNode.ID } });
                 if (users.Any())
@@ -63,6 +65,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     foreach (var user in users)
                     {
                         UserViewModels.Add(new UserViewModel(user));
+                        
                     }
                 }
 

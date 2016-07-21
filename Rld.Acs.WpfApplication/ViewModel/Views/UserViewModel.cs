@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +10,13 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using log4net;
+using Ninject.Activation.Caching;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Messages;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
@@ -21,13 +25,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IUserRepository _userRepo = NinjectBinder.GetRepository<IUserRepository>();
+        private UserAvatorService _userAvatorService = new UserAvatorService();
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
+        public RelayCommand<string> UploadImageCmd { get; private set; }
+        
 
         public List<Department> AuthorizationDepartments { get; set; }
         public List<SysDictionary> NationalityList { get; set; }
-        
+
         public Boolean IsAddMode { get; set; }
         public string Title { get; set; }
         public string Avator { get; set; }
@@ -70,6 +77,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
+            UploadImageCmd = new RelayCommand<string>(UploadImage);
 
             CurrentUser = userInfo;
             AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
@@ -80,22 +88,20 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             IsAddMode = userInfo.UserID == 0;
             StartDate = DateTime.Now;
             Birthday = DateTime.Now;
-            Avator = @"C:\Users\wood\Desktop\bbb.jpg";
+            Avator = _userAvatorService.GetAvator(_userAvatorService.DefaultAvatorFileName);
             Title = IsAddMode ? "新增人员" : "修改人员";
-
 
             if (!IsAddMode) //Edit mode
             {
-                Avator = @"C:\Users\wood\Desktop\aaa.jpg";
                 UserType = userInfo.Type;
                 UserCode = userInfo.UserCode;
                 Name = userInfo.Name;
-                GenderInfo = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender)
-                .FirstOrDefault(x => x.ItemID == (int)userInfo.Gender);
-                Phone = userInfo.Phone;
                 Status = userInfo.Status;
                 StartDate = userInfo.StartDate;
                 EndDate = userInfo.EndDate;
+                Avator = _userAvatorService.GetAvator(userInfo.Photo);
+                GenderInfo = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender)
+                    .FirstOrDefault(x => x.ItemID == (int)userInfo.Gender);
                 DepartmentInfo = AuthorizationDepartments.FirstOrDefault(d => d.DepartmentID == userInfo.DepartmentID);
 
                 LastName = userInfo.UserPropertyInfo.FirstName;
@@ -104,7 +110,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 NativePlace = userInfo.UserPropertyInfo.NativePlace;
                 Birthday = userInfo.UserPropertyInfo.Birthday;
                 Marriage = userInfo.UserPropertyInfo.Marriage;
-                PoliticalStatus = (userInfo.UserPropertyInfo.PoliticalStatus != null) 
+                PoliticalStatus = (userInfo.UserPropertyInfo.PoliticalStatus != null)
                     ? (PoliticalStatus)userInfo.UserPropertyInfo.PoliticalStatus : PoliticalStatus.Unknown;
                 Degree = (userInfo.UserPropertyInfo.Degree != null)
                     ? (DegreeStatus)userInfo.UserPropertyInfo.Degree : DegreeStatus.Unknown;
@@ -121,8 +127,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 Postcode = userInfo.UserPropertyInfo.Postcode;
                 Remark = userInfo.UserPropertyInfo.Remark;
             }
-
-
         }
 
 
@@ -175,41 +179,65 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseUserView);
         }
 
+        private void UploadImage(string filePath)
+        {
+            try
+            {
+                if (!File.Exists(filePath))
+                    throw new Exception("file does not exist.");
+
+                string extension = new FileInfo(filePath).Extension;
+
+                string uniqueFileName = string.Format(@"{0}_{1}{2}", Guid.NewGuid(), DateTime.Now.ToString("yyyyMMddhhmmss"), extension);
+                string cacheFilePath = string.Format(@"{0}\{1}", ApplicationManager.GetInstance().LocalImageCachePath, uniqueFileName);
+                File.Copy(filePath, cacheFilePath);
+
+                _userAvatorService.UploadAvatorToServer(uniqueFileName);
+                Avator = cacheFilePath;
+                //RaisePropertyChanged("Avator");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                throw;
+            }
+
+        }
+
         private void ToUser()
         {
             //Avator = @"C:\Users\wood\Desktop\aaa.jpg";
-
-            CurrentUser.Photo = Avator;
+            CurrentUser.Photo = new FileInfo(Avator).Name;
             CurrentUser.Type = UserType;
             CurrentUser.UserCode = UserCode;
             CurrentUser.Name = Name;
             CurrentUser.Gender = (GenderType)GenderInfo.ItemID;
             CurrentUser.Phone = Phone;
-            CurrentUser.Status =  Status;
-            CurrentUser.StartDate =  StartDate;
-            CurrentUser.EndDate =  EndDate;
+            CurrentUser.Status = Status;
+            CurrentUser.StartDate = StartDate;
+            CurrentUser.EndDate = EndDate;
             CurrentUser.DepartmentID = DepartmentInfo.DepartmentID;
 
-            CurrentUser.UserPropertyInfo.LastName =  LastName;
-            CurrentUser.UserPropertyInfo.FirstName =  FirstName;
-            CurrentUser.UserPropertyInfo.Nationality =  Nationality;
-            CurrentUser.UserPropertyInfo.NativePlace =  NativePlace;
-            CurrentUser.UserPropertyInfo.Birthday =  Birthday;
-            CurrentUser.UserPropertyInfo.Marriage =  Marriage;
+            CurrentUser.UserPropertyInfo.LastName = LastName;
+            CurrentUser.UserPropertyInfo.FirstName = FirstName;
+            CurrentUser.UserPropertyInfo.Nationality = Nationality;
+            CurrentUser.UserPropertyInfo.NativePlace = NativePlace;
+            CurrentUser.UserPropertyInfo.Birthday = Birthday;
+            CurrentUser.UserPropertyInfo.Marriage = Marriage;
             CurrentUser.UserPropertyInfo.PoliticalStatus = (int)PoliticalStatus;
-            CurrentUser.UserPropertyInfo.Degree = (int) Degree;
-            CurrentUser.UserPropertyInfo.HomeNumber =  HomeNumber;
-            CurrentUser.UserPropertyInfo.EnglishName =  EnglishName;
-            CurrentUser.UserPropertyInfo.Company =  Company;
-            CurrentUser.UserPropertyInfo.TechnicalTitle =  TechnicalTitle;
-            CurrentUser.UserPropertyInfo.TechnicalLevel =  TechnicalLevel;
-            CurrentUser.UserPropertyInfo.IDType =  IDType;
-            CurrentUser.UserPropertyInfo.IDNumber =  IDNumber;
-            CurrentUser.UserPropertyInfo.SocialNumber =  SocialNumber;
-            CurrentUser.UserPropertyInfo.Email =  Email;
-            CurrentUser.UserPropertyInfo.Address =  Address;
-            CurrentUser.UserPropertyInfo.Postcode =  Postcode;
-            CurrentUser.UserPropertyInfo.Remark =  Remark;
+            CurrentUser.UserPropertyInfo.Degree = (int)Degree;
+            CurrentUser.UserPropertyInfo.HomeNumber = HomeNumber;
+            CurrentUser.UserPropertyInfo.EnglishName = EnglishName;
+            CurrentUser.UserPropertyInfo.Company = Company;
+            CurrentUser.UserPropertyInfo.TechnicalTitle = TechnicalTitle;
+            CurrentUser.UserPropertyInfo.TechnicalLevel = TechnicalLevel;
+            CurrentUser.UserPropertyInfo.IDType = IDType;
+            CurrentUser.UserPropertyInfo.IDNumber = IDNumber;
+            CurrentUser.UserPropertyInfo.SocialNumber = SocialNumber;
+            CurrentUser.UserPropertyInfo.Email = Email;
+            CurrentUser.UserPropertyInfo.Address = Address;
+            CurrentUser.UserPropertyInfo.Postcode = Postcode;
+            CurrentUser.UserPropertyInfo.Remark = Remark;
         }
     }
 }

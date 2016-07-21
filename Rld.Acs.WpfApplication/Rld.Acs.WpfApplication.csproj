@@ -112,6 +112,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppConfiguration.cs" />
     <Compile Include="ApplicationManager.cs" />
     <Compile Include="Converter\EnumDescriptionTypeConverter.cs" />
     <Compile Include="Converter\EnumToBooleanConverter.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="Repository\DeviceControllerRepository.cs" />
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
+    <Compile Include="Service\UserAvatorService.cs" />
     <Compile Include="sysLogin.xaml.cs">
       <DependentUpon>sysLogin.xaml</DependentUpon>
     </Compile>
