@@ -14,8 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls;
-using Rld.Acs.WpfApplication.Extension;
-using Rld.Acs.WpfApplication.Messages;
+using Rld.Acs.WpfApplication.Models.Messages;
+using Rld.Acs.WpfApplication.View;
 using Rld.Acs.WpfApplication.Views;
 
 namespace Rld.Acs.WpfApplication.Pages

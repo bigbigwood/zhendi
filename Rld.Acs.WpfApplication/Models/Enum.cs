@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using Rld.Acs.WpfApplication.View.Converter;
 
 namespace Rld.Acs.WpfApplication.Models

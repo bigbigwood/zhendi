@@ -124,9 +124,9 @@
       <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Service\DictionaryManager.cs" />
-    <Compile Include="View\Extension\EnumBindingSourceExtension.cs" />
-    <Compile Include="View\Extension\LocalizedDescriptionAttribute.cs" />
-    <Compile Include="View\Extension\MessageBoxSingleton.cs" />
+    <Compile Include="Models\EnumBindingSourceExtension.cs" />
+    <Compile Include="Models\LocalizedDescriptionAttribute.cs" />
+    <Compile Include="View\MessageBoxSingleton.cs" />
     <Compile Include="Models\Messages\OpenWindowMessage.cs" />
     <Compile Include="Models\Messages\Tokens.cs" />
     <Compile Include="Models\Enum.cs" />

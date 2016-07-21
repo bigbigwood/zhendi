@@ -6,8 +6,7 @@
              xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:model="clr-namespace:Rld.Acs.Model;assembly=Rld.Acs.Model"
-             xmlns:extension="clr-namespace:Rld.Acs.WpfApplication.Extension"
-             xmlns:AppModels="clr-namespace:Rld.Acs.WpfApplication.Models"
+                      xmlns:AppModels="clr-namespace:Rld.Acs.WpfApplication.Models"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600"
@@ -188,9 +187,9 @@
                             Content="已婚" GroupName="rb_marriage" VerticalAlignment="Center" Margin="3"/>
                     </StackPanel>
                     <ComboBox Grid.Row="7" Grid.Column="1" SelectedItem="{Binding PoliticalStatus}"
-                              ItemsSource="{Binding Source={extension:EnumBindingSource {x:Type AppModels:PoliticalStatus}}}" />
+                              ItemsSource="{Binding Source={AppModels:EnumBindingSource {x:Type AppModels:PoliticalStatus}}}" />
                     <ComboBox Grid.Row="8" Grid.Column="1" SelectedItem="{Binding Degree}"
-                              ItemsSource="{Binding Source={extension:EnumBindingSource {x:Type AppModels:DegreeStatus}}}" />
+                              ItemsSource="{Binding Source={AppModels:EnumBindingSource {x:Type AppModels:DegreeStatus}}}" />
                     <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding SocialNumber}"/>
                     <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Company}"/>
                     <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding TechnicalTitle}"/>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Rld.Acs.WpfApplication.Messages
+﻿namespace Rld.Acs.WpfApplication.Models.Messages
 {
     public class OpenWindowMessage
     {

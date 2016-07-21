@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Rld.Acs.WpfApplication.Extension
+namespace Rld.Acs.WpfApplication.Models
 {
     public class LocalizedDescriptionAttribute : DescriptionAttribute
     {

@@ -3,7 +3,6 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
-using Rld.Acs.WpfApplication.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using System;
 using System.Collections.Generic;

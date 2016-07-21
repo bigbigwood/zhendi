@@ -2,7 +2,6 @@
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Rld.Acs.WpfApplication.CustomerControl;
-using Rld.Acs.WpfApplication.Extension;
 using Rld.Acs.WpfApplication.Pages;
 using System;
 using System.Collections.Generic;
@@ -17,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Rld.Acs.WpfApplication.View;
 
 namespace Rld.Acs.WpfApplication
 {

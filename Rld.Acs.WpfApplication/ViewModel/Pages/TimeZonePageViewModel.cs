@@ -8,7 +8,7 @@ using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using log4net;
 using Rld.Acs.Repository.Interfaces;
-using Rld.Acs.WpfApplication.Messages;
+using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 

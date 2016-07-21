@@ -13,8 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls;
-using Rld.Acs.WpfApplication.Extension;
-using Rld.Acs.WpfApplication.Messages;
+using Rld.Acs.WpfApplication.Models.Messages;
+using Rld.Acs.WpfApplication.View;
 
 namespace Rld.Acs.WpfApplication.Views
 {
