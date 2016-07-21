@@ -9,10 +9,11 @@
              xmlns:extension="clr-namespace:Rld.Acs.WpfApplication.Extension"
              xmlns:AppModels="clr-namespace:Rld.Acs.WpfApplication.Models"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600"
              d:DataContext= "{d:DesignInstance Type= vm:UserViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="400" Width="600" Unloaded="MetroWindow_Unloaded">
+             Height="500" Width="600" Unloaded="MetroWindow_Unloaded">
 
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
@@ -35,6 +36,8 @@
         </Style>
         <Style TargetType="Button" BasedOn="{StaticResource ResourceKey={x:Type Button}}" >
             <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Width" Value="75"/>
         </Style>
         <Style TargetType="RadioButton" BasedOn="{StaticResource ResourceKey={x:Type RadioButton}}" >
             <Setter Property="FontSize" Value="12"/>
@@ -56,7 +59,7 @@
             <TextBlock Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
-        <TabControl Grid.Row="2" controls:TabControlHelper.IsUnderlined="True">
+        <TabControl Grid.Row="2" controls:TabControlHelper.IsUnderlined="True" Name="myTab">
             <TabItem Header="基本信息" controls:ControlsHelper.HeaderFontSize="12" >
                 <Grid Margin="5" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
@@ -68,8 +71,8 @@
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
-                        <RowDefinition Height="28"/>
-                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -103,18 +106,29 @@
                     <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Phone}"/>
                     <ComboBox Grid.Row="4" Grid.Column="1" IsEnabled="{Binding IsAddMode}"
                               ItemsSource="{Binding AuthorizationDepartments, Mode=OneWay}"  
-                              SelectedItem="{Binding DepartmentInfo}" SelectedValuePath="DepartmentID" DisplayMemberPath="Name" />
+                              SelectedItem="{Binding DepartmentInfo}" SelectedValuePath="DepartmentID" DisplayMemberPath="Name">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DepartmentChangedCmd}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
 
                     <CheckBox IsChecked="{Binding Status, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GeneralStatus.Enabled}}"
                         Grid.Row="5" Grid.Column="1" Content="启用"/>
                     <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate ="{Binding StartDate}" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
                     <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate ="{Binding EndDate}" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
-                    
+
                     <Image Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Margin="10" Source="{Binding Avator}" Name="img_avator"/>
                     <TextBox Grid.Row="5" Grid.Column="3" Name="tb_AvatorfilePath"></TextBox>
                     <StackPanel Grid.Row="6" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Width="60" Content="浏览" Margin="3, 0" Click="ButtonBase_OnClick" ></Button>
-                        <Button Width="60" Content="上传" Margin="3, 0" Command="{Binding UploadImageCmd}" CommandParameter="{Binding ElementName=tb_AvatorfilePath, Path=Text}"></Button>
+                        <Button Width="65" Content="浏览" Margin="3, 0" Click="ButtonBase_OnClick" ></Button>
+                        <Button Width="65" Content="上传" Margin="3, 0" Command="{Binding UploadImageCmd}" CommandParameter="{Binding ElementName=tb_AvatorfilePath, Path=Text}"></Button>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Orientation="Horizontal" >
+                        <Button Content="下一页" Click="OnNextPageClicked" Margin="3,0"/>
+                        <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -131,7 +145,8 @@
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
-                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -187,6 +202,11 @@
                     <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding Postcode}"/>
                     <TextBox Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Remark}" 
                              TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+
+                    <StackPanel Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Orientation="Horizontal" >
+                        <Button Content="下一页" Click="OnNextPageClicked" Margin="3,0"/>
+                        <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
+                    </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="权限管理" controls:ControlsHelper.HeaderFontSize="12">
@@ -199,24 +219,36 @@
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
-                        <RowDefinition Height="28"/>
-                        <RowDefinition Height="28"/>
-                        <RowDefinition Height="28"/>
-                        <RowDefinition Height="28"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="150"/>
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
-
-                    <Button Grid.Row="9" Grid.Column="1"
-                        Content="Save" Command="{Binding SaveCmd}" />
+                    <GroupBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="6"
+                            Style="{StaticResource DefaultGroupBoxStyle}" 
+                              Header="{StaticResource DepartmentDetail_Label_DepartmentOwnedDevices}">
+                        <ListBox ItemsSource="{Binding DeviceRoleListBoxSource}" >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel Margin="3">
+                                        <CheckBox IsChecked="{Binding IsSelected}" IsEnabled="{Binding IsEnabled}" Content="{Binding Path=DisplayName}" Width="120" DockPanel.Dock="Left"/>
+                                        <TextBlock Text="默认" IsEnabled="False" 
+                                                       Visibility="{Binding IsDefault, Converter={StaticResource BooleanToVisibilityConverter}}" DockPanel.Dock="Right"/>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </GroupBox>
+                    <StackPanel Grid.Row="8" Grid.Column="1"  HorizontalAlignment="Center" Orientation="Horizontal">
+                        <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0"/>
+                        <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
+                    </StackPanel>
                 </Grid>
-                
+
             </TabItem>
         </TabControl>
     </Grid>

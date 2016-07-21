@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
     <Compile Include="Department\Department.cs" />
     <Compile Include="Department\DepartmentDevice.cs" />
     <Compile Include="Device\DeviceController.cs" />

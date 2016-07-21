@@ -65,7 +65,6 @@
     <Compile Include="Interfaces\Device\IDeviceHeadReadingRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceRolePermissionRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceRoleRepository.cs" />
-    <Compile Include="Interfaces\ICustomerRepository.cs" />
     <Compile Include="Interfaces\System\ISysDictionaryRepository.cs" />
     <Compile Include="Interfaces\System\ISysRoleRepository.cs" />
     <Compile Include="Interfaces\System\ISysRolePermissionRepository.cs" />

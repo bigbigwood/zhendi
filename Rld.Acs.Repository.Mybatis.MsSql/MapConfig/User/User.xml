@@ -21,6 +21,7 @@
       <result property="EndDate" column="EndDate"/>
       <result property="UserAuthentications" column="UserID" select="UserAuthentication.GetByUserID"/>
       <result property="UserPropertyInfo" column="UserPropertyID" select="UserProperty.GetByKey"/>
+      <result property="UserDeviceRoles" column="UserID" select="UserDeviceRole.GetByUserID"/>
     </resultMap>
   </resultMaps>
 

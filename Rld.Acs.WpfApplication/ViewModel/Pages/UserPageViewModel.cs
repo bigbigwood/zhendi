@@ -15,7 +15,6 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Messages;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
-using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -130,15 +129,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
-                //if (AuthorizationDepartments.Any(d => d.Parent != null && d.Parent.DepartmentID == SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID))
-                //{
-                //    Messenger.Default.Send(new NotificationMessage("选中部门存在子部门，请先删除所属子部门!"), Tokens.DepartmentPage_ShowNotification);
-                //    return;
-                //}
-
-                string question = string.Format("确定删除用户:{0}吗？", SelectedUserViewModel);
+                string question = string.Format("确定删除用户:{0}吗？", SelectedUserViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteUser), Tokens.UserPage_ShowQuestion);
-
             }
             catch (Exception ex)
             {

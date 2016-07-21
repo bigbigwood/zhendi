@@ -20,6 +20,12 @@
       WHERE
       [UserDeviceRoleID] = #value#
     </select>
+    <select id="UserDeviceRole.GetByUserID" parameterClass="int" resultMap="UserDeviceRoleResult">
+      SELECT *
+      FROM [SYS_USER_DEVICE_ROLES]
+      WHERE
+      [UserID] = #UserID#
+    </select>
 
     <insert id="UserDeviceRole.Insert" parameterClass="UserDeviceRole">
       INSERT INTO [SYS_USER_DEVICE_ROLES] (

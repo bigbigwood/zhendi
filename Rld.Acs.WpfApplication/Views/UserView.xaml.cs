@@ -63,5 +63,15 @@ namespace Rld.Acs.WpfApplication.Views
                 img_avator.Source = new BitmapImage(new Uri(openFileDialog.FileName));
             }
         }
+
+        private void OnNextPageClicked(object sender, RoutedEventArgs e)
+        {
+            myTab.SelectedIndex ++;
+        }
+
+        private void OnPreviousPageClicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

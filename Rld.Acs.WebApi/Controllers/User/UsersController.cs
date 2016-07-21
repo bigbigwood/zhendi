@@ -57,13 +57,22 @@ namespace Rld.Acs.WebApi.Controllers
                 if (userInfo.UserPropertyInfo == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "UserPropertyInfo property cannot be null.");
 
+                if (userInfo.UserDeviceRoles == null)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "UserDeviceRoles property cannot be null.");
+
                 var userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
                 var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
                 var userRepo = RepositoryManager.GetRepository<IUserRepository>();
+                var userDeviceRoleRepo = RepositoryManager.GetRepository<IUserDeviceRoleRepository>();
 
-                userInfo.UserAuthentications.ForEach(a => userAuthenticationRepo.Insert(a));
                 userPropertyRepo.Insert(userInfo.UserPropertyInfo);
                 userRepo.Insert(userInfo);
+
+                userInfo.UserAuthentications.ForEach(a => a.UserID = userInfo.UserID);
+                userInfo.UserAuthentications.ForEach(a => userAuthenticationRepo.Insert(a));
+
+                userInfo.UserDeviceRoles.ForEach(a => a.UserID = userInfo.UserID);
+                userInfo.UserDeviceRoles.ForEach(a => userDeviceRoleRepo.Insert(a));
 
                 return Request.CreateResponse(HttpStatusCode.OK, userInfo);
 
@@ -79,19 +88,50 @@ namespace Rld.Acs.WebApi.Controllers
                 var userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
                 var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
                 var userRepo = RepositoryManager.GetRepository<IUserRepository>();
+                var userDeviceRoleRepo = RepositoryManager.GetRepository<IUserDeviceRoleRepository>();
 
-                var tryFindUserInfo = userRepo.GetByKey(id);
-                if (tryFindUserInfo == null)
+                var originalUserInfo = userRepo.GetByKey(id);
+                if (originalUserInfo == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("User Id={0} does not exist.", id));
 
-                if (userInfo.UserAuthentications != null)
+                var addedAuthentications = new List<UserAuthentication>();
+                var deletedAuthenticationIds = new List<int>();
+                if (userInfo.UserAuthentications != null && userInfo.UserAuthentications.Any())
                 {
-                    userInfo.UserAuthentications.ForEach(a => userAuthenticationRepo.SaveOrUpdate(a));
+                    var originalUserAuthenticationIDs = originalUserInfo.UserAuthentications.Select(d => d.UserAuthenticationID);
+                    var UserAuthenticationIDs = userInfo.UserAuthentications.Select(d => d.UserAuthenticationID);
+                    deletedAuthenticationIds = originalUserAuthenticationIDs.Except(UserAuthenticationIDs).ToList();
+
+                    addedAuthentications = userInfo.UserAuthentications.FindAll(d => d.UserAuthenticationID == 0);
                 }
-                if (userInfo.UserPropertyInfo != null)
+                else
                 {
-                    userPropertyRepo.Update(userInfo.UserPropertyInfo);
+                    deletedAuthenticationIds = originalUserInfo.UserAuthentications.Select(d => d.UserAuthenticationID).ToList();
                 }
+
+
+                deletedAuthenticationIds.ForEach(d => userAuthenticationRepo.Delete(d));
+                addedAuthentications.ForEach(d => userAuthenticationRepo.Insert(d));
+
+                var addedUserDeviceRoles = new List<UserDeviceRole>();
+                var deletedUserDeviceRoleIds = new List<int>();
+                if (userInfo.UserDeviceRoles != null && userInfo.UserDeviceRoles.Any())
+                {
+                    var originalUserDeviceRoleIDs = originalUserInfo.UserDeviceRoles.Select(d => d.UserDeviceRoleID);
+                    var userDeviceRoleIDs = userInfo.UserDeviceRoles.Select(d => d.UserDeviceRoleID);
+                    deletedUserDeviceRoleIds = originalUserDeviceRoleIDs.Except(userDeviceRoleIDs).ToList();
+
+                    addedUserDeviceRoles = userInfo.UserDeviceRoles.FindAll(d => d.UserDeviceRoleID == 0);
+                }
+                else
+                {
+                    deletedUserDeviceRoleIds = originalUserInfo.UserDeviceRoles.Select(d => d.UserDeviceRoleID).ToList();
+                }
+
+                deletedUserDeviceRoleIds.ForEach(d => userDeviceRoleRepo.Delete(d));
+                addedUserDeviceRoles.ForEach(d => userDeviceRoleRepo.Insert(d));
+
+                userPropertyRepo.Update(userInfo.UserPropertyInfo);
                 userRepo.Update(userInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
@@ -106,12 +146,14 @@ namespace Rld.Acs.WebApi.Controllers
                 var userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
                 var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
                 var userRepo = RepositoryManager.GetRepository<IUserRepository>();
+                var userDeviceRoleRepo = RepositoryManager.GetRepository<IUserDeviceRoleRepository>();
 
                 var userInfo = userRepo.GetByKey(id);
                 if (userInfo != null)
                 {
                     userInfo.UserAuthentications.ForEach(a => userAuthenticationRepo.Delete(a.UserAuthenticationID));
                     userPropertyRepo.Delete(userInfo.UserPropertyInfo.UserPropertyID);
+                    userInfo.UserDeviceRoles.ForEach(a => userDeviceRoleRepo.Delete(a.UserDeviceRoleID));
                     userRepo.Delete(id);
                 }
 

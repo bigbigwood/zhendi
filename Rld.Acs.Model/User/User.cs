@@ -21,11 +21,13 @@ namespace Rld.Acs.Model
 
         public virtual IList<UserAuthentication> UserAuthentications{ get; set; }
         public virtual UserProperty UserPropertyInfo { get; set; }
+        public virtual IList<UserDeviceRole> UserDeviceRoles { get; set; }
 
         public User()
         {
             UserPropertyInfo = new UserProperty();
             UserAuthentications = new List<UserAuthentication>();
+            UserDeviceRoles = new List<UserDeviceRole>();
         }
     }
 }

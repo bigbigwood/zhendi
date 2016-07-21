@@ -17,7 +17,6 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             Bind<IConnectionProvider>().To<MyBatisConnectionProvider>();
             Bind<IPersistanceTransaction>().To<TransactionToPersistanceTransaction>();
 
-            Bind<ICustomerRepository>().To<CustomerRepositoryMB>();
             //Department
             Bind<IDepartmentRepository>().To<DepartmentRepositoryMB>();
             Bind<IDepartmentDeviceRepository>().To<DepartmentDeviceRepositoryMB>();

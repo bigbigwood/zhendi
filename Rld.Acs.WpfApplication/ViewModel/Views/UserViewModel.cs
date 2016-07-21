@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,7 @@ using log4net;
 using Ninject.Activation.Caching;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.WpfApplication.Messages;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
@@ -29,16 +31,23 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
+        public RelayCommand NextPageCmd { get; private set; }
+        public RelayCommand PreviousPageCmd { get; private set; }
+
         public RelayCommand<string> UploadImageCmd { get; private set; }
-        
+        public RelayCommand DepartmentChangedCmd { get; private set; }
+
 
         public List<Department> AuthorizationDepartments { get; set; }
         public List<SysDictionary> NationalityList { get; set; }
+        public ObservableCollection<ListBoxItem> DeviceRoleListBoxSource { get; set; }
+
+
+        public virtual Department DepartmentInfo { get; set; }
 
         public Boolean IsAddMode { get; set; }
         public string Title { get; set; }
         public string Avator { get; set; }
-        public virtual Department DepartmentInfo { get; set; }
         public virtual UserType UserType { get; set; }
         public virtual String UserCode { get; set; }
         public virtual String Name { get; set; }
@@ -78,12 +87,17 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
             UploadImageCmd = new RelayCommand<string>(UploadImage);
+            DepartmentChangedCmd = new RelayCommand(ProcessDepartmentChangedCmd);
+            NextPageCmd = new RelayCommand(ProcessNextPageCmd);
+            PreviousPageCmd = new RelayCommand(ProcessPreviousPageCmd);
 
             CurrentUser = userInfo;
             AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
             NationalityList = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Nationality);
 
             DepartmentInfo = new Department();
+            GenderInfo =
+                DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int) DictionaryType.Gender).FirstOrDefault();
 
             IsAddMode = userInfo.UserID == 0;
             StartDate = DateTime.Now;
@@ -127,9 +141,19 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 Postcode = userInfo.UserPropertyInfo.Postcode;
                 Remark = userInfo.UserPropertyInfo.Remark;
             }
+
+            DeviceRoleListBoxSource = GetDeviceRoleListBoxSource();
         }
 
+        private void ProcessNextPageCmd()
+        {
+            
+        }
 
+        private void ProcessPreviousPageCmd()
+        {
+
+        }
         private void Save()
         {
             string message = "";
@@ -194,14 +218,58 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
                 _userAvatorService.UploadAvatorToServer(uniqueFileName);
                 Avator = cacheFilePath;
-                //RaisePropertyChanged("Avator");
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
                 throw;
             }
+        }
 
+        private void ProcessDepartmentChangedCmd()
+        {
+            if (IsAddMode)
+            {
+                CurrentUser.UserDeviceRoles = new []{ new UserDeviceRole{ DeviceRoleID = DepartmentInfo.DeviceRoleID }}.ToList();
+            }
+
+            DeviceRoleListBoxSource = GetDeviceRoleListBoxSource();
+            RaisePropertyChanged(null);
+        }
+
+
+        private ObservableCollection<ListBoxItem> GetDeviceRoleListBoxSource()
+        {
+            var items = new ObservableCollection<ListBoxItem>();
+            var AuthorizationDeviceRoles = ApplicationManager.GetInstance().AuthorizationDeviceRoles;
+            AuthorizationDeviceRoles.ForEach(role => items.Add(new ListBoxItem()
+            {
+                ID = role.DeviceRoleID, 
+                DisplayName = role.RoleName, 
+                IsSelected = CurrentUser.UserDeviceRoles.Select(x => x.DeviceRoleID).Contains(role.DeviceRoleID), 
+                IsDefault = (DepartmentInfo.DeviceRoleID == role.DeviceRoleID),
+                IsEnabled = (DepartmentInfo.DeviceRoleID != role.DeviceRoleID), // default is not able to changed
+            }));
+
+            return items;
+        }
+
+        private List<UserDeviceRole> GetUserDeviceFromUI()
+        {
+            List<UserDeviceRole> result = new List<UserDeviceRole>();
+            var AuthorizationDeviceRoles = ApplicationManager.GetInstance().AuthorizationDeviceRoles;
+            var selected = DeviceRoleListBoxSource.FindAll(x => x.IsSelected);
+            foreach (var listBoxItem in selected)
+            {
+                var userDeviceRole = CurrentUser.UserDeviceRoles.FirstOrDefault(x => x.DeviceRoleID == listBoxItem.ID);
+                if (userDeviceRole == null)
+                {
+                    userDeviceRole = new UserDeviceRole() {DeviceRoleID = listBoxItem.ID, UserID = CurrentUser.UserID};
+                }
+
+                result.Add(userDeviceRole);
+            }
+            return result;
         }
 
         private void ToUser()
@@ -238,6 +306,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             CurrentUser.UserPropertyInfo.Address = Address;
             CurrentUser.UserPropertyInfo.Postcode = Postcode;
             CurrentUser.UserPropertyInfo.Remark = Remark;
+
+            CurrentUser.UserDeviceRoles = GetUserDeviceFromUI();
         }
     }
 }

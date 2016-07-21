@@ -67,7 +67,6 @@
   <ItemGroup>
     <Compile Include="Adapter\MyBatisConnectionProvider.cs" />
     <Compile Include="Adapter\MyBatisRepository.cs" />
-    <Compile Include="Impl\CustomerRepositoryMB.cs" />
     <Compile Include="Impl\Department\DepartmentDeviceRepositoryMB.cs" />
     <Compile Include="Impl\Department\DepartmentRepositoryMB.cs" />
     <Compile Include="Impl\Device\DeviceOperationLogRepositoryMB.cs" />
@@ -116,9 +115,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Device\DeviceHeadReading.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MapConfig\Customer.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Time\TimeSegment.xml">
