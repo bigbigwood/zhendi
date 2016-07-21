@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
+﻿using FluentValidation;
 using Rld.Acs.Model;
 using Rld.Acs.Unility;
 
-namespace Rld.Acs.WpfApplication.Validator
+namespace Rld.Acs.WpfApplication.Service.Validator
 {
     public class UserPropertyInfoValidator : AbstractValidator<UserProperty> 
     {

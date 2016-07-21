@@ -112,44 +112,45 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AppConfiguration.cs" />
-    <Compile Include="ApplicationManager.cs" />
-    <Compile Include="Converter\EnumDescriptionTypeConverter.cs" />
-    <Compile Include="Converter\EnumToBooleanConverter.cs" />
-    <Compile Include="Converter\RowToIndexConverter.cs" />
-    <Compile Include="CustomControls\TileIconBox.xaml.cs">
+    <Compile Include="Models\AppConfiguration.cs" />
+    <Compile Include="Service\ApplicationManager.cs" />
+    <Compile Include="View\Converter\EnumDescriptionTypeConverter.cs" />
+    <Compile Include="View\Converter\EnumToBooleanConverter.cs" />
+    <Compile Include="View\Converter\RowToIndexConverter.cs" />
+    <Compile Include="View\CustomControls\TileIconBox.xaml.cs">
       <DependentUpon>TileIconBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\TimeControl.xaml.cs">
+    <Compile Include="View\CustomControls\TimeControl.xaml.cs">
       <DependentUpon>TimeControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DictionaryManager.cs" />
-    <Compile Include="Extension\EnumBindingSourceExtension.cs" />
-    <Compile Include="Extension\LocalizedDescriptionAttribute.cs" />
-    <Compile Include="Extension\MessageBoxSingleton.cs" />
-    <Compile Include="Messages\OpenWindowMessage.cs" />
-    <Compile Include="Messages\Tokens.cs" />
+    <Compile Include="Service\DictionaryManager.cs" />
+    <Compile Include="View\Extension\EnumBindingSourceExtension.cs" />
+    <Compile Include="View\Extension\LocalizedDescriptionAttribute.cs" />
+    <Compile Include="View\Extension\MessageBoxSingleton.cs" />
+    <Compile Include="Models\Messages\OpenWindowMessage.cs" />
+    <Compile Include="Models\Messages\Tokens.cs" />
     <Compile Include="Models\Enum.cs" />
     <Compile Include="Models\SelectableItem.cs" />
     <Compile Include="Models\TreeViewNode.cs" />
-    <Compile Include="Navigation\FrameNavigationService.cs" />
-    <Compile Include="Navigation\IFrameNavigationService.cs" />
-    <Compile Include="Pages\DepartmentPage.xaml.cs">
+    <Compile Include="Service\Navigation\FrameNavigationService.cs" />
+    <Compile Include="Service\Navigation\IFrameNavigationService.cs" />
+    <Compile Include="View\BaseWindow.cs" />
+    <Compile Include="View\Pages\DepartmentPage.xaml.cs">
       <DependentUpon>DepartmentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SummaryPage.xaml.cs">
+    <Compile Include="View\Pages\SummaryPage.xaml.cs">
       <DependentUpon>SummaryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TimeZonePage.xaml.cs">
+    <Compile Include="View\Pages\TimeZonePage.xaml.cs">
       <DependentUpon>TimeZonePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TimeGroupPage.xaml.cs">
+    <Compile Include="View\Pages\TimeGroupPage.xaml.cs">
       <DependentUpon>TimeGroupPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TimeSegmentPage.xaml.cs">
+    <Compile Include="View\Pages\TimeSegmentPage.xaml.cs">
       <DependentUpon>TimeSegmentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UserPage.xaml.cs">
+    <Compile Include="View\Pages\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Repository\BaseRepository.cs" />
@@ -164,11 +165,11 @@
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="Service\UserAvatorService.cs" />
-    <Compile Include="sysLogin.xaml.cs">
+    <Compile Include="View\sysLogin.xaml.cs">
       <DependentUpon>sysLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Validator\UserPropertyInfoValidator.cs" />
-    <Compile Include="Validator\UserValidator.cs" />
+    <Compile Include="Service\Validator\UserPropertyInfoValidator.cs" />
+    <Compile Include="Service\Validator\UserValidator.cs" />
     <Compile Include="ViewModel\Pages\DepartmentPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\TimeGroupPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\TimeZonePageViewModel.cs" />
@@ -183,36 +184,36 @@
     <Compile Include="ViewModel\Views\TimeGroupViewModel.cs" />
     <Compile Include="ViewModel\Views\TimeSegmentViewModel.cs" />
     <Compile Include="ViewModel\Views\UserViewModel.cs" />
-    <Compile Include="Views\DepartmentDetailPanel.xaml.cs">
+    <Compile Include="View\SubWindows\DepartmentDetailPanel.xaml.cs">
       <DependentUpon>DepartmentDetailPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TimeZoneDashboardView.xaml.cs">
+    <Compile Include="View\SubWindows\TimeZoneDashboardView.xaml.cs">
       <DependentUpon>TimeZoneDashboardView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserView.xaml.cs">
+    <Compile Include="View\SubWindows\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TimeZoneView.xaml.cs">
+    <Compile Include="View\SubWindows\TimeZoneView.xaml.cs">
       <DependentUpon>TimeZoneView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TimeGroupView.xaml.cs">
+    <Compile Include="View\SubWindows\TimeGroupView.xaml.cs">
       <DependentUpon>TimeGroupView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DepartmentView.xaml.cs">
+    <Compile Include="View\SubWindows\DepartmentView.xaml.cs">
       <DependentUpon>DepartmentView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TimeSegmentView.xaml.cs">
+    <Compile Include="View\SubWindows\TimeSegmentView.xaml.cs">
       <DependentUpon>TimeSegmentView.xaml</DependentUpon>
     </Compile>
-    <Page Include="CustomControls\TileIconBox.xaml">
+    <Page Include="View\CustomControls\TileIconBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CustomControls\TimeControl.xaml">
+    <Page Include="View\CustomControls\TimeControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -220,32 +221,32 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Converter\ToggleExpandToVisibility.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\Converter\ToggleExpandToVisibility.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\DepartmentPage.xaml">
+    <Page Include="View\Pages\DepartmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SummaryPage.xaml">
+    <Page Include="View\Pages\SummaryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\TimeZonePage.xaml">
+    <Page Include="View\Pages\TimeZonePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\TimeGroupPage.xaml">
+    <Page Include="View\Pages\TimeGroupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\TimeSegmentPage.xaml">
+    <Page Include="View\Pages\TimeSegmentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\UserPage.xaml">
+    <Page Include="View\Pages\UserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,35 +274,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="sysLogin.xaml">
+    <Page Include="View\sysLogin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\DepartmentDetailPanel.xaml">
+    <Page Include="View\SubWindows\DepartmentDetailPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TimeZoneDashboardView.xaml">
+    <Page Include="View\SubWindows\TimeZoneDashboardView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\UserView.xaml">
+    <Page Include="View\SubWindows\UserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\TimeZoneView.xaml">
+    <Page Include="View\SubWindows\TimeZoneView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\TimeGroupView.xaml">
+    <Page Include="View\SubWindows\TimeGroupView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\DepartmentView.xaml">
+    <Page Include="View\SubWindows\DepartmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TimeSegmentView.xaml">
+    <Page Include="View\SubWindows\TimeSegmentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

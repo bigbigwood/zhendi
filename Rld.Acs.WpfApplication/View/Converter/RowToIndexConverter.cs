@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Rld.Acs.WpfApplication.Converter
+namespace Rld.Acs.WpfApplication.View.Converter
 {
     public class RowToIndexConverter : MarkupExtension, IValueConverter
     {

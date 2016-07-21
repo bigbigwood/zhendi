@@ -19,7 +19,7 @@ using Rld.Acs.WpfApplication.Messages;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
-using Rld.Acs.WpfApplication.Validator;
+using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {

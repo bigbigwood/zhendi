@@ -8,7 +8,7 @@
       xmlns:views="clr-namespace:Rld.Acs.WpfApplication.Views"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:command="http://www.galasoft.ch/mvvmlight"
-      xmlns:converter="clr-namespace:Rld.Acs.WpfApplication.Converter"
+      xmlns:converter1="clr-namespace:Rld.Acs.WpfApplication.View.Converter"
       DataContext="{Binding TimeSegmentPage, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="600" Unloaded="Page_Unloaded">
@@ -63,7 +63,7 @@
                 <DataGrid ItemsSource="{Binding TimeSegmentViewModels}" SelectedItem="{Binding Path=SelectedTimeSegmentViewModel}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter:RowToIndexConverter}}" />
+                        <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
                         <!--<DataGridTemplateColumn >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

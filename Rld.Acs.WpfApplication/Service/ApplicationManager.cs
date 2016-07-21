@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
 
 namespace Rld.Acs.WpfApplication

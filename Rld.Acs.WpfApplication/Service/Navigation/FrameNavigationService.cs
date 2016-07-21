@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Rld.Acs.WpfApplication.Navigation
+namespace Rld.Acs.WpfApplication.Service.Navigation
 {
     public class FrameNavigationService : IFrameNavigationService
     {

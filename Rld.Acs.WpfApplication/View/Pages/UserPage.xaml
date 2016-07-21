@@ -7,7 +7,7 @@
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:command="http://www.galasoft.ch/mvvmlight"
       xmlns:models="clr-namespace:Rld.Acs.WpfApplication.Models"
-      xmlns:converter="clr-namespace:Rld.Acs.WpfApplication.Converter"
+      xmlns:converter1="clr-namespace:Rld.Acs.WpfApplication.View.Converter"
       mc:Ignorable="d"  d:DesignHeight="400" d:DesignWidth="800"
       DataContext="{Binding UserPage, Source={StaticResource Locator}}" Unloaded="Page_Unloaded" >
     <Border Style="{StaticResource ContainerBorderStyle}">
@@ -119,7 +119,7 @@
                     <DataGrid Grid.Row="1" ItemsSource="{Binding UserViewModels}" SelectedItem="{Binding Path=SelectedUserViewModel}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter:RowToIndexConverter}}" />
+                            <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
                             <DataGridTemplateColumn Header="{DynamicResource UserPage_Label_Avator}" Width="64" IsReadOnly="True">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

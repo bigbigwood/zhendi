@@ -1,7 +1,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
-using Rld.Acs.WpfApplication.Navigation;
+using Rld.Acs.WpfApplication.Service.Navigation;
 
 namespace Rld.Acs.WpfApplication.ViewModel
 {

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Rld.Acs.WpfApplication.Converter;
+using Rld.Acs.WpfApplication.View.Converter;
 
 namespace Rld.Acs.WpfApplication.Models
 {

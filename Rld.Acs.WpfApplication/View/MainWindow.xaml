@@ -382,7 +382,7 @@
             <Frame Name="MainFrame" 
                    NavigationUIVisibility="Hidden"  
                    ScrollViewer.CanContentScroll="False" 
-                   Source="/Rld.Acs.WpfApplication;component/Pages/SummaryPage.xaml">
+                   Source="/View/Pages/SummaryPage.xaml">
             </Frame>
 
         </DockPanel>
