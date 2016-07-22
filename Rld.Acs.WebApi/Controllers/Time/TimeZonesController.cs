@@ -111,6 +111,7 @@ namespace Rld.Acs.WebApi.Controllers
 
                 deletedTimeGroupIds.ForEach(d => timeZoneGroupRepo.Delete(d));
                 addedTimeGroups.ForEach(d => timeZoneGroupRepo.Insert(d));
+                timeZoneInfo.TimeGroupAssociations.FindAll(d => d.TimeZoneGroupID != 0).ForEach(d => timeZoneGroupRepo.Update(d));
                 timeZoneRepo.Update(timeZoneInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);

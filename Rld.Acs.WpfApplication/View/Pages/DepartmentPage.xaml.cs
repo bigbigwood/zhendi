@@ -18,13 +18,8 @@ namespace Rld.Acs.WpfApplication.View.Pages
             InitializeComponent();
 
             Messenger.Default.Register<OpenWindowMessage>(this, Tokens.OpenDepartmentView, OpenDepartmentView);
-            Messenger.Default.Register(this, Tokens.DepartmentPage_ShowNotification, new Action<NotificationMessage>(ShowNotification));
-            Messenger.Default.Register(this, Tokens.DepartmentPage_ShowQuestion, new Action<NotificationMessageAction>(ProcessShowNotificationAction));
-        }
-
-        private void ProcessShowNotificationAction(NotificationMessageAction msg)
-        {
-            MessageBoxSingleton.Instance.ShowYesNo(msg.Notification, "删除部门", msg.Execute);
+            Messenger.Default.Register(this, Tokens.DepartmentPage_ShowNotification, new Action<NotificationMessage>(ShowMessage));
+            Messenger.Default.Register(this, Tokens.DepartmentPage_ShowQuestion, new Action<NotificationMessageAction>((msg) => ShowQuestionAndAction(msg, "删除部门")));
         }
 
         private void OpenDepartmentView(OpenWindowMessage msg)

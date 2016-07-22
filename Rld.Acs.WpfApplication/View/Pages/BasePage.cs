@@ -6,12 +6,12 @@ namespace Rld.Acs.WpfApplication.View.Pages
 {
     public class BasePage : Page
     {
-        public virtual void ProcessShowNotificationAction(NotificationMessageAction msg, string Title)
+        public virtual void ShowQuestionAndAction(NotificationMessageAction msg, string title)
         {
-            MessageBoxSingleton.Instance.ShowYesNo(msg.Notification, Title, msg.Execute);
+            MessageBoxSingleton.Instance.ShowYesNo(msg.Notification, title, msg.Execute);
         }
 
-        public virtual void ShowNotification(NotificationMessage msg)
+        public virtual void ShowMessage(NotificationMessage msg)
         {
             if (!string.IsNullOrWhiteSpace(msg.Notification))
                 MessageBoxSingleton.Instance.ShowDialog(msg.Notification, "");

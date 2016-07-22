@@ -31,8 +31,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-        public RelayCommand NextPageCmd { get; private set; }
-        public RelayCommand PreviousPageCmd { get; private set; }
 
         public RelayCommand<string> UploadImageCmd { get; private set; }
         public RelayCommand DepartmentChangedCmd { get; private set; }
@@ -78,6 +76,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public virtual String Address { get; set; }
         public virtual String Postcode { get; set; }
         public virtual String Remark { get; set; }
+        public virtual String CurrentDepartmentName { get; set; }
 
 
         public User CurrentUser { get; set; }
@@ -88,8 +87,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             CancelCmd = new RelayCommand(() => Close(""));
             UploadImageCmd = new RelayCommand<string>(UploadImage);
             DepartmentChangedCmd = new RelayCommand(ProcessDepartmentChangedCmd);
-            NextPageCmd = new RelayCommand(ProcessNextPageCmd);
-            PreviousPageCmd = new RelayCommand(ProcessPreviousPageCmd);
 
             CurrentUser = userInfo;
             AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
@@ -117,6 +114,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 GenderInfo = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender)
                     .FirstOrDefault(x => x.ItemID == (int)userInfo.Gender);
                 DepartmentInfo = AuthorizationDepartments.FirstOrDefault(d => d.DepartmentID == userInfo.DepartmentID);
+                CurrentDepartmentName = DepartmentInfo.Name;
 
                 LastName = userInfo.UserPropertyInfo.FirstName;
                 FirstName = userInfo.UserPropertyInfo.FirstName;
@@ -145,15 +143,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             DeviceRoleListBoxSource = GetDeviceRoleListBoxSource();
         }
 
-        private void ProcessNextPageCmd()
-        {
-            
-        }
-
-        private void ProcessPreviousPageCmd()
-        {
-
-        }
         private void Save()
         {
             string message = "";
@@ -230,7 +219,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             if (IsAddMode)
             {
+                //Apply default role of department
                 CurrentUser.UserDeviceRoles = new []{ new UserDeviceRole{ DeviceRoleID = DepartmentInfo.DeviceRoleID }}.ToList();
+            }
+            else
+            {
+                //Change default role of department
+                var previousDefaultItem = DeviceRoleListBoxSource.First(x => x.IsDefault);
+                var departmentDefaultRole = CurrentUser.UserDeviceRoles.First(x => x.DeviceRoleID == previousDefaultItem.ID);
+                departmentDefaultRole.DeviceRoleID = DepartmentInfo.DeviceRoleID;
             }
 
             DeviceRoleListBoxSource = GetDeviceRoleListBoxSource();

@@ -42,10 +42,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             AddUserCmd = new RelayCommand(AddUser);
             ModifyUserCmd = new RelayCommand(ModifyUser);
             DeleteUserCmd = new RelayCommand(DeleteUser);
+            MoveUserCmd = new RelayCommand(MoveUser);
+            SyncUserCmd = new RelayCommand(SyncUser);
             SelectedTreeNodeChangedCmd = new RelayCommand<TreeViewNode>(ShowUserBySelectedDepartmentNode);
+
             UserViewModels = new ObservableCollection<UserViewModel>();
             AuthorizationDepartments = AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
-
             TreeViewSource = BuildTreeViewSource();
         }
 
@@ -118,7 +120,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             }
         }
 
-
         private void DeleteUser()
         {
             try
@@ -156,6 +157,34 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeGroupPage_ShowNotification);
             });
+        }
+
+
+        private void MoveUser()
+        {
+            try
+            {
+                if (SelectedUserViewModel == null)
+                {
+                    Messenger.Default.Send(new NotificationMessage("请先选择用户!"), Tokens.UserPage_ShowNotification);
+                    return;
+                }
+
+                Messenger.Default.Send(new OpenWindowMessage()
+                {
+                    DataContext = SelectedUserViewModel,
+                    WindowType = "MoveUserView",
+                }, Tokens.OpenUserView);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+        private void SyncUser()
+        {
+            Messenger.Default.Send(new NotificationMessage("此功能还未实现..."), Tokens.UserPage_ShowNotification);
+            return;
         }
 
         private List<TreeViewNode> BuildTreeViewSource()

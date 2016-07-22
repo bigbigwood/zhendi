@@ -18,24 +18,8 @@ namespace Rld.Acs.WpfApplication.View.Pages
             InitializeComponent();
 
             Messenger.Default.Register<OpenWindowMessage>(this, Tokens.OpenTimeSegmentView, ProcessOpenView);
-            Messenger.Default.Register(this, Tokens.TimeSegmentPage_ShowNotification, new Action<NotificationMessage>((msg) => { ShowNotification(msg); }));
-            Messenger.Default.Register(this, Tokens.TimeSegmentPage_ShowQuestion, new Action<NotificationMessageAction>((msg) => { ProcessShowNotificationAction(msg); }));
-        }
-
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Messenger.Default.Unregister(this);
-        }
-
-        private void ProcessShowNotificationAction(NotificationMessageAction msg)
-        {
-            MessageBoxSingleton.Instance.ShowYesNo(msg.Notification, "删除时间段", () => { msg.Execute(); });
-        }
-
-        private void ShowNotification(NotificationMessage msg)
-        {
-            if (!string.IsNullOrWhiteSpace(msg.Notification))
-                MessageBoxSingleton.Instance.ShowDialog(msg.Notification, "");
+            Messenger.Default.Register(this, Tokens.TimeSegmentPage_ShowNotification, new Action<NotificationMessage>(ShowMessage));
+            Messenger.Default.Register(this, Tokens.TimeSegmentPage_ShowQuestion, new Action<NotificationMessageAction>((msg) => ShowQuestionAndAction(msg, "删除时间段")));
         }
 
         private void ProcessOpenView(OpenWindowMessage msg)

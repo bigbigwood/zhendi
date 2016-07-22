@@ -18,33 +18,29 @@ namespace Rld.Acs.WpfApplication.View.Pages
             InitializeComponent();
 
             Messenger.Default.Register<OpenWindowMessage>(this, Tokens.OpenUserView, ProcessOpenView);
-            Messenger.Default.Register(this, Tokens.UserPage_ShowNotification, new Action<NotificationMessage>(ShowNotification));
-            Messenger.Default.Register(this, Tokens.UserPage_ShowQuestion, new Action<NotificationMessageAction>(ProcessShowNotificationAction));
+            Messenger.Default.Register(this, Tokens.UserPage_ShowNotification, new Action<NotificationMessage>(ShowMessage));
+            Messenger.Default.Register(this, Tokens.UserPage_ShowQuestion, new Action<NotificationMessageAction>(msg => ShowQuestionAndAction(msg, "删除人员")));
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Messenger.Default.Unregister(this);
-        }
-
-        private void ProcessShowNotificationAction(NotificationMessageAction msg)
-        {
-            MessageBoxSingleton.Instance.ShowYesNo(msg.Notification, "删除人员", msg.Execute);
-        }
-
-        private void ShowNotification(NotificationMessage msg)
-        {
-            if (!string.IsNullOrWhiteSpace(msg.Notification))
-                MessageBoxSingleton.Instance.ShowDialog(msg.Notification, "");
-        }
         private void ProcessOpenView(OpenWindowMessage msg)
         {
-            var view = new UserView() { DataContext = msg.DataContext };
-            view.BorderThickness = new Thickness(1);
-            view.GlowBrush = null;
-            view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
-            view.ShowDialog();
-
+            BaseWindow view;
+            if (msg.WindowType == "MoveUserView")
+            {
+                view = new MoveUserView { DataContext = msg.DataContext };
+                view.BorderThickness = new Thickness(1);
+                view.GlowBrush = null;
+                view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
+                view.ShowDialog();
+            }
+            else
+            {
+                view = new UserView { DataContext = msg.DataContext };
+                view.BorderThickness = new Thickness(1);
+                view.GlowBrush = null;
+                view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
+                view.ShowDialog();
+            }
         }
     }
 }

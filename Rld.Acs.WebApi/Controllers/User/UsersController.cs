@@ -109,9 +109,9 @@ namespace Rld.Acs.WebApi.Controllers
                     deletedAuthenticationIds = originalUserInfo.UserAuthentications.Select(d => d.UserAuthenticationID).ToList();
                 }
 
-
                 deletedAuthenticationIds.ForEach(d => userAuthenticationRepo.Delete(d));
                 addedAuthentications.ForEach(d => userAuthenticationRepo.Insert(d));
+                userInfo.UserAuthentications.FindAll(d => d.UserAuthenticationID != 0).ForEach(d => userAuthenticationRepo.Update(d));
 
                 var addedUserDeviceRoles = new List<UserDeviceRole>();
                 var deletedUserDeviceRoleIds = new List<int>();
@@ -130,6 +130,7 @@ namespace Rld.Acs.WebApi.Controllers
 
                 deletedUserDeviceRoleIds.ForEach(d => userDeviceRoleRepo.Delete(d));
                 addedUserDeviceRoles.ForEach(d => userDeviceRoleRepo.Insert(d));
+                userInfo.UserDeviceRoles.FindAll(d => d.UserDeviceRoleID != 0).ForEach(d => userDeviceRoleRepo.Update(d));
 
                 userPropertyRepo.Update(userInfo.UserPropertyInfo);
                 userRepo.Update(userInfo);

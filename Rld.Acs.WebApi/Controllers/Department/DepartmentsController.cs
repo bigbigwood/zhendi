@@ -109,6 +109,7 @@ namespace Rld.Acs.WebApi.Controllers
 
                 deletedDevicesIds.ForEach(d => departmentDeviceRepo.Delete(d));
                 addedDevices.ForEach(d => departmentDeviceRepo.Insert(d));
+                departmentInfo.DeviceAssociations.FindAll(d => d.DepartmentDeviceID != 0).ForEach(d => departmentDeviceRepo.Update(d));
                 departmentRepo.Update(departmentInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);

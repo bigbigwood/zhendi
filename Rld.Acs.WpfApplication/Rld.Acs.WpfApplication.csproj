@@ -169,6 +169,9 @@
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="Service\UserAvatorService.cs" />
+    <Compile Include="View\Windows\MoveUserView.xaml.cs">
+      <DependentUpon>MoveUserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\sysLogin.xaml.cs">
       <DependentUpon>sysLogin.xaml</DependentUpon>
     </Compile>
@@ -275,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\StyleExtension.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\MoveUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
