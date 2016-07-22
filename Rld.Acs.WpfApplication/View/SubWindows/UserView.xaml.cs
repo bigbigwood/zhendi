@@ -21,35 +21,14 @@ namespace Rld.Acs.WpfApplication.Views
     /// <summary>
     /// Interaction logic for UserView.xaml
     /// </summary>
-    public partial class UserView
+    public partial class UserView : BaseWindow
     {
         public UserView()
         {
             InitializeComponent();
 
             Messenger.Default.Register(this, Tokens.CloseUserView, new Action<NotificationMessage>(ProcessCloseViewMessage));
-            Messenger.Default.Register(this, Tokens.UserPage_ShowNotification, new Action<NotificationMessage>(ShowNotification));
-        }
-
-        private void ProcessCloseViewMessage(NotificationMessage msg)
-        {
-            if (!string.IsNullOrWhiteSpace(msg.Notification))
-            {
-                MessageBoxSingleton.Instance.ShowDialog(msg.Notification, "");
-            }
-
-            Close();
-        }
-
-        private void ShowNotification(NotificationMessage msg)
-        {
-            if (!string.IsNullOrWhiteSpace(msg.Notification))
-                MessageBoxSingleton.Instance.ShowDialog(msg.Notification, "");
-        }
-
-        private void MetroWindow_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Messenger.Default.Unregister(this);
+            Messenger.Default.Register(this, Tokens.UserView_ShowNotification, new Action<NotificationMessage>(ShowSubViewNotification));
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

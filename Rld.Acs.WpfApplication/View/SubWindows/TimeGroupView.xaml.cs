@@ -20,28 +20,13 @@ namespace Rld.Acs.WpfApplication.Views
     /// <summary>
     /// Interaction logic for TimeGroupView.xaml
     /// </summary>
-    public partial class TimeGroupView
+    public partial class TimeGroupView : BaseWindow
     {
         public TimeGroupView()
         {
             InitializeComponent();
 
             Messenger.Default.Register(this, Tokens.CloseTimeGroupView, new Action<NotificationMessage>(ProcessCloseViewMessage));
-        }
-
-        private void ProcessCloseViewMessage(NotificationMessage msg)
-        {
-            if (!string.IsNullOrWhiteSpace(msg.Notification))
-            {
-                MessageBoxSingleton.Instance.ShowDialog(msg.Notification, "");
-            }
-
-            Close();
-        }
-
-        private void MetroWindow_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Messenger.Default.Unregister(this);
         }
     }
 }

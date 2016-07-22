@@ -112,6 +112,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\Pages\BasePage.cs" />
     <Compile Include="Models\AppConfiguration.cs" />
     <Compile Include="Service\ApplicationManager.cs" />
     <Compile Include="View\Converter\EnumDescriptionTypeConverter.cs" />

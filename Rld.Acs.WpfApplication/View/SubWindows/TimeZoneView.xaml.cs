@@ -20,28 +20,13 @@ namespace Rld.Acs.WpfApplication.Views
     /// <summary>
     /// Interaction logic for TimeGroupView.xaml
     /// </summary>
-    public partial class TimeZoneView
+    public partial class TimeZoneView : BaseWindow
     {
         public TimeZoneView()
         {
             InitializeComponent();
 
             Messenger.Default.Register(this, Tokens.CloseTimeZoneView, new Action<NotificationMessage>(ProcessCloseViewMessage));
-        }
-
-        private void ProcessCloseViewMessage(NotificationMessage msg)
-        {
-            if (!string.IsNullOrWhiteSpace(msg.Notification))
-            {
-                MessageBoxSingleton.Instance.ShowDialog(msg.Notification, "");
-            }
-
-            Close();
-        }
-
-        private void MetroWindow_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Messenger.Default.Unregister(this);
         }
     }
 }

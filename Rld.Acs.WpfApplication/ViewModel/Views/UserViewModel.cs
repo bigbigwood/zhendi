@@ -195,7 +195,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         private void SendMessage(string message)
         {
-            Messenger.Default.Send(new NotificationMessage(message), Tokens.UserPage_ShowNotification);
+            Messenger.Default.Send(new NotificationMessage(message), Tokens.UserView_ShowNotification);
         }
 
         private void Close(string message)

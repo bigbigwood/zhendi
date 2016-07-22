@@ -20,28 +20,13 @@ namespace Rld.Acs.WpfApplication.Views
     /// <summary>
     /// Interaction logic for DepartmentView.xaml
     /// </summary>
-    public partial class DepartmentView
+    public partial class DepartmentView : BaseWindow
     {
         public DepartmentView()
         {
             InitializeComponent();
 
-            Messenger.Default.Register(this, Tokens.CloseDepartmentView, new Action<NotificationMessage>((msg) => { ProcessCloseDepartmentViewMessage(msg); }));
-        }
-
-        private void ProcessCloseDepartmentViewMessage(NotificationMessage msg)
-        {
-            if (!string.IsNullOrWhiteSpace(msg.Notification))
-            {
-                MessageBoxSingleton.Instance.ShowDialog(msg.Notification, "");
-            }
-
-            Close();
-        }
-
-        private void MetroWindow_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Messenger.Default.Unregister(this);
+            Messenger.Default.Register(this, Tokens.CloseDepartmentView, new Action<NotificationMessage>(ProcessCloseViewMessage));
         }
     }
 }
