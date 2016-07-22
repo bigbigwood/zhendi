@@ -1,4 +1,4 @@
-﻿<Page x:Class="Rld.Acs.WpfApplication.Pages.TimeGroupPage"
+﻿<pages:BasePage x:Class="Rld.Acs.WpfApplication.View.Pages.TimeGroupPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,6 +7,7 @@
       xmlns:wpfApplication="clr-namespace:Rld.Acs.WpfApplication"
       xmlns:vm="clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
       xmlns:converter1="clr-namespace:Rld.Acs.WpfApplication.View.Converter"
+      xmlns:pages="clr-namespace:Rld.Acs.WpfApplication.View.Pages"
       mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600"
       DataContext="{Binding TimeGroupPage, Source={StaticResource Locator}}" Unloaded="Page_Unloaded" >
     <Border Style="{StaticResource ContainerBorderStyle}">
@@ -74,4 +75,4 @@
             </DataGrid>
         </Grid>
     </Border>
-</Page>
+</pages:BasePage>

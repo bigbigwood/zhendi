@@ -3,6 +3,7 @@ using System.Windows;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls;
 using Rld.Acs.WpfApplication.Models.Messages;
+using Rld.Acs.WpfApplication.View.Windows;
 using Rld.Acs.WpfApplication.Views;
 
 namespace Rld.Acs.WpfApplication.View.Pages

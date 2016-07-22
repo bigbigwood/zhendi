@@ -1,4 +1,4 @@
-﻿<view:BaseWindow x:Class="Rld.Acs.WpfApplication.Views.DepartmentView"
+﻿<windows:BaseWindow x:Class="Rld.Acs.WpfApplication.View.Windows.DepartmentView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,12 +7,11 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
-             xmlns:view="clr-namespace:Rld.Acs.WpfApplication.View"
-             mc:Ignorable="d" 
+             xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
+             mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="400"
              d:DataContext= "{d:DesignInstance Type=vm:DepartmentDetailViewModel, IsDesignTimeCreatable=True}"
-             d:DesignHeight="400" d:DesignWidth="400" MinHeight="400" MaxHeight="400" MinWidth="400" MaxWidth="400"
-              WindowStartupLocation="CenterScreen"  Title="{Binding Title}" Unloaded="MetroWindow_Unloaded"
-              ShowMinButton="False" ShowMaxRestoreButton="False" ShowCloseButton="False" WindowTransitionsEnabled="False">
+             Width="400" Height="400" Unloaded="MetroWindow_Unloaded"
+             ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <command:EventToCommand Command="{Binding PrepareDataCmd}"/>
@@ -32,10 +31,13 @@
             </Style>
             <Style TargetType="Button" BasedOn="{StaticResource ResourceKey={x:Type Button}}" >
                 <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Height" Value="28"/>
+                <Setter Property="Width" Value="75"/>
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="28" />
+            <RowDefinition Height="5" />
             <RowDefinition Height="28" />
             <RowDefinition Height="28" />
             <RowDefinition Height="28" />
@@ -46,8 +48,9 @@
             <RowDefinition Height="28" />
             <RowDefinition Height="28" />
             <RowDefinition Height="28" />
-            <RowDefinition Height="28" />
-            <RowDefinition Height="28" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -55,12 +58,17 @@
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_DepartmentName}" />
-        <TextBox   Grid.Row="0" Grid.Column="2" Text="{Binding DepartmentName}" Name="TextBlock_DepartmentName"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_DepartmentCode}" />
-        <TextBox   Grid.Row="1" Grid.Column="2" Text="{Binding DepartmentCode}" />
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_ParentDepartment}" />
-        <ComboBox  Grid.Row="2" Grid.Column="2" Margin="2"
+
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="4" >
+            <TextBlock Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+        </DockPanel>
+        <Separator Grid.Row="1" Grid.ColumnSpan="4" Background="LightGray" />
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_DepartmentName}" />
+        <TextBox   Grid.Row="2" Grid.Column="2" Text="{Binding DepartmentName}" Name="TextBlock_DepartmentName"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_DepartmentCode}" />
+        <TextBox   Grid.Row="3" Grid.Column="2" Text="{Binding DepartmentCode}" />
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_ParentDepartment}" />
+        <ComboBox  Grid.Row="4" Grid.Column="2" Margin="2"
                    Style="{DynamicResource VirtualisedMetroComboBox}"
                    controls:TextBoxHelper.Watermark="请选择上级部门"
                    IsEditable="True"
@@ -69,8 +77,8 @@
                    SelectedItem="{Binding ParentDepartment}" 
                    SelectedValuePath="DepartmentID" 
                    DisplayMemberPath="Name" />
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_DepartmentRole}" />
-        <ComboBox  Grid.Row="3" Grid.Column="2" Margin="2"
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="{StaticResource DepartmentDetail_Label_DepartmentRole}" />
+        <ComboBox  Grid.Row="5" Grid.Column="2" Margin="2"
                    Style="{DynamicResource VirtualisedMetroComboBox}"
                    controls:TextBoxHelper.Watermark="请选择默认设备权限角色"
                    IsEditable="True"
@@ -80,7 +88,7 @@
                    SelectedValuePath="DeviceRoleID" 
                    DisplayMemberPath="RoleName" />
 
-        <DockPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="6">
+        <DockPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="6">
             <GroupBox Style="{StaticResource DefaultGroupBoxStyle}" Header="{StaticResource DepartmentDetail_Label_DepartmentOwnedDevices}" Margin="0,5,0,0">
                 <ListBox ItemsSource="{Binding DeviceListBoxSource}" >
                     <ListBox.ItemTemplate>
@@ -95,7 +103,9 @@
             </GroupBox>
         </DockPanel>
 
-        <Button Grid.Row="11" Grid.Column="1" Content="{StaticResource Ok}" Command="{Binding SaveCmd}" Width="100"/>
-        <Button Grid.Row="11" Grid.Column="2" Content="{StaticResource Cancel}" Command="{Binding CancelCmd}" Width="100"/>
+        <StackPanel Grid.Row="13" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0"/>
+            <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
+        </StackPanel>
     </Grid>
-</view:BaseWindow>
+</windows:BaseWindow>

@@ -1,4 +1,4 @@
-﻿<view:BaseWindow x:Class="Rld.Acs.WpfApplication.Views.UserView"
+﻿<windows:BaseWindow x:Class="Rld.Acs.WpfApplication.View.Windows.UserView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,12 +6,11 @@
              xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:model="clr-namespace:Rld.Acs.Model;assembly=Rld.Acs.Model"
-                      xmlns:AppModels="clr-namespace:Rld.Acs.WpfApplication.Models"
+             xmlns:AppModels="clr-namespace:Rld.Acs.WpfApplication.Models"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:view="clr-namespace:Rld.Acs.WpfApplication.View"
-             mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="600"
-             d:DataContext= "{d:DesignInstance Type= vm:UserViewModel, IsDesignTimeCreatable=True}"
+             xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
+             mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:UserViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
              Height="500" Width="600" Unloaded="MetroWindow_Unloaded">
 
@@ -252,4 +251,4 @@
             </TabItem>
         </TabControl>
     </Grid>
-</view:BaseWindow>
+</windows:BaseWindow>

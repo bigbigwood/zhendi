@@ -60,13 +60,13 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             SimpleIoc.Default.Unregister<IFrameNavigationService>();
             var navigationService = new FrameNavigationService();
-            navigationService.Configure("SummaryPage", new Uri("../View/Pages/SummaryPage.xaml", UriKind.Relative));
-            navigationService.Configure("UserPage", new Uri("../View/Pages/UserPage.xaml", UriKind.Relative));
-            navigationService.Configure("DepartmentPage", new Uri("../View/Pages/DepartmentPage.xaml", UriKind.Relative));
+            navigationService.Configure("SummaryPage", new Uri("../Pages/SummaryPage.xaml", UriKind.Relative));
+            navigationService.Configure("UserPage", new Uri("../Pages/UserPage.xaml", UriKind.Relative));
+            navigationService.Configure("DepartmentPage", new Uri("../Pages/DepartmentPage.xaml", UriKind.Relative));
 
-            navigationService.Configure("TimeSegmentPage", new Uri("../View/Pages/TimeSegmentPage.xaml", UriKind.Relative));
-            navigationService.Configure("TimeGroupPage", new Uri("../View/Pages/TimeGroupPage.xaml", UriKind.Relative));
-            navigationService.Configure("TimeZonePage", new Uri("../View/Pages/TimeZonePage.xaml", UriKind.Relative));
+            navigationService.Configure("TimeSegmentPage", new Uri("../Pages/TimeSegmentPage.xaml", UriKind.Relative));
+            navigationService.Configure("TimeGroupPage", new Uri("../Pages/TimeGroupPage.xaml", UriKind.Relative));
+            navigationService.Configure("TimeZonePage", new Uri("../Pages/TimeZonePage.xaml", UriKind.Relative));
 
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }

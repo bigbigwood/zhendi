@@ -17,7 +17,7 @@ namespace Rld.Acs.WpfApplication.Service
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public readonly string serverUrl = ConfigurationSettings.AppSettings.Get("BaseUri") + "/userImages";
-        public readonly string DefaultAvatorFileName = "default.jpg";
+        public readonly string DefaultAvatorFileName = "avator.jpg";
         public string GetAvator(string fileName)
         {
             string fileFullPath = string.Format(@"{0}\{1}", ApplicationManager.GetInstance().LocalImageCachePath, fileName);

@@ -5,7 +5,7 @@ using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
-namespace Rld.Acs.WpfApplication.View
+namespace Rld.Acs.WpfApplication.View.Windows
 {
     public class BaseWindow : MetroWindow
     {

@@ -1,29 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls;
 using Rld.Acs.WpfApplication.Models.Messages;
-using Rld.Acs.WpfApplication.View;
-using Rld.Acs.WpfApplication.Views;
+using Rld.Acs.WpfApplication.View.Windows;
 
-namespace Rld.Acs.WpfApplication.Pages
+namespace Rld.Acs.WpfApplication.View.Pages
 {
     /// <summary>
     /// Interaction logic for TimeGroupPage.xaml
     /// </summary>
-    public partial class TimeZonePage : Page
+    public partial class TimeZonePage : BasePage
     {
         public TimeZonePage()
         {
