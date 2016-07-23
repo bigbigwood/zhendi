@@ -115,6 +115,7 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Global.asax" />
+    <Content Include="SecurityService\SecurityService.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -169,10 +170,16 @@
     <Compile Include="Controllers\User\UsersController.cs" />
     <Compile Include="Framework\ActionWarpper.cs" />
     <Compile Include="Framework\HttpRequestMessageExtension.cs" />
+    <Compile Include="Framework\SysOperatorExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityService\Response.cs" />
+    <Compile Include="SecurityService\SecurityService.asmx.cs">
+      <DependentUpon>SecurityService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -12,5 +12,10 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             get { return "SysOperator"; }
         }
         #endregion
+
+        public bool UpdatePassword(SysOperator sysOperatorInfo)
+        {
+            return _sqlMapper.Update("SysOperator.UpdatePassword", sysOperatorInfo) > 0;
+        }
     }
 }

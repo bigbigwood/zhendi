@@ -25,6 +25,7 @@ namespace Rld.Acs.WpfApplication
         public List<Department> AuthorizationDepartments { get; set; }
         public List<DeviceController> AuthorizationDevices { get; set; }
         public List<DeviceRole> AuthorizationDeviceRoles { get; set; }
+        public SysOperator CurrentOperatorInfo { get; set; }
         public string LocalCachePath { get; private set; }
         public string LocalImageCachePath { get; private set; }
 
@@ -46,13 +47,31 @@ namespace Rld.Acs.WpfApplication
             InitEnvironment();
 
             InitResource();
+
+            CurrentOperatorInfo = initFakeOperator();
+        }
+
+        private SysOperator initFakeOperator()
+        {
+            var sysOperator = new SysOperator();
+            sysOperator.OperatorID = 1;
+            sysOperator.LoginName = "管理员";
+            sysOperator.LanguageID = 2502;
+            sysOperator.Photo = "";
+            sysOperator.Status = GeneralStatus.Enabled;
+            sysOperator.UpdateUserID = null;
+            sysOperator.UpdateDate = null;
+            sysOperator.CreateUserID = 1;
+            sysOperator.CreateDate = DateTime.Now.AddYears(-1);
+
+            return sysOperator;
         }
 
         private void InitResource()
         {
-            AuthorizationDepartments = _departmentRepository.Query(new Hashtable()).ToList();
-            AuthorizationDevices = _deviceControllerRepository.Query(new Hashtable { { "Status", 1 } }).ToList();
-            AuthorizationDeviceRoles = _deviceRoleRepository.Query(new Hashtable { { "Status", 1 } }).ToList();
+            AuthorizationDepartments = _departmentRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
+            AuthorizationDevices = _deviceControllerRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
+            AuthorizationDeviceRoles = _deviceRoleRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
 
             var topDepartment = new Department() { DepartmentID = -1, Name = "总经办" };
             AuthorizationDepartments.Insert(0, topDepartment);

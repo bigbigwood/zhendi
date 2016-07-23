@@ -3,6 +3,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.WebApi.Framework;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace Rld.Acs.WebApi.Controllers
                 var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
                 var operatorInfos = repo.Query(conditions);
 
+                operatorInfos.ForEach(d => d.MaskPassword());
                 return Request.CreateResponse(HttpStatusCode.OK, operatorInfos.ToList());
 
             }), this);
@@ -41,6 +43,7 @@ namespace Rld.Acs.WebApi.Controllers
                 if (sysOperatorInfo == null)
                     return Request.CreateResponse(HttpStatusCode.NotFound);
 
+                sysOperatorInfo.MaskPassword();
                 return Request.CreateResponse(HttpStatusCode.OK, sysOperatorInfo);
 
             }), this);
@@ -51,6 +54,10 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(sysOperatorInfo, new Func<HttpResponseMessage>(() =>
             {
                 var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
+
+                string salt = Guid.NewGuid().ToString();
+                var hashPassword = SysOperatorExtension.ExcryptPassword(sysOperatorInfo.Password, salt);
+                sysOperatorInfo.Password = hashPassword;
                 repo.Insert(sysOperatorInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysOperatorInfo);

@@ -10,7 +10,9 @@
       <result property="OperatorID" column="OperatorID"/>
       <result property="LoginName" column="LoginName"/>
       <result property="Password" column="Password"/>
+      <result property="Salt" column="Salt"/>
       <result property="LanguageID" column="LanguageID"/>
+      <result property="Photo" column="Photo"/>
       <result property="CreateUserID" column="CreateUserID"/>
       <result property="CreateDate" column="CreateDate"/>
       <result property="Status" column="Status"/>
@@ -32,7 +34,9 @@
       [UserID]
       , [LoginName]
       , [Password]
+      , [Salt]
       , [LanguageID]
+      , [Photo]
       , [CreateUserID]
       , [CreateDate]
       , [Status]
@@ -42,7 +46,9 @@
       #UserID#
       , #LoginName#
       , #Password#
+      , #Salt#
       , #LanguageID#
+      , #Photo#
       , #CreateUserID#
       , #CreateDate#
       , #Status#
@@ -58,11 +64,21 @@
       UPDATE [SYS_OPERATOR] SET
       [UserID] = #UserID#
       , [LoginName] = #LoginName#
-      , [Password] = #Password#
       , [LanguageID] = #LanguageID#
+      , [Photo] = #Photo#
       , [CreateUserID] = #CreateUserID#
       , [CreateDate] = #CreateDate#
       , [Status] = #Status#
+      , [UpdateUserID] = #UpdateUserID#
+      , [UpdateDate] = #UpdateDate#
+      WHERE
+      ([OperatorID] = #OperatorID#)
+    </update>
+
+    <update id="SysOperator.UpdatePassword" parameterClass="SysOperator">
+      UPDATE [SYS_OPERATOR] SET
+      [Password] = #Password#
+      , [Salt] = #Salt#
       , [UpdateUserID] = #UpdateUserID#
       , [UpdateDate] = #UpdateDate#
       WHERE
