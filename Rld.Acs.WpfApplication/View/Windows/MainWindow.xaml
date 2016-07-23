@@ -109,10 +109,16 @@
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="管理员" Foreground="Black"/>
-            <Button Foreground="Black">
-                <Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />
+            <Button Name="OperatorSettingBtn" Foreground="Black" Command="{Binding ShowSettingCmd}" Click="OperatorSettingBtn_OnClick">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding CurrentOperator.LoginName}" Foreground="Black" Margin="0,0,5,0"/>
+                    <Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />
+                </StackPanel>
             </Button>
+            <Popup Name="popUserInfo" PlacementTarget="{Binding ElementName=OperatorSettingBtn}" 
+                   Placement="Top" PopupAnimation="Fade" StaysOpen="False" >
+                <Image Source="/Images/ADMIN.jpg"></Image>
+            </Popup>
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>
@@ -121,10 +127,11 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1"></RowDefinition>
+            <RowDefinition Height="2"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2"></StackPanel>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Red"></Border>
+        <!--<Separator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Red" />-->
         <StackPanel Background="Red" Grid.Row="1" ZIndex="1">
             <Button Background="Red" Margin="{DynamicResource ControlMargin}" Click="PopFullMenus">
                 <Image Style="{StaticResource QuickMenuImageStyle}" Source="{StaticResource QuickMenu_threeSlash}"/>

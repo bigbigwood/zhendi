@@ -1,6 +1,8 @@
+using System.Net.Mime;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using Rld.Acs.Model;
 using Rld.Acs.WpfApplication.Service.Navigation;
 
 namespace Rld.Acs.WpfApplication.ViewModel
@@ -21,7 +23,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
     {
         private IFrameNavigationService navigationService;
         public RelayCommand<string> NatigatePageCmd { get; set; }
-
+        public RelayCommand ShowSettingCmd { get; set; }
+        public SysOperator CurrentOperator { get; set; }
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -29,11 +32,19 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             this.navigationService = navigationService;
             NatigatePageCmd = new RelayCommand<string>(NatigateToPage);
+            ShowSettingCmd = new RelayCommand(ShowSetting);
+
+            CurrentOperator = ApplicationManager.GetInstance().CurrentOperatorInfo;
         }
 
         private void NatigateToPage(string pageKey)
         {
             navigationService.NavigateTo(pageKey);
+        }
+
+        private void ShowSetting()
+        {
+            
         }
     }
 }

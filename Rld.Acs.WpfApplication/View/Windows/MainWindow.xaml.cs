@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 
@@ -224,9 +225,11 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 }
 
             }
+        }
 
-
-
+        private void OperatorSettingBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            popUserInfo.IsOpen = !popUserInfo.IsOpen;
         }
     }
 }
