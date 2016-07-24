@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Web.Services.Protocols;
 using System;
 using System.Diagnostics;
+using Rld.Acs.WpfApplication.Models;
 
 namespace Rld.Acs.WpfApplication.Service.Security
 {
@@ -20,7 +21,7 @@ namespace Rld.Acs.WpfApplication.Service.Security
         
         /// <remarks/>
         public SecurityService() {
-            this.Url = "http://localhost:7362/SecurityService/SecurityService.asmx";
+            this.Url = AppConfiguration.BaseServer + "/SecurityService/SecurityService.asmx";
         }
         
         /// <remarks/>

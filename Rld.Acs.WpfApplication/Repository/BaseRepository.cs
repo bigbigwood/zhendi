@@ -5,13 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using Rld.Acs.WpfApplication.Models;
 
 namespace Rld.Acs.WpfApplication.Repository
 {
     public abstract class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : class
     {
-        protected readonly string BASE_ADDRESS = ConfigurationSettings.AppSettings.Get("BaseUri");
+        protected readonly string BASE_ADDRESS = AppConfiguration.BaseServer;
         protected string RelevantUri { get; set; }
 
         public virtual TEntity Insert(TEntity entity)
