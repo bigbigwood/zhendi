@@ -118,6 +118,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Service\SecurityServiceProxy.cs" />
+    <Compile Include="Service\Validator\TimeZoneValidator.cs" />
+    <Compile Include="Service\Validator\TimeGroupValidator.cs" />
+    <Compile Include="Service\Validator\TimeSegmentValidator.cs" />
+    <Compile Include="Service\Validator\DepartmentValidator.cs" />
     <Compile Include="View\Pages\BasePage.cs" />
     <Compile Include="Models\AppConfiguration.cs" />
     <Compile Include="Service\ApplicationManager.cs" />

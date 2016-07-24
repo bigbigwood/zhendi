@@ -150,11 +150,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 ToUser();
 
-                var userValidator = NinjectBinder.GetValidator<UserValidator>();
-                var results = userValidator.Validate(CurrentUser);
+                var validator = NinjectBinder.GetValidator<UserValidator>();
+                var results = validator.Validate(CurrentUser);
                 if (!results.IsValid)
                 {
-                    message = string.Join(",", results.Errors);
+                    message = string.Join("\n", results.Errors);
                     SendMessage(message);
                     return;
                 }

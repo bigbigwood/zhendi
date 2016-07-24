@@ -112,13 +112,13 @@
             <Button Name="OperatorSettingBtn" Foreground="Black" Command="{Binding ShowSettingCmd}" Click="OperatorSettingBtn_OnClick">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding CurrentOperator.LoginName}" Foreground="Black" Margin="0,0,5,0"/>
-                    <Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />
+                    <!--<Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />-->
                 </StackPanel>
             </Button>
-            <Popup Name="popUserInfo" PlacementTarget="{Binding ElementName=OperatorSettingBtn}" 
+            <!--<Popup Name="popUserInfo" PlacementTarget="{Binding ElementName=OperatorSettingBtn}" 
                    Placement="Top" PopupAnimation="Fade" StaysOpen="False" >
                 <Image Source="/Images/ADMIN.jpg"></Image>
-            </Popup>
+            </Popup>-->
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>

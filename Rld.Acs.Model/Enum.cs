@@ -32,6 +32,12 @@ namespace Rld.Acs.Model
         Visitor = 2,
     }
 
+    public enum IDType
+    {
+        ID = 0,
+        Passport = 1,
+    }
+
     public enum GenderType
     {
         Male = 0,

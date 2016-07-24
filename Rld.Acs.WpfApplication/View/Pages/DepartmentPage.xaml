@@ -47,7 +47,7 @@
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button>
+                    <Button Command="{Binding SyncDataCmd}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_SyncDataBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_SyncDataBtn}" />

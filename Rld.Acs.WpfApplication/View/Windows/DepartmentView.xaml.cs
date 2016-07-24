@@ -14,6 +14,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             InitializeComponent();
 
             Messenger.Default.Register(this, Tokens.CloseDepartmentView, new Action<NotificationMessage>(ProcessCloseViewMessage));
+            Messenger.Default.Register(this, Tokens.DepartmentView_ShowNotification, new Action<NotificationMessage>(ShowSubViewNotification));
         }
     }
 }

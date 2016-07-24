@@ -7,6 +7,7 @@ using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -56,13 +57,26 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
+                if (StartHour.Length == 1) StartHour = "0" + StartHour;
+                if (EndHour.Length == 1) StartHour = "0" + EndHour;
+
+                CurrentTimeSegment.BeginTime = string.Format("{0}:{1}", StartHour, StartMinute);
+                CurrentTimeSegment.EndTime = string.Format("{0}:{1}", EndHour, EndMinute);
+                CurrentTimeSegment.TimeSegmentName = Name;
+                CurrentTimeSegment.Status = GeneralStatus.Enabled;
+
+                var validator = NinjectBinder.GetValidator<TimeSegmentValidator>();
+                var results = validator.Validate(CurrentTimeSegment);
+                if (!results.IsValid)
+                {
+                    message = string.Join("\n", results.Errors);
+                    SendMessage(message);
+                    return;
+                }
+
                 if (CurrentTimeSegment.TimeSegmentID == 0)
                 {
-                    CurrentTimeSegment.BeginTime = string.Format("{0}:{1}", StartHour, StartMinute);
-                    CurrentTimeSegment.EndTime = string.Format("{0}:{1}", EndHour, EndMinute);
-                    CurrentTimeSegment.TimeSegmentName = Name;
-                    CurrentTimeSegment.Status = GeneralStatus.Enabled;;
-                    CurrentTimeSegment.CreateUserID = 1;
+                    CurrentTimeSegment.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentTimeSegment.CreateDate = DateTime.Now;
                     CurrentTimeSegment = _timeSegmentRepo.Insert(CurrentTimeSegment);
 
@@ -70,15 +84,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 }
                 else
                 {
-                    CurrentTimeSegment.BeginTime = string.Format("{0}:{1}", StartHour, StartMinute);
-                    CurrentTimeSegment.EndTime = string.Format("{0}:{1}", EndHour, EndMinute);
-                    CurrentTimeSegment.TimeSegmentName = Name;
-                    CurrentTimeSegment.Status = GeneralStatus.Enabled; ;
-                    CurrentTimeSegment.UpdateUserID = 1;
+                    CurrentTimeSegment.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentTimeSegment.UpdateDate = DateTime.Now;
                     _timeSegmentRepo.Update(CurrentTimeSegment);
 
-                    RaisePropertyChanged(null);
                     message = "修改时间段成功!";
                 }
             }
@@ -86,15 +95,22 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 Log.Error("Update department fails.", ex);
                 message = "保存时间段失败";
+                SendMessage(message);
                 return;
             }
 
+            RaisePropertyChanged(null);
             Close(message);
         }
 
         private void Close(string message)
         {
             Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseTimeSegmentView);
+        }
+
+        private void SendMessage(string message)
+        {
+            Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeSegmentView_ShowNotification);
         }
     }
 }

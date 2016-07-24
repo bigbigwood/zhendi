@@ -13,6 +13,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel
 {
@@ -66,11 +67,12 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
             ParentDepartment = new Department();
             CurrentDepartment = new Department();
-            AuthorizationDepartments = new List<Department>();
-            AuthorizationDevices = new List<DeviceController>();
-            AuthorizationDeviceRoles = new List<DeviceRole>();
+            AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
+            AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
+            AuthorizationDeviceRoles = ApplicationManager.GetInstance().AuthorizationDeviceRoles;
             OwnedDevices = new List<DepartmentDevice>();
             DeviceListBoxSource = new List<ListBoxItem>();
+            DeviceRole = AuthorizationDeviceRoles.First();
         }
 
         private void PrepareData()
@@ -127,15 +129,20 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 UpdateSelectedDevices();
 
+                ToDepartment();
+
+                var validator = NinjectBinder.GetValidator<DepartmentValidator>();
+                var results = validator.Validate(CurrentDepartment);
+                if (!results.IsValid)
+                {
+                    message = string.Join("\n", results.Errors);
+                    SendMessage(message);
+                    return;
+                }
+
                 if (ID == 0)
                 {
-                    CurrentDepartment.Name = DepartmentName;
-                    CurrentDepartment.DepartmentCode = DepartmentCode;
-                    CurrentDepartment.Status = GeneralStatus.Enabled;
-                    CurrentDepartment.Parent = ParentDepartment;
-                    CurrentDepartment.DeviceRoleID = DeviceRole.DeviceRoleID;
-                    CurrentDepartment.DeviceAssociations = OwnedDevices;
-                    CurrentDepartment.CreateUserID = 1;
+                    CurrentDepartment.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentDepartment.CreateDate = DateTime.Now;
                     CurrentDepartment = _departmentRepository.Insert(CurrentDepartment);
 
@@ -144,13 +151,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 }
                 else
                 {
-                    CurrentDepartment.Name = DepartmentName;
-                    CurrentDepartment.DepartmentCode = DepartmentCode;
-                    CurrentDepartment.Status = GeneralStatus.Enabled;
-                    CurrentDepartment.Parent = ParentDepartment;
-                    CurrentDepartment.DeviceRoleID = DeviceRole.DeviceRoleID;
-                    CurrentDepartment.DeviceAssociations = OwnedDevices;
-                    CurrentDepartment.UpdateUserID = 1;
+                    CurrentDepartment.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentDepartment.UpdateDate = DateTime.Now;
                     _departmentRepository.Update(CurrentDepartment);
 
@@ -164,12 +165,28 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 return;
             }
 
+            RaisePropertyChanged(null);
             Close(message);
+        }
+
+        private void ToDepartment()
+        {
+            CurrentDepartment.Name = DepartmentName;
+            CurrentDepartment.DepartmentCode = DepartmentCode;
+            CurrentDepartment.Status = GeneralStatus.Enabled;
+            CurrentDepartment.Parent = ParentDepartment;
+            CurrentDepartment.DeviceRoleID = DeviceRole.DeviceRoleID;
+            CurrentDepartment.DeviceAssociations = OwnedDevices;
         }
 
         private void Close(string message)
         {
             Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseDepartmentView);
+        }
+
+        private void SendMessage(string message)
+        {
+            Messenger.Default.Send(new NotificationMessage(message), Tokens.DepartmentView_ShowNotification);
         }
     }
 }

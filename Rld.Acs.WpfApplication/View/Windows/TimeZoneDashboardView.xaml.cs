@@ -14,6 +14,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             InitializeComponent();
 
             Messenger.Default.Register(this, Tokens.CloseTimeZoneView, new Action<NotificationMessage>(ProcessCloseViewMessage));
+            Messenger.Default.Register(this, Tokens.TimeZoneView_ShowNotification, new Action<NotificationMessage>(ShowSubViewNotification));
         }
     }
 }

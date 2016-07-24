@@ -236,187 +236,26 @@ VALUES  ( 2 , -- DeviceID - int
           1  -- Status - int
         )
 
-INSERT DEVICE_ROLES VALUES (N'Admin', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
-INSERT DEVICE_ROLES VALUES (N'Manager', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
-INSERT DEVICE_ROLES VALUES (N'General Stuff', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
+
+INSERT DEVICE_ROLES VALUES (N'管理员', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
+INSERT DEVICE_ROLES VALUES (N'经理', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
+INSERT DEVICE_ROLES VALUES (N'员工', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
  
 INSERT DEVICE_ROLES_PERMISSIONS VALUES (1, 1, 1, '', 1, '', 1, '2016-01-01 00:00:00.000', NULL)
 INSERT DEVICE_ROLES_PERMISSIONS VALUES (1, 2, 1, '', 1, '', 1, '2016-01-01 00:00:00.000', NULL)
 INSERT DEVICE_ROLES_PERMISSIONS VALUES (2, 1, 1, '', 1, '', 1, '2016-01-01 00:00:00.000', NULL)
 INSERT DEVICE_ROLES_PERMISSIONS VALUES (2, 2, 1, '', 1, '', 1, '2016-01-01 00:00:00.000', NULL)
 INSERT DEVICE_ROLES_PERMISSIONS VALUES (3, 1, 1, '', 1, '', 1, '2016-01-01 00:00:00.000', NULL)
+
+
+INSERT SYS_DEPARTMENT VALUES  ( N'研发部', N'RD',      -1, 3, N'', 1,  '2016-01-01 00:00:00.000', 1, NULL, NULL)
+INSERT SYS_DEPARTMENT VALUES  ( N'财务部', N'FD',      -1, 3, N'', 1,  '2016-01-01 00:00:00.000', 1, NULL, NULL)
+INSERT SYS_DEPARTMENT VALUES  ( N'保安部', N'SD',      -1, 3, N'', 1,  '2016-01-01 00:00:00.000', 1, NULL, NULL)
+INSERT SYS_DEPARTMENT VALUES  ( N'开发组一', N'RDD1',   1, 3, N'', 1,  '2016-01-01 00:00:00.000', 1, NULL, NULL)
+INSERT SYS_DEPARTMENT VALUES  ( N'开发组二', N'RDD2',   1, 3, N'', 1,  '2016-01-01 00:00:00.000', 1, NULL, NULL)
+INSERT SYS_DEPARTMENT VALUES  ( N'测试组一', N'TDD1',   1, 3, N'', 1,  '2016-01-01 00:00:00.000', 1, NULL, NULL)
+INSERT SYS_DEPARTMENT VALUES  ( N'测试组二', N'TDD2',   1, 3, N'', 1,  '2016-01-01 00:00:00.000', 1, NULL, NULL)
 		
-INSERT SYS_DEPARTMENT
-        ( Name ,
-          DepartmentCode ,
-          ParentID ,
-          DeviceRoleID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( N'R&D' , -- Name - nvarchar(100)
-          N'RD' , -- DepartmentCode - nvarchar(25)
-          -1 , -- ParentID - int
-          3 , -- DeviceRoleID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-
-INSERT SYS_DEPARTMENT
-        ( Name ,
-          DepartmentCode ,
-          ParentID ,
-          DeviceRoleID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( N'Finance Dept' , -- Name - nvarchar(100)
-          N'FD' , -- DepartmentCode - nvarchar(25)
-          -1 , -- ParentID - int
-          3 , -- DeviceRoleID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-INSERT SYS_DEPARTMENT
-        ( Name ,
-          DepartmentCode ,
-          ParentID ,
-          DeviceRoleID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( N'Secure Dept' , -- Name - nvarchar(100)
-          N'SD' , -- DepartmentCode - nvarchar(25)
-          -1 , -- ParentID - int
-          1 , -- DeviceRoleID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-		
-
-	
-INSERT SYS_DEPARTMENT
-        ( Name ,
-          DepartmentCode ,
-          ParentID ,
-          DeviceRoleID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( N'Development Team 1' , -- Name - nvarchar(100)
-          N'RDD1' , -- DepartmentCode - nvarchar(25)
-          1 , -- ParentID - int
-          3 , -- DeviceRoleID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-
-
-INSERT SYS_DEPARTMENT
-        ( Name ,
-          DepartmentCode ,
-          ParentID ,
-          DeviceRoleID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( N'Development Team 2' , -- Name - nvarchar(100)
-          N'RDD2' , -- DepartmentCode - nvarchar(25)
-          1 , -- ParentID - int
-          3 , -- DeviceRoleID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-
-
-INSERT SYS_DEPARTMENT
-        ( Name ,
-          DepartmentCode ,
-          ParentID ,
-          DeviceRoleID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( N'Tester Team 1' , -- Name - nvarchar(100)
-          N'RDT1' , -- DepartmentCode - nvarchar(25)
-          1 , -- ParentID - int
-          3 , -- DeviceRoleID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
-
-
-INSERT SYS_DEPARTMENT
-        ( Name ,
-          DepartmentCode ,
-          ParentID ,
-          DeviceRoleID ,
-          Remark ,
-          CreateUserID ,
-          CreateDate ,
-          Status ,
-          UpdateUserID ,
-          UpdateDate
-        )
-VALUES  ( N'Tester Team 2' , -- Name - nvarchar(100)
-          N'RDT2' , -- DepartmentCode - nvarchar(25)
-          1 , -- ParentID - int
-          3 , -- DeviceRoleID - int
-          N'' , -- Remark - nvarchar(1024)
-          1 , -- CreateUserID - int
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- Status - int
-          NULL , -- UpdateUserID - int
-          NULL  -- UpdateDate - datetime
-        )
 
 INSERT SYS_DEPARTMENT_DEVICES VALUES (1, 1)
 INSERT SYS_DEPARTMENT_DEVICES VALUES (2, 1)
@@ -907,69 +746,12 @@ VALUES  ( N'query empolyee' , -- ElementName - nvarchar(100)
         )
 		
 		
-
-INSERT SYS_ROLE
-        ( RoleName ,
-          Description ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'Admin' , -- RoleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-
-
-INSERT SYS_ROLE
-        ( RoleName ,
-          Description ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'Operator' , -- RoleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-
-INSERT SYS_ROLE
-        ( RoleName ,
-          Description ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'Monitor' , -- RoleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
 		
-		
+
+INSERT SYS_ROLE VALUES (N'管理员',  N'',  N'', '2016-01-01 00:00:00.000',1 ,1, NULL, NULL)
+INSERT SYS_ROLE VALUES (N'操作员',  N'',  N'', '2016-01-01 00:00:00.000',1 ,1, NULL, NULL)
+INSERT SYS_ROLE VALUES (N'监控员',  N'',  N'', '2016-01-01 00:00:00.000',1 ,1, NULL, NULL)
+				
 		
 --admin
 INSERT SYS_ROLE_PERMISSIONS VALUES (1, NULL, 1, 1, 1)

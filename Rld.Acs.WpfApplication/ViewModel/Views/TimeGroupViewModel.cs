@@ -14,6 +14,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -68,24 +69,31 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
+                CurrentTimeGroup.TimeGroupName = Name;
+                CurrentTimeGroup.Status = GeneralStatus.Enabled;
+                CurrentTimeGroup.TimeSegments = GetSelectedTimeSegments();
+
+                var validator = NinjectBinder.GetValidator<TimeGroupValidator>();
+                var results = validator.Validate(CurrentTimeGroup);
+                if (!results.IsValid)
+                {
+                    message = string.Join("\n", results.Errors);
+                    SendMessage(message);
+                    return;
+                }
+
                 if (CurrentTimeGroup.TimeGroupID == 0)
                 {
-                    CurrentTimeGroup.TimeGroupName = Name;
-                    CurrentTimeGroup.Status = GeneralStatus.Enabled;
-                    CurrentTimeGroup.CreateUserID = 1;
+                    CurrentTimeGroup.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentTimeGroup.CreateDate = DateTime.Now;
-                    CurrentTimeGroup.TimeSegments = GetSelectedTimeSegments();
                     CurrentTimeGroup = _timeGroupRepo.Insert(CurrentTimeGroup);
 
                     message = "增加时间组成功!";
                 }
                 else
                 {
-                    CurrentTimeGroup.TimeGroupName = Name;
-                    CurrentTimeGroup.Status = GeneralStatus.Enabled;
-                    CurrentTimeGroup.UpdateUserID = 1;
+                    CurrentTimeGroup.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentTimeGroup.UpdateDate = DateTime.Now;
-                    CurrentTimeGroup.TimeSegments = GetSelectedTimeSegments();
                     _timeGroupRepo.Update(CurrentTimeGroup);
 
                     message = "修改时间组成功!";
@@ -95,18 +103,24 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 Log.Error("Update department fails.", ex);
                 message = "保存时间组失败";
+                SendMessage(message);
                 return;
             }
 
             SelectedFormattingTimeSegmentList = GetSelectedFormattingTimeSegmentList();
-            RaisePropertyChanged(null);
 
+            RaisePropertyChanged(null);
             Close(message);
         }
 
         private void Close(string message)
         {
             Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseTimeGroupView);
+        }
+
+        private void SendMessage(string message)
+        {
+            Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeGroupView_ShowNotification);
         }
 
         private List<TimeSegment> GetSelectedTimeSegments()

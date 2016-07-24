@@ -1,4 +1,5 @@
 ﻿using Ninject;
+using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Rld.Acs.WpfApplication.Service.Validator;
+using RldModel = Rld.Acs.Model;
 
 namespace Rld.Acs.WpfApplication.Repository
 {
@@ -41,6 +43,10 @@ namespace Rld.Acs.WpfApplication.Repository
         {
             InjectionKernel.Bind<UserValidator>().To<UserValidator>();
             InjectionKernel.Bind<UserPropertyInfoValidator>().To<UserPropertyInfoValidator>();
+            InjectionKernel.Bind<Department>().To<Department>();
+            InjectionKernel.Bind<TimeSegment>().To<TimeSegment>();
+            InjectionKernel.Bind<TimeGroup>().To<TimeGroup>();
+            InjectionKernel.Bind<RldModel.TimeZone>().To<RldModel.TimeZone>();
         }
 
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()

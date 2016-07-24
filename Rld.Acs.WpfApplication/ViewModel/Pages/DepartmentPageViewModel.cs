@@ -45,8 +45,6 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public DepartmentDetailViewModel SelectedDepartmentDetailViewModel { get; set; }
         public Boolean HasSelectedDepartment { get { return SelectedDepartmentDetailViewModel != null; } }
         private IDepartmentRepository _departmentRepository = NinjectBinder.GetRepository<IDepartmentRepository>();
-        private IDeviceRoleRepository _deviceRoleRepository = NinjectBinder.GetRepository<IDeviceRoleRepository>();
-        private IDeviceControllerRepository _deviceControllerRepository = NinjectBinder.GetRepository<IDeviceControllerRepository>();
 
 
         public DepartmentPageViewModel()
@@ -55,15 +53,11 @@ namespace Rld.Acs.WpfApplication.ViewModel
             AddDepartmentCmd = new RelayCommand(AddDepartment);
             ModifyDepartmentCmd = new RelayCommand(ModifyDepartment);
             DeleteDepartmentCmd = new RelayCommand(ProcessDeleteDepartmentCmd);
-            //SyncDataCmd = new RelayCommand();
+            SyncDataCmd = new RelayCommand(SyncDepartment);
 
-            AuthorizationDepartments = _departmentRepository.Query(new Hashtable()).ToList();
-            var topDepartment = new Department() { DepartmentID = -1, Name = "总经办" };
-            AuthorizationDepartments.Insert(0, topDepartment);
-            AuthorizationDepartments.FindAll(d => d.Parent == null && d.DepartmentID != -1).ForEach(d => d.Parent = topDepartment);
-
-            AuthorizationDevices = _deviceControllerRepository.Query(new Hashtable { { "Status", 1 } }).ToList();
-            AuthorizationDeviceRoles = _deviceRoleRepository.Query(new Hashtable { { "Status", 1 } }).ToList();
+            AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
+            AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
+            AuthorizationDeviceRoles = ApplicationManager.GetInstance().AuthorizationDeviceRoles;
 
             TreeViewSource = BuildTreeViewSource();
         }
@@ -87,13 +81,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     DeviceRole = AuthorizationDeviceRoles.First(r => r.DeviceRoleID == dept.DeviceRoleID),
                     ParentDepartment = parentDept,
                     CurrentDepartment = dept,
-                    AuthorizationDepartments = AuthorizationDepartments,
-                    AuthorizationDeviceRoles = AuthorizationDeviceRoles,
-                    AuthorizationDevices = AuthorizationDevices,
                 };
 
-                RaisePropertyChanged("SelectedDepartmentDetailViewModel");
-                RaisePropertyChanged("HasSelectedDepartment");
+                RaisePropertyChanged(null);
             }
             catch (Exception ex)
             {
@@ -150,7 +140,11 @@ namespace Rld.Acs.WpfApplication.ViewModel
             });
         }
 
-
+        private void SyncDepartment()
+        {
+            Messenger.Default.Send(new NotificationMessage("此功能还未实现..."), Tokens.DepartmentPage_ShowNotification);
+            return;
+        }
         private void ModifyDepartment()
         {
             try

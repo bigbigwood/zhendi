@@ -229,7 +229,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
 
         private void OperatorSettingBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            popUserInfo.IsOpen = !popUserInfo.IsOpen;
+            //popUserInfo.IsOpen = !popUserInfo.IsOpen;
         }
     }
 }

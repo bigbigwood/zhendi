@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using FluentValidation;
 using GalaSoft.MvvmLight.Threading;
 using log4net;
 
@@ -19,6 +20,8 @@ namespace Rld.Acs.WpfApplication
         {
             log4net.Config.XmlConfigurator.Configure();
             Log.Info("Application start");
+
+            ValidatorOptions.CascadeMode = CascadeMode.StopOnFirstFailure;
 
             DispatcherHelper.Initialize();
 

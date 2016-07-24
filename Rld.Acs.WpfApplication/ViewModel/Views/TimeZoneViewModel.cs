@@ -15,6 +15,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Validator;
 using RldModel = Rld.Acs.Model;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
@@ -69,26 +70,32 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
+                CurrentTimeZone.TimeZoneName = Name;
+                CurrentTimeZone.Status = GeneralStatus.Enabled;
+                CurrentTimeZone.TimeGroupAssociations = GetTimeGroupAssociations();
+
+                var validator = NinjectBinder.GetValidator<TimeZoneValidator>();
+                var results = validator.Validate(CurrentTimeZone);
+                if (!results.IsValid)
+                {
+                    message = string.Join("\n", results.Errors);
+                    SendMessage(message);
+                    return;
+                }
+
                 if (CurrentTimeZone.TimeZoneID == 0)
                 {
-                    CurrentTimeZone.TimeZoneName = Name;
-                    CurrentTimeZone.Status = GeneralStatus.Enabled;
-                    CurrentTimeZone.CreateUserID = 1;
+                    
+                    CurrentTimeZone.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentTimeZone.CreateDate = DateTime.Now;
-                    CurrentTimeZone.TimeGroupAssociations = GetTimeGroupAssociations();
                     CurrentTimeZone = _timeZoneRepo.Insert(CurrentTimeZone);
-
                     message = "增加时间区成功!";
                 }
                 else
                 {
-                    CurrentTimeZone.TimeZoneName = Name;
-                    CurrentTimeZone.Status = GeneralStatus.Enabled;
-                    CurrentTimeZone.UpdateUserID = 1;
+                    CurrentTimeZone.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentTimeZone.UpdateDate = DateTime.Now;
-                    CurrentTimeZone.TimeGroupAssociations = GetTimeGroupAssociations();
                     _timeZoneRepo.Update(CurrentTimeZone);
-
                     message = "修改时间区成功!";
                 }
             }
@@ -96,6 +103,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 Log.Error("Update department fails.", ex);
                 message = "保存时间区失败";
+                SendMessage(message);
                 return;
             }
 
@@ -106,6 +114,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         private void Close(string message)
         {
             Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseTimeZoneView);
+        }
+
+        private void SendMessage(string message)
+        {
+            Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeZoneView_ShowNotification);
         }
 
         private TimeZoneGroupMappingInfo BuildMappingInfo(RldModel.TimeZone timeZone, int index)
@@ -119,6 +132,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 id = association.TimeZoneGroupID;
                 timeGroup = AllTimeGroups.FirstOrDefault(t => t.TimeGroupID == association.TimeGroupID);
+            }
+            else
+            {
+                timeGroup = AllTimeGroups.First();
             }
 
             switch (index)
