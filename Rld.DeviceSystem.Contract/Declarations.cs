@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rld.DeviceSystem.Service
+namespace Rld.DeviceSystem.Contract
 {
     public class Declarations
     {

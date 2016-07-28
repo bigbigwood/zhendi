@@ -38,7 +38,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Riss.Devices">
+      <HintPath>..\lib\Riss.Devices.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -57,6 +63,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -65,15 +72,21 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceAdapter.cs" />
+    <Compile Include="DeviceProxy.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Rld.DeviceSystem.Model\Rld.DeviceSystem.Model.csproj">
+    <ProjectReference Include="..\Rld.DeviceSystem.Contract\Rld.DeviceSystem.Contract.csproj">
       <Project>{0c2b88a5-1828-4a90-b8be-66f710e17699}</Project>
-      <Name>Rld.DeviceSystem.Model</Name>
+      <Name>Rld.DeviceSystem.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

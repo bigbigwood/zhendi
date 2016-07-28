@@ -19,11 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{660A3DCB-05BB-405D-A8A7-B87DDCEC4C1A}"
 	ProjectSection(SolutionItems) = preProject
+		lib\Castle.DynamicProxy.dll = lib\Castle.DynamicProxy.dll
 		lib\IBatisNet.Common.dll = lib\IBatisNet.Common.dll
 		lib\IBatisNet.Common.Logging.Log4Net.dll = lib\IBatisNet.Common.Logging.Log4Net.dll
 		lib\IBatisNet.DataAccess.dll = lib\IBatisNet.DataAccess.dll
 		lib\IBatisNet.DataMapper.dll = lib\IBatisNet.DataMapper.dll
 		lib\log4net.dll = lib\log4net.dll
+		lib\Riss.Devices.dll = lib\Riss.Devices.dll
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.WebApi", "Rld.Acs.WebApi\Rld.Acs.WebApi.csproj", "{C633CD4F-21BF-4DD8-BD83-C361F5BD2D54}"
@@ -32,7 +34,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.Unility", "Rld.Acs.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.WpfApplication.Resources", "Rld.Acs.WpfApplication.Resources\Rld.Acs.WpfApplication.Resources.csproj", "{311ED256-EDC1-491F-8118-60F98BB3C53F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem.Model", "Rld.DeviceSystem.Model\Rld.DeviceSystem.Model.csproj", "{0C2B88A5-1828-4A90-B8BE-66F710E17699}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem.Contract", "Rld.DeviceSystem.Contract\Rld.DeviceSystem.Contract.csproj", "{0C2B88A5-1828-4A90-B8BE-66F710E17699}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem.Service", "Rld.DeviceSystem.Service\Rld.DeviceSystem.Service.csproj", "{1EE2C48F-D38D-4F00-814A-909D4D127E12}"
 EndProject
