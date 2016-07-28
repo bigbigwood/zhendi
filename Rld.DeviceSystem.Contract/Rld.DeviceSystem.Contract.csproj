@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Declarations.cs" />
+    <Compile Include="Interface\IUserService.cs" />
     <Compile Include="Message\BaseRequest.cs" />
     <Compile Include="Message\BaseResponse.cs" />
     <Compile Include="Message\GetUserOperation\GetUserRequest.cs" />
