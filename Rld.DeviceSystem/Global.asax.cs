@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
 using log4net;
 
-namespace Rld.DeviceSystem.Service
+namespace Rld.DeviceSystem
 {
     public class Global : System.Web.HttpApplication
     {

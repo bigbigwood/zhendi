@@ -7,24 +7,23 @@ using Riss.Devices;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 {
-    public class DeviceAdapter
+    public class DeviceManager
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private static DeviceAdapter _instance = null;
+        private static DeviceManager _instance = null;
 
-        private Device _device;
-        private DeviceConnection _deviceConnection;
+        private DeviceProxy _deviceProxy = null;
 
 
         public static void Initialize()
         {
-            Log.Info("Initializing ApplicationManager...");
-            _instance = new DeviceAdapter();
+            Log.Info("Initializing DeviceManager...");
+            _instance = new DeviceManager();
 
-            Log.Info("Initializing ApplicationManager Finish...");
+            Log.Info("Initializing DeviceManager Finish...");
         }
 
-        public static DeviceAdapter GetInstance()
+        public static DeviceManager GetInstance()
         {
             return _instance;
         }
@@ -50,8 +49,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             var deviceConnection = DeviceConnection.CreateConnection(ref device);
             if (deviceConnection.Open() > 0)
             {
-                _device = device;
-                _deviceConnection = deviceConnection;
+                _deviceProxy = new DeviceProxy(device, deviceConnection);
                 return true;
             }
             else
@@ -62,8 +60,13 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 
         public bool CloseConnection()
         {
-            _deviceConnection.Close();
+            _deviceProxy.DeviceConnection.Close();
             return true;
+        }
+
+        public DeviceProxy GetDeviceProxy()
+        {
+            return _deviceProxy;
         }
     }
 }

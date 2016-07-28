@@ -16,8 +16,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             log4net.Config.XmlConfigurator.Configure();
             Log.Info("Application start");
 
-            DeviceAdapter.Initialize();
-            DeviceAdapter.GetInstance().OpenConnection();
+            DeviceManager.Initialize();
+            DeviceManager.GetInstance().OpenConnection();
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -29,7 +29,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
         protected void Application_End(object sender, EventArgs e)
         {
             Log.Info("Application end.");
-            DeviceAdapter.GetInstance().CloseConnection();
+            DeviceManager.GetInstance().CloseConnection();
         }
     }
 }

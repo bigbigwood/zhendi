@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{660A3DCB-05B
 		lib\IBatisNet.DataAccess.dll = lib\IBatisNet.DataAccess.dll
 		lib\IBatisNet.DataMapper.dll = lib\IBatisNet.DataMapper.dll
 		lib\log4net.dll = lib\log4net.dll
+		lib\Microsoft.WebSockets.dll = lib\Microsoft.WebSockets.dll
 		lib\Riss.Devices.dll = lib\Riss.Devices.dll
 	EndProjectSection
 EndProject
@@ -36,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.WpfApplication.Reso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem.Contract", "Rld.DeviceSystem.Contract\Rld.DeviceSystem.Contract.csproj", "{0C2B88A5-1828-4A90-B8BE-66F710E17699}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem.Service", "Rld.DeviceSystem.Service\Rld.DeviceSystem.Service.csproj", "{1EE2C48F-D38D-4F00-814A-909D4D127E12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem", "Rld.DeviceSystem\Rld.DeviceSystem.csproj", "{1EE2C48F-D38D-4F00-814A-909D4D127E12}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem.DeviceAdapter.ZDC2911", "Rld.DeviceSystem.DeviceAdapter.ZDC2911\Rld.DeviceSystem.DeviceAdapter.ZDC2911.csproj", "{A7C582ED-CFA8-467B-B299-1265D7D34DEA}"
 EndProject
