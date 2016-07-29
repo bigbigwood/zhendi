@@ -11,10 +11,26 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
         public Device Device { get; set; }
         public DeviceConnection DeviceConnection { get; set; }
 
-        public DeviceProxy(Device device, DeviceConnection deviceConnection)
+        public bool OpenConnection()
         {
-            Device = device;
-            DeviceConnection = deviceConnection;
+            var myDevice = Device;
+            var deviceConnection = DeviceConnection.CreateConnection(ref myDevice);
+            if (deviceConnection.Open() > 0)
+            {
+                DeviceConnection = deviceConnection;
+                Device = myDevice;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool CloseConnection()
+        {
+            DeviceConnection.Close();
+            return true;
         }
     }
 }

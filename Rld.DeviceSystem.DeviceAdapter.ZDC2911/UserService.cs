@@ -15,7 +15,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
         {
             try
             {
-                var deviceProxy = DeviceManager.GetInstance().GetDeviceProxy();
+                var deviceProxy = DeviceManager.GetInstance().GetDeviceProxy(1);
 
                 object extraProperty = new object();
                 object extraData = new object();
@@ -34,7 +34,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
         {
             try
             {
-                var deviceProxy = DeviceManager.GetInstance().GetDeviceProxy();
+                var deviceProxy = DeviceManager.GetInstance().GetDeviceProxy(1);
 
                 var extraData = new object();
                 var user = new User() { DIN = (UInt64)deviceProxy.Device.DN };

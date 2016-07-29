@@ -43,8 +43,8 @@
   <ItemGroup>
     <Compile Include="Declarations.cs" />
     <Compile Include="Interface\IUserService.cs" />
-    <Compile Include="Message\BaseRequest.cs" />
-    <Compile Include="Message\BaseResponse.cs" />
+    <Compile Include="Message\RequestBase.cs" />
+    <Compile Include="Message\ResponseBase.cs" />
     <Compile Include="Message\GetUserOperation\GetUserRequest.cs" />
     <Compile Include="Message\GetUserOperation\GetUserResponse.cs" />
     <Compile Include="Model\Device\Device.cs" />
@@ -58,6 +58,7 @@
     <Compile Include="Model\User\User.cs" />
     <Compile Include="Message\UserRequestType.cs" />
     <Compile Include="Model\User\UserRole.cs" />
+    <Compile Include="TypesResolver.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using log4net;
 using Riss.Devices;
+using Rld.Acs.Unility;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Configuration;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 {
@@ -11,16 +13,23 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static DeviceManager _instance = null;
+        private readonly Dictionary<Int32, DeviceProxy> _deviceDictionary = null;
 
-        private DeviceProxy _deviceProxy = null;
-
-
-        public static void Initialize()
+        public static void Initialize(List<DeviceConfigurationBase> deviceConfigurations)
         {
             Log.Info("Initializing DeviceManager...");
-            _instance = new DeviceManager();
+            _instance = new DeviceManager(deviceConfigurations);
 
             Log.Info("Initializing DeviceManager Finish...");
+        }
+
+        private DeviceManager(IEnumerable<DeviceConfigurationBase> deviceConfigurations)
+        {
+            _deviceDictionary = new Dictionary<int, DeviceProxy>();
+            foreach (var deviceConfig in deviceConfigurations)
+            {
+                _deviceDictionary.Add(deviceConfig.DeviceId, CreateDeviceProxy(deviceConfig));
+            }
         }
 
         public static DeviceManager GetInstance()
@@ -28,45 +37,58 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             return _instance;
         }
 
-        public bool OpenConnection()
+        private static DeviceProxy CreateDeviceProxy(DeviceConfigurationBase deviceConfig)
         {
-            Int32 deviceId = 1;
-            string password = "0";
-            string ip = "192.168.31.73";
-            Int32 port = 5500;
-
             var device = new Device()
             {
-                DN = deviceId,
-                Password = password,
-                Model = "ZDC2911",
-                ConnectionModel = 5,
-                CommunicationType = CommunicationType.Tcp,
-                IpAddress = ip,
-                IpPort = port,
+                DN = deviceConfig.DeviceId,
+                Password = deviceConfig.Password,
+                Model = deviceConfig.DeviceModel,
+                ConnectionModel = deviceConfig.ConnectionModel,
             };
 
-            var deviceConnection = DeviceConnection.CreateConnection(ref device);
-            if (deviceConnection.Open() > 0)
+            if (deviceConfig is DeviceTcpConfiguration)
             {
-                _deviceProxy = new DeviceProxy(device, deviceConnection);
-                return true;
+                var deviceTcpConfig = deviceConfig as DeviceTcpConfiguration;
+                device.CommunicationType = CommunicationType.Tcp;
+                device.IpAddress = deviceTcpConfig.IpAddress;
+                device.IpPort = deviceTcpConfig.Port;
             }
-            else
+
+            return new DeviceProxy { Device = device };
+        }
+
+        public void Run()
+        {
+            try
             {
-                return false;
+                _deviceDictionary.Values.ForEach(p => p.OpenConnection());
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Encounting error while trying to Run DeviceManager", ex);
+                throw;
             }
         }
 
-        public bool CloseConnection()
+        public void Stop()
         {
-            _deviceProxy.DeviceConnection.Close();
-            return true;
+            try
+            {
+                _deviceDictionary.Values.ForEach(p => p.CloseConnection());
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Encounting error while trying to Stop DeviceManager", ex);
+                throw;
+            }
         }
 
-        public DeviceProxy GetDeviceProxy()
+        public DeviceProxy GetDeviceProxy(Int32 key)
         {
-            return _deviceProxy;
+            DeviceProxy deviceProxy;
+            _deviceDictionary.TryGetValue(key, out deviceProxy);
+            return deviceProxy;
         }
     }
 }

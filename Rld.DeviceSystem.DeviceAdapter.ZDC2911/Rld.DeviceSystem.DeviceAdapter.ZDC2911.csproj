@@ -42,6 +42,9 @@
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.WebSockets">
+      <HintPath>..\lib\Microsoft.WebSockets.dll</HintPath>
+    </Reference>
     <Reference Include="Riss.Devices">
       <HintPath>..\lib\Riss.Devices.dll</HintPath>
     </Reference>
@@ -64,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="DeviceProcessor.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -76,8 +80,14 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\DeviceConfigurationBase.cs" />
+    <Compile Include="Configuration\DeviceTcpConfiguration.cs" />
     <Compile Include="DeviceManager.cs" />
+    <Compile Include="DeviceProcessor.ashx.cs">
+      <DependentUpon>DeviceProcessor.ashx</DependentUpon>
+    </Compile>
     <Compile Include="DeviceProxy.cs" />
+    <Compile Include="DeviceWebSocketHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -86,6 +96,10 @@
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Rld.Acs.Unility\Rld.Acs.Unility.csproj">
+      <Project>{56CD6CFE-8104-4B3F-997C-D84E6788F259}</Project>
+      <Name>Rld.Acs.Unility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rld.DeviceSystem.Contract\Rld.DeviceSystem.Contract.csproj">
       <Project>{0c2b88a5-1828-4a90-b8be-66f710e17699}</Project>
       <Name>Rld.DeviceSystem.Contract</Name>
