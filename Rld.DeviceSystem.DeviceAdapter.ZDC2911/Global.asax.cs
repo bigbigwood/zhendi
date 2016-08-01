@@ -22,6 +22,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 
             var deviceConfigurations = GetDeviceConfigurations("DeviceConfigGroup");
             DeviceManager.Initialize(deviceConfigurations);
+            DeviceManager.GetInstance().Run();
         }
 
         protected void Application_Error(object sender, EventArgs e)

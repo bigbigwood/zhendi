@@ -19,7 +19,6 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
         {
             Log.Info("Initializing DeviceManager...");
             _instance = new DeviceManager(deviceConfigurations);
-
             Log.Info("Initializing DeviceManager Finish...");
         }
 

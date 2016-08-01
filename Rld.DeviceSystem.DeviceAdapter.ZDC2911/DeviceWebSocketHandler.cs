@@ -4,6 +4,9 @@ using Microsoft.Web.WebSockets;
 using Rld.Acs.Unility.Serialization;
 using Rld.DeviceSystem.Contract.Message;
 using Rld.DeviceSystem.Contract.Message.GetUserOperation;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation;
+using Rld.DeviceSystem.Contract.Message.CreateUserOperation;
+using Rld.DeviceSystem.Contract.Message.DeleteUserOperation;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 {
@@ -19,10 +22,32 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 
         public override void OnMessage(string message)
         {
-            var request = DataContractSerializationHelper.Deserialize<RequestBase>(message);
 
+            if (message.Contains("GetUserRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<GetUserRequest>(message);
+                var response = new GetUserOperation().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize<GetUserResponse>(response));
+            }
+            else if (message.Contains("ModifyUserRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<ModifyUserRequest>(message);
+                var response = new ModifyUserOperation().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize<ModifyUserResponse>(response));
+            }
+            else if (message.Contains("CreateUserRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<CreateUserRequest>(message);
+                var response = new CreateUserOperation().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize<CreateUserResponse>(response));
+            }
+            else if (message.Contains("DeleteUserRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<DeleteUserRequest>(message);
+                var response = new DeleteUserOperation().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize<DeleteUserResponse>(response));
+            }
 
-            //this.Send(message);
         }
 
         public override void OnClose()

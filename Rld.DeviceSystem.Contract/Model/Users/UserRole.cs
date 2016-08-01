@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-namespace Rld.DeviceSystem.Contract.Model.User
+namespace Rld.DeviceSystem.Contract.Model.Users
 {
     [DataContract(Namespace = Declarations.NameSpace)]
     public enum UserRole
@@ -13,6 +13,6 @@ namespace Rld.DeviceSystem.Contract.Model.User
         [EnumMember]
         Manager = 8,
         [EnumMember]
-        Custom = 16,
+        Visitor = 16,
     }
 }

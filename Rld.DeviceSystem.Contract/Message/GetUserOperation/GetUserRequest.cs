@@ -8,11 +8,9 @@ namespace Rld.DeviceSystem.Contract.Message.GetUserOperation
     [DataContract(Namespace = Declarations.NameSpace)]
     public class GetUserRequest : RequestBase
     {
-        [MessageBodyMember]
         [DataMember]
         public Int32 UserId { get; set; }
-        [MessageBodyMember]
-        [DataMember]
-        public UserRequestType[] RequestTypes { get; set; }
+        //[DataMember]
+        //public UserRequestType[] RequestTypes { get; set; }
     }
 }

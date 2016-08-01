@@ -24,13 +24,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             }
             else
             {
-                GetUserRequest req = new GetUserRequest();
-                req.UserId = 1;
-                req.RequestTypes = new [] { UserRequestType.All, UserRequestType.UserName};
-
-                var s = DataContractSerializationHelper.Serialize(req);
-
-                new DeviceWebSocketHandler().OnMessage(s);
+                //var message = ReadRequestBody(context);
+                //new DeviceWebSocketHandler().OnMessage(message);
                 context.Response.ContentType = "text/plain";
                 context.Response.Write("DeviceProcessor running");
             }
@@ -38,10 +33,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 
         public bool IsReusable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public string ReadRequestBody(HttpContext context)

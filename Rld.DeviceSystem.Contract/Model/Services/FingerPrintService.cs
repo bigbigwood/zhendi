@@ -8,6 +8,7 @@ namespace Rld.DeviceSystem.Contract.Model.Services
     {
         [DataMember]
         public Int32 Index { get; set; }
+        [DataMember]
         public String FingerPrintData { get; set; }
     }
 }

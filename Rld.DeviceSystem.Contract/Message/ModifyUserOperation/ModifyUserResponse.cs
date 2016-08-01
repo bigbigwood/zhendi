@@ -6,15 +6,7 @@ namespace Rld.DeviceSystem.Contract.Message.GetUserOperation
 {
     [MessageContract(IsWrapped = true)]
     [DataContract(Namespace = Declarations.NameSpace)]
-    public class GetUserResponse : ResponseBase
+    public class ModifyUserResponse : ResponseBase
     {
-        [MessageBodyMember]
-        [DataMember]
-        public User UserInfo { get; set; }
-
-        public GetUserResponse()
-        {
-            UserInfo = new User();
-        }
     }
 }
