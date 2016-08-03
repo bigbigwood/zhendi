@@ -141,11 +141,9 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Service
                     byte[] data = Encoding.Unicode.GetBytes((string)extraData);
                     for (int index = 0; index < Zd2911Utils.PassItemCount; index++)
                     {
-                        var timeGroupService = new TimeGroupService()
-                        {
-                            TimeGroupId = index,
-                            TimeSegmentIds = ZeroToNineCollection.Select(num => (int)data[index + num]),
-                        };
+                        var ids = new List<int>();
+                        ZeroToNineCollection.ForEach(num => ids.Add(data[index * 10 + num]));
+                        var timeGroupService = new TimeGroupService() { TimeGroupId = index, TimeSegmentIds = ids};
 
                         timeGroupServices.Add(timeGroupService);
                     }
@@ -232,16 +230,17 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Service
                     byte[] data = Encoding.Unicode.GetBytes((string)extraData);
                     for (int index = 0; index < Zd2911Utils.PassItemCount; index++)
                     {
+                        int groupIndex = index * 7;
                         var timeZoneService = new TimeZoneService()
                         {
                             TimeZoneId = index,
-                            MondayTimeGroupId = data[index + 0],
-                            TuesdayTimeGroupId = data[index + 1],
-                            WednesdayTimeGroupId = data[index + 2],
-                            ThursdayTimeGroupId = data[index + 3],
-                            FridayTimeGroupId = data[index + 4],
-                            SaturdayTimeGroupId = data[index + 5],
-                            SundayTimeGroupId = data[index + 6],
+                            MondayTimeGroupId = data[groupIndex + 0],
+                            TuesdayTimeGroupId = data[groupIndex + 1],
+                            WednesdayTimeGroupId = data[groupIndex + 2],
+                            ThursdayTimeGroupId = data[groupIndex + 3],
+                            FridayTimeGroupId = data[groupIndex + 4],
+                            SaturdayTimeGroupId = data[groupIndex + 5],
+                            SundayTimeGroupId = data[groupIndex + 6],
                         };
 
                         timeZoneServices.Add(timeZoneService);

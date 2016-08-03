@@ -3,8 +3,12 @@ using log4net;
 using Microsoft.Web.WebSockets;
 using Rld.Acs.Unility.Serialization;
 using Rld.DeviceSystem.Contract.Message;
+using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeGroupsOperation;
 using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeSegmentsOperation;
+using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeZonesOperation;
+using Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOperation;
 using Rld.DeviceSystem.Contract.Message.GetAllTimeSegmentsOperation;
+using Rld.DeviceSystem.Contract.Message.GetAllTimeZonesOperation;
 using Rld.DeviceSystem.Contract.Message.GetTimeSegmentOperation;
 using Rld.DeviceSystem.Contract.Message.GetUserOperation;
 using Rld.DeviceSystem.Contract.Message.ModifyDeviceOperation;
@@ -68,13 +72,18 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 this.Send(DataContractSerializationHelper.Serialize<DeleteUserResponse>(response));
             }
 
-
-            else if (message.Contains("GetTimeSegmentRequest"))
-            {
-                var request = DataContractSerializationHelper.Deserialize<GetTimeSegmentRequest>(message);
-                var response = new GetTimeSegmentOp().Process(request);
-                this.Send(DataContractSerializationHelper.Serialize(response));
-            }
+            //else if (message.Contains("UpdateTimeSegmentRequest"))
+            //{
+            //    var request = DataContractSerializationHelper.Deserialize<UpdateTimeSegmentRequest>(message);
+            //    var response = new UpdateTimeSegmentOp().Process(request);
+            //    this.Send(DataContractSerializationHelper.Serialize(response));
+            //}
+            //else if (message.Contains("GetTimeSegmentRequest"))
+            //{
+            //    var request = DataContractSerializationHelper.Deserialize<GetTimeSegmentRequest>(message);
+            //    var response = new GetTimeSegmentOp().Process(request);
+            //    this.Send(DataContractSerializationHelper.Serialize(response));
+            //}
             else if (message.Contains("GetAllTimeSegmentsRequest"))
             {
                 var request = DataContractSerializationHelper.Deserialize<GetAllTimeSegmentsRequest>(message);
@@ -87,12 +96,31 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 var response = new BatchUpdateTimeSegmentsOp().Process(request);
                 this.Send(DataContractSerializationHelper.Serialize(response));
             }
-            else if (message.Contains("UpdateTimeSegmentRequest"))
+            else if (message.Contains("GetAllTimeGroupsRequest"))
             {
-                var request = DataContractSerializationHelper.Deserialize<UpdateTimeSegmentRequest>(message);
-                var response = new UpdateTimeSegmentOp().Process(request);
+                var request = DataContractSerializationHelper.Deserialize<GetAllTimeGroupsRequest>(message);
+                var response = new GetAllTimeGroupsOp().Process(request);
                 this.Send(DataContractSerializationHelper.Serialize(response));
             }
+            else if (message.Contains("BatchUpdateTimeGroupsRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<BatchUpdateTimeGroupsRequest>(message);
+                var response = new BatchUpdateTimeGroupsOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
+            }
+            else if (message.Contains("GetAllTimeZonesRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<GetAllTimeZonesRequest>(message);
+                var response = new GetAllTimeZonesOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
+            }
+            else if (message.Contains("BatchUpdateTimeZonesRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<BatchUpdateTimeZonesRequest>(message);
+                var response = new BatchUpdateTimeZonesOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
+            }
+
         }
 
         public override void OnClose()
