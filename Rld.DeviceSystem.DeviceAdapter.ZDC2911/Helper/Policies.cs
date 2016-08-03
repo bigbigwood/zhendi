@@ -14,8 +14,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper
         {
             return Policy.HandleResult<bool>(b=> b == false)
                 .Retry(3 ,
-                (ex, timeSpan, contezt) =>
-                    Log.Info("Element is busy, will retry"));
+                (ex, timeSpan, context) =>
+                    Log.Info("Device reutrn failure, will retry"));
         }
     }
 }

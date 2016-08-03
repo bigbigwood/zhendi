@@ -14,11 +14,11 @@ namespace Rld.DeviceSystem.Contract.Model.Services
         public Int32 TimeGroupId { get; set; }
 
         [DataMember (Order = 2)]
-        public IEnumerable<TimeSegmentService> TimeSegmentServices { get; set; }
+        public IEnumerable<Int32> TimeSegmentIds { get; set; }
 
         public TimeGroupService()
         {
-            TimeSegmentServices = new List<TimeSegmentService>();
+            TimeSegmentIds = new List<Int32>();
         }
     }
 }

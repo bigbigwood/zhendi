@@ -43,10 +43,18 @@
   <ItemGroup>
     <Compile Include="Declarations.cs" />
     <Compile Include="Interface\IUserService.cs" />
+    <Compile Include="Message\BatchUpdateTimeZonesOperation\BatchUpdateTimeZonesRequest.cs" />
+    <Compile Include="Message\BatchUpdateTimeZonesOperation\BatchUpdateTimeZonesResponse.cs" />
+    <Compile Include="Message\BatchUpdateTimeGroupsOperation\BatchUpdateTimeGroupsRequest.cs" />
+    <Compile Include="Message\BatchUpdateTimeGroupsOperation\BatchUpdateTimeGroupsResponse.cs" />
     <Compile Include="Message\DeleteUserOperation\DeleteUserRequest.cs" />
     <Compile Include="Message\DeleteUserOperation\DeleteUserResponse.cs" />
     <Compile Include="Message\CreateUserOperation\CreateUserRequest.cs" />
     <Compile Include="Message\CreateUserOperation\CreateUserResponse.cs" />
+    <Compile Include="Message\GetAllTimeZonesOperation\GetAllTimeZonesRequest.cs" />
+    <Compile Include="Message\GetAllTimeZonesOperation\GetAllTimeZonesResponse.cs" />
+    <Compile Include="Message\GetAllTimeGroupsOperation\GetAllTimeGroupsRequest.cs" />
+    <Compile Include="Message\GetAllTimeGroupsOperation\GetAllTimeGroupsResponse.cs" />
     <Compile Include="Message\GetAllTimeSegmentsOperation\GetAllTimeSegmentsRequest.cs" />
     <Compile Include="Message\GetAllTimeSegmentsOperation\GetAllTimeSegmentsResponse.cs" />
     <Compile Include="Message\GetTimeSegmentOperation\GetTimeSegmentRequest.cs" />

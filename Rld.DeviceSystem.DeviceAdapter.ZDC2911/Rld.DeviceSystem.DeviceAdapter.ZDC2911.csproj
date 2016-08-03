@@ -98,6 +98,10 @@
     </Compile>
     <Compile Include="Helper\ConvertObject.cs" />
     <Compile Include="Model\DeviceStatus.cs" />
+    <Compile Include="Operations\TimeOperation\BatchUpdateTimeZonesOp.cs" />
+    <Compile Include="Operations\TimeOperation\BatchUpdateTimeGroupsOp.cs" />
+    <Compile Include="Operations\TimeOperation\GetAllTimeZonesOp.cs" />
+    <Compile Include="Operations\TimeOperation\GetAllTimeGroupsOp.cs" />
     <Compile Include="Operations\TimeOperation\GetAllTimeSegmentsOp.cs" />
     <Compile Include="Operations\TimeOperation\BatchUpdateTimeSegmentsOp.cs" />
     <Compile Include="Operations\TimeOperation\UpdateTimeSegmentOp.cs" />
