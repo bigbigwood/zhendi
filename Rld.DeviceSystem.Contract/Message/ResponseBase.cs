@@ -12,8 +12,7 @@ namespace Rld.DeviceSystem.Contract.Message
     [KnownType("KnownTypes")]
     public class ResponseBase
     {
-        [MessageBodyMember]
-        [DataMember]
+        [DataMember(Order = 900)]
         public ResultType ResultType { get; set; }
 
         static IEnumerable<Type> KnownTypes()

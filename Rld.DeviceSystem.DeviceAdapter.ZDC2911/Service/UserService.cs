@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using log4net;
 using Riss.Devices;
-using Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation;
 using Rld.DeviceSystem.Contract.Model.Services;
-using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Model;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper;
-using RldDeviceModel = Rld.DeviceSystem.Contract.Model;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Model;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation;
 
-namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
+namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Service
 {
     public class UserService
     {
@@ -21,7 +19,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             _deviceProxy = proxy;
         }
 
-        public RldDeviceModel.Users.User GetUserInfo(int userId)
+        public Contract.Model.Users.User GetUserInfo(int userId)
         {
             try
             {
@@ -37,9 +35,9 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 result = _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, null, device, DeviceStatus.DeviceIdle);
 
 
-                var userInfo = new RldDeviceModel.Users.User() { UserId = userId };
+                var userInfo = new Contract.Model.Users.User() { UserId = userId };
                 userInfo.UserName = deviceUser.UserName;
-                userInfo.Role = (RldDeviceModel.Users.UserRole)deviceUser.Privilege;
+                userInfo.Role = (Contract.Model.Users.UserRole)deviceUser.Privilege;
                 userInfo.Comment = deviceUser.Comment;
                 userInfo.UserStatus = deviceUser.Enable;
                 userInfo.DepartmentId = !string.IsNullOrWhiteSpace(deviceUser.DeptId) ? int.Parse(deviceUser.DeptId) : 0;
@@ -74,7 +72,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             }
         }
 
-        public bool ModifyUserInfo(RldDeviceModel.Users.User userInfo)
+        public bool ModifyUserInfo(Contract.Model.Users.User userInfo)
         {
             var device = _deviceProxy.Device;
 
@@ -164,7 +162,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
         }
 
 
-        public bool CreateUserInfo(RldDeviceModel.Users.User userInfo)
+        public bool CreateUserInfo(Contract.Model.Users.User userInfo)
         {
             var device = _deviceProxy.Device;
 
@@ -274,7 +272,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             }
         }
 
-        public void GetUserName(ref RldDeviceModel.Users.User DeviceUser)
+        public void GetUserName(ref Contract.Model.Users.User DeviceUser)
         {
             var extraData = new object();
             var user = new User() { DIN = (UInt64)DeviceUser.UserId };
@@ -282,7 +280,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             DeviceUser.UserName = user.UserName;
         }
 
-        public void GetPassword(ref RldDeviceModel.Users.User DeviceUser)
+        public void GetPassword(ref Contract.Model.Users.User DeviceUser)
         {
             object extraData = new object();
             Enroll enroll = new Enroll() { DIN = (UInt64)DeviceUser.UserId };
@@ -292,7 +290,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             DeviceUser.CredentialServices.Add(service);
         }
 
-        public void GetCard(ref RldDeviceModel.Users.User DeviceUser)
+        public void GetCard(ref Contract.Model.Users.User DeviceUser)
         {
             object extraData = new object();
             Enroll enroll = new Enroll() { DIN = (UInt64)DeviceUser.UserId };
@@ -302,7 +300,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             DeviceUser.CredentialServices.Add(service);
         }
 
-        public void GetFingerPrint(ref RldDeviceModel.Users.User DeviceUser, Int32 index)
+        public void GetFingerPrint(ref Contract.Model.Users.User DeviceUser, Int32 index)
         {
             try
             {
@@ -340,7 +338,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             var rawEnroll = rawUser.Enrolls.First();
 
             var dto = new UserEnrollSummary();
-            dto.Role = (RldDeviceModel.Users.UserRole)rawUser.Privilege;
+            dto.Role = (Contract.Model.Users.UserRole)rawUser.Privilege;
             dto.PasswordEnabled = (Zd2911Utils.BitCheck((int)rawEnroll.EnrollType, (int)EnrollType.Password) != 0);
             dto.CardEnabled = (Zd2911Utils.BitCheck((int)rawEnroll.EnrollType, (int)EnrollType.Card) != 0);
             dto.FingerPrint0Enabled = (Zd2911Utils.BitCheck((int)rawEnroll.EnrollType, (int)EnrollType.Finger0) != 0);

@@ -1,16 +1,18 @@
 ﻿using Rld.DeviceSystem.Contract.Message;
+using Rld.DeviceSystem.Contract.Message.CreateUserOperation;
 using Rld.DeviceSystem.Contract.Message.GetUserOperation;
 using Rld.DeviceSystem.Contract.Model.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Service;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation
 {
-    public class ModifyUserOperation
+    public class CreateUserOperation
     {
-        public ModifyUserResponse Process(ModifyUserRequest request)
+        public CreateUserResponse Process(CreateUserRequest request)
         {
             if (request.UserInfo == null)
             {
@@ -18,10 +20,10 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation
             }
 
             var service = new UserService(DeviceManager.GetInstance().GetDeviceProxy(1));
-            service.ModifyUserInfo(request.UserInfo);
+            service.CreateUserInfo(request.UserInfo);
 
 
-            return new ModifyUserResponse() { ResultType = ResultType.OK };
+            return new CreateUserResponse() { ResultType = ResultType.OK };
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Rld.DeviceSystem.Contract.Model.Device
+namespace Rld.DeviceSystem.Contract.Model.Devices
 {
     [DataContract(Namespace = Declarations.NameSpace)]
     public class Device

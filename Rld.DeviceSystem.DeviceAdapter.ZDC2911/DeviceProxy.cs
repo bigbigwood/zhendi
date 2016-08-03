@@ -23,7 +23,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             }
             else
             {
-                return false;
+                throw new Exception(string.Format("Open connection for device #{0} fails", Device.DN));
             }
         }
 

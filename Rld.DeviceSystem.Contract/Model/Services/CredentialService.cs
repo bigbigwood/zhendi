@@ -8,7 +8,7 @@ namespace Rld.DeviceSystem.Contract.Model.Services
 {
     [DataContract(Namespace = Declarations.NameSpace)]
     [KnownType("KnownTypes")]
-    public class CredentialService : BaseService
+    public class CredentialService : ServiceBase
     {
         [DataMember]
         public Boolean UseForDuress { get; set; }

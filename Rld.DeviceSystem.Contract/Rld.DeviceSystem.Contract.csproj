@@ -47,6 +47,18 @@
     <Compile Include="Message\DeleteUserOperation\DeleteUserResponse.cs" />
     <Compile Include="Message\CreateUserOperation\CreateUserRequest.cs" />
     <Compile Include="Message\CreateUserOperation\CreateUserResponse.cs" />
+    <Compile Include="Message\GetAllTimeSegmentsOperation\GetAllTimeSegmentsRequest.cs" />
+    <Compile Include="Message\GetAllTimeSegmentsOperation\GetAllTimeSegmentsResponse.cs" />
+    <Compile Include="Message\GetTimeSegmentOperation\GetTimeSegmentRequest.cs" />
+    <Compile Include="Message\GetTimeSegmentOperation\GetTimeSegmentResponse.cs" />
+    <Compile Include="Message\GetDeviceOperation\GetDeviceRequest.cs" />
+    <Compile Include="Message\GetDeviceOperation\GetDeviceResponse.cs" />
+    <Compile Include="Message\ModifyDeviceOperation\ModifyDeviceRequest.cs" />
+    <Compile Include="Message\ModifyDeviceOperation\ModifyDeviceResponse.cs" />
+    <Compile Include="Message\BatchUpdateTimeSegmentsOperation\BatchUpdateTimeSegmentsRequest.cs" />
+    <Compile Include="Message\BatchUpdateTimeSegmentsOperation\BatchUpdateTimeSegmentsResponse.cs" />
+    <Compile Include="Message\UpdateTimeSegmentOperation\UpdateTimeSegmentRequest.cs" />
+    <Compile Include="Message\UpdateTimeSegmentOperation\UpdateTimeSegmentResponse.cs" />
     <Compile Include="Message\ModifyUserOperation\ModifyUserRequest.cs" />
     <Compile Include="Message\ModifyUserOperation\ModifyUserResponse.cs" />
     <Compile Include="Message\RequestBase.cs" />
@@ -55,14 +67,16 @@
     <Compile Include="Message\GetUserOperation\GetUserResponse.cs" />
     <Compile Include="Model\Devices\Device.cs" />
     <Compile Include="Model\KeyValue.cs" />
+    <Compile Include="Model\Services\TimeZoneService.cs" />
+    <Compile Include="Model\Services\TimeGroupService.cs" />
+    <Compile Include="Model\Services\TimeSegmentService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Services\CredentialService.cs" />
-    <Compile Include="Model\Services\BaseService.cs" />
+    <Compile Include="Model\Services\ServiceBase.cs" />
     <Compile Include="Model\Services\CredentialCardService.cs" />
     <Compile Include="Model\Services\PasswordService.cs" />
     <Compile Include="Model\Services\FingerPrintService.cs" />
     <Compile Include="Model\Users\User.cs" />
-    <Compile Include="Message\UserRequestType.cs" />
     <Compile Include="Model\Users\UserRole.cs" />
     <Compile Include="TypesResolver.cs" />
   </ItemGroup>
