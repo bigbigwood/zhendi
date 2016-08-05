@@ -77,20 +77,21 @@
     <Compile Include="Message\ResponseBase.cs" />
     <Compile Include="Message\GetUserOperation\GetUserRequest.cs" />
     <Compile Include="Message\GetUserOperation\GetUserResponse.cs" />
-    <Compile Include="Model\Devices\Device.cs" />
+    <Compile Include="Model\DeviceSystemInfo.cs" />
     <Compile Include="Model\KeyValue.cs" />
-    <Compile Include="Model\Services\DeviceControlling\HeadReadingService.cs" />
-    <Compile Include="Model\Services\DeviceControlling\DoorService.cs" />
-    <Compile Include="Model\Services\DeviceControlling\DeviceService.cs" />
-    <Compile Include="Model\Services\DeviceControlling\AlarmService.cs" />
-    <Compile Include="Model\Services\DeviceControlling\LinkageService.cs" />
-    <Compile Include="Model\Services\DeviceControlling\MultiPersionLockService.cs" />
-    <Compile Include="Model\Services\DeviceControlling\DuressService.cs" />
-    <Compile Include="Model\Services\DeviceConnection\DeviceConnectionService.cs" />
-    <Compile Include="Model\Services\DeviceConnection\P2PConnectionService.cs" />
-    <Compile Include="Model\Services\DeviceConnection\UsbConnectionService.cs" />
-    <Compile Include="Model\Services\DeviceConnection\SerialConnectionService.cs" />
-    <Compile Include="Model\Services\DeviceConnection\TcpConnectionService.cs" />
+    <Compile Include="Model\Services\Device\DoorOpenBehaviorService.cs" />
+    <Compile Include="Model\Enum.cs" />
+    <Compile Include="Model\HeadReadingInfo.cs" />
+    <Compile Include="Model\DoorInfo.cs" />
+    <Compile Include="Model\DeviceInfo.cs" />
+    <Compile Include="Model\Services\Device\DoorLinkageService.cs" />
+    <Compile Include="Model\Services\Device\MultiPersionLockService.cs" />
+    <Compile Include="Model\Services\Device\DuressService.cs" />
+    <Compile Include="Model\Services\DeviceConn\DeviceConnectionService.cs" />
+    <Compile Include="Model\Services\DeviceConn\P2PConnectionService.cs" />
+    <Compile Include="Model\Services\DeviceConn\UsbConnectionService.cs" />
+    <Compile Include="Model\Services\DeviceConn\SerialConnectionService.cs" />
+    <Compile Include="Model\Services\DeviceConn\TcpConnectionService.cs" />
     <Compile Include="Model\Services\Time\TimeZoneService.cs" />
     <Compile Include="Model\Services\Time\TimeGroupService.cs" />
     <Compile Include="Model\Services\Time\TimeSegmentService.cs" />
@@ -100,8 +101,7 @@
     <Compile Include="Model\Services\UserCredential\CredentialCardService.cs" />
     <Compile Include="Model\Services\UserCredential\PasswordService.cs" />
     <Compile Include="Model\Services\UserCredential\FingerPrintService.cs" />
-    <Compile Include="Model\Users\User.cs" />
-    <Compile Include="Model\Users\UserRole.cs" />
+    <Compile Include="Model\UserInfo.cs" />
     <Compile Include="TypesResolver.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -1,5 +1,5 @@
 ﻿using System.Runtime.Serialization;
-using Rld.DeviceSystem.Contract.Model.Devices;
+using Rld.DeviceSystem.Contract.Model;
 
 namespace Rld.DeviceSystem.Contract.Message.GetDeviceOperation
 {
@@ -7,11 +7,11 @@ namespace Rld.DeviceSystem.Contract.Message.GetDeviceOperation
     public class GetDeviceResponse : ResponseBase
     {
         [DataMember]
-        public Device DeviceInfo { get; set; }
+        public DeviceSystemInfo DeviceInfo { get; set; }
 
         public GetDeviceResponse()
         {
-            DeviceInfo = new Device();
+            DeviceInfo = new DeviceSystemInfo();
         }
     }
 }

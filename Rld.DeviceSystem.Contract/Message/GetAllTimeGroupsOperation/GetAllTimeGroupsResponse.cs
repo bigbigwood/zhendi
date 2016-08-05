@@ -9,7 +9,7 @@ namespace Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOperation
     public class GetAllTimeGroupsResponse : ResponseBase
     {
         [DataMember]
-        public IEnumerable<TimeGroupService> Services { get; set; }
+        public IList<TimeGroupService> Services { get; set; }
 
         public GetAllTimeGroupsResponse()
         {

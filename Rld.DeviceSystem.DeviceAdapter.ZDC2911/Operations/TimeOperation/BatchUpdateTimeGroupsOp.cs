@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Rld.Acs.Unility;
 using Rld.DeviceSystem.Contract.Message;
 using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeGroupsOperation;
-using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeSegmentsOperation;
-using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Service;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Time;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
 {
@@ -18,8 +16,13 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
 
             }
 
-            var service = new TimeService(DeviceManager.GetInstance().GetDeviceProxy(1));
-            var result = service.BatchUpdateTimeGroupServices(request.Services );
+            var deviceDao = new TimeGroupInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+
+            var data = deviceDao.GetTimeGroupData();
+
+            request.Services.ForEach(s => TimeGroupMapper.UpdateTimeGroupData(ref data, s));
+
+            bool result = deviceDao.UpdateTimeGroupData(data);
 
             return new BatchUpdateTimeGroupsResponse() { ResultType = ResultType.OK };
         }

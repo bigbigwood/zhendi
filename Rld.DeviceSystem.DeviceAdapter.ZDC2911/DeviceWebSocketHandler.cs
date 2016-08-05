@@ -15,7 +15,6 @@ using Rld.DeviceSystem.Contract.Message.GetUserOperation;
 using Rld.DeviceSystem.Contract.Message.ModifyDeviceOperation;
 using Rld.DeviceSystem.Contract.Message.UpdateTimeSegmentOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.AccessControllingOperation;
-using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.DeviceOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation;
 using Rld.DeviceSystem.Contract.Message.CreateUserOperation;
@@ -61,12 +60,6 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 this.Send(DataContractSerializationHelper.Serialize<DeleteUserResponse>(response));
             }
 
-            else if (message.Contains("ModifyDeviceRequest"))
-            {
-                var request = DataContractSerializationHelper.Deserialize<ModifyDeviceRequest>(message);
-                var response = new ModifyDeviceOp().Process(request);
-                this.Send(DataContractSerializationHelper.Serialize<ModifyDeviceResponse>(response));
-            }
             else if (message.Contains("GetDeviceRequest"))
             {
                 var request = DataContractSerializationHelper.Deserialize<DeleteUserRequest>(message);
@@ -81,18 +74,6 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 this.Send(DataContractSerializationHelper.Serialize(response));
             }
 
-            //else if (message.Contains("UpdateTimeSegmentRequest"))
-            //{
-            //    var request = DataContractSerializationHelper.Deserialize<UpdateTimeSegmentRequest>(message);
-            //    var response = new UpdateTimeSegmentOp().Process(request);
-            //    this.Send(DataContractSerializationHelper.Serialize(response));
-            //}
-            //else if (message.Contains("GetTimeSegmentRequest"))
-            //{
-            //    var request = DataContractSerializationHelper.Deserialize<GetTimeSegmentRequest>(message);
-            //    var response = new GetTimeSegmentOp().Process(request);
-            //    this.Send(DataContractSerializationHelper.Serialize(response));
-            //}
             else if (message.Contains("GetAllTimeSegmentsRequest"))
             {
                 var request = DataContractSerializationHelper.Deserialize<GetAllTimeSegmentsRequest>(message);

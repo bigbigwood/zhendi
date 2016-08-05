@@ -1,10 +1,7 @@
-﻿using Rld.DeviceSystem.Contract.Model.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
+using Rld.DeviceSystem.Contract.Model;
 
-namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation
+namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Model
 {
     public class UserEnrollSummary
     {

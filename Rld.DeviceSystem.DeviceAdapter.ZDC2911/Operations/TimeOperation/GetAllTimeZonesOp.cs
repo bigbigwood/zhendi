@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Rld.DeviceSystem.Contract.Message;
-using Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOperation;
-using Rld.DeviceSystem.Contract.Message.GetAllTimeSegmentsOperation;
+﻿using Rld.DeviceSystem.Contract.Message;
 using Rld.DeviceSystem.Contract.Message.GetAllTimeZonesOperation;
-using Rld.DeviceSystem.Contract.Message.GetTimeSegmentOperation;
-using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Service;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Time;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
 {
@@ -15,10 +10,11 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
     {
         public GetAllTimeZonesResponse Process(GetAllTimeZonesRequest request)
         {
-            var service = new TimeService(DeviceManager.GetInstance().GetDeviceProxy(1));
-            var serviceInfos = service.GetAllTimeZoneServices();
+            var deviceDao = new TimeZoneInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var data = deviceDao.GetData();
+            var services = TimeZoneServiceMapper.BuildServices(data);
 
-            return new GetAllTimeZonesResponse() { ResultType = ResultType.OK, Services = serviceInfos };
+            return new GetAllTimeZonesResponse() { ResultType = ResultType.OK, Services = services };
         }
     }
 }

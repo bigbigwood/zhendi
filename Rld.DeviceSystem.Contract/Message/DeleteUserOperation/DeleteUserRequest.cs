@@ -1,5 +1,4 @@
-﻿using Rld.DeviceSystem.Contract.Model.Users;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 

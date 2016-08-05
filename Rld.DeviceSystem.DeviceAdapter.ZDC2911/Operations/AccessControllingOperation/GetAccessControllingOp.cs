@@ -1,6 +1,8 @@
 ﻿using Rld.DeviceSystem.Contract.Message;
 using Rld.DeviceSystem.Contract.Message.GetDeviceServiceOperation;
-using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Service;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Device;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.AccessControllingOperation
 {
@@ -8,10 +10,11 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.AccessControllingOpe
     {
         public GetDeviceServiceResponse Process(GetDeviceServiceRequest request)
         {
-            var service = new AccessControllingService(DeviceManager.GetInstance().GetDeviceProxy(1));
-            var serviceInfos = service.GetDeviceService();
+            var deviceDao = new DeviceInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var deviceData = deviceDao.GetDeviceData();
+            var serviceData = DeviceInfoMapper.ToModel(deviceData);
 
-            return new GetDeviceServiceResponse() { ResultType = ResultType.OK, Service = serviceInfos };
+            return new GetDeviceServiceResponse() { ResultType = ResultType.OK, Service = serviceData };
         }
     }
 }

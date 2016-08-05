@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization;
-using Rld.DeviceSystem.Contract.Model.Services.DeviceControlling;
+using Rld.DeviceSystem.Contract.Model;
+using Rld.DeviceSystem.Contract.Model.Services.Device;
 
 namespace Rld.DeviceSystem.Contract.Message.ModifyDeviceServiceOperation
 {
@@ -7,6 +8,6 @@ namespace Rld.DeviceSystem.Contract.Message.ModifyDeviceServiceOperation
     public class ModifyDeviceServiceRequest : RequestBase
     {
         [DataMember]
-        public DeviceService Service { get; set; }
+        public DeviceInfo Service { get; set; }
     }
 }

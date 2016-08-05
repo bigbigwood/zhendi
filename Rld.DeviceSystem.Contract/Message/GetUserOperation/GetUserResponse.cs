@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using System.ServiceModel;
-using Rld.DeviceSystem.Contract.Model.Users;
+using Rld.DeviceSystem.Contract.Model;
 
 namespace Rld.DeviceSystem.Contract.Message.GetUserOperation
 {
@@ -10,11 +10,11 @@ namespace Rld.DeviceSystem.Contract.Message.GetUserOperation
     {
         [MessageBodyMember]
         [DataMember]
-        public User UserInfo { get; set; }
+        public UserInfo UserInfo { get; set; }
 
         public GetUserResponse()
         {
-            UserInfo = new User();
+            UserInfo = new UserInfo();
         }
     }
 }
