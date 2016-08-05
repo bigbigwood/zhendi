@@ -2,6 +2,7 @@
 using Rld.DeviceSystem.Contract.Model.Services;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
+using Rld.DeviceSystem.Contract.Model.Services.UserCredential;
 
 namespace Rld.DeviceSystem.Contract.Model.Users
 {

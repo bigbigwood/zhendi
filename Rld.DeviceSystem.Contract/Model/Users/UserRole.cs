@@ -13,6 +13,6 @@ namespace Rld.DeviceSystem.Contract.Model.Users
         [EnumMember]
         Manager = 8,
         [EnumMember]
-        Visitor = 16,
+        Custom = 16,
     }
 }

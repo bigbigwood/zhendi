@@ -7,6 +7,7 @@ using System.Web;
 using log4net;
 using Riss.Devices;
 using Rld.DeviceSystem.Contract.Model.Services;
+using Rld.DeviceSystem.Contract.Model.Services.Time;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Model;
 

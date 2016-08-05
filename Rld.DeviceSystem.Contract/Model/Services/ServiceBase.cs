@@ -12,8 +12,8 @@ namespace Rld.DeviceSystem.Contract.Model.Services
         [DataMember(Order = 900)]
         public Boolean Enabled { get; set; }
 
-        [DataMember(Order = 901)]
-        public KeyValue[] ExtendData { get; set; }
+        //[DataMember(Order = 901)]
+        //public KeyValue[] ExtendData { get; set; }
 
         public ServiceBase()
         {

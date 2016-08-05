@@ -4,6 +4,7 @@ using System.Linq;
 using log4net;
 using Riss.Devices;
 using Rld.DeviceSystem.Contract.Model.Services;
+using Rld.DeviceSystem.Contract.Model.Services.UserCredential;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Model;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation;

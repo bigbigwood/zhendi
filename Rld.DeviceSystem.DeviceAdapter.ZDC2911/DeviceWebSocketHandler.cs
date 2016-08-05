@@ -9,10 +9,12 @@ using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeZonesOperation;
 using Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOperation;
 using Rld.DeviceSystem.Contract.Message.GetAllTimeSegmentsOperation;
 using Rld.DeviceSystem.Contract.Message.GetAllTimeZonesOperation;
+using Rld.DeviceSystem.Contract.Message.GetDeviceServiceOperation;
 using Rld.DeviceSystem.Contract.Message.GetTimeSegmentOperation;
 using Rld.DeviceSystem.Contract.Message.GetUserOperation;
 using Rld.DeviceSystem.Contract.Message.ModifyDeviceOperation;
 using Rld.DeviceSystem.Contract.Message.UpdateTimeSegmentOperation;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.AccessControllingOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.DeviceOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation;
@@ -70,6 +72,13 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 var request = DataContractSerializationHelper.Deserialize<DeleteUserRequest>(message);
                 var response = new DeleteUserOperation().Process(request);
                 this.Send(DataContractSerializationHelper.Serialize<DeleteUserResponse>(response));
+            }
+
+            else if (message.Contains("GetDeviceServiceRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<GetDeviceServiceRequest>(message);
+                var response = new GetAccessControllingOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
             }
 
             //else if (message.Contains("UpdateTimeSegmentRequest"))

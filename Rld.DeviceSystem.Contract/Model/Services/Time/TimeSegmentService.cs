@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Rld.DeviceSystem.Contract.Model.Services
+namespace Rld.DeviceSystem.Contract.Model.Services.Time
 {
     [DataContract(Namespace = Declarations.NameSpace)]
     public class TimeSegmentService : ServiceBase
