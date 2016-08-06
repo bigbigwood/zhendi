@@ -99,7 +99,9 @@
     <Compile Include="Mapper\Time\TimeGroupMapper.cs" />
     <Compile Include="Mapper\Time\TimeZoneServiceMapper.cs" />
     <Compile Include="Mapper\Time\TimeSegmentMapper.cs" />
-    <Compile Include="Operations\AccessControllingOperation\GetAccessControllingOp.cs" />
+    <Compile Include="Model\DeviceSystemEntity.cs" />
+    <Compile Include="Operations\DeviceOperation\UpdateDeviceInfoOp.cs" />
+    <Compile Include="Operations\DeviceOperation\GetDeviceInfoOp.cs" />
     <Compile Include="DeviceProcessor.ashx.cs">
       <DependentUpon>DeviceProcessor.ashx</DependentUpon>
     </Compile>
@@ -122,7 +124,7 @@
     <Compile Include="Mapper\DeviceSystemInfoMapper.cs" />
     <Compile Include="Operations\UserOperation\DeleteUserOperation.cs" />
     <Compile Include="Operations\UserOperation\CreateUserOperation.cs" />
-    <Compile Include="Operations\UserOperation\ModifyUserOperation.cs" />
+    <Compile Include="Operations\UserOperation\UpdateUserOp.cs" />
     <Compile Include="Mapper\Device\DoorInfoMapper.cs" />
     <Compile Include="Mapper\Time\TimeService.cs" />
     <Compile Include="Mapper\UserService.cs" />

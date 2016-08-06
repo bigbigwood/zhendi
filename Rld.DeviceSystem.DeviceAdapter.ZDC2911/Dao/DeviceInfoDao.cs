@@ -28,11 +28,16 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
             {
                 _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device, DeviceStatus.DeviceBusy);
 
-                extraData = Zd2911Utils.DeviceAccessControlSettings;
+               
 
                 var retryablePolicy = Policies.GetRetryablePolicy();
                 result = retryablePolicy.Execute(
-                    () => _deviceProxy.DeviceConnection.GetProperty(DeviceProperty.AccessControlSettings, extraProperty, ref device, ref extraData));
+                    () =>
+                    {
+                        extraData = Zd2911Utils.DeviceAccessControlSettings;
+                        return _deviceProxy.DeviceConnection.GetProperty(DeviceProperty.AccessControlSettings, extraProperty,
+                            ref device, ref extraData);
+                    });
 
                 byte[] data = Encoding.Unicode.GetBytes((string)extraData);
                 return data;
@@ -63,9 +68,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
 
                 var retryablePolicy = Policies.GetRetryablePolicy();
                 result = retryablePolicy.Execute(
-                    () =>
-                        _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.PassSegment,
-                            Zd2911Utils.DevicePassSegment, device, extraData));
+                    () => result = _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.AccessControlSettings, Zd2911Utils.DeviceAccessControlSettings, device, extraData));
             }
             catch (Exception ex)
             {

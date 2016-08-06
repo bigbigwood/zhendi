@@ -2,9 +2,9 @@
 using Rld.DeviceSystem.Contract.Message.GetUserOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper;
 
-namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation
+namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation
 {
-    public class ModifyUserOperation
+    public class UpdateUserOp
     {
         public ModifyUserResponse Process(ModifyUserRequest request)
         {

@@ -16,13 +16,13 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
 
             }
 
-            var deviceDao = new TimeSegmentInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var dao = new TimeSegmentInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
 
-            var data = deviceDao.GetTimeSegmentData();
+            var data = dao.GetTimeSegmentData();
 
             request.Services.ForEach(s =>  TimeSegmentMapper.UpdateTimeSegmentData(ref data, s));
 
-            bool result = deviceDao.UpdateTimeSegmentData(data);
+            bool result = dao.UpdateTimeSegmentData(data);
 
             return new BatchUpdateTimeSegmentsResponse() { ResultType = ResultType.OK };
         }

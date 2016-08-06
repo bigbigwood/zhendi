@@ -39,13 +39,16 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Device
             if (duressService.IsTriggerAlarm.HasValue)
                 deviceData[2] = (byte)(duressService.IsTriggerAlarm.Value ? 1 : 0);
 
-            string pwd = duressService.Password;
-            for (int i = 0; i < Zd2911Utils.PasswordLength; i++)
+            if (!string.IsNullOrWhiteSpace(duressService.Password))
             {
-                if (i < (pwd.Length))
-                    deviceData[8 + i] = (byte)pwd[i];
-                else
-                    deviceData[8 + i] = 0;
+                string pwd = duressService.Password;
+                for (int i = 0; i < Zd2911Utils.PasswordLength; i++)
+                {
+                    if (i < (pwd.Length))
+                        deviceData[8 + i] = (byte)pwd[i];
+                    else
+                        deviceData[8 + i] = 0;
+                }
             }
         }
     }

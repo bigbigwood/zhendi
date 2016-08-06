@@ -1,13 +1,17 @@
 ﻿using System.Runtime.Serialization;
 using Rld.DeviceSystem.Contract.Model;
-using Rld.DeviceSystem.Contract.Model.Services.Device;
 
-namespace Rld.DeviceSystem.Contract.Message.ModifyDeviceServiceOperation
+namespace Rld.DeviceSystem.Contract.Message.GetDeviceInfoOp
 {
     [DataContract(Namespace = Declarations.NameSpace)]
-    public class ModifyDeviceServiceRequest : RequestBase
+    public class GetDeviceInfoResponse : ResponseBase
     {
         [DataMember]
         public DeviceInfo Service { get; set; }
+
+        public GetDeviceInfoResponse()
+        {
+            Service = new DeviceInfo();
+        }
     }
 }

@@ -16,13 +16,13 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
 
             }
 
-            var deviceDao = new TimeZoneInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var dao = new TimeZoneInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
 
-            var data = deviceDao.GetData();
+            var data = dao.GetData();
 
             request.Services.ForEach(s => TimeZoneServiceMapper.UpdateData(ref data, s));
 
-            bool result = deviceDao.UpdateData(data);
+            bool result = dao.UpdateData(data);
 
             return new BatchUpdateTimeZonesResponse() { ResultType = ResultType.OK };
         }

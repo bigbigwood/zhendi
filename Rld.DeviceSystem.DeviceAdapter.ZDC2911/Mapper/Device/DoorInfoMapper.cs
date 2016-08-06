@@ -32,7 +32,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Device
 
             var slaveDoor = new DoorInfo();
             slaveDoor.Name = "Slave Door";
-            masterDoor.DoorType = DoorType.Slave;
+            slaveDoor.DoorType = DoorType.Slave;
             //slaveDoor.ElectricalAppliances = 0;
             //slaveDoor.CheckOutAction = CheckOutOptions.Button;
             //slaveDoor.AlertType = 0;

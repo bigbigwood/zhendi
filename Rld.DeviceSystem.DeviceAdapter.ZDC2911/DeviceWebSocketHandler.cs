@@ -9,13 +9,14 @@ using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeZonesOperation;
 using Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOperation;
 using Rld.DeviceSystem.Contract.Message.GetAllTimeSegmentsOperation;
 using Rld.DeviceSystem.Contract.Message.GetAllTimeZonesOperation;
-using Rld.DeviceSystem.Contract.Message.GetDeviceServiceOperation;
+using Rld.DeviceSystem.Contract.Message.GetDeviceInfoOp;
 using Rld.DeviceSystem.Contract.Message.GetTimeSegmentOperation;
 using Rld.DeviceSystem.Contract.Message.GetUserOperation;
-using Rld.DeviceSystem.Contract.Message.ModifyDeviceOperation;
+using Rld.DeviceSystem.Contract.Message.UpdateDeviceInfoOp;
 using Rld.DeviceSystem.Contract.Message.UpdateTimeSegmentOperation;
-using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.AccessControllingOperation;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.DeviceOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation;
 using Rld.DeviceSystem.Contract.Message.CreateUserOperation;
 using Rld.DeviceSystem.Contract.Message.DeleteUserOperation;
@@ -44,7 +45,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             else if (message.Contains("ModifyUserRequest"))
             {
                 var request = DataContractSerializationHelper.Deserialize<ModifyUserRequest>(message);
-                var response = new ModifyUserOperation().Process(request);
+                var response = new UpdateUserOp().Process(request);
                 this.Send(DataContractSerializationHelper.Serialize<ModifyUserResponse>(response));
             }
             else if (message.Contains("CreateUserRequest"))
@@ -67,10 +68,16 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 this.Send(DataContractSerializationHelper.Serialize<DeleteUserResponse>(response));
             }
 
-            else if (message.Contains("GetDeviceServiceRequest"))
+            else if (message.Contains("GetDeviceInfoRequest"))
             {
-                var request = DataContractSerializationHelper.Deserialize<GetDeviceServiceRequest>(message);
-                var response = new GetAccessControllingOp().Process(request);
+                var request = DataContractSerializationHelper.Deserialize<GetDeviceInfoRequest>(message);
+                var response = new GetDeviceInfoOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
+            }
+            else if (message.Contains("UpdateDeviceInfoRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<UpdateDeviceInfoRequest>(message);
+                var response = new UpdateDeviceInfoOp().Process(request);
                 this.Send(DataContractSerializationHelper.Serialize(response));
             }
 
