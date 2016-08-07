@@ -6,7 +6,7 @@ using Rld.DeviceSystem.Contract.Model.Services;
 namespace Rld.DeviceSystem.Contract.Model
 {
     [DataContract(Namespace = Declarations.NameSpace)]
-    public class DeviceSystemInfo
+    public class SystemInfo
     {
         [DataMember]
         public Int32 DeviceId { get; set; }
@@ -21,15 +21,9 @@ namespace Rld.DeviceSystem.Contract.Model
         [DataMember]
         public String CommunitionType { get; set; }
         [DataMember]
-        public String Protocol { get; set; }
-        [DataMember]
-        public Boolean Status { get; set; }
-        [DataMember]
-        public String Remark { get; set; }
-        [DataMember]
-        public IEnumerable<ServiceBase> Services { get; set; }
+        public IList<ServiceBase> Services { get; set; }
         
-        public DeviceSystemInfo()
+        public SystemInfo()
         {
             Services = new List<ServiceBase>();
         }

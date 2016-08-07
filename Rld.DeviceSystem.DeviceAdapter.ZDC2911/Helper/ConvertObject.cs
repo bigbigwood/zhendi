@@ -292,5 +292,10 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper
         //    }
         //    return userRole;
         //}
+
+        public static string ToPrettyString(string originalString)
+        {
+            return originalString.Replace("\0", "");
+        }
     }
 }

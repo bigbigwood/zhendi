@@ -2,6 +2,7 @@
 using log4net;
 using Riss.Devices;
 using Rld.DeviceSystem.Contract.Model.Services.Device;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Device
 {
@@ -21,7 +22,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Device
             {
                 pwd.Append((char)deviceData[8 + i]);
             }
-            duressService.Password = pwd.ToString();
+            duressService.Password = ConvertObject.ToPrettyString(pwd.ToString());
 
             return duressService;
         }

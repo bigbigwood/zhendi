@@ -61,12 +61,12 @@
     <Compile Include="Message\GetDeviceInfoOp\GetDeviceInfoResponse.cs" />
     <Compile Include="Message\GetTimeSegmentOperation\GetTimeSegmentRequest.cs" />
     <Compile Include="Message\GetTimeSegmentOperation\GetTimeSegmentResponse.cs" />
-    <Compile Include="Message\GetDeviceSystemInfoOp\GetDeviceSystemInfoRequest.cs" />
-    <Compile Include="Message\GetDeviceSystemInfoOp\GetDeviceSystemInfoResponse.cs" />
+    <Compile Include="Message\GetSystemInfoOp\GetSystemInfoRequest.cs" />
+    <Compile Include="Message\GetSystemInfoOp\GetSystemInfoResponse.cs" />
     <Compile Include="Message\UpdateDeviceInfoOp\UpdateDeviceInfoRequest.cs" />
     <Compile Include="Message\UpdateDeviceInfoOp\UpdateDeviceInfoResponse.cs" />
-    <Compile Include="Message\UpdateDeviceSystemInfoOp\UpdateDeviceSystemInfoRequest.cs" />
-    <Compile Include="Message\UpdateDeviceSystemInfoOp\UpdateDeviceSystemInfoResponse.cs" />
+    <Compile Include="Message\UpdateSystemInfoOp\UpdateSystemInfoRequest.cs" />
+    <Compile Include="Message\UpdateSystemInfoOp\UpdateSystemInfoResponse.cs" />
     <Compile Include="Message\BatchUpdateTimeSegmentsOperation\BatchUpdateTimeSegmentsRequest.cs" />
     <Compile Include="Message\BatchUpdateTimeSegmentsOperation\BatchUpdateTimeSegmentsResponse.cs" />
     <Compile Include="Message\UpdateTimeSegmentOperation\UpdateTimeSegmentRequest.cs" />
@@ -77,7 +77,9 @@
     <Compile Include="Message\ResponseBase.cs" />
     <Compile Include="Message\GetUserOperation\GetUserRequest.cs" />
     <Compile Include="Message\GetUserOperation\GetUserResponse.cs" />
-    <Compile Include="Model\DeviceSystemInfo.cs" />
+    <Compile Include="Model\Services\DeviceConn\WebSocketConnectionService.cs" />
+    <Compile Include="Model\Services\DeviceConn\UdpConnectionService.cs" />
+    <Compile Include="Model\SystemInfo.cs" />
     <Compile Include="Model\KeyValue.cs" />
     <Compile Include="Model\Services\Device\DoorOpenBehaviorService.cs" />
     <Compile Include="Model\Enum.cs" />

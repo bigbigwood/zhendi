@@ -10,11 +10,14 @@ using Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOperation;
 using Rld.DeviceSystem.Contract.Message.GetAllTimeSegmentsOperation;
 using Rld.DeviceSystem.Contract.Message.GetAllTimeZonesOperation;
 using Rld.DeviceSystem.Contract.Message.GetDeviceInfoOp;
+using Rld.DeviceSystem.Contract.Message.GetSystemInfoOp;
 using Rld.DeviceSystem.Contract.Message.GetTimeSegmentOperation;
 using Rld.DeviceSystem.Contract.Message.GetUserOperation;
 using Rld.DeviceSystem.Contract.Message.UpdateDeviceInfoOp;
+using Rld.DeviceSystem.Contract.Message.UpdateSystemInfoOp;
 using Rld.DeviceSystem.Contract.Message.UpdateTimeSegmentOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.DeviceOperation;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.SystemOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation;
@@ -61,11 +64,17 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 this.Send(DataContractSerializationHelper.Serialize<DeleteUserResponse>(response));
             }
 
-            else if (message.Contains("GetDeviceRequest"))
+            else if (message.Contains("GetSystemInfoRequest"))
             {
-                var request = DataContractSerializationHelper.Deserialize<DeleteUserRequest>(message);
-                var response = new DeleteUserOperation().Process(request);
-                this.Send(DataContractSerializationHelper.Serialize<DeleteUserResponse>(response));
+                var request = DataContractSerializationHelper.Deserialize<GetSystemInfoRequest>(message);
+                var response = new GetSystemInfoOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
+            }
+            else if (message.Contains("UpdateSystemInfoRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<UpdateSystemInfoRequest>(message);
+                var response = new UpdateSystemInfoOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
             }
 
             else if (message.Contains("GetDeviceInfoRequest"))
