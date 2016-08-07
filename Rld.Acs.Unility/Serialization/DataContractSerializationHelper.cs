@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using Rld.DeviceSystem.Contract.Message.GetUserOperation;
+using Rld.DeviceSystem.Contract.Message.GetUserInfoOp;
 
 namespace Rld.Acs.Unility.Serialization
 {
@@ -28,7 +28,7 @@ namespace Rld.Acs.Unility.Serialization
 
         public static T Deserialize<T>(string data)
         {
-            var serializer = new DataContractSerializer(typeof(T), new[] { typeof(GetUserRequest) });
+            var serializer = new DataContractSerializer(typeof(T), new[] { typeof(GetUserInfoRequest) });
             using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(data)))
             {
                 T response = (T)serializer.ReadObject(ms);

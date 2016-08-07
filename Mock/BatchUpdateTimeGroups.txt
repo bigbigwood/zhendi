@@ -1,0 +1,17 @@
+<BatchUpdateTimeGroupsRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Services>
+		<TimeGroupService>
+			<Enabled>true</Enabled>
+			<ExtendData i:nil="true"/>
+			<TimeGroupId>1</TimeGroupId>
+			<TimeSegmentIds xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+				<a:int>1</a:int>
+			</TimeSegmentIds>
+		</TimeGroupService>
+	</Services>
+</BatchUpdateTimeGroupsRequest>
+
+
+<BatchUpdateTimeGroupsResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ResultType>OK</ResultType>
+</BatchUpdateTimeGroupsResponse>

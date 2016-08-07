@@ -1,0 +1,7 @@
+<DeleteUserInfoRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<UserId>3</UserId>
+</DeleteUserInfoRequest>
+
+<DeleteUserInfoResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ResultType>OK</ResultType>
+</DeleteUserInfoResponse>

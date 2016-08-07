@@ -1,0 +1,28 @@
+<GetSystemInfoRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+</GetSystemInfoRequest>
+
+
+
+<GetSystemInfoResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ResultType>OK</ResultType>
+	<SystemInfo>
+		<CommunitionType i:nil="true"/>
+		<DeviceId>1</DeviceId>
+		<DeviceModel>M-F132</DeviceModel>
+		<Mac>60-D2-B9-00-C5-94</Mac>
+		<Password>0</Password>
+		<SerialNumber>2016012900304</SerialNumber>
+		<Services>
+			<ServiceBase i:type="TcpConnectionService">
+				<Enabled>true</Enabled>
+				<IpAddress>192.168.31.73</IpAddress>
+				<Port>5500</Port>
+			</ServiceBase>
+			<ServiceBase i:type="UdpConnectionService">
+				<Enabled>true</Enabled>
+				<IpAddress>192.168.31.41</IpAddress>
+				<Port>5055</Port>
+			</ServiceBase>
+		</Services>
+	</SystemInfo>
+</GetSystemInfoResponse>

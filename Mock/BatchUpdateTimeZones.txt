@@ -1,0 +1,21 @@
+<BatchUpdateTimeZonesRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Services>
+		<TimeZoneService>
+			<Enabled>true</Enabled>
+			<ExtendData i:nil="true"/>
+			<TimeZoneId>2</TimeZoneId>
+			<MondayTimeGroupId>2</MondayTimeGroupId>
+			<TuesdayTimeGroupId>2</TuesdayTimeGroupId>
+			<WednesdayTimeGroupId>2</WednesdayTimeGroupId>
+			<ThursdayTimeGroupId>2</ThursdayTimeGroupId>
+			<FridayTimeGroupId>2</FridayTimeGroupId>
+			<SaturdayTimeGroupId>31</SaturdayTimeGroupId>
+			<SundayTimeGroupId>31</SundayTimeGroupId>
+		</TimeZoneService>
+	</Services>
+</BatchUpdateTimeZonesRequest>
+
+
+<BatchUpdateTimeZonesResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ResultType>OK</ResultType>
+</BatchUpdateTimeZonesResponse>

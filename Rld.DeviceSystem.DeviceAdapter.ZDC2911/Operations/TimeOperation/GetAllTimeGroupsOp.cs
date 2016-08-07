@@ -1,5 +1,5 @@
 ﻿using Rld.DeviceSystem.Contract.Message;
-using Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOperation;
+using Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOp;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Time;

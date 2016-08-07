@@ -1,0 +1,45 @@
+<UpdateDeviceInfoRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<DeviceInfo>
+		<Enabled>true</Enabled>
+		<Services>
+			<ServiceBase i:type="DoorUnlockOpenBehaviorService">
+				<Enabled>false</Enabled>
+				<Seconds>0</Seconds>
+				<Type>UnlockOpen</Type>
+				<TimezoneId>0</TimezoneId>
+			</ServiceBase>
+			<ServiceBase i:type="DuressService">
+				<Enabled>false</Enabled>
+				<FingerPrintIndex>2</FingerPrintIndex>
+				<IsOpenDoor>true</IsOpenDoor>
+				<IsTriggerAlarm>false</IsTriggerAlarm>
+			</ServiceBase>
+			<ServiceBase i:type="DoorInfo">
+				<Enabled>true</Enabled>
+				<DoorType>Master</DoorType>
+				<Services>
+					<ServiceBase i:type="DoorOpenBehaviorService">
+						<Enabled>true</Enabled>
+						<Seconds>10</Seconds>
+						<Type>DelayOpen</Type>
+					</ServiceBase>
+					<ServiceBase i:type="DoorOpenBehaviorService">
+						<Enabled>false</Enabled>
+						<Seconds>20</Seconds>
+						<Type>OverTimeOpen</Type>
+					</ServiceBase>
+					<ServiceBase i:type="DoorOpenBehaviorService">
+						<Enabled>false</Enabled>
+						<Seconds>5</Seconds>
+						<Type>IllegalOpen</Type>
+					</ServiceBase>
+				</Services>
+			</ServiceBase>
+		</Services>
+	</DeviceInfo>
+</UpdateDeviceInfoRequest>
+
+
+<UpdateDeviceInfoResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ResultType>OK</ResultType>
+</UpdateDeviceInfoResponse>

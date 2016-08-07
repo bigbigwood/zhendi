@@ -3,26 +3,24 @@ using log4net;
 using Microsoft.Web.WebSockets;
 using Rld.Acs.Unility.Serialization;
 using Rld.DeviceSystem.Contract.Message;
-using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeGroupsOperation;
-using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeSegmentsOperation;
-using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeZonesOperation;
-using Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOperation;
-using Rld.DeviceSystem.Contract.Message.GetAllTimeSegmentsOperation;
-using Rld.DeviceSystem.Contract.Message.GetAllTimeZonesOperation;
+using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeGroupsOp;
+using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeSegmentsOp;
+using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeZonesOp;
+using Rld.DeviceSystem.Contract.Message.CreateUserInfoOp;
+using Rld.DeviceSystem.Contract.Message.DeleteUserInfoOp;
+using Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOp;
+using Rld.DeviceSystem.Contract.Message.GetAllTimeSegmentsOp;
+using Rld.DeviceSystem.Contract.Message.GetAllTimeZonesOp;
 using Rld.DeviceSystem.Contract.Message.GetDeviceInfoOp;
 using Rld.DeviceSystem.Contract.Message.GetSystemInfoOp;
-using Rld.DeviceSystem.Contract.Message.GetTimeSegmentOperation;
-using Rld.DeviceSystem.Contract.Message.GetUserOperation;
+using Rld.DeviceSystem.Contract.Message.GetUserInfoOp;
 using Rld.DeviceSystem.Contract.Message.UpdateDeviceInfoOp;
 using Rld.DeviceSystem.Contract.Message.UpdateSystemInfoOp;
-using Rld.DeviceSystem.Contract.Message.UpdateTimeSegmentOperation;
+using Rld.DeviceSystem.Contract.Message.UpdateUserInfoOp;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.DeviceOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.SystemOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation;
-using Rld.DeviceSystem.DeviceAdapter.ZDC2911.UserOperation;
-using Rld.DeviceSystem.Contract.Message.CreateUserOperation;
-using Rld.DeviceSystem.Contract.Message.DeleteUserOperation;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 {
@@ -39,29 +37,29 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
         public override void OnMessage(string message)
         {
 
-            if (message.Contains("GetUserRequest"))
+            if (message.Contains("GetUserInfoRequest"))
             {
-                var request = DataContractSerializationHelper.Deserialize<GetUserRequest>(message);
-                var response = new GetUserOperation().Process(request);
-                this.Send(DataContractSerializationHelper.Serialize<GetUserResponse>(response));
+                var request = DataContractSerializationHelper.Deserialize<GetUserInfoRequest>(message);
+                var response = new GetUserOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
             }
-            else if (message.Contains("ModifyUserRequest"))
+            else if (message.Contains("UpdateUserInfoRequest"))
             {
-                var request = DataContractSerializationHelper.Deserialize<ModifyUserRequest>(message);
+                var request = DataContractSerializationHelper.Deserialize<UpdateUserInfoRequest>(message);
                 var response = new UpdateUserOp().Process(request);
-                this.Send(DataContractSerializationHelper.Serialize<ModifyUserResponse>(response));
+                this.Send(DataContractSerializationHelper.Serialize(response));
             }
-            else if (message.Contains("CreateUserRequest"))
+            else if (message.Contains("CreateUserInfoRequest"))
             {
-                var request = DataContractSerializationHelper.Deserialize<CreateUserRequest>(message);
-                var response = new CreateUserOperation().Process(request);
-                this.Send(DataContractSerializationHelper.Serialize<CreateUserResponse>(response));
+                var request = DataContractSerializationHelper.Deserialize<CreateUserInfoRequest>(message);
+                var response = new CreateUserOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
             }
-            else if (message.Contains("DeleteUserRequest"))
+            else if (message.Contains("DeleteUserInfoRequest"))
             {
-                var request = DataContractSerializationHelper.Deserialize<DeleteUserRequest>(message);
-                var response = new DeleteUserOperation().Process(request);
-                this.Send(DataContractSerializationHelper.Serialize<DeleteUserResponse>(response));
+                var request = DataContractSerializationHelper.Deserialize<DeleteUserInfoRequest>(message);
+                var response = new DeleteUserOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
             }
 
             else if (message.Contains("GetSystemInfoRequest"))

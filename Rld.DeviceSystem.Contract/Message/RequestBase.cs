@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using Rld.DeviceSystem.Contract.Message.GetUserOperation;
 
 namespace Rld.DeviceSystem.Contract.Message
 {

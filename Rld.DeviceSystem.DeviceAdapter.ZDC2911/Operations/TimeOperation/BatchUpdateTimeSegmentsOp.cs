@@ -1,6 +1,6 @@
 ﻿using Rld.Acs.Unility;
 using Rld.DeviceSystem.Contract.Message;
-using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeSegmentsOperation;
+using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeSegmentsOp;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Time;

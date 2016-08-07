@@ -1,0 +1,18 @@
+<UpdateSystemInfoRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<SystemInfo>
+		<CommunitionType i:nil="true"/>
+		<DeviceModel>M-F131</DeviceModel>
+		<Services>
+			<ServiceBase i:type="UdpConnectionService">
+				<Enabled>true</Enabled>
+				<IpAddress>192.168.31.41</IpAddress>
+				<Port>5055</Port>
+			</ServiceBase>
+		</Services>
+	</SystemInfo>
+</UpdateSystemInfoRequest>
+
+
+<UpdateSystemInfoResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ResultType>OK</ResultType>
+</UpdateSystemInfoResponse>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 using log4net;
 using Riss.Devices;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Model;
 
@@ -25,7 +26,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
             var device = _deviceProxy.Device;
             var extraProperty = new object();
             var extraData = new object();
-            try
+
+            using (var operation = new DeviceLockableOperation(_deviceProxy))
             {
                 var retryablePolicy = Policies.GetRetryablePolicy();
                 bool result = retryablePolicy.Execute(()
@@ -35,20 +37,12 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
                     return _deviceProxy.DeviceConnection.GetProperty(DeviceProperty.PassGroup, extraProperty, ref device, ref extraData);
                 });
 
-                if (result)
+                if (!result)
                 {
-                    byte[] data = Encoding.Unicode.GetBytes((string)extraData);
-                    return data;
+                    throw new Exception("Get time group fails");
                 }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-                throw;
+
+                return Encoding.Unicode.GetBytes((string)extraData);
             }
         }
 
@@ -56,29 +50,16 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
         public bool UpdateTimeGroupData(byte[] data)
         {
             var device = _deviceProxy.Device;
-            var extraProperty = new object();
-            try
+            object extraData = Encoding.Unicode.GetString(data);
+
+            using (var operation = new DeviceLockableOperation(_deviceProxy))
             {
-                object extraData = Encoding.Unicode.GetString(data);
-
-                _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device, DeviceStatus.DeviceBusy);
-
                 var retryablePolicy = Policies.GetRetryablePolicy();
                 bool result = retryablePolicy.Execute(
                     () => _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.PassGroup, Zd2911Utils.DevicePassGroup, device, extraData));
 
                 return result;
             }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-                return false;
-            }
-            finally
-            {
-                _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device, DeviceStatus.DeviceIdle);
-            }
         }
-
     }
 }

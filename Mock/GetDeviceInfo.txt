@@ -1,0 +1,114 @@
+<GetDeviceInfoRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+</GetDeviceInfoRequest>
+
+
+
+<GetDeviceInfoResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ResultType>OK</ResultType>
+	<Service>
+		<Enabled>true</Enabled>
+		<AntiPassbackEnabled>true</AntiPassbackEnabled>
+		<AuthticationType i:nil="true"/>
+		<Services>
+			<ServiceBase i:type="DoorUnlockOpenBehaviorService">
+				<Enabled>false</Enabled>
+				<Seconds>0</Seconds>
+				<Type>UnlockOpen</Type>
+				<TimezoneId>0</TimezoneId>
+			</ServiceBase>
+			<ServiceBase i:type="DuressService">
+				<Enabled>false</Enabled>
+				<FingerPrintIndex>2</FingerPrintIndex>
+				<IsOpenDoor>true</IsOpenDoor>
+				<IsTriggerAlarm>false</IsTriggerAlarm>
+				<Password/>
+			</ServiceBase>
+			<ServiceBase i:type="MultiPersionLockService">
+				<Enabled>false</Enabled>
+			</ServiceBase>
+			<ServiceBase i:type="DoorLinkageService">
+				<Enabled>true</Enabled>
+				<AlarmOption>Slave</AlarmOption>
+				<OpenDoorOption>None</OpenDoorOption>
+			</ServiceBase>
+			<ServiceBase i:type="DoorInfo">
+				<Enabled>true</Enabled>
+				<AlertType i:nil="true"/>
+				<CheckOutAction i:nil="true"/>
+				<DoorType>Master</DoorType>
+				<ElectricalAppliances i:nil="true"/>
+				<Name>Master Door</Name>
+				<Remark i:nil="true"/>
+				<Services>
+					<ServiceBase i:type="DoorOpenBehaviorService">
+						<Enabled>true</Enabled>
+						<Seconds>10</Seconds>
+						<Type>DelayOpen</Type>
+					</ServiceBase>
+					<ServiceBase i:type="DoorOpenBehaviorService">
+						<Enabled>true</Enabled>
+						<Seconds>20</Seconds>
+						<Type>OverTimeOpen</Type>
+					</ServiceBase>
+					<ServiceBase i:type="DoorOpenBehaviorService">
+						<Enabled>true</Enabled>
+						<Seconds>5</Seconds>
+						<Type>IllegalOpen</Type>
+					</ServiceBase>
+					<ServiceBase i:type="DoorUnlockOpenBehaviorService">
+						<Enabled>false</Enabled>
+						<Seconds>0</Seconds>
+						<Type>UnlockOpen</Type>
+						<TimezoneId>0</TimezoneId>
+					</ServiceBase>
+					<ServiceBase i:type="DuressService">
+						<Enabled>false</Enabled>
+						<FingerPrintIndex>2</FingerPrintIndex>
+						<IsOpenDoor>true</IsOpenDoor>
+						<IsTriggerAlarm>false</IsTriggerAlarm>
+						<Password/>
+					</ServiceBase>
+				</Services>
+			</ServiceBase>
+			<ServiceBase i:type="DoorInfo">
+				<Enabled>true</Enabled>
+				<AlertType i:nil="true"/>
+				<CheckOutAction i:nil="true"/>
+				<DoorType>Slave</DoorType>
+				<ElectricalAppliances i:nil="true"/>
+				<Name>Slave Door</Name>
+				<Remark i:nil="true"/>
+				<Services>
+					<ServiceBase i:type="DoorOpenBehaviorService">
+						<Enabled>true</Enabled>
+						<Seconds>5</Seconds>
+						<Type>DelayOpen</Type>
+					</ServiceBase>
+					<ServiceBase i:type="DoorOpenBehaviorService">
+						<Enabled>false</Enabled>
+						<Seconds>0</Seconds>
+						<Type>OverTimeOpen</Type>
+					</ServiceBase>
+					<ServiceBase i:type="DoorOpenBehaviorService">
+						<Enabled>false</Enabled>
+						<Seconds>0</Seconds>
+						<Type>IllegalOpen</Type>
+					</ServiceBase>
+					<ServiceBase i:type="DoorUnlockOpenBehaviorService">
+						<Enabled>false</Enabled>
+						<Seconds>0</Seconds>
+						<Type>UnlockOpen</Type>
+						<TimezoneId>0</TimezoneId>
+					</ServiceBase>
+					<ServiceBase i:type="DuressService">
+						<Enabled>false</Enabled>
+						<FingerPrintIndex>2</FingerPrintIndex>
+						<IsOpenDoor>true</IsOpenDoor>
+						<IsTriggerAlarm>false</IsTriggerAlarm>
+						<Password/>
+					</ServiceBase>
+				</Services>
+			</ServiceBase>
+		</Services>
+	</Service>
+</GetDeviceInfoResponse>

@@ -2,6 +2,7 @@
 using System.Text;
 using log4net;
 using Riss.Devices;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Model;
 
@@ -24,12 +25,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
             var extraProperty = new object();
             var extraData = new object();
 
-            try
+            using (var operation = new DeviceLockableOperation(_deviceProxy))
             {
-                _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device, DeviceStatus.DeviceBusy);
-
-               
-
                 var retryablePolicy = Policies.GetRetryablePolicy();
                 result = retryablePolicy.Execute(
                     () =>
@@ -42,15 +39,6 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
                 byte[] data = Encoding.Unicode.GetBytes((string)extraData);
                 return data;
             }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-                throw;
-            }
-            finally
-            {
-                _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device, DeviceStatus.DeviceIdle);
-            }
         }
 
         public void UpdateDevice(byte[] data)
@@ -58,25 +46,13 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
             bool result = false;
             var device = _deviceProxy.Device;
             var extraProperty = new object();
-            var extraData = new object();
-            try
+            var extraData = Encoding.Unicode.GetString(data);
+
+            using (var operation = new DeviceLockableOperation(_deviceProxy))
             {
-                extraData = Encoding.Unicode.GetString(data);
-
-                _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device,
-                    DeviceStatus.DeviceBusy);
-
                 var retryablePolicy = Policies.GetRetryablePolicy();
                 result = retryablePolicy.Execute(
                     () => result = _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.AccessControlSettings, Zd2911Utils.DeviceAccessControlSettings, device, extraData));
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-            }
-            finally
-            {
-                _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device, DeviceStatus.DeviceIdle);
             }
         }
     }

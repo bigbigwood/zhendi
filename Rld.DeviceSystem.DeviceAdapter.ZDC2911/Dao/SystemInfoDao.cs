@@ -6,6 +6,7 @@ using System.Web;
 using log4net;
 using Riss.Devices;
 using Rld.DeviceSystem.Contract.Model;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Model;
 
@@ -29,10 +30,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
             object extraProperty = new object();
             object extraData = new object();
 
-            try
+            using (var operation = new DeviceLockableOperation(_deviceProxy))
             {
-                _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device, DeviceStatus.DeviceBusy);
-
                 entity.DeviceId = GetSystemParameter(SystemParameters.DeviceID);
                 entity.BaudRate = GetSystemParameter(SystemParameters.Baudrate);
                 entity.Password = GetSystemParameter(SystemParameters.DevicePassword);
@@ -59,15 +58,6 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
 
                 return entity;
             }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-                throw;
-            }
-            finally
-            {
-                _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device, DeviceStatus.DeviceIdle);
-            }
         }
 
         public bool UpdateSystemData(SystemEntity entity)
@@ -77,10 +67,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
             object extraProperty = new object();
             object extraData = new object();
 
-            try
+            using (var operation = new DeviceLockableOperation(_deviceProxy))
             {
-                _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device, DeviceStatus.DeviceBusy);
-
                 SetSystemParameter(SystemParameters.DeviceID, entity.DeviceId);
                 SetSystemParameter(SystemParameters.Baudrate, entity.BaudRate);
                 SetSystemParameter(SystemParameters.DevicePassword, entity.Password);
@@ -94,15 +82,6 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
                 _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Model, extraProperty, device, extraData);
 
                 return result;
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-                throw;
-            }
-            finally
-            {
-                _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.Enable, extraProperty, device, DeviceStatus.DeviceIdle);
             }
         }
 

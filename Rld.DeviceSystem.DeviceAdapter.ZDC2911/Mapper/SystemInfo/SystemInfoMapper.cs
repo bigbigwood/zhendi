@@ -9,11 +9,6 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.SystemInfo
     public class SystemInfoMapper
     {
         private static readonly ILog Log = LogManager.GetLogger(global::System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private DeviceProxy _deviceProxy = null;
-        public SystemInfoMapper(DeviceProxy proxy)
-        {
-            _deviceProxy = proxy;
-        }
 
         public static Contract.Model.SystemInfo ToModel(SystemEntity systemEntity)
         {

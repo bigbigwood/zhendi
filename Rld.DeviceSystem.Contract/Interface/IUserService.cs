@@ -4,7 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using Rld.DeviceSystem.Contract.Message.GetUserOperation;
+using Rld.DeviceSystem.Contract.Message.GetUserInfoOp;
 
 namespace Rld.DeviceSystem.Contract.Interface
 {
@@ -12,6 +12,6 @@ namespace Rld.DeviceSystem.Contract.Interface
     public interface IUserService
     {
         [OperationContract]
-        GetUserResponse GetUser(GetUserRequest request);
+        GetUserInfoResponse GetUser(GetUserInfoRequest request);
     }
 }

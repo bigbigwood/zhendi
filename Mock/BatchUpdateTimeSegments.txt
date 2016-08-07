@@ -1,0 +1,36 @@
+<BatchUpdateTimeSegmentsRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Services>
+		<TimeSegmentService>
+			<Enabled>true</Enabled>
+			<ExtendData i:nil="true"/>
+			<TimeSegmentId>0</TimeSegmentId>
+			<StartHour>0</StartHour>
+			<StartMinute>0</StartMinute>
+			<EndHour>23</EndHour>
+			<EndMinute>59</EndMinute>
+		</TimeSegmentService>
+		<TimeSegmentService>
+			<Enabled>true</Enabled>
+			<ExtendData i:nil="true"/>
+			<TimeSegmentId>1</TimeSegmentId>
+			<StartHour>8</StartHour>
+			<StartMinute>0</StartMinute>
+			<EndHour>9</EndHour>
+			<EndMinute>0</EndMinute>
+		</TimeSegmentService>
+		<TimeSegmentService>
+			<Enabled>true</Enabled>
+			<ExtendData i:nil="true"/>
+			<TimeSegmentId>2</TimeSegmentId>
+			<StartHour>9</StartHour>
+			<StartMinute>0</StartMinute>
+			<EndHour>12</EndHour>
+			<EndMinute>0</EndMinute>
+		</TimeSegmentService>
+	</Services>
+</BatchUpdateTimeSegmentsRequest>
+
+
+<BatchUpdateTimeSegmentsResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ResultType>OK</ResultType>
+</BatchUpdateTimeSegmentsResponse>

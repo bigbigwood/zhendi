@@ -1,6 +1,6 @@
 ﻿using Rld.Acs.Unility;
 using Rld.DeviceSystem.Contract.Message;
-using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeZonesOperation;
+using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeZonesOp;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Time;
@@ -18,11 +18,11 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
 
             var dao = new TimeZoneInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
 
-            var data = dao.GetData();
+            var data = dao.GetTimeZoneData();
 
             request.Services.ForEach(s => TimeZoneServiceMapper.UpdateData(ref data, s));
 
-            bool result = dao.UpdateData(data);
+            bool result = dao.UpdateTimeZoneData(data);
 
             return new BatchUpdateTimeZonesResponse() { ResultType = ResultType.OK };
         }

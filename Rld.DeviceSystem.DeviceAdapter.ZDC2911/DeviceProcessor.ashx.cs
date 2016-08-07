@@ -6,7 +6,6 @@ using log4net;
 using Microsoft.Web.WebSockets;
 using Rld.Acs.Unility.Serialization;
 using Rld.DeviceSystem.Contract.Message;
-using Rld.DeviceSystem.Contract.Message.GetUserOperation;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 {

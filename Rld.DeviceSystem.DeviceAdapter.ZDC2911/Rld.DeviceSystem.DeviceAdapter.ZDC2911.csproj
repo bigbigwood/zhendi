@@ -87,8 +87,11 @@
     <Compile Include="Configuration\DeviceTcpConfiguration.cs" />
     <Compile Include="Dao\DeviceInfoDao.cs" />
     <Compile Include="Dao\SystemInfoDao.cs" />
+    <Compile Include="Dao\TimeZoneInfoDao.cs" />
     <Compile Include="Dao\TimeGroupInfoDao.cs" />
-    <Compile Include="Helper\TimeZoneInfoDao.cs" />
+    <Compile Include="Dao\UserEnrollInfoDao.cs" />
+    <Compile Include="Dao\UserInfoDao.cs" />
+    <Compile Include="Framework\DeviceLockableOperation.cs" />
     <Compile Include="Dao\TimeSegmentInfoDao.cs" />
     <Compile Include="DeviceManager.cs" />
     <Compile Include="Helper\Policies.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Mapper\Time\TimeGroupMapper.cs" />
     <Compile Include="Mapper\Time\TimeZoneServiceMapper.cs" />
     <Compile Include="Mapper\Time\TimeSegmentMapper.cs" />
+    <Compile Include="Mapper\UserInfo\UserInfoMapper.cs" />
     <Compile Include="Model\SystemEntity.cs" />
     <Compile Include="Operations\SystemOperation\GetSystemInfoOp.cs" />
     <Compile Include="Operations\SystemOperation\UpdateSystemInfoOp.cs" />
@@ -126,13 +130,13 @@
     <Compile Include="Model\UserEnrollSummary.cs" />
     <Compile Include="Mapper\Device\DeviceInfoMapper.cs" />
     <Compile Include="Mapper\SystemInfo\SystemInfoMapper.cs" />
-    <Compile Include="Operations\UserOperation\DeleteUserOperation.cs" />
-    <Compile Include="Operations\UserOperation\CreateUserOperation.cs" />
+    <Compile Include="Operations\UserOperation\DeleteUserOp.cs" />
+    <Compile Include="Operations\UserOperation\CreateUserOp.cs" />
     <Compile Include="Operations\UserOperation\UpdateUserOp.cs" />
     <Compile Include="Mapper\Device\DoorInfoMapper.cs" />
     <Compile Include="Mapper\Time\TimeService.cs" />
     <Compile Include="Mapper\UserService.cs" />
-    <Compile Include="Operations\UserOperation\GetUserOperation.cs" />
+    <Compile Include="Operations\UserOperation\GetUserOp.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rld.Acs.Unility\Rld.Acs.Unility.csproj">
