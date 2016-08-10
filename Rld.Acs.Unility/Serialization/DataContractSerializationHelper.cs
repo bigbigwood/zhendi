@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using Rld.DeviceSystem.Contract.Message.GetUserInfoOp;
+using Rld.DeviceSystem.Contract.Message;
 
 namespace Rld.Acs.Unility.Serialization
 {

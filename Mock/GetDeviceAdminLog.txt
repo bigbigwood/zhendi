@@ -1,0 +1,130 @@
+<GetDeviceAdminLogRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<BeginTime>2016-07-01</BeginTime>
+	<EndTime>2016-08-01</EndTime>
+</GetDeviceAdminLogRequest>
+
+
+<GetDeviceAdminLogResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ResultType>OK</ResultType>
+	<Logs>
+		<DeviceAdminLog>
+			<AdminId>22</AdminId>
+			<CreateTime>2016-07-25T07:35:21</CreateTime>
+			<Enroll>0</Enroll>
+			<Operation>Registered user</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>22</AdminId>
+			<CreateTime>2016-07-25T07:35:43</CreateTime>
+			<Enroll>1</Enroll>
+			<Operation>Registered user</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>0</AdminId>
+			<CreateTime>2016-07-25T07:42:41</CreateTime>
+			<Enroll>0</Enroll>
+			<Operation>Set the record information</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>23</AdminId>
+			<CreateTime>2016-07-25T07:51:55</CreateTime>
+			<Enroll>0</Enroll>
+			<Operation>Registered user</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>23</AdminId>
+			<CreateTime>2016-07-25T07:52:19</CreateTime>
+			<Enroll>10</Enroll>
+			<Operation>Registered user</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>23</AdminId>
+			<CreateTime>2016-07-26T07:42:23</CreateTime>
+			<Enroll>10</Enroll>
+			<Operation>Remove the password</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>23</AdminId>
+			<CreateTime>2016-07-26T07:42:32</CreateTime>
+			<Enroll>0</Enroll>
+			<Operation>Delete fingerprint</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>0</AdminId>
+			<CreateTime>2016-07-30T10:28:03</CreateTime>
+			<Enroll>0</Enroll>
+			<Operation>Set system information</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>1</AdminId>
+			<CreateTime>2016-07-30T10:31:47</CreateTime>
+			<Enroll>0</Enroll>
+			<Operation>Registered user</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>1</AdminId>
+			<CreateTime>2016-07-30T10:31:56</CreateTime>
+			<Enroll>1</Enroll>
+			<Operation>Registered user</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>1</AdminId>
+			<CreateTime>2016-07-30T10:32:19</CreateTime>
+			<Enroll>2</Enroll>
+			<Operation>Registered user</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>1</AdminId>
+			<CreateTime>2016-07-30T10:32:44</CreateTime>
+			<Enroll>10</Enroll>
+			<Operation>Registered user</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>2</AdminId>
+			<CreateTime>2016-07-30T10:35:39</CreateTime>
+			<Enroll>0</Enroll>
+			<Operation>Registered user</Operation>
+			<UserId>0</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>2</AdminId>
+			<CreateTime>2016-07-30T17:00:00</CreateTime>
+			<Enroll>0</Enroll>
+			<Operation>Register super administrator</Operation>
+			<UserId>2</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>1</AdminId>
+			<CreateTime>2016-07-30T17:05:19</CreateTime>
+			<Enroll>0</Enroll>
+			<Operation>Register super administrator</Operation>
+			<UserId>2</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>3</AdminId>
+			<CreateTime>2016-07-30T17:24:55</CreateTime>
+			<Enroll>0</Enroll>
+			<Operation>Delete fingerprint</Operation>
+			<UserId>1</UserId>
+		</DeviceAdminLog>
+		<DeviceAdminLog>
+			<AdminId>2</AdminId>
+			<CreateTime>2016-07-30T22:24:55</CreateTime>
+			<Enroll>1</Enroll>
+			<Operation>Register super administrator</Operation>
+			<UserId>2</UserId>
+		</DeviceAdminLog>
+	</Logs>
+</GetDeviceAdminLogResponse>

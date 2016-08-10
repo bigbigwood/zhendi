@@ -1,0 +1,362 @@
+<GetDeviceAccessLogRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<BeginTime>2016-07-01</BeginTime>
+	<EndTime>2016-08-01</EndTime>
+</GetDeviceAccessLogRequest>
+
+<GetDeviceAccessLogResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ResultType>OK</ResultType>
+	<Logs>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-25T07:15:36</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-25T07:36:19</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>22</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-25T07:36:33</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>22</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-25T07:41:00</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-25T07:49:33</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>22</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>P </CheckInOptions>
+			<CreateTime>2016-07-25T07:53:19</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>23</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>P </CheckInOptions>
+			<CreateTime>2016-07-25T07:54:36</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>22</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-26T07:38:24</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-26T19:46:56</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-27T21:50:55</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-28T21:23:25</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-29T21:17:07</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-30T09:27:09</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T10:35:59</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>2</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T10:36:05</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>1</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T10:36:13</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>1</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-30T15:09:46</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>P </CheckInOptions>
+			<CreateTime>2016-07-30T15:40:45</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Invalid date</Result>
+			<UserId>1</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T15:44:47</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Illegal operation</Result>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T15:44:49</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Illegal operation</Result>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T15:44:52</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Illegal operation</Result>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T15:44:54</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>2</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T15:48:33</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Illegal operation</Result>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T15:48:36</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Illegal operation</Result>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-30T15:49:42</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-30T16:51:02</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>P </CheckInOptions>
+			<CreateTime>2016-07-30T16:51:40</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Invalid date</Result>
+			<UserId>1</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>P </CheckInOptions>
+			<CreateTime>2016-07-30T16:59:02</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>2</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T17:00:17</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>2</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T17:00:27</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>2</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T17:01:06</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>2</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T17:01:31</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>2</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>P </CheckInOptions>
+			<CreateTime>2016-07-30T17:24:18</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Invalid time</Result>
+			<UserId>3</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T17:25:07</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Invalid time</Result>
+			<UserId>3</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-07-30T22:24:07</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T22:24:13</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>2</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>P </CheckInOptions>
+			<CreateTime>2016-07-30T22:57:13</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>1</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T23:22:49</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>1</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T23:23:57</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>2</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T23:24:05</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>1</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T23:38:09</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>3</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T23:38:26</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>2</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions>F </CheckInOptions>
+			<CreateTime>2016-07-30T23:53:32</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result>Check in</Result>
+			<UserId>1</UserId>
+		</DeviceAccessLog>
+		<DeviceAccessLog>
+			<AccessLogType>General</AccessLogType>
+			<CheckInOptions/>
+			<CreateTime>2016-08-01T21:50:28</CreateTime>
+			<DeviceId>1</DeviceId>
+			<Result/>
+			<UserId>0</UserId>
+		</DeviceAccessLog>
+	</Logs>
+</GetDeviceAccessLogResponse>

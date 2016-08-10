@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace Rld.DeviceSystem.Contract.Model
 {
@@ -44,6 +45,19 @@ namespace Rld.DeviceSystem.Contract.Model
     }
 
     [DataContract(Namespace = Declarations.NameSpace)]
+    public enum DoorOperations
+    {
+        [EnumMember]
+        Open = 1,
+        [EnumMember]
+        Auto = 2,
+        [EnumMember]
+        KeepOpen = 3,
+        [EnumMember]
+        KeepClose = 4,
+    }
+
+    [DataContract(Namespace = Declarations.NameSpace)]
     public enum CheckOutOptions
     {
         [EnumMember]
@@ -54,6 +68,19 @@ namespace Rld.DeviceSystem.Contract.Model
         Card = 2,
         [EnumMember]
         FingerPrint = 3,
+    }
+
+    [DataContract(Namespace = Declarations.NameSpace)]
+    public enum CheckInOptions
+    {
+        [EnumMember]
+        Password = 1,
+        [EnumMember]
+        Card = 2,
+        [EnumMember]
+        FingerPrint = 3,
+        [EnumMember]
+        Wiegand = 4,
     }
 
     [DataContract(Namespace = Declarations.NameSpace)]
@@ -159,5 +186,16 @@ namespace Rld.DeviceSystem.Contract.Model
         MenaceOpenDoor = 35,
         [EnumMember]
         MenaceAlarm = 36,
+    }
+
+    [DataContract(Namespace = Declarations.NameSpace)]
+    public enum AccessLogType
+    {
+        [EnumMember]
+        General = 0,
+        [EnumMember]
+        Alarm = 1,
+        [EnumMember]
+        Exception = 2,
     }
 }

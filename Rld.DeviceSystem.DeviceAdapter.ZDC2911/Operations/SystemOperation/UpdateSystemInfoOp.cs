@@ -1,6 +1,4 @@
 ﻿using Rld.DeviceSystem.Contract.Message;
-using Rld.DeviceSystem.Contract.Message.UpdateDeviceInfoOp;
-using Rld.DeviceSystem.Contract.Message.UpdateSystemInfoOp;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Device;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.SystemInfo;

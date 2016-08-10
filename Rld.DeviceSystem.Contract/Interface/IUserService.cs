@@ -4,7 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using Rld.DeviceSystem.Contract.Message.GetUserInfoOp;
+using Rld.DeviceSystem.Contract.Message;
 
 namespace Rld.DeviceSystem.Contract.Interface
 {

@@ -1,23 +1,9 @@
-﻿using System.Xml;
-using log4net;
+﻿using log4net;
 using Microsoft.Web.WebSockets;
 using Rld.Acs.Unility.Serialization;
 using Rld.DeviceSystem.Contract.Message;
-using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeGroupsOp;
-using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeSegmentsOp;
-using Rld.DeviceSystem.Contract.Message.BatchUpdateTimeZonesOp;
-using Rld.DeviceSystem.Contract.Message.CreateUserInfoOp;
-using Rld.DeviceSystem.Contract.Message.DeleteUserInfoOp;
-using Rld.DeviceSystem.Contract.Message.GetAllTimeGroupsOp;
-using Rld.DeviceSystem.Contract.Message.GetAllTimeSegmentsOp;
-using Rld.DeviceSystem.Contract.Message.GetAllTimeZonesOp;
-using Rld.DeviceSystem.Contract.Message.GetDeviceInfoOp;
-using Rld.DeviceSystem.Contract.Message.GetSystemInfoOp;
-using Rld.DeviceSystem.Contract.Message.GetUserInfoOp;
-using Rld.DeviceSystem.Contract.Message.UpdateDeviceInfoOp;
-using Rld.DeviceSystem.Contract.Message.UpdateSystemInfoOp;
-using Rld.DeviceSystem.Contract.Message.UpdateUserInfoOp;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.DeviceOperation;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.LogOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.SystemOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation;
@@ -125,6 +111,18 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 this.Send(DataContractSerializationHelper.Serialize(response));
             }
 
+            else if (message.Contains("GetDeviceAccessLogRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<GetDeviceAccessLogRequest>(message);
+                var response = new GetDeviceAccessLogOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
+            }
+            else if (message.Contains("GetDeviceAdminLogRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<GetDeviceAdminLogRequest>(message);
+                var response = new GetDeviceAdminLogOp().Process(request);
+                this.Send(DataContractSerializationHelper.Serialize(response));
+            }
         }
 
         public override void OnClose()
