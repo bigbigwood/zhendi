@@ -80,7 +80,7 @@
     <Compile Include="Message\GetUserInfoResponse.cs" />
     <Compile Include="Model\Logs\DeviceAccessLog.cs" />
     <Compile Include="Model\Logs\DeviceAdminLog.cs" />
-    <Compile Include="Model\Logs\DoorState.cs" />
+    <Compile Include="Model\Logs\DoorStateInfo.cs" />
     <Compile Include="Model\Services\DeviceConn\WebSocketConnectionService.cs" />
     <Compile Include="Model\Services\DeviceConn\UdpConnectionService.cs" />
     <Compile Include="Model\SystemInfo.cs" />

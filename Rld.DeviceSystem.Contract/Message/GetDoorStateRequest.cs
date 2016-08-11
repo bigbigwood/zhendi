@@ -20,6 +20,6 @@ namespace Rld.DeviceSystem.Contract.Message
     public class GetDoorStateResponse : ResponseBase
     {
         [DataMember]
-        public IList<DoorState> DoorStateLogs { get; set; }
+        public IList<DoorStateInfo> DoorStateLogs { get; set; }
     }
 }

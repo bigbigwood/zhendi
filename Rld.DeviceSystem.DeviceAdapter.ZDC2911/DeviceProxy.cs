@@ -2,16 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using log4net;
 using Riss.Devices;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 {
     public class DeviceProxy
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public Device Device { get; set; }
         public DeviceConnection DeviceConnection { get; set; }
 
-        public bool OpenConnection()
+        public void OpenConnection()
+        {
+            var retryablePolicy = Policies.GetRetryablePolicy();
+            bool result = retryablePolicy.Execute(TryOpenConnection);
+            
+            if (!result)
+            {
+                throw new Exception(string.Format("Open connection for device #{0} fails", Device.DN));
+            }
+
+            Log.InfoFormat("Open connection for device #{0} successfully", Device.DN);
+        }
+
+        private bool TryOpenConnection()
         {
             var myDevice = Device;
             var deviceConnection = DeviceConnection.CreateConnection(ref myDevice);
@@ -21,16 +37,13 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 Device = myDevice;
                 return true;
             }
-            else
-            {
-                throw new Exception(string.Format("Open connection for device #{0} fails", Device.DN));
-            }
+            return false;
         }
 
-        public bool CloseConnection()
+        public void CloseConnection()
         {
             DeviceConnection.Close();
-            return true;
+            Log.InfoFormat("Close connection for device #{0} successfully", Device.DN);
         }
     }
 }

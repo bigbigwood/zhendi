@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using log4net;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Configuration;
+using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 {
@@ -23,6 +24,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             var deviceConfigurations = GetDeviceConfigurations("DeviceConfigGroup");
             DeviceManager.Initialize(deviceConfigurations);
             DeviceManager.GetInstance().Run();
+
+            UdpListener.GetInstance().Start();
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -34,7 +37,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
         protected void Application_End(object sender, EventArgs e)
         {
             Log.Info("Application end.");
-            DeviceManager.GetInstance().Stop();
+            CleanUp();
         }
 
         private List<DeviceConfigurationBase> GetDeviceConfigurations(String groupName)
@@ -60,6 +63,12 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             }
 
             return configuration;
+        }
+
+        private void CleanUp()
+        {
+            DeviceManager.GetInstance().Stop();
+            UdpListener.GetInstance().Stop();
         }
     }
 }
