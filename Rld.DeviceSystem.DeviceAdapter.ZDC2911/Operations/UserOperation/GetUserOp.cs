@@ -13,7 +13,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation
 
             }
 
-            var dao = new UserInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var dao = new UserInfoDao();
             var userData = dao.GetUser(request.UserId);
             var userInfo = UserInfoMapper.ToModel(userData);
 

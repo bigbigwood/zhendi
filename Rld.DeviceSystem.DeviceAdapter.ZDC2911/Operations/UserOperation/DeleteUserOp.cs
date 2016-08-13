@@ -13,7 +13,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation
 
             }
 
-            var userDao = new UserInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var userDao = new UserInfoDao();
             bool result = userDao.DeleteUser(request.UserId);
 
             return new DeleteUserInfoResponse() { ResultType = ResultType.OK };

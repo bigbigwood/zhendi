@@ -11,7 +11,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.LogOperation
     {
         public GetDeviceAccessLogResponse Process(GetDeviceAccessLogRequest request)
         {
-            var dao = new GLogInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var dao = new GLogInfoDao();
             var rawData = dao.GetLogData(new QueryLogCondictions()
             {
                 Options = GetLogOptions.GetAllLogs,

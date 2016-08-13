@@ -16,8 +16,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation
 
             }
 
-            var userEnrollInfoDao = new UserEnrollInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
-            var userDao = new UserInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var userEnrollInfoDao = new UserEnrollInfoDao();
+            var userDao = new UserInfoDao();
 
             var enroll = new Enroll() { DIN = (UInt64)request.UserInfo.UserId, Fingerprint = new byte[Zd2911Utils.MaxFingerprintLength * 10] };
             var deviceUser = new User() { DIN = (UInt64)request.UserInfo.UserId, Enrolls = new List<Enroll> { enroll } };

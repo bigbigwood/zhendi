@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Declarations.cs" />
-    <Compile Include="Interface\IUserService.cs" />
+    <Compile Include="Interface\IDevice.cs" />
     <Compile Include="Message\BatchUpdateTimeZonesRequest.cs" />
     <Compile Include="Message\BatchUpdateTimeZonesResponse.cs" />
     <Compile Include="Message\BatchUpdateTimeGroupsRequest.cs" />
@@ -78,6 +78,8 @@
     <Compile Include="Message\ResponseBase.cs" />
     <Compile Include="Message\GetUserInfoRequest.cs" />
     <Compile Include="Message\GetUserInfoResponse.cs" />
+    <Compile Include="Model\Configuration\DeviceConfiguration.cs" />
+    <Compile Include="Model\Configuration\WebSocketClientConfig.cs" />
     <Compile Include="Model\Logs\DeviceAccessLog.cs" />
     <Compile Include="Model\Logs\DeviceAdminLog.cs" />
     <Compile Include="Model\Logs\DoorStateInfo.cs" />

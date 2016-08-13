@@ -7,7 +7,7 @@ using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Model;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework
 {
-    public class DeviceLockableOperation : IDisposable
+    internal class DeviceLockableOperation : IDisposable
     {
         public Device _device { get; set; }
         public DeviceConnection _deviceConnection { get; set; }

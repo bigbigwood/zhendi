@@ -69,6 +69,7 @@
     <Content Include="packages.config" />
     <Content Include="DeviceProcessor.ashx" />
     <Content Include="ApplicationProcessor.ashx" />
+    <Content Include="GetClients.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -87,6 +88,9 @@
       <DependentUpon>ApplicationProcessor.ashx</DependentUpon>
     </Compile>
     <Compile Include="DeviceWebSocketHandler.cs" />
+    <Compile Include="GetClients.ashx.cs">
+      <DependentUpon>GetClients.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -94,6 +98,7 @@
       <DependentUpon>DeviceProcessor.ashx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebSocketClientManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rld.DeviceSystem.Contract\Rld.DeviceSystem.Contract.csproj">

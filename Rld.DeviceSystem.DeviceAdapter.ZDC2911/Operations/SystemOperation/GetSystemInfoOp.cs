@@ -10,7 +10,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.SystemOperation
     {
         public GetSystemInfoResponse Process(GetSystemInfoRequest request)
         {
-            var dao = new SystemInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var dao = new SystemInfoDao();
             var systemData = dao.GetSystemData();
             var serviceData = SystemInfoMapper.ToModel(systemData);
 

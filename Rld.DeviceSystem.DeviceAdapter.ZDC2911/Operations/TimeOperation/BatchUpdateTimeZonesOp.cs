@@ -15,7 +15,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
 
             }
 
-            var dao = new TimeZoneInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var dao = new TimeZoneInfoDao();
 
             var data = dao.GetTimeZoneData();
 

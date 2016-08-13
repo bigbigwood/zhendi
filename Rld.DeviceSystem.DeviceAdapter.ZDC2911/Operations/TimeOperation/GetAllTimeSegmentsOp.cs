@@ -9,7 +9,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
     {
         public GetAllTimeSegmentsResponse Process(GetAllTimeSegmentsRequest request)
         {
-            var deviceDao = new TimeSegmentInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var deviceDao = new TimeSegmentInfoDao();
             var data = deviceDao.GetTimeSegmentData();
             var services = TimeSegmentMapper.BuildServices(data);
 

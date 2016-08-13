@@ -15,7 +15,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
 
             }
 
-            var dao = new TimeGroupInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var dao = new TimeGroupInfoDao();
 
             var data = dao.GetTimeGroupData();
 

@@ -14,12 +14,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
     public class TimeSegmentInfoDao
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private DeviceProxy _deviceProxy = null;
-
-        public TimeSegmentInfoDao(DeviceProxy proxy)
-        {
-            _deviceProxy = proxy;
-        }
+        private DeviceProxy _deviceProxy = DeviceProxyManager.GetDeviceProxy();
 
         public byte[] GetTimeSegmentData()
         {

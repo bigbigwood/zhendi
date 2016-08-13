@@ -10,7 +10,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.LogOperation
     {
         public GetDeviceAdminLogResponse Process(GetDeviceAdminLogRequest request)
         {
-            var dao = new SLogInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var dao = new SLogInfoDao();
             var rawData = dao.GetLogData(new QueryLogCondictions()
             {
                 Options = GetLogOptions.GetAllLogs,

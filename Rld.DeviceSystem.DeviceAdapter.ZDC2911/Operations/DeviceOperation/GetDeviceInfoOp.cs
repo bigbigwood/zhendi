@@ -8,7 +8,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.DeviceOperation
     {
         public GetDeviceInfoResponse Process(GetDeviceInfoRequest request)
         {
-            var deviceDao = new DeviceInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var deviceDao = new DeviceInfoDao();
             var deviceData = deviceDao.GetDeviceData();
             var serviceData = DeviceInfoMapper.ToModel(deviceData);
 

@@ -9,7 +9,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
     {
         public GetAllTimeZonesResponse Process(GetAllTimeZonesRequest request)
         {
-            var deviceDao = new TimeZoneInfoDao(DeviceManager.GetInstance().GetDeviceProxy(1));
+            var deviceDao = new TimeZoneInfoDao();
             var data = deviceDao.GetTimeZoneData();
             var services = TimeZoneServiceMapper.BuildServices(data);
 

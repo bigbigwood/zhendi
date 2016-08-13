@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Web.UI.WebControls;
 using log4net;
 using Riss.Devices;
 using Rld.DeviceSystem.Contract.Model;

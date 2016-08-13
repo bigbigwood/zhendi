@@ -8,13 +8,12 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A7C582ED-CFA8-467B-B299-1265D7D34DEA}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Rld.DeviceSystem.DeviceAdapter.ZDC2911</RootNamespace>
     <AssemblyName>Rld.DeviceSystem.DeviceAdapter.ZDC2911</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <FileAlignment>512</FileAlignment>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -24,7 +23,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,7 +31,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -51,40 +50,23 @@
     <Reference Include="Riss.Devices">
       <HintPath>..\lib\Riss.Devices.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebSocket4Net">
+      <HintPath>..\packages\WebSocket4Net.0.14.1\lib\net45\WebSocket4Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="DeviceProcessor.ashx" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
-    <Content Include="Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Configuration\DeviceConfigurationBase.cs" />
-    <Compile Include="Configuration\DeviceTcpConfiguration.cs" />
+    <Compile Include="Configuration\DeviceConfigurationAdapter.cs" />
     <Compile Include="Dao\DoorInfoDao.cs" />
     <Compile Include="Dao\DeviceInfoDao.cs" />
     <Compile Include="Dao\SLogInfoDao.cs" />
@@ -94,11 +76,12 @@
     <Compile Include="Dao\TimeGroupInfoDao.cs" />
     <Compile Include="Dao\UserEnrollInfoDao.cs" />
     <Compile Include="Dao\UserInfoDao.cs" />
+    <Compile Include="DeviceAdapter.cs" />
+    <Compile Include="Framework\DeviceProxyManager.cs" />
     <Compile Include="Framework\DeviceLockableOperation.cs" />
     <Compile Include="Dao\TimeSegmentInfoDao.cs" />
-    <Compile Include="DeviceManager.cs" />
     <Compile Include="Helper\Policies.cs" />
-    <Compile Include="Helper\UdpListener.cs" />
+    <Compile Include="Framework\UdpListener.cs" />
     <Compile Include="Mapper\Device\DoorOpenBehaviorServiceMapper.cs" />
     <Compile Include="Mapper\Device\DuressServiceMapper.cs" />
     <Compile Include="Mapper\Device\DoorLinkageServiceMapper.cs" />
@@ -119,14 +102,7 @@
     <Compile Include="Operations\SystemOperation\UpdateSystemInfoOp.cs" />
     <Compile Include="Operations\DeviceOperation\UpdateDeviceInfoOp.cs" />
     <Compile Include="Operations\DeviceOperation\GetDeviceInfoOp.cs" />
-    <Compile Include="DeviceProcessor.ashx.cs">
-      <DependentUpon>DeviceProcessor.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="DeviceProxy.cs" />
-    <Compile Include="DeviceWebSocketHandler.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
+    <Compile Include="Framework\DeviceProxy.cs" />
     <Compile Include="Helper\ConvertObject.cs" />
     <Compile Include="Model\DeviceStatus.cs" />
     <Compile Include="Operations\TimeOperation\BatchUpdateTimeZonesOp.cs" />
@@ -145,6 +121,7 @@
     <Compile Include="Mapper\Device\DoorInfoMapper.cs" />
     <Compile Include="Mapper\Time\TimeService.cs" />
     <Compile Include="Operations\UserOperation\GetUserOp.cs" />
+    <Compile Include="Framework\WebSocketClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rld.Acs.Unility\Rld.Acs.Unility.csproj">
@@ -161,27 +138,8 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
-        <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2718</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2718/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-        </WebProjectProperties>
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
