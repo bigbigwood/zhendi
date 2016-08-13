@@ -10,7 +10,6 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework
 {
     internal static class DeviceProxyManager
     {
-        [ThreadStatic]
         private static DeviceProxy _deviceProxy;
 
         public static DeviceProxy GetDeviceProxy()

@@ -1,18 +1,23 @@
-﻿using log4net;
+﻿using System;
+using log4net;
 using Microsoft.Web.WebSockets;
+using Rld.Acs.Unility.Extension;
 
 namespace Rld.DeviceSystem
 {
     public class DeviceWebSocketHandler : WebSocketHandler
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public static WebSocketCollection clients = new WebSocketCollection();
-        public string Id;
+        public Int32 Id;
 
         public override void OnOpen()
         {
-            this.Id = this.WebSocketContext.QueryString["Id"];
-            clients.Add(this);
+            int deviceId = WebSocketContext.QueryString["Id"].ToInt32();
+            if (deviceId != ConvertorExtension.ConvertionFailureValue)
+            {
+                this.Id = deviceId;
+                WebSocketClientManager.GetInstance().AddClient(this);
+            }
         }
 
         public override void OnMessage(string message)
@@ -29,7 +34,7 @@ namespace Rld.DeviceSystem
 
         public override void OnClose()
         {
-            clients.Remove(this);
+            WebSocketClientManager.GetInstance().RemoveClient(this);
         }
     }
 }

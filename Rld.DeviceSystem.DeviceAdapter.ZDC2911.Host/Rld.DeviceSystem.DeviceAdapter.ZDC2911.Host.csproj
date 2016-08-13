@@ -39,6 +39,7 @@
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -48,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationHelper.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -62,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Rld.Acs.Unility\Rld.Acs.Unility.csproj">
+      <Project>{56CD6CFE-8104-4B3F-997C-D84E6788F259}</Project>
+      <Name>Rld.Acs.Unility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rld.DeviceSystem.Contract\Rld.DeviceSystem.Contract.csproj">
       <Project>{0c2b88a5-1828-4a90-b8be-66f710e17699}</Project>
       <Name>Rld.DeviceSystem.Contract</Name>

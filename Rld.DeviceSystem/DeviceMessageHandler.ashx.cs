@@ -7,10 +7,11 @@ using Microsoft.Web.WebSockets;
 namespace Rld.DeviceSystem
 {
     /// <summary>
-    /// Summary description for ApplicationProcessor
+    /// DeviceMessageHandler 的摘要说明
     /// </summary>
-    public class ApplicationProcessor : IHttpHandler
+    public class DeviceMessageHandler : IHttpHandler
     {
+
         public void ProcessRequest(HttpContext context)
         {
             if (context.IsWebSocketRequest || context.IsWebSocketRequestUpgrading)
@@ -20,7 +21,7 @@ namespace Rld.DeviceSystem
             else
             {
                 context.Response.ContentType = "text/plain";
-                context.Response.Write("ApplicationProcessor running");
+                context.Response.Write("DeviceMessageHandler running");
             }
         }
 

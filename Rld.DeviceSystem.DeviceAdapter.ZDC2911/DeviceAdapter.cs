@@ -24,8 +24,6 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             _deviceProxy = new DeviceProxy(deviceConfig);
             _udpListener = new UdpListener(deviceConfig.UdpPort, SendMessage);
             _webSocketClient = new WebSocketClient(deviceConfig.WebSocketClientConfig.ServerUrl, ReceiveMessage);
-
-            DeviceProxyManager.Bind(_deviceProxy);
         }
 
 
@@ -80,6 +78,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 
         public void ReceiveMessage(String message)
         {
+            DeviceProxyManager.Bind(_deviceProxy);
             var response = _deviceProxy.ProcessReceiveEvent(message);
             SendMessage(response);
         }

@@ -26,20 +26,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Host
                     System.Console.ReadLine();
                     System.Console.WriteLine("Starting.");
 
-                    var config = new DeviceConfigurationAdapter()
-                    {
-                        DeviceId = 1,
-                        Password = "0",
-                        DeviceModel = "ZDC2911",
-                        ConnectionModel = 5,
-                        DeviceName = "",
-                        TcpPort = 5500,
-                        TcpAddress = "192.168.31.73",
-                        UdpPort = 5055,
-                        WebSocketClientConfig = new WebSocketClientConfig() { ServerUrl = "ws://localhost:2697/ApplicationProcessor.ashx" },
-                    };
-
-
+                    var config = ConfigurationHelper.CreateConfiguration();
                     var device = new Rld.DeviceSystem.DeviceAdapter.ZDC2911.DeviceAdapter();
                     device.Start(config);
 

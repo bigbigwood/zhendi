@@ -1,4 +1,5 @@
 ﻿using Rld.Acs.Unility;
+using Rld.Acs.Unility.Extension;
 using Rld.DeviceSystem.Contract.Message;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper;

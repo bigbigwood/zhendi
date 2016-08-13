@@ -13,23 +13,12 @@ namespace Rld.DeviceSystem
 
         public void ProcessRequest(HttpContext context)
         {
+            var clients = WebSocketClientManager.GetInstance().GetAllClients();
+
             context.Response.ContentType = "text/plain";
-            var devices = DeviceWebSocketHandler.clients.ToList();
+            context.Response.Write(string.Format("Getting {0} clients:", clients.Count) + Environment.NewLine);
 
-            foreach (var d in devices)
-            {
-                var client  = d as DeviceWebSocketHandler;
-                if (client != null)
-                    context.Response.Write(client.Id);
-
-                if (client.Id == "12")
-                {
-                    client.Send("Hello 12");
-                }
-            }
-
-
-            context.Response.Write("Hello World");
+            clients.ForEach(d => context.Response.Write(d.Id + Environment.NewLine));
         }
 
         public bool IsReusable
