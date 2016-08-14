@@ -17,9 +17,9 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Log
         private static readonly List<Int32> AlarmOptions = new List<int>() { 19, 20, 21 }; //19=开门超时报警, 20=强行开门报警 21=胁迫报警
         private static readonly List<Int32> ExceptionOptions = new List<int>() { 26, 27, 31 }; //26=无效时间, 27=无效通行 31=无效操作
 
-        public static Contract.Model.Logs.DeviceAccessLog ToModel(Record record)
+        public static Contract.Model.Logs.DeviceTrafficLog ToModel(Record record)
         {
-            var logInfo = new Contract.Model.Logs.DeviceAccessLog();
+            var logInfo = new Contract.Model.Logs.DeviceTrafficLog();
 
             try
             {

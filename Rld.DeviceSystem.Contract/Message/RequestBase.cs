@@ -12,7 +12,6 @@ namespace Rld.DeviceSystem.Contract.Message
     [KnownType("KnownTypes")]
     public class RequestBase
     {
-
         static IEnumerable<Type> KnownTypes()
         {
             IList<Type> typesOfResource =

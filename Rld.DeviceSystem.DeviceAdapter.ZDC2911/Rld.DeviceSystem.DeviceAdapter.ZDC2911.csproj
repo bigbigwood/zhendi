@@ -96,8 +96,8 @@
     <Compile Include="Mapper\UserInfo\UserInfoMapper.cs" />
     <Compile Include="Model\QueryLogCondictions.cs" />
     <Compile Include="Model\SystemEntity.cs" />
-    <Compile Include="Operations\LogOperation\GetDeviceAdminLogOp.cs" />
-    <Compile Include="Operations\LogOperation\GetDeviceAccessLogOp.cs" />
+    <Compile Include="Operations\LogOperation\GetDeviceOperationLogOp.cs" />
+    <Compile Include="Operations\LogOperation\GetDeviceTrafficLogOp.cs" />
     <Compile Include="Operations\SystemOperation\GetSystemInfoOp.cs" />
     <Compile Include="Operations\SystemOperation\UpdateSystemInfoOp.cs" />
     <Compile Include="Operations\DeviceOperation\UpdateDeviceInfoOp.cs" />

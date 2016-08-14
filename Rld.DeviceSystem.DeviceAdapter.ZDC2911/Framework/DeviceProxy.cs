@@ -123,16 +123,16 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework
                 return (DataContractSerializationHelper.Serialize(response));
             }
 
-            else if (message.Contains("GetDeviceAccessLogRequest"))
+            else if (message.Contains("GetDeviceTrafficLogRequest"))
             {
-                var request = DataContractSerializationHelper.Deserialize<GetDeviceAccessLogRequest>(message);
-                var response = new GetDeviceAccessLogOp().Process(request);
+                var request = DataContractSerializationHelper.Deserialize<GetDeviceTrafficLogRequest>(message);
+                var response = new GetDeviceTrafficLogOp().Process(request);
                 return (DataContractSerializationHelper.Serialize(response));
             }
-            else if (message.Contains("GetDeviceAdminLogRequest"))
+            else if (message.Contains("GetDeviceOperationLogRequest"))
             {
-                var request = DataContractSerializationHelper.Deserialize<GetDeviceAdminLogRequest>(message);
-                var response = new GetDeviceAdminLogOp().Process(request);
+                var request = DataContractSerializationHelper.Deserialize<GetDeviceOperationLogRequest>(message);
+                var response = new GetDeviceOperationLogOp().Process(request);
                 return (DataContractSerializationHelper.Serialize(response));
             }
 

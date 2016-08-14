@@ -63,13 +63,15 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework
         private void listener_ReceiveHandler(object sender, ReceiveEventArg e)
         {
             Record record = e.record;
-            string verify = ConvertObject.IOMode(record.Verify);
-            string action = ConvertObject.GLogType(record.Action);
-
             var logInfo = DeviceAccessLogMapper.ToModel(record);
-            var message = DataContractSerializationHelper.Serialize(logInfo);
-           
-            Log.Info( message);
+            var deviceAccessEvent = new DeviceTrafficEvent() { DeviceAccessLog = logInfo };
+            var message = DataContractSerializationHelper.Serialize(deviceAccessEvent);
+            Log.Info(message);
+
+            var logInfo2 = DeviceAdminLogMapper.ToModel(record);
+            var message2 = DataContractSerializationHelper.Serialize(logInfo);
+            Log.Info(message2);
+
             ReportMessage(message);
         }
     }

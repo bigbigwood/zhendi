@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Rld.DeviceSystem.Contract.Model.Logs
 {
     [DataContract(Namespace = Declarations.NameSpace)]
-    public class DeviceAccessLog
+    public class DeviceTrafficLog
     {
         [DataMember]
         public AccessLogType AccessLogType { get; set; }

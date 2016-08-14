@@ -1,17 +1,16 @@
 ﻿using System.Linq;
 using Rld.DeviceSystem.Contract.Message;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao;
-using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Device;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Log;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Model;
 
 namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.LogOperation
 {
-    public class GetDeviceAccessLogOp
+    public class GetDeviceOperationLogOp
     {
-        public GetDeviceAccessLogResponse Process(GetDeviceAccessLogRequest request)
+        public GetDeviceOperationLogResponse Process(GetDeviceOperationLogRequest request)
         {
-            var dao = new GLogInfoDao();
+            var dao = new SLogInfoDao();
             var rawData = dao.GetLogData(new QueryLogCondictions()
             {
                 Options = GetLogOptions.GetAllLogs,
@@ -20,9 +19,9 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.LogOperation
                 CleanNewLogPosition = false,
             });
 
-            var serviceData = rawData.Select(DeviceAccessLogMapper.ToModel).ToList();
+            var serviceData = rawData.Select(DeviceAdminLogMapper.ToModel).ToList();
 
-            return new GetDeviceAccessLogResponse() { ResultType = ResultType.OK, Logs = serviceData};
+            return new GetDeviceOperationLogResponse() { ResultType = ResultType.OK, Logs = serviceData };
         }
     }
 }

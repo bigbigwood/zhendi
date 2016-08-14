@@ -14,9 +14,9 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Log
     {
         private static readonly ILog Log = LogManager.GetLogger(global::System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static Contract.Model.Logs.DeviceAdminLog ToModel(Record record)
+        public static Contract.Model.Logs.DeviceOperationLog ToModel(Record record)
         {
-            var logInfo = new Contract.Model.Logs.DeviceAdminLog();
+            var logInfo = new Contract.Model.Logs.DeviceOperationLog();
 
             try
             {

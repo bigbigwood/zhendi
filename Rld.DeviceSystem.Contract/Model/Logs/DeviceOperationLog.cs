@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Rld.DeviceSystem.Contract.Model.Logs
 {
     [DataContract(Namespace = Declarations.NameSpace)]
-    public class DeviceAdminLog
+    public class DeviceOperationLog
     {
         [DataMember]
         public Int32 AdminId { get; set; }

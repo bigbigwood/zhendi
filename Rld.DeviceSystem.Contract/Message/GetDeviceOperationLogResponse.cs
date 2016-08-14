@@ -7,14 +7,14 @@ using Rld.DeviceSystem.Contract.Model.Logs;
 namespace Rld.DeviceSystem.Contract.Message
 {
     [DataContract(Namespace = Declarations.NameSpace)]
-    public class GetDeviceAdminLogResponse : ResponseBase
+    public class GetDeviceOperationLogResponse : ResponseBase
     {
         [DataMember]
-        public IList<DeviceAdminLog> Logs { get; set; }
+        public IList<DeviceOperationLog> Logs { get; set; }
 
-        public GetDeviceAdminLogResponse()
+        public GetDeviceOperationLogResponse()
         {
-            Logs = new List<DeviceAdminLog>();
+            Logs = new List<DeviceOperationLog>();
         }
     }
 }
