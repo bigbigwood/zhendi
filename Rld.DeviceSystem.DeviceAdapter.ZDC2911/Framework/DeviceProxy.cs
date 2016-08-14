@@ -135,6 +135,13 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework
                 var response = new GetDeviceOperationLogOp().Process(request);
                 return (DataContractSerializationHelper.Serialize(response));
             }
+            else if (message.Contains("GetDoorStateRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<GetDoorStateRequest>(message);
+                var response = new GetDoorStateOp().Process(request);
+                return (DataContractSerializationHelper.Serialize(response));
+            }
+            
 
             return string.Empty;
         }
