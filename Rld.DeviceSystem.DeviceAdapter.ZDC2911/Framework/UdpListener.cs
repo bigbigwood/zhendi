@@ -64,13 +64,13 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework
         {
             Record record = e.record;
             var logInfo = DeviceAccessLogMapper.ToModel(record);
-            var deviceAccessEvent = new DeviceTrafficEvent() { DeviceAccessLog = logInfo };
+            var deviceAccessEvent = new DeviceTrafficEvent() { DeviceTrafficLog = logInfo };
             var message = DataContractSerializationHelper.Serialize(deviceAccessEvent);
             Log.Info(message);
 
-            var logInfo2 = DeviceAdminLogMapper.ToModel(record);
-            var message2 = DataContractSerializationHelper.Serialize(logInfo);
-            Log.Info(message2);
+            //var logInfo2 = DeviceAdminLogMapper.ToModel(record);
+            //var message2 = DataContractSerializationHelper.Serialize(logInfo2);
+            //Log.Info(message2);
 
             ReportMessage(message);
         }

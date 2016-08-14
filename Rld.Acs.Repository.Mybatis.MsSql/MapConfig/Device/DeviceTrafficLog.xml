@@ -9,6 +9,7 @@
     <resultMap id="DeviceTrafficLogResult" class="Rld.Acs.Model.DeviceTrafficLog">
       <result property="TrafficID" column="TrafficID"/>
       <result property="DeviceID" column="DeviceID"/>
+      <result property="DeviceUserID" column="DeviceUserID"/>
       <result property="DeviceType" column="DeviceType"/>
       <result property="DeviceSN" column="DeviceSN"/>
       <result property="RecordType" column="RecordType"/>
@@ -30,6 +31,7 @@
     <insert id="DeviceTrafficLog.Insert" parameterClass="DeviceTrafficLog">
       INSERT INTO [DEVICE_TRAFFIC_LOG] (
       [DeviceID]
+      , [DeviceUserID]
       , [DeviceType]
       , [DeviceSN]
       , [RecordType]
@@ -39,6 +41,7 @@
       , [Remark]
       ) VALUES (
       #DeviceID#
+      , #DeviceUserID#
       , #DeviceType#
       , #DeviceSN#
       , #RecordType#
@@ -55,6 +58,7 @@
     <update id="DeviceTrafficLog.Update" parameterClass="DeviceTrafficLog">
       UPDATE [DEVICE_TRAFFIC_LOG] SET
       [DeviceID] = #DeviceID#
+      , [DeviceUserID] = #DeviceUserID#
       , [DeviceType] = #DeviceType#
       , [DeviceSN] = #DeviceSN#
       , [RecordType] = #RecordType#

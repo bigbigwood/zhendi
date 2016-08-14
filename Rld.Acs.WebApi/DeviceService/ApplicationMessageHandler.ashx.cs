@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using log4net;
+using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
 
 namespace Rld.Acs.WebApi.DeviceService
@@ -9,7 +10,7 @@ namespace Rld.Acs.WebApi.DeviceService
     /// <summary>
     /// Summary description for ApplicationProcessor
     /// </summary>
-    public class ApplicationProcessor : IHttpHandler
+    public class ApplicationMessageHandler : IHttpHandler
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public void ProcessRequest(HttpContext context)
@@ -21,7 +22,7 @@ namespace Rld.Acs.WebApi.DeviceService
                 if (client != null)
                 {
                     client.Send(GetRequestBody(context));
-                    context.Response.Write("Ok");
+                    context.Response.Write(ConstStrings.Ok);
                 }
                 else
                 {
@@ -42,14 +43,6 @@ namespace Rld.Acs.WebApi.DeviceService
                 requestBody = reader.ReadToEnd();
             }
             return requestBody;
-        }
-
-        public Int32 GetDeviceId(HttpContext context)
-        {
-            Int32 deviceId;
-            if (Int32.TryParse(context.Request.Params["DeviceId"], out deviceId))
-                return deviceId;
-            return 0;
         }
 
 

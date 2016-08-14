@@ -451,6 +451,7 @@ go
 create table DEVICE_TRAFFIC_LOG (
    TrafficID            int                  identity(1,1),
    DeviceID             int                  not null,
+   DeviceUserID         int                  not null,
    DeviceType           int                  not null,
    DeviceSN             nvarchar(100)        not null,
    RecordType           nvarchar(1024)       null,

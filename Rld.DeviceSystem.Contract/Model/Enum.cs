@@ -70,6 +70,7 @@ namespace Rld.DeviceSystem.Contract.Model
         FingerPrint = 3,
     }
 
+    [Flags]
     [DataContract(Namespace = Declarations.NameSpace)]
     public enum CheckInOptions
     {
@@ -78,9 +79,9 @@ namespace Rld.DeviceSystem.Contract.Model
         [EnumMember]
         Card = 2,
         [EnumMember]
-        FingerPrint = 3,
+        FingerPrint = 4,
         [EnumMember]
-        Wiegand = 4,
+        Wiegand = 8,
     }
 
     [DataContract(Namespace = Declarations.NameSpace)]

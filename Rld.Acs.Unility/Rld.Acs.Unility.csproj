@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstStrings.cs" />
     <Compile Include="Extension\ConvertorExtension.cs" />
     <Compile Include="Extension\EnumerableExtension.cs" />
     <Compile Include="FilePathHelper.cs" />

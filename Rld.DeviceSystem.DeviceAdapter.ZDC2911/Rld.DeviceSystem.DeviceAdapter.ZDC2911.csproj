@@ -119,7 +119,6 @@
     <Compile Include="Operations\UserOperation\CreateUserOp.cs" />
     <Compile Include="Operations\UserOperation\UpdateUserOp.cs" />
     <Compile Include="Mapper\Device\DoorInfoMapper.cs" />
-    <Compile Include="Mapper\Time\TimeService.cs" />
     <Compile Include="Operations\UserOperation\GetUserOp.cs" />
     <Compile Include="Framework\WebSocketClient.cs" />
   </ItemGroup>

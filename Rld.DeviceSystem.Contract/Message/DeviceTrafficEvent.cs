@@ -12,6 +12,6 @@ namespace Rld.DeviceSystem.Contract.Message
     public class DeviceTrafficEvent
     {
         [DataMember]
-        public DeviceTrafficLog DeviceAccessLog { get; set; }
+        public DeviceTrafficLog DeviceTrafficLog { get; set; }
     }
 }

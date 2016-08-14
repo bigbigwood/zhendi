@@ -171,12 +171,13 @@
     <Compile Include="Controllers\Time\TimeGroupsController.cs" />
     <Compile Include="Controllers\Time\TimeSegmentsController.cs" />
     <Compile Include="Controllers\User\UsersController.cs" />
-    <Compile Include="DeviceService\ApplicationMessageProcessor.ashx.cs">
-      <DependentUpon>ApplicationMessageProcessor.ashx</DependentUpon>
+    <Compile Include="DeviceService\ApplicationMessageHandler.ashx.cs">
+      <DependentUpon>ApplicationMessageHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="DeviceService\DeviceMessageHandler.ashx.cs">
       <DependentUpon>DeviceMessageHandler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="DeviceService\DeviceMessageProcessor.cs" />
     <Compile Include="DeviceService\DeviceWebSocketHandler.cs" />
     <Compile Include="DeviceService\GetClients.ashx.cs">
       <DependentUpon>GetClients.ashx</DependentUpon>
@@ -184,6 +185,7 @@
     <Compile Include="DeviceService\WebSocketClientManager.cs" />
     <Compile Include="Framework\ActionWarpper.cs" />
     <Compile Include="Framework\HttpRequestMessageExtension.cs" />
+    <Compile Include="Framework\PersistenceOperationHelper.cs" />
     <Compile Include="Framework\SysOperatorExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -221,7 +223,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="DeviceService\ApplicationMessageProcessor.ashx" />
+    <Content Include="DeviceService\ApplicationMessageHandler.ashx" />
     <Content Include="DeviceService\DeviceMessageHandler.ashx" />
     <Content Include="DeviceService\GetClients.ashx" />
     <None Include="Web.Debug.config">
@@ -248,6 +250,10 @@
     <ProjectReference Include="..\Rld.Acs.Unility\Rld.Acs.Unility.csproj">
       <Project>{56cd6cfe-8104-4b3f-997c-d84e6788f259}</Project>
       <Name>Rld.Acs.Unility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.DeviceSystem.Contract\Rld.DeviceSystem.Contract.csproj">
+      <Project>{0c2b88a5-1828-4a90-b8be-66f710e17699}</Project>
+      <Name>Rld.DeviceSystem.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

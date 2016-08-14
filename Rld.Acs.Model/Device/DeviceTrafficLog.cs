@@ -8,6 +8,7 @@ namespace Rld.Acs.Model
     {
         public virtual Int32 TrafficID { get; set; }
         public virtual Int32 DeviceID { get; set; }
+        public virtual Int32 DeviceUserID { get; set; }
         public virtual Int32 DeviceType { get; set; }
         public virtual String DeviceSN { get; set; }
         public virtual String RecordType { get; set; }
