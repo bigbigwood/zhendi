@@ -177,6 +177,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework
         {
             DeviceConnection.Close();
             Log.InfoFormat("Close connection for device #{0} successfully", Device.DN);
+            DeviceConnection = null;
+            Device = null;
         }
     }
 }

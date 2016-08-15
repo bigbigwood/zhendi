@@ -12,12 +12,14 @@ namespace Rld.Acs.DeviceSystem.Framework
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private String _response;
+        private Int32 _websocketClientId;
         private CancellationTokenSource blockToken;
         public String Token { get; private set; }
-        public WebSocketOperation()
+        public WebSocketOperation(int websocketClientId)
         {
             blockToken = new CancellationTokenSource();
             Token = Guid.NewGuid().ToString();
+            _websocketClientId = websocketClientId;
         }
 
         public string Execute(string request)
@@ -25,7 +27,7 @@ namespace Rld.Acs.DeviceSystem.Framework
             var task1 = new Task<string>(() =>
             {
                 OperationManager.GetInstance().AddOperation(Token, this);
-                WebSocketClientManager.GetInstance().GetClientById(1).Send(request);
+                WebSocketClientManager.GetInstance().GetClientById(_websocketClientId).Send(request);
                 Log.InfoFormat("request {0}", request);
 
                 while (!blockToken.IsCancellationRequested)

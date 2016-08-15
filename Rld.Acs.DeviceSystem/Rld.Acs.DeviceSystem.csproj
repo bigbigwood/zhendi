@@ -39,8 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.WebSockets">
@@ -72,6 +73,10 @@
     <Content Include="DeviceService.svc" />
     <Content Include="packages.config" />
     <Content Include="DeviceMessageHandler.ashx" />
+    <Content Include="SqlMap.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="providers.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -90,6 +95,7 @@
     <Compile Include="DeviceService.svc.cs">
       <DependentUpon>DeviceService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Framework\Extension.cs" />
     <Compile Include="Framework\Initializer.cs" />
     <Compile Include="Framework\WebSocketOperation.cs" />
     <Compile Include="IDeviceService.cs" />
@@ -98,6 +104,7 @@
     <Compile Include="Message\SyncDBUser.cs" />
     <Compile Include="Message\SyncDeviceUser.cs" />
     <Compile Include="Service\DeviceMessageProcessor.cs" />
+    <Compile Include="Service\UserOperation.cs" />
     <Compile Include="Websocket\DeviceWebSocketHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

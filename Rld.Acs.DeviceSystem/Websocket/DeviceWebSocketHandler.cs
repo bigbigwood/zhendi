@@ -60,9 +60,17 @@ namespace Rld.Acs.DeviceSystem.Websocket
 
         public string ParseToken(string message)
         {
-            var match = TokenRegex.Match(message);
-            string result = match.ToString();
-            var token = result.Substring(7, result.Length - 15);
+            string token = string.Empty;
+            try
+            {
+                var match = TokenRegex.Match(message);
+                string result = match.ToString();
+                token = result.Substring(7, result.Length - 15);
+            }
+            catch (Exception ex)
+            {
+                Log.Warn(ex);
+            }
             return token;
         }
     }

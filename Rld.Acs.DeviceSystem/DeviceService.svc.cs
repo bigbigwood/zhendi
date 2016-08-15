@@ -7,7 +7,10 @@ using System.Text;
 using log4net;
 using Rld.Acs.DeviceSystem.Framework;
 using Rld.Acs.DeviceSystem.Message;
+using Rld.Acs.DeviceSystem.Service;
 using Rld.Acs.Model;
+using Rld.Acs.Repository;
+using Rld.Acs.Repository.Interfaces;
 using Rld.DeviceSystem.Contract.Model;
 
 namespace Rld.Acs.DeviceSystem
@@ -16,17 +19,17 @@ namespace Rld.Acs.DeviceSystem
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public  SyncDeviceUserResponse SyncDeviceUser(SyncDeviceUserRequest request)
+        public SyncDeviceUserResponse SyncDeviceUser(SyncDeviceUserRequest request)
         {
+            PersistenceOperation.Process(() =>
+            {
+                var repo = RepositoryManager.GetRepository<IUserRepository>();
+                var userInfo = repo.GetByKey(3);
 
+                new UserOperation().UpdateDeviceUser(userInfo);
+            });
 
-            var request2 = "request from helloworld";
-            var operation = new WebSocketOperation();
-            var response = operation.Execute(request2);
-
-            Log.Info("return helloworld");
-
-            throw new NotImplementedException();
+            return new SyncDeviceUserResponse() { ResultType = ResultTypes.Ok };
         }
 
         public SyncDBUserResponse SyncDBUser(SyncDBUserRequest request)

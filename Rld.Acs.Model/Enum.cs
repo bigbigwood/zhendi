@@ -57,12 +57,22 @@ namespace Rld.Acs.Model
         Type3 = 3,
         Type4 = 4,
     }
+
     public enum AuthenticationType
     {
-        IcCard = 1,
-        Password = 2,
-        FingerPrint = 3,
-        FacePrint = 4,
+        FingerPrint1 = 0,
+        FingerPrint2 = 1,
+        FingerPrint3 = 2,
+        FingerPrint4 = 3,
+        FingerPrint5 = 4,
+        FingerPrint6 = 5,
+        FingerPrint7 = 6,
+        FingerPrint8 = 7,
+        FingerPrint9 = 8,
+        FingerPrint10 = 9,
+        Password = 10,
+        IcCard = 11,
+        //FacePrint = 12,
     }
 
     public enum DictionaryType
