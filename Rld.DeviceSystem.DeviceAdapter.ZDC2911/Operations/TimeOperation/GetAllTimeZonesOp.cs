@@ -13,7 +13,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
             var data = deviceDao.GetTimeZoneData();
             var services = TimeZoneServiceMapper.BuildServices(data);
 
-            return new GetAllTimeZonesResponse() { ResultType = ResultType.OK, Services = services };
+            return new GetAllTimeZonesResponse() { Token = request.Token, ResultType = ResultType.OK, Services = services };
         }
     }
 }

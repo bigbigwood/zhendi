@@ -14,7 +14,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.SystemOperation
             var systemData = dao.GetSystemData();
             var serviceData = SystemInfoMapper.ToModel(systemData);
 
-            return new GetSystemInfoResponse() { ResultType = ResultType.OK, SystemInfo = serviceData };
+            return new GetSystemInfoResponse() { Token = request.Token, ResultType = ResultType.OK, SystemInfo = serviceData };
         }
     }
 }

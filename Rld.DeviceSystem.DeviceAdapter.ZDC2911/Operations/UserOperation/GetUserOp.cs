@@ -17,7 +17,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation
             var userData = dao.GetUser(request.UserId);
             var userInfo = UserInfoMapper.ToModel(userData);
 
-            return new GetUserInfoResponse() {ResultType = ResultType.OK, UserInfo = userInfo};
+            return new GetUserInfoResponse() {Token = request.Token, ResultType = ResultType.OK, UserInfo = userInfo};
         }
     }
 }

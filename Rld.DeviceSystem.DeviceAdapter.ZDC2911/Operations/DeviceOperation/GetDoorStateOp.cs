@@ -10,7 +10,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.DeviceOperation
             var dao = new DoorInfoDao();
             var doorStates = dao.GetDoorStates();
 
-            return new GetDoorStateResponse() { ResultType = ResultType.OK, DoorStateInfos = doorStates };
+            return new GetDoorStateResponse() { Token = request.Token, ResultType = ResultType.OK, DoorStateInfos = doorStates };
         }
     }
 }

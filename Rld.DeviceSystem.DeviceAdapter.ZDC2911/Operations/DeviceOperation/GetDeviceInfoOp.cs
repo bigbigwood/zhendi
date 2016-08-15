@@ -12,7 +12,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.DeviceOperation
             var deviceData = deviceDao.GetDeviceData();
             var serviceData = DeviceInfoMapper.ToModel(deviceData);
 
-            return new GetDeviceInfoResponse() { ResultType = ResultType.OK, Service = serviceData };
+            return new GetDeviceInfoResponse() { Token = request.Token, ResultType = ResultType.OK, Service = serviceData };
         }
     }
 }

@@ -16,38 +16,49 @@ namespace Rld.Acs.WebApi.Framework
 
         public static HttpResponseMessage Process<T>(T t, Func<HttpResponseMessage> fun, ApiController controller)
         {
+            Log.Info("a");
             var sw = Stopwatch.StartNew();
 
-            using (var conn = RepositoryManager.GetNewConnection())
-            using (var transaction = conn.BeginTransaction())
+            try
             {
-                try
+                using (var conn = RepositoryManager.GetNewConnection())
+                using (var transaction = conn.BeginTransaction())
                 {
-                    var result = fun();
-
-                    Log.Info("Commit transaction!");
-                    transaction.Commit();
-
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("Unhandled error", ex);
-
-                    if (transaction != null)
+                    try
                     {
-                        Log.Warn("Rollback transaction!");
-                        transaction.Rollback();
+                        Log.Info("b");
+                        var result = fun();
+                        Log.Info("c");
+                        Log.Info("Commit transaction!");
+                        transaction.Commit();
+                        Log.Info("d");
+                        return result;
                     }
+                    catch (Exception ex)
+                    {
+                        Log.Error("Unhandled error", ex);
 
-                    return controller.Request.CreateErrorResponse(System.Net.HttpStatusCode.InternalServerError, "Internal Error", ex);
-                }
-                finally
-                {
-                    Log.InfoFormat("Finish processing request, cost {0} milliseconds.",  sw.ElapsedMilliseconds);
-                    Log.InfoFormat("Http Method: {0}, Request Uri: {1}.", controller.Request.Method, controller.Request.RequestUri);
+                        if (transaction != null)
+                        {
+                            Log.Warn("Rollback transaction!");
+                            transaction.Rollback();
+                        }
+
+                        return controller.Request.CreateErrorResponse(System.Net.HttpStatusCode.InternalServerError, "Internal Error", ex);
+                    }
+                    finally
+                    {
+                        Log.InfoFormat("Finish processing request, cost {0} milliseconds.", sw.ElapsedMilliseconds);
+                        Log.InfoFormat("Http Method: {0}, Request Uri: {1}.", controller.Request.Method, controller.Request.RequestUri);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                throw;
+            }
+
         }
     }
 }

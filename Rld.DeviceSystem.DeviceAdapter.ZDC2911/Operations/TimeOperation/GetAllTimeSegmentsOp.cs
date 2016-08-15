@@ -13,7 +13,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
             var data = deviceDao.GetTimeSegmentData();
             var services = TimeSegmentMapper.BuildServices(data);
 
-            return new GetAllTimeSegmentsResponse() { ResultType = ResultType.OK, Services = services };
+            return new GetAllTimeSegmentsResponse() { Token = request.Token, ResultType = ResultType.OK, Services = services };
         }
     }
 }

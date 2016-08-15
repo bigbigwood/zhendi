@@ -13,7 +13,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
             var data = deviceDao.GetTimeGroupData();
             var services = TimeGroupMapper.BuildServices(data);
 
-            return new GetAllTimeGroupsResponse() { ResultType = ResultType.OK, Services = services };
+            return new GetAllTimeGroupsResponse() { Token = request.Token, ResultType = ResultType.OK, Services = services };
         }
     }
 }

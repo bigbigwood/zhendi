@@ -22,7 +22,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.LogOperation
 
             var serviceData = rawData.Select(DeviceAccessLogMapper.ToModel).ToList();
 
-            return new GetDeviceTrafficLogResponse() { ResultType = ResultType.OK, Logs = serviceData};
+            return new GetDeviceTrafficLogResponse() { Token = request.Token, ResultType = ResultType.OK, Logs = serviceData };
         }
     }
 }

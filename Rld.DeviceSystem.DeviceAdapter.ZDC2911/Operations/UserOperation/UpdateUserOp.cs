@@ -31,7 +31,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation
             UserInfoMapper.UpdateSystemInfo(ref deviceUser, request.UserInfo);
             bool result = userDao.SaveOrUpdateUser(deviceUser);
 
-            return new UpdateUserInfoResponse() { ResultType = ResultType.OK };
+            return new UpdateUserInfoResponse() { Token = request.Token, ResultType = ResultType.OK };
         }
     }
 }

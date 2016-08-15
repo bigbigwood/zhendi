@@ -15,6 +15,12 @@ namespace Rld.DeviceSystem.Contract.Message
         [DataMember(Order = 900)]
         public ResultType ResultType { get; set; }
 
+        /// <summary>
+        /// Help to identify the operation in the socket. Must be the same as the OperationGuid of the request
+        /// </summary>
+        [DataMember(Order = 901)]
+        public String Token { get; set; }
+
         static IEnumerable<Type> KnownTypes()
         {
             IList<Type> typesOfResource =

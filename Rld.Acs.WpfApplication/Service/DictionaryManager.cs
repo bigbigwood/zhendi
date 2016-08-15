@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Rld.Acs.WpfApplication
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ISysDictionaryRepository _sysDictionaryRepo = NinjectBinder.GetRepository<ISysDictionaryRepository>();
+        private IDictionary<int, List<SysDictionary>> dictionary = new Dictionary<int, List<SysDictionary>>();
 
         private static DictionaryManager _instance = null;
 
@@ -37,7 +39,14 @@ namespace Rld.Acs.WpfApplication
 
         public List<SysDictionary> GetDictionaryItemsByTypeId(Int32 typeId)
         {
-            return _sysDictionaryRepo.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled }, { "TypeID", typeId } }).ToList();
+            List<SysDictionary> dic = null;
+            if (!dictionary.TryGetValue(typeId, out dic))
+            {
+                dic = _sysDictionaryRepo.Query(new Hashtable {{"Status", (int) GeneralStatus.Enabled}, {"TypeID", typeId}}).ToList();
+                dictionary.Add(typeId, dic);
+            }
+
+            return dic;
         }
     }
 }

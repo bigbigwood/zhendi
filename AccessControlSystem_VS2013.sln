@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DeviceSystem", "DeviceSyste
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.DeviceSystem.DeviceAdapter.ZDC2911.Host", "Rld.DeviceSystem.DeviceAdapter.ZDC2911.Host\Rld.DeviceSystem.DeviceAdapter.ZDC2911.Host.csproj", "{6DA71BD8-4163-4271-BF5B-E44BB9DA5475}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.DeviceSystem", "Rld.Acs.DeviceSystem\Rld.Acs.DeviceSystem.csproj", "{265F3AA8-972D-4722-B182-8D0F593B05F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{6DA71BD8-4163-4271-BF5B-E44BB9DA5475}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DA71BD8-4163-4271-BF5B-E44BB9DA5475}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DA71BD8-4163-4271-BF5B-E44BB9DA5475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265F3AA8-972D-4722-B182-8D0F593B05F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265F3AA8-972D-4722-B182-8D0F593B05F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265F3AA8-972D-4722-B182-8D0F593B05F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265F3AA8-972D-4722-B182-8D0F593B05F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

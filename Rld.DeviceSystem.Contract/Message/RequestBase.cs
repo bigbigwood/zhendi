@@ -12,6 +12,9 @@ namespace Rld.DeviceSystem.Contract.Message
     [KnownType("KnownTypes")]
     public class RequestBase
     {
+        [DataMember]
+        public String Token { get; set; }
+
         static IEnumerable<Type> KnownTypes()
         {
             IList<Type> typesOfResource =

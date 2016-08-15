@@ -21,7 +21,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.LogOperation
 
             var serviceData = rawData.Select(DeviceAdminLogMapper.ToModel).ToList();
 
-            return new GetDeviceOperationLogResponse() { ResultType = ResultType.OK, Logs = serviceData };
+            return new GetDeviceOperationLogResponse() { Token = request.Token, ResultType = ResultType.OK, Logs = serviceData };
         }
     }
 }

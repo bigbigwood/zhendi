@@ -24,7 +24,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
 
             bool result = dao.UpdateTimeGroupData(data);
 
-            return new BatchUpdateTimeGroupsResponse() { ResultType = ResultType.OK };
+            return new BatchUpdateTimeGroupsResponse() { Token = request.Token, ResultType = ResultType.OK };
         }
     }
 }

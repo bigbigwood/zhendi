@@ -24,7 +24,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.TimeOperation
 
             bool result = dao.UpdateTimeZoneData(data);
 
-            return new BatchUpdateTimeZonesResponse() { ResultType = ResultType.OK };
+            return new BatchUpdateTimeZonesResponse() { Token = request.Token, ResultType = ResultType.OK };
         }
     }
 }

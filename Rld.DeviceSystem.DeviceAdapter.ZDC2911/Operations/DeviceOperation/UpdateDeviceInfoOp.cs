@@ -17,7 +17,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.DeviceOperation
 
             dao.UpdateDevice(data);
 
-            return new UpdateDeviceInfoResponse() { ResultType = ResultType.OK};
+            return new UpdateDeviceInfoResponse() { Token = request.Token, ResultType = ResultType.OK };
         }
     }
 }

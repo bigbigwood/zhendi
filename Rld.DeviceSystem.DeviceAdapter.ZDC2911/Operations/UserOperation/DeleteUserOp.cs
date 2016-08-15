@@ -16,7 +16,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation
             var userDao = new UserInfoDao();
             bool result = userDao.DeleteUser(request.UserId);
 
-            return new DeleteUserInfoResponse() { ResultType = ResultType.OK };
+            return new DeleteUserInfoResponse() { Token = request.Token, ResultType = ResultType.OK };
         }
     }
 }
