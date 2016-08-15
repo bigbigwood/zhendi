@@ -21,15 +21,17 @@ namespace Rld.Acs.DeviceSystem
 
         public SyncDeviceUserResponse SyncDeviceUser(SyncDeviceUserRequest request)
         {
-            PersistenceOperation.Process(() =>
+            return PersistenceOperation.Process(request, () =>
             {
                 var repo = RepositoryManager.GetRepository<IUserRepository>();
-                var userInfo = repo.GetByKey(3);
+                request.DbUsers.ForEach(user =>
+                {
+                    var userInfo = repo.GetByKey(user.UserID);
+                    new UserOperation().UpdateDeviceUser(userInfo);
+                });
 
-                new UserOperation().UpdateDeviceUser(userInfo);
+                return new SyncDeviceUserResponse() { ResultType = ResultTypes.Ok };
             });
-
-            return new SyncDeviceUserResponse() { ResultType = ResultTypes.Ok };
         }
 
         public SyncDBUserResponse SyncDBUser(SyncDBUserRequest request)

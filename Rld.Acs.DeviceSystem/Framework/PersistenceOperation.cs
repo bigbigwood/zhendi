@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using log4net;
+using Rld.Acs.DeviceSystem.Message;
 using Rld.Acs.Repository;
+using Rld.Acs.Repository.Framework;
 
 namespace Rld.Acs.DeviceSystem.Framework
 {
@@ -9,34 +11,40 @@ namespace Rld.Acs.DeviceSystem.Framework
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static void Process(Action fun)
+        public static TResult Process<T, TResult>(T tParameters, Func<TResult> fun)
+            where TResult : ResponseBase, new()
         {
             var sw = Stopwatch.StartNew();
-
-            using (var conn = RepositoryManager.GetNewConnection())
-            using (var transaction = conn.BeginTransaction())
+            IPersistanceTransaction transaction = null;
+            try
             {
-                try
+                using (var conn = RepositoryManager.GetNewConnection())
                 {
-                    fun();
+                    transaction = conn.BeginTransaction();
+
+                    var result = fun();
 
                     Log.Info("Commit transaction!");
                     transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("Unhandled error", ex);
 
-                    if (transaction != null)
-                    {
-                        Log.Warn("Rollback transaction!");
-                        transaction.Rollback();
-                    }
+                    return result;
                 }
-                finally
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Unhandled error", ex);
+
+                if (transaction != null)
                 {
-                    Log.InfoFormat("Finish processing request, cost {0} milliseconds.", sw.ElapsedMilliseconds);
+                    Log.Warn("Rollback transaction!");
+                    transaction.Rollback();
                 }
+
+                return new TResult() { ResultType = ResultTypes.UnknownError, Messages = new[] { "Internal error" } };
+            }
+            finally
+            {
+                Log.InfoFormat("Finish processing request, cost {0} milliseconds.", sw.ElapsedMilliseconds);
             }
         }
     }

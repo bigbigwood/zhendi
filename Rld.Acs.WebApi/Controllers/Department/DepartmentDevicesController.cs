@@ -21,14 +21,14 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
                 var departmentDeviceInfos = repo.Query(conditions);
 
                 return Request.CreateResponse(HttpStatusCode.OK, departmentDeviceInfos.ToList());
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage GetById(int id)

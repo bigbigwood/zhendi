@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using Rld.Acs.Repository.Framework;
 
 namespace Rld.Acs.WebApi.Framework
 {
@@ -16,47 +17,38 @@ namespace Rld.Acs.WebApi.Framework
 
         public static HttpResponseMessage Process<T>(T t, Func<HttpResponseMessage> fun, ApiController controller)
         {
-            Log.Info("a");
+            Log.InfoFormat("Http Method: {0}, Request Uri: {1}.", controller.Request.Method, controller.Request.RequestUri);
             var sw = Stopwatch.StartNew();
+            IPersistanceTransaction transaction = null;
 
             try
             {
                 using (var conn = RepositoryManager.GetNewConnection())
-                using (var transaction = conn.BeginTransaction())
                 {
-                    try
-                    {
-                        Log.Info("b");
-                        var result = fun();
-                        Log.Info("c");
-                        Log.Info("Commit transaction!");
-                        transaction.Commit();
-                        Log.Info("d");
-                        return result;
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error("Unhandled error", ex);
+                    transaction = conn.BeginTransaction();
 
-                        if (transaction != null)
-                        {
-                            Log.Warn("Rollback transaction!");
-                            transaction.Rollback();
-                        }
+                    var result = fun();
 
-                        return controller.Request.CreateErrorResponse(System.Net.HttpStatusCode.InternalServerError, "Internal Error", ex);
-                    }
-                    finally
-                    {
-                        Log.InfoFormat("Finish processing request, cost {0} milliseconds.", sw.ElapsedMilliseconds);
-                        Log.InfoFormat("Http Method: {0}, Request Uri: {1}.", controller.Request.Method, controller.Request.RequestUri);
-                    }
+                    Log.Info("Commit transaction!");
+                    transaction.Commit();
+                    return result;
                 }
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
-                throw;
+                Log.Error("Unhandled error", ex);
+
+                if (transaction != null)
+                {
+                    Log.Warn("Rollback transaction!");
+                    transaction.Rollback();
+                }
+
+                return controller.Request.CreateErrorResponse(System.Net.HttpStatusCode.InternalServerError, "Internal Error", ex);
+            }
+            finally
+            {
+                Log.InfoFormat("Finish processing request, cost {0} milliseconds.", sw.ElapsedMilliseconds);
             }
 
         }

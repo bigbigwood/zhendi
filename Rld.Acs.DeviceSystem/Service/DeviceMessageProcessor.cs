@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Rld.Acs.DeviceSystem.Framework;
+using Rld.Acs.DeviceSystem.Message;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility.Extension;
@@ -31,10 +32,12 @@ namespace Rld.Acs.DeviceSystem.Service
             logInfo.DeviceType = 1;
             logInfo.DeviceSN = "hardcode";
 
-            PersistenceOperation.Process(() =>
+            PersistenceOperation.Process(logInfo, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
                 repo.Insert(logInfo);
+
+                return new Message.ResponseBase();
             });
         }
 

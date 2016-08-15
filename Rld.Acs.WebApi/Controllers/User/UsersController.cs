@@ -22,16 +22,11 @@ namespace Rld.Acs.WebApi.Controllers
 
         public HttpResponseMessage Get()
         {
-            Log.Info("target");
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            Log.Info("2");
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
-                Log.Info("3");
                 var repo = RepositoryManager.GetRepository<IUserRepository>();
-                Log.Info("4");
                 var users = repo.Query(conditions);
-                Log.Info("5");
                 return Request.CreateResponse(HttpStatusCode.OK, users.ToList());
                
             }), this);
