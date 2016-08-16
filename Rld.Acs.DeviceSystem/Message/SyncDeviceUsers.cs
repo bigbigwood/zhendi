@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Web;
-using Rld.DeviceSystem.Contract.Model;
+using Rld.Acs.Model;
 
 namespace Rld.Acs.DeviceSystem.Message
 {
     [MessageContract(IsWrapped = true)]
-    public class SyncDBUserRequest : RequestBase
+    public class SyncDeviceUsersRequest : RequestBase
     {
         [MessageBodyMember]
-        public List<UserInfo> DbUsers { get; set; }
+        public List<User> Users { get; set; }
+
+        [MessageBodyMember]
+        public List<DeviceController> Devices { get; set; }
     }
 
     [MessageContract(IsWrapped = true)]
-    public class SyncDBUserResponse : ResponseBase
+    public class SyncDeviceUsersResponse : ResponseBase
     {
     }
 }

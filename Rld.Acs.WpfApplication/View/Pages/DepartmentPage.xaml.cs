@@ -24,11 +24,23 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
         private void OpenDepartmentView(OpenWindowMessage msg)
         {
-            var view = new DepartmentView {DataContext = msg.DataContext};
-            view.BorderThickness = new Thickness(1);
-            view.GlowBrush = null;
-            view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
-            view.ShowDialog();
+            BaseWindow view;
+            if (msg.WindowType == "SyncDepartmentView")
+            {
+                view = new SyncDepartmentView(){ DataContext = msg.DataContext };
+                view.BorderThickness = new Thickness(1);
+                view.GlowBrush = null;
+                view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
+                view.ShowDialog();
+            }
+            else
+            {
+                view = new DepartmentView { DataContext = msg.DataContext };
+                view.BorderThickness = new Thickness(1);
+                view.GlowBrush = null;
+                view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
+                view.ShowDialog();
+            }
         }
     }
 }

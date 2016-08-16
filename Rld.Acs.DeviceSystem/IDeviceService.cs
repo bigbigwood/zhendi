@@ -15,9 +15,26 @@ namespace Rld.Acs.DeviceSystem
     public interface IDeviceService
     {
         [OperationContract]
-        SyncDeviceUserResponse SyncDeviceUser(SyncDeviceUserRequest request);
+        SyncDBUsersResponse SyncDBUsers(SyncDBUsersRequest request);
+        [OperationContract]
+        SyncDepartmentUsersResponse SyncDepartmentUsers(SyncDepartmentUsersRequest request);
+        [OperationContract]
+        SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(SyncDeviceOperationLogsRequest request);
 
         [OperationContract]
-        SyncDBUserResponse SyncDBUser(SyncDBUserRequest request);
+        SyncDeviceTrafficLogsResponse SyncDeviceTrafficLogs(SyncDeviceTrafficLogsRequest request);
+
+        [OperationContract]
+        SyncDeviceUsersResponse SyncDeviceUsers(SyncDeviceUsersRequest request);
+
+        [OperationContract]
+        SyncDoorStateLogsResponse SyncDoorStateLogs(SyncDoorStateLogsRequest request);
+        [OperationContract]
+        SyncTimeGroupsResponse SyncTimeGroups(SyncTimeGroupsRequest request);
+        [OperationContract]
+        SyncTimeSegmentsResponse SyncTimeSegments(SyncTimeSegmentsRequest request);
+
+        [OperationContract]
+        SyncTimeZonesResponse SyncTimeZones(SyncTimeZonesRequest request);
     }
 }

@@ -30,6 +30,11 @@ namespace Rld.Acs.WpfApplication.View.Windows
             Close();
         }
 
+        public virtual void ShowQuestionAndAction(NotificationMessageAction msg, string title)
+        {
+            ShowYesNo(msg.Notification, title, msg.Execute);
+        }
+
         public virtual void ShowMainWindowNotification(NotificationMessage msg)
         {
             if (!string.IsNullOrWhiteSpace(msg.Notification))

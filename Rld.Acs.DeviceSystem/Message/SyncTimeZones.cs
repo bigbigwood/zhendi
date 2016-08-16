@@ -4,21 +4,22 @@ using System.Linq;
 using System.ServiceModel;
 using System.Web;
 using Rld.Acs.Model;
+using Rld.DeviceSystem.Contract.Model;
 
 namespace Rld.Acs.DeviceSystem.Message
 {
     [MessageContract(IsWrapped = true)]
-    public class SyncDeviceUserRequest : RequestBase
+    public class SyncTimeZonesRequest : RequestBase
     {
         [MessageBodyMember]
-        public List<User> DbUsers { get; set; }
+        public List<Model.TimeZone> TimeZones { get; set; }
 
         [MessageBodyMember]
-        public List<DeviceController> DeviceControllers { get; set; }
+        public List<DeviceController> Devices { get; set; }
     }
 
     [MessageContract(IsWrapped = true)]
-    public class SyncDeviceUserResponse : ResponseBase
+    public class SyncTimeZonesResponse : ResponseBase
     {
     }
 }

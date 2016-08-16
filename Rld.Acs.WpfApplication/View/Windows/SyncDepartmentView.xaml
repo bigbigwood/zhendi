@@ -1,0 +1,154 @@
+﻿<windows:BaseWindow x:Class="Rld.Acs.WpfApplication.View.Windows.SyncDepartmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:models="clr-namespace:Rld.Acs.WpfApplication.Models"
+             xmlns:AppModels="clr-namespace:Rld.Acs.WpfApplication.Models"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:SyncDepartmentViewModel, IsDesignTimeCreatable=True}"
+             ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
+             Height="500" Width="600" Unloaded="MetroWindow_Unloaded">
+
+    <controls:MetroWindow.Resources>
+        <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,0,10,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource ResourceKey={x:Type TextBox}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
+        </Style>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource ResourceKey={x:Type ComboBox}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
+        </Style>
+        <Style TargetType="DatePicker" BasedOn="{StaticResource ResourceKey={x:Type DatePicker}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
+        </Style>
+        <Style TargetType="Button" BasedOn="{StaticResource ResourceKey={x:Type Button}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Width" Value="75"/>
+        </Style>
+        <Style TargetType="RadioButton" BasedOn="{StaticResource ResourceKey={x:Type RadioButton}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
+        </Style>
+        <Style TargetType="CheckBox" BasedOn="{StaticResource ResourceKey={x:Type CheckBox}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
+            <Setter Property="Width" Value="150" />
+        </Style>
+    </controls:MetroWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" >
+            <TextBlock Text="同步数据" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+        </DockPanel>
+        <Separator Grid.Row="1"  Background="LightGray" />
+        <Grid Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="选择设备"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="选择部门"/>
+
+            <Border Grid.Row="1" Grid.Column="1"  BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding DeviceDtos}">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
+                    <TreeView Name="lstDepartment" ItemsSource="{Binding TreeViewSource}">
+                        <TreeView.Resources>
+                            <Style x:Key="ExpandingImageStyle" TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="{DynamicResource icon_treeitem_closed}"/>
+                                <Setter Property="Width" Value="12" />
+                                <Setter Property="Height" Value="12" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="Margin" Value="0,0,3,0" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsExpanded}" Value="True">
+                                        <Setter Property="Source" Value="{DynamicResource icon_treeitem_opened}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TreeView.Resources>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectedItemChanged">
+                                <command:EventToCommand Command="{Binding SelectedTreeNodeChangedCmd}" CommandParameter="{Binding ElementName=lstDepartment,Path=SelectedValue}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate DataType="{x:Type models:TreeViewNode}" ItemsSource="{Binding Path=Children}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Style="{StaticResource ExpandingImageStyle}"/>
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+                                </StackPanel>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Border>
+                <StackPanel Grid.Column="1" Margin="2,8" VerticalAlignment="Bottom">
+                    <Button Content="选择" Command="{Binding MoveDepartmentToSelectedCmd}" Margin="3"/>
+                    <Button Content="移除" Command="{Binding RemoveSelectedDepartmentCmd}" Margin="3"/>
+                    <TextBlock/>
+                    <Button Content="选择全部" Command="{Binding SelectAllDepartmentsCmd}" Margin="3"/>
+                    <Button Content="移除全部" Command="{Binding RemoveAllSelectedDepartmentsCmd}" Margin="3"/>
+                </StackPanel>
+                <Border Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
+                    <ListBox ItemsSource="{Binding SelectedSyncDepartmentDtos}" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Border>
+            </Grid>
+
+            <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0"/>
+                <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</windows:BaseWindow>

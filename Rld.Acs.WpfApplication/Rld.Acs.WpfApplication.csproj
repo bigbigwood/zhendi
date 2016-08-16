@@ -117,11 +117,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Service\DeviceServiceProxy.cs" />
     <Compile Include="Service\SecurityServiceProxy.cs" />
     <Compile Include="Service\Validator\TimeZoneValidator.cs" />
     <Compile Include="Service\Validator\TimeGroupValidator.cs" />
     <Compile Include="Service\Validator\TimeSegmentValidator.cs" />
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
+    <Compile Include="ViewModel\Views\SyncDepartmentViewModel.cs" />
     <Compile Include="ViewModel\Views\SyncUserViewModel.cs" />
     <Compile Include="View\Pages\BasePage.cs" />
     <Compile Include="Models\AppConfiguration.cs" />
@@ -179,6 +181,9 @@
     <Compile Include="Service\UserAvatorService.cs" />
     <Compile Include="View\Windows\MoveUserView.xaml.cs">
       <DependentUpon>MoveUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\SyncDepartmentView.xaml.cs">
+      <DependentUpon>SyncDepartmentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\sysLogin.xaml.cs">
       <DependentUpon>sysLogin.xaml</DependentUpon>
@@ -295,6 +300,10 @@
     <Page Include="View\Windows\MoveUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\SyncDepartmentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Windows\sysLogin.xaml">
       <Generator>MSBuild:Compile</Generator>

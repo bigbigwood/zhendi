@@ -15,6 +15,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel
 {
@@ -142,8 +143,19 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         private void SyncDepartment()
         {
-            Messenger.Default.Send(new NotificationMessage("此功能还未实现..."), Tokens.DepartmentPage_ShowNotification);
-            return;
+            try
+            {
+                Messenger.Default.Send(new OpenWindowMessage()
+                {
+                    DataContext = new SyncDepartmentViewModel(),
+                    WindowType = "SyncDepartmentView",
+
+                }, Tokens.OpenDepartmentView);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
         private void ModifyDepartment()
         {
