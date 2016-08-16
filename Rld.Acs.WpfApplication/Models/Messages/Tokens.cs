@@ -10,6 +10,9 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string UserPage_ShowQuestion = Guid.NewGuid().ToString();
         public static readonly string UserView_ShowNotification = Guid.NewGuid().ToString();
 
+        public static readonly string CloseSyncUserView = Guid.NewGuid().ToString();
+        public static readonly string SyncUserView_ShowNotification = Guid.NewGuid().ToString();
+
         public static readonly string OpenDepartmentView = Guid.NewGuid().ToString();
         public static readonly string CloseDepartmentView = Guid.NewGuid().ToString();
         public static readonly string DepartmentPage_ShowNotification = Guid.NewGuid().ToString();

@@ -33,4 +33,13 @@ namespace Rld.Acs.WpfApplication.Models
         [Description("博士")]
         Doctor = 5,
     }
+
+    [TypeConverter(typeof(EnumDescriptionTypeConverter))]
+    public enum SyncUserType
+    {
+        [Description("同步设备数据到人员")]
+        SyncDeviceToUser = 0,
+        [Description("同步人员数据到设备")]
+        SyncUserToDevice = 1,
+    }
 }

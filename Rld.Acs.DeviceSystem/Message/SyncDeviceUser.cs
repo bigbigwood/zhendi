@@ -12,6 +12,9 @@ namespace Rld.Acs.DeviceSystem.Message
     {
         [MessageBodyMember]
         public List<User> DbUsers { get; set; }
+
+        [MessageBodyMember]
+        public List<DeviceController> DeviceControllers { get; set; }
     }
 
     [MessageContract(IsWrapped = true)]

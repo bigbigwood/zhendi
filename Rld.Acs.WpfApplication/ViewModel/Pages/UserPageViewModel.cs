@@ -183,8 +183,22 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         }
         private void SyncUser()
         {
-            Messenger.Default.Send(new NotificationMessage("此功能还未实现..."), Tokens.UserPage_ShowNotification);
-            return;
+            try
+            {
+                Messenger.Default.Send(new OpenWindowMessage()
+                {
+                    DataContext = new SyncUserViewModel(),
+                    WindowType = "SyncUserView",
+
+                }, Tokens.OpenUserView);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+
+            //Messenger.Default.Send(new NotificationMessage("此功能还未实现..."), Tokens.UserPage_ShowNotification);
+            //return;
         }
 
         private List<TreeViewNode> BuildTreeViewSource()

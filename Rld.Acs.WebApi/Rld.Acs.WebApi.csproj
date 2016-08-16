@@ -170,19 +170,8 @@
     <Compile Include="Controllers\Time\TimeZonesController.cs" />
     <Compile Include="Controllers\Time\TimeGroupsController.cs" />
     <Compile Include="Controllers\Time\TimeSegmentsController.cs" />
+    <Compile Include="Controllers\User\UserSummarysController.cs" />
     <Compile Include="Controllers\User\UsersController.cs" />
-    <Compile Include="DeviceService\ApplicationMessageHandler.ashx.cs">
-      <DependentUpon>ApplicationMessageHandler.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="DeviceService\DeviceMessageHandler.ashx.cs">
-      <DependentUpon>DeviceMessageHandler.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="DeviceService\DeviceMessageProcessor.cs" />
-    <Compile Include="DeviceService\DeviceWebSocketHandler.cs" />
-    <Compile Include="DeviceService\GetClients.ashx.cs">
-      <DependentUpon>GetClients.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="DeviceService\WebSocketClientManager.cs" />
     <Compile Include="Framework\ActionWarpper.cs" />
     <Compile Include="Framework\HttpRequestMessageExtension.cs" />
     <Compile Include="Framework\PersistenceOperationHelper.cs" />
@@ -223,9 +212,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
-    <Content Include="DeviceService\ApplicationMessageHandler.ashx" />
-    <Content Include="DeviceService\DeviceMessageHandler.ashx" />
-    <Content Include="DeviceService\GetClients.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -235,6 +221,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Rld.Acs.Model.Extension\Rld.Acs.Model.Extension.csproj">
+      <Project>{6c4efeac-6aeb-481f-8088-1eacc2eaa399}</Project>
+      <Name>Rld.Acs.Model.Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rld.Acs.Model\Rld.Acs.Model.csproj">
       <Project>{1f0d7445-70c1-48be-8ecd-68f9b3a07d83}</Project>
       <Name>Rld.Acs.Model</Name>

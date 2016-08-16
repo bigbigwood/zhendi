@@ -23,6 +23,18 @@
       <result property="UserPropertyInfo" column="UserPropertyID" select="UserProperty.GetByKey"/>
       <result property="UserDeviceRoles" column="UserID" select="UserDeviceRole.GetByUserID"/>
     </resultMap>
+
+    <resultMap id="SummaryUserResult" class="Rld.Acs.Model.User">
+      <result property="UserID" column="UserID"/>
+      <result property="DepartmentID" column="DepartmentID"/>
+      <result property="Type" column="Type"/>
+      <result property="UserCode" column="UserCode"/>
+      <result property="Name" column="Name"/>
+      <result property="Gender" column="Gender"/>
+      <result property="Phone" column="Phone"/>
+      <result property="Photo" column="Photo"/>
+      <result property="UserPropertyInfo.TechnicalTitle" column="TechnicalTitle"/>
+    </resultMap>
   </resultMaps>
 
   <statements>
@@ -30,6 +42,13 @@
       SELECT *
       FROM SYS_USER
       where UserID =  #value#
+    </select>
+
+    <select id="User.GetDepartmentSummaryUsers" parameterClass="int" resultMap="SummaryUserResult">
+      SELECT U.UserID, U.Name, U.Photo, U.Gender, U.UserCode, U.Phone, U.DepartmentID, U.Type, P.TechnicalTitle
+      FROM SYS_USER U left join SYS_USER_PROPERTY P
+      On U.UserPropertyID = P.UserPropertyID
+      where U.DepartmentID =  #value#
     </select>
 
     <insert id="User.Insert" parameterClass="User">

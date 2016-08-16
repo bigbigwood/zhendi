@@ -23,18 +23,18 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, () =>
             {
                 var repo = RepositoryManager.GetRepository<IUserRepository>();
                 var users = repo.Query(conditions);
                 return Request.CreateResponse(HttpStatusCode.OK, users.ToList());
                
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, () =>
             {
                 var repo = RepositoryManager.GetRepository<IUserRepository>();
                 var userInfo = repo.GetByKey(id);
@@ -44,12 +44,12 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, userInfo);
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage Post([FromBody]User userInfo)
         {
-            return ActionWarpper.Process(userInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(userInfo, () =>
             {
                 if (userInfo.UserAuthentications == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "UserAuthenticationInfo property cannot be null.");
@@ -76,12 +76,12 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, userInfo);
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage Put(int id, [FromBody]User userInfo)
         {
-            return ActionWarpper.Process(userInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(userInfo, () =>
             {
                 userInfo.UserID = id;
 
@@ -137,12 +137,12 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, () =>
             {
                 var userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
                 var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
@@ -160,7 +160,7 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }

@@ -122,6 +122,7 @@
     <Compile Include="Service\Validator\TimeGroupValidator.cs" />
     <Compile Include="Service\Validator\TimeSegmentValidator.cs" />
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
+    <Compile Include="ViewModel\Views\SyncUserViewModel.cs" />
     <Compile Include="View\Pages\BasePage.cs" />
     <Compile Include="Models\AppConfiguration.cs" />
     <Compile Include="Service\ApplicationManager.cs" />
@@ -203,6 +204,9 @@
     </Compile>
     <Compile Include="View\Windows\TimeZoneDashboardView.xaml.cs">
       <DependentUpon>TimeZoneDashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\SyncUserView.xaml.cs">
+      <DependentUpon>SyncUserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\UserView.xaml.cs">
       <DependentUpon>UserView.xaml</DependentUpon>
@@ -304,6 +308,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Windows\SyncUserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Windows\UserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -352,6 +360,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Rld.Acs.Model.Extension\Rld.Acs.Model.Extension.csproj">
+      <Project>{6c4efeac-6aeb-481f-8088-1eacc2eaa399}</Project>
+      <Name>Rld.Acs.Model.Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rld.Acs.Model\Rld.Acs.Model.csproj">
       <Project>{1f0d7445-70c1-48be-8ecd-68f9b3a07d83}</Project>
       <Name>Rld.Acs.Model</Name>

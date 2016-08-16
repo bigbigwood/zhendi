@@ -24,11 +24,11 @@ namespace Rld.Acs.DeviceSystem
             return PersistenceOperation.Process(request, () =>
             {
                 var repo = RepositoryManager.GetRepository<IUserRepository>();
-                request.DbUsers.ForEach(user =>
+                request.DbUsers.ForEach(user => request.DeviceControllers.ForEach(device =>
                 {
                     var userInfo = repo.GetByKey(user.UserID);
-                    new UserOperation().UpdateDeviceUser(userInfo);
-                });
+                    new UserOperation().UpdateDeviceUser(userInfo, device);
+                }));
 
                 return new SyncDeviceUserResponse() { ResultType = ResultTypes.Ok };
             });

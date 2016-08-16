@@ -18,6 +18,14 @@ namespace Rld.Acs.Unility.Extension
             Int32 target;
             return Int32.TryParse(source, out target) ? target : ConvertionFailureValue;
         }
+
+        public static Int32 ToInt32(this object source)
+        {
+            if (source == null) return ConvertionFailureValue;
+
+            var sourceString = source.ToString();
+            return sourceString.ToInt32();
+        }
     }
 }
 

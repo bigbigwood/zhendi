@@ -95,7 +95,6 @@
     <Compile Include="DeviceService.svc.cs">
       <DependentUpon>DeviceService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Framework\Extension.cs" />
     <Compile Include="Framework\Initializer.cs" />
     <Compile Include="Framework\WebSocketOperation.cs" />
     <Compile Include="IDeviceService.cs" />
@@ -114,6 +113,10 @@
     <Compile Include="Framework\WebSocketClientManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Rld.Acs.Model.Extension\Rld.Acs.Model.Extension.csproj">
+      <Project>{6c4efeac-6aeb-481f-8088-1eacc2eaa399}</Project>
+      <Name>Rld.Acs.Model.Extension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rld.Acs.Model\Rld.Acs.Model.csproj">
       <Project>{1f0d7445-70c1-48be-8ecd-68f9b3a07d83}</Project>
       <Name>Rld.Acs.Model</Name>

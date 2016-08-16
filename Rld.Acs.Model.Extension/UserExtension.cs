@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Rld.Acs.Model;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Rld.Acs.DeviceSystem.Framework
+namespace Rld.Acs.Model.Extension
 {
-    public static class Extension
+    public static class UserExtension
     {
         public static List<Int32> GetUserAccessableDeviceIds(this User user)
         {
