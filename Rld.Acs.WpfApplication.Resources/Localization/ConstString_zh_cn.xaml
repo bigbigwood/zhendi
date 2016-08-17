@@ -50,4 +50,12 @@
     <sys:String x:Key="TimeZonePage_ModifyBtn">修改时间区</sys:String>
     <sys:String x:Key="TimeZonePage_DeleteBtn">删除时间区</sys:String>
     <sys:String x:Key="TimeZoneView_Label_Name">时间区名称</sys:String>
+
+    <sys:String x:Key="DevicePage_AddBtn">增加设备</sys:String>
+    <sys:String x:Key="DevicePage_ModifyBtn">修改设备</sys:String>
+    <sys:String x:Key="DevicePage_DeleteBtn">删除设备</sys:String>
+    <sys:String x:Key="DevicePage_Label_Name">设备编号</sys:String>
+    <sys:String x:Key="DevicePage_Label_Code">设备编号</sys:String>
+    <sys:String x:Key="DevicePage_Label_Doors">关联的门</sys:String>
+    <sys:String x:Key="DevicePage_Label_HeadReadings">关联的读头</sys:String>
 </ResourceDictionary>

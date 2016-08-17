@@ -295,7 +295,8 @@ go
 create table DEVICE_CONTROLLERS (
    DeviceID             int                  identity(1,1),
    Mac                  nvarchar(100)        not null,
-   DeviceCode           nvarchar(100)        not null,
+   Name           		nvarchar(100)        not null,
+   Code           		nvarchar(100)        not null,
    SN                   nvarchar(100)        not null,
    Mode                 nvarchar(100)        null,
    CommunicationType      int                  not null,
@@ -344,6 +345,7 @@ create table DEVICE_DOORS (
    DeviceDoorID         int                  identity(1,1),
    DeviceID             int                  not null,
    Name                 nvarchar(100)        not null,
+   Code           		nvarchar(100)        not null,
    ElectricalAppliances int                  null,
    OpenType             int                  null,
    Status               int                  null,
@@ -369,6 +371,8 @@ go
 create table DEVICE_HEADREADINGS (
    DeviceHeadReadingID  int                  identity(1,1),
    DeviceID             int                  not null,
+   Name           		nvarchar(100)        not null,
+   Code           		nvarchar(100)        not null,
    Mac                  nvarchar(100)        not null,
    HeadReadingSN        nvarchar(100)        not null,
    HeadReadingType      int                  not null,

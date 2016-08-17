@@ -237,7 +237,7 @@
                         </StackPanel>
                         <!--设备管理:折叠节点-->
                         <StackPanel x:Name="dev_control" Style="{StaticResource stack_tree_open}">
-                            <MenuItem x:Name="dev2_shebei" FontSize="12" Width="180" Header="设备管理" >
+                            <MenuItem x:Name="dev2_shebei" FontSize="12" Width="180" Header="设备管理" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="DevicePage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}" Source="/Rld.Acs.WpfApplication;component/Images/minImage/设备管理.png"/>
                                 </MenuItem.Icon>

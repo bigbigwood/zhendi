@@ -72,7 +72,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SelectedSyncUserDtos = new ObservableCollection<SelectableItem>();
 
             AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
-            AuthorizationDevices.ForEach(d => DeviceDtos.Add(new ListBoxItem { ID = d.DeviceID, DisplayName = d.DeviceCode }));
+            AuthorizationDevices.ForEach(d => DeviceDtos.Add(new ListBoxItem { ID = d.DeviceID, DisplayName = d.Code }));
 
             AuthorizationDepartments = AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
             TreeViewSource = BuildTreeViewSource();

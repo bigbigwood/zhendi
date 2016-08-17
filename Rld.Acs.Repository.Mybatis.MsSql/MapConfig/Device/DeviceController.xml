@@ -9,7 +9,8 @@
     <resultMap id="DeviceControllerResult" class="Rld.Acs.Model.DeviceController">
       <result property="DeviceID" column="DeviceID"/>
       <result property="Mac" column="Mac"/>
-      <result property="DeviceCode" column="DeviceCode"/>
+      <result property="Name" column="Name"/>
+      <result property="Code" column="Code"/>
       <result property="SN" column="SN"/>
       <result property="Mode" column="Mode"/>
       <result property="CommunicationType" column="CommunicationType"/>
@@ -44,7 +45,8 @@
     <insert id="DeviceController.Insert" parameterClass="DeviceController">
       INSERT INTO [DEVICE_CONTROLLERS] (
       [Mac]
-      , [DeviceCode]
+      , [Name]
+      , [Code]
       , [SN]
       , [Mode]
       , [CommunicationType]
@@ -65,7 +67,8 @@
       , [DeviceParameterID]
       ) VALUES (
       #Mac#
-      , #DeviceCode#
+      , #Name#
+      , #Code#
       , #SN#
       , #Mode#
       , #CommunicationType#
@@ -93,7 +96,8 @@
     <update id="DeviceController.Update" parameterClass="DeviceController">
       UPDATE [DEVICE_CONTROLLERS] SET
       [Mac] = #Mac#
-      , [DeviceCode] = #DeviceCode#
+      , [Name] = #Name#
+      , [Code] = #Code#
       , [SN] = #SN#
       , [Mode] = #Mode#
       , [CommunicationType] = #CommunicationType#
@@ -130,8 +134,11 @@
         <isNotEmpty prepend="AND" property="Mac">
           Mac = #Mac#
         </isNotEmpty>
-        <isNotEmpty prepend="AND" property="DeviceCode">
-          DeviceCode = #DeviceCode#
+        <isNotEmpty prepend="AND" property="Name">
+          Name = #Name#
+        </isNotEmpty>
+          <isNotEmpty prepend="AND" property="Code">
+          Code = #Code#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="Status">
           Status = #Status#

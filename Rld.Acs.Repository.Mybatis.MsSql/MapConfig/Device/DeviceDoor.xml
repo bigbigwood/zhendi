@@ -9,6 +9,7 @@
     <resultMap id="DeviceDoorResult" class="Rld.Acs.Model.DeviceDoor">
       <result property="DeviceDoorID" column="DeviceDoorID"/>
       <result property="Name" column="Name"/>
+      <result property="Code" column="Code"/>
       <result property="ElectricalAppliances" column="ElectricalAppliances"/>
       <result property="OpenType" column="OpenType"/>
       <result property="Status" column="Status"/>
@@ -44,6 +45,7 @@
       INSERT INTO [DEVICE_DOORS] (
       [DeviceID]
       , [Name]
+      , [Code]
       , [ElectricalAppliances]
       , [OpenType]
       , [Status]
@@ -62,6 +64,7 @@
       ) VALUES (
       #DeviceID#
       , #Name#
+      , #Code#
       , #ElectricalAppliances#
       , #OpenType#
       , #Status#
@@ -87,6 +90,7 @@
       UPDATE [DEVICE_DOORS] SET
       [DeviceID] = #DeviceID#
       , [Name] = #Name#
+      , [Code] = #Code#
       , [ElectricalAppliances] = #ElectricalAppliances#
       , [OpenType] = #OpenType#
       , [Status] = #Status#
@@ -119,6 +123,9 @@
       <dynamic prepend="AND">
         <isNotEmpty prepend="AND" property="Name">
           Name = #Name#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Code">
+          Code = #Code#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="Status">
           Status = #Status#

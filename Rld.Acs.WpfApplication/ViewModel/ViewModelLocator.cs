@@ -34,6 +34,15 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            SimpleIoc.Default.Register<IDialogCoordinator, DialogCoordinator>();
+            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<SummaryPageViewModel>();
+            SimpleIoc.Default.Register<UserPageViewModel>();
+            SimpleIoc.Default.Register<DepartmentPageViewModel>();
+            SimpleIoc.Default.Register<DevicePageViewModel>();
+            SimpleIoc.Default.Register<TimeSegmentPageViewModel>();
+            SimpleIoc.Default.Register<TimeGroupPageViewModel>();
+            SimpleIoc.Default.Register<TimeZonePageViewModel>();
 
             SetupNavigation();
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -46,15 +55,6 @@ namespace Rld.Acs.WpfApplication.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-
-            SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<SummaryPageViewModel>();
-            SimpleIoc.Default.Register<UserPageViewModel>();
-            SimpleIoc.Default.Register<DepartmentPageViewModel>();
-
-            SimpleIoc.Default.Register<TimeSegmentPageViewModel>();
-            SimpleIoc.Default.Register<TimeGroupPageViewModel>();
-            SimpleIoc.Default.Register<TimeZonePageViewModel>();
         }
 
         private static void SetupNavigation()
@@ -64,11 +64,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
             navigationService.Configure("SummaryPage", new Uri("../Pages/SummaryPage.xaml", UriKind.Relative));
             navigationService.Configure("UserPage", new Uri("../Pages/UserPage.xaml", UriKind.Relative));
             navigationService.Configure("DepartmentPage", new Uri("../Pages/DepartmentPage.xaml", UriKind.Relative));
-
+            navigationService.Configure("DevicePage", new Uri("../Pages/DevicePage.xaml", UriKind.Relative));
             navigationService.Configure("TimeSegmentPage", new Uri("../Pages/TimeSegmentPage.xaml", UriKind.Relative));
             navigationService.Configure("TimeGroupPage", new Uri("../Pages/TimeGroupPage.xaml", UriKind.Relative));
             navigationService.Configure("TimeZonePage", new Uri("../Pages/TimeZonePage.xaml", UriKind.Relative));
-            SimpleIoc.Default.Register<IDialogCoordinator, DialogCoordinator>();
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
 
@@ -86,12 +85,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<UserPageViewModel>(); }
         }
-
         public DepartmentPageViewModel DepartmentPage
         {
             get { return ServiceLocator.Current.GetInstance<DepartmentPageViewModel>(); }
         }
-
+        public DevicePageViewModel DevicePage
+        {
+            get { return ServiceLocator.Current.GetInstance<DevicePageViewModel>(); }
+        }
         public TimeSegmentPageViewModel TimeSegmentPage
         {
             get { return ServiceLocator.Current.GetInstance<TimeSegmentPageViewModel>(); }

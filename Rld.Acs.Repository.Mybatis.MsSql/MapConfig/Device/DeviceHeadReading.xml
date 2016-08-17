@@ -8,6 +8,8 @@
   <resultMaps>
     <resultMap id="DeviceHeadReadingResult" class="Rld.Acs.Model.DeviceHeadReading">
       <result property="DeviceHeadReadingID" column="DeviceHeadReadingID"/>
+      <result property="Name" column="Name"/>
+      <result property="Code" column="Code"/>
       <result property="Mac" column="Mac"/>
       <result property="HeadReadingSN" column="HeadReadingSN"/>
       <result property="HeadReadingType" column="HeadReadingType"/>
@@ -32,6 +34,8 @@
     <insert id="DeviceHeadReading.Insert" parameterClass="DeviceHeadReading">
       INSERT INTO [DEVICE_HEADREADINGS] (
       [DeviceID]
+      , [Name]
+      , [Code]
       , [Mac]
       , [HeadReadingSN]
       , [HeadReadingType]
@@ -39,6 +43,8 @@
       , [Status]
       ) VALUES (
       #DeviceID#
+      , #Name#
+      , #Code#
       , #Mac#
       , #HeadReadingSN#
       , #HeadReadingType#
@@ -53,6 +59,8 @@
     <update id="DeviceHeadReading.Update" parameterClass="DeviceHeadReading">
       UPDATE [DEVICE_HEADREADINGS] SET
       [DeviceID] = #DeviceID#
+      , [Name] = #Name#
+      , [Code] = #Code#
       , [Mac] = #Mac#
       , [HeadReadingSN] = #HeadReadingSN#
       , [HeadReadingType] = #HeadReadingType#
@@ -75,6 +83,12 @@
       <dynamic prepend="AND">
         <isNotEmpty prepend="AND" property="Status">
           Status = #Status#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Name">
+          Name = #Name#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Code">
+          Code = #Code#
         </isNotEmpty>
       </dynamic>
     </select>

@@ -9,7 +9,6 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string UserPage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string UserPage_ShowQuestion = Guid.NewGuid().ToString();
         public static readonly string UserView_ShowNotification = Guid.NewGuid().ToString();
-
         public static readonly string CloseSyncUserView = Guid.NewGuid().ToString();
         public static readonly string SyncUserView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string SyncUserView_ShowQuestion = Guid.NewGuid().ToString();
@@ -19,7 +18,6 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string DepartmentPage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DepartmentPage_ShowQuestion = Guid.NewGuid().ToString();
         public static readonly string DepartmentView_ShowNotification = Guid.NewGuid().ToString();
-
         public static readonly string CloseSyncDepartmentView = Guid.NewGuid().ToString();
         public static readonly string SyncDepartmentView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string SyncDepartmentView_ShowQuestion = Guid.NewGuid().ToString();
@@ -43,6 +41,12 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string TimeZonePage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string TimeZonePage_ShowQuestion = Guid.NewGuid().ToString();
         public static readonly string TimeZoneView_ShowNotification = Guid.NewGuid().ToString();
+
+        public static readonly string OpenDeviceView = Guid.NewGuid().ToString();
+        public static readonly string CloseDeviceView = Guid.NewGuid().ToString();
+        public static readonly string DevicePage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string DevicePage_ShowQuestion = Guid.NewGuid().ToString();
+        public static readonly string DeviceView_ShowNotification = Guid.NewGuid().ToString();
 
     }
 }

@@ -9,6 +9,7 @@ namespace Rld.Acs.Model
         public virtual Int32 DeviceDoorID { get; set; }
         public virtual Int32 DeviceID { get; set; }
         public virtual String Name { get; set; }
+        public virtual String Code { get; set; }
         public virtual Int32? ElectricalAppliances { get; set; }
         public virtual Int32? OpenType { get; set; }
         public virtual Int32? Status { get; set; }

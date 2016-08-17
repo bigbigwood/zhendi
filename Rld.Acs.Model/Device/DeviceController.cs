@@ -8,7 +8,8 @@ namespace Rld.Acs.Model
     {
         public virtual Int32 DeviceID { get; set; }
         public virtual String Mac { get; set; }
-        public virtual String DeviceCode { get; set; }
+        public virtual String Name { get; set; }
+        public virtual String Code { get; set; }
         public virtual String SN { get; set; }
         public virtual String Mode { get; set; }
         public virtual CommunicationType CommunicationType { get; set; }
