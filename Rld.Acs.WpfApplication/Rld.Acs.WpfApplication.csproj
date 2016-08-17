@@ -123,7 +123,9 @@
     <Compile Include="Service\Validator\TimeGroupValidator.cs" />
     <Compile Include="Service\Validator\TimeSegmentValidator.cs" />
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
+    <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
+    <Compile Include="ViewModel\Views\DeviceRoleViewModel.cs" />
     <Compile Include="ViewModel\Views\SyncDepartmentViewModel.cs" />
     <Compile Include="ViewModel\Views\SyncUserViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceViewModel.cs" />
@@ -152,6 +154,9 @@
     <Compile Include="Service\Navigation\IFrameNavigationService.cs" />
     <Compile Include="View\Pages\DevicePage.xaml.cs">
       <DependentUpon>DevicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\DeviceRolePage.xaml.cs">
+      <DependentUpon>DeviceRolePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\BaseWindow.cs" />
     <Compile Include="View\Pages\DepartmentPage.xaml.cs">
@@ -242,6 +247,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\DevicePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\DeviceRolePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -480,7 +489,11 @@
     <Resource Include="Images\Logo.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\AllRight.png" />
+    <Resource Include="Images\Left.png" />
+    <Resource Include="Images\Right.png" />
     <Resource Include="app.ico" />
+    <Resource Include="Images\AllLeft.png" />
     <Content Include="Images\delete_time.png" />
     <Resource Include="Images\app.ico" />
     <Resource Include="Images\avator.jpg" />

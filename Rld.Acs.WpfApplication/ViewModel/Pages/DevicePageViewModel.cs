@@ -91,7 +91,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 if (SelectedDeviceViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择设备!"), Tokens.TimeSegmentPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage("请先选择设备!"), Tokens.DevicePage_ShowNotification);
                     return;
                 }
 

@@ -264,7 +264,7 @@
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/时间区.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem x:Name="dev2_sbqx" FontSize="12" Width="180"  Header="设备权限管理" IsCheckable="False">
+                            <MenuItem x:Name="dev2_sbqx" FontSize="12" Width="180"  Header="设备权限管理" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="DeviceRolePage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/设备权限管理.png"/>
                                 </MenuItem.Icon>

@@ -12,5 +12,10 @@
     <ImageSource x:Key="DepartmentPage_Toolbar_SyncDataBtn_img">/Images/syn_data.png</ImageSource>
     <ImageSource x:Key="icon_treeitem_opened">/Images/treeitem_opened.png</ImageSource>
     <ImageSource x:Key="icon_treeitem_closed">/Images/treeitem_closed.png</ImageSource>
+	
+	<ImageSource x:Key="icon_left">/Images/Left.png</ImageSource>
+	<ImageSource x:Key="icon_right">/Images/Right.png</ImageSource>
+	<ImageSource x:Key="icon_allLeft">/Images/AllLeft.png</ImageSource>
+	<ImageSource x:Key="icon_allRight">/Images/AllRight.png</ImageSource>
     
 </ResourceDictionary>

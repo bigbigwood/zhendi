@@ -149,11 +149,19 @@
                     </Grid>
                 </Border>
                 <StackPanel Grid.Column="1" Margin="2,8" VerticalAlignment="Bottom">
-                    <Button Content="全选左边" Command="{Binding SelectedAllSourceUserCmd}" Margin="3"/>
-                    <Button Content="全选右边" Command="{Binding SelectedAllTargetUserCmd}" Margin="3"/>
+                    <Button Command="{Binding SelectedAllSourceUserCmd}" Margin="3">
+                        <Image Height="10" Source="{StaticResource icon_allLeft}" />
+                    </Button>
+                    <Button Command="{Binding SelectedAllTargetUserCmd}" Margin="3">
+                    <Image Height="10" Source="{StaticResource icon_allRight}" />
+                    </Button>
                     <TextBlock/>
-                    <Button Content="移到右边" Command="{Binding MoveToSelectedCmd}" Margin="3"/>
-                    <Button Content="移到左边" Command="{Binding RemoveSelectedCmd}" Margin="3"/>
+                    <Button Command="{Binding MoveToSelectedCmd}" Margin="3">
+                        <Image Height="10" Source="{StaticResource icon_right}" />
+                    </Button>
+                    <Button Command="{Binding RemoveSelectedCmd}" Margin="3">
+                        <Image Height="10" Source="{StaticResource icon_left}" />
+                    </Button>
                 </StackPanel>
                 <Border Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
                     <ListBox ItemsSource="{Binding SelectedSyncUserDtos}" >

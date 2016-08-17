@@ -40,6 +40,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Register<UserPageViewModel>();
             SimpleIoc.Default.Register<DepartmentPageViewModel>();
             SimpleIoc.Default.Register<DevicePageViewModel>();
+            SimpleIoc.Default.Register<DeviceRolePageViewModel>();
             SimpleIoc.Default.Register<TimeSegmentPageViewModel>();
             SimpleIoc.Default.Register<TimeGroupPageViewModel>();
             SimpleIoc.Default.Register<TimeZonePageViewModel>();
@@ -65,6 +66,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             navigationService.Configure("UserPage", new Uri("../Pages/UserPage.xaml", UriKind.Relative));
             navigationService.Configure("DepartmentPage", new Uri("../Pages/DepartmentPage.xaml", UriKind.Relative));
             navigationService.Configure("DevicePage", new Uri("../Pages/DevicePage.xaml", UriKind.Relative));
+            navigationService.Configure("DeviceRolePage", new Uri("../Pages/DeviceRolePage.xaml", UriKind.Relative));
             navigationService.Configure("TimeSegmentPage", new Uri("../Pages/TimeSegmentPage.xaml", UriKind.Relative));
             navigationService.Configure("TimeGroupPage", new Uri("../Pages/TimeGroupPage.xaml", UriKind.Relative));
             navigationService.Configure("TimeZonePage", new Uri("../Pages/TimeZonePage.xaml", UriKind.Relative));
@@ -92,6 +94,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public DevicePageViewModel DevicePage
         {
             get { return ServiceLocator.Current.GetInstance<DevicePageViewModel>(); }
+        }
+        public DeviceRolePageViewModel DeviceRolePage
+        {
+            get { return ServiceLocator.Current.GetInstance<DeviceRolePageViewModel>(); }
         }
         public TimeSegmentPageViewModel TimeSegmentPage
         {

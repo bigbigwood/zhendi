@@ -48,5 +48,10 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string DevicePage_ShowQuestion = Guid.NewGuid().ToString();
         public static readonly string DeviceView_ShowNotification = Guid.NewGuid().ToString();
 
+        public static readonly string OpenDeviceRoleView = Guid.NewGuid().ToString();
+        public static readonly string CloseDeviceRoleView = Guid.NewGuid().ToString();
+        public static readonly string DeviceRolePage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string DeviceRolePage_ShowQuestion = Guid.NewGuid().ToString();
+        public static readonly string DeviceRoleView_ShowNotification = Guid.NewGuid().ToString();
     }
 }
