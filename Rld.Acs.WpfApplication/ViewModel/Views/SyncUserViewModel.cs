@@ -14,6 +14,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using log4net;
+using MahApps.Metro.Controls.Dialogs;
 using Ninject.Activation.Caching;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility;
@@ -86,37 +87,44 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         private void SyncData()
         {
-            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            DispatcherHelper.CheckBeginInvokeOnUI(async () =>
             {
                 string message = "";
-                try
-                {
-                    var devices =
-                        DeviceDtos.FindAll(d => d.IsSelected)
-                            .Select(dd => new DSProxy.DeviceController() { DeviceID = dd.ID });
-                    var users = SelectedSyncUserDtos.Select(u => new DSProxy.User() { UserID = u.ID });
 
-                    DSProxy.ResultTypes resultTypes;
-                    bool resultTypeSpecified;
-                    string[] messages;
+                var controller = await DialogCoordinator.Instance.ShowProgressAsync(this, "同步数据", "同步数据中，请稍等");
+                controller.SetIndeterminate();
 
-                    if (SyncUserType == SyncUserType.SyncDeviceToUser)
-                    {
-                        new DSProxy.DeviceService().SyncDBUsers(devices.ToArray(), users.ToArray(), out resultTypes,
-                            out resultTypeSpecified, out messages);
-                    }
-                    else
-                    {
-                        new DSProxy.DeviceService().SyncDeviceUsers(devices.ToArray(), users.ToArray(), out resultTypes,
-                            out resultTypeSpecified, out messages);
-                    }
-                    message = "同步数据成功！";
-                }
-                catch (Exception ex)
+                await Task.Run(() =>
                 {
-                    Log.Error(ex);
-                    message = "同步数据失败！";
-                }
+                    try
+                    {
+                        var devices = DeviceDtos.FindAll(d => d.IsSelected).Select(dd => new DSProxy.DeviceController() { DeviceID = dd.ID });
+                        var users = SelectedSyncUserDtos.Select(u => new DSProxy.User() { UserID = u.ID });
+
+                        DSProxy.ResultTypes resultTypes;
+                        bool resultTypeSpecified;
+                        string[] messages;
+
+                        if (SyncUserType == SyncUserType.SyncDeviceToUser)
+                        {
+                            new DSProxy.DeviceService().SyncDBUsers(devices.ToArray(), users.ToArray(), out resultTypes,
+                                out resultTypeSpecified, out messages);
+                        }
+                        else
+                        {
+                            new DSProxy.DeviceService().SyncDeviceUsers(devices.ToArray(), users.ToArray(), out resultTypes,
+                                out resultTypeSpecified, out messages);
+                        }
+                        message = "同步数据成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex);
+                        message = "同步数据失败！";
+                    }
+                });
+
+                await controller.CloseAsync();
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.SyncUserView_ShowNotification);
             });
         }

@@ -22,6 +22,8 @@ namespace Rld.Acs.WpfApplication.Models.Messages
 
         public static readonly string CloseSyncDepartmentView = Guid.NewGuid().ToString();
         public static readonly string SyncDepartmentView_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string SyncDepartmentView_ShowQuestion = Guid.NewGuid().ToString();
+
 
         public static readonly string OpenTimeSegmentView = Guid.NewGuid().ToString();
         public static readonly string CloseTimeSegmentView = Guid.NewGuid().ToString();

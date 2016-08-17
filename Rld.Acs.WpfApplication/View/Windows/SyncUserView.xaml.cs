@@ -18,7 +18,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
 
             Messenger.Default.Register(this, Tokens.CloseSyncUserView, new Action<NotificationMessage>(ProcessCloseViewMessage));
             Messenger.Default.Register(this, Tokens.SyncUserView_ShowNotification, new Action<NotificationMessage>(ShowSubViewNotification));
-            Messenger.Default.Register(this, Tokens.SyncUserView_ShowQuestion, new Action<NotificationMessageAction>(msg => ShowQuestionAndAction(msg, "同步人员数据")));
+            Messenger.Default.Register(this, Tokens.SyncUserView_ShowQuestion, new Action<NotificationMessageAction>(msg => ShowQuestionAndAction(msg, "同步数据")));
         }
     }
 }

@@ -11,7 +11,9 @@ using FluentValidation.Results;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 using log4net;
+using MahApps.Metro.Controls.Dialogs;
 using Ninject.Activation.Caching;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
@@ -22,6 +24,7 @@ using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.Service.Validator;
+using DSProxy = Rld.Acs.WpfApplication.Service.DeviceService;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -70,21 +73,45 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         private void Save()
         {
-            string message = "";
-            try
-            {
+            string question = "确定同步数据吗？";
+            Messenger.Default.Send(new NotificationMessageAction(this, question, SyncData), Tokens.SyncDepartmentView_ShowQuestion);
+        }
 
-            }
-            catch (Exception ex)
+        private void SyncData()
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(async () =>
             {
-                Log.Error("Update user fails.", ex);
-                message = "保存人员失败";
-                SendMessage(message);
-                return;
-            }
+                string message = "";
 
-            RaisePropertyChanged(null);
-            Close(message);
+                var controller = await DialogCoordinator.Instance.ShowProgressAsync(this, "同步数据", "同步数据中，请稍等");
+                controller.SetIndeterminate();
+
+                await Task.Run(() =>
+                {
+                    try
+                    {
+                        var devices = DeviceDtos.FindAll(d => d.IsSelected).Select(dd => new DSProxy.DeviceController() { DeviceID = dd.ID });
+                        var departments = SelectedSyncDepartmentDtos.Select(u => new DSProxy.Department() { DepartmentID = u.ID });
+
+                        Service.DeviceService.ResultTypes resultTypes;
+                        bool resultTypeSpecified;
+                        string[] messages;
+
+                        new Service.DeviceService.DeviceService().SyncDepartmentUsers(departments.ToArray(), devices.ToArray(), out resultTypes, out resultTypeSpecified, out messages);
+
+                        message = "同步数据成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex);
+                        message = "同步数据失败！";
+                    }
+                });
+
+                await controller.CloseAsync();
+
+                Messenger.Default.Send(new NotificationMessage(message), Tokens.SyncDepartmentView_ShowNotification);
+            });
         }
 
         private void SendMessage(string message)

@@ -56,7 +56,8 @@ namespace Rld.Acs.DeviceSystem
 
         public SyncDepartmentUsersResponse SyncDepartmentUsers(SyncDepartmentUsersRequest request)
         {
-            throw new NotImplementedException();
+            Thread.Sleep(3 * 1000);
+            return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.Ok };
         }
 
         public SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(SyncDeviceOperationLogsRequest request)
