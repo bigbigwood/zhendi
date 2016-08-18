@@ -50,7 +50,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 {
                     DataContext = deviceRoleViewModel
 
-                }, Tokens.OpenDeviceView);
+                }, Tokens.OpenDeviceRoleView);
 
                 if (deviceRoleViewModel.CurrentDeviceRole.DeviceRoleID != 0)
                     DeviceRoleViewModels.Add(deviceRoleViewModel);
@@ -121,7 +121,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     Log.Error(ex);
                     message = "删除设备角色失败！";
                 }
-                Messenger.Default.Send(new NotificationMessage(message), Tokens.DeviceRolePage_ShowQuestion);
+                Messenger.Default.Send(new NotificationMessage(message), Tokens.DeviceRolePage_ShowNotification);
             });
         }
     }

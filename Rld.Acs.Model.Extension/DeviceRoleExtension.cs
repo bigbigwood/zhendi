@@ -13,7 +13,11 @@ namespace Rld.Acs.Model.Extension
             if (deviceRole == null || deviceRole.DeviceRolePermissions == null || deviceRole.DeviceRolePermissions.Count == 0)
                 return string.Empty;
 
-            var deviceNames = deviceRole.DeviceRolePermissions.Select(x => devices.First(d => d.DeviceID== x.DeviceID).Name).ToList();
+            if (devices == null || devices.Count == 0) 
+                return string.Empty;
+
+            var permissions = deviceRole.DeviceRolePermissions.Where(x => devices.Select(d => d.DeviceID).Contains(x.DeviceID));
+            var deviceNames = permissions.Select(x => devices.First(d => d.DeviceID == x.DeviceID).Name).Distinct();
             return string.Join(", ", deviceNames);
         }
 
@@ -22,8 +26,21 @@ namespace Rld.Acs.Model.Extension
             if (deviceRole == null || deviceRole.DeviceRolePermissions == null || deviceRole.DeviceRolePermissions.Count == 0)
                 return string.Empty;
 
-            var deviceNames = deviceRole.DeviceRolePermissions.Select(x => timeZones.First(d => d.TimeZoneID == x.AllowedAccessTimeZoneID).TimeZoneName).ToList();
-            return string.Join(", ", deviceNames);
+            if (timeZones == null || timeZones.Count == 0) 
+                return string.Empty;
+
+            var permissions = deviceRole.DeviceRolePermissions.Where(x => timeZones.Select(d => d.TimeZoneID).Contains(x.DeviceID));
+            var timezoneNames = permissions.Select(x => timeZones.First(d => d.TimeZoneID == x.AllowedAccessTimeZoneID).TimeZoneName).Distinct();
+            return string.Join(", ", timezoneNames);
+        }
+
+
+        public static bool HasDeviceAuthorization(this DeviceRole deviceRole, Int32 deviceId)
+        {
+            if (deviceRole == null || deviceRole.DeviceRolePermissions == null || deviceRole.DeviceRolePermissions.Count == 0)
+                return false;
+
+            return deviceRole.DeviceRolePermissions.Any(r => r.DeviceID == deviceId);
         }
     }
 }

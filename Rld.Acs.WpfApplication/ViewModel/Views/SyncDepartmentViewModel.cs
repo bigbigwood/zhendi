@@ -35,7 +35,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
         public RelayCommand<TreeViewNode> SelectedTreeNodeChangedCmd { get; private set; }
-        public RelayCommand MoveDepartmentToSelectedCmd { get; private set; }
+        public RelayCommand SelectDepartmentsCmd { get; private set; }
         public RelayCommand RemoveSelectedDepartmentCmd { get; private set; }
         public RelayCommand SelectAllDepartmentsCmd { get; private set; }
         public RelayCommand RemoveAllSelectedDepartmentsCmd { get; private set; }
@@ -55,7 +55,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
             SelectedTreeNodeChangedCmd = new RelayCommand<TreeViewNode>(ShowUserBySelectedDepartmentNode);
-            MoveDepartmentToSelectedCmd = new RelayCommand(MoveDepartmentToSelected);
+            SelectDepartmentsCmd = new RelayCommand(SelectDepartments);
             RemoveSelectedDepartmentCmd = new RelayCommand(RemoveSelectedDepartment);
             SelectAllDepartmentsCmd = new RelayCommand(SelectAllDepartments);
             RemoveAllSelectedDepartmentsCmd = new RelayCommand(RemoveAllSelectedDepartments);
@@ -167,7 +167,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             }
         }
 
-        private void MoveDepartmentToSelected()
+        private void SelectDepartments()
         {
             if (SelectedNode == null) return;
 

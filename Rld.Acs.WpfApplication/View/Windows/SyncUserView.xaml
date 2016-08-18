@@ -14,7 +14,7 @@
              xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro" Dialog:DialogParticipation.Register="{Binding}"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:SyncUserViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="500" Width="600" Unloaded="MetroWindow_Unloaded">
+             Height="500" Width="650" Unloaded="MetroWindow_Unloaded">
 
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
@@ -71,6 +71,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition />
+                <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="同步类型"/>
@@ -82,7 +83,7 @@
                       Width="180" Margin="2,3" HorizontalAlignment="Left"/>
 
             <Border Grid.Row="1" Grid.Column="1"  BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding DeviceDtos}">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding DeviceDtos}" HorizontalAlignment="Stretch">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal"/>
@@ -99,7 +100,7 @@
             <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="85"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
@@ -139,7 +140,7 @@
                             </TreeView.ItemTemplate>
                         </TreeView>
 
-                        <ListBox  Grid.Column="1" ItemsSource="{Binding DepartmentUserDtos}" >
+                        <ListBox  Grid.Column="1" ItemsSource="{Binding DepartmentUserDtos}" HorizontalAlignment="Left">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}"/>
@@ -149,22 +150,22 @@
                     </Grid>
                 </Border>
                 <StackPanel Grid.Column="1" Margin="2,8" VerticalAlignment="Bottom">
-                    <Button Command="{Binding SelectedAllSourceUserCmd}" Margin="3">
-                        <Image Height="10" Source="{StaticResource icon_allLeft}" />
-                    </Button>
-                    <Button Command="{Binding SelectedAllTargetUserCmd}" Margin="3">
-                    <Image Height="10" Source="{StaticResource icon_allRight}" />
-                    </Button>
-                    <TextBlock/>
                     <Button Command="{Binding MoveToSelectedCmd}" Margin="3">
                         <Image Height="10" Source="{StaticResource icon_right}" />
                     </Button>
                     <Button Command="{Binding RemoveSelectedCmd}" Margin="3">
                         <Image Height="10" Source="{StaticResource icon_left}" />
                     </Button>
+                    <TextBlock/>
+                    <Button Command="{Binding SelectedAllSourceUserCmd}" Margin="3">
+                        <Image Height="10" Source="{StaticResource icon_allLeft}" />
+                    </Button>
+                    <Button Command="{Binding SelectedAllTargetUserCmd}" Margin="3">
+                        <Image Height="10" Source="{StaticResource icon_allRight}" />
+                    </Button>
                 </StackPanel>
                 <Border Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
-                    <ListBox ItemsSource="{Binding SelectedSyncUserDtos}" >
+                    <ListBox ItemsSource="{Binding SelectedSyncUserDtos}" HorizontalAlignment="Left">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}"/>
@@ -174,7 +175,7 @@
                 </Border>
             </Grid>
 
-            <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalAlignment="Center" Orientation="Horizontal">
+            <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"  HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0"/>
                 <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
             </StackPanel>

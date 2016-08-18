@@ -64,8 +64,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SelectedTreeNodeChangedCmd = new RelayCommand<TreeViewNode>(ShowUserBySelectedDepartmentNode);
             MoveToSelectedCmd = new RelayCommand(MoveToSelected);
             RemoveSelectedCmd = new RelayCommand(RemoveSelected);
-            SelectedAllSourceUserCmd = new RelayCommand(SelectedAllSourceUser);
-            SelectedAllTargetUserCmd = new RelayCommand(SelectedAllTargetUser);
+            SelectedAllSourceUserCmd = new RelayCommand(SelectAllDepartmentUsers);
+            SelectedAllTargetUserCmd = new RelayCommand(RemoveAllSelectedUsers);
 
             DeviceDtos = new ObservableCollection<SelectableItem>();
             DepartmentUserDtos = new ObservableCollection<SelectableItem>();
@@ -214,22 +214,28 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             RaisePropertyChanged(null);
         }
 
-        private void SelectedAllSourceUser()
+        private void SelectAllDepartmentUsers()
         {
-            var temp = DepartmentUserDtos;
-            DepartmentUserDtos = new ObservableCollection<SelectableItem>();
-            temp.ForEach(t => DepartmentUserDtos.Add(new ComboBoxItem() { ID = t.ID, DisplayName = t.DisplayName, IsSelected = true }));
+            if (DepartmentUserDtos == null || DepartmentUserDtos.Count == 0)
+                return;
+
+            DepartmentUserDtos.ForEach(u =>
+            {
+                if (SelectedSyncUserDtos.All(sy => sy.ID != u.ID))
+                {
+                    SelectedSyncUserDtos.Add(new ComboBoxItem() { ID = u.ID, DisplayName = u.DisplayName });
+                }
+            });
             RaisePropertyChanged(null);
         }
 
-        private void SelectedAllTargetUser()
+        private void RemoveAllSelectedUsers()
         {
-            //SelectedSyncUserDtos.ForEach(u => u.IsSelected = true);
-            //RaisePropertyChanged(null);
+            //var temp = SelectedSyncUserDtos;
+            //SelectedSyncUserDtos = new ObservableCollection<SelectableItem>();
+            //temp.ForEach(t => SelectedSyncUserDtos.Add(new ComboBoxItem() { ID = t.ID, DisplayName = t.DisplayName, IsSelected = true }));
 
-            var temp = SelectedSyncUserDtos;
             SelectedSyncUserDtos = new ObservableCollection<SelectableItem>();
-            temp.ForEach(t => SelectedSyncUserDtos.Add(new ComboBoxItem() { ID = t.ID, DisplayName = t.DisplayName, IsSelected = true }));
             RaisePropertyChanged(null);
         }
     }

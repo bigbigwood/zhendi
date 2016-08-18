@@ -120,7 +120,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         private void Close(string message)
         {
-            Messenger.Default.Send(new NotificationMessage(this, message), Tokens.OpenDeviceView);
+            Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseDeviceView);
         }
 
         private void SendMessage(string message)

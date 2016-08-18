@@ -24,11 +24,11 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
         private void ProcessOpenView(OpenWindowMessage msg)
         {
-            //var view = new TimeSegmentView { DataContext = msg.DataContext };
-            //view.BorderThickness = new Thickness(1);
-            //view.GlowBrush = null;
-            //view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
-            //view.ShowDialog();
+            var view = new DeviceRoleView() { DataContext = msg.DataContext };
+            view.BorderThickness = new Thickness(1);
+            view.GlowBrush = null;
+            view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
+            view.ShowDialog();
         }
     }
 }

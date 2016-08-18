@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Documents;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -8,6 +10,8 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Model.Extension;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Extension;
+using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service.Validator;
@@ -22,15 +26,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-        public List<DeviceController> Devices { get; set; }
+        public List<DeviceController> AuthorizationDevices { get; set; }
         public List<TimeZone> Timezones { get; set; }
-
+        public List<SysDictionary> PermissionActionDict { get; set; }
+        public TimeZone SelectedTimezone { get; set; }
+        public Int32 SelectedPermissionAction { get; set; }
         public DeviceRole CurrentDeviceRole { get; set; }
+        public ObservableCollection<SelectableItem> DeviceDtos { get; set; }
         public String Name { get; set; }
         public String Title { get; set; }
         public String DeviceListString
         {
-            get { return CurrentDeviceRole.GetDeviceAssociatedDeviceList(Devices); }
+            get { return CurrentDeviceRole.GetDeviceAssociatedDeviceList(AuthorizationDevices); }
         }
         public String TimezoneListString
         {
@@ -41,29 +48,30 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
-            Devices = ApplicationManager.GetInstance().AuthorizationDevices;
+
+            DeviceDtos = new ObservableCollection<SelectableItem>();
+
+            Timezones = ApplicationManager.GetInstance().AuthorizationTimezones;
+            AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
+            AuthorizationDevices.ForEach(d => DeviceDtos.Add(new ListBoxItem
+                {
+                    ID = d.DeviceID, DisplayName = d.Name, IsSelected =  deviceRole.HasDeviceAuthorization(d.DeviceID)
+                }));
+            PermissionActionDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.DevicePermission);
+
             CurrentDeviceRole = deviceRole;
             if (deviceRole.DeviceRoleID != 0)
             {
-                FromCoreModel(deviceRole);
+                Name = deviceRole.RoleName;
+                if (deviceRole.DeviceRolePermissions.Any())
+                {
+                    var firstPermission = deviceRole.DeviceRolePermissions.First();
+                    SelectedTimezone = Timezones.FirstOrDefault(x => x.TimeZoneID == firstPermission.AllowedAccessTimeZoneID);
+                    SelectedPermissionAction = (int)firstPermission.PermissionAction;
+                }
             }
-
+            
             Title = (deviceRole.DeviceRoleID == 0) ? "新增设备角色" : "修改设备角色";
-        }
-        private void FromCoreModel(DeviceRole deviceRole)
-        {
-            Name = deviceRole.RoleName;
-            //Code = device.Code;
-            //Mac = device.Mac;
-            //SN = device.SN;
-        }
-
-        private void ToCoreModel(DeviceRole deviceRole)
-        {
-            deviceRole.RoleName = Name;
-            //device.Code = Code;
-            //device.Mac = Mac;
-            //device.SN = SN;
         }
 
         private void Save()
@@ -71,24 +79,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
-                ToCoreModel(CurrentDeviceRole);
-
-                //if (StartHour.Length == 1) StartHour = "0" + StartHour;
-                //if (EndHour.Length == 1) StartHour = "0" + EndHour;
-
-                //CurrentTimeSegment.BeginTime = string.Format("{0}:{1}", StartHour, StartMinute);
-                //CurrentTimeSegment.EndTime = string.Format("{0}:{1}", EndHour, EndMinute);
-                //CurrentTimeSegment.TimeSegmentName = Name;
-                //CurrentTimeSegment.Status = GeneralStatus.Enabled;
-
-                //var validator = NinjectBinder.GetValidator<TimeSegmentValidator>();
-                //var results = validator.Validate(CurrentTimeSegment);
-                //if (!results.IsValid)
-                //{
-                //    message = string.Join("\n", results.Errors);
-                //    SendMessage(message);
-                //    return;
-                //}
+                CurrentDeviceRole.RoleName = Name;
+                CurrentDeviceRole.Status = GeneralStatus.Enabled;
+                CurrentDeviceRole.DeviceRolePermissions = GetDeviceRolePermissionFromUI();
 
                 if (CurrentDeviceRole.DeviceRoleID == 0)
                 {
@@ -119,9 +112,35 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             Close(message);
         }
 
+        private List<DeviceRolePermission> GetDeviceRolePermissionFromUI()
+        {
+            var result = new List<DeviceRolePermission>();
+            var selected = DeviceDtos.FindAll(x => x.IsSelected);
+            foreach (var checkboxItem in selected)
+            {
+                var rolePermission = CurrentDeviceRole.DeviceRolePermissions.FirstOrDefault(x => x.DeviceID == checkboxItem.ID);
+                if (rolePermission == null)
+                {
+                    rolePermission = new DeviceRolePermission()
+                    {
+                        DeviceID = checkboxItem.ID,
+                        DeviceRoleID = CurrentDeviceRole.DeviceRoleID,
+                        Enable = true,
+                        STARTDATE = DateTime.Now,
+                    };
+                }
+
+                rolePermission.PermissionAction = (DevicePermissionAction)SelectedPermissionAction;
+                rolePermission.AllowedAccessTimeZoneID = SelectedTimezone.TimeZoneID;
+
+                result.Add(rolePermission);
+            }
+            return result;
+        }
+
         private void Close(string message)
         {
-            Messenger.Default.Send(new NotificationMessage(this, message), Tokens.OpenDeviceRoleView);
+            Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseDeviceRoleView);
         }
 
         private void SendMessage(string message)

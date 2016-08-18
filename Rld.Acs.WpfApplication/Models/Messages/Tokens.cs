@@ -50,8 +50,12 @@ namespace Rld.Acs.WpfApplication.Models.Messages
 
         public static readonly string OpenDeviceRoleView = Guid.NewGuid().ToString();
         public static readonly string CloseDeviceRoleView = Guid.NewGuid().ToString();
+        public static readonly string DeviceRoleView_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string OpenDeviceRolePermissionView = Guid.NewGuid().ToString();
+        public static readonly string CloseDeviceRolePermissionView = Guid.NewGuid().ToString();
+        public static readonly string DeviceRolePermissionView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DeviceRolePage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DeviceRolePage_ShowQuestion = Guid.NewGuid().ToString();
-        public static readonly string DeviceRoleView_ShowNotification = Guid.NewGuid().ToString();
+        
     }
 }

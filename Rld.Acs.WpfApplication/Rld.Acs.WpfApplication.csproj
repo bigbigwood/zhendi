@@ -125,6 +125,7 @@
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
+    <Compile Include="ViewModel\Views\DeviceRolePermissionViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceRoleViewModel.cs" />
     <Compile Include="ViewModel\Views\SyncDepartmentViewModel.cs" />
     <Compile Include="ViewModel\Views\SyncUserViewModel.cs" />
@@ -189,6 +190,9 @@
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="Service\UserAvatorService.cs" />
+    <Compile Include="View\Windows\DeviceRolePermissionView.xaml.cs">
+      <DependentUpon>DeviceRolePermissionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\MoveUserView.xaml.cs">
       <DependentUpon>MoveUserView.xaml</DependentUpon>
     </Compile>
@@ -216,6 +220,9 @@
     <Compile Include="ViewModel\Views\UserViewModel.cs" />
     <Compile Include="View\CustomControls\DepartmentDetailPanel.xaml.cs">
       <DependentUpon>DepartmentDetailPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\DeviceRoleView.xaml.cs">
+      <DependentUpon>DeviceRoleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\TimeZoneDashboardView.xaml.cs">
       <DependentUpon>TimeZoneDashboardView.xaml</DependentUpon>
@@ -251,6 +258,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\DeviceRolePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\DeviceRolePermissionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -330,6 +341,10 @@
     <Page Include="View\CustomControls\DepartmentDetailPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\DeviceRoleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Windows\TimeZoneDashboardView.xaml">
       <Generator>MSBuild:Compile</Generator>

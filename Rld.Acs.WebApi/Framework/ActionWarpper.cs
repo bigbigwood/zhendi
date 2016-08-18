@@ -20,6 +20,7 @@ namespace Rld.Acs.WebApi.Framework
             Log.InfoFormat("Http Method: {0}, Request Uri: {1}.", controller.Request.Method, controller.Request.RequestUri);
             var sw = Stopwatch.StartNew();
             IPersistanceTransaction transaction = null;
+            HttpResponseMessage result = null;
 
             try
             {
@@ -27,11 +28,10 @@ namespace Rld.Acs.WebApi.Framework
                 {
                     transaction = conn.BeginTransaction();
 
-                    var result = fun();
+                    result = fun();
 
                     Log.Info("Commit transaction!");
                     transaction.Commit();
-                    return result;
                 }
             }
             catch (Exception ex)
@@ -44,13 +44,12 @@ namespace Rld.Acs.WebApi.Framework
                     transaction.Rollback();
                 }
 
-                return controller.Request.CreateErrorResponse(System.Net.HttpStatusCode.InternalServerError, "Internal Error", ex);
-            }
-            finally
-            {
-                Log.InfoFormat("Finish processing request, cost {0} milliseconds.", sw.ElapsedMilliseconds);
+                result = controller.Request.CreateErrorResponse(System.Net.HttpStatusCode.InternalServerError, "Internal Error", ex);
             }
 
+            Log.InfoFormat("Response: {0}", result);
+            Log.InfoFormat("Finish processing request, cost {0} milliseconds.", sw.ElapsedMilliseconds);
+            return result;
         }
     }
 }

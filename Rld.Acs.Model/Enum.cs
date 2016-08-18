@@ -15,8 +15,11 @@ namespace Rld.Acs.Model
 
     public enum DevicePermissionAction
     {
-        Pass = 1,
-        ReadLog = 2,
+        User = 1,
+        Registrar = 2,
+        LogQuery = 4,
+        Manager = 8,
+        Custom = 16,
     }
 
     public enum CommunicationType
@@ -79,5 +82,7 @@ namespace Rld.Acs.Model
     {
         Nationality = 10001, //民族
         Gender = 10002, //性别
+        DevicePermission = 10003, //设备权限
+        SystemPermission = 10003, //系统权限
     }
 }

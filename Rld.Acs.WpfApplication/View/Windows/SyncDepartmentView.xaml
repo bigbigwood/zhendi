@@ -14,7 +14,7 @@
              xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro" Dialog:DialogParticipation.Register="{Binding}"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:SyncDepartmentViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="500" Width="600" Unloaded="MetroWindow_Unloaded">
+             Height="500" Width="650" Unloaded="MetroWindow_Unloaded">
 
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
@@ -71,6 +71,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition />
+                <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Row="1" Grid.Column="0" Text="选择设备"/>
@@ -94,7 +95,7 @@
             <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="85"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
@@ -129,14 +130,22 @@
                     </TreeView>
                 </Border>
                 <StackPanel Grid.Column="1" Margin="2,8" VerticalAlignment="Bottom">
-                    <Button Content="选择" Command="{Binding MoveDepartmentToSelectedCmd}" Margin="3"/>
-                    <Button Content="移除" Command="{Binding RemoveSelectedDepartmentCmd}" Margin="3"/>
+                    <Button Command="{Binding SelectDepartmentsCmd}" Margin="3">
+                        <Image Height="10" Source="{StaticResource icon_right}" />
+                    </Button>
+                    <Button Command="{Binding RemoveSelectedDepartmentCmd}" Margin="3">
+                        <Image Height="10" Source="{StaticResource icon_left}" />
+                    </Button>
                     <TextBlock/>
-                    <Button Content="选择全部" Command="{Binding SelectAllDepartmentsCmd}" Margin="3"/>
-                    <Button Content="移除全部" Command="{Binding RemoveAllSelectedDepartmentsCmd}" Margin="3"/>
+                    <Button Command="{Binding SelectAllDepartmentsCmd}" Margin="3">
+                        <Image Height="10" Source="{StaticResource icon_allLeft}" />
+                    </Button>
+                    <Button Command="{Binding RemoveAllSelectedDepartmentsCmd}" Margin="3">
+                        <Image Height="10" Source="{StaticResource icon_allRight}" />
+                    </Button>
                 </StackPanel>
                 <Border Grid.Column="2" BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
-                    <ListBox ItemsSource="{Binding SelectedSyncDepartmentDtos}" >
+                    <ListBox ItemsSource="{Binding SelectedSyncDepartmentDtos}" HorizontalAlignment="Left">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}"/>
@@ -146,8 +155,8 @@
                 </Border>
             </Grid>
 
-            <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0"/>
+            <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"  HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0" />
                 <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
             </StackPanel>
         </Grid>
