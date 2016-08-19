@@ -41,6 +41,12 @@
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
     </Reference>
@@ -123,10 +129,15 @@
     <Compile Include="Service\Validator\TimeGroupValidator.cs" />
     <Compile Include="Service\Validator\TimeSegmentValidator.cs" />
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
+    <Compile Include="ViewModel\AutoMapperProfile.cs" />
+    <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
+    <Compile Include="ViewModel\Views\DeviceHeadReadingViewModel.cs" />
+    <Compile Include="ViewModel\Views\DeviceDoorViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceRolePermissionViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceRoleViewModel.cs" />
+    <Compile Include="ViewModel\Views\DeviceExtensionViewModel.cs" />
     <Compile Include="ViewModel\Views\SyncDepartmentViewModel.cs" />
     <Compile Include="ViewModel\Views\SyncUserViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceViewModel.cs" />
@@ -190,8 +201,17 @@
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="Service\UserAvatorService.cs" />
+    <Compile Include="View\Windows\DeviceHeadReadingView.xaml.cs">
+      <DependentUpon>DeviceHeadReadingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\DeviceDoorView.xaml.cs">
+      <DependentUpon>DeviceDoorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\DeviceRolePermissionView.xaml.cs">
       <DependentUpon>DeviceRolePermissionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\DeviceView.xaml.cs">
+      <DependentUpon>DeviceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\MoveUserView.xaml.cs">
       <DependentUpon>MoveUserView.xaml</DependentUpon>
@@ -261,7 +281,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Windows\DeviceHeadReadingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\DeviceDoorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Windows\DeviceRolePermissionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\DeviceView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -521,6 +553,7 @@
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
     <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

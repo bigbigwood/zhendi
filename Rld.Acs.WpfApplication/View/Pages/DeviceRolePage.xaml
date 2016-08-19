@@ -63,6 +63,7 @@
                         <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
                         <DataGridTextColumn Header="{DynamicResource DeviceRolePage_Label_Name}" Binding="{Binding Name}" Width="200" />
                         <DataGridTextColumn Header="{DynamicResource DeviceRolePage_Label_Device}" Binding="{Binding DeviceListString}" Width="200"  />
+                        <DataGridTextColumn Header="{DynamicResource DeviceRolePage_Label_DevicePermission}" Binding="{Binding PermissionActionString}" Width="200"  />
                         <DataGridTextColumn Header="{DynamicResource DeviceRolePage_Label_Timezones}" Binding="{Binding TimezoneListString}" Width="200"  />
                         <DataGridTextColumn Width="*"  />
                     </DataGrid.Columns>

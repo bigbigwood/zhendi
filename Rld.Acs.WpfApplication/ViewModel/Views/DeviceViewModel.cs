@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -6,9 +8,11 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Model.Extension;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service.Validator;
+using Rld.Acs.WpfApplication.ViewModel.Converter;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -17,91 +21,66 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IDeviceControllerRepository _deviceControllerRepo = NinjectBinder.GetRepository<IDeviceControllerRepository>();
 
+        public Int32 Id { get; set; }
+        public String Mac { get; set; }
+        public String Name { get; set; }
+        public String Code { get; set; }
+        public String SN { get; set; }
+        public String Model { get; set; }
+        public CommunicationType CommunicationType { get; set; }
+        public String BaudRate { get; set; }
+        public String SerialPort { get; set; }
+        public String Password { get; set; }
+        public String IP { get; set; }
+        public String Port { get; set; }
+        public String Protocol { get; set; }
+        public String Label { get; set; }
+        public String ServerURL { get; set; }
+        public String Remark { get; set; }
+        public Int32 CreateUserID { get; set; }
+        public DateTime CreateDate { get; set; }
+        public GeneralStatus Status { get; set; }
+        public Int32? UpdateUserID { get; set; }
+        public DateTime? UpdateDate { get; set; }
+        public String Title { get; set; }
+
+
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
+        public ObservableCollection<DeviceDoorViewModel> DoorViewModels { get; set; }
+        public ObservableCollection<DeviceHeadReadingViewModel> HeadReadingViewModels { get; set; }
+        public DeviceExtensionViewModel DeviceExtensionViewModel { get; set; }
+        public String DoorListString { get; set; }
+        public String HeadReadingListString { get; set; }
 
-        public DeviceViewModel(DeviceController device)
+        public DeviceViewModel()
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
-
-            CurrentDeviceController = device;
-            if (device.DeviceID != 0)
-            {
-                FromCoreModel(device);
-            }
-
-            Title = (device.DeviceID == 0) ? "新增设备" : "修改设备";
-        }
-        public DeviceController CurrentDeviceController { get; set; }
-        public String Name { get; set; }
-        public String Code { get; set; }
-        public String Mac { get; set; }
-        public String SN { get; set; }
-        public String Title { get; set; }
-
-        public String DoorListString
-        {
-            get { return CurrentDeviceController.GetDeviceAssociatedDoorList(); }
-        }
-        public String HeadReadingListString
-        {
-            get { return CurrentDeviceController.GetDeviceAssociatedHeadReadingList(); }
         }
 
-        private void FromCoreModel(DeviceController device)
-        {
-            Name = device.Name;
-            Code = device.Code;
-            Mac = device.Mac;
-            SN = device.SN;
-        }
-
-        private void ToCoreModel(DeviceController device)
-        {
-            device.Name = Name;
-            device.Code = Code;
-            device.Mac = Mac;
-            device.SN = SN;
-        }
 
         private void Save()
         {
             string message = "";
             try
             {
-                ToCoreModel(CurrentDeviceController);
+                var deviceController = this.ToCoreModel();
 
-                //if (StartHour.Length == 1) StartHour = "0" + StartHour;
-                //if (EndHour.Length == 1) StartHour = "0" + EndHour;
-
-                //CurrentTimeSegment.BeginTime = string.Format("{0}:{1}", StartHour, StartMinute);
-                //CurrentTimeSegment.EndTime = string.Format("{0}:{1}", EndHour, EndMinute);
-                //CurrentTimeSegment.TimeSegmentName = Name;
-                //CurrentTimeSegment.Status = GeneralStatus.Enabled;
-
-                //var validator = NinjectBinder.GetValidator<TimeSegmentValidator>();
-                //var results = validator.Validate(CurrentTimeSegment);
-                //if (!results.IsValid)
-                //{
-                //    message = string.Join("\n", results.Errors);
-                //    SendMessage(message);
-                //    return;
-                //}
-
-                if (CurrentDeviceController.DeviceID == 0)
+                if (Id == 0)
                 {
-                    CurrentDeviceController.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    CurrentDeviceController.CreateDate = DateTime.Now;
-                    CurrentDeviceController = _deviceControllerRepo.Insert(CurrentDeviceController);
+                    deviceController.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                    deviceController.CreateDate = DateTime.Now;
+                    deviceController = _deviceControllerRepo.Insert(deviceController);
+                    Id = deviceController.DeviceID;
 
                     message = "增加设备成功!";
                 }
                 else
                 {
-                    CurrentDeviceController.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    CurrentDeviceController.UpdateDate = DateTime.Now;
-                    _deviceControllerRepo.Update(CurrentDeviceController);
+                    deviceController.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                    deviceController.UpdateDate = DateTime.Now;
+                    _deviceControllerRepo.Update(deviceController);
 
                     message = "修改设备成功!";
                 }
@@ -127,5 +106,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             Messenger.Default.Send(new NotificationMessage(message), Tokens.DeviceView_ShowNotification);
         }
+
+
+
+
     }
 }

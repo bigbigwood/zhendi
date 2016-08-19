@@ -65,5 +65,6 @@
     <sys:String x:Key="DeviceRolePage_Label_Name">设备名称</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_Code">设备编号</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_Device">关联设备</sys:String>
+    <sys:String x:Key="DeviceRolePage_Label_DevicePermission">关联设备权限</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_Timezones">关联时间区</sys:String>
 </ResourceDictionary>

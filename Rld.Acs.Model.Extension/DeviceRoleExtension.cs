@@ -34,6 +34,18 @@ namespace Rld.Acs.Model.Extension
             return string.Join(", ", timezoneNames);
         }
 
+        public static String GetDeviceAssociatedPermissionActionList(this DeviceRole deviceRole, List<SysDictionary> permissionActionDict)
+        {
+            if (deviceRole == null || deviceRole.DeviceRolePermissions == null || deviceRole.DeviceRolePermissions.Count == 0)
+                return string.Empty;
+
+            if (permissionActionDict == null || permissionActionDict.Count == 0)
+                return string.Empty;
+
+            var permissions = deviceRole.DeviceRolePermissions.Where(x => permissionActionDict.Select(d => d.ItemID).Contains((int)x.PermissionAction));
+            var permissionActionNames = permissions.Select(x => permissionActionDict.First(d => d.ItemID == (int)x.PermissionAction).ItemValue).Distinct();
+            return string.Join(", ", permissionActionNames);
+        }
 
         public static bool HasDeviceAuthorization(this DeviceRole deviceRole, Int32 deviceId)
         {

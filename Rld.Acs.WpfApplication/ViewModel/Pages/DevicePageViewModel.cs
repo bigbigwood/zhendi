@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
+using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -15,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Rld.Acs.WpfApplication.ViewModel.Converter;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel
@@ -36,24 +38,24 @@ namespace Rld.Acs.WpfApplication.ViewModel
             ModifyCmd = new RelayCommand(ModifyDeviceController);
             DeleteCmd = new RelayCommand(DeleteDeviceController);
 
-            DeviceControllerViewModels = new ObservableCollection<DeviceViewModel>();
-            //DeviceControllers = _deviceControllerRepo.Query(new Hashtable()).ToList();
+            
             DeviceControllers = ApplicationManager.GetInstance().AuthorizationDevices;
-            DeviceControllers.ForEach(t => DeviceControllerViewModels.Add(new DeviceViewModel(t)));
+            var deviceViewModels = DeviceControllers.Select(x => x.ToViewModel());
+            DeviceControllerViewModels = new ObservableCollection<DeviceViewModel>(deviceViewModels);
         }
 
         private void AddDeviceController()
         {
             try
             {
-                var deviceViewModel = new DeviceViewModel(new DeviceController());
+                var deviceViewModel = new DeviceController().ToViewModel();
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
                     DataContext = deviceViewModel
 
                 }, Tokens.OpenDeviceView);
 
-                if (deviceViewModel.CurrentDeviceController.DeviceID!= 0)
+                if (deviceViewModel.Id != 0)
                     DeviceControllerViewModels.Add(deviceViewModel);
             }
             catch (Exception ex)
@@ -95,12 +97,6 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
-                //if (AuthorizationDepartments.Any(d => d.Parent != null && d.Parent.DepartmentID == SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID))
-                //{
-                //    Messenger.Default.Send(new NotificationMessage("选中部门存在子部门，请先删除所属子部门!"), Tokens.DepartmentPage_ShowNotification);
-                //    return;
-                //}
-
                 string question = string.Format("确定删除设备:{0}吗？", SelectedDeviceViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeviceController), Tokens.DevicePage_ShowQuestion);
 
@@ -118,7 +114,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 string message = "";
                 try
                 {
-                    _deviceControllerRepo.Delete(SelectedDeviceViewModel.CurrentDeviceController.DeviceID);
+                    _deviceControllerRepo.Delete(SelectedDeviceViewModel.Id);
                     message = "删除设备成功!";
 
                     DeviceControllerViewModels.Remove(SelectedDeviceViewModel);

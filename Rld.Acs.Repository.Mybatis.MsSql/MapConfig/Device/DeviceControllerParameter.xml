@@ -9,12 +9,12 @@
     <resultMap id="DeviceControllerParameterResult" class="Rld.Acs.Model.DeviceControllerParameter">
       <result property="DeviceParameterID" column="DeviceParameterID"/>
       <result property="AuthticationType" column="AuthticationType"/>
-      <result property="AutoOpenTimeZone" column="AutoOpenTimeZone"/>
-      <result property="IsSneak" column="IsSneak"/>
+      <result property="UnlockOpenTimeZone" column="UnlockOpenTimeZone"/>
+      <result property="AntiPassbackEnabled" column="AntiPassbackEnabled"/>
       <result property="MultiPersonLock" column="MultiPersonLock"/>
-      <result property="Linkage" column="Linkage"/>
-      <result property="LaunchDuress" column="LaunchDuress"/>
-      <result property="DuressFingerPrint" column="DuressFingerPrint"/>
+      <result property="DoorLinkageEnabled" column="DoorLinkageEnabled"/>
+      <result property="DuressEnabled" column="DuressEnabled"/>
+      <result property="DuressFingerPrintIndex" column="DuressFingerPrintIndex"/>
       <result property="DuressOpen" column="DuressOpen"/>
       <result property="DuressAlarm" column="DuressAlarm"/>
       <result property="DuressPassword" column="DuressPassword"/>
@@ -32,23 +32,23 @@
     <insert id="DeviceControllerParameter.Insert" parameterClass="DeviceControllerParameter">
       INSERT INTO [DEVICE_CONTROLLERS_PARAMETERS] (
       [AuthticationType]
-      , [AutoOpenTimeZone]
-      , [IsSneak]
+      , [UnlockOpenTimeZone]
+      , [AntiPassbackEnabled]
       , [MultiPersonLock]
-      , [Linkage]
-      , [LaunchDuress]
-      , [DuressFingerPrint]
+      , [DoorLinkageEnabled]
+      , [DuressEnabled]
+      , [DuressFingerPrintIndex]
       , [DuressOpen]
       , [DuressAlarm]
       , [DuressPassword]
       ) VALUES (
       #AuthticationType#
-      , #AutoOpenTimeZone#
-      , #IsSneak#
+      , #UnlockOpenTimeZone#
+      , #AntiPassbackEnabled#
       , #MultiPersonLock#
-      , #Linkage#
-      , #LaunchDuress#
-      , #DuressFingerPrint#
+      , #DoorLinkageEnabled#
+      , #DuressEnabled#
+      , #DuressFingerPrintIndex#
       , #DuressOpen#
       , #DuressAlarm#
       , #DuressPassword#
@@ -61,12 +61,12 @@
     <update id="DeviceControllerParameter.Update" parameterClass="DeviceControllerParameter">
       UPDATE [DEVICE_CONTROLLERS_PARAMETERS] SET
       [AuthticationType] = #AuthticationType#
-      , [AutoOpenTimeZone] = #AutoOpenTimeZone#
-      , [IsSneak] = #IsSneak#
+      , [UnlockOpenTimeZone] = #UnlockOpenTimeZone#
+      , [AntiPassbackEnabled] = #AntiPassbackEnabled#
       , [MultiPersonLock] = #MultiPersonLock#
-      , [Linkage] = #Linkage#
-      , [LaunchDuress] = #LaunchDuress#
-      , [DuressFingerPrint] = #DuressFingerPrint#
+      , [DoorLinkageEnabled] = #DoorLinkageEnabled#
+      , [DuressEnabled] = #DuressEnabled#
+      , [DuressFingerPrintIndex] = #DuressFingerPrintIndex#
       , [DuressOpen] = #DuressOpen#
       , [DuressAlarm] = #DuressAlarm#
       , [DuressPassword] = #DuressPassword#

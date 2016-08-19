@@ -39,10 +39,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             get { return CurrentDeviceRole.GetDeviceAssociatedDeviceList(AuthorizationDevices); }
         }
+        public String PermissionActionString
+        {
+            get { return CurrentDeviceRole.GetDeviceAssociatedPermissionActionList(PermissionActionDict); }
+        }
         public String TimezoneListString
         {
             get { return CurrentDeviceRole.GetDeviceAssociatedTimezoneList(Timezones); }
         }
+
 
         public DeviceRoleViewModel(DeviceRole deviceRole)
         {

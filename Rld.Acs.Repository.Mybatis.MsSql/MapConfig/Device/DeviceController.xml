@@ -12,7 +12,7 @@
       <result property="Name" column="Name"/>
       <result property="Code" column="Code"/>
       <result property="SN" column="SN"/>
-      <result property="Mode" column="Mode"/>
+      <result property="Model" column="Model"/>
       <result property="CommunicationType" column="CommunicationType"/>
       <result property="BaudRate" column="BaudRate"/>
       <result property="SerialPort" column="SerialPort"/>
@@ -48,7 +48,7 @@
       , [Name]
       , [Code]
       , [SN]
-      , [Mode]
+      , [Model]
       , [CommunicationType]
       , [BaudRate]
       , [SerialPort]
@@ -70,7 +70,7 @@
       , #Name#
       , #Code#
       , #SN#
-      , #Mode#
+      , #Model#
       , #CommunicationType#
       , #BaudRate#
       , #SerialPort#
@@ -99,7 +99,7 @@
       , [Name] = #Name#
       , [Code] = #Code#
       , [SN] = #SN#
-      , [Mode] = #Mode#
+      , [Model] = #Model#
       , [CommunicationType] = #CommunicationType#
       , [BaudRate] = #BaudRate#
       , [SerialPort] = #SerialPort#

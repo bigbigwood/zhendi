@@ -10,6 +10,7 @@ using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.ViewModel;
 
 namespace Rld.Acs.WpfApplication
 {
@@ -51,6 +52,8 @@ namespace Rld.Acs.WpfApplication
             InitResource();
 
             CurrentOperatorInfo = initFakeOperator();
+
+            ProvisioningModelMapper.BindModelMap();
         }
 
         private SysOperator initFakeOperator()

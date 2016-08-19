@@ -11,7 +11,7 @@ namespace Rld.Acs.Model
         public virtual String Name { get; set; }
         public virtual String Code { get; set; }
         public virtual String SN { get; set; }
-        public virtual String Mode { get; set; }
+        public virtual String Model { get; set; }
         public virtual CommunicationType CommunicationType { get; set; }
         public virtual String BaudRate { get; set; }
         public virtual String SerialPort { get; set; }
@@ -35,6 +35,7 @@ namespace Rld.Acs.Model
         {
             DeviceDoors= new List<DeviceDoor>();
             DeviceHeadReadings = new List<DeviceHeadReading>();
+            DeviceControllerParameter = new DeviceControllerParameter();
         }
     }
 }

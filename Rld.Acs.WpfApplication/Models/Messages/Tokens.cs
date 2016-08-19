@@ -44,9 +44,17 @@ namespace Rld.Acs.WpfApplication.Models.Messages
 
         public static readonly string OpenDeviceView = Guid.NewGuid().ToString();
         public static readonly string CloseDeviceView = Guid.NewGuid().ToString();
+        public static readonly string DeviceView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DevicePage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DevicePage_ShowQuestion = Guid.NewGuid().ToString();
-        public static readonly string DeviceView_ShowNotification = Guid.NewGuid().ToString();
+
+        public static readonly string OpenDeviceDoorView = Guid.NewGuid().ToString();
+        public static readonly string CloseDeviceDoorView = Guid.NewGuid().ToString();
+        public static readonly string DeviceDoorView_ShowNotification = Guid.NewGuid().ToString();
+
+        public static readonly string OpenDeviceHeadReadingView = Guid.NewGuid().ToString();
+        public static readonly string CloseDeviceHeadReadingView = Guid.NewGuid().ToString();
+        public static readonly string DeviceHeadReadingView_ShowNotification = Guid.NewGuid().ToString();
 
         public static readonly string OpenDeviceRoleView = Guid.NewGuid().ToString();
         public static readonly string CloseDeviceRoleView = Guid.NewGuid().ToString();

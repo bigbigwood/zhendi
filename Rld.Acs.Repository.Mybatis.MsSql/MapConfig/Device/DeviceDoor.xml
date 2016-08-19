@@ -11,17 +11,16 @@
       <result property="Name" column="Name"/>
       <result property="Code" column="Code"/>
       <result property="ElectricalAppliances" column="ElectricalAppliances"/>
-      <result property="OpenType" column="OpenType"/>
+      <result property="CheckOutOptions" column="CheckOutOptions"/>
       <result property="Status" column="Status"/>
       <result property="Remark" column="Remark"/>
-      <result property="DelayTime" column="DelayTime"/>
-      <result property="AlertType" column="AlertType"/>
-      <result property="OverTimeOpen" column="OverTimeOpen"/>
-      <result property="IsOverTime" column="IsOverTime"/>
-      <result property="ForceOpen" column="ForceOpen"/>
-      <result property="ConnectionAlerm" column="ConnectionAlerm"/>
-      <result property="LaunchDuress" column="LaunchDuress"/>
-      <result property="DuressFingerPrint" column="DuressFingerPrint"/>
+      <result property="RingType" column="RingType"/>
+      <result property="DelayOpenSeconds" column="DelayOpenSeconds"/>
+      <result property="OverTimeOpenSeconds" column="OverTimeOpenSeconds"/>
+      <result property="IllegalOpenSeconds" column="IllegalOpenSeconds"/>
+      <result property="LinkageAlarm" column="LinkageAlarm"/>
+      <result property="DuressEnabled" column="DuressEnabled"/>
+      <result property="DuressFingerPrintIndex" column="DuressFingerPrintIndex"/>
       <result property="DuressOpen" column="DuressOpen"/>
       <result property="DuressAlarm" column="DuressAlarm"/>
       <result property="DuressPassword" column="DuressPassword"/>
@@ -47,17 +46,16 @@
       , [Name]
       , [Code]
       , [ElectricalAppliances]
-      , [OpenType]
+      , [CheckOutOptions]
       , [Status]
       , [Remark]
-      , [DelayTime]
-      , [AlertType]
-      , [OverTimeOpen]
-      , [IsOverTime]
-      , [ForceOpen]
-      , [ConnectionAlerm]
-      , [LaunchDuress]
-      , [DuressFingerPrint]
+      , [RingType]
+      , [DelayOpenSeconds]
+      , [OverTimeOpenSeconds]
+      , [IllegalOpenSeconds]
+      , [LinkageAlarm]
+      , [DuressEnabled]
+      , [DuressFingerPrintIndex]
       , [DuressOpen]
       , [DuressAlarm]
       , [DuressPassword]
@@ -66,17 +64,16 @@
       , #Name#
       , #Code#
       , #ElectricalAppliances#
-      , #OpenType#
+      , #CheckOutOptions#
       , #Status#
       , #Remark#
-      , #DelayTime#
-      , #AlertType#
-      , #OverTimeOpen#
-      , #IsOverTime#
-      , #ForceOpen#
-      , #ConnectionAlerm#
-      , #LaunchDuress#
-      , #DuressFingerPrint#
+      , #RingType#
+      , #DelayOpenSeconds#
+      , #OverTimeOpenSeconds#
+      , #IllegalOpenSeconds#
+      , #LinkageAlarm#
+      , #DuressEnabled#
+      , #DuressFingerPrintIndex#
       , #DuressOpen#
       , #DuressAlarm#
       , #DuressPassword#
@@ -92,17 +89,16 @@
       , [Name] = #Name#
       , [Code] = #Code#
       , [ElectricalAppliances] = #ElectricalAppliances#
-      , [OpenType] = #OpenType#
+      , [CheckOutOptions] = #CheckOutOptions#
       , [Status] = #Status#
       , [Remark] = #Remark#
-      , [DelayTime] = #DelayTime#
-      , [AlertType] = #AlertType#
-      , [OverTimeOpen] = #OverTimeOpen#
-      , [IsOverTime] = #IsOverTime#
-      , [ForceOpen] = #ForceOpen#
-      , [ConnectionAlerm] = #ConnectionAlerm#
-      , [LaunchDuress] = #LaunchDuress#
-      , [DuressFingerPrint] = #DuressFingerPrint#
+      , [RingType] = #RingType#
+      , [DelayOpenSeconds] = #DelayOpenSeconds#
+      , [OverTimeOpenSeconds] = #OverTimeOpenSeconds#
+      , [IllegalOpenSeconds] = #IllegalOpenSeconds#
+      , [LinkageAlarm] = #LinkageAlarm#
+      , [DuressEnabled] = #DuressEnabled#
+      , [DuressFingerPrintIndex] = #DuressFingerPrintIndex#
       , [DuressOpen] = #DuressOpen#
       , [DuressAlarm] = #DuressAlarm#
       , [DuressPassword] = #DuressPassword#

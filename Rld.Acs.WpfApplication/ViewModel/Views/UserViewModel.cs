@@ -32,7 +32,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-
         public RelayCommand<string> UploadImageCmd { get; private set; }
         public RelayCommand DepartmentChangedCmd { get; private set; }
 
