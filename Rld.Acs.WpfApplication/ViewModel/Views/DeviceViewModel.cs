@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -13,6 +15,7 @@ using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service.Validator;
 using Rld.Acs.WpfApplication.ViewModel.Converter;
+using TimeZone = Rld.Acs.Model.TimeZone;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -27,13 +30,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public String Code { get; set; }
         public String SN { get; set; }
         public String Model { get; set; }
-        public CommunicationType CommunicationType { get; set; }
+        public Int32 CommunicationType { get; set; }
         public String BaudRate { get; set; }
         public String SerialPort { get; set; }
         public String Password { get; set; }
         public String IP { get; set; }
         public String Port { get; set; }
-        public String Protocol { get; set; }
+        public Int32 Protocol { get; set; }
         public String Label { get; set; }
         public String ServerURL { get; set; }
         public String Remark { get; set; }
@@ -52,11 +55,29 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public DeviceExtensionViewModel DeviceExtensionViewModel { get; set; }
         public String DoorListString { get; set; }
         public String HeadReadingListString { get; set; }
+        public List<SysDictionary> CommunicationTypeDict { get; set; }
+        public List<SysDictionary> ProtocolDict { get; set; }
+        public List<SysDictionary> AuthticationTypeDict { get; set; }
+
+        public List<NullableSelectableItem> Timezones
+        {
+            get
+            {
+                return ApplicationManager.GetInstance().AuthorizationTimezones.Select(x => new NullableSelectableItem
+                {
+                    ID = x.TimeZoneID, DisplayName = x.TimeZoneName
+                }).ToList();
+            }
+        }
 
         public DeviceViewModel()
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
+
+            CommunicationTypeDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.CommunicationType);
+            ProtocolDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Protocol);
+            AuthticationTypeDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.AuthticationType);
         }
 
 
@@ -65,12 +86,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
-                var deviceController = this.ToCoreModel();
-
                 if (Id == 0)
                 {
-                    deviceController.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    deviceController.CreateDate = DateTime.Now;
+                    Status= GeneralStatus.Enabled;
+                    CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                    CreateDate = DateTime.Now;
+
+                    var deviceController = this.ToCoreModel();
                     deviceController = _deviceControllerRepo.Insert(deviceController);
                     Id = deviceController.DeviceID;
 
@@ -78,8 +100,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 }
                 else
                 {
-                    deviceController.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    deviceController.UpdateDate = DateTime.Now;
+                    UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                    UpdateDate = DateTime.Now;
+
+                    var deviceController = this.ToCoreModel();
                     _deviceControllerRepo.Update(deviceController);
 
                     message = "修改设备成功!";

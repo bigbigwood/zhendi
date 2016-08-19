@@ -4,7 +4,7 @@ namespace Rld.Acs.WpfApplication.Models
 {
     public abstract class SelectableItem
     {
-        public Int32 ID { get; set; }
+        public virtual Int32 ID { get; set; }
         public Boolean IsEnabled { get; set; }
         public Boolean IsDefault { get; set; }
         public Boolean IsSelected { get; set; }
@@ -33,5 +33,10 @@ namespace Rld.Acs.WpfApplication.Models
 
     public class ComboBoxItem : SelectableItem
     {
+    }
+
+    public class NullableSelectableItem : SelectableItem
+    {
+        public new Int32? ID { get; set; }
     }
 }

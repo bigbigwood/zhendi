@@ -41,6 +41,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             CreateProvMap<DeviceDoor, DeviceDoorViewModel>()
                 .ForMember(dest => dest.IsSelected, op => op.Ignore())
+                .ForMember(dest => dest.RingTypeDict, op => op.Ignore())
+                .ForMember(dest => dest.CheckOutOptionsDict, op => op.Ignore())
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())
                 .ForMember(dest => dest.ModifyDoorCmd, op => op.Ignore());
@@ -49,6 +51,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
             CreateProvMap<DeviceHeadReading, DeviceHeadReadingViewModel>()
                 .ForMember(dest => dest.IsSelected, op => op.Ignore())
+                .ForMember(dest => dest.HeadReaderTypeDict, op => op.Ignore())
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())
                 .ForMember(dest => dest.ModifyHeadReadingCmd, t => t.Ignore());
@@ -66,6 +69,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.Title, op => op.Ignore())
                 .ForMember(dest => dest.DoorViewModels, op => op.Ignore())
                 .ForMember(dest => dest.HeadReadingViewModels, op => op.Ignore())
+                .ForMember(dest => dest.CommunicationTypeDict, op => op.Ignore())
+                .ForMember(dest => dest.ProtocolDict, op => op.Ignore())
+                .ForMember(dest => dest.AuthticationTypeDict, op => op.Ignore())
+                .ForMember(dest => dest.Timezones, op => op.Ignore())
                 .ForMember(dest => dest.DoorListString, op => op.MapFrom(src => src.GetDeviceAssociatedDoorList()))
                 .ForMember(dest => dest.HeadReadingListString, op => op.MapFrom(src => src.GetDeviceAssociatedHeadReadingList()));
 

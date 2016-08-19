@@ -25,5 +25,13 @@ namespace Rld.Acs.Model.Extension
             var headReadingNames = deviceController.DeviceHeadReadings.Select(x => x.Name).ToList();
             return string.Join(", ", headReadingNames);
         }
+
+        public static Boolean Compare(this DeviceController deviceController, DeviceController other)
+        {
+            if (other == null)
+                return false;
+
+            return deviceController.DeviceID == other.DeviceID;
+        }
     }
 }

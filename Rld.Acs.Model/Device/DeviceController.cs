@@ -12,13 +12,13 @@ namespace Rld.Acs.Model
         public virtual String Code { get; set; }
         public virtual String SN { get; set; }
         public virtual String Model { get; set; }
-        public virtual CommunicationType CommunicationType { get; set; }
+        public virtual Int32 CommunicationType { get; set; }
         public virtual String BaudRate { get; set; }
         public virtual String SerialPort { get; set; }
         public virtual String Password { get; set; }
         public virtual String IP { get; set; }
         public virtual String Port { get; set; }
-        public virtual String Protocol { get; set; }
+        public virtual Int32 Protocol { get; set; }
         public virtual String Label { get; set; }
         public virtual String ServerURL { get; set; }
         public virtual String Remark { get; set; }

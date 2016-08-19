@@ -305,7 +305,7 @@ create table DEVICE_CONTROLLERS (
    Password             nvarchar(100)        null,
    IP                   nvarchar(100)        null,
    Port                 nvarchar(100)        null,
-   protocol             nvarchar(100)        null,
+   protocol             int                  null,
    Label                nvarchar(1024)       null,
    ServerURL            nvarchar(1024)       null,
    Remark               nvarchar(1024)       null,

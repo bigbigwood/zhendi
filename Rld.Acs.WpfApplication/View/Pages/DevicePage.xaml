@@ -47,18 +47,9 @@
                     </ToolBar>
                 </ToolBarTray>
             </DockPanel>
-            <DockPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
-                <TextBox Margin="0,0,5,0"
-                     Width="200"
-                         Name="SearchDepartmentTextBox"
-                         Controls:TextBoxHelper.Watermark="Search time segment..."
-                         Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmdWithParameter, Mode=OneWay}"
-                         Controls:TextBoxHelper.ButtonCommandParameter="{Binding ElementName=test2, Path=Text}"
-                         Style="{DynamicResource SearchMetroTextBox}" />
-            </DockPanel>
             <Grid Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" >
                 <DataGrid ItemsSource="{Binding DeviceControllerViewModels}" SelectedItem="{Binding Path=SelectedDeviceViewModel}" 
-                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow">
+                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
                         <DataGridTextColumn Header="{DynamicResource DevicePage_Label_Name}" Binding="{Binding Name}" Width="200" />

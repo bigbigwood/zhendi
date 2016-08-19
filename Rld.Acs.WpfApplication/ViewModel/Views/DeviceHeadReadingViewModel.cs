@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Documents;
+using FluentValidation.Resources;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -34,6 +35,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
         public RelayCommand<DeviceHeadReadingViewModel> ModifyHeadReadingCmd { get; private set; }
+        public List<SysDictionary> HeadReaderTypeDict { get; set; }
+        //private DeviceHeadReadingViewModel backup { get; set; }
 
 
         public DeviceHeadReadingViewModel()
@@ -41,9 +44,23 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
             ModifyHeadReadingCmd = new RelayCommand<DeviceHeadReadingViewModel>(ModifyDeviceHeadReading);
+            HeadReaderTypeDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.HeadReaderType);
+
+          //backup = MemberwiseClone() as DeviceHeadReadingViewModel;
         }
 
         private void Save()
+        {
+            if (DeviceHeadReadingID == 0)
+            {
+                Status = 1;
+            }
+
+            RaisePropertyChanged(null);
+            Close("");
+        }
+
+        private void Cancel()
         {
             RaisePropertyChanged(null);
             Close("");

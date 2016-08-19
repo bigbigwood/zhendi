@@ -83,6 +83,12 @@ namespace Rld.Acs.Model
         Nationality = 10001, //民族
         Gender = 10002, //性别
         DevicePermission = 10003, //设备权限
-        SystemPermission = 10003, //系统权限
+        SystemPermission = 10004, //系统权限
+        HeadReaderType = 10005, //读头类型
+        CheckOutOptions = 10006, //出门选项
+        RingType = 10007, //铃声类型
+        CommunicationType = 10008, //通讯类型
+        Protocol = 10009, //通讯协议
+        AuthticationType = 10010, //验证模式
     }
 }

@@ -3,6 +3,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="Ok">确认</sys:String>
     <sys:String x:Key="Cancel">取消</sys:String>
+	<sys:String x:Key="Enabled">启用</sys:String>
     <sys:String x:Key="SettingDetail">设置详情</sys:String>
 
 

@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceHeadReadingExtension.cs" />
+    <Compile Include="DeviceDoorExtension.cs" />
     <Compile Include="DeviceRoleExtension.cs" />
     <Compile Include="DeviceControllerExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
