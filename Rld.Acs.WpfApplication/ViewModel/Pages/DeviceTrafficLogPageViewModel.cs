@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Documents;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -25,49 +26,190 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public String DeviceUserId { get; set; }
         public ObservableCollection<DeviceTrafficLogViewModel> DeviceTrafficLogViewModels { get; set; }
         public DeviceTrafficLogViewModel SelectedTrafficLogViewModel { get; set; }
-        public RelayCommand<Int32> QueryCmd { get; private set; }
+
+        public RelayCommand QueryCommand { get; set; }
+
+        private async void QueryCommandFunc()
+        {
+            await Task.Run(() =>
+            {
+                int totalCount = 0;
+                DeviceTrafficLogViewModels = GetData(PageSize, out totalCount);
+                if (totalCount % PageSize == 0)
+                {
+                    TotalPage = (totalCount / PageSize).ToString();
+                }
+                else
+                {
+                    TotalPage = ((totalCount / PageSize) + 1).ToString();
+                }
+
+                RaisePropertyChanged(null);
+            });
+        }
+
+        #region 分页相关属性
+
+        /// <summary>
+        /// 分页查询命令
+        /// </summary>
+        private async void NextPageSearchCommandFunc()
+        {
+            await Task.Run(() =>
+            {
+                var pageIndex = Convert.ToInt32(CurrentPage);
+                DeviceTrafficLogViewModels = QueryData(pageIndex, PageSize);
+
+                RaisePropertyChanged(null);
+            });
+        }
+        private string _totalPage = string.Empty;
+
+
+        /// <summary>
+        /// 总页数
+        /// </summary>
+        public string TotalPage
+        {
+            get { return _totalPage; }
+            set
+            {
+                _totalPage = value;
+                RaisePropertyChanged();
+            }
+        }
+        private string _navigationPage = string.Empty;
+
+        public string NavigationPage
+        {
+            get { return _navigationPage; }
+            set
+            {
+                _navigationPage = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string _currentPage = "1";
+        /// <summary>
+        /// 当前页
+        /// </summary>
+        public string CurrentPage
+        {
+            get { return _currentPage; }
+            set
+            {
+                _currentPage = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private int _pageSize = 40;
+        /// <summary>
+        /// 每页显示的记录数
+        /// </summary>
+        public int PageSize
+        {
+            get { return _pageSize; }
+            set
+            {
+                _pageSize = value;
+                RaisePropertyChanged();
+            }
+        }
+        private int _pageIndex;
+        private int _totalCount;
+        public int PageIndex
+        {
+            get { return _pageIndex; }
+            set
+            {
+                _pageIndex = value;
+
+                RaisePropertyChanged();
+            }
+        }
+
+        public int TotalCount
+        {
+            get { return _totalCount; }
+            set
+            {
+                _totalCount = value;
+
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 分页管理
+        /// </summary>
+        public RelayCommand NextPageSearchCommand { get; set; }
+
+        #endregion
+
+
         public DeviceTrafficLogPageViewModel()
         {
-            QueryCmd = new RelayCommand<Int32>(QueryTrafficLog);
+            QueryCommand = new RelayCommand(QueryCommandFunc);
+            NextPageSearchCommand = new RelayCommand(NextPageSearchCommandFunc);
+
             DeviceTrafficLogViewModels = new ObservableCollection<DeviceTrafficLogViewModel>();
 
             StartDate = DateTime.Now.AddDays(-7);
             EndDate = DateTime.Now;
         }
 
-        private void QueryTrafficLog(Int32 trafficLogType)
+        private ObservableCollection<DeviceTrafficLogViewModel> GetData(int pageSize, out int totalCount)
         {
-            try
-            {
-                Int32 pageStart = 1;
-                Int32 pageEnd = 2;
+            Int32 pageStart = 1;
+            Int32 pageEnd = pageSize;
 
-                var conditions = new Hashtable()
+            var conditions = GetConditions();
+            conditions.Add("PageStart", pageStart);
+            conditions.Add("PageEnd", pageEnd);
+
+            var paninationResult = _deviceTrafficLogRepo.QueryPage(conditions);
+            totalCount = paninationResult.TotalCount;
+            var logVM = paninationResult.Entities.Select(AutoMapper.Mapper.Map<DeviceTrafficLogViewModel>);
+
+            DeviceTrafficLogViewModels = new ObservableCollection<DeviceTrafficLogViewModel>(logVM);
+            return DeviceTrafficLogViewModels;
+        }
+
+        private ObservableCollection<DeviceTrafficLogViewModel> QueryData(int pageIndex, int pageSize)
+        {
+            Int32 pageStart = pageSize * (pageIndex - 1) + 1;
+            Int32 pageEnd = pageSize * pageIndex;
+
+            var conditions = GetConditions();
+            conditions.Add("PageStart", pageStart);
+            conditions.Add("PageEnd", pageEnd);
+
+            var paninationResult = _deviceTrafficLogRepo.QueryPage(conditions);
+            //totalCount = paninationResult.TotalCount;
+            var logVM = paninationResult.Entities.Select(AutoMapper.Mapper.Map<DeviceTrafficLogViewModel>);
+
+            DeviceTrafficLogViewModels = new ObservableCollection<DeviceTrafficLogViewModel>(logVM);
+            return DeviceTrafficLogViewModels;
+        }
+
+        private Hashtable GetConditions()
+        {
+            var conditions = new Hashtable()
                 {
-                    {"RecordType", trafficLogType},
-                    {"PageStart", pageStart},
-                    {"PageEnd", pageEnd},
+                    {"RecordType", 1},
                     {"StartDate",StartDate},
                     {"EndDate", EndDate},
                 };
 
-                if (!string.IsNullOrWhiteSpace(DeviceId))
-                    conditions.Add("DeviceId", DeviceId);
 
-                if (!string.IsNullOrWhiteSpace(DeviceUserId))
-                    conditions.Add("DeviceUserId", DeviceUserId);
+            if (!string.IsNullOrWhiteSpace(DeviceId))
+                conditions.Add("DeviceId", DeviceId);
 
-                var logs = _deviceTrafficLogRepo.Query(conditions);
-                var logVM = logs.Select(AutoMapper.Mapper.Map<DeviceTrafficLogViewModel>);
-                DeviceTrafficLogViewModels = new ObservableCollection<DeviceTrafficLogViewModel>(logVM);
+            if (!string.IsNullOrWhiteSpace(DeviceUserId))
+                conditions.Add("DeviceUserId", DeviceUserId);
 
-                RaisePropertyChanged(null);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-            }
+            return conditions;
         }
-
     }
 }

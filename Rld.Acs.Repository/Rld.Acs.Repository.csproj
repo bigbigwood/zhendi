@@ -53,7 +53,9 @@
     <Compile Include="Framework\IConnectionProvider.cs" />
     <Compile Include="Framework\IPersistanceConnection.cs" />
     <Compile Include="Framework\IPersistanceTransaction.cs" />
+    <Compile Include="Framework\Pagination\IPaginationRepository.cs" />
     <Compile Include="Framework\IRepository.cs" />
+    <Compile Include="Framework\Pagination\PaginationResult.cs" />
     <Compile Include="Interfaces\Department\IDepartmentDeviceRepository.cs" />
     <Compile Include="Interfaces\Department\IDepartmentRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceControllerRepository.cs" />

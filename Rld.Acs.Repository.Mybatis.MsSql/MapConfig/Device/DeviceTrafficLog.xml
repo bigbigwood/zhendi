@@ -78,10 +78,34 @@
 
     <select id="DeviceTrafficLog.Query" parameterClass="Hashtable" resultMap="DeviceTrafficLogResult">
       SELECT N.rownum, L.* FROM
-      (SELECT TOP $PageEnd$ row_number() OVER (ORDER BY TrafficID DESC) rownum, TrafficID FROM DEVICE_TRAFFIC_LOG) as N
+      (SELECT TOP $PageEnd$ row_number() OVER (ORDER BY TrafficID) rownum, TrafficID FROM DEVICE_TRAFFIC_LOG
+      WHERE 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="StartDate">
+          RecordTime >= #StartDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="EndDate">
+          RecordTime  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceId">
+          DeviceId = #DeviceId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceUserId">
+          DeviceUserId = #DeviceUserId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="RecordType">
+          RecordType = #RecordType#
+        </isNotEmpty>
+      </dynamic>
+      ) N
       INNER JOIN DEVICE_TRAFFIC_LOG L ON N.TrafficID = L.TrafficID
       WHERE N.rownum >= $PageStart$
-      <dynamic prepend="AND">
+    </select>
+
+    <select id="DeviceTrafficLog.QueryCount" parameterClass="Hashtable" resultClass="int">
+      SELECT COUNT(1) FROM DEVICE_TRAFFIC_LOG L
+      Where 1=1
+      <dynamic prepend="AND"> 
         <isNotEmpty prepend="AND" property="StartDate">
           L.RecordTime >= #StartDate#
         </isNotEmpty>
@@ -98,7 +122,6 @@
           L.RecordType = #RecordType#
         </isNotEmpty>
       </dynamic>
-      ORDER BY N.rownum
     </select>
   </statements>
 </sqlMap>

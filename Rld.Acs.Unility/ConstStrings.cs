@@ -10,5 +10,7 @@ namespace Rld.Acs.Unility
     {
         public const string Ok = "Ok";
         public const string Nok = "Nok";
+
+        public const string HTTP_HEADER_X_Pagination_TotalCount = "X-Pagination-TotalCount";
     }
 }

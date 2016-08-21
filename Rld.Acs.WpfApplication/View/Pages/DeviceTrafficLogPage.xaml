@@ -7,6 +7,8 @@
       xmlns:pages="clr-namespace:Rld.Acs.WpfApplication.View.Pages"
       xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:customControls="clr-namespace:Rld.Acs.WpfApplication.View.CustomControls"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       DataContext="{Binding DeviceTrafficLogPage, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="1000" Unloaded="Page_Unloaded">
@@ -32,6 +34,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="28"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Background="WhiteSmoke">
@@ -44,7 +47,7 @@
                 <TextBlock Text="用户设备ID:" Margin="10,0"/>
                 <TextBox  Text="{Binding DeviceUserId}" Width="150"/>
                 <Button  Margin="10,1" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
-                         Content="{DynamicResource Query}"  Command="{Binding QueryCmd}" CommandParameter="{StaticResource IntOne}"/>
+                         Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{StaticResource IntOne}"/>
             </StackPanel>
             <Grid Grid.Row="1" Margin="0,0,0,0" >
                 <DataGrid ItemsSource="{Binding DeviceTrafficLogViewModels}" SelectedItem="{Binding Path=SelectedTrafficLogViewModel}" 
@@ -61,6 +64,15 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
+            <customControls:PagePicker Grid.Row="2" HorizontalAlignment="Right"
+                                       TotalPage="{Binding Path=TotalPage,Mode=TwoWay}" PageSize="{Binding Path=PageSize,Mode=TwoWay}" 
+                               CurrentPage="{Binding Path=CurrentPage,Mode=TwoWay}" NavigationPage="{Binding NavigationPage}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger  EventName="PageChanged">
+                        <i:InvokeCommandAction  Command="{Binding Path=NextPageSearchCommand, Mode=TwoWay}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </customControls:PagePicker>
         </Grid>
     </Border>
 </pages:BasePage>

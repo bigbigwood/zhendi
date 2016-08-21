@@ -1,4 +1,5 @@
-﻿using Rld.Acs.Model;
+﻿using System.Collections;
+using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,11 @@ namespace Rld.Acs.WpfApplication.Repository
         public override bool Update(DeviceController deviceController)
         {
             return Update(deviceController, deviceController.DeviceID);
+        }
+
+        public Int32 QueryCount(Hashtable conditions)
+        {
+            throw new NotImplementedException();
         }
     }
 }

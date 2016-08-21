@@ -146,6 +146,9 @@
     <Compile Include="ViewModel\Views\SyncUserViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceViewModel.cs" />
     <Compile Include="View\CustomControls\MTextBlock.cs" />
+    <Compile Include="View\CustomControls\PagePicker.xaml.cs">
+      <DependentUpon>PagePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\BasePage.cs" />
     <Compile Include="Models\AppConfiguration.cs" />
     <Compile Include="Service\ApplicationManager.cs" />
@@ -273,6 +276,10 @@
     <Compile Include="View\Windows\TimeSegmentView.xaml.cs">
       <DependentUpon>TimeSegmentView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\CustomControls\PagePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CustomControls\TileIconBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -3,6 +3,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.WebApi.Framework;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,11 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
-                var deviceTrafficInfos = repo.Query(conditions);
+
+                var paginationResult = repo.QueryPage(conditions);
+                var totalCount = paginationResult.TotalCount;
+                var deviceTrafficInfos = paginationResult.Entities;
+                System.Web.HttpContext.Current.Response.Headers.Add(ConstStrings.HTTP_HEADER_X_Pagination_TotalCount, totalCount.ToString());
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceTrafficInfos.ToList());
 

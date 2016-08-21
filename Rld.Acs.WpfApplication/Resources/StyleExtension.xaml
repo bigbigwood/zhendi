@@ -88,7 +88,7 @@
         <Setter Property="VerticalAlignment" Value="Stretch" />
     </Style>
 
-    <Style  x:Key="FlatButtonStyle" TargetType="{x:Type Button}"
+    <Style x:Key="FlatButtonStyle" TargetType="{x:Type Button}"
            BasedOn="{StaticResource MetroFlatButton}" />
 
     <!--<Style TargetType="customControls:MTextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
