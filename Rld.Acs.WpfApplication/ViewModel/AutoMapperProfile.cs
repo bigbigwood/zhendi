@@ -83,7 +83,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.DeviceHeadReadings, op => op.Ignore());
 
             CreateProvMap<DeviceTrafficLogViewModel, DeviceTrafficLog>();
-            CreateProvMap<DeviceTrafficLog, DeviceTrafficLogViewModel>();
+            CreateProvMap<DeviceTrafficLog, DeviceTrafficLogViewModel>()
+                 .ForMember(dest => dest.AuthenticationString, op => op.Ignore());
 
             Log.Info("Verify mapper configuration..");
             Mapper.AssertConfigurationIsValid();

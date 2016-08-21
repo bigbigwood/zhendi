@@ -31,10 +31,29 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public Int32? AuthenticationType { get; set; }
         public String Remark { get; set; }
 
-
-        public DeviceTrafficLogViewModel()
+        public String AuthenticationString
         {
+            get
+            {
+                if (AuthenticationType == null || AuthenticationType == 0)
+                    return string.Empty;
+                else
+                {
+                    return _authenticationTypeDict[AuthenticationType.Value];
+                }
+            }
+        }
 
+        private static Dictionary<int, string> _authenticationTypeDict = null;
+
+        static DeviceTrafficLogViewModel ()
+        {
+            var dict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.CheckInOptions);
+            _authenticationTypeDict = new Dictionary<int, string>();
+            _authenticationTypeDict.Add(1, dict.First(d => d.ItemID == 1).ItemValue);
+            _authenticationTypeDict.Add(2, dict.First(d => d.ItemID == 2).ItemValue);
+            _authenticationTypeDict.Add(4, dict.First(d => d.ItemID == 4).ItemValue);
+            _authenticationTypeDict.Add(8, dict.First(d => d.ItemID == 8).ItemValue);
         }
     }
 }

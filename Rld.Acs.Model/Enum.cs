@@ -78,6 +78,15 @@ namespace Rld.Acs.Model
         //FacePrint = 12,
     }
 
+    [Flags]
+    public enum CheckInOptions
+    {
+        Password = 1,
+        Card = 2,
+        FingerPrint = 4,
+        Wiegand = 8,
+    }
+
     public enum DictionaryType
     {
         Nationality = 10001, //民族
@@ -90,5 +99,7 @@ namespace Rld.Acs.Model
         CommunicationType = 10008, //通讯类型
         Protocol = 10009, //通讯协议
         AuthticationType = 10010, //验证模式
+        DeviceTrafficLogType = 10011, //日志记录类型
+        CheckInOptions = 10012, //访问记录验证选择
     }
 }

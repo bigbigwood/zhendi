@@ -5,6 +5,14 @@
     <sys:String x:Key="Cancel">取消</sys:String>
 	<sys:String x:Key="Enabled">启用</sys:String>
 	<sys:String x:Key="Query">查询</sys:String>
+	<sys:String x:Key="Export">导出</sys:String>
+	<sys:String x:Key="Import">导入</sys:String>
+	<sys:String x:Key="Save">保存</sys:String>
+	<sys:String x:Key="ExportFile">导出文件</sys:String>
+	<sys:String x:Key="ImportFile">导入文件</sys:String>
+	<sys:String x:Key="SaveFile">保存文件</sys:String>
+	<sys:String x:Key="ExportResult">导出结果</sys:String>
+	<sys:String x:Key="SaveResult">保存结果</sys:String>
     <sys:String x:Key="SettingDetail">设置详情</sys:String>
 
 

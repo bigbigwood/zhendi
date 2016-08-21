@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Windows.Documents;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using log4net;
+using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Repository;
@@ -26,6 +28,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public String DeviceUserId { get; set; }
         public ObservableCollection<DeviceTrafficLogViewModel> DeviceTrafficLogViewModels { get; set; }
         public DeviceTrafficLogViewModel SelectedTrafficLogViewModel { get; set; }
+        public Int32 SelectedLogType { get; set; }
+        public List<SysDictionary> DeviceTrafficLogTypeDict { get; set; }
 
         public RelayCommand QueryCommand { get; set; }
 
@@ -34,7 +38,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             await Task.Run(() =>
             {
                 int totalCount = 0;
-                DeviceTrafficLogViewModels = GetData(PageSize, out totalCount);
+                var pageIndex = 1;
+                DeviceTrafficLogViewModels = QueryData(1, PageSize, out totalCount);
                 if (totalCount % PageSize == 0)
                 {
                     TotalPage = (totalCount / PageSize).ToString();
@@ -57,8 +62,17 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             await Task.Run(() =>
             {
+                int totalCount = 0;
                 var pageIndex = Convert.ToInt32(CurrentPage);
-                DeviceTrafficLogViewModels = QueryData(pageIndex, PageSize);
+                DeviceTrafficLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
+                if (totalCount % PageSize == 0)
+                {
+                    TotalPage = (totalCount / PageSize).ToString();
+                }
+                else
+                {
+                    TotalPage = ((totalCount / PageSize) + 1).ToString();
+                }
 
                 RaisePropertyChanged(null);
             });
@@ -154,15 +168,17 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             NextPageSearchCommand = new RelayCommand(NextPageSearchCommandFunc);
 
             DeviceTrafficLogViewModels = new ObservableCollection<DeviceTrafficLogViewModel>();
+            DeviceTrafficLogTypeDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.DeviceTrafficLogType);
 
             StartDate = DateTime.Now.AddDays(-7);
             EndDate = DateTime.Now;
         }
 
-        private ObservableCollection<DeviceTrafficLogViewModel> GetData(int pageSize, out int totalCount)
+
+        private ObservableCollection<DeviceTrafficLogViewModel> QueryData(int pageIndex, int pageSize, out int totalCount)
         {
-            Int32 pageStart = 1;
-            Int32 pageEnd = pageSize;
+            Int32 pageStart = pageSize * (pageIndex - 1) + 1;
+            Int32 pageEnd = pageSize * pageIndex;
 
             var conditions = GetConditions();
             conditions.Add("PageStart", pageStart);
@@ -176,28 +192,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             return DeviceTrafficLogViewModels;
         }
 
-        private ObservableCollection<DeviceTrafficLogViewModel> QueryData(int pageIndex, int pageSize)
-        {
-            Int32 pageStart = pageSize * (pageIndex - 1) + 1;
-            Int32 pageEnd = pageSize * pageIndex;
-
-            var conditions = GetConditions();
-            conditions.Add("PageStart", pageStart);
-            conditions.Add("PageEnd", pageEnd);
-
-            var paninationResult = _deviceTrafficLogRepo.QueryPage(conditions);
-            //totalCount = paninationResult.TotalCount;
-            var logVM = paninationResult.Entities.Select(AutoMapper.Mapper.Map<DeviceTrafficLogViewModel>);
-
-            DeviceTrafficLogViewModels = new ObservableCollection<DeviceTrafficLogViewModel>(logVM);
-            return DeviceTrafficLogViewModels;
-        }
-
         private Hashtable GetConditions()
         {
             var conditions = new Hashtable()
                 {
-                    {"RecordType", 1},
+                    {"RecordType", SelectedLogType},
                     {"StartDate",StartDate},
                     {"EndDate", EndDate},
                 };

@@ -86,11 +86,26 @@
                         <TextBlock Text="设备名称" Margin="0"/>
                     </TextBlock>
                     <!--<customControls:MTextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Width="80"></customControls:MTextBlock>-->
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="设备编号"/>
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="设备型号"/>
-                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Mac地址"/>
-                    <TextBlock Grid.Row="4" Grid.Column="1" Text="产品序列号"/>
-                    <TextBlock Grid.Row="5" Grid.Column="1" Text="密码"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="设备编号" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="设备型号" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="Mac地址" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="产品序列号" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="密码" Margin="0"/>
+                    </TextBlock>
                     <TextBlock Grid.Row="6" Grid.Column="1" Text="备注"/>
                     <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Name}"/>
                     <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Code}"/>
