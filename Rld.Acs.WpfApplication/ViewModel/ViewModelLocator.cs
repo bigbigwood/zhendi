@@ -44,6 +44,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Register<TimeSegmentPageViewModel>();
             SimpleIoc.Default.Register<TimeGroupPageViewModel>();
             SimpleIoc.Default.Register<TimeZonePageViewModel>();
+            SimpleIoc.Default.Register<DeviceTrafficLogPageViewModel>();
 
             SetupNavigation();
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -70,6 +71,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
             navigationService.Configure("TimeSegmentPage", new Uri("../Pages/TimeSegmentPage.xaml", UriKind.Relative));
             navigationService.Configure("TimeGroupPage", new Uri("../Pages/TimeGroupPage.xaml", UriKind.Relative));
             navigationService.Configure("TimeZonePage", new Uri("../Pages/TimeZonePage.xaml", UriKind.Relative));
+            navigationService.Configure("DeviceTrafficLogPage", new Uri("../Pages/DeviceTrafficLogPage.xaml", UriKind.Relative));
+
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
 
@@ -110,6 +113,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public TimeZonePageViewModel TimeZonePage
         {
             get { return ServiceLocator.Current.GetInstance<TimeZonePageViewModel>(); }
+        }
+        public DeviceTrafficLogPageViewModel DeviceTrafficLogPage
+        {
+            get { return ServiceLocator.Current.GetInstance<DeviceTrafficLogPageViewModel>(); }
         }
 
         public static void Cleanup()

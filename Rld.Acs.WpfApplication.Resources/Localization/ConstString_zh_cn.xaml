@@ -4,6 +4,7 @@
     <sys:String x:Key="Ok">确认</sys:String>
     <sys:String x:Key="Cancel">取消</sys:String>
 	<sys:String x:Key="Enabled">启用</sys:String>
+	<sys:String x:Key="Query">查询</sys:String>
     <sys:String x:Key="SettingDetail">设置详情</sys:String>
 
 
@@ -68,4 +69,13 @@
     <sys:String x:Key="DeviceRolePage_Label_Device">关联设备</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_DevicePermission">关联设备权限</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_Timezones">关联时间区</sys:String>
+	
+	<sys:String x:Key="DeviceTrafficLogPage_Label_DeviceID">设备ID</sys:String>
+	<sys:String x:Key="DeviceTrafficLogPage_Label_DeviceType">设备类型</sys:String>
+	<sys:String x:Key="DeviceTrafficLogPage_Label_DeviceSN">设备序列号</sys:String>
+	<sys:String x:Key="DeviceTrafficLogPage_Label_DeviceUserID">用户设备ID</sys:String>
+	<sys:String x:Key="DeviceTrafficLogPage_Label_RecordType">日志类型</sys:String>
+	<sys:String x:Key="DeviceTrafficLogPage_Label_RecordTime">记录时间</sys:String>
+	<sys:String x:Key="DeviceTrafficLogPage_Label_AuthenticationType">验证方式</sys:String>
+	<sys:String x:Key="DeviceTrafficLogPage_Label_AuthenticationResult">验证结果</sys:String>
 </ResourceDictionary>

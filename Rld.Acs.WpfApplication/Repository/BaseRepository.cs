@@ -77,11 +77,13 @@ namespace Rld.Acs.WpfApplication.Repository
                     {
                         queryString += string.Format("{0}={1}&", c.Key, c.Value);
                     }
-                    queryString.Trim('&');
+
+                    if (queryString.EndsWith("&"))
+                        queryString = queryString.Remove(queryString.Length - 1);
                 }
 
                 var response = httpClient.GetAsync(RelevantUri + queryString).Result;
-                response.EnsureSuccessStatusCode(); // Throw on error code. 
+                response.EnsureSuccessStatusCode(); // Throw on error code.     
                 var entities = response.Content.ReadAsAsync<IEnumerable<TEntity>>().Result;
                 return entities;
             }

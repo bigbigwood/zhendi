@@ -123,6 +123,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Repository\DeviceOperationLogRepository.cs" />
+    <Compile Include="Repository\DeviceTrafficLogRepository.cs" />
     <Compile Include="Service\DeviceServiceProxy.cs" />
     <Compile Include="Service\SecurityServiceProxy.cs" />
     <Compile Include="Service\Validator\TimeZoneValidator.cs" />
@@ -131,8 +133,10 @@
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
+    <Compile Include="ViewModel\Pages\DeviceTrafficLogPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
+    <Compile Include="ViewModel\Views\DeviceTrafficLogViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceHeadReadingViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceDoorViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceRolePermissionViewModel.cs" />
@@ -141,6 +145,7 @@
     <Compile Include="ViewModel\Views\SyncDepartmentViewModel.cs" />
     <Compile Include="ViewModel\Views\SyncUserViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceViewModel.cs" />
+    <Compile Include="View\CustomControls\MTextBlock.cs" />
     <Compile Include="View\Pages\BasePage.cs" />
     <Compile Include="Models\AppConfiguration.cs" />
     <Compile Include="Service\ApplicationManager.cs" />
@@ -164,6 +169,9 @@
     <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Service\Navigation\FrameNavigationService.cs" />
     <Compile Include="Service\Navigation\IFrameNavigationService.cs" />
+    <Compile Include="View\Pages\DeviceTrafficLogPage.xaml.cs">
+      <DependentUpon>DeviceTrafficLogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\DevicePage.xaml.cs">
       <DependentUpon>DevicePage.xaml</DependentUpon>
     </Compile>
@@ -270,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CustomControls\TimeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\DeviceTrafficLogPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -536,6 +548,8 @@
     <Resource Include="Images\Logo.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\door.png" />
+    <Resource Include="Images\Monitor.png" />
     <Resource Include="Images\AllRight.png" />
     <Resource Include="Images\Left.png" />
     <Resource Include="Images\Right.png" />

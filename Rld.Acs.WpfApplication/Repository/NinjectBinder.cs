@@ -37,6 +37,8 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<ITimeZoneRepository>().To<TimeZoneRepository>();
 
             InjectionKernel.Bind<ISysDictionaryRepository>().To<SysDictionaryRepository>();
+            InjectionKernel.Bind<IDeviceTrafficLogRepository>().To<DeviceTrafficLogRepository>();
+            InjectionKernel.Bind<IDeviceOperationLogRepository>().To<DeviceOperationLogRepository>();
         }
 
         private static void BindValidator()

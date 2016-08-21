@@ -1,0 +1,66 @@
+﻿<pages:BasePage x:Class="Rld.Acs.WpfApplication.View.Pages.DeviceTrafficLogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:converter1="clr-namespace:Rld.Acs.WpfApplication.View.Converter"
+      xmlns:pages="clr-namespace:Rld.Acs.WpfApplication.View.Pages"
+      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      DataContext="{Binding DeviceTrafficLogPage, Source={StaticResource Locator}}"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="1000" Unloaded="Page_Unloaded">
+    <Page.Resources>
+        <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,0,10,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource ResourceKey={x:Type TextBox}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="DatePicker" BasedOn="{StaticResource ResourceKey={x:Type DatePicker}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
+        </Style>
+    </Page.Resources>
+    <Border Style="{StaticResource ContainerBorderStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="28"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="WhiteSmoke">
+                <TextBlock Text="时间:" Margin="10,0"/>
+                <DatePicker SelectedDate ="{Binding StartDate}" Width="150"/>
+                <TextBlock Text="至" Margin="10,0" />
+                <DatePicker SelectedDate ="{Binding EndDate}" Width="150"/>
+                <TextBlock Text="设备ID:" Margin="10,0"/>
+                <TextBox  Text="{Binding DeviceId}" Width="150"/>
+                <TextBlock Text="用户设备ID:" Margin="10,0"/>
+                <TextBox  Text="{Binding DeviceUserId}" Width="150"/>
+                <Button  Margin="10,1" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
+                         Content="{DynamicResource Query}"  Command="{Binding QueryCmd}" CommandParameter="{StaticResource IntOne}"/>
+            </StackPanel>
+            <Grid Grid.Row="1" Margin="0,0,0,0" >
+                <DataGrid ItemsSource="{Binding DeviceTrafficLogViewModels}" SelectedItem="{Binding Path=SelectedTrafficLogViewModel}" 
+                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceID}" Binding="{Binding DeviceID}" Width="*" />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceType}" Binding="{Binding DeviceType}" Width="*"  />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceSN}" Binding="{Binding DeviceSN}" Width="*"  />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceUserID}" Binding="{Binding DeviceUserID}" Width="*"  />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_AuthenticationType}" Binding="{Binding AuthenticationType}"  Width="*" />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_AuthenticationResult}" Binding="{Binding Remark}" Width="*"  />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_RecordTime}" Binding="{Binding RecordTime}" Width="1.5*"  />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </Border>
+</pages:BasePage>

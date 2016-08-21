@@ -115,8 +115,8 @@
 
                     <CheckBox IsChecked="{Binding Status, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GeneralStatus.Enabled}}"
                         Grid.Row="5" Grid.Column="1" Content="启用"/>
-                    <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate ="{Binding StartDate}" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
-                    <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate ="{Binding EndDate}" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
+                    <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate ="{Binding StartDate}" />
+                    <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate ="{Binding EndDate}" />
 
                     <Image Grid.Row="0" Grid.Column="3" Grid.RowSpan="5" Margin="10" Source="{Binding Avator}" Name="img_avator"/>
                     <TextBox Grid.Row="5" Grid.Column="3" Name="tb_AvatorfilePath"></TextBox>

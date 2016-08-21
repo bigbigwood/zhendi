@@ -6,7 +6,9 @@
              xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
-             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro" Dialog:DialogParticipation.Register="{Binding}"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:customControls="clr-namespace:Rld.Acs.WpfApplication.View.CustomControls"
+             Dialog:DialogParticipation.Register="{Binding}"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:DeviceViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
              Height="335" Width="600" Unloaded="MetroWindow_Unloaded">
@@ -71,14 +73,19 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="80"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="80"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="设备名称"/>
+
+                    <TextBlock Grid.Row="0" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="设备名称" Margin="0"/>
+                    </TextBlock>
+                    <!--<customControls:MTextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Width="80"></customControls:MTextBlock>-->
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="设备编号"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="设备型号"/>
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="Mac地址"/>

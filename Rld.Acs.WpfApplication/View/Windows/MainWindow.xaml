@@ -285,24 +285,24 @@
                         </StackPanel>
                         <!--综合信息展示:折叠节点-->
                         <StackPanel x:Name="pub_control" Style="{StaticResource stack_tree_open}">
-                            <MenuItem x:Name="pub_fwjl" FontSize="12" Width="180" Header="访问记录" >
+                            <MenuItem x:Name="pub_fwjl" FontSize="12" Width="180" Header="访问记录" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="DeviceTrafficLogPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}" Source="/Rld.Acs.WpfApplication;component/Images/minImage/访问记录.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
 
 
-                            <MenuItem x:Name="pub_jgjl" FontSize="12" Width="180"  Header="警告记录" IsCheckable="False">
+                            <MenuItem x:Name="pub_jgjl" FontSize="12" Width="180"  Header="警告记录" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="DeviceTrafficLogPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/警告记录.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem x:Name="pub_ycjl" FontSize="12" Width="180"  Header="异常记录" IsCheckable="False">
+                            <MenuItem x:Name="pub_ycjl" FontSize="12" Width="180"  Header="异常记录" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="DeviceTrafficLogPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/异常记录.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem x:Name="pub_czrz" FontSize="12" Width="180"  Header="操作日志" IsCheckable="False">
+                            <MenuItem x:Name="pub_czrz" FontSize="12" Width="180"  Header="操作日志" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="DeviceTrafficLogPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/操作日志.png"/>
                                 </MenuItem.Icon>
