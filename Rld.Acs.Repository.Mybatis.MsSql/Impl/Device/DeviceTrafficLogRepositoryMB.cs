@@ -26,7 +26,6 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
                 TotalCount = totalCount,
                 Entities = entities,
             };
-
         }
     }
 }

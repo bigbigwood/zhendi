@@ -1,11 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using GalaSoft.MvvmLight;
+using log4net;
 
-namespace Rld.Acs.Model
+
+namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
-    public class DeviceOperationLog
+    public class DeviceOperationLogViewModel : ViewModelBase
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public virtual Int32 LogID { get; set; }
         public virtual Int32? DeviceUserId { get; set; }
         public virtual Int32 DeviceId { get; set; }
@@ -16,5 +19,7 @@ namespace Rld.Acs.Model
         public virtual String OperationContent { get; set; }
         public virtual DateTime? OperationTime { get; set; }
         public virtual DateTime? OperationUploadTime { get; set; }
+
+
     }
 }

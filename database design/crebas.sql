@@ -386,14 +386,15 @@ go
 /*==============================================================*/
 create table DEVICE_OPERATION_LOG (
    LogID                int                  identity(1,1),
-   RegisterID           int                  null,
-   DeviceID             int                  not null,
+   DeviceUserId           int                  null,
+   DeviceId             int                  not null,
    DeviceType           int                  not null,
    OperationType        int                  not null,
-   OperatorID           int                  not null,
+   OperationDescription        nvarchar(1024)       null,
+   OperatorId           int                  not null,
    OperationContent     nvarchar(1024)       null,
-   OperationTime        nvarchar(1024)       not null,
-   OperationUploadTime  nvarchar(1024)       null,
+   OperationTime        datetime           null,
+   OperationUploadTime  datetime           null,
    constraint PK_DEVICE_OPERATION_LOG primary key nonclustered (LOGID)
 )
 go

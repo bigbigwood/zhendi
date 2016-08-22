@@ -23,17 +23,5 @@ namespace Rld.Acs.WpfApplication.Repository
         {
             return Update(log, log.TrafficID);
         }
-
-        public PaginationResult<DeviceTrafficLog> QueryPage(Hashtable conditions)
-        {
-            Int32 count;
-            var entities = Query(conditions, out count);
-
-            return new PaginationResult<DeviceTrafficLog>()
-            {
-                TotalCount = count,
-                Entities = entities,
-            };
-        }
     }
 }

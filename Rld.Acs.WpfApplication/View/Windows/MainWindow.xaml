@@ -294,7 +294,7 @@
                                 </MenuItem.Icon>
                             </MenuItem>
 
-                            <MenuItem x:Name="pub_czrz" FontSize="12" Width="180"  Header="设备操作日志" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="DeviceTrafficLogPage">
+                            <MenuItem x:Name="pub_czrz" FontSize="12" Width="180"  Header="设备操作日志" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="DeviceOperationLogPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/操作日志.png"/>
                                 </MenuItem.Icon>

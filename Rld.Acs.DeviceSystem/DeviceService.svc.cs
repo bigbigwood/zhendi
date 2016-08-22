@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
 using System.Threading;
 using log4net;
 using Rld.Acs.DeviceSystem.Framework;
 using Rld.Acs.DeviceSystem.Message;
 using Rld.Acs.DeviceSystem.Service;
-using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
-using Rld.DeviceSystem.Contract.Model;
+
 
 namespace Rld.Acs.DeviceSystem
 {
@@ -24,14 +18,12 @@ namespace Rld.Acs.DeviceSystem
         {
             return PersistenceOperation.Process(request, () =>
             {
-                //var repo = RepositoryManager.GetRepository<IUserRepository>();
-                //request.DbUsers.ForEach(user => request.DeviceControllers.ForEach(device =>
-                //{
-                //    var userInfo = repo.GetByKey(user.UserID);
-                //    new UserOperation().UpdateDeviceUser(userInfo, device);
-                //}));
-
-                Thread.Sleep(10 * 1000);
+                var repo = RepositoryManager.GetRepository<IUserRepository>();
+                request.Users.ForEach(user => request.Devices.ForEach(device =>
+                {
+                    var userInfo = repo.GetByKey(user.UserID);
+                    new UserOp().UpdateDeviceUser(userInfo, device);
+                }));
 
                 return new SyncDeviceUsersResponse() { ResultType = ResultTypes.Ok };
             });
@@ -62,7 +54,20 @@ namespace Rld.Acs.DeviceSystem
 
         public SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(SyncDeviceOperationLogsRequest request)
         {
-            throw new NotImplementedException();
+            return PersistenceOperation.Process(request, () =>
+            {
+                request.Devices.ForEach(d =>
+                {
+                    var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
+                    var logs = new OperationLogOp().QueryNewOperationLogs(d.DeviceID);
+                    foreach (var deviceOperationLog in logs)
+                    {
+                        repo.Insert(deviceOperationLog);
+                    }
+                });
+
+                return new SyncDeviceOperationLogsResponse() { ResultType = ResultTypes.Ok };
+            });
         }
 
         public SyncDeviceTrafficLogsResponse SyncDeviceTrafficLogs(SyncDeviceTrafficLogsRequest request)

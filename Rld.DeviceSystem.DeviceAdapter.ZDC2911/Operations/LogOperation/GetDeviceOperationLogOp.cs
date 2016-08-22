@@ -13,7 +13,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.LogOperation
             var dao = new SLogInfoDao();
             var rawData = dao.GetLogData(new QueryLogCondictions()
             {
-                Options = GetLogOptions.GetAllLogs,
+                Options = GetLogOptions.GetNewLogs,
                 BeginTime = request.BeginTime,
                 EndTime = request.EndTime,
                 CleanNewLogPosition = false,

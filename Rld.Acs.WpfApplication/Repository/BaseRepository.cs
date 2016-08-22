@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Formatting;
+using Rld.Acs.Repository.Framework.Pagination;
 using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
@@ -43,8 +44,6 @@ namespace Rld.Acs.WpfApplication.Repository
                 response.EnsureSuccessStatusCode(); // Throw on error code. 
                 return true;
             }
-
-            return false;
         }
 
         public virtual bool Delete(TKey key)
@@ -55,7 +54,6 @@ namespace Rld.Acs.WpfApplication.Repository
                 response.EnsureSuccessStatusCode(); // Throw on error code. 
                 return true;
             }
-            return false;
         }
 
         public virtual TEntity GetByKey(TKey key)
@@ -69,9 +67,8 @@ namespace Rld.Acs.WpfApplication.Repository
             }
         }
 
-        public virtual IEnumerable<TEntity> Query(Hashtable conditions, out int totalCount)
+        public virtual PaginationResult<TEntity> QueryPage(Hashtable conditions)
         {
-            totalCount = 0;
             using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
             {
                 string queryString = "";
@@ -90,8 +87,13 @@ namespace Rld.Acs.WpfApplication.Repository
                 var response = httpClient.GetAsync(RelevantUri + queryString).Result;
                 response.EnsureSuccessStatusCode(); // Throw on error code.     
                 var entities = response.Content.ReadAsAsync<IEnumerable<TEntity>>().Result;
-                totalCount = response.Headers.GetValues(ConstStrings.HTTP_HEADER_X_Pagination_TotalCount).First().ToInt32();
-                return entities;
+                int totalCount = response.Headers.GetValues(ConstStrings.HTTP_HEADER_X_Pagination_TotalCount).First().ToInt32();
+
+                return new PaginationResult<TEntity>()
+                {
+                    TotalCount = totalCount,
+                    Entities = entities,
+                };
             }
         }
 

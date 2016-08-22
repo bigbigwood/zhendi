@@ -12,7 +12,7 @@ using Rld.DeviceSystem.Contract.Model.Services.UserCredential;
 
 namespace Rld.Acs.DeviceSystem.Service
 {
-    public class UserOperation
+    public class UserOp
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public void UpdateDeviceUser(User user, DeviceController device)

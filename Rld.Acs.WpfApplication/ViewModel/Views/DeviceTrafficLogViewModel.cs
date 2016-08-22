@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Documents;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Messaging;
 using log4net;
 using Rld.Acs.Model;
-using Rld.Acs.Model.Extension;
-using Rld.Acs.Repository.Interfaces;
-using Rld.Acs.Unility.Extension;
-using Rld.Acs.WpfApplication.Models;
-using Rld.Acs.WpfApplication.Models.Messages;
+
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -49,11 +41,22 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         static DeviceTrafficLogViewModel ()
         {
             var dict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.CheckInOptions);
+            var passwordString = dict.First(d => d.ItemID == 1).ItemValue;
+            var card = dict.First(d => d.ItemID == 2).ItemValue;
+            var fingerPrint = dict.First(d => d.ItemID == 4).ItemValue;
+            var wiegand = dict.First(d => d.ItemID == 8).ItemValue;
+
             _authenticationTypeDict = new Dictionary<int, string>();
-            _authenticationTypeDict.Add(1, dict.First(d => d.ItemID == 1).ItemValue);
-            _authenticationTypeDict.Add(2, dict.First(d => d.ItemID == 2).ItemValue);
-            _authenticationTypeDict.Add(4, dict.First(d => d.ItemID == 4).ItemValue);
-            _authenticationTypeDict.Add(8, dict.First(d => d.ItemID == 8).ItemValue);
+            _authenticationTypeDict.Add((int)CheckInOptions.Password, passwordString);
+            _authenticationTypeDict.Add((int)CheckInOptions.Card, card);
+            _authenticationTypeDict.Add((int)CheckInOptions.FingerPrint, fingerPrint);
+            _authenticationTypeDict.Add((int)CheckInOptions.Wiegand, wiegand);
+            _authenticationTypeDict.Add((int)CheckInOptions.Password + (int)CheckInOptions.Card, string.Join(",", new[] { passwordString, card }));
+            _authenticationTypeDict.Add((int)CheckInOptions.Password + (int)CheckInOptions.FingerPrint, string.Join(",", new[] { passwordString, fingerPrint }));
+            _authenticationTypeDict.Add((int)CheckInOptions.Password + (int)CheckInOptions.Wiegand, string.Join(",", new[] { passwordString, wiegand }));
+            _authenticationTypeDict.Add((int)CheckInOptions.Card + (int)CheckInOptions.FingerPrint, string.Join(",", new[] { card, fingerPrint }));
+            _authenticationTypeDict.Add((int)CheckInOptions.Card + (int)CheckInOptions.Wiegand, string.Join(",", new[] { card, wiegand }));
+            _authenticationTypeDict.Add((int)CheckInOptions.FingerPrint + (int)CheckInOptions.Wiegand, string.Join(",", new[] { fingerPrint, wiegand }));
         }
     }
 }

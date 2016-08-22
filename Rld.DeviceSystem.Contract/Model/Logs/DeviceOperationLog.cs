@@ -15,6 +15,8 @@ namespace Rld.DeviceSystem.Contract.Model.Logs
         [DataMember]
         public Int32 UserId { get; set; }
         [DataMember]
+        public Int32 OperationType { get; set; }
+        [DataMember]
         public String Message { get; set; }
         [DataMember]
         public String Enroll { get; set; }

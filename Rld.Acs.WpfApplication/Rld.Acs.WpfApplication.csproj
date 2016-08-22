@@ -133,9 +133,11 @@
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
+    <Compile Include="ViewModel\Pages\DeviceOperationLogPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DeviceTrafficLogPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
+    <Compile Include="ViewModel\Views\DeviceOperationLogViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceTrafficLogViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceHeadReadingViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceDoorViewModel.cs" />
@@ -172,6 +174,9 @@
     <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Service\Navigation\FrameNavigationService.cs" />
     <Compile Include="Service\Navigation\IFrameNavigationService.cs" />
+    <Compile Include="View\Pages\DeviceOperationLogPage.xaml.cs">
+      <DependentUpon>DeviceOperationLogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\DeviceTrafficLogPage.xaml.cs">
       <DependentUpon>DeviceTrafficLogPage.xaml</DependentUpon>
     </Compile>
@@ -285,6 +290,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CustomControls\TimeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\DeviceOperationLogPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -8,11 +8,12 @@
   <resultMaps>
     <resultMap id="DeviceOperationLogResult" class="Rld.Acs.Model.DeviceOperationLog">
       <result property="LogID" column="LogID"/>
-      <result property="RegisterID" column="RegisterID"/>
-      <result property="DeviceID" column="DeviceID"/>
+      <result property="DeviceUserId" column="DeviceUserId"/>
+      <result property="DeviceId" column="DeviceId"/>
       <result property="DeviceType" column="DeviceType"/>
       <result property="OperationType" column="OperationType"/>
-      <result property="OperatorID" column="OperatorID"/>
+      <result property="OperationDescription" column="OperationDescription"/>
+      <result property="OperatorId" column="OperatorId"/>
       <result property="OperationContent" column="OperationContent"/>
       <result property="OperationTime" column="OperationTime"/>
       <result property="OperationUploadTime" column="OperationUploadTime"/>
@@ -29,20 +30,22 @@
 
     <insert id="DeviceOperationLog.Insert" parameterClass="DeviceOperationLog">
       INSERT INTO [DEVICE_OPERATION_LOG] (
-      [RegisterID]
-      , [DeviceID]
+      [DeviceUserId]
+      , [DeviceId]
       , [DeviceType]
       , [OperationType]
-      , [OperatorID]
+      , [OperationDescription]
+      , [OperatorId]
       , [OperationContent]
       , [OperationTime]
       , [OperationUploadTime]
       ) VALUES (
-      #RegisterID#
-      , #DeviceID#
+      #DeviceUserId#
+      , #DeviceId#
       , #DeviceType#
       , #OperationType#
-      , #OperatorID#
+      , #OperationDescription#
+      , #OperatorId#
       , #OperationContent#
       , #OperationTime#
       , #OperationUploadTime#
@@ -54,11 +57,12 @@
 
     <update id="DeviceOperationLog.Update" parameterClass="DeviceOperationLog">
       UPDATE [DEVICE_OPERATION_LOG] SET
-      [RegisterID] = #RegisterID#
-      , [DeviceID] = #DeviceID#
+      [DeviceUserId] = #DeviceUserId#
+      , [DeviceId] = #DeviceId#
       , [DeviceType] = #DeviceType#
       , [OperationType] = #OperationType#
-      , [OperatorID] = #OperatorID#
+      , [OperationDescription] = #OperationDescription#
+      , [OperatorId] = #OperatorId#
       , [OperationContent] = #OperationContent#
       , [OperationTime] = #OperationTime#
       , [OperationUploadTime] = #OperationUploadTime#
@@ -72,10 +76,60 @@
       [LogID] = #LogID#
     </delete>
 
+
     <select id="DeviceOperationLog.Query" parameterClass="Hashtable" resultMap="DeviceOperationLogResult">
-      SELECT *
-      FROM DEVICE_OPERATION_LOG
-      where 1=1
+      SELECT N.rownum, L.* FROM
+      (SELECT TOP $PageEnd$ row_number() OVER (ORDER BY LogID) rownum, LogID FROM DEVICE_OPERATION_LOG L
+      WHERE 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="StartDate">
+          L.OperationTime >= #StartDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="EndDate">
+          L.OperationTime  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceId">
+          L.DeviceId = #DeviceId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceUserId">
+          L.DeviceUserId = #DeviceUserId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="OperatorId">
+          L.OperatorId = #OperatorId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="OperationType">
+          L.OperationType = #OperationType#
+        </isNotEmpty>
+      </dynamic>
+      ) N
+      INNER JOIN DEVICE_OPERATION_LOG L ON N.LogID = L.LogID
+      WHERE N.rownum >= $PageStart$
+    </select>
+
+
+    <select id="DeviceOperationLog.QueryCount" parameterClass="Hashtable" resultClass="int">
+      SELECT COUNT(1) FROM DEVICE_OPERATION_LOG L
+      Where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="StartDate">
+          L.OperationTime >= #StartDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="EndDate">
+          L.OperationTime  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceId">
+          L.DeviceId = #DeviceId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceUserId">
+          L.DeviceUserId = #DeviceUserId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="OperatorId">
+          L.OperatorId = #OperatorId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="OperationType">
+          L.OperationType = #OperationType#
+        </isNotEmpty>
+      </dynamic>
     </select>
   </statements>
 </sqlMap>

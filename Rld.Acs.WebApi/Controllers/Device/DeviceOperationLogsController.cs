@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Results;
+using Rld.Acs.Unility;
 
 namespace Rld.Acs.WebApi.Controllers
 {
@@ -24,7 +25,11 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
-                var deviceOperationLogInfos = repo.Query(conditions);
+
+                var paginationResult = repo.QueryPage(conditions);
+                var totalCount = paginationResult.TotalCount;
+                var deviceOperationLogInfos = paginationResult.Entities;
+                System.Web.HttpContext.Current.Response.Headers.Add(ConstStrings.HTTP_HEADER_X_Pagination_TotalCount, totalCount.ToString());
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceOperationLogInfos.ToList());
 
