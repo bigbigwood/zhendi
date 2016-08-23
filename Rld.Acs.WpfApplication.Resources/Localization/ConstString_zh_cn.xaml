@@ -8,6 +8,9 @@
 	<sys:String x:Key="Export">导出</sys:String>
 	<sys:String x:Key="Import">导入</sys:String>
 	<sys:String x:Key="Save">保存</sys:String>
+	<sys:String x:Key="Add">新建</sys:String>
+	<sys:String x:Key="Modify">修改</sys:String>
+	<sys:String x:Key="Delete">删除</sys:String>
 	<sys:String x:Key="ExportFile">导出文件</sys:String>
 	<sys:String x:Key="ImportFile">导入文件</sys:String>
 	<sys:String x:Key="SaveFile">保存文件</sys:String>
@@ -94,10 +97,10 @@
 	<sys:String x:Key="DeviceOperationLogPage_Label_OperationTime">操作时间</sys:String>
 	
 	<sys:String x:Key="SysDictionaryPage_Label_Name">名称</sys:String>
-		<sys:String x:Key="SysDictionaryPage_Label_TypeID">类型ID</sys:String>
-			<sys:String x:Key="SysDictionaryPage_Label_TypeName">类型名称</sys:String>
-				<sys:String x:Key="SysDictionaryPage_Label_LanguageID">语言</sys:String>
-					<sys:String x:Key="SysDictionaryPage_Label_ItemID">选项ID</sys:String>	
-					<sys:String x:Key="SysDictionaryPage_Label_ItemValue">选项值</sys:String>
-					<sys:String x:Key="SysDictionaryPage_Label_Description">描述</sys:String>
+	<sys:String x:Key="SysDictionaryPage_Label_TypeID">类型ID</sys:String>
+	<sys:String x:Key="SysDictionaryPage_Label_TypeName">类型名称</sys:String>
+	<sys:String x:Key="SysDictionaryPage_Label_LanguageID">语言</sys:String>
+	<sys:String x:Key="SysDictionaryPage_Label_ItemID">选项ID</sys:String>	
+	<sys:String x:Key="SysDictionaryPage_Label_ItemValue">选项值</sys:String>
+	<sys:String x:Key="SysDictionaryPage_Label_Description">描述</sys:String>
 </ResourceDictionary>

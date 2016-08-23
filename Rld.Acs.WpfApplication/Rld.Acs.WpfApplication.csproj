@@ -222,6 +222,9 @@
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="Service\UserAvatorService.cs" />
+    <Compile Include="View\Windows\SysDictionaryView.xaml.cs">
+      <DependentUpon>SysDictionaryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\DeviceHeadReadingView.xaml.cs">
       <DependentUpon>DeviceHeadReadingView.xaml</DependentUpon>
     </Compile>
@@ -315,6 +318,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\DeviceRolePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\SysDictionaryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

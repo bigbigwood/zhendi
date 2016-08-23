@@ -14,6 +14,9 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.ViewModel.Views;
+using Rld.Acs.WpfApplication.Models.Messages;
+using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
 {
@@ -27,7 +30,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public ObservableCollection<SysDictionaryViewModel> SysDictionaryViewModels { get; set; }
         public Int32 SelectedTypeHeader { get; set; }
         public List<SysDictionary> TypeHeadersDict { get; set; }
-
+        public RelayCommand AddCmd { get; private set; }
+        public RelayCommand ModifyCmd { get; private set; }
+        public RelayCommand DeleteCmd { get; private set; }
         public RelayCommand QueryCommand { get; set; }
 
         private async void QueryCommandFunc()
@@ -162,6 +167,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             QueryCommand = new RelayCommand(QueryCommandFunc);
             NextPageSearchCommand = new RelayCommand(NextPageSearchCommandFunc);
+            AddCmd = new RelayCommand(AddItem);
+            ModifyCmd = new RelayCommand(ModifyItem);
+            DeleteCmd = new RelayCommand(DeleteItem);
 
             SysDictionaryViewModels = new ObservableCollection<SysDictionaryViewModel>();
             TypeHeadersDict = new List<SysDictionary>() {new SysDictionary() {ItemID = -1, ItemValue = ""}};
@@ -169,6 +177,90 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             SelectedTypeHeader = -1;
         }
 
+
+        private void AddItem()
+        {
+            try
+            {
+                var viewModel = new SysDictionaryViewModel();
+                Messenger.Default.Send(new OpenWindowMessage()
+                {
+                    DataContext = viewModel
+
+                }, Tokens.OpenSysDictionaryView);
+
+                if (viewModel.DictionaryID != 0)
+                    SysDictionaryViewModels.Add(viewModel);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        private void ModifyItem()
+        {
+            try
+            {
+                if (SelectedSysDictionaryViewModel == null)
+                {
+                    Messenger.Default.Send(new NotificationMessage("请先选择选项!"), Tokens.SysDictionaryPage_ShowNotification);
+                    return;
+                }
+
+                Messenger.Default.Send(new OpenWindowMessage()
+                {
+                    DataContext = SelectedSysDictionaryViewModel
+
+                }, Tokens.OpenSysDictionaryView);
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        private void DeleteItem()
+        {
+            try
+            {
+                if (SelectedSysDictionaryViewModel == null)
+                {
+                    Messenger.Default.Send(new NotificationMessage("请先选择选项!"), Tokens.SysDictionaryPage_ShowNotification);
+                    return;
+                }
+
+                string question = string.Format("确定删除选项:{0}吗？", SelectedSysDictionaryViewModel.ItemValue);
+                Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDelete), Tokens.SysDictionaryPage_ShowQuestion);
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        private void ConfirmDelete()
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                string message = "";
+                try
+                {
+                    _sysDictionaryRepo.Delete(SelectedSysDictionaryViewModel.DictionaryID);
+                    message = "删除设备成功!";
+
+                    SysDictionaryViewModels.Remove(SelectedSysDictionaryViewModel);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                    message = "删除设备失败！";
+                }
+                Messenger.Default.Send(new NotificationMessage(message), Tokens.SysDictionaryPage_ShowNotification);
+            });
+        }
 
         private ObservableCollection<SysDictionaryViewModel> QueryData(int pageIndex, int pageSize, out int totalCount)
         {

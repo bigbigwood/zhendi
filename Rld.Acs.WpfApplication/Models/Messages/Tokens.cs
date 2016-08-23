@@ -64,6 +64,11 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string DeviceRolePermissionView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DeviceRolePage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DeviceRolePage_ShowQuestion = Guid.NewGuid().ToString();
-        
+
+        public static readonly string OpenSysDictionaryView = Guid.NewGuid().ToString();
+        public static readonly string CloseSysDictionaryView = Guid.NewGuid().ToString();
+        public static readonly string SysDictionaryView_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string SysDictionaryPage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string SysDictionaryPage_ShowQuestion = Guid.NewGuid().ToString();
     }
 }

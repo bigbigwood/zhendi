@@ -90,7 +90,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
             CreateProvMap<DeviceOperationLog, DeviceOperationLogViewModel>();
 
             CreateProvMap<SysDictionaryViewModel, SysDictionary>();
-            CreateProvMap<SysDictionary, SysDictionaryViewModel>();
+            CreateProvMap<SysDictionary, SysDictionaryViewModel>()
+                .ForMember(dest => dest.SaveCmd, op => op.Ignore())
+                .ForMember(dest => dest.CancelCmd, op => op.Ignore())
+                .ForMember(dest => dest.TypeHeadersDict, op => op.Ignore());
 
 
             Log.Info("Verify mapper configuration..");

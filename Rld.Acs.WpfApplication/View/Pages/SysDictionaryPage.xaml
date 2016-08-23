@@ -56,6 +56,13 @@
             <Grid Grid.Row="1" Margin="0,0,0,0" >
                 <DataGrid ItemsSource="{Binding SysDictionaryViewModels}" SelectedItem="{Binding Path=SelectedSysDictionaryViewModel}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
+                    <DataGrid.ContextMenu>
+                        <ContextMenu >
+                            <MenuItem Header="{DynamicResource Add}" Command="{Binding AddCmd}"/>
+                            <MenuItem Header="{DynamicResource Modify}" Command="{Binding ModifyCmd}"  />
+                            <MenuItem Header="{DynamicResource Delete}" Command="{Binding DeleteCmd}"  />
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
                         <DataGridTextColumn Header="{DynamicResource SysDictionaryPage_Label_Name}" Binding="{Binding Name}" Width="*" />

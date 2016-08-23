@@ -16,7 +16,19 @@ namespace Rld.Acs.WpfApplication.View.Pages
         public SysDictionaryPage()
         {
             InitializeComponent();
+
+            Messenger.Default.Register<OpenWindowMessage>(this, Tokens.OpenSysDictionaryView, ProcessOpenView);
+            Messenger.Default.Register(this, Tokens.SysDictionaryPage_ShowNotification, new Action<NotificationMessage>(ShowMessage));
+            Messenger.Default.Register(this, Tokens.SysDictionaryPage_ShowQuestion, new Action<NotificationMessageAction>((msg) => ShowQuestionAndAction(msg, "删除字典项")));
         }
 
+        private void ProcessOpenView(OpenWindowMessage msg)
+        {
+            var view = new SysDictionaryView() { DataContext = msg.DataContext };
+            view.BorderThickness = new Thickness(1);
+            view.GlowBrush = null;
+            view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
+            view.ShowDialog();
+        }
     }
 }
