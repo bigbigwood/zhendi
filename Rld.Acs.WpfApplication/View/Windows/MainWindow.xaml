@@ -321,9 +321,9 @@
                                 </MenuItem>
                             </Border>
                         </StackPanel>
-                        <!--系统维护:折叠节点-->
+                        <!--系统维护:折叠节点--> 
                         <StackPanel x:Name="syswh_control" Style="{StaticResource stack_tree_open}">
-                            <MenuItem x:Name="syswh_sjzd" FontSize="12" Width="180" Header="数据字典维护" >
+                            <MenuItem x:Name="syswh_sjzd" FontSize="12" Width="180" Header="数据字典维护"  IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="SysDictionaryPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}" Source="/Rld.Acs.WpfApplication;component/Images/minImage/数据字典维护.png"/>
                                 </MenuItem.Icon>

@@ -42,8 +42,30 @@ namespace Rld.Acs.WpfApplication
             List<SysDictionary> dic = null;
             if (!dictionary.TryGetValue(typeId, out dic))
             {
-                dic = _sysDictionaryRepo.Query(new Hashtable {{"Status", (int) GeneralStatus.Enabled}, {"TypeID", typeId}}).ToList();
+                dic = _sysDictionaryRepo.Query(new Hashtable
+                {
+                    { "Status", (int)GeneralStatus.Enabled }, 
+                    { "TypeID", typeId }, 
+                    { "Level", (int)DictionaryLevel.TypeItemsLevel }
+                }).ToList();
                 dictionary.Add(typeId, dic);
+            }
+
+            return dic;
+        }
+
+        public List<SysDictionary> GetAllTypeHeaders()
+        {
+            Int32 headerTypeId = -1;
+            List<SysDictionary> dic = null;
+            if (!dictionary.TryGetValue(headerTypeId, out dic))
+            {
+                dic = _sysDictionaryRepo.Query(new Hashtable
+                {
+                    { "Status", (int)GeneralStatus.Enabled }, 
+                    { "Level", (int)DictionaryLevel.TypeHeaderLevel }
+                }).ToList();
+                dictionary.Add(headerTypeId, dic);
             }
 
             return dic;

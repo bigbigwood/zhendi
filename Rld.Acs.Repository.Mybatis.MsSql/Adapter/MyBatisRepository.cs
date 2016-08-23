@@ -28,7 +28,7 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
         protected string UpdateStatement { get { return string.Format("{0}.Update", EntityCode); } }
         protected string DeleteStatement { get { return string.Format("{0}.Delete", EntityCode); } }
         protected string GetByKeyStatement { get { return string.Format("{0}.GetByKey", EntityCode); } }
-        protected string QueryCountStatement { get { return string.Format("{0}.Count", EntityCode); } }
+        protected string QueryCountStatement { get { return string.Format("{0}.QueryCount", EntityCode); } }
         protected string QueryStatement { get { return string.Format("{0}.Query", EntityCode); } }
 
         public virtual TEntity Insert(TEntity entity)

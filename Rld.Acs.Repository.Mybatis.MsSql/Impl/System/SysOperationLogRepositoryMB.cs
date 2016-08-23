@@ -4,7 +4,7 @@ using Rld.Acs.Repository.Interfaces;
 
 namespace Rld.Acs.Repository.Mybatis.MsSql
 {
-    public class SysOperationLogRepositoryMB : MyBatisRepository<SysOperationLog, int>, ISysOperationLogRepository
+    public class SysOperationLogRepositoryMB : PaginationRepository<SysOperationLog, int>, ISysOperationLogRepository
     {
         #region Repository
         protected override string EntityCode

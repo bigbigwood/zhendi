@@ -3,6 +3,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.WebApi.Framework;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,19 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
             {
                 var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
-                var sysDictionaryInfos = repo.Query(conditions);
+
+                IEnumerable<SysDictionary> sysDictionaryInfos;
+                if (conditions.ContainsKey(ConstStrings.PageStart) && conditions.ContainsKey(ConstStrings.PageEnd))
+                {
+                    var paginationResult = repo.QueryPage(conditions);
+                    var totalCount = paginationResult.TotalCount;
+                    sysDictionaryInfos = paginationResult.Entities;
+                    System.Web.HttpContext.Current.Response.Headers.Add(ConstStrings.HTTP_HEADER_X_Pagination_TotalCount, totalCount.ToString());
+                }
+                else
+                {
+                    sysDictionaryInfos = repo.Query(conditions);
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysDictionaryInfos.ToList());
 

@@ -87,6 +87,12 @@ namespace Rld.Acs.Model
         Wiegand = 8,
     }
 
+    public enum DictionaryLevel
+    {
+        TypeHeaderLevel = 1,
+        TypeItemsLevel = 2,
+    }
+
     public enum DictionaryType
     {
         Nationality = 10001, //民族

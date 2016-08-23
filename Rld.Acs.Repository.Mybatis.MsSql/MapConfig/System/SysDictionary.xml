@@ -105,36 +105,89 @@
     </delete>
 
     <select id="SysDictionary.Query" parameterClass="Hashtable" resultMap="SysDictionaryResult">
-      SELECT *
-      FROM [SYS_DICTIONARY]
-
-      <dynamic prepend="WHERE">
-        <isNotEmpty prepend="AND" property="Name">
-          Name = #Name#
-        </isNotEmpty>
-        <isNotEmpty prepend="AND" property="Status">
-          Status = #Status#
-        </isNotEmpty>
+      SELECT * FROM SYS_DICTIONARY L
+      Where 1=1
+      <dynamic prepend="AND">
         <isNotEmpty prepend="AND" property="TypeID">
-          TypeID = #TypeID#
-        </isNotEmpty>
-        <isNotEmpty prepend="AND" property="TypeName">
-          TypeName = #TypeName#
+          L.TypeID = #TypeID#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="ParentID">
-          ParentID = #ParentID#
+          L.ParentID = #ParentID#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="LanguageID">
-          LanguageID = #LanguageID#
+          L.LanguageID = #LanguageID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Level">
+          L.Level = #Level#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="ItemID">
-          ItemID = #ItemID#
+          L.ItemID = #ItemID#
         </isNotEmpty>
-        <isNotEmpty prepend="AND" property="ItemProperty">
-          ItemProperty = #ItemProperty#
+        <isNotEmpty prepend="AND" property="Status">
+          L.Status = #Status#
         </isNotEmpty>
-        <isNotEmpty prepend="AND" property="ItemValue">
-          ItemValue = #ItemValue#
+        <isNotEmpty prepend="AND" property="Keyword">
+          (L.Name like '%$Keyword$%' or L.TypeName like '%$Keyword$%' or L.ItemValue like '%$Keyword$%')
+        </isNotEmpty>
+      </dynamic>
+    </select>
+
+    <select id="SysDictionary.QueryPage" parameterClass="Hashtable" resultMap="SysDictionaryResult">
+      SELECT N.rownum, L.* FROM
+      (SELECT TOP $PageEnd$ row_number() OVER (ORDER BY DictionaryID) rownum, DictionaryID FROM SYS_DICTIONARY L
+      WHERE 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="TypeID">
+          L.TypeID = #TypeID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ParentID">
+          L.ParentID = #ParentID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="LanguageID">
+          L.LanguageID = #LanguageID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Level">
+          L.Level = #Level#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ItemID">
+          L.ItemID = #ItemID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Status">
+          L.Status = #Status#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Keyword">
+          (L.Name like '%$Keyword$%' or L.TypeName like '%$Keyword$%' or L.ItemValue like '%$Keyword$%')
+        </isNotEmpty>
+      </dynamic>
+      ) N
+      INNER JOIN SYS_DICTIONARY L ON N.DictionaryID = L.DictionaryID
+      WHERE N.rownum >= $PageStart$
+    </select>
+
+    <select id="SysDictionary.QueryCount" parameterClass="Hashtable" resultClass="int">
+      SELECT COUNT(1) FROM SYS_DICTIONARY L
+      Where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="TypeID">
+          L.TypeID = #TypeID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ParentID">
+          L.ParentID = #ParentID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="LanguageID">
+          L.LanguageID = #LanguageID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Level">
+          L.Level = #Level#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="ItemID">
+          L.ItemID = #ItemID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Status">
+          L.Status = #Status#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Keyword">
+          (L.Name like '%$Keyword$%' or L.TypeName like '%$Keyword$%' or L.ItemValue like '%$Keyword$%')
         </isNotEmpty>
       </dynamic>
     </select>

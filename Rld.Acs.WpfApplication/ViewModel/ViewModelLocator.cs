@@ -46,6 +46,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Register<TimeZonePageViewModel>();
             SimpleIoc.Default.Register<DeviceTrafficLogPageViewModel>();
             SimpleIoc.Default.Register<DeviceOperationLogPageViewModel>();
+            SimpleIoc.Default.Register<SysDictionaryPageViewModel>();
 
             SetupNavigation();
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -74,6 +75,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
             navigationService.Configure("TimeZonePage", new Uri("../Pages/TimeZonePage.xaml", UriKind.Relative));
             navigationService.Configure("DeviceTrafficLogPage", new Uri("../Pages/DeviceTrafficLogPage.xaml", UriKind.Relative));
             navigationService.Configure("DeviceOperationLogPage", new Uri("../Pages/DeviceOperationLogPage.xaml", UriKind.Relative));
+            navigationService.Configure("SysDictionaryPage", new Uri("../Pages/SysDictionaryPage.xaml", UriKind.Relative));
+            
 
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
@@ -124,6 +127,12 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<DeviceOperationLogPageViewModel>(); }
         }
+        public SysDictionaryPageViewModel SysDictionaryPage
+        {
+            get { return ServiceLocator.Current.GetInstance<SysDictionaryPageViewModel>(); }
+        }
+
+        
 
         public static void Cleanup()
         {

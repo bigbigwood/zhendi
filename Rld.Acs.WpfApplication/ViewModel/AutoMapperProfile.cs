@@ -89,6 +89,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
             CreateProvMap<DeviceOperationLogViewModel, DeviceOperationLog>();
             CreateProvMap<DeviceOperationLog, DeviceOperationLogViewModel>();
 
+            CreateProvMap<SysDictionaryViewModel, SysDictionary>();
+            CreateProvMap<SysDictionary, SysDictionaryViewModel>();
+
+
             Log.Info("Verify mapper configuration..");
             Mapper.AssertConfigurationIsValid();
         }

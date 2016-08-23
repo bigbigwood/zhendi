@@ -5,10 +5,11 @@ using System.Linq;
 using System.Web;
 using Rld.Acs.Repository.Framework;
 using Rld.Acs.Model;
+using Rld.Acs.Repository.Framework.Pagination;
 
 namespace Rld.Acs.Repository.Interfaces
 {
-    public interface ISysDictionaryRepository : IRepository<SysDictionary, Int32>
+    public interface ISysDictionaryRepository : IPaginationRepository<SysDictionary, Int32>
     {
     }
 }

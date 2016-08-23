@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapter\PaginationRepository.cs" />
     <Compile Include="Adapter\MyBatisConnectionProvider.cs" />
     <Compile Include="Adapter\MyBatisRepository.cs" />
     <Compile Include="Impl\Department\DepartmentDeviceRepositoryMB.cs" />
@@ -161,7 +162,9 @@
     <EmbeddedResource Include="MapConfig\Department\DepartmentDevice.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MapConfig\System\SysDictionary.xml" />
+    <EmbeddedResource Include="MapConfig\System\SysDictionary.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\System\SysOperationLog.xml" />
