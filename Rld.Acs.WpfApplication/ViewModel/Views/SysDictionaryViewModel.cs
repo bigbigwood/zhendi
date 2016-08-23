@@ -10,6 +10,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models.Messages;
 using GalaSoft.MvvmLight.Messaging;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Validator;
 
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
@@ -56,8 +57,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             try
             {
                 var selected = TypeHeadersDict.FirstOrDefault(d => d.TypeID == TypeID);
-                Name = selected.Name;
-                TypeName = selected.TypeName;
+                if (selected != null)
+                {
+                    Name = selected.Name;
+                    TypeName = selected.TypeName;
+                }
                 ParentID = 0;
                 Level = 2;
                 Status = GeneralStatus.Enabled;
@@ -68,6 +72,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CreateDate = DateTime.Now;
 
                     var coreModel = Mapper.Map<SysDictionary>(this);
+                    var validator = NinjectBinder.GetValidator<SysDictionaryValidator>();
+                    var results = validator.Validate(coreModel);
+                    if (!results.IsValid)
+                    {
+                        message = string.Join("\n", results.Errors);
+                        SendMessage(message);
+                        return;
+                    }
+
                     coreModel = _sysDictionaryRepo.Insert(coreModel);
 
                     DictionaryID = coreModel.DictionaryID;
@@ -79,6 +92,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     UpdateDate = DateTime.Now;
 
                     var coreModel = Mapper.Map<SysDictionary>(this);
+                    var validator = NinjectBinder.GetValidator<SysDictionaryValidator>();
+                    var results = validator.Validate(coreModel);
+                    if (!results.IsValid)
+                    {
+                        message = string.Join("\n", results.Errors);
+                        SendMessage(message);
+                        return;
+                    }
+
                    _sysDictionaryRepo.Update(coreModel);
                    message = "修改数据项成功!";
                 }

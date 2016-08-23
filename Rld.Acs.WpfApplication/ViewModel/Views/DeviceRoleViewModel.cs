@@ -92,6 +92,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 {
                     CurrentDeviceRole.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentDeviceRole.CreateDate = DateTime.Now;
+
+                    var validator = NinjectBinder.GetValidator<DeviceRoleValidator>();
+                    var results = validator.Validate(CurrentDeviceRole);
+                    if (!results.IsValid)
+                    {
+                        message = string.Join("\n", results.Errors);
+                        SendMessage(message);
+                        return;
+                    }
+
                     CurrentDeviceRole = _deviceRoleRepo.Insert(CurrentDeviceRole);
 
                     message = "增加设备权限成功!";
@@ -100,6 +110,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 {
                     CurrentDeviceRole.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentDeviceRole.UpdateDate = DateTime.Now;
+
+                    var validator = NinjectBinder.GetValidator<DeviceRoleValidator>();
+                    var results = validator.Validate(CurrentDeviceRole);
+                    if (!results.IsValid)
+                    {
+                        message = string.Join("\n", results.Errors);
+                        SendMessage(message);
+                        return;
+                    }
+
                     _deviceRoleRepo.Update(CurrentDeviceRole);
 
                     message = "修改设备权限成功!";

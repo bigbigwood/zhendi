@@ -67,16 +67,23 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
                 <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="名称"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="编号"/>
+
+            <TextBlock Grid.Row="0" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="名称" Margin="0"/>
+            </TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="编号" Margin="0"/>
+            </TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="1" Text="门继电器"/>
             <TextBlock Grid.Row="3" Grid.Column="1" Text="响铃类型"/>
             <TextBlock Grid.Row="4" Grid.Column="1" Text="出门选项"/>
@@ -93,6 +100,7 @@
                         SelectedValue="{Binding CheckOutOptions}" SelectedValuePath="ItemID" />
             <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding DelayOpenSeconds}"/>
             <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding OverTimeOpenSeconds}"/>
+
 
             <TextBlock Grid.Row="0" Grid.Column="4" Text="非法开门超时报警(秒)"/>
             <TextBlock Grid.Row="1" Grid.Column="4" Text="联动报警"/>

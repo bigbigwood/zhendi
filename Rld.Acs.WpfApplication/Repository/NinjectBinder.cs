@@ -49,6 +49,12 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<TimeSegment>().To<TimeSegment>();
             InjectionKernel.Bind<TimeGroup>().To<TimeGroup>();
             InjectionKernel.Bind<RldModel.TimeZone>().To<RldModel.TimeZone>();
+            InjectionKernel.Bind<DeviceValidator>().To<DeviceValidator>();
+            InjectionKernel.Bind<DeviceParameterValidator>().To<DeviceParameterValidator>();
+            InjectionKernel.Bind<DoorValidator>().To<DoorValidator>();
+            InjectionKernel.Bind<HeadReadingValidator>().To<HeadReadingValidator>();
+            InjectionKernel.Bind<DeviceRoleValidator>().To<DeviceRoleValidator>();
+            InjectionKernel.Bind<SysDictionaryValidator>().To<SysDictionaryValidator>();
         }
 
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()

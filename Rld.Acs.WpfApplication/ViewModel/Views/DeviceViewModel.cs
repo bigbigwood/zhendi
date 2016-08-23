@@ -10,6 +10,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Model.Extension;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
@@ -86,24 +87,40 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
+                var deviceController = this.ToCoreModel();
+
+                var validator = NinjectBinder.GetValidator<DeviceValidator>();
+                var results = validator.Validate(deviceController);
+                if (!results.IsValid)
+                {
+                    message = string.Join("\n", results.Errors);
+                    SendMessage(message);
+                    return;
+                }
+
                 if (Id == 0)
                 {
-                    Status= GeneralStatus.Enabled;
-                    CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    CreateDate = DateTime.Now;
+                    deviceController.Status = GeneralStatus.Enabled;
+                    deviceController.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                    deviceController.CreateDate = DateTime.Now;
 
-                    var deviceController = this.ToCoreModel();
                     deviceController = _deviceControllerRepo.Insert(deviceController);
                     Id = deviceController.DeviceID;
+                    var newViewModel = deviceController.ToViewModel();
+                    DeviceExtensionViewModel = newViewModel.DeviceExtensionViewModel;
+                    DoorViewModels = newViewModel.DoorViewModels;
+                    HeadReadingViewModels = newViewModel.HeadReadingViewModels;
+                    Status = newViewModel.Status;
+                    CreateUserID = newViewModel.CreateUserID;
+                    CreateDate = newViewModel.CreateDate;
 
                     message = "增加设备成功!";
                 }
                 else
                 {
-                    UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    UpdateDate = DateTime.Now;
+                    deviceController.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                    deviceController.UpdateDate = DateTime.Now;
 
-                    var deviceController = this.ToCoreModel();
                     _deviceControllerRepo.Update(deviceController);
 
                     message = "修改设备成功!";

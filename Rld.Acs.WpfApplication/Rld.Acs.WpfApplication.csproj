@@ -127,10 +127,16 @@
     <Compile Include="Repository\DeviceTrafficLogRepository.cs" />
     <Compile Include="Service\DeviceServiceProxy.cs" />
     <Compile Include="Service\SecurityServiceProxy.cs" />
+    <Compile Include="Service\Validator\DeviceParameterValidator.cs" />
+    <Compile Include="Service\Validator\DeviceRoleValidator.cs" />
+    <Compile Include="Service\Validator\SysDictionaryValidator.cs" />
+    <Compile Include="Service\Validator\HeadReadingValidator.cs" />
+    <Compile Include="Service\Validator\DoorValidator.cs" />
     <Compile Include="Service\Validator\TimeZoneValidator.cs" />
     <Compile Include="Service\Validator\TimeGroupValidator.cs" />
     <Compile Include="Service\Validator\TimeSegmentValidator.cs" />
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
+    <Compile Include="Service\Validator\DeviceValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
     <Compile Include="ViewModel\Pages\SysDictionaryPageViewModel.cs" />

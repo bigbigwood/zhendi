@@ -73,10 +73,10 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
@@ -102,10 +102,7 @@
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                         <TextBlock Text="产品序列号" Margin="0"/>
                     </TextBlock>
-                    <TextBlock Grid.Row="5" Grid.Column="1" >
-                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="密码" Margin="0"/>
-                    </TextBlock>
+                    <TextBlock Grid.Row="5" Grid.Column="1" Text="密码" />
                     <TextBlock Grid.Row="6" Grid.Column="1" Text="备注"/>
                     <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Name}"/>
                     <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Code}"/>
@@ -115,7 +112,10 @@
                     <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Password}"/>
                     <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding Remark}"/>
 
-                    <TextBlock Grid.Row="0" Grid.Column="4" Text="通讯类型"/>
+                    <TextBlock Grid.Row="0" Grid.Column="4" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="通讯类型" Margin="0"/>
+                    </TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="4" Text="通讯协议"/>
                     <TextBlock Grid.Row="2" Grid.Column="4" Text="波特率"/>
                     <TextBlock Grid.Row="3" Grid.Column="4" Text="串口端口号"/>
@@ -154,14 +154,17 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="40"/>
-                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="验证模式"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="验证模式" Margin="0"/>
+                    </TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="通行时间区"/>
                     <TextBlock Grid.Row="2" Grid.Column="1" Text="反潜回"/>
                     <TextBlock Grid.Row="3" Grid.Column="1" Text="多人组合锁"/>
@@ -197,7 +200,7 @@
             <TabItem Header="门参数设置" controls:ControlsHelper.HeaderFontSize="12">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -236,7 +239,7 @@
             <TabItem Header="读头参数设置" controls:ControlsHelper.HeaderFontSize="12">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="150"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>

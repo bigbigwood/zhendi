@@ -66,15 +66,27 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition />
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource SysDictionaryPage_Label_TypeName}"/>
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource SysDictionaryPage_Label_LanguageID}"/>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource SysDictionaryPage_Label_ItemID}"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" Text="{DynamicResource SysDictionaryPage_Label_ItemValue}"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="{DynamicResource SysDictionaryPage_Label_TypeName}" Margin="0"/>
+            </TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="{DynamicResource SysDictionaryPage_Label_LanguageID}" Margin="0"/>
+            </TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="{DynamicResource SysDictionaryPage_Label_ItemID}" Margin="0"/>
+            </TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="{DynamicResource SysDictionaryPage_Label_ItemValue}" Margin="0"/>
+            </TextBlock>
             <TextBlock Grid.Row="4" Grid.Column="1" Text="{DynamicResource SysDictionaryPage_Label_Description}"/>
             <ComboBox Grid.Row="0" Grid.Column="2" Margin="2,3" 
                         ItemsSource="{Binding TypeHeadersDict, Mode=OneWay}" SelectedValuePath="ItemID" DisplayMemberPath="ItemValue" 
