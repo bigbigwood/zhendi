@@ -360,19 +360,9 @@
                         </StackPanel>
                         <!--后台服务:折叠节点-->
                         <StackPanel x:Name="suppor_control" Style="{StaticResource stack_tree_open}">
-                            <MenuItem x:Name="suppor_sjwh" FontSize="12" Width="180" Header="数据维护" >
-                                <MenuItem.Icon >
-                                    <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/数据维护.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
                             <MenuItem x:Name="suppor_sjtb" FontSize="12" Width="180"  Header="数据同步" >
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/数据同步.png"/>
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem x:Name="suppor_sjjk" FontSize="12" Width="180"  Header="数据监控" >
-                                <MenuItem.Icon >
-                                    <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/数据监控.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                         </StackPanel>

@@ -153,442 +153,69 @@ INSERT SYS_USER_DEVICE_ROLES VALUES (8, 3)
 INSERT SYS_USER_DEVICE_ROLES VALUES (9, 3)
 	
 
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'Stuff Management' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          -1 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'Stuff Management' , -- FullClassName - nvarchar(1024)
-          1 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
+INSERT dbo.SYS_MODULE VALUES ('人员管理部',   '人员管理部-菜单', -1, '', '', 1, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('设备管理部',   '设备管理部-菜单', -1, '', '', 1, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('综合信息展示', '综合信息展示-菜单', -1, '', '', 1, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('系统维护',     '系统维护-菜单', -1, '', '', 1, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('后台服务',     '后台服务-菜单', -1, '', '', 1, '', '2015-01-01', 1, 1, NULL, NULL)
 
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'Device Management' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          -1 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'Device Management' , -- FullClassName - nvarchar(1024)
-          1 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
+INSERT dbo.SYS_MODULE VALUES ('人员管理', '人员管理模块', 1, 'UserPage', 'UserPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('部门管理', '部门管理模块', 1, 'DepartmentPage', 'DepartmentPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
 
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'Dashboard' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          -1 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'Dashboard' , -- FullClassName - nvarchar(1024)
-          1 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
+INSERT dbo.SYS_MODULE VALUES ('设备管理', '设备管理模块', 2, 'DevicePage', 'DevicePage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('楼层管理', '楼层管理模块', 2, 'FloorPage', 'FloorPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('时间段', '时间段模块', 2, 'TimeSegmentPage', 'TimeSegmentPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('时间组', '时间组模块', 2, 'TimeGroupPage', 'TimeGroupPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('时间区', '时间区模块', 2, 'TimeZonePage', 'TimeZonePage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('设备权限管理', '设备权限管理模块', 2, 'DeviceRolePage', 'DeviceRolePage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
 
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'Mantance' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          -1 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'Mantance' , -- FullClassName - nvarchar(1024)
-          1 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
+INSERT dbo.SYS_MODULE VALUES ('实时监控', '实时监控模块', 3, 'MonitorPage', 'MonitorPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('设备访问记录', '设备访问记录模块', 3, 'DeviceTrafficLogPage', 'DeviceTrafficLogPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('设备操作日志', '设备操作日志模块', 3, 'DeviceOperationLogPage', 'DeviceOperationLogPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('系统操作日志', '系统操作日志模块', 3, 'SystemOperationLogPage', 'SystemOperationLogPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
 
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'Backend Service' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          -1 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'Backend Service' , -- FullClassName - nvarchar(1024)
-          1 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-		
+INSERT dbo.SYS_MODULE VALUES ('数据字典维护', '数据字典维护模块', 4, 'SysDictionaryPage', 'SysDictionaryPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('角色', '角色模块', 4, 'SystemRolePage', 'SystemRolePage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('用户', '用户模块', 4, 'OperatorPage', 'OperatorPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
 
+INSERT dbo.SYS_MODULE VALUES ('数据同步', '数据同步模块', 5, 'DataSynchorizationPage', 'DataSynchorizationPage', 2, '', '2015-01-01', 1, 1, NULL, NULL)
+	
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('增加人员', 6, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改人员', 6, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('删除人员', 6, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('移动人员', 6, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('同步数据', 6, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('增加部门', 7, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改部门', 7, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('删除部门', 7, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('同步数据到设备', 7, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('增加设备', 8, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改设备', 8, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('删除设备', 8, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('增加楼层', 9, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改楼层', 9, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('删除楼层', 9, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('增加时间段', 10, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改时间段', 10, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('删除时间段', 10, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('增加时间组', 11, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改时间组', 11, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('删除时间组', 11, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('增加时间区', 12, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改时间区', 12, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('删除时间区', 12, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('增加设备角色', 13, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改设备角色', 13, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('删除设备角色', 13, '', '', '2016-01-01', 1, 1, NULL, NULL)
 
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'dept Management' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          1 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'dept Management' , -- FullClassName - nvarchar(1024)
-          2 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('查询设备访问记录', 15, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('导出设备访问记录', 15, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('查询设备操作记录', 16, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('导出设备操作记录', 16, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('查询系统操作记录', 17, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('导出系统操作记录', 17, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('查询数据字典', 18, '', '', '2016-01-01', 1, 1, NULL, NULL)
 
-
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'empolyee Management' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          1 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'empolyee Management' , -- FullClassName - nvarchar(1024)
-          2 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-
-
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'device Management' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          2 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'device Management' , -- FullClassName - nvarchar(1024)
-          2 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-
-
-
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'door Management' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          2 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'door Management' , -- FullClassName - nvarchar(1024)
-          2 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-
-
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'timesegment Management' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          2 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'timesegment Management' , -- FullClassName - nvarchar(1024)
-          2 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-
-
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'timegroup Management' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          2 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'timegroup Management' , -- FullClassName - nvarchar(1024)
-          2 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-
-
-INSERT SYS_MODULE
-        ( ModuleName ,
-          Description ,
-          ParentID ,
-          LinkURL ,
-          FullClassName ,
-          ModuleLevel ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'timezone Management' , -- ModuleName - nvarchar(100)
-          N'' , -- Description - nvarchar(1024)
-          2 , -- ParentID - int
-          N'' , -- LinkURL - nvarchar(1024)
-          N'timezone Management' , -- FullClassName - nvarchar(1024)
-          2 , -- ModuleLevel - int
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000'  , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-		
-
-INSERT SYS_MODULE_ELEMENTS
-        ( ElementName ,
-          ModuleID ,
-          Description ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'Add empolyee' , -- ElementName - nvarchar(100)
-          7 , -- ModuleID - int
-          N'' , -- Description - nvarchar(1024)
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-
-
-INSERT SYS_MODULE_ELEMENTS
-        ( ElementName ,
-          ModuleID ,
-          Description ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'modify empolyee' , -- ElementName - nvarchar(100)
-          7 , -- ModuleID - int
-          N'' , -- Description - nvarchar(1024)
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-
-INSERT SYS_MODULE_ELEMENTS
-        ( ElementName ,
-          ModuleID ,
-          Description ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'delete empolyee' , -- ElementName - nvarchar(100)
-          7 , -- ModuleID - int
-          N'' , -- Description - nvarchar(1024)
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-
-
-INSERT SYS_MODULE_ELEMENTS
-        ( ElementName ,
-          ModuleID ,
-          Description ,
-          Remark ,
-          CreateDate ,
-          CreateUserID ,
-          Status ,
-          UpdateDate ,
-          UpdateUserID
-        )
-VALUES  ( N'query empolyee' , -- ElementName - nvarchar(100)
-          7 , -- ModuleID - int
-          N'' , -- Description - nvarchar(1024)
-          N'' , -- Remark - nvarchar(1024)
-          '2016-01-01 00:00:00.000' , -- CreateDate - datetime
-          1 , -- CreateUserID - int
-          1 , -- Status - int
-          NULL , -- UpdateDate - datetime
-          NULL  -- UpdateUserID - int
-        )
-		
 		
 		
 
