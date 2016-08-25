@@ -10,7 +10,5 @@ namespace Rld.Acs.Model
         public virtual Int32 RoleID { get; set; }
         public virtual SysModule ModuleInfo { get; set; }
         public virtual SysModuleElement ElementInfo { get; set; }
-        public virtual Boolean Visible { get; set; }
-        public virtual Boolean Enabled { get; set; }
     }
 }

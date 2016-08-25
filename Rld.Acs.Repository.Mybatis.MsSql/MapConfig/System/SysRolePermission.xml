@@ -8,8 +8,6 @@
   <resultMaps>
     <resultMap id="SysRolePermissionResult" class="Rld.Acs.Model.SysRolePermission">
       <result property="SysRolePermissionID" column="SysRolePermissionID"/>
-      <result property="Visible" column="Visible"/>
-      <result property="Enabled" column="Enabled"/>
       <result property="RoleID" column="RoleID"/>
       <result property="ModuleInfo" column="ModuleID" select="SysModule.GetByKey"/>
       <result property="ElementInfo" column="ElementID" select="SysModuleElement.GetByKey"/>
@@ -36,14 +34,10 @@
       [RoleID]
       , [ElementID]
       , [ModuleID]
-      , [Visible]
-      , [Enabled]
       ) VALUES (
       #RoleID#
       , #ElementInfo.ElementID#
       , #ModuleInfo.ModuleID#
-      , #Visible#
-      , #Enabled#
       )
       <selectKey resultClass="int" type="post" property="SysRolePermissionID" >
         select @@IDENTITY as value
@@ -55,8 +49,6 @@
       [RoleID] = #RoleID#
       , [ElementID] = #ElementInfo.ElementID#
       , [ModuleID] = #ModuleInfo.ModuleID#
-      , [Visible] = #Visible#
-      , [Enabled] = #Enabled#
       WHERE
       [SysRolePermissionID] = #SysRolePermissionID#
     </update>
@@ -79,12 +71,6 @@
         </isNotNull>
         <isNotNull prepend="AND" property="ModuleID">
           ModuleID = #ModuleID#
-        </isNotNull>
-        <isNotNull prepend="AND" property="Visible">
-          Visible = #Visible#
-        </isNotNull>
-        <isNotNull prepend="AND" property="Enabled">
-          Enabled = #Enabled#
         </isNotNull>
       </dynamic>
     </select>

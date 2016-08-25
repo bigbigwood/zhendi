@@ -103,4 +103,11 @@
 	<sys:String x:Key="SysDictionaryPage_Label_ItemID">选项ID</sys:String>	
 	<sys:String x:Key="SysDictionaryPage_Label_ItemValue">选项值</sys:String>
 	<sys:String x:Key="SysDictionaryPage_Label_Description">描述</sys:String>
+	
+	<sys:String x:Key="SysRolePage_AddBtn">增加系统角色</sys:String>
+    <sys:String x:Key="SysRolePage_ModifyBtn">修改系统角色</sys:String>
+    <sys:String x:Key="SysRolePage_DeleteBtn">删除系统角色</sys:String>
+    <sys:String x:Key="SysRolePage_Label_Name">角色名称</sys:String>
+	<sys:String x:Key="SysRolePage_Label_Description">描述</sys:String>
+	<sys:String x:Key="SysRolePage_Label_AuthorizationModule">授权模块</sys:String>
 </ResourceDictionary>

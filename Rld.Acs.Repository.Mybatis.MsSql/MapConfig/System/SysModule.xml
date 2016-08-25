@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
+  <cacheModels>
+    <cacheModel id="SysModule-cache"  implementation="MEMORY" >
+      <flushInterval hours="24"/>
+      <flushOnExecute  statement="SysModule.Insert"/>
+      <flushOnExecute  statement="SysModule.Update"/>
+      <flushOnExecute  statement="SysModule.Delete"/>
+      <property name="Type" value="Weak"/>
+    </cacheModel>
+  </cacheModels>
+
   <alias>
     <typeAlias alias="SysModule" type="Rld.Acs.Model.SysModule" />
   </alias>
@@ -24,7 +34,7 @@
   </resultMaps>
 
   <statements>
-    <select id="SysModule.GetByKey" parameterClass="int" resultMap="SysModuleResult">
+    <select id="SysModule.GetByKey" parameterClass="int" resultMap="SysModuleResult" cacheModel="SysModule-cache">
       SELECT *
       FROM [SYS_MODULE]
       WHERE
@@ -88,7 +98,7 @@
       [ModuleID] = #ModuleID#
     </delete>
 
-    <select id="SysModule.Query" parameterClass="Hashtable" resultMap="SysModuleResult">
+    <select id="SysModule.Query" parameterClass="Hashtable" resultMap="SysModuleResult" cacheModel="SysModule-cache">
       SELECT *
       FROM [SYS_MODULE]
       <dynamic prepend="WHERE">

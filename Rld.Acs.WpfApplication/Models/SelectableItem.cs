@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Rld.Acs.WpfApplication.Models
 {
@@ -38,5 +39,16 @@ namespace Rld.Acs.WpfApplication.Models
     public class NullableSelectableItem : SelectableItem
     {
         public new Int32? ID { get; set; }
+    }
+
+    public class TreeViewItem : SelectableItem
+    {
+        public Int32 NodeType { get; set; }
+        public IList<TreeViewItem> Children { get; set; }
+
+        public TreeViewItem()
+        {
+            Children = new List<TreeViewItem>();
+        }
     }
 }

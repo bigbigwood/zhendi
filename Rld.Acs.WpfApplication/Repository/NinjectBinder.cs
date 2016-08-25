@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Rld.Acs.WpfApplication.Repository.System;
 using Rld.Acs.WpfApplication.Service.Validator;
 using RldModel = Rld.Acs.Model;
 
@@ -37,6 +38,10 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<ITimeZoneRepository>().To<TimeZoneRepository>();
 
             InjectionKernel.Bind<ISysDictionaryRepository>().To<SysDictionaryRepository>();
+            InjectionKernel.Bind<ISysRoleRepository>().To<SysRoleRepository>();
+            InjectionKernel.Bind<ISysModuleRepository>().To<SysModuleRepository>();
+            InjectionKernel.Bind<ISysModuleElementRepository>().To<SysModuleElementRepository>();
+
             InjectionKernel.Bind<IDeviceTrafficLogRepository>().To<DeviceTrafficLogRepository>();
             InjectionKernel.Bind<IDeviceOperationLogRepository>().To<DeviceOperationLogRepository>();
         }

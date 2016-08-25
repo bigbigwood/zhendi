@@ -15,7 +15,7 @@ namespace Rld.Acs.Model
         public virtual GeneralStatus Status { get; set; }
         public virtual DateTime? UpdateDate { get; set; }
         public virtual Int32? UpdateUserID { get; set; }
-        public virtual IList<SysRolePermission> SysRolePermissions { get; set; }
+        public virtual List<SysRolePermission> SysRolePermissions { get; set; }
 
         public SysRole()
         {

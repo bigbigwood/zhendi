@@ -70,5 +70,11 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string SysDictionaryView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string SysDictionaryPage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string SysDictionaryPage_ShowQuestion = Guid.NewGuid().ToString();
+
+        public static readonly string SysRoleView_Open = Guid.NewGuid().ToString();
+        public static readonly string SysRoleView_Close = Guid.NewGuid().ToString();
+        public static readonly string SysRoleView_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string SysRolePage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string SysRolePage_ShowQuestion = Guid.NewGuid().ToString();
     }
 }

@@ -603,8 +603,6 @@ create table SYS_ROLE_PERMISSIONS (
    RoleID               int                  not null,
    ElementID            int                  null,
    ModuleID             int                  null,
-   Visible              bit                  not null,
-   Enabled              bit                  not null,
    constraint PK_SYS_ROLE_MODULEELEMENT primary key nonclustered (SysRolePermissionID)
 )
 go

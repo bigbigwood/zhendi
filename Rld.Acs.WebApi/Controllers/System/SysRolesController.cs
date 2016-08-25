@@ -50,8 +50,16 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(sysRoleInfo, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysRoleRepository>();
-                repo.Insert(sysRoleInfo);
+                var sysRoleRepo = RepositoryManager.GetRepository<ISysRoleRepository>();
+                var sysRolePermissionRepo = RepositoryManager.GetRepository<ISysRolePermissionRepository>();
+
+                if (sysRoleInfo == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "sysRoleInfo is null");
+                }
+
+                sysRoleRepo.Insert(sysRoleInfo);
+                sysRoleInfo.SysRolePermissions.ForEach(x => sysRolePermissionRepo.Insert(x));
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysRoleInfo);
 
@@ -63,8 +71,38 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(sysRoleInfo, new Func<HttpResponseMessage>(() =>
             {
                 sysRoleInfo.RoleID = id;
-                var repo = RepositoryManager.GetRepository<ISysRoleRepository>();
-                repo.Update(sysRoleInfo);
+
+                var sysRoleRepo = RepositoryManager.GetRepository<ISysRoleRepository>();
+                var sysRolePermissionRepo = RepositoryManager.GetRepository<ISysRolePermissionRepository>();
+
+                var originalsysRoleInfo = sysRoleRepo.GetByKey(id);
+                if (originalsysRoleInfo == null)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("role Id={0} does not exist.", id));
+
+                #region role permissions
+                var addedPermissions = new List<SysRolePermission>();
+                var deletedPermissionIds = new List<int>();
+                if (sysRoleInfo.SysRolePermissions != null && sysRoleInfo.SysRolePermissions.Any())
+                {
+                    var originalPermissionIDs = originalsysRoleInfo.SysRolePermissions.Select(d => d.SysRolePermissionID);
+                    var currentPermissionIDs = sysRoleInfo.SysRolePermissions.Select(d => d.SysRolePermissionID);
+                    deletedPermissionIds = originalPermissionIDs.Except(currentPermissionIDs).ToList();
+
+                    addedPermissions = sysRoleInfo.SysRolePermissions.FindAll(d => d.SysRolePermissionID == 0);
+
+                    deletedPermissionIds.ForEach(d => sysRolePermissionRepo.Delete(d));
+                    addedPermissions.ForEach(d => sysRolePermissionRepo.Insert(d));
+                    sysRoleInfo.SysRolePermissions.FindAll(d => d.SysRolePermissionID != 0).ForEach(d => sysRolePermissionRepo.Update(d));
+                }
+                else
+                {
+                    deletedPermissionIds = originalsysRoleInfo.SysRolePermissions.Select(d => d.SysRolePermissionID).ToList();
+                    deletedPermissionIds.ForEach(d => sysRolePermissionRepo.Delete(d));
+                }
+
+                #endregion
+
+                sysRoleRepo.Update(sysRoleInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -75,8 +113,15 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysRoleRepository>();
-                repo.Delete(id);
+                var sysRoleRepo = RepositoryManager.GetRepository<ISysRoleRepository>();
+                var sysRolePermissionRepo = RepositoryManager.GetRepository<ISysRolePermissionRepository>();
+
+                var sysRoleInfo = sysRoleRepo.GetByKey(id);
+                if (sysRoleInfo != null)
+                {
+                    sysRoleInfo.SysRolePermissions.ForEach(x => sysRolePermissionRepo.Delete(x.SysRolePermissionID));
+                    sysRoleRepo.Delete(id);
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 

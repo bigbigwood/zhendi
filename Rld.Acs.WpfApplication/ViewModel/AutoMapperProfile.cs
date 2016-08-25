@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Model.Extension;
+using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel
@@ -94,6 +96,16 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.TypeHeadersDict, op => op.Ignore());
+
+            CreateProvMap<SysRoleViewModel, SysRole>()
+                .ForMember(dest => dest.SysRolePermissions, op => op.MapFrom(src => src.GetPermissionsFromUI()));
+            CreateProvMap<SysRole, SysRoleViewModel>()
+                .ForMember(dest => dest.SaveCmd, op => op.Ignore())
+                .ForMember(dest => dest.CancelCmd, op => op.Ignore())
+                .ForMember(dest => dest.Title, op => op.Ignore())
+                .ForMember(dest => dest.AuthorizationModuleString, op => op.Ignore())
+                .ForMember(dest => dest.TreeViewSource, op => op.Ignore())
+                .AfterMap((src, dest) => dest.BindPermissionsToTreeView(src.SysRolePermissions));
 
 
             Log.Info("Verify mapper configuration..");

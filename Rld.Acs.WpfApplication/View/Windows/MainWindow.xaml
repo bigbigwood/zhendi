@@ -330,7 +330,7 @@
                             </MenuItem>
 
 
-                            <MenuItem x:Name="syswh_role" FontSize="12" Width="180"  Header="角色" IsCheckable="False">
+                            <MenuItem x:Name="syswh_role" FontSize="12" Width="180" Header="角色" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="SysRolePage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/角色.png"/>
                                 </MenuItem.Icon>
