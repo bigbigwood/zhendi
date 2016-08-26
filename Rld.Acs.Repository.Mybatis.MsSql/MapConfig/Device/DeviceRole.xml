@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
+  <cacheModels>
+    <cacheModel id="DeviceRole-cache"  implementation="MEMORY" >
+      <flushInterval hours="24"/>
+      <flushOnExecute  statement="DeviceRole.Insert"/>
+      <flushOnExecute  statement="DeviceRole.Update"/>
+      <flushOnExecute  statement="DeviceRole.Delete"/>
+      <property name="Type" value="Weak"/>
+    </cacheModel>
+  </cacheModels>
+
   <alias>
     <typeAlias alias="DeviceRole" type="Rld.Acs.Model.DeviceRole" />
   </alias>
@@ -19,7 +29,7 @@
   </resultMaps>
 
   <statements>
-    <select id="DeviceRole.GetByKey" parameterClass="int" resultMap="DeviceRoleResult">
+    <select id="DeviceRole.GetByKey" parameterClass="int" resultMap="DeviceRoleResult"  cacheModel="DeviceRole-cache">
       SELECT *
       FROM DEVICE_ROLES
       where DeviceRoleID =  #value#

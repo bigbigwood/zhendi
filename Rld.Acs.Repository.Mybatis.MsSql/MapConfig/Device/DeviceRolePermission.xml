@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
+    <cacheModels>
+    <cacheModel id="DeviceRolePermission-cache"  implementation="MEMORY" >
+      <flushInterval hours="24"/>
+      <flushOnExecute  statement="DeviceRolePermission.Insert"/>
+      <flushOnExecute  statement="DeviceRolePermission.Update"/>
+      <flushOnExecute  statement="DeviceRolePermission.Delete"/>
+      <property name="Type" value="Weak"/>
+    </cacheModel>
+  </cacheModels>
+  
   <alias>
     <typeAlias alias="DeviceRolePermission" type="Rld.Acs.Model.DeviceRolePermission" />
   </alias>
@@ -21,13 +31,13 @@
   </resultMaps>
 
   <statements>
-    <select id="DeviceRolePermission.GetByKey" parameterClass="int" resultMap="DeviceRolePermissionResult">
+    <select id="DeviceRolePermission.GetByKey" parameterClass="int" resultMap="DeviceRolePermissionResult" cacheModel="DeviceRolePermission-cache">
       SELECT *
       FROM [DEVICE_ROLES_PERMISSIONS]
       WHERE
       [DeviceRolePermissionID] = #value#
     </select>
-    <select id="DeviceRolePermission.GetByRoleID" parameterClass="int" resultMap="DeviceRolePermissionResult">
+    <select id="DeviceRolePermission.GetByRoleID" parameterClass="int" resultMap="DeviceRolePermissionResult" cacheModel="DeviceRolePermission-cache">
       SELECT *
       FROM [DEVICE_ROLES_PERMISSIONS]
       WHERE
@@ -82,7 +92,7 @@
       [DeviceRolePermissionID] = #DeviceRolePermissionID#
     </delete>
 
-    <select id="DeviceRolePermission.Query" parameterClass="Hashtable" resultMap="DeviceRolePermissionResult">
+    <select id="DeviceRolePermission.Query" parameterClass="Hashtable" resultMap="DeviceRolePermissionResult" cacheModel="DeviceRolePermission-cache">
       SELECT *
       FROM DEVICE_ROLES_PERMISSIONS
       <dynamic prepend="WHERE">

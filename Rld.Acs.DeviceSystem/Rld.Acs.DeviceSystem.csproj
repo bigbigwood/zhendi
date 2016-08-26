@@ -111,6 +111,7 @@
     <Compile Include="Message\SyncDeviceUsers.cs" />
     <Compile Include="Service\DeviceMessageProcessor.cs" />
     <Compile Include="Service\OperationLogOp.cs" />
+    <Compile Include="Service\DepartmentOp.cs" />
     <Compile Include="Service\UserOp.cs" />
     <Compile Include="Websocket\DeviceWebSocketHandler.cs" />
     <Compile Include="Global.asax.cs">

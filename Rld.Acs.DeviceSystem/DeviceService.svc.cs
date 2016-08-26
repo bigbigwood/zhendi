@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using log4net;
 using Rld.Acs.DeviceSystem.Framework;
@@ -33,14 +34,12 @@ namespace Rld.Acs.DeviceSystem
         {
             return PersistenceOperation.Process(request, () =>
             {
-                //var repo = RepositoryManager.GetRepository<IUserRepository>();
-                //request.DbUsers.ForEach(user => request.DeviceControllers.ForEach(device =>
-                //{
-                //    var userInfo = repo.GetByKey(user.UserID);
-                //    new UserOperation().UpdateDeviceUser(userInfo, device);
-                //}));
-
-                Thread.Sleep(10*1000);
+                var repo = RepositoryManager.GetRepository<IUserRepository>();
+                request.Users.ForEach(user => request.Devices.ForEach(device =>
+                {
+                    var userInfo = repo.GetByKey(user.UserID);
+                    new UserOp().UpdateDBUser(userInfo, device);
+                }));
 
                 return new SyncDBUsersResponse() { ResultType = ResultTypes.Ok };
             });
@@ -48,8 +47,18 @@ namespace Rld.Acs.DeviceSystem
 
         public SyncDepartmentUsersResponse SyncDepartmentUsers(SyncDepartmentUsersRequest request)
         {
-            Thread.Sleep(3 * 1000);
-            return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.Ok };
+            if ((request.Departments == null || !request.Departments.Any()) ||
+                request.Devices == null || !request.Devices.Any())
+            {
+                return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.Ok };
+            }
+
+            return PersistenceOperation.Process(request, () =>
+            {
+                request.Departments.ForEach(department => new DepartmentOp().SyncDepartment(department, request.Devices));
+
+                return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.Ok };
+            });
         }
 
         public SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(SyncDeviceOperationLogsRequest request)
