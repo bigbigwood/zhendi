@@ -123,11 +123,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\PasswordBoxHelper.cs" />
     <Compile Include="Models\TriStateTreeViewNode.cs" />
     <Compile Include="Repository\DeviceOperationLogRepository.cs" />
     <Compile Include="Repository\DeviceTrafficLogRepository.cs" />
     <Compile Include="Repository\System\SysModuleElementRepository.cs" />
     <Compile Include="Repository\System\SysModuleRepository.cs" />
+    <Compile Include="Repository\System\SysOperatorRepository.cs" />
     <Compile Include="Repository\System\SysRoleRepository.cs" />
     <Compile Include="Service\DeviceServiceProxy.cs" />
     <Compile Include="Service\SysPermissionProvider.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Service\Validator\DeviceValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
+    <Compile Include="ViewModel\Pages\SysOperatorPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SysRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SysDictionaryPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DeviceOperationLogPageViewModel.cs" />
@@ -152,6 +155,7 @@
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
     <Compile Include="ViewModel\Views\SysRolePermissionViewModel.cs" />
+    <Compile Include="ViewModel\Views\SysOperatorViewModel.cs" />
     <Compile Include="ViewModel\Views\SysRoleViewModel.cs" />
     <Compile Include="ViewModel\Views\SysDictionaryViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceOperationLogViewModel.cs" />
@@ -191,6 +195,9 @@
     <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Service\Navigation\FrameNavigationService.cs" />
     <Compile Include="Service\Navigation\IFrameNavigationService.cs" />
+    <Compile Include="View\Pages\SysOperatorPage.xaml.cs">
+      <DependentUpon>SysOperatorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\SysRolePage.xaml.cs">
       <DependentUpon>SysRolePage.xaml</DependentUpon>
     </Compile>
@@ -240,6 +247,9 @@
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="Service\UserAvatorService.cs" />
+    <Compile Include="View\Windows\SysOperatorView.xaml.cs">
+      <DependentUpon>SysOperatorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\SysRoleView.xaml.cs">
       <DependentUpon>SysRoleView.xaml</DependentUpon>
     </Compile>
@@ -322,6 +332,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Pages\SysOperatorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Pages\SysRolePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -343,6 +357,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\DeviceRolePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\SysOperatorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

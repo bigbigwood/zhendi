@@ -48,6 +48,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Register<DeviceOperationLogPageViewModel>();
             SimpleIoc.Default.Register<SysDictionaryPageViewModel>();
             SimpleIoc.Default.Register<SysRolePageViewModel>();
+            SimpleIoc.Default.Register<SysOperatorPageViewModel>();
 
             SetupNavigation();
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -78,6 +79,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             navigationService.Configure("DeviceOperationLogPage", new Uri("../Pages/DeviceOperationLogPage.xaml", UriKind.Relative));
             navigationService.Configure("SysDictionaryPage", new Uri("../Pages/SysDictionaryPage.xaml", UriKind.Relative));
             navigationService.Configure("SysRolePage", new Uri("../Pages/SysRolePage.xaml", UriKind.Relative));
+            navigationService.Configure("SysOperatorPage", new Uri("../Pages/SysOperatorPage.xaml", UriKind.Relative));
 
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
@@ -136,7 +138,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<SysRolePageViewModel>(); }
         }
-        
+        public SysOperatorPageViewModel SysOperatorPage
+        {
+            get { return ServiceLocator.Current.GetInstance<SysOperatorPageViewModel>(); }
+        }
 
         public static void Cleanup()
         {

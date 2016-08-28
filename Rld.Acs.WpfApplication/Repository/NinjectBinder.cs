@@ -41,6 +41,7 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<ISysRoleRepository>().To<SysRoleRepository>();
             InjectionKernel.Bind<ISysModuleRepository>().To<SysModuleRepository>();
             InjectionKernel.Bind<ISysModuleElementRepository>().To<SysModuleElementRepository>();
+            InjectionKernel.Bind<ISysOperatorRepository>().To<SysOperatorRepository>();
 
             InjectionKernel.Bind<IDeviceTrafficLogRepository>().To<DeviceTrafficLogRepository>();
             InjectionKernel.Bind<IDeviceOperationLogRepository>().To<DeviceOperationLogRepository>();

@@ -335,7 +335,7 @@
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/角色.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem x:Name="syswh_user" FontSize="12" Width="180"  Header="用户" IsCheckable="False">
+                            <MenuItem x:Name="syswh_user" FontSize="12" Width="180"  Header="用户" IsCheckable="False" Command="{Binding NatigatePageCmd}" CommandParameter="SysOperatorPage">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/用户.png"/>
                                 </MenuItem.Icon>

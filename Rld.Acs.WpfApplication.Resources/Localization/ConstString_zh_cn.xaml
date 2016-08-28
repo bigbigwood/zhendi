@@ -110,4 +110,21 @@
     <sys:String x:Key="SysRolePage_Label_Name">角色名称</sys:String>
 	<sys:String x:Key="SysRolePage_Label_Description">描述</sys:String>
 	<sys:String x:Key="SysRolePage_Label_AuthorizationModule">授权模块</sys:String>
+	
+	<sys:String x:Key="SysOperatorPage_Label_Name">登录名</sys:String>
+	<sys:String x:Key="SysOperatorPage_Label_Status">状态</sys:String>
+	<sys:String x:Key="SysOperatorPage_Label_CreateUserID">创建者ID</sys:String>
+	<sys:String x:Key="SysOperatorPage_Label_CreateDate">创建时间</sys:String>
+	<sys:String x:Key="SysOperatorPage_AddBtn">增加用户</sys:String>
+	<sys:String x:Key="SysOperatorPage_ModifyBtn">修改用户</sys:String>
+	<sys:String x:Key="SysOperatorPage_DeleteBtn">删除用户</sys:String>
+
+	
+    <sys:String x:Key="SysOperatorView_Label_Name">登录名</sys:String>
+	<sys:String x:Key="SysOperatorView_Label_LanguageID">语言</sys:String>
+	<sys:String x:Key="SysOperatorView_Label_Status">状态</sys:String>
+	<sys:String x:Key="SysOperatorView_Label_CurrentPassword">当前密码</sys:String>
+	<sys:String x:Key="SysOperatorView_Label_NewPassword">新密码</sys:String>
+	<sys:String x:Key="SysOperatorView_Label_2ndNewPassword">确认密码</sys:String>
+
 </ResourceDictionary>

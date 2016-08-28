@@ -65,6 +65,8 @@
       [UserID] = #UserID#
       , [LoginName] = #LoginName#
       , [LanguageID] = #LanguageID#
+      , [Password] = #Password#
+      , [Salt] = #Salt#
       , [Photo] = #Photo#
       , [CreateUserID] = #CreateUserID#
       , [CreateDate] = #CreateDate#

@@ -107,6 +107,16 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.TreeViewSource, op => op.Ignore())
                 .AfterMap((src, dest) => dest.BindPermissionsToTreeView(src.SysRolePermissions));
 
+            CreateProvMap<SysOperatorViewModel, SysOperator>();
+            CreateProvMap<SysOperator, SysOperatorViewModel>()
+                .ForMember(dest => dest.SaveCmd, op => op.Ignore())
+                .ForMember(dest => dest.CancelCmd, op => op.Ignore())
+                .ForMember(dest => dest.NewPasswordEnabled, op => op.Ignore())
+                .ForMember(dest => dest.NewPassword1, op => op.Ignore())
+                .ForMember(dest => dest.NewPassword2, op => op.Ignore())
+                .ForMember(dest => dest.Title, op => op.Ignore())
+                .AfterMap((src, dest) => dest.BindDefaultValues());
+
 
             Log.Info("Verify mapper configuration..");
             Mapper.AssertConfigurationIsValid();

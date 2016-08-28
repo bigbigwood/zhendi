@@ -59,6 +59,7 @@ namespace Rld.Acs.WebApi.Controllers
                 string salt = Guid.NewGuid().ToString();
                 var hashPassword = SysOperatorExtension.ExcryptPassword(sysOperatorInfo.Password, salt);
                 sysOperatorInfo.Password = hashPassword;
+                sysOperatorInfo.Salt = salt;
                 repo.Insert(sysOperatorInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysOperatorInfo);
@@ -72,6 +73,15 @@ namespace Rld.Acs.WebApi.Controllers
             {
                 sysOperatorInfo.OperatorID = id;
                 var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
+
+                var originalsysOperatorInfo = repo.GetByKey(id);
+                if (originalsysOperatorInfo == null)
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("operator Id={0} does not exist.", id));
+
+                string salt = originalsysOperatorInfo.Salt;
+                var hashPassword = SysOperatorExtension.ExcryptPassword(sysOperatorInfo.Password, salt);
+                sysOperatorInfo.Password = hashPassword;
+                sysOperatorInfo.Salt = salt;
                 repo.Update(sysOperatorInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
