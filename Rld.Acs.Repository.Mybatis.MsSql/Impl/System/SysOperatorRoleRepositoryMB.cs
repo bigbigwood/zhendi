@@ -4,12 +4,12 @@ using Rld.Acs.Repository.Interfaces;
 
 namespace Rld.Acs.Repository.Mybatis.MsSql
 {
-    public class UserRoleRepositoryMB : MyBatisRepository<UserRole, int>, IUserRoleRepository
+    public class SysOperatorRoleRepositoryMB : MyBatisRepository<SysOperatorRole, int>, ISysOperatorRoleRepository
     {
         #region Repository
         protected override string EntityCode
         {
-            get { return "UserRole"; }
+            get { return "SysOperatorRole"; }
         }
         #endregion
     }

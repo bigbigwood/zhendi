@@ -107,7 +107,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.TreeViewSource, op => op.Ignore())
                 .AfterMap((src, dest) => dest.BindPermissionsToTreeView(src.SysRolePermissions));
 
-            CreateProvMap<SysOperatorViewModel, SysOperator>();
+            CreateProvMap<SysOperatorViewModel, SysOperator>()
+                .ForMember(dest => dest.SysOperatorRoles, op => op.Ignore())
+                .AfterMap((src, dest) => dest.SysOperatorRoles = src.GetRolesFromUI(dest));
             CreateProvMap<SysOperator, SysOperatorViewModel>()
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
@@ -115,7 +117,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.NewPassword1, op => op.Ignore())
                 .ForMember(dest => dest.NewPassword2, op => op.Ignore())
                 .ForMember(dest => dest.Title, op => op.Ignore())
-                .AfterMap((src, dest) => dest.BindDefaultValues());
+                .ForMember(dest => dest.SysOperatorRoleItems, op => op.Ignore())
+                .AfterMap((src, dest) => dest.BindUI(src));
 
 
             Log.Info("Verify mapper configuration..");

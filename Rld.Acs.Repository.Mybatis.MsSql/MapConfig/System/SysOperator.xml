@@ -19,6 +19,7 @@
       <result property="UpdateUserID" column="UpdateUserID"/>
       <result property="UpdateDate" column="UpdateDate"/>
       <result property="UserID" column="UserID"/>
+      <result property="SysOperatorRoles" column="OperatorID" select="SysOperatorRole.GetByOperatorID"/>
     </resultMap>
   </resultMaps>
 

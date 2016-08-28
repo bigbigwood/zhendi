@@ -54,13 +54,17 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(sysOperatorInfo, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
+                var sysOperatorRepository = RepositoryManager.GetRepository<ISysOperatorRepository>();
+                var sysOperatorRoleRepo = RepositoryManager.GetRepository<ISysOperatorRoleRepository>();
 
                 string salt = Guid.NewGuid().ToString();
                 var hashPassword = SysOperatorExtension.ExcryptPassword(sysOperatorInfo.Password, salt);
                 sysOperatorInfo.Password = hashPassword;
                 sysOperatorInfo.Salt = salt;
-                repo.Insert(sysOperatorInfo);
+                sysOperatorRepository.Insert(sysOperatorInfo);
+
+                sysOperatorInfo.SysOperatorRoles.ForEach(a => a.OperatorID = sysOperatorInfo.OperatorID);
+                sysOperatorInfo.SysOperatorRoles.ForEach(a => sysOperatorRoleRepo.Insert(a));
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysOperatorInfo);
 
@@ -72,17 +76,41 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(sysOperatorInfo, new Func<HttpResponseMessage>(() =>
             {
                 sysOperatorInfo.OperatorID = id;
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
+                var sysOperatorRepository = RepositoryManager.GetRepository<ISysOperatorRepository>();
+                var sysOperatorRoleRepo = RepositoryManager.GetRepository<ISysOperatorRoleRepository>();
 
-                var originalsysOperatorInfo = repo.GetByKey(id);
+                var originalsysOperatorInfo = sysOperatorRepository.GetByKey(id);
                 if (originalsysOperatorInfo == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("operator Id={0} does not exist.", id));
+
+                #region SysOperatorRole
+                var addedRoles = new List<SysOperatorRole>();
+                var deletedRoleIds = new List<int>();
+                if (sysOperatorInfo.SysOperatorRoles != null && sysOperatorInfo.SysOperatorRoles.Any())
+                {
+                    var originalPermissionIDs = originalsysOperatorInfo.SysOperatorRoles.Select(d => d.SysOperatorRoleID);
+                    var currentPermissionIDs = sysOperatorInfo.SysOperatorRoles.Select(d => d.SysOperatorRoleID);
+                    deletedRoleIds = originalPermissionIDs.Except(currentPermissionIDs).ToList();
+
+                    addedRoles = sysOperatorInfo.SysOperatorRoles.FindAll(d => d.SysOperatorRoleID == 0);
+
+                    deletedRoleIds.ForEach(d => sysOperatorRoleRepo.Delete(d));
+                    addedRoles.ForEach(d => sysOperatorRoleRepo.Insert(d));
+                    sysOperatorInfo.SysOperatorRoles.FindAll(d => d.SysOperatorRoleID != 0).ForEach(d => sysOperatorRoleRepo.Update(d));
+                }
+                else
+                {
+                    deletedRoleIds = originalsysOperatorInfo.SysOperatorRoles.Select(d => d.SysOperatorRoleID).ToList();
+                    deletedRoleIds.ForEach(d => sysOperatorRoleRepo.Delete(d));
+                }
+
+                #endregion
 
                 string salt = originalsysOperatorInfo.Salt;
                 var hashPassword = SysOperatorExtension.ExcryptPassword(sysOperatorInfo.Password, salt);
                 sysOperatorInfo.Password = hashPassword;
                 sysOperatorInfo.Salt = salt;
-                repo.Update(sysOperatorInfo);
+                sysOperatorRepository.Update(sysOperatorInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
@@ -93,8 +121,14 @@ namespace Rld.Acs.WebApi.Controllers
         {
             return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
             {
-                var repo = RepositoryManager.GetRepository<ISysOperatorRepository>();
-                repo.Delete(id);
+                var sysOperatorRepository = RepositoryManager.GetRepository<ISysOperatorRepository>();
+                var sysOperatorRoleRepo = RepositoryManager.GetRepository<ISysOperatorRoleRepository>();
+                var sysOperatorInfo = sysOperatorRepository.GetByKey(id);
+                if (sysOperatorInfo != null)
+                {
+                    sysOperatorInfo.SysOperatorRoles.ForEach(x => sysOperatorRoleRepo.Delete(x.SysOperatorRoleID));
+                    sysOperatorRepository.Delete(id);
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 

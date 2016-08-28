@@ -78,16 +78,16 @@ go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SYS_USER_ROLE') and o.name = 'FK_SYS_USER_REFERENCE_SYS_ROLE')
-alter table SYS_USER_ROLE
-   drop constraint FK_SYS_USER_REFERENCE_SYS_ROLE
+   where r.fkeyid = object_id('SYS_OPERATOR_ROLE') and o.name = 'FK_SYS_OPERATOR_REFERENCE_SYS_ROLE')
+alter table SYS_OPERATOR_ROLE
+   drop constraint FK_SYS_OPERATOR_REFERENCE_SYS_ROLE
 go
 
 if exists (select 1
    from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
-   where r.fkeyid = object_id('SYS_USER_ROLE') and o.name = 'FK_SYS_USER_REFERENCE_SYS_USER')
-alter table SYS_USER_ROLE
-   drop constraint FK_SYS_USER_REFERENCE_SYS_USER
+   where r.fkeyid = object_id('SYS_OPERATOR_ROLE') and o.name = 'FK_SYS_OPERATOR_REFERENCE_SYS_USER')
+alter table SYS_OPERATOR_ROLE
+   drop constraint FK_SYS_OPERATOR_REFERENCE_SYS_USER
 go
 
 
@@ -249,9 +249,9 @@ go
 
 if exists (select 1
             from  sysobjects
-           where  id = object_id('SYS_USER_ROLE')
+           where  id = object_id('SYS_OPERATOR_ROLE')
             and   type = 'U')
-   drop table SYS_USER_ROLE
+   drop table SYS_OPERATOR_ROLE
 go
 
 if exists (select 1
@@ -683,6 +683,17 @@ create table SYS_OPERATOR (
 go
 
 /*==============================================================*/
+/* Table: SYS_OPERATOR_ROLE                                         */
+/*==============================================================*/
+create table SYS_OPERATOR_ROLE (
+   SysOperatorRoleID        int                  identity(1,1),
+   OperatorID           int                  not null,
+   RoleID               int                  not null,
+   constraint PK_SYS_OPERATOR_ROLE primary key nonclustered (SYSOPERATORROLEID)
+)
+go
+
+/*==============================================================*/
 /* Table: SYS_USER_PROPERTY                                     */
 /*==============================================================*/
 create table SYS_USER_PROPERTY (
@@ -711,16 +722,7 @@ create table SYS_USER_PROPERTY (
 )
 go
 
-/*==============================================================*/
-/* Table: SYS_USER_ROLE                                         */
-/*==============================================================*/
-create table SYS_USER_ROLE (
-   SysUserRoleID        int                  identity(1,1),
-   UserID               int                  not null,
-   RoleID               int                  not null,
-   constraint PK_SYS_USER_ROLE primary key nonclustered (SYSUSERROLEID)
-)
-go
+
 
 /*==============================================================*/
 /* Table: TIME_GROUPS                                           */
@@ -847,14 +849,14 @@ alter table SYS_USER_DEVICE_ROLES
 go
 
 
-alter table SYS_USER_ROLE
-   add constraint FK_SYS_USER_REFERENCE_SYS_ROLE foreign key (ROLEID)
+alter table SYS_OPERATOR_ROLE
+   add constraint FK_SYS_OPERATOR_REFERENCE_SYS_ROLE foreign key (ROLEID)
       references SYS_ROLE (ROLEID)
 go
 
-alter table SYS_USER_ROLE
-   add constraint FK_SYS_USER_REFERENCE_SYS_USER foreign key (USERID)
-      references SYS_USER (USERID)
+alter table SYS_OPERATOR_ROLE
+   add constraint FK_SYS_OPERATOR_REFERENCE_SYS_USER foreign key (OperatorID)
+      references SYS_OPERATOR (OperatorID)
 go
 
 

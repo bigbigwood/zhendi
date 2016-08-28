@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="SysOperatorRole" type="Rld.Acs.Model.SysOperatorRole" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SysOperatorRoleResult" class="Rld.Acs.Model.SysOperatorRole">
+      <result property="SysOperatorRoleID" column="SysOperatorRoleID"/>
+      <result property="OperatorID" column="OperatorID"/>
+      <result property="RoleID" column="RoleID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="SysOperatorRole.GetByKey" parameterClass="int" resultMap="SysOperatorRoleResult">
+      SELECT *
+      FROM [SYS_OPERATOR_ROLE]
+      WHERE
+      [SysOperatorRoleID] = #value#
+    </select>
+
+    <select id="SysOperatorRole.GetByOperatorID" parameterClass="int" resultMap="SysOperatorRoleResult">
+      SELECT *
+      FROM [SYS_OPERATOR_ROLE]
+      WHERE
+      [OperatorID] = #OperatorID#
+    </select>
+
+    <insert id="SysOperatorRole.Insert" parameterClass="SysOperatorRole">
+      INSERT INTO [SYS_OPERATOR_ROLE] (
+      [OperatorID]
+      , [RoleID]
+      ) VALUES (
+      #OperatorID#
+      , #RoleID#
+      )
+      <selectKey resultClass="int" type="post" property="SysOperatorRoleID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="SysOperatorRole.Update" parameterClass="SysOperatorRole">
+      UPDATE [SYS_OPERATOR_ROLE] SET
+      [OperatorID] = #OperatorID#
+      , [RoleID] = #RoleID#
+      WHERE
+      [SysOperatorRoleID] = #SysOperatorRoleID#
+    </update>
+
+    <delete id="SysOperatorRole.Delete"  parameterClass="int">
+      DELETE FROM [SYS_OPERATOR_ROLE]
+      WHERE
+      [SysOperatorRoleID] = #SysOperatorRoleID#
+    </delete>
+
+    <select id="SysOperatorRole.Query" parameterClass="Hashtable" resultMap="SysOperatorRoleResult">
+      SELECT *
+      FROM SYS_OPERATOR_ROLE
+      <dynamic prepend="WHERE">
+      <isNotNull prepend="and" property="OperatorID">
+        OperatorID=#OperatorID#
+      </isNotNull>
+        <isNotNull prepend="and" property="RoleID">
+          RoleID=#RoleID#
+        </isNotNull>
+    </dynamic>
+    </select>
+  </statements>
+</sqlMap>

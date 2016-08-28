@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -6,8 +9,11 @@ using GalaSoft.MvvmLight.Messaging;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Extension;
+using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service;
 
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
@@ -48,12 +54,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public String NewPassword2 { get; set; }
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-
+        public ObservableCollection<ComboBoxItem> SysOperatorRoleItems { get; set; }
 
         public SysOperatorViewModel()
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
+
+            SysOperatorRoleItems = new ObservableCollection<ComboBoxItem>();
+            SysPermissionProvider.GetInstance().AllSysRoles.ForEach(r =>
+                SysOperatorRoleItems.Add(new ComboBoxItem() {ID =  r.RoleID, DisplayName = r.RoleName}));
         }
 
         private void Save()
@@ -114,13 +124,37 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             Messenger.Default.Send(new NotificationMessage(message), Tokens.SysOperatorView_ShowNotification);
         }
 
-        public void BindDefaultValues()
+        public List<SysOperatorRole> GetRolesFromUI(SysOperator coreModel)
+        {
+            var result = new List<SysOperatorRole>();
+            SysOperatorRoleItems.FindAll(x => x.IsSelected).ForEach(x =>
+            {
+                var role =coreModel.SysOperatorRoles.FirstOrDefault(r => r.RoleID == x.ID);
+                if (role == null)
+                {
+                    role = new SysOperatorRole() {OperatorID = OperatorID, RoleID = x.ID};
+                }
+                result.Add(role);
+            });
+
+            return result;
+        }
+
+        public void BindUI(SysOperator coreModel)
         {
             if (OperatorID == 0)
             {
                 NewPasswordEnabled = true;
                 LanguageID = 2052;
                 Status = GeneralStatus.Enabled;
+            }
+            else
+            {
+                coreModel.SysOperatorRoles.ForEach(x =>
+                {
+                    var item = SysOperatorRoleItems.FirstOrDefault(i => i.ID == x.RoleID);
+                    if (item != null) item.IsSelected = true;
+                });
             }
         }
     }

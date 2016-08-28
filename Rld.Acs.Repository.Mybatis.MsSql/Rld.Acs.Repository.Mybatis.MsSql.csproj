@@ -94,7 +94,7 @@
     <Compile Include="Impl\User\UserPropertyRepositoryMB.cs" />
     <Compile Include="Impl\User\UserAuthenticationRepositoryMB.cs" />
     <Compile Include="Impl\User\UserDeviceRoleRepositoryMB.cs" />
-    <Compile Include="Impl\User\UserRoleRepositoryMB.cs" />
+    <Compile Include="Impl\System\SysOperatorRoleRepositoryMB.cs" />
     <Compile Include="Impl\User\UserRepositoryMB.cs" />
     <Compile Include="NinjectBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -205,7 +205,7 @@
     <EmbeddedResource Include="MapConfig\System\SysRolePermission.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MapConfig\User\UserRole.xml" />
+    <EmbeddedResource Include="MapConfig\System\SysOperatorRole.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\User\UserDeviceRole.xml" />

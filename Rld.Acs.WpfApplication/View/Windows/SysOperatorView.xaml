@@ -11,7 +11,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:SysOperatorViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="250" Width="300" Unloaded="MetroWindow_Unloaded">
+             Height="300" Width="600" Unloaded="MetroWindow_Unloaded">
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
             <Setter Property="FontSize" Value="12"/>
@@ -61,15 +61,16 @@
                 <RowDefinition Height="28"/>
                 <RowDefinition Height="28"/>
                 <RowDefinition Height="28"/>
-                <RowDefinition Height="28"/>
-                <RowDefinition Height="28"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
 
@@ -85,8 +86,13 @@
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                         <TextBlock Text="{DynamicResource SysOperatorView_Label_Status}" Margin="0"/>
             </TextBlock>
-            <CheckBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right"
+            <TextBlock Grid.Row="3" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="用户角色" Margin="0"/>
+            </TextBlock>
+            <CheckBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Right"
                       Content="新密码" IsChecked="{Binding NewPasswordEnabled}"/>
+            <TextBlock Grid.Row="1" Grid.Column="4" Text="确认密码" HorizontalAlignment="Right"/>
 
 
             <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding LoginName}"/>
@@ -95,14 +101,29 @@
             <CheckBox IsChecked="{Binding Status, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GeneralStatus.Enabled}}"
                         Grid.Row="2" Grid.Column="2" Content="启用" HorizontalAlignment="Left"/>
 
-            <PasswordBox Grid.Row="3" Grid.Column="2" IsEnabled="{Binding NewPasswordEnabled}" 
+            <PasswordBox Grid.Row="0" Grid.Column="5" IsEnabled="{Binding NewPasswordEnabled}" 
                Margin="2,1" models:PasswordBoxHelper.Password="{Binding Path=NewPassword1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
             </PasswordBox>
-            <PasswordBox Grid.Row="4" Grid.Column="2" IsEnabled="{Binding NewPasswordEnabled}" 
+            <PasswordBox Grid.Row="1" Grid.Column="5" IsEnabled="{Binding NewPasswordEnabled}" 
                Margin="2,1" models:PasswordBoxHelper.Password="{Binding Path=NewPassword2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
             </PasswordBox>
+            
+            <Border Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="4" BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
+                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding SysOperatorRoleItems}" HorizontalAlignment="Stretch">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
 
-            <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"  HorizontalAlignment="Center" Orientation="Horizontal">
+            <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="7"  HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0"/>
                 <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
             </StackPanel>

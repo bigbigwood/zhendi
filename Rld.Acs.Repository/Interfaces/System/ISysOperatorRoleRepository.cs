@@ -8,7 +8,7 @@ using Rld.Acs.Model;
 
 namespace Rld.Acs.Repository.Interfaces
 {
-    public interface IUserRoleRepository : IRepository<UserRole, Int32>
+    public interface ISysOperatorRoleRepository : IRepository<SysOperatorRole, Int32>
     {
     }
 }

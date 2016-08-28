@@ -123,6 +123,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Authorization\AuthToEnabledExtension.cs" />
+    <Compile Include="Models\Authorization\AuthToVisibilityExtension.cs" />
     <Compile Include="Models\PasswordBoxHelper.cs" />
     <Compile Include="Models\TriStateTreeViewNode.cs" />
     <Compile Include="Repository\DeviceOperationLogRepository.cs" />
@@ -131,6 +133,8 @@
     <Compile Include="Repository\System\SysModuleRepository.cs" />
     <Compile Include="Repository\System\SysOperatorRepository.cs" />
     <Compile Include="Repository\System\SysRoleRepository.cs" />
+    <Compile Include="Service\Authorization\AuthProvider.cs" />
+    <Compile Include="Service\Authorization\DefaultAuthProvider.cs" />
     <Compile Include="Service\DeviceServiceProxy.cs" />
     <Compile Include="Service\SysPermissionProvider.cs" />
     <Compile Include="Service\ResourceManager.cs" />

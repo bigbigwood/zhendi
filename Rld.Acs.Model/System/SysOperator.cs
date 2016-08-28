@@ -18,5 +18,12 @@ namespace Rld.Acs.Model
         public virtual GeneralStatus Status { get; set; }
         public virtual Int32? UpdateUserID { get; set; }
         public virtual DateTime? UpdateDate { get; set; }
+
+        public virtual IList<SysOperatorRole> SysOperatorRoles { get; set; }
+
+        public SysOperator()
+        {
+            SysOperatorRoles = new List<SysOperatorRole>();
+        }
     }
 }

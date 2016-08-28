@@ -23,6 +23,7 @@ namespace Rld.Acs.WpfApplication
         private IDeviceRoleRepository _deviceRoleRepository = NinjectBinder.GetRepository<IDeviceRoleRepository>();
         private IDeviceControllerRepository _deviceControllerRepository = NinjectBinder.GetRepository<IDeviceControllerRepository>();
         private ITimeZoneRepository _timeZoneRepository = NinjectBinder.GetRepository<ITimeZoneRepository>();
+        private ISysRoleRepository _sysRoleRepo = NinjectBinder.GetRepository<ISysRoleRepository>();
 
         public List<Department> AuthorizationDepartments { get; set; }
         public List<DeviceController> AuthorizationDevices { get; set; }
@@ -31,6 +32,7 @@ namespace Rld.Acs.WpfApplication
         public SysOperator CurrentOperatorInfo { get; set; }
         public string LocalCachePath { get; private set; }
         public string LocalImageCachePath { get; private set; }
+        public List<SysRolePermission> AuthorizationPermissions { get; set; }
 
         public static ApplicationManager GetInstance()
         {
@@ -78,6 +80,7 @@ namespace Rld.Acs.WpfApplication
             AuthorizationDevices = _deviceControllerRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
             AuthorizationDeviceRoles = _deviceRoleRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
             AuthorizationTimezones = _timeZoneRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
+
 
             var topDepartment = new Department() { DepartmentID = -1, Name = "总经办" };
             AuthorizationDepartments.Insert(0, topDepartment);

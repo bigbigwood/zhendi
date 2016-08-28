@@ -61,6 +61,7 @@
     <Compile Include="System\SysOperationLog.cs" />
     <Compile Include="System\SysRole.cs" />
     <Compile Include="System\SysRolePermission.cs" />
+    <Compile Include="System\SysOperatorRole.cs" />
     <Compile Include="Time\TimeGroup.cs" />
     <Compile Include="Time\TimeGroupSegment.cs" />
     <Compile Include="Time\TimeSegment.cs" />
@@ -71,7 +72,6 @@
     <Compile Include="User\UserDeviceRole.cs" />
     <Compile Include="System\SysOperator.cs" />
     <Compile Include="User\UserProperty.cs" />
-    <Compile Include="User\UserRole.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
