@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using MahApps.Metro.Controls;
 using Rld.Acs.WpfApplication.Service.Security;
@@ -36,7 +37,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 return;
             }
 
-            ApplicationManager.GetInstance().CurrentOperatorInfo = ToModel(authenticationResult.OperatorInfo);
+            ApplicationManager.GetInstance().UpdateCurrentOperatorAndPermission(ToModel(authenticationResult.OperatorInfo));
 
             Window mainWin = new MainWindow();
             Application.Current.MainWindow = mainWin;
@@ -56,6 +57,13 @@ namespace Rld.Acs.WpfApplication.View.Windows
             sysOperator.UpdateDate = operatorInfo.UpdateDate;
             sysOperator.CreateUserID = operatorInfo.CreateUserID;
             sysOperator.CreateDate = operatorInfo.CreateDate;
+
+            sysOperator.SysOperatorRoles = operatorInfo.SysOperatorRoles.Select(x => new RldModel.SysOperatorRole()
+            {
+                SysOperatorRoleID = x.SysOperatorRoleID,
+                OperatorID = x.OperatorID,
+                RoleID = x.RoleID,
+            }).ToList();
 
             return sysOperator;
         }

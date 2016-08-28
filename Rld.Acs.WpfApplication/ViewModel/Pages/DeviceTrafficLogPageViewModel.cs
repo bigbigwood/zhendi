@@ -11,6 +11,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility.Extension;
+using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
@@ -164,8 +165,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         public DeviceTrafficLogPageViewModel()
         {
-            QueryCommand = new RelayCommand(QueryCommandFunc);
-            NextPageSearchCommand = new RelayCommand(NextPageSearchCommandFunc);
+            QueryCommand = new AuthCommand(QueryCommandFunc);
+            NextPageSearchCommand = new AuthCommand(NextPageSearchCommandFunc);
 
             DeviceTrafficLogViewModels = new ObservableCollection<DeviceTrafficLogViewModel>();
             DeviceTrafficLogTypeDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.DeviceTrafficLogType);

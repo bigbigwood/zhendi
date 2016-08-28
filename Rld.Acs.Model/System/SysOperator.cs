@@ -19,7 +19,7 @@ namespace Rld.Acs.Model
         public virtual Int32? UpdateUserID { get; set; }
         public virtual DateTime? UpdateDate { get; set; }
 
-        public virtual IList<SysOperatorRole> SysOperatorRoles { get; set; }
+        public virtual List<SysOperatorRole> SysOperatorRoles { get; set; }
 
         public SysOperator()
         {
