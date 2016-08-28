@@ -19,6 +19,7 @@
     <resultMap id="SysModuleElementResult" class="Rld.Acs.Model.SysModuleElement">
       <result property="ElementID" column="ElementID"/>
       <result property="ElementName" column="ElementName"/>
+      <result property="ElementCode" column="ElementCode"/>
       <result property="ModuleID" column="ModuleID"/>
       <result property="Description" column="Description"/>
       <result property="Remark" column="Remark"/>
@@ -42,6 +43,7 @@
       INSERT INTO [SYS_MODULE_ELEMENTS] (
       [ModuleID]
       , [ElementName]
+      , [ElementCode]
       , [Description]
       , [Remark]
       , [CreateDate]
@@ -52,6 +54,7 @@
       ) VALUES (
       #ModuleID#
       , #ElementName#
+      , #ElementCode#
       , #Description#
       , #Remark#
       , #CreateDate#
@@ -69,6 +72,7 @@
       UPDATE [SYS_MODULE_ELEMENTS] SET
       [ModuleID] = #ModuleID#
       , [ElementName] = #ElementName#
+      , [ElementCode] = #ElementCode#
       , [Description] = #Description#
       , [Remark] = #Remark#
       , [CreateDate] = #CreateDate#

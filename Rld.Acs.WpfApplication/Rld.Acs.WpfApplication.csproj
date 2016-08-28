@@ -133,6 +133,7 @@
     <Compile Include="Repository\System\SysModuleRepository.cs" />
     <Compile Include="Repository\System\SysOperatorRepository.cs" />
     <Compile Include="Repository\System\SysRoleRepository.cs" />
+    <Compile Include="Service\Authorization\ACL.cs" />
     <Compile Include="Service\Authorization\AuthProvider.cs" />
     <Compile Include="Service\Authorization\DefaultAuthProvider.cs" />
     <Compile Include="Service\DeviceServiceProxy.cs" />

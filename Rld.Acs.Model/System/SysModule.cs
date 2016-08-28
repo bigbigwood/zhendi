@@ -8,6 +8,7 @@ namespace Rld.Acs.Model
     {
         public virtual Int32 ModuleID { get; set; }
         public virtual String ModuleName { get; set; }
+        public virtual String ModuleCode { get; set; }
         public virtual String Description { get; set; }
         public virtual SysModule Parent { get; set; }
         public virtual String LinkURL { get; set; }

@@ -19,6 +19,7 @@
     <resultMap id="SysModuleResult" class="Rld.Acs.Model.SysModule">
       <result property="ModuleID" column="ModuleID"/>
       <result property="ModuleName" column="ModuleName"/>
+      <result property="ModuleCode" column="ModuleCode"/>
       <result property="Description" column="Description"/>
       <result property="LinkURL" column="LinkURL"/>
       <result property="FullClassName" column="FullClassName"/>
@@ -44,6 +45,7 @@
     <insert id="SysModule.Insert" parameterClass="SysModule">
       INSERT INTO [SYS_MODULE] (
       [ModuleName]
+      , [ModuleCode]
       , [Description]
       , [ParentID]
       , [LinkURL]
@@ -57,6 +59,7 @@
       , [UpdateUserID]
       ) VALUES (
       #ModuleName#
+      , #ModuleCode#
       , #Description#
       , #Parent.ModuleID#
       , #LinkURL#
@@ -77,6 +80,7 @@
     <update id="SysModule.Update" parameterClass="SysModule">
       UPDATE [SYS_MODULE] SET
       [ModuleName] = #ModuleName#
+      , [ModuleCode] = #ModuleCode#
       , [Description] = #Description#
       , [ParentID] = #Parent.ModuleID#
       , [LinkURL] = #LinkURL#

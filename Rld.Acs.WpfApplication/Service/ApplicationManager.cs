@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Authorization;
 using Rld.Acs.WpfApplication.ViewModel;
 
 namespace Rld.Acs.WpfApplication
@@ -55,6 +57,8 @@ namespace Rld.Acs.WpfApplication
 
             CurrentOperatorInfo = initFakeOperator();
 
+            InitPermissions(CurrentOperatorInfo);
+
             ProvisioningModelMapper.BindModelMap();
         }
 
@@ -70,6 +74,7 @@ namespace Rld.Acs.WpfApplication
             sysOperator.UpdateDate = null;
             sysOperator.CreateUserID = 1;
             sysOperator.CreateDate = DateTime.Now.AddYears(-1);
+            sysOperator.SysOperatorRoles.Add(new SysOperatorRole(){OperatorID = 1, RoleID = 3});
 
             return sysOperator;
         }
@@ -85,6 +90,18 @@ namespace Rld.Acs.WpfApplication
             var topDepartment = new Department() { DepartmentID = -1, Name = "总经办" };
             AuthorizationDepartments.Insert(0, topDepartment);
             AuthorizationDepartments.FindAll(d => d.Parent == null && d.DepartmentID != -1).ForEach(d => d.Parent = topDepartment);
+        }
+
+        private void InitPermissions(SysOperator currentOperator)
+        {
+            var roles = new List<SysRole>();
+            currentOperator.SysOperatorRoles.ForEach(x => roles.Add(_sysRoleRepo.GetByKey(x.RoleID)));
+            AuthorizationPermissions = roles.SelectMany(x => x.SysRolePermissions).ToList();
+
+            var accessControlList = new List<string>();
+            accessControlList.AddRange(AuthorizationPermissions.FindAll(x => x.ModuleInfo != null).Select(x => x.ModuleInfo.ModuleCode));
+            accessControlList.AddRange(AuthorizationPermissions.FindAll(x => x.ElementInfo != null).Select(x => x.ElementInfo.ElementCode));
+            AuthProvider.Initialize<DefaultAuthProvider>(accessControlList.ToArray());
         }
 
         private void InitEnvironment()

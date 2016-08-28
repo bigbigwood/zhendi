@@ -8,6 +8,7 @@ namespace Rld.Acs.Model
     {
         public virtual Int32 ElementID { get; set; }
         public virtual String ElementName { get; set; }
+        public virtual String ElementCode { get; set; }
         public virtual Int32 ModuleID { get; set; }
         public virtual String Description { get; set; }
         public virtual String Remark { get; set; }

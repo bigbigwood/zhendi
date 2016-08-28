@@ -29,7 +29,7 @@
       FROM SYS_OPERATOR
       where OperatorID =  #value#
     </select>
-    
+
     <insert id="SysOperator.Insert" parameterClass="SysOperator">
       INSERT INTO [SYS_OPERATOR] (
       [UserID]

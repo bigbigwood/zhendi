@@ -528,6 +528,7 @@ go
 create table SYS_MODULE (
    ModuleID             int                  identity(1,1),
    ModuleName           nvarchar(100)        not null,
+   ModuleCode           nvarchar(100)        not null,
    Description          nvarchar(1024)       null,
    ParentID             int                  not null,
    LinkURL              nvarchar(1024)       null,
@@ -549,6 +550,7 @@ go
 create table SYS_MODULE_ELEMENTS (
    ElementID            int                  identity(1,1),
    ElementName          nvarchar(100)        not null,
+   ElementCode          nvarchar(100)        not null,
    ModuleID             int                  not null,
    Description          nvarchar(1024)       null,
    Remark               nvarchar(1024)       null,
