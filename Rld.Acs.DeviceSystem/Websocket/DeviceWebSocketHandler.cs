@@ -30,16 +30,17 @@ namespace Rld.Acs.DeviceSystem.Websocket
         {
             Log.InfoFormat("Web socket id: {0} receive message: {1}", Id, message);
 
-            var token = ParseToken(message);
-            if (string.IsNullOrWhiteSpace(token))
-            {
-                return;
-            }
 
             if (message.Contains("DeviceTrafficEvent"))
                 DeviceMessageProcessor.ProcessDeviceTrafficEvent(message);
             else if (message.Contains("Response"))
             {
+                var token = ParseToken(message);
+                if (string.IsNullOrWhiteSpace(token))
+                {
+                    return;
+                }
+
                 var op = OperationManager.GetInstance().GetOperationByToken(token);
                 if (op != null)
                 {

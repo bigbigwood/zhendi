@@ -60,10 +60,9 @@
                     </DataGrid.ContextMenu>
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
-                        <DataGridTextColumn Header="{DynamicResource SysRolePage_Label_Name}" Binding="{Binding RoleName}" Width="Auto" />
-                        <DataGridTextColumn Header="{DynamicResource SysRolePage_Label_AuthorizationModule}" Binding="{Binding AuthorizationModuleString}" Width="Auto"  />
-                        <DataGridTextColumn Header="{DynamicResource SysRolePage_Label_Description}" Binding="{Binding Description}" Width="Auto"  />
-                        <DataGridTextColumn Width="*"  />
+                        <DataGridTextColumn Header="{DynamicResource SysRolePage_Label_Name}" Binding="{Binding RoleName}" Width="200" />
+                        <DataGridTextColumn Header="{DynamicResource SysRolePage_Label_AuthorizationModule}" Binding="{Binding AuthorizationModuleString}" Width="*"  />
+                        <DataGridTextColumn Header="{DynamicResource SysRolePage_Label_Description}" Binding="{Binding Description}" Width="*"  />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
