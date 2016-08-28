@@ -74,7 +74,7 @@ namespace Rld.Acs.WpfApplication
             sysOperator.UpdateDate = null;
             sysOperator.CreateUserID = 1;
             sysOperator.CreateDate = DateTime.Now.AddYears(-1);
-            sysOperator.SysOperatorRoles.Add(new SysOperatorRole(){OperatorID = 1, RoleID = 3});
+            sysOperator.SysOperatorRoles.Add(new SysOperatorRole(){OperatorID = 1, RoleID = 1});
 
             return sysOperator;
         }
@@ -118,8 +118,6 @@ namespace Rld.Acs.WpfApplication
             {
                 Directory.CreateDirectory(LocalImageCachePath);
             }
-
-
         }
     }
 }

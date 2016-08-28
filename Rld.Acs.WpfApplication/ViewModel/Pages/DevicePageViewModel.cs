@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Threading;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using System;
@@ -34,9 +35,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         public DevicePageViewModel()
         {
-            AddCmd = new RelayCommand(AddDeviceController);
-            ModifyCmd = new RelayCommand(ModifyDeviceController);
-            DeleteCmd = new RelayCommand(DeleteDeviceController);
+            AddCmd = new AuthCommand(AddDeviceController);
+            ModifyCmd = new AuthCommand(ModifyDeviceController);
+            DeleteCmd = new AuthCommand(DeleteDeviceController);
 
             
             DeviceControllers = ApplicationManager.GetInstance().AuthorizationDevices;

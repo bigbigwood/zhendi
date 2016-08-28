@@ -22,10 +22,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         public SummaryPageViewModel()
         {
-            //GotoStuffCommand = new RelayCommand(GotoStuff);
-            //GotoDepartmentCommand = new RelayCommand(GotoDepartment);
-            //GotoDeviceCommand = new RelayCommand(GotoDevice);
-            //GotoDoorCommand = new RelayCommand(GotoDoor);
+            //GotoStuffCommand = new AuthCommand(GotoStuff);
+            //GotoDepartmentCommand = new AuthCommand(GotoDepartment);
+            //GotoDeviceCommand = new AuthCommand(GotoDevice);
+            //GotoDoorCommand = new AuthCommand(GotoDoor);
         }
     }
 }

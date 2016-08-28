@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using log4net;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.ViewModel.Views;
@@ -29,10 +30,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         public TimeZonePageViewModel()
         {
-            AddTimeZoneCmd = new RelayCommand(AddTimeZone);
-            ModifyTimeZoneCmd = new RelayCommand(ModifyTimeZone);
-            DeleteTimeZoneCmd = new RelayCommand(DeleteTimeZone);
-            TimeZoneDashboardCmd = new RelayCommand(OpenTimeZoneDetail);
+            AddTimeZoneCmd = new AuthCommand(AddTimeZone);
+            ModifyTimeZoneCmd = new AuthCommand(ModifyTimeZone);
+            DeleteTimeZoneCmd = new AuthCommand(DeleteTimeZone);
+            TimeZoneDashboardCmd = new AuthCommand(OpenTimeZoneDetail);
 
             TimeZoneViewModels = new ObservableCollection<TimeZoneViewModel>();
             var timezones = _timeZoneRepo.Query(new Hashtable()).ToList();

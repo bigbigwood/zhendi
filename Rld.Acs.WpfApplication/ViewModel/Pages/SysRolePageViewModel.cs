@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Messaging;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
@@ -27,9 +28,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         public SysRolePageViewModel()
         {
-            AddCmd = new RelayCommand(Add);
-            ModifyCmd = new RelayCommand(Modify);
-            DeleteCmd = new RelayCommand(ShowDeletionQuestion);
+            AddCmd = new AuthCommand(Add);
+            ModifyCmd = new AuthCommand(Modify);
+            DeleteCmd = new AuthCommand(ShowDeletionQuestion);
 
             var vms = SysPermissionProvider.GetInstance().AllSysRoles.Select(AutoMapper.Mapper.Map<SysRoleViewModel>);
             SysRoleViewModels = new ObservableCollection<SysRoleViewModel>(vms);

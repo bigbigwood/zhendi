@@ -13,8 +13,10 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models;
+using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Authorization;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -39,11 +41,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         public UserPageViewModel()
         {
-            AddUserCmd = new RelayCommand(AddUser);
-            ModifyUserCmd = new RelayCommand(ModifyUser);
-            DeleteUserCmd = new RelayCommand(DeleteUser);
-            MoveUserCmd = new RelayCommand(MoveUser);
-            SyncUserCmd = new RelayCommand(SyncUser);
+            AddUserCmd = new AuthCommand(AddUser);
+            ModifyUserCmd = new AuthCommand(ModifyUser);
+            DeleteUserCmd = new AuthCommand(DeleteUser);
+            MoveUserCmd = new AuthCommand(MoveUser);
+            SyncUserCmd = new AuthCommand(SyncUser);
             SelectedTreeNodeChangedCmd = new RelayCommand<TreeViewNode>(ShowUserBySelectedDepartmentNode);
 
             UserViewModels = new ObservableCollection<UserViewModel>();

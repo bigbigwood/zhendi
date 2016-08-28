@@ -9,6 +9,7 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:customControls="clr-namespace:Rld.Acs.WpfApplication.View.CustomControls"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
       DataContext="{Binding SysDictionaryPage, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="1000" Unloaded="Page_Unloaded">
@@ -50,7 +51,7 @@
                 <TextBox  Width="120" Text="{Binding Keyword}" />
 
                 <Button  Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
-                         Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" />
+                         Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_QuerySysDict}"/>
 
             </StackPanel>
             <Grid Grid.Row="1" Margin="0,0,0,0" >
@@ -58,9 +59,9 @@
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
                     <DataGrid.ContextMenu>
                         <ContextMenu >
-                            <MenuItem Header="{DynamicResource Add}" Command="{Binding AddCmd}"/>
-                            <MenuItem Header="{DynamicResource Modify}" Command="{Binding ModifyCmd}"  />
-                            <MenuItem Header="{DynamicResource Delete}" Command="{Binding DeleteCmd}"  />
+                            <MenuItem Header="{DynamicResource Add}" Command="{Binding AddCmd}" CommandParameter="{x:Static a:ACL.E_AddSysDict}"/>
+                            <MenuItem Header="{DynamicResource Modify}" Command="{Binding ModifyCmd}" CommandParameter="{x:Static a:ACL.E_MdfSysDict}" />
+                            <MenuItem Header="{DynamicResource Delete}" Command="{Binding DeleteCmd}" CommandParameter="{x:Static a:ACL.E_DelSysDict}" />
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                     <DataGrid.Columns>

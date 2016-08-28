@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Threading;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using System;
@@ -34,9 +35,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         public TimeGroupPageViewModel()
         {
-            AddTimeGroupCmd = new RelayCommand(AddTimeGroup);
-            ModifyTimeGroupCmd = new RelayCommand(ModifyTimeGroup);
-            DeleteTimeGroupCmd = new RelayCommand(DeleteTimeGroup);
+            AddTimeGroupCmd = new AuthCommand(AddTimeGroup);
+            ModifyTimeGroupCmd = new AuthCommand(ModifyTimeGroup);
+            DeleteTimeGroupCmd = new AuthCommand(DeleteTimeGroup);
 
             TimeGroupViewModels = new ObservableCollection<TimeGroupViewModel>();
             var timegroups = _timeGroupRepo.Query(new Hashtable()).ToList();

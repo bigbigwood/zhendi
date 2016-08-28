@@ -9,6 +9,7 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:customControls="clr-namespace:Rld.Acs.WpfApplication.View.CustomControls"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
       DataContext="{Binding DeviceTrafficLogPage, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="1000" Unloaded="Page_Unloaded">
@@ -55,9 +56,9 @@
                 <TextBlock Text="至" Margin="5,0" />
                 <DatePicker SelectedDate ="{Binding EndDate}" Width="120"/>
                 <Button  Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
-                         Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" />
+                         Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_QueryDeviceTrafficLog}"/>
                 <Button  Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
-                         Content="{DynamicResource Export}"  Command="{Binding QueryCommand}" />
+                         Content="{DynamicResource Export}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_ExportDeviceTrafficLog}"/>
             </StackPanel>
             <Grid Grid.Row="1" Margin="0,0,0,0" >
                 <DataGrid ItemsSource="{Binding DeviceTrafficLogViewModels}" SelectedItem="{Binding Path=SelectedTrafficLogViewModel}" 

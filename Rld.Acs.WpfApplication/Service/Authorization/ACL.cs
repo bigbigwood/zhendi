@@ -64,5 +64,14 @@ namespace Rld.Acs.WpfApplication.Service.Authorization
         public const string E_QuerySysOperationLog = "E_QuerySysOperationLog";
         public const string E_ExportsysOperationLog = "E_ExportsysOperationLog";
         public const string E_QuerySysDict = "E_QuerySysDict";
+        public const string E_AddSysDict = "E_AddSysDict";
+        public const string E_MdfSysDict = "E_MdfSysDict";
+        public const string E_DelSysDict = "E_DelSysDict";
+        public const string E_AddSysOperator = "E_AddSysOperator";
+        public const string E_MdfSysOperator = "E_MdfSysOperator";
+        public const string E_DelSysOperator = "E_DelSysOperator";
+        public const string E_AddSysRole = "E_AddSysRole";
+        public const string E_MdfSysRole = "E_MdfSysRole";
+        public const string E_DelSysRole = "E_DelSysRole";
     }
 }

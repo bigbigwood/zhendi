@@ -9,6 +9,7 @@
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:command="http://www.galasoft.ch/mvvmlight"
       xmlns:pages="clr-namespace:Rld.Acs.WpfApplication.View.Pages"
+      xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
       DataContext="{Binding DepartmentPage, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="600" Unloaded="Page_Unloaded">
@@ -26,28 +27,28 @@
             <StackPanel Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" >
                 <ToolBarTray>
                     <ToolBar>
-                        <Button Name="AddBtn" Command="{Binding AddDepartmentCmd}">
+                    <Button Name="AddBtn" Command="{Binding AddDepartmentCmd}" CommandParameter="{x:Static a:ACL.E_AddDept}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_AddBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="ModifyBtn" Command="{Binding ModifyDepartmentCmd}">
+                    <Button Name="ModifyBtn" Command="{Binding ModifyDepartmentCmd}" CommandParameter="{x:Static a:ACL.E_MdfDept}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_ModifyBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="DeleteBtn"  Command="{Binding DeleteDepartmentCmd}">
+                    <Button Name="DeleteBtn"  Command="{Binding DeleteDepartmentCmd}" CommandParameter="{x:Static a:ACL.E_DelDept}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_DeleteBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                    <Button Command="{Binding SyncDataCmd}">
+                    <Button Command="{Binding SyncDataCmd}" CommandParameter="{x:Static a:ACL.E_SyncDept}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_SyncDataBtn_img}" />
                                 <TextBlock Text="{StaticResource DepartmentPage_Toolbar_SyncDataBtn}" />

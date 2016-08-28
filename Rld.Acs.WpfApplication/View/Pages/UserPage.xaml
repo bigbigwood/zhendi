@@ -9,6 +9,7 @@
       xmlns:models="clr-namespace:Rld.Acs.WpfApplication.Models"
       xmlns:converter1="clr-namespace:Rld.Acs.WpfApplication.View.Converter"
       xmlns:pages="clr-namespace:Rld.Acs.WpfApplication.View.Pages"
+      xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
       mc:Ignorable="d"  d:DesignHeight="400" d:DesignWidth="800"
       DataContext="{Binding UserPage, Source={StaticResource Locator}}" Unloaded="Page_Unloaded" >
     <Border Style="{StaticResource ContainerBorderStyle}">
@@ -25,35 +26,35 @@
             <DockPanel Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" >
                 <ToolBarTray HorizontalAlignment="Stretch" IsLocked="True" >
                     <ToolBar>
-                        <Button Name="AddBtn" Command="{Binding AddUserCmd}" >
+                        <Button Name="AddBtn" Command="{Binding AddUserCmd}" CommandParameter="{x:Static a:ACL.E_AddStuff}" >
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
                                 <TextBlock Text="{DynamicResource UserPage_AddBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="ModifyBtn" Command="{Binding ModifyUserCmd}">
+                        <Button Name="ModifyBtn" Command="{Binding ModifyUserCmd}" CommandParameter="{x:Static a:ACL.E_MdfStuff}" >
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
                                 <TextBlock Text="{DynamicResource UserPage_ModifyBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="DeleteBtn"  Command="{Binding DeleteUserCmd}" >
+                        <Button Name="DeleteBtn"  Command="{Binding DeleteUserCmd}" CommandParameter="{x:Static a:ACL.E_DelStuff}" >
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
                                 <TextBlock Text="{DynamicResource UserPage_DeleteBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="MoveBtn"  Command="{Binding MoveUserCmd}" >
+                        <Button Name="MoveBtn"  Command="{Binding MoveUserCmd}" CommandParameter="{x:Static a:ACL.E_MoveStuff}" >
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
                                 <TextBlock Text="{DynamicResource UserPage_MoveUserBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="SyncUserBtn"  Command="{Binding SyncUserCmd}" >
+                        <Button Name="SyncUserBtn"  Command="{Binding SyncUserCmd}" CommandParameter="{x:Static a:ACL.E_SyncStuff}" >
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
                                 <TextBlock Text="{DynamicResource UserPage_SyncDataBtn}" />

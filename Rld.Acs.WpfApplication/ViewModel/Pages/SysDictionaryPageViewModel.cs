@@ -12,6 +12,7 @@ using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
+using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 using Rld.Acs.WpfApplication.Models.Messages;
@@ -165,11 +166,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         public SysDictionaryPageViewModel()
         {
-            QueryCommand = new RelayCommand(QueryCommandFunc);
-            NextPageSearchCommand = new RelayCommand(NextPageSearchCommandFunc);
-            AddCmd = new RelayCommand(AddItem);
-            ModifyCmd = new RelayCommand(ModifyItem);
-            DeleteCmd = new RelayCommand(DeleteItem);
+            QueryCommand = new AuthCommand(QueryCommandFunc);
+            NextPageSearchCommand = new AuthCommand(NextPageSearchCommandFunc);
+            AddCmd = new AuthCommand(AddItem);
+            ModifyCmd = new AuthCommand(ModifyItem);
+            DeleteCmd = new AuthCommand(DeleteItem);
 
             SysDictionaryViewModels = new ObservableCollection<SysDictionaryViewModel>();
             TypeHeadersDict = new List<SysDictionary>() {new SysDictionary() {ItemID = -1, ItemValue = ""}};

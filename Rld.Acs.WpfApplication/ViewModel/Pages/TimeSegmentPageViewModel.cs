@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Threading;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using System;
@@ -32,9 +33,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         public TimeSegmentPageViewModel()
         {
-            AddTimeSegmentCmd = new RelayCommand(AddTimeSegment);
-            ModifyTimeSegmentCmd = new RelayCommand(ModifyTimeSegment);
-            DeleteTimeSegmentCmd = new RelayCommand(DeleteTimeSegment);
+            AddTimeSegmentCmd = new AuthCommand(AddTimeSegment);
+            ModifyTimeSegmentCmd = new AuthCommand(ModifyTimeSegment);
+            DeleteTimeSegmentCmd = new AuthCommand(DeleteTimeSegment);
 
             TimeSegmentViewModels = new ObservableCollection<TimeSegmentViewModel>();
             TimeSegments = _timeSegmentRepository.Query(new Hashtable()).ToList();

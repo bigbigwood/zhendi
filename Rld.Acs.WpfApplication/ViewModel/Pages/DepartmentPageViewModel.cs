@@ -13,6 +13,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models;
+using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.ViewModel.Views;
@@ -51,10 +52,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public DepartmentPageViewModel()
         {
             SelectedTreeNodeChangedCmd = new RelayCommand<TreeViewNode>(UpdateDepartmentDetailViewModel);
-            AddDepartmentCmd = new RelayCommand(AddDepartment);
-            ModifyDepartmentCmd = new RelayCommand(ModifyDepartment);
-            DeleteDepartmentCmd = new RelayCommand(ProcessDeleteDepartmentCmd);
-            SyncDataCmd = new RelayCommand(SyncDepartment);
+            AddDepartmentCmd = new AuthCommand(AddDepartment);
+            ModifyDepartmentCmd = new AuthCommand(ModifyDepartment);
+            DeleteDepartmentCmd = new AuthCommand(ProcessDeleteDepartmentCmd);
+            SyncDataCmd = new AuthCommand(SyncDepartment);
 
             AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
             AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
