@@ -24,11 +24,13 @@ namespace Rld.Acs.WpfApplication
         private IDepartmentRepository _departmentRepository = NinjectBinder.GetRepository<IDepartmentRepository>();
         private IDeviceRoleRepository _deviceRoleRepository = NinjectBinder.GetRepository<IDeviceRoleRepository>();
         private IDeviceControllerRepository _deviceControllerRepository = NinjectBinder.GetRepository<IDeviceControllerRepository>();
+        private IDeviceDoorRepository _deviceDoorRepository = NinjectBinder.GetRepository<IDeviceDoorRepository>();
         private ITimeZoneRepository _timeZoneRepository = NinjectBinder.GetRepository<ITimeZoneRepository>();
         private ISysRoleRepository _sysRoleRepo = NinjectBinder.GetRepository<ISysRoleRepository>();
 
         public List<Department> AuthorizationDepartments { get; set; }
         public List<DeviceController> AuthorizationDevices { get; set; }
+        public List<DeviceDoor> AuthorizationDoors { get; set; }
         public List<DeviceRole> AuthorizationDeviceRoles { get; set; }
         public List<Model.TimeZone> AuthorizationTimezones { get; set; }
         public SysOperator CurrentOperatorInfo { get; set; }
@@ -85,7 +87,7 @@ namespace Rld.Acs.WpfApplication
             sysOperator.CreateUserID = 1;
             sysOperator.CreateDate = DateTime.Now.AddYears(-1);
             sysOperator.SysOperatorRoles.Add(new SysOperatorRole(){OperatorID = 1, RoleID = 1});
-            //UpdateCurrentOperatorAndPermission(sysOperator);
+            UpdateCurrentOperatorAndPermission(sysOperator);
 
             return sysOperator;
         }
@@ -94,6 +96,7 @@ namespace Rld.Acs.WpfApplication
         {
             AuthorizationDepartments = _departmentRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
             AuthorizationDevices = _deviceControllerRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
+            AuthorizationDoors = _deviceDoorRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
             AuthorizationDeviceRoles = _deviceRoleRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
             AuthorizationTimezones = _timeZoneRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
 

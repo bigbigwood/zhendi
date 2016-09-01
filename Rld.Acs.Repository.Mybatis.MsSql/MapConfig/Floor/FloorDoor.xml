@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="FloorDoor" type="Rld.Acs.Model.FloorDoor" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="FloorDoorResult" class="Rld.Acs.Model.FloorDoor">
+      <result property="FloorDoorID" column="FloorDoorID"/>
+      <result property="FloorID" column="FloorID"/>
+      <result property="DoorID" column="DoorID"/>
+      <result property="DoorType" column="DoorType"/>
+      <result property="LocationX" column="LocationX"/>
+      <result property="LocationY" column="LocationY"/>
+      <result property="Rotation" column="Rotation"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="FloorDoor.GetByKey" parameterClass="int" resultMap="FloorDoorResult">
+      SELECT *
+      FROM [FLOOR_DOOR]
+      WHERE
+      [FloorDoorID] = #value#
+    </select>
+
+    <select id="FloorDoor.GetByFloorID" parameterClass="int" resultMap="FloorDoorResult">
+      SELECT *
+      FROM [FLOOR_DOOR]
+      WHERE
+      [FloorID] = #value#
+    </select>
+
+    <insert id="FloorDoor.Insert" parameterClass="FloorDoor">
+      INSERT INTO [FLOOR_DOOR] (
+      [FloorID]
+      , [DoorID]
+      , [DoorType]
+      , [LocationX]
+      , [LocationY]
+      , [Rotation]
+      VALUES (
+      #FloorID#
+      , #DoorID#
+      , #DoorType#
+      , #LocationX#
+      , #LocationY#
+      , #Rotation#
+      )
+      <selectKey resultClass="int" type="post" property="FloorDoorID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="FloorDoor.Update" parameterClass="FloorDoor">
+      UPDATE [FLOOR_DOOR] SET
+      [FloorID] = #FloorID#
+      , [DoorID] = #DoorID#
+      , [DoorType] = #DoorType#
+      , [LocationX] = #LocationX#
+      , [LocationY] = #LocationY#
+      , [Rotation] = #Rotation#
+      WHERE
+      [FloorDoorID] = #FloorDoorID#
+    </update>
+
+    <delete id="FloorDoor.Delete"  parameterClass="int">
+      DELETE FROM [FLOOR_DOOR]
+      WHERE
+      [FloorDoorID] = #FloorDoorID#
+    </delete>
+
+    <select id="FloorDoor.Query" parameterClass="Hashtable" resultMap="FloorDoorResult">
+      SELECT *
+      FROM [FLOOR_DOOR]
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="FloorID">
+          FloorID = #FloorID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DoorID">
+          DoorID = #DoorID#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

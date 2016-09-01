@@ -30,8 +30,12 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<IUserRepository>().To<UserRepository>();
             InjectionKernel.Bind<IDepartmentRepository>().To<DepartmentRepository>();
             InjectionKernel.Bind<IDepartmentDeviceRepository>().To<DepartmentDeviceRepository>();
+
             InjectionKernel.Bind<IDeviceRoleRepository>().To<DeviceRoleRepository>();
             InjectionKernel.Bind<IDeviceControllerRepository>().To<DeviceControllerRepository>();
+            InjectionKernel.Bind<IDeviceDoorRepository>().To<DeviceDoorRepository>();
+            InjectionKernel.Bind<IDeviceTrafficLogRepository>().To<DeviceTrafficLogRepository>();
+            InjectionKernel.Bind<IDeviceOperationLogRepository>().To<DeviceOperationLogRepository>();
 
             InjectionKernel.Bind<ITimeSegmentRepository>().To<TimeSegmentRepository>();
             InjectionKernel.Bind<ITimeGroupRepository>().To<TimeGroupRepository>();
@@ -43,8 +47,7 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<ISysModuleElementRepository>().To<SysModuleElementRepository>();
             InjectionKernel.Bind<ISysOperatorRepository>().To<SysOperatorRepository>();
 
-            InjectionKernel.Bind<IDeviceTrafficLogRepository>().To<DeviceTrafficLogRepository>();
-            InjectionKernel.Bind<IDeviceOperationLogRepository>().To<DeviceOperationLogRepository>();
+            InjectionKernel.Bind<IFloorRepository>().To<FloorRepository>();
         }
 
         private static void BindValidator()

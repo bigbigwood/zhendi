@@ -126,5 +126,11 @@
 	<sys:String x:Key="SysOperatorView_Label_CurrentPassword">当前密码</sys:String>
 	<sys:String x:Key="SysOperatorView_Label_NewPassword">新密码</sys:String>
 	<sys:String x:Key="SysOperatorView_Label_2ndNewPassword">确认密码</sys:String>
+	
+	<sys:String x:Key="FloorPage_AddBtn">增加楼层</sys:String>
+    <sys:String x:Key="FloorPage_ModifyBtn">修改楼层</sys:String>
+    <sys:String x:Key="FloorPage_DeleteBtn">删除楼层</sys:String>
+    <sys:String x:Key="FloorPage_Label_Name">楼层名称</sys:String>
+	<sys:String x:Key="FloorPage_Label_Description">关联的门</sys:String>
 
 </ResourceDictionary>

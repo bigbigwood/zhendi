@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="Floor" type="Rld.Acs.Model.Floor" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="FloorResult" class="Rld.Acs.Model.Floor">
+      <result property="FloorID" column="FloorID"/>
+      <result property="Name" column="Name"/>
+      <result property="Photo" column="Photo"/>
+      <result property="Status" column="Status"/>
+      <result property="Doors" column="FloorID" select="FloorDoor.GetByFloorID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="Floor.GetByKey" parameterClass="int" resultMap="FloorResult">
+      SELECT *
+      FROM [FLOOR]
+      WHERE
+      [FloorID] = #FloorID#
+    </select>
+
+    <insert id="Floor.Insert" parameterClass="Floor">
+      INSERT INTO [FLOOR] (
+      [Name]
+      , [Photo]
+      , [Status]
+      ) VALUES (
+      #Name#
+      , #Photo#
+      , #Status#
+      )
+      <selectKey resultClass="int" type="post" property="FloorID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="Floor.Update" parameterClass="Floor">
+      UPDATE [FLOOR] SET
+      [Name] = #Name#
+      , [Photo] = #Photo#
+      , [Status] = #Status#
+      WHERE
+      [FloorID] = #FloorID#
+    </update>
+
+    <delete id="Floor.Delete"  parameterClass="int">
+      DELETE FROM [FLOOR]
+      WHERE
+      [FloorID] = #FloorID#
+    </delete>
+
+    <select id="Floor.Query" parameterClass="Hashtable" resultMap="FloorResult">
+      SELECT *
+      FROM [FLOOR]
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="Status">
+          Status = #Status#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Name">
+          Name = #Name#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

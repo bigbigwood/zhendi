@@ -17,5 +17,16 @@
 	<ImageSource x:Key="icon_right">/Images/Right.png</ImageSource>
 	<ImageSource x:Key="icon_allLeft">/Images/AllLeft.png</ImageSource>
 	<ImageSource x:Key="icon_allRight">/Images/AllRight.png</ImageSource>
-    
+
+    <ImageSource x:Key="icon_door">/Images/device/door.png</ImageSource>
+    <ImageSource x:Key="icon_Monitor">/Images/device/Monitor.png</ImageSource>
+
+    <ImageSource x:Key="DoubleDoorClosed_128">/Images/Door/DoubleDoorClosed_128.png</ImageSource>
+    <ImageSource x:Key="DoubleDoorOpen_128">/Images/Door/DoubleDoorOpen_128.png</ImageSource>
+    <ImageSource x:Key="DoubleDoorOpen_64">/Images/Door/DoubleDoorOpen_64.png</ImageSource>
+    <ImageSource x:Key="DoubleDoorbClosed_64">/Images/Door/DoubleDoorbClosed_64.png</ImageSource>
+    <ImageSource x:Key="SingleDoorClosed_128">/Images/Door/SingleDoorClosed_128.png</ImageSource>
+    <ImageSource x:Key="SingleDoorClosed_64">/Images/Door/SingleDoorClosed_64.png</ImageSource>
+    <ImageSource x:Key="SingleDoorOpen64">/Images/Door/SingleDoorOpen64.png</ImageSource>
+    <ImageSource x:Key="SingleDoorOpen_128">/Images/Door/SingleDoorOpen_128.png</ImageSource>
 </ResourceDictionary>

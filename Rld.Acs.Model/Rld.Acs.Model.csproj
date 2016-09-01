@@ -53,6 +53,8 @@
     <Compile Include="Device\DeviceRolePermission.cs" />
     <Compile Include="Device\DeviceStateHistory.cs" />
     <Compile Include="Device\DeviceTrafficLog.cs" />
+    <Compile Include="Floor\FloorDoor.cs" />
+    <Compile Include="Floor\Floor.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\SysDictionary.cs" />

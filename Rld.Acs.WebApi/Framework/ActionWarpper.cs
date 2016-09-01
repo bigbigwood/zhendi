@@ -51,5 +51,15 @@ namespace Rld.Acs.WebApi.Framework
             Log.InfoFormat("Finish processing request, cost {0} milliseconds.", sw.ElapsedMilliseconds);
             return result;
         }
+
+        internal static HttpResponseMessage Process(Model.DeviceController deviceInfo, Func<HttpResponseMessage> func, Controllers.FloorsController floorsController)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static HttpResponseMessage Process(Model.Floor floorInfo, Func<HttpResponseMessage> func, Controllers.FloorsController floorsController)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

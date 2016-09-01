@@ -253,6 +253,7 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                             <MenuItem x:Name="dev2_doorstate" FontSize="12" Width="180"  Header="楼层管理" IsCheckable="False"
+                                       Command="{Binding NatigatePageCmd}" CommandParameter="FloorPage"
                                        IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_Floor}}">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/门状态管理.png"/>

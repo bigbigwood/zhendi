@@ -82,5 +82,11 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string SysOperatorView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string SysOperatorPage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string SysOperatorPage_ShowQuestion = Guid.NewGuid().ToString();
+
+        public static readonly string FloorView_Open = Guid.NewGuid().ToString();
+        public static readonly string FloorView_Close = Guid.NewGuid().ToString();
+        public static readonly string FloorView_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string FloorPage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string FloorPage_ShowQuestion = Guid.NewGuid().ToString();
     }
 }

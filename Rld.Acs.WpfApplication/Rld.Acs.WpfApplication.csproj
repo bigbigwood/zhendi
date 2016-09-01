@@ -128,6 +128,8 @@
     <Compile Include="Models\Command\AuthCommand.cs" />
     <Compile Include="Models\PasswordBoxHelper.cs" />
     <Compile Include="Models\TriStateTreeViewNode.cs" />
+    <Compile Include="Repository\DeviceDoorRepository.cs" />
+    <Compile Include="Repository\FloorRepository.cs" />
     <Compile Include="Repository\DeviceOperationLogRepository.cs" />
     <Compile Include="Repository\DeviceTrafficLogRepository.cs" />
     <Compile Include="Repository\System\SysModuleElementRepository.cs" />
@@ -137,10 +139,9 @@
     <Compile Include="Service\Authorization\ACL.cs" />
     <Compile Include="Service\Authorization\AuthProvider.cs" />
     <Compile Include="Service\Authorization\DefaultAuthProvider.cs" />
-    <Compile Include="Service\DeviceServiceProxy.cs" />
+    <Compile Include="Service\Proxy\DeviceServiceProxy.cs" />
     <Compile Include="Service\SysPermissionProvider.cs" />
-    <Compile Include="Service\ResourceManager.cs" />
-    <Compile Include="Service\SecurityServiceProxy.cs" />
+    <Compile Include="Service\Proxy\SecurityServiceProxy.cs" />
     <Compile Include="Service\Validator\DeviceParameterValidator.cs" />
     <Compile Include="Service\Validator\DeviceRoleValidator.cs" />
     <Compile Include="Service\Validator\SysDictionaryValidator.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Service\Validator\DeviceValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
+    <Compile Include="ViewModel\Pages\FloorPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SysOperatorPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SysRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SysDictionaryPageViewModel.cs" />
@@ -160,6 +162,8 @@
     <Compile Include="ViewModel\Pages\DeviceTrafficLogPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
+    <Compile Include="ViewModel\Views\FloorDoorViewModel.cs" />
+    <Compile Include="ViewModel\Views\FloorViewModel.cs" />
     <Compile Include="ViewModel\Views\SysRolePermissionViewModel.cs" />
     <Compile Include="ViewModel\Views\SysOperatorViewModel.cs" />
     <Compile Include="ViewModel\Views\SysRoleViewModel.cs" />
@@ -201,6 +205,9 @@
     <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Service\Navigation\FrameNavigationService.cs" />
     <Compile Include="Service\Navigation\IFrameNavigationService.cs" />
+    <Compile Include="View\Pages\FloorPage.xaml.cs">
+      <DependentUpon>FloorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\SysOperatorPage.xaml.cs">
       <DependentUpon>SysOperatorPage.xaml</DependentUpon>
     </Compile>
@@ -253,6 +260,9 @@
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="Service\UserAvatorService.cs" />
+    <Compile Include="View\Windows\FloorView.xaml.cs">
+      <DependentUpon>FloorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\SysOperatorView.xaml.cs">
       <DependentUpon>SysOperatorView.xaml</DependentUpon>
     </Compile>
@@ -338,6 +348,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Pages\FloorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Pages\SysOperatorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -363,6 +377,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\DeviceRolePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\FloorView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -633,6 +651,16 @@
     <Resource Include="Images\Logo.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\device\door.png" />
+    <Resource Include="Images\device\Monitor.png" />
+    <Resource Include="Images\Door\DoubleDoorClosed_128.png" />
+    <Resource Include="Images\Door\DoubleDoorOpen_128.png" />
+    <Resource Include="Images\Door\SingleDoorClosed_128.png" />
+    <Resource Include="Images\Door\SingleDoorOpen_128.png" />
+    <Resource Include="Images\Door\DoubleDoorbClosed_64.png" />
+    <Resource Include="Images\Door\DoubleDoorOpen_64.png" />
+    <Resource Include="Images\Door\SingleDoorClosed_64.png" />
+    <Resource Include="Images\Door\SingleDoorOpen64.png" />
     <Resource Include="Images\door.png" />
     <Resource Include="Images\Monitor.png" />
     <Resource Include="Images\AllRight.png" />

@@ -120,6 +120,23 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.SysOperatorRoleItems, op => op.Ignore())
                 .AfterMap((src, dest) => dest.BindUI(src));
 
+            CreateProvMap<FloorDoorViewModel, FloorDoor>();
+            CreateProvMap<FloorDoor, FloorDoorViewModel>()
+                .ForMember(dest => dest.SaveCmd, op => op.Ignore())
+                .ForMember(dest => dest.CancelCmd, op => op.Ignore())
+                .ForMember(dest => dest.DoorName, op => op.Ignore())
+                .ForMember(dest => dest.Enabled, op => op.Ignore())
+                ;
+
+            CreateProvMap<FloorViewModel, Floor>()
+                 .ForMember(dest => dest.Doors, op => op.MapFrom(src => src.GetUIDoors()))
+                 ;
+            CreateProvMap<Floor, FloorViewModel>()
+                .ForMember(dest => dest.SaveCmd, op => op.Ignore())
+                .ForMember(dest => dest.CancelCmd, op => op.Ignore())
+                .ForMember(dest => dest.Doors, op => op.Ignore())
+                .AfterMap((src, dest) => dest.BindDoors(src.Doors))
+                ;
 
             Log.Info("Verify mapper configuration..");
             Mapper.AssertConfigurationIsValid();

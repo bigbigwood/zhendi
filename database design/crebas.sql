@@ -91,6 +91,19 @@ alter table SYS_OPERATOR_ROLE
 go
 
 
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('FLOOR') and o.name = 'PK_FLOOR')
+alter table FLOOR
+   drop constraint PK_FLOOR
+go
+
+if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('FLOOR_DOOR') and o.name = 'PK_FLOOR_DOOR')
+alter table FLOOR_DOOR
+   drop constraint PK_FLOOR_DOOR
+go
 
 if exists (select 1
             from  sysobjects
@@ -289,6 +302,20 @@ if exists (select 1
    drop table TIME_ZONE_GROUP
 go
 
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('FLOOR')
+            and   type = 'U')
+   drop table FLOOR
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('FLOOR_DOOR')
+            and   type = 'U')
+   drop table FLOOR_DOOR
+go
+
 /*==============================================================*/
 /* Table: DEVICE_CONTROLLERS                                    */
 /*==============================================================*/
@@ -464,6 +491,33 @@ create table DEVICE_TRAFFIC_LOG (
    AuthenticationType   int                  null,
    Remark               nvarchar(1024)       null,
    constraint PK_DEVICE_TRAFFIC_LOG primary key nonclustered (TRAFFICID)
+)
+go
+
+/*==============================================================*/
+/* Table: FLOOR                                            */
+/*==============================================================*/
+create table FLOOR (
+   FloorID              int                  identity(1,1),
+   Name                 nvarchar(100)                not null,
+   Photo           	    nvarchar(1024)       not null,
+   Status               int                  not null,
+   constraint PK_FLOOR primary key nonclustered (FloorID)
+)
+go
+
+/*==============================================================*/
+/* Table: FLOOR_DOOR                                             */
+/*==============================================================*/
+create table FLOOR_DOOR (
+   FloorDoorID          int                  identity(1,1),
+   FloorID              int                  not null,
+   DoorID           	int                  not null,
+   DoorType             int                  not null,
+   LocationX            int                  not null,
+   LocationY            int                  not null,
+   Rotation             int                  not null,
+   constraint PK_FLOOR_DOOR primary key nonclustered (FloorDoorID)
 )
 go
 
