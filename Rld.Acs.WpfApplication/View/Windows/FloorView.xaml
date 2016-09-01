@@ -72,7 +72,7 @@
 
                 <Border Height="450">
                     <GroupBox Style="{StaticResource DefaultGroupBoxStyle}" Header="门列表" Margin="0,5,0,0">
-                        <ListBox ItemsSource="{Binding Doors}" >
+                        <ListBox ItemsSource="{Binding Doors}" AllowDrop="True" PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="3">
@@ -85,15 +85,17 @@
                     </GroupBox>
                 </Border>
             </StackPanel>
-            <Border Grid.Row="0" Grid.Column="1" Margin="5" BorderBrush="LightGray" BorderThickness="1"  >
-                <Viewbox>
-      
-                  
-                    
-                        <Image Name="FloorPhoto" />
-                    
- 
-                </Viewbox>
+            <Border Grid.Row="0" Grid.Column="1" Margin="5" BorderBrush="LightGray" BorderThickness="1" >
+                <Canvas Name="MyCanvas" AllowDrop="True" Drop="UIElement_OnDrop">
+
+                </Canvas>
+                
+                
+                <!--<Grid>
+                    <Grid.Background>
+                        <ImageBrush Name="FloorPhoto" />
+                    </Grid.Background>
+                </Grid>-->
             </Border>
 
             <TextBox Name="FloorPhotoPath" Visibility="Hidden" Text="{Binding Photo}" />
