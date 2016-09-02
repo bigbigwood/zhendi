@@ -11,7 +11,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:FloorViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="600" Width="800" Unloaded="MetroWindow_Unloaded">
+             Height="600" Width="800" Unloaded="MetroWindow_Unloaded" Loaded="FloorView_OnLoaded">
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
             <Setter Property="FontSize" Value="12"/>
@@ -72,7 +72,8 @@
 
                 <Border Height="450">
                     <GroupBox Style="{StaticResource DefaultGroupBoxStyle}" Header="门列表" Margin="0,5,0,0">
-                        <ListBox ItemsSource="{Binding Doors}" AllowDrop="True" PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown">
+                        <ListBox ItemsSource="{Binding Doors}" PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown"
+                                 Drop="ListBox_OnDrop" AllowDrop="True" >
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="3">
@@ -86,7 +87,7 @@
                 </Border>
             </StackPanel>
             <Border Grid.Row="0" Grid.Column="1" Margin="5" BorderBrush="LightGray" BorderThickness="1" >
-                <Canvas Name="MyCanvas" AllowDrop="True" Drop="UIElement_OnDrop">
+                <Canvas Name="MyCanvas" AllowDrop="True" Drop="myCanvas_OnDrop" SizeChanged="MyCanvas_OnSizeChanged">
 
                 </Canvas>
                 
@@ -100,8 +101,8 @@
 
             <TextBox Name="FloorPhotoPath" Visibility="Hidden" Text="{Binding Photo}" />
             <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0"/>
-                <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
+                <Button Content="{DynamicResource Ok}" Click="OkBtn_Click" Margin="3,0"/>
+                <Button Content="{DynamicResource Cancel}" Click="CancelBtn_Click" Margin="3,0"/>
             </StackPanel>
         </Grid>
     </Grid>

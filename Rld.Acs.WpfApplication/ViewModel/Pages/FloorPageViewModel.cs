@@ -76,6 +76,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                 }, Tokens.FloorView_Open);
 
+                RaisePropertyChanged(null);
             }
             catch (Exception ex)
             {

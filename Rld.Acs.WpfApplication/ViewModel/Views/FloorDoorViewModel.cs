@@ -29,8 +29,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public Int32 FloorID { get; set; }
         public Int32 DoorID { get; set; }
         public Int32 DoorType { get; set; }
-        public Int32 LocationX { get; set; }
-        public Int32 LocationY { get; set; }
+        public Double LocationX { get; set; }
+        public Double LocationY { get; set; }
         public Int32 Rotation { get; set; }
 
         public String DoorName { get; set; }
@@ -79,6 +79,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         private void SendMessage(string message)
         {
             Messenger.Default.Send(new NotificationMessage(message), Tokens.DeviceRoleView_ShowNotification);
+        }
+
+        public static Boolean Compare(FloorDoorViewModel current, FloorDoorViewModel other)
+        {
+            if (current == null && other == null)
+                return true;
+            else if (current == null || other == null)
+                return false;
+
+            return (current.FloorID == other.FloorID) && (current.DoorID == other.DoorID);
         }
     }
 }

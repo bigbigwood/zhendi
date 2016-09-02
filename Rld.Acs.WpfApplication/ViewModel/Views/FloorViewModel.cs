@@ -34,6 +34,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public String Photo { get; set; }
         public GeneralStatus Status { get; set; }
 
+        public string DoorNames
+        {
+            get
+            {
+                var coremodel = Mapper.Map<Floor>(this);
+                return coremodel.GetDoorList(ApplicationManager.GetInstance().AuthorizationDoors);
+            }
+            
+        }
 
         public FloorViewModel()
         {

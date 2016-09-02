@@ -8,8 +8,8 @@ namespace Rld.Acs.Model
         public virtual Int32 FloorID { get; set; }
         public virtual Int32 DoorID { get; set; }
         public virtual Int32 DoorType { get; set; }
-        public virtual Int32 LocationX { get; set; }
-        public virtual Int32 LocationY { get; set; }
+        public virtual Double LocationX { get; set; }
+        public virtual Double LocationY { get; set; }
         public virtual Int32 Rotation { get; set; }
     }
 }
