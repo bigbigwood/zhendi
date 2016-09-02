@@ -88,18 +88,9 @@
             </StackPanel>
             <Border Grid.Row="0" Grid.Column="1" Margin="5" BorderBrush="LightGray" BorderThickness="1" >
                 <Canvas Name="MyCanvas" AllowDrop="True" Drop="myCanvas_OnDrop" SizeChanged="MyCanvas_OnSizeChanged">
-
                 </Canvas>
-                
-                
-                <!--<Grid>
-                    <Grid.Background>
-                        <ImageBrush Name="FloorPhoto" />
-                    </Grid.Background>
-                </Grid>-->
             </Border>
 
-            <TextBox Name="FloorPhotoPath" Visibility="Hidden" Text="{Binding Photo}" />
             <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Content="{DynamicResource Ok}" Click="OkBtn_Click" Margin="3,0"/>
                 <Button Content="{DynamicResource Cancel}" Click="CancelBtn_Click" Margin="3,0"/>

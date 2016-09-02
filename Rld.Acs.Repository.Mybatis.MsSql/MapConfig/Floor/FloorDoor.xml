@@ -40,7 +40,7 @@
       , [LocationX]
       , [LocationY]
       , [Rotation]
-      VALUES (
+      ) VALUES (
       #FloorID#
       , #DoorID#
       , #DoorType#

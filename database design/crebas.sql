@@ -514,8 +514,8 @@ create table FLOOR_DOOR (
    FloorID              int                  not null,
    DoorID           	int                  not null,
    DoorType             int                  not null,
-   LocationX            int                  not null,
-   LocationY            int                  not null,
+   LocationX            float                not null,
+   LocationY            float                not null,
    Rotation             int                  not null,
    constraint PK_FLOOR_DOOR primary key nonclustered (FloorDoorID)
 )
