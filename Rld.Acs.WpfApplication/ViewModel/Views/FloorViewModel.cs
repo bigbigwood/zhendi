@@ -58,22 +58,22 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             }));
         }
 
-        public List<FloorDoor> GetUIDoors()
-        {
-            var coreDoors = new List<FloorDoor>();
-            Doors.FindAll(x => x.FloorID != 0).ForEach(x => coreDoors.Add(new FloorDoor()
-            {
-                FloorDoorID = x.FloorDoorID,
-                DoorID = x.DoorID,
-                FloorID = x.FloorID,
-                DoorType = x.DoorType,
-                LocationX = x.LocationX,
-                LocationY = x.LocationY,
-                Rotation = x.Rotation,
-            }));
+        //public List<FloorDoor> GetUIDoors()
+        //{
+        //    var coreDoors = new List<FloorDoor>();
+        //    Doors.FindAll(x => x.FloorID != 0).ForEach(x => coreDoors.Add(new FloorDoor()
+        //    {
+        //        FloorDoorID = x.FloorDoorID,
+        //        DoorID = x.DoorID,
+        //        FloorID = x.FloorID,
+        //        DoorType = x.DoorType,
+        //        LocationX = x.LocationX,
+        //        LocationY = x.LocationY,
+        //        Rotation = x.Rotation,
+        //    }));
 
-            return coreDoors;
-        }
+        //    return coreDoors;
+        //}
 
         public void BindDoors(List<FloorDoor> coreDoors)
         {

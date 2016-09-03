@@ -129,7 +129,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 ;
 
             CreateProvMap<FloorViewModel, Floor>()
-                 .ForMember(dest => dest.Doors, op => op.MapFrom(src => src.GetUIDoors()))
+                 .ForMember(dest => dest.Doors, op => op.Ignore())
                  ;
             CreateProvMap<Floor, FloorViewModel>()
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())

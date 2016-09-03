@@ -50,6 +50,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Register<SysRolePageViewModel>();
             SimpleIoc.Default.Register<SysOperatorPageViewModel>();
             SimpleIoc.Default.Register<FloorPageViewModel>();
+            SimpleIoc.Default.Register<FloorMonitorPageViewModel>();
 
             SetupNavigation();
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -82,6 +83,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             navigationService.Configure("SysRolePage", new Uri("../Pages/SysRolePage.xaml", UriKind.Relative));
             navigationService.Configure("SysOperatorPage", new Uri("../Pages/SysOperatorPage.xaml", UriKind.Relative));
             navigationService.Configure("FloorPage", new Uri("../Pages/FloorPage.xaml", UriKind.Relative));
+            navigationService.Configure("FloorMonitorPage", new Uri("../Pages/FloorMonitorPage.xaml", UriKind.Relative));
 
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
@@ -148,6 +150,11 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<FloorPageViewModel>(); }
         }
+        public FloorMonitorPageViewModel FloorMonitorPage
+        {
+            get { return ServiceLocator.Current.GetInstance<FloorMonitorPageViewModel>(); }
+        }
+        
 
         public static void Cleanup()
         {

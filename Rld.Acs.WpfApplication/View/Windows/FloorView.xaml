@@ -67,7 +67,15 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel>
-                <Button Margin="0,5" Height="25"  FontSize ="12" Style="{StaticResource FlatButtonStyle}" Background="WhiteSmoke" 
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="2">
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="楼层名称" Margin="0"/>
+                    </TextBlock>
+                    <TextBox Text="{Binding Name}" Width="80"/>
+                </StackPanel>
+                
+                <Button Margin="0,5" Height="25"  FontSize ="12" Style="{StaticResource FlatButtonStyle}" Background="LightGray" 
                         Content="上传楼层平面图" Click="UploadPhothBtn_Click"/>
 
                 <Border Height="450">

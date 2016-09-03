@@ -305,7 +305,7 @@
                         <!--综合信息展示:折叠节点-->
                         <StackPanel x:Name="pub_control" Style="{StaticResource stack_tree_open}">
                             <MenuItem x:Name="pub_ssjk" FontSize="12" Width="180"  Header="实时监控" IsCheckable="False" 
-                                      Command="{Binding NatigatePageCmd}" CommandParameter="DeviceTrafficLogPage"
+                                      Command="{Binding NatigatePageCmd}" CommandParameter="FloorMonitorPage"
                                       IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_Monitor}}">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/操作日志.png"/>

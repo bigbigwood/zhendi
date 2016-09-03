@@ -154,6 +154,7 @@
     <Compile Include="Service\Validator\DeviceValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
+    <Compile Include="ViewModel\Pages\FloorMonitorPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\FloorPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SysOperatorPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SysRolePageViewModel.cs" />
@@ -207,6 +208,9 @@
     <Compile Include="Service\Navigation\IFrameNavigationService.cs" />
     <Compile Include="View\Pages\FloorPage.xaml.cs">
       <DependentUpon>FloorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pages\FloorMonitorPage.xaml.cs">
+      <DependentUpon>FloorMonitorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Pages\SysOperatorPage.xaml.cs">
       <DependentUpon>SysOperatorPage.xaml</DependentUpon>
@@ -349,6 +353,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\FloorPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\FloorMonitorPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

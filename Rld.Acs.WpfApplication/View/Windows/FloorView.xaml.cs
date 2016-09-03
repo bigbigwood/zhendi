@@ -63,20 +63,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 {
                     foreach (var floorDoor in floorDoors)
                     {
-                        var carBitmap = new BitmapImage(new Uri("pack://application:,,,/Images/device/door.png"));
-                        var carImg = new Image();
-                        carImg.Source = carBitmap;
-                        carImg.Width = 25;
-                        carImg.Height = 15;
-
-                        var panel = new StackPanel() { Orientation = Orientation.Horizontal };
-                        panel.Children.Add(carImg);
-                        panel.Children.Add(new TextBlock() { Text = floorDoor.DoorName });
-                        panel.DataContext = floorDoor;
-                        panel.PreviewMouseLeftButtonDown += Door_PreviewMouseLeftButtonDown;
-
-                        Canvas.SetLeft(panel, floorDoor.LocationX * MyCanvas.ActualWidth);
-                        Canvas.SetTop(panel, floorDoor.LocationY * MyCanvas.ActualHeight);
+                        var panel = CreateDoorControl(floorDoor);
                         MyCanvas.Children.Add(panel);
                         dropDoors.Add(panel);
                     }
@@ -84,17 +71,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             }
         }
 
-        private void SetFloorPhoto(string imagePath)
-        {
-            var myBrush = new ImageBrush();
-            var image = new Image()
-            {
-                Source = new BitmapImage(new Uri(imagePath)),
-                Stretch = Stretch.Fill,
-            };
-            myBrush.ImageSource = image.Source;
-            MyCanvas.Background = myBrush;
-        }
+     
 
         private void UploadPhothBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -125,23 +102,31 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 }
 
                 var coreModel = Mapper.Map<Floor>(_floorViewModel);
+                foreach (var dropDoor in dropDoors)
+                {
+                    var floorDoorViewModel = Mapper.Map<FloorDoor>(dropDoor.DataContext as FloorDoorViewModel);
+                    coreModel.Doors.Add(floorDoorViewModel);
+                }
+
                 if (coreModel.FloorID == 0)
                 {
+					coreModel.Status = GeneralStatus.Enabled;
                     coreModel = _floorRepo.Insert(coreModel);
                     _floorViewModel.FloorID = coreModel.FloorID;
+                    _floorViewModel.BindDoors(coreModel.Doors);
                 }
                 else
                 {
                     _floorRepo.Update(coreModel);
+                    _floorViewModel.BindDoors(coreModel.Doors);
                 }
 
-                MessageBoxSingleton.Instance.ShowDialog("保存成功", "");
-                Close();
+                ProcessCloseViewMessage(new NotificationMessage("保存成功"));
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
-                MessageBoxSingleton.Instance.ShowDialog("保存失败", "");
+                ShowSubViewNotification(new NotificationMessage("保存失败"));
             }
         }
 
@@ -231,20 +216,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             floorDoor.LocationX = e.GetPosition(parent).X / MyCanvas.ActualWidth;
             floorDoor.LocationY = e.GetPosition(parent).Y / MyCanvas.ActualHeight;
 
-            var carBitmap = new BitmapImage(new Uri("pack://application:,,,/Images/device/door.png"));
-            var carImg = new Image();
-            carImg.Source = carBitmap;
-            carImg.Width = 25;
-            carImg.Height = 15;
-
-            var panel = new StackPanel() { Orientation = Orientation.Horizontal };
-            panel.Children.Add(carImg);
-            panel.Children.Add(new TextBlock() { Text = floorDoor.DoorName });
-            panel.DataContext = floorDoor;
-            panel.PreviewMouseLeftButtonDown += Door_PreviewMouseLeftButtonDown;
-
-            Canvas.SetLeft(panel, floorDoor.LocationX * MyCanvas.ActualWidth);
-            Canvas.SetTop(panel, floorDoor.LocationY * MyCanvas.ActualHeight);
+            var panel = CreateDoorControl(floorDoor);
             MyCanvas.Children.Add(panel);
             dropDoors.Add(panel);
         }
@@ -269,6 +241,36 @@ namespace Rld.Acs.WpfApplication.View.Windows
                     MyCanvas.Children.Add(panel);
                 }
             }
+        }
+
+        private void SetFloorPhoto(string imagePath)
+        {
+            var myBrush = new ImageBrush();
+            var image = new Image()
+            {
+                Source = new BitmapImage(new Uri(imagePath)),
+                Stretch = Stretch.Fill,
+            };
+            myBrush.ImageSource = image.Source;
+            MyCanvas.Background = myBrush;
+        }
+
+        private StackPanel CreateDoorControl(FloorDoorViewModel floorDoor)
+        {
+            var carBitmap = new BitmapImage(new Uri("pack://application:,,,/Images/device/door.png"));
+            var carImg = new Image();
+            carImg.Source = carBitmap;
+            carImg.Width = 25;
+            carImg.Height = 15;
+
+            var panel = new StackPanel() { Orientation = Orientation.Horizontal };
+            panel.Children.Add(carImg);
+            panel.Children.Add(new TextBlock() { Text = floorDoor.DoorName });
+            panel.DataContext = floorDoor;
+            panel.PreviewMouseLeftButtonDown += Door_PreviewMouseLeftButtonDown;
+            Canvas.SetLeft(panel, floorDoor.LocationX * MyCanvas.ActualWidth);
+            Canvas.SetTop(panel, floorDoor.LocationY * MyCanvas.ActualHeight);
+            return panel;
         }
 
     }

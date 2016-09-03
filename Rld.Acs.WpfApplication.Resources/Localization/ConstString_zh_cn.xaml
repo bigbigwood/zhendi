@@ -11,6 +11,12 @@
 	<sys:String x:Key="Add">新建</sys:String>
 	<sys:String x:Key="Modify">修改</sys:String>
 	<sys:String x:Key="Delete">删除</sys:String>
+	<sys:String x:Key="Start">开始</sys:String>
+	<sys:String x:Key="Stop">结束</sys:String>
+	<sys:String x:Key="Open">打开</sys:String>
+	<sys:String x:Key="Close">关闭</sys:String>
+	<sys:String x:Key="Run">运行</sys:String>
+	<sys:String x:Key="Pause">暂停</sys:String>
 	<sys:String x:Key="ExportFile">导出文件</sys:String>
 	<sys:String x:Key="ImportFile">导入文件</sys:String>
 	<sys:String x:Key="SaveFile">保存文件</sys:String>
@@ -132,5 +138,7 @@
     <sys:String x:Key="FloorPage_DeleteBtn">删除楼层</sys:String>
     <sys:String x:Key="FloorPage_Label_Name">楼层名称</sys:String>
 	<sys:String x:Key="FloorPage_Label_Description">关联的门</sys:String>
+	
+	<sys:String x:Key="FloorMonitorPage_Label_IntervalSeconds">运行间隔时间(秒)</sys:String>
 
 </ResourceDictionary>
