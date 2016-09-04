@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.ServiceModel;
 using System.Threading;
 using log4net;
 using Rld.Acs.DeviceSystem.Framework;
@@ -11,10 +12,11 @@ using Rld.Acs.Repository.Interfaces;
 
 namespace Rld.Acs.DeviceSystem
 {
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
     public class DeviceService : IDeviceService
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        private static Int32 index = 0;
         public SyncDeviceUsersResponse SyncDeviceUsers(SyncDeviceUsersRequest request)
         {
             return PersistenceOperation.Process(request, () =>
@@ -102,11 +104,14 @@ namespace Rld.Acs.DeviceSystem
         }
         public GetDoorStateResponse GetDoorState(GetDoorStateRequest request)
         {
-            throw new NotImplementedException();
+            var bOpened = new DoorStateOp().GetDoorState(request.DeviceId, request.DoorIndex);
+            return new GetDoorStateResponse() { ResultType = ResultTypes.Ok, IsOpened = bOpened };
         }
         public UpdateDoorStateResponse UpdateDoorState(UpdateDoorStateRequest request)
         {
-            Thread.Sleep(3000);
+            var op = new DoorStateOp();
+            op.UpdateDoorState(request.DeviceId, request.DoorIndex, request.Option);
+
             return new UpdateDoorStateResponse() { ResultType = ResultTypes.Ok};
         }
     }

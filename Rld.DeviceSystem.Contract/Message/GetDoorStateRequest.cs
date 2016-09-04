@@ -12,7 +12,8 @@ namespace Rld.DeviceSystem.Contract.Message
     [DataContract(Namespace = Declarations.NameSpace)]
     public class GetDoorStateRequest : RequestBase
     {
-
+        [DataMember]
+        public Int32 DoorIndex { get; set; }
     }
 
 
@@ -20,6 +21,6 @@ namespace Rld.DeviceSystem.Contract.Message
     public class GetDoorStateResponse : ResponseBase
     {
         [DataMember]
-        public IList<DoorStateInfo> DoorStateInfos { get; set; }
+        public DoorStateInfo DoorStateInfo { get; set; }
     }
 }

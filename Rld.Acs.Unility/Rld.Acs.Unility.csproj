@@ -46,6 +46,7 @@
     <Compile Include="FilePathHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\DataContractSerializationHelper.cs" />
+    <Compile Include="StringHelper.cs" />
     <Compile Include="ValidatorToolkit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

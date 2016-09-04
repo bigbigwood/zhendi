@@ -30,6 +30,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         public FloorMonitorPageViewModel()
         {
+            IntervalSeconds = 10;
             var operators = _floorRepo.Query(new Hashtable());
             var vms = operators.Select(AutoMapper.Mapper.Map<FloorViewModel>);
             FloorViewModels = new ObservableCollection<FloorViewModel>(vms);

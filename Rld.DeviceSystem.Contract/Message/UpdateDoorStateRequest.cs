@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using Rld.DeviceSystem.Contract.Model;
 
 namespace Rld.DeviceSystem.Contract.Message
@@ -7,6 +8,9 @@ namespace Rld.DeviceSystem.Contract.Message
     public class UpdateDoorStateRequest : RequestBase
     {
         [DataMember]
-        public DoorInfo DoorInfo { get; set; }
+        public Int32 DoorIndex { get; set; }
+        [DataMember]
+        public DoorControlOption Option { get; set; }
+        
     }
 }

@@ -33,6 +33,8 @@ namespace Rld.Acs.WpfApplication.View.Windows
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private UserAvatorService _userAvatorService = new UserAvatorService();
         private IFloorRepository _floorRepo = NinjectBinder.GetRepository<IFloorRepository>();
+        private ListBox dragSource = null;
+        private List<StackPanel> dropDoors = new List<StackPanel>();
 
         public FloorView()
         {
@@ -135,8 +137,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             Close();
         }
 
-        private ListBox dragSource = null;
-        private List<StackPanel> dropDoors = new List<StackPanel>();
+
         private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ListBox parent = (ListBox)sender;

@@ -11,6 +11,8 @@ namespace Rld.DeviceSystem.Contract.Model
         [DataMember]
         public String Name { get; set; }
         [DataMember]
+        public Int32 DoorIndex { get; set; }
+        [DataMember]
         public DoorType DoorType { get; set; }
         [DataMember]
         public Int32? ElectricalAppliances { get; set; }

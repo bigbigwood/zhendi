@@ -97,6 +97,7 @@
     <Compile Include="Model\QueryLogCondictions.cs" />
     <Compile Include="Model\SystemEntity.cs" />
     <Compile Include="Operations\DeviceOperation\GetDoorStateOp.cs" />
+    <Compile Include="Operations\DeviceOperation\UpdateDoorStateOp.cs" />
     <Compile Include="Operations\LogOperation\GetDeviceOperationLogOp.cs" />
     <Compile Include="Operations\LogOperation\GetDeviceTrafficLogOp.cs" />
     <Compile Include="Operations\SystemOperation\GetSystemInfoOp.cs" />

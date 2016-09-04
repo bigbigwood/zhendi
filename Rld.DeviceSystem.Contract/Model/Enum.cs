@@ -199,4 +199,17 @@ namespace Rld.DeviceSystem.Contract.Model
         [EnumMember]
         Exception = 2,
     }
+
+    [DataContract(Namespace = Declarations.NameSpace)]
+    public enum DoorControlOption
+    {
+        [EnumMember]
+        Open = 1,
+        [EnumMember]
+        Auto = 2,
+        [EnumMember]
+        KeepOpen = 3,
+        [EnumMember]
+        KeepClose = 4,
+    }
 }

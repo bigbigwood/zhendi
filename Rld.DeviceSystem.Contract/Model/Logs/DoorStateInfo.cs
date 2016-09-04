@@ -11,7 +11,7 @@ namespace Rld.DeviceSystem.Contract.Model.Logs
     public class DoorStateInfo
     {
         [DataMember]
-        public String DoorName { get; set; }
+        public Int32 DoorIndex { get; set; }
 
         /// <summary>
         /// 1 = opened, 0 = closed

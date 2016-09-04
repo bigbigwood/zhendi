@@ -74,11 +74,11 @@
                 <TextBlock Text="{DynamicResource FloorMonitorPage_Label_IntervalSeconds}" Margin="5,0"/>
                 <TextBox  Width="120" Text="{Binding IntervalSeconds}" />
 
-                <Button  Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
-                         Content="{DynamicResource Run}" Click="OnStart" CommandParameter="{x:Static a:ACL.E_RunMonitor}"/>
+                <Button Name="BtnStartMonitor" Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
+                        Content="{DynamicResource Run}" Click="OnStart" CommandParameter="{x:Static a:ACL.E_RunMonitor}"/>
 
-                <Button  Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
-                         Content="{DynamicResource Pause}"  Click="OnStop" CommandParameter="{x:Static a:ACL.E_PauseMonitor}"/>
+                <Button Name="BtnStopMonitor" Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
+                        Content="{DynamicResource Pause}"  Click="OnStop" CommandParameter="{x:Static a:ACL.E_PauseMonitor}"/>
 
             </StackPanel>
             <Grid Grid.Row="1">

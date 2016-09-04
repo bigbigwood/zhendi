@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -8,14 +10,16 @@ using GalaSoft.MvvmLight.Messaging;
 using log4net;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using Rld.Acs.Model;
+using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
+using Rld.Acs.WpfApplication.Service.DeviceService;
 using Rld.Acs.WpfApplication.View.Windows;
 using Rld.Acs.WpfApplication.ViewModel.Pages;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 using System.Threading.Tasks;
+using DoorControlOption = Rld.Acs.Model.DoorControlOption;
 
 namespace Rld.Acs.WpfApplication.View.Pages
 {
@@ -26,6 +30,10 @@ namespace Rld.Acs.WpfApplication.View.Pages
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private FloorMonitorPageViewModel _viewModel;
+        private FloorViewModel _selectedFloorViewModel;
+        private System.Timers.Timer _timer;
+        private const Int32 DefaultTimerIntervalMillSeconds = 10 * 1000;
+        private Dictionary<Int32, StackPanel> _dropDoorDict = new Dictionary<Int32, StackPanel>();
 
         public FloorMonitorPage()
         {
@@ -34,33 +42,157 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
         private void FloorMonitorPage_OnLoaded(object sender, RoutedEventArgs e)
         {
-            _viewModel = DataContext as FloorMonitorPageViewModel;
-            if (_viewModel != null && _viewModel.FloorViewModels.Count > 1)
+            try
             {
-                var firstFloorViewModel = _viewModel.FloorViewModels.FirstOrDefault();
-                SetFloorCanvas(firstFloorViewModel);
+                _viewModel = DataContext as FloorMonitorPageViewModel;
+                if (_viewModel != null && _viewModel.FloorViewModels.Count > 1)
+                {
+                    var firstFloorViewModel = _viewModel.FloorViewModels.FirstOrDefault();
+                    SelectFloorCanvas(firstFloorViewModel);
+                }
+
+                BtnStartMonitor.IsEnabled = true;
+                BtnStopMonitor.IsEnabled = false;
+
+                _timer = new System.Timers.Timer();
+                _timer.Elapsed += OnTimedEvent;
+                _timer.Interval = DefaultTimerIntervalMillSeconds;
+                //_timer.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("OnTimedEvent error", ex);
+                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
             }
         }
 
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            try
+            {
+                Log.Info("Trigger Floor monitor timer event...");
+                if (_selectedFloorViewModel != null && _selectedFloorViewModel.Doors.Any())
+                {
+                    Log.InfoFormat("Floor monitor timer check doors for floor id: {0}", _selectedFloorViewModel.FloorID);
+                    foreach (var floordoorId in _dropDoorDict.Keys)
+                    {
+                        var doorInfo = ApplicationManager.GetInstance().AuthorizationDoors.FirstOrDefault(x => x.DeviceDoorID == floordoorId);
+                        ResultTypes resultTypes;
+                        bool resultTypeSpecified;
+                        string[] messages;
+                        bool isopened;
+                        bool isopenedSpecified;
+                        Int32 deviceId = doorInfo.DeviceID;
+                        Int32 doorIndex = doorInfo.DoorIndex;
+
+                        new DeviceService().GetDoorState(deviceId, true, doorIndex, true,
+                            out isopened, out isopenedSpecified, out resultTypes, out resultTypeSpecified, out messages);
+                        if (resultTypes == ResultTypes.Ok)
+                        {
+                            Log.InfoFormat("Floor monitor timer gets state result: [doorId={0}, isopened={1}]", floordoorId, isopened);
+                            Dispatcher.Invoke(() =>
+                            {
+                                UpdateDoorColerByState(_dropDoorDict[floordoorId], isopened);
+                            });
+                        }
+                        else
+                        {
+                            Log.Warn(messages.ConvertToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("OnTimedEvent error", ex);
+                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+            }
+        }
+
+
         private void OnStart(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Log.InfoFormat("Floor monitor timer start witn interval second: {0}...", _viewModel.IntervalSeconds);
+                _timer.Interval = _viewModel.IntervalSeconds * 1000;
+                _timer.Start();
+
+                BtnStartMonitor.IsEnabled = false;
+                BtnStopMonitor.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("OnPhotoClick error", ex);
+                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+            }
         }
 
         private void OnStop(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Log.Info("Floor monitor timer stop...");
+                _timer.Stop();
+
+                BtnStartMonitor.IsEnabled = true;
+                BtnStopMonitor.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                Log.Error("OnPhotoClick error", ex);
+                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+            }
         }
 
         private void OnPhotoClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var listBox = sender as ListBox;
-            var floorViewModel = listBox.SelectedItem as FloorViewModel;
+            try
+            {
+                var listBox = sender as ListBox;
+                var floorViewModel = listBox.SelectedItem as FloorViewModel;
 
-            SetFloorCanvas(floorViewModel);
+                SelectFloorCanvas(floorViewModel);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("OnPhotoClick error", ex);
+                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+            }
         }
 
-        private void SetFloorCanvas(FloorViewModel floorViewModel)
+        private void SmallCanvas_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var canvas = sender as Canvas;
+                var floorViewModel = canvas.DataContext as FloorViewModel;
+                SetFloorPhoto(floorViewModel.Photo, canvas);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("SmallCanvas_Loaded error", ex);
+                throw;
+            }
+        }
+
+        private void FloorMonitorPage_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            try
+            {
+                ResizeCanvas(MainCanvas);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Resize error", ex);
+                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+            }
+        }
+
+        private void SelectFloorCanvas(FloorViewModel floorViewModel)
         {
             MainCanvas.Children.Clear();
+            _dropDoorDict.Clear();
             SetFloorPhoto(floorViewModel.Photo, MainCanvas);
 
             var floorDoors = floorViewModel.Doors.FindAll(x => x.FloorID == floorViewModel.FloorID);
@@ -69,11 +201,13 @@ namespace Rld.Acs.WpfApplication.View.Pages
                 foreach (var floorDoor in floorDoors)
                 {
                     var panel = CreateDoorControl(floorDoor, MainCanvas);
+                    _dropDoorDict.Add(floorDoor.DoorID, panel);
                     MainCanvas.Children.Add(panel);
                 }
             }
 
             MainFloorName.Text = floorViewModel.Name;
+            _selectedFloorViewModel = floorViewModel;
         }
 
 
@@ -102,10 +236,10 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
             var panel = new StackPanel() { Orientation = Orientation.Horizontal };
             panel.Children.Add(carImg);
-            panel.Children.Add(new TextBlock() { Text = floorDoor.DoorName, FontSize = 16});
+            panel.Children.Add(new TextBlock() { Text = floorDoor.DoorName, FontSize = 16 });
             panel.DataContext = floorDoor;
 
-            var menu_open = new MenuItem() { Header = "开门", Tag = panel};
+            var menu_open = new MenuItem() { Header = "开门", Tag = panel };
             var menu_keepOpen = new MenuItem() { Header = "常开门", Tag = panel };
             var menu_keepClose = new MenuItem() { Header = "常关门", Tag = panel };
             var menu_autoControl = new MenuItem() { Header = "自动控制", Tag = panel };
@@ -127,7 +261,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
         private async void UpdateDoorState(object sender, DoorControlOption option)
         {
-            var menuItem = (MenuItem) sender;
+            var menuItem = (MenuItem)sender;
             var panel = menuItem.Tag as StackPanel;
             var floordoor = panel.DataContext as FloorDoorViewModel;
             var doorInfo = ApplicationManager.GetInstance().AuthorizationDoors.FirstOrDefault(x => x.DeviceDoorID == floordoor.DoorID);
@@ -141,14 +275,14 @@ namespace Rld.Acs.WpfApplication.View.Pages
             {
                 try
                 {
-                    Service.DeviceService.ResultTypes resultTypes;
+                    ResultTypes resultTypes;
                     bool resultTypeSpecified;
                     string[] messages;
                     Int32 deviceId = doorInfo.DeviceID;
                     Int32 doorIndex = doorInfo.DoorIndex;
                     var selectedOption = (Service.DeviceService.DoorControlOption)option.GetHashCode();
 
-                    new Service.DeviceService.DeviceService().UpdateDoorState(deviceId, true, doorIndex, true,
+                    new DeviceService().UpdateDoorState(deviceId, true, doorIndex, true,
                         selectedOption, true,
                         out resultTypes, out resultTypeSpecified, out messages);
 
@@ -168,7 +302,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
             {
                 UpdateDoorColerByState(panel, false);
             }
-            else
+            else if (option == DoorControlOption.Open || option == DoorControlOption.KeepOpen)
             {
                 UpdateDoorColerByState(panel, true);
             }
@@ -177,18 +311,6 @@ namespace Rld.Acs.WpfApplication.View.Pages
         private void UpdateDoorColerByState(StackPanel panel, bool isOpen)
         {
             panel.Background = isOpen ? Brushes.Red : Brushes.Transparent;
-        }
-
-        private void SmallCanvas_Loaded(object sender, RoutedEventArgs e)
-        {
-            var canvas = sender as Canvas;
-            var floorViewModel = canvas.DataContext as FloorViewModel;
-            SetFloorPhoto(floorViewModel.Photo, canvas);
-        }
-
-        private void FloorMonitorPage_OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            ResizeCanvas(MainCanvas);
         }
 
         private void ResizeCanvas(Canvas canvas)

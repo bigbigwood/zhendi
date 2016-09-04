@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using log4net;
 using Riss.Devices;
+using Rld.DeviceSystem.Contract.Model;
 using Rld.DeviceSystem.Contract.Model.Logs;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper;
@@ -15,17 +16,37 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private DeviceProxy _deviceProxy = DeviceProxyManager.GetDeviceProxy();
 
-        public List<DoorStateInfo> GetDoorStates()
+        public DoorStateInfo GetDoorStates(Int32 doorIndex)
         {
-            var masterDoorState = new DoorStateInfo() { DoorName = "Master Door" };
-            var slaveDoorState = new DoorStateInfo() { DoorName = "Slave Door" };
-            var result = new List<DoorStateInfo>() { masterDoorState, slaveDoorState };
-
+            var doorState = new DoorStateInfo() { DoorIndex = doorIndex };
             using (var operation = new DeviceLockableOperation(_deviceProxy))
             {
-                masterDoorState.Opened = GetDoorStatus(true);
-                slaveDoorState.Opened = GetDoorStatus(false);
+                doorState.Opened = GetDoorStatus(doorIndex == 1);
             }
+
+            return doorState;
+        }
+
+        public bool UpdateStatus(Int32 doorIndex, DoorControlOption option)
+        {
+            var device = _deviceProxy.Device;
+            var extraProperty = new object();
+            var extraData = new object();
+            byte[] data = new byte[8];
+            UInt32 paramIndex = Zd2911Utils.DeviceParamLock1Status;
+            if (doorIndex == 2)
+                paramIndex = Zd2911Utils.DeviceParamLock2Status;
+
+            Array.Copy(BitConverter.GetBytes(paramIndex), 0, data, 0, 4);
+            Array.Copy(BitConverter.GetBytes((UInt32)option.GetHashCode()), 0, data, 4, 4);
+
+            var retryablePolicy = Policies.GetRetryablePolicy();
+            bool result = retryablePolicy.Execute(
+                () =>
+                {
+                    extraData = data;
+                    return _deviceProxy.DeviceConnection.SetProperty(DeviceProperty.SysParam, extraProperty, device, extraData);
+                });
 
             return result;
         }

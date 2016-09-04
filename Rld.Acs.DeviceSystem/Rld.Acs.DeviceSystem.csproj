@@ -110,6 +110,7 @@
     <Compile Include="Message\SyncDepartmentUsers.cs" />
     <Compile Include="Message\SyncDBUsers.cs" />
     <Compile Include="Message\SyncDeviceUsers.cs" />
+    <Compile Include="Service\DoorStateOp.cs" />
     <Compile Include="Service\DeviceMessageProcessor.cs" />
     <Compile Include="Service\OperationLogOp.cs" />
     <Compile Include="Service\DepartmentOp.cs" />

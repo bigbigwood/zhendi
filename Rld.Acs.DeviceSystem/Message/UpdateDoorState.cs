@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Web;
-using Rld.Acs.Model;
 using Rld.DeviceSystem.Contract.Model;
 
 namespace Rld.Acs.DeviceSystem.Message
