@@ -34,7 +34,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             var vms = operators.Select(AutoMapper.Mapper.Map<FloorViewModel>);
             FloorViewModels = new ObservableCollection<FloorViewModel>(vms);
 
-            FloorViewModels.ForEach(x => x.Photo = _userAvatorService.GetAvator(x.Photo));
+            FloorViewModels.ForEach(x =>
+            {
+                if (!string.IsNullOrWhiteSpace(x.Photo))
+                    x.Photo = _userAvatorService.GetAvator(x.Photo);
+            });
         }
     }
 }

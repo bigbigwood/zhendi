@@ -26,6 +26,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
         {
             MessageBoxSingleton.Instance.ShowDialog = ShowDialog;
             MessageBoxSingleton.Instance.ShowYesNo = ShowYesNo;
+            MessageBoxSingleton.Instance.ShowProgressAsync = ShowProgressAsync2;
         }
 
         public async void ShowDialog(string message, string title)
@@ -51,6 +52,11 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 await this.ShowMessageAsync(title, message, MessageDialogStyle.AffirmativeAndNegative, mySettings);
             if (result == MessageDialogResult.Affirmative)
                 await Task.Factory.StartNew(action);
+        }
+
+        public async Task<ProgressDialogController> ShowProgressAsync2(string title, string message, bool isCancelable = false)
+        {
+            return await this.ShowProgressAsync(title, message, isCancelable);
         }
 
         #endregion

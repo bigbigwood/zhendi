@@ -19,22 +19,20 @@ namespace Rld.Acs.DeviceSystem
         [OperationContract]
         SyncDepartmentUsersResponse SyncDepartmentUsers(SyncDepartmentUsersRequest request);
         [OperationContract]
-        SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(SyncDeviceOperationLogsRequest request);
-
+        SyncDeviceUsersResponse SyncDeviceUsers(SyncDeviceUsersRequest request);
         [OperationContract]
         SyncDeviceTrafficLogsResponse SyncDeviceTrafficLogs(SyncDeviceTrafficLogsRequest request);
-
         [OperationContract]
-        SyncDeviceUsersResponse SyncDeviceUsers(SyncDeviceUsersRequest request);
-
-        [OperationContract]
-        SyncDoorStateLogsResponse SyncDoorStateLogs(SyncDoorStateLogsRequest request);
+        SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(SyncDeviceOperationLogsRequest request);
         [OperationContract]
         SyncTimeGroupsResponse SyncTimeGroups(SyncTimeGroupsRequest request);
         [OperationContract]
         SyncTimeSegmentsResponse SyncTimeSegments(SyncTimeSegmentsRequest request);
-
         [OperationContract]
         SyncTimeZonesResponse SyncTimeZones(SyncTimeZonesRequest request);
+        [OperationContract]
+        GetDoorStateResponse GetDoorState(GetDoorStateRequest request);
+        [OperationContract]
+        UpdateDoorStateResponse UpdateDoorState(UpdateDoorStateRequest request);
     }
 }

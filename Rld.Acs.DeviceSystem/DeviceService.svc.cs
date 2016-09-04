@@ -84,10 +84,7 @@ namespace Rld.Acs.DeviceSystem
             throw new NotImplementedException();
         }
 
-        public SyncDoorStateLogsResponse SyncDoorStateLogs(SyncDoorStateLogsRequest request)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public SyncTimeGroupsResponse SyncTimeGroups(SyncTimeGroupsRequest request)
         {
@@ -102,6 +99,15 @@ namespace Rld.Acs.DeviceSystem
         public SyncTimeZonesResponse SyncTimeZones(SyncTimeZonesRequest request)
         {
             throw new NotImplementedException();
+        }
+        public GetDoorStateResponse GetDoorState(GetDoorStateRequest request)
+        {
+            throw new NotImplementedException();
+        }
+        public UpdateDoorStateResponse UpdateDoorState(UpdateDoorStateRequest request)
+        {
+            Thread.Sleep(3000);
+            return new UpdateDoorStateResponse() { ResultType = ResultTypes.Ok};
         }
     }
 }

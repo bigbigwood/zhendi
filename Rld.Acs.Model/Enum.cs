@@ -93,6 +93,14 @@ namespace Rld.Acs.Model
         TypeItemsLevel = 2,
     }
 
+    public enum DoorControlOption
+    {
+        Open = 0,
+        KeepOpen = 1,
+        KeepClose = 2,
+        Auto = 3,
+    }
+
     public enum DictionaryType
     {
         Nationality = 10001, //民族

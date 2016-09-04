@@ -10,6 +10,7 @@
       <result property="DeviceDoorID" column="DeviceDoorID"/>
       <result property="Name" column="Name"/>
       <result property="Code" column="Code"/>
+      <result property="DoorIndex" column="DoorIndex"/>
       <result property="ElectricalAppliances" column="ElectricalAppliances"/>
       <result property="CheckOutOptions" column="CheckOutOptions"/>
       <result property="Status" column="Status"/>
@@ -45,6 +46,7 @@
       [DeviceID]
       , [Name]
       , [Code]
+      , [DoorIndex]
       , [ElectricalAppliances]
       , [CheckOutOptions]
       , [Status]
@@ -63,6 +65,7 @@
       #DeviceID#
       , #Name#
       , #Code#
+      , #DoorIndex#
       , #ElectricalAppliances#
       , #CheckOutOptions#
       , #Status#
@@ -88,6 +91,7 @@
       [DeviceID] = #DeviceID#
       , [Name] = #Name#
       , [Code] = #Code#
+      , [DoorIndex] = #DoorIndex#
       , [ElectricalAppliances] = #ElectricalAppliances#
       , [CheckOutOptions] = #CheckOutOptions#
       , [Status] = #Status#

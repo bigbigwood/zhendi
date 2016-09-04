@@ -100,9 +100,10 @@
     <Compile Include="IDeviceService.cs" />
     <Compile Include="Message\MessageBase.cs" />
     <Compile Include="Framework\OperationManager.cs" />
-    <Compile Include="Message\SyncDoorStateLogs.cs" />
+    <Compile Include="Message\GetDoorState.cs" />
     <Compile Include="Message\SyncDeviceTrafficLogs.cs" />
     <Compile Include="Message\SyncDeviceOperationLogs.cs" />
+    <Compile Include="Message\UpdateDoorState.cs" />
     <Compile Include="Message\SyncTimeZones.cs" />
     <Compile Include="Message\SyncTimeGroups.cs" />
     <Compile Include="Message\SyncTimeSegments.cs" />

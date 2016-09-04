@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace Rld.Acs.WpfApplication.View
 {
@@ -15,5 +17,7 @@ namespace Rld.Acs.WpfApplication.View
         /// 调用消息确认窗口的代理事件
         /// </summary>
         public Action<string, string, Action> ShowYesNo { get; set; }
+
+        public Func<string, string, Boolean, Task<ProgressDialogController>> ShowProgressAsync { get; set; }
     }
 }

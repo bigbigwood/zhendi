@@ -373,6 +373,7 @@ create table DEVICE_DOORS (
    DeviceID             int                  not null,
    Name                 nvarchar(100)        not null,
    Code           		nvarchar(100)        not null,
+   DoorIndex            int                  not null,
    ElectricalAppliances int                  null,
    CheckOutOptions      int                  null,
    Status               int                  null,

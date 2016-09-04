@@ -9,14 +9,20 @@ using Rld.DeviceSystem.Contract.Model;
 namespace Rld.Acs.DeviceSystem.Message
 {
     [MessageContract(IsWrapped = true)]
-    public class SyncDoorStateLogsRequest : RequestBase
+    public class UpdateDoorStateRequest : RequestBase
     {
         [MessageBodyMember]
-        public List<DeviceController> Devices { get; set; }
+        public DoorControlOption Option { get; set; }
+
+        [MessageBodyMember]
+        public Int32 DoorIndex { get; set; }
+
+        [MessageBodyMember]
+        public Int32 DeviceId { get; set; }
     }
 
     [MessageContract(IsWrapped = true)]
-    public class SyncDoorStateLogsResponse : ResponseBase
+    public class UpdateDoorStateResponse : ResponseBase
     {
     }
 }

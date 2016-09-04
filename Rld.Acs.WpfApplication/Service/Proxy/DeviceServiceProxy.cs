@@ -14,76 +14,84 @@
 
 using Rld.Acs.WpfApplication.Models;
 
-namespace Rld.Acs.WpfApplication.Service.DeviceService {
+namespace Rld.Acs.WpfApplication.Service.DeviceService
+{
     using System;
     using System.Web.Services;
     using System.Diagnostics;
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
-    
-    
+
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_IDeviceService", Namespace="http://tempuri.org/")]
-    public partial class DeviceService : System.Web.Services.Protocols.SoapHttpClientProtocol {
-        
+    [System.Web.Services.WebServiceBindingAttribute(Name = "BasicHttpBinding_IDeviceService", Namespace = "http://www.realand.com/DeviceSystem/")]
+    public partial class DeviceService : System.Web.Services.Protocols.SoapHttpClientProtocol
+    {
+
         private System.Threading.SendOrPostCallback SyncDBUsersOperationCompleted;
-        
+
         private System.Threading.SendOrPostCallback SyncDepartmentUsersOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SyncDeviceOperationLogsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SyncDeviceTrafficLogsOperationCompleted;
-        
+
         private System.Threading.SendOrPostCallback SyncDeviceUsersOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SyncDoorStateLogsOperationCompleted;
-        
+
+        private System.Threading.SendOrPostCallback SyncDeviceTrafficLogsOperationCompleted;
+
+        private System.Threading.SendOrPostCallback SyncDeviceOperationLogsOperationCompleted;
+
         private System.Threading.SendOrPostCallback SyncTimeGroupsOperationCompleted;
-        
+
         private System.Threading.SendOrPostCallback SyncTimeSegmentsOperationCompleted;
-        
+
         private System.Threading.SendOrPostCallback SyncTimeZonesOperationCompleted;
-        
+
+        private System.Threading.SendOrPostCallback GetDoorStateOperationCompleted;
+
+        private System.Threading.SendOrPostCallback UpdateDoorStateOperationCompleted;
+
         /// <remarks/>
         public DeviceService()
         {
             this.Url = AppConfiguration.DeviceSystemUrl;
         }
-        
+
         /// <remarks/>
         public event SyncDBUsersCompletedEventHandler SyncDBUsersCompleted;
-        
+
         /// <remarks/>
         public event SyncDepartmentUsersCompletedEventHandler SyncDepartmentUsersCompleted;
-        
-        /// <remarks/>
-        public event SyncDeviceOperationLogsCompletedEventHandler SyncDeviceOperationLogsCompleted;
-        
-        /// <remarks/>
-        public event SyncDeviceTrafficLogsCompletedEventHandler SyncDeviceTrafficLogsCompleted;
-        
+
         /// <remarks/>
         public event SyncDeviceUsersCompletedEventHandler SyncDeviceUsersCompleted;
-        
+
         /// <remarks/>
-        public event SyncDoorStateLogsCompletedEventHandler SyncDoorStateLogsCompleted;
-        
+        public event SyncDeviceTrafficLogsCompletedEventHandler SyncDeviceTrafficLogsCompleted;
+
+        /// <remarks/>
+        public event SyncDeviceOperationLogsCompletedEventHandler SyncDeviceOperationLogsCompleted;
+
         /// <remarks/>
         public event SyncTimeGroupsCompletedEventHandler SyncTimeGroupsCompleted;
-        
+
         /// <remarks/>
         public event SyncTimeSegmentsCompletedEventHandler SyncTimeSegmentsCompleted;
-        
+
         /// <remarks/>
         public event SyncTimeZonesCompletedEventHandler SyncTimeZonesCompleted;
-        
+
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDBUsers", RequestElementName="SyncDBUsersRequest", RequestNamespace="http://www.realand.com/DeviceSystem/", ResponseNamespace="http://www.realand.com/DeviceSystem/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SyncDBUsers([System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] User[] Users, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages) {
+        public event GetDoorStateCompletedEventHandler GetDoorStateCompleted;
+
+        /// <remarks/>
+        public event UpdateDoorStateCompletedEventHandler UpdateDoorStateCompleted;
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDBUsers", RequestElementName = "SyncDBUsersRequest", RequestNamespace = "http://www.realand.com/DeviceSystem/", ResponseNamespace = "http://www.realand.com/DeviceSystem/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SyncDBUsers([System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] User[] Users, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages)
+        {
             object[] results = this.Invoke("SyncDBUsers", new object[] {
                         Devices,
                         Users});
@@ -91,47 +99,55 @@ namespace Rld.Acs.WpfApplication.Service.DeviceService {
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public System.IAsyncResult BeginSyncDBUsers(DeviceController[] Devices, User[] Users, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginSyncDBUsers(DeviceController[] Devices, User[] Users, System.AsyncCallback callback, object asyncState)
+        {
             return this.BeginInvoke("SyncDBUsers", new object[] {
                         Devices,
                         Users}, callback, asyncState);
         }
-        
+
         /// <remarks/>
-        public void EndSyncDBUsers(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages) {
+        public void EndSyncDBUsers(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages)
+        {
             object[] results = this.EndInvoke(asyncResult);
             ResultType = ((ResultTypes)(results[0]));
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public void SyncDBUsersAsync(DeviceController[] Devices, User[] Users) {
+        public void SyncDBUsersAsync(DeviceController[] Devices, User[] Users)
+        {
             this.SyncDBUsersAsync(Devices, Users, null);
         }
-        
+
         /// <remarks/>
-        public void SyncDBUsersAsync(DeviceController[] Devices, User[] Users, object userState) {
-            if ((this.SyncDBUsersOperationCompleted == null)) {
+        public void SyncDBUsersAsync(DeviceController[] Devices, User[] Users, object userState)
+        {
+            if ((this.SyncDBUsersOperationCompleted == null))
+            {
                 this.SyncDBUsersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncDBUsersOperationCompleted);
             }
             this.InvokeAsync("SyncDBUsers", new object[] {
                         Devices,
                         Users}, this.SyncDBUsersOperationCompleted, userState);
         }
-        
-        private void OnSyncDBUsersOperationCompleted(object arg) {
-            if ((this.SyncDBUsersCompleted != null)) {
+
+        private void OnSyncDBUsersOperationCompleted(object arg)
+        {
+            if ((this.SyncDBUsersCompleted != null))
+            {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SyncDBUsersCompleted(this, new SyncDBUsersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDepartmentUsers", RequestElementName="SyncDepartmentUsersRequest", RequestNamespace="http://www.realand.com/DeviceSystem/", ResponseNamespace="http://www.realand.com/DeviceSystem/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SyncDepartmentUsers([System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] Department[] Departments, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDepartmentUsers", RequestElementName = "SyncDepartmentUsersRequest", RequestNamespace = "http://www.realand.com/DeviceSystem/", ResponseNamespace = "http://www.realand.com/DeviceSystem/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SyncDepartmentUsers([System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] Department[] Departments, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages)
+        {
             object[] results = this.Invoke("SyncDepartmentUsers", new object[] {
                         Departments,
                         Devices});
@@ -139,137 +155,55 @@ namespace Rld.Acs.WpfApplication.Service.DeviceService {
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public System.IAsyncResult BeginSyncDepartmentUsers(Department[] Departments, DeviceController[] Devices, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginSyncDepartmentUsers(Department[] Departments, DeviceController[] Devices, System.AsyncCallback callback, object asyncState)
+        {
             return this.BeginInvoke("SyncDepartmentUsers", new object[] {
                         Departments,
                         Devices}, callback, asyncState);
         }
-        
+
         /// <remarks/>
-        public void EndSyncDepartmentUsers(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages) {
+        public void EndSyncDepartmentUsers(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages)
+        {
             object[] results = this.EndInvoke(asyncResult);
             ResultType = ((ResultTypes)(results[0]));
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public void SyncDepartmentUsersAsync(Department[] Departments, DeviceController[] Devices) {
+        public void SyncDepartmentUsersAsync(Department[] Departments, DeviceController[] Devices)
+        {
             this.SyncDepartmentUsersAsync(Departments, Devices, null);
         }
-        
+
         /// <remarks/>
-        public void SyncDepartmentUsersAsync(Department[] Departments, DeviceController[] Devices, object userState) {
-            if ((this.SyncDepartmentUsersOperationCompleted == null)) {
+        public void SyncDepartmentUsersAsync(Department[] Departments, DeviceController[] Devices, object userState)
+        {
+            if ((this.SyncDepartmentUsersOperationCompleted == null))
+            {
                 this.SyncDepartmentUsersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncDepartmentUsersOperationCompleted);
             }
             this.InvokeAsync("SyncDepartmentUsers", new object[] {
                         Departments,
                         Devices}, this.SyncDepartmentUsersOperationCompleted, userState);
         }
-        
-        private void OnSyncDepartmentUsersOperationCompleted(object arg) {
-            if ((this.SyncDepartmentUsersCompleted != null)) {
+
+        private void OnSyncDepartmentUsersOperationCompleted(object arg)
+        {
+            if ((this.SyncDepartmentUsersCompleted != null))
+            {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SyncDepartmentUsersCompleted(this, new SyncDepartmentUsersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceOperationLogs", RequestElementName="SyncDeviceOperationLogsRequest", RequestNamespace="http://www.realand.com/DeviceSystem/", ResponseNamespace="http://www.realand.com/DeviceSystem/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SyncDeviceOperationLogs([System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages) {
-            object[] results = this.Invoke("SyncDeviceOperationLogs", new object[] {
-                        Devices});
-            ResultType = ((ResultTypes)(results[0]));
-            ResultTypeSpecified = ((bool)(results[1]));
-            Messages = ((string[])(results[2]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginSyncDeviceOperationLogs(DeviceController[] Devices, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("SyncDeviceOperationLogs", new object[] {
-                        Devices}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndSyncDeviceOperationLogs(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages) {
-            object[] results = this.EndInvoke(asyncResult);
-            ResultType = ((ResultTypes)(results[0]));
-            ResultTypeSpecified = ((bool)(results[1]));
-            Messages = ((string[])(results[2]));
-        }
-        
-        /// <remarks/>
-        public void SyncDeviceOperationLogsAsync(DeviceController[] Devices) {
-            this.SyncDeviceOperationLogsAsync(Devices, null);
-        }
-        
-        /// <remarks/>
-        public void SyncDeviceOperationLogsAsync(DeviceController[] Devices, object userState) {
-            if ((this.SyncDeviceOperationLogsOperationCompleted == null)) {
-                this.SyncDeviceOperationLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncDeviceOperationLogsOperationCompleted);
-            }
-            this.InvokeAsync("SyncDeviceOperationLogs", new object[] {
-                        Devices}, this.SyncDeviceOperationLogsOperationCompleted, userState);
-        }
-        
-        private void OnSyncDeviceOperationLogsOperationCompleted(object arg) {
-            if ((this.SyncDeviceOperationLogsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SyncDeviceOperationLogsCompleted(this, new SyncDeviceOperationLogsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogs", RequestElementName="SyncDeviceTrafficLogsRequest", RequestNamespace="http://www.realand.com/DeviceSystem/", ResponseNamespace="http://www.realand.com/DeviceSystem/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SyncDeviceTrafficLogs([System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages) {
-            object[] results = this.Invoke("SyncDeviceTrafficLogs", new object[] {
-                        Devices});
-            ResultType = ((ResultTypes)(results[0]));
-            ResultTypeSpecified = ((bool)(results[1]));
-            Messages = ((string[])(results[2]));
-        }
-        
-        /// <remarks/>
-        public System.IAsyncResult BeginSyncDeviceTrafficLogs(DeviceController[] Devices, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("SyncDeviceTrafficLogs", new object[] {
-                        Devices}, callback, asyncState);
-        }
-        
-        /// <remarks/>
-        public void EndSyncDeviceTrafficLogs(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages) {
-            object[] results = this.EndInvoke(asyncResult);
-            ResultType = ((ResultTypes)(results[0]));
-            ResultTypeSpecified = ((bool)(results[1]));
-            Messages = ((string[])(results[2]));
-        }
-        
-        /// <remarks/>
-        public void SyncDeviceTrafficLogsAsync(DeviceController[] Devices) {
-            this.SyncDeviceTrafficLogsAsync(Devices, null);
-        }
-        
-        /// <remarks/>
-        public void SyncDeviceTrafficLogsAsync(DeviceController[] Devices, object userState) {
-            if ((this.SyncDeviceTrafficLogsOperationCompleted == null)) {
-                this.SyncDeviceTrafficLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncDeviceTrafficLogsOperationCompleted);
-            }
-            this.InvokeAsync("SyncDeviceTrafficLogs", new object[] {
-                        Devices}, this.SyncDeviceTrafficLogsOperationCompleted, userState);
-        }
-        
-        private void OnSyncDeviceTrafficLogsOperationCompleted(object arg) {
-            if ((this.SyncDeviceTrafficLogsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SyncDeviceTrafficLogsCompleted(this, new SyncDeviceTrafficLogsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsers", RequestElementName="SyncDeviceUsersRequest", RequestNamespace="http://www.realand.com/DeviceSystem/", ResponseNamespace="http://www.realand.com/DeviceSystem/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SyncDeviceUsers([System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] User[] Users, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsers", RequestElementName = "SyncDeviceUsersRequest", RequestNamespace = "http://www.realand.com/DeviceSystem/", ResponseNamespace = "http://www.realand.com/DeviceSystem/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SyncDeviceUsers([System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] User[] Users, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages)
+        {
             object[] results = this.Invoke("SyncDeviceUsers", new object[] {
                         Devices,
                         Users});
@@ -277,92 +211,161 @@ namespace Rld.Acs.WpfApplication.Service.DeviceService {
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public System.IAsyncResult BeginSyncDeviceUsers(DeviceController[] Devices, User[] Users, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginSyncDeviceUsers(DeviceController[] Devices, User[] Users, System.AsyncCallback callback, object asyncState)
+        {
             return this.BeginInvoke("SyncDeviceUsers", new object[] {
                         Devices,
                         Users}, callback, asyncState);
         }
-        
+
         /// <remarks/>
-        public void EndSyncDeviceUsers(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages) {
+        public void EndSyncDeviceUsers(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages)
+        {
             object[] results = this.EndInvoke(asyncResult);
             ResultType = ((ResultTypes)(results[0]));
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public void SyncDeviceUsersAsync(DeviceController[] Devices, User[] Users) {
+        public void SyncDeviceUsersAsync(DeviceController[] Devices, User[] Users)
+        {
             this.SyncDeviceUsersAsync(Devices, Users, null);
         }
-        
+
         /// <remarks/>
-        public void SyncDeviceUsersAsync(DeviceController[] Devices, User[] Users, object userState) {
-            if ((this.SyncDeviceUsersOperationCompleted == null)) {
+        public void SyncDeviceUsersAsync(DeviceController[] Devices, User[] Users, object userState)
+        {
+            if ((this.SyncDeviceUsersOperationCompleted == null))
+            {
                 this.SyncDeviceUsersOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncDeviceUsersOperationCompleted);
             }
             this.InvokeAsync("SyncDeviceUsers", new object[] {
                         Devices,
                         Users}, this.SyncDeviceUsersOperationCompleted, userState);
         }
-        
-        private void OnSyncDeviceUsersOperationCompleted(object arg) {
-            if ((this.SyncDeviceUsersCompleted != null)) {
+
+        private void OnSyncDeviceUsersOperationCompleted(object arg)
+        {
+            if ((this.SyncDeviceUsersCompleted != null))
+            {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SyncDeviceUsersCompleted(this, new SyncDeviceUsersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDoorStateLogs", RequestElementName="SyncDoorStateLogsRequest", RequestNamespace="http://www.realand.com/DeviceSystem/", ResponseNamespace="http://www.realand.com/DeviceSystem/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SyncDoorStateLogs([System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages) {
-            object[] results = this.Invoke("SyncDoorStateLogs", new object[] {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogs", RequestElementName = "SyncDeviceTrafficLogsRequest", RequestNamespace = "http://www.realand.com/DeviceSystem/", ResponseNamespace = "http://www.realand.com/DeviceSystem/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SyncDeviceTrafficLogs([System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages)
+        {
+            object[] results = this.Invoke("SyncDeviceTrafficLogs", new object[] {
                         Devices});
             ResultType = ((ResultTypes)(results[0]));
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public System.IAsyncResult BeginSyncDoorStateLogs(DeviceController[] Devices, System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("SyncDoorStateLogs", new object[] {
+        public System.IAsyncResult BeginSyncDeviceTrafficLogs(DeviceController[] Devices, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("SyncDeviceTrafficLogs", new object[] {
                         Devices}, callback, asyncState);
         }
-        
+
         /// <remarks/>
-        public void EndSyncDoorStateLogs(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages) {
+        public void EndSyncDeviceTrafficLogs(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages)
+        {
             object[] results = this.EndInvoke(asyncResult);
             ResultType = ((ResultTypes)(results[0]));
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public void SyncDoorStateLogsAsync(DeviceController[] Devices) {
-            this.SyncDoorStateLogsAsync(Devices, null);
+        public void SyncDeviceTrafficLogsAsync(DeviceController[] Devices)
+        {
+            this.SyncDeviceTrafficLogsAsync(Devices, null);
         }
-        
+
         /// <remarks/>
-        public void SyncDoorStateLogsAsync(DeviceController[] Devices, object userState) {
-            if ((this.SyncDoorStateLogsOperationCompleted == null)) {
-                this.SyncDoorStateLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncDoorStateLogsOperationCompleted);
+        public void SyncDeviceTrafficLogsAsync(DeviceController[] Devices, object userState)
+        {
+            if ((this.SyncDeviceTrafficLogsOperationCompleted == null))
+            {
+                this.SyncDeviceTrafficLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncDeviceTrafficLogsOperationCompleted);
             }
-            this.InvokeAsync("SyncDoorStateLogs", new object[] {
-                        Devices}, this.SyncDoorStateLogsOperationCompleted, userState);
+            this.InvokeAsync("SyncDeviceTrafficLogs", new object[] {
+                        Devices}, this.SyncDeviceTrafficLogsOperationCompleted, userState);
         }
-        
-        private void OnSyncDoorStateLogsOperationCompleted(object arg) {
-            if ((this.SyncDoorStateLogsCompleted != null)) {
+
+        private void OnSyncDeviceTrafficLogsOperationCompleted(object arg)
+        {
+            if ((this.SyncDeviceTrafficLogsCompleted != null))
+            {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SyncDoorStateLogsCompleted(this, new SyncDoorStateLogsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.SyncDeviceTrafficLogsCompleted(this, new SyncDeviceTrafficLogsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeGroups", RequestElementName="SyncTimeGroupsRequest", RequestNamespace="http://www.realand.com/DeviceSystem/", ResponseNamespace="http://www.realand.com/DeviceSystem/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SyncTimeGroups([System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] TimeGroup[] TimeGroups, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceOperationLogs", RequestElementName = "SyncDeviceOperationLogsRequest", RequestNamespace = "http://www.realand.com/DeviceSystem/", ResponseNamespace = "http://www.realand.com/DeviceSystem/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SyncDeviceOperationLogs([System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages)
+        {
+            object[] results = this.Invoke("SyncDeviceOperationLogs", new object[] {
+                        Devices});
+            ResultType = ((ResultTypes)(results[0]));
+            ResultTypeSpecified = ((bool)(results[1]));
+            Messages = ((string[])(results[2]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginSyncDeviceOperationLogs(DeviceController[] Devices, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("SyncDeviceOperationLogs", new object[] {
+                        Devices}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public void EndSyncDeviceOperationLogs(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            ResultType = ((ResultTypes)(results[0]));
+            ResultTypeSpecified = ((bool)(results[1]));
+            Messages = ((string[])(results[2]));
+        }
+
+        /// <remarks/>
+        public void SyncDeviceOperationLogsAsync(DeviceController[] Devices)
+        {
+            this.SyncDeviceOperationLogsAsync(Devices, null);
+        }
+
+        /// <remarks/>
+        public void SyncDeviceOperationLogsAsync(DeviceController[] Devices, object userState)
+        {
+            if ((this.SyncDeviceOperationLogsOperationCompleted == null))
+            {
+                this.SyncDeviceOperationLogsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncDeviceOperationLogsOperationCompleted);
+            }
+            this.InvokeAsync("SyncDeviceOperationLogs", new object[] {
+                        Devices}, this.SyncDeviceOperationLogsOperationCompleted, userState);
+        }
+
+        private void OnSyncDeviceOperationLogsOperationCompleted(object arg)
+        {
+            if ((this.SyncDeviceOperationLogsCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SyncDeviceOperationLogsCompleted(this, new SyncDeviceOperationLogsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeGroups", RequestElementName = "SyncTimeGroupsRequest", RequestNamespace = "http://www.realand.com/DeviceSystem/", ResponseNamespace = "http://www.realand.com/DeviceSystem/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SyncTimeGroups([System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] TimeGroup[] TimeGroups, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages)
+        {
             object[] results = this.Invoke("SyncTimeGroups", new object[] {
                         Devices,
                         TimeGroups});
@@ -370,47 +373,55 @@ namespace Rld.Acs.WpfApplication.Service.DeviceService {
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public System.IAsyncResult BeginSyncTimeGroups(DeviceController[] Devices, TimeGroup[] TimeGroups, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginSyncTimeGroups(DeviceController[] Devices, TimeGroup[] TimeGroups, System.AsyncCallback callback, object asyncState)
+        {
             return this.BeginInvoke("SyncTimeGroups", new object[] {
                         Devices,
                         TimeGroups}, callback, asyncState);
         }
-        
+
         /// <remarks/>
-        public void EndSyncTimeGroups(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages) {
+        public void EndSyncTimeGroups(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages)
+        {
             object[] results = this.EndInvoke(asyncResult);
             ResultType = ((ResultTypes)(results[0]));
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public void SyncTimeGroupsAsync(DeviceController[] Devices, TimeGroup[] TimeGroups) {
+        public void SyncTimeGroupsAsync(DeviceController[] Devices, TimeGroup[] TimeGroups)
+        {
             this.SyncTimeGroupsAsync(Devices, TimeGroups, null);
         }
-        
+
         /// <remarks/>
-        public void SyncTimeGroupsAsync(DeviceController[] Devices, TimeGroup[] TimeGroups, object userState) {
-            if ((this.SyncTimeGroupsOperationCompleted == null)) {
+        public void SyncTimeGroupsAsync(DeviceController[] Devices, TimeGroup[] TimeGroups, object userState)
+        {
+            if ((this.SyncTimeGroupsOperationCompleted == null))
+            {
                 this.SyncTimeGroupsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncTimeGroupsOperationCompleted);
             }
             this.InvokeAsync("SyncTimeGroups", new object[] {
                         Devices,
                         TimeGroups}, this.SyncTimeGroupsOperationCompleted, userState);
         }
-        
-        private void OnSyncTimeGroupsOperationCompleted(object arg) {
-            if ((this.SyncTimeGroupsCompleted != null)) {
+
+        private void OnSyncTimeGroupsOperationCompleted(object arg)
+        {
+            if ((this.SyncTimeGroupsCompleted != null))
+            {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SyncTimeGroupsCompleted(this, new SyncTimeGroupsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeSegments", RequestElementName="SyncTimeSegmentsRequest", RequestNamespace="http://www.realand.com/DeviceSystem/", ResponseNamespace="http://www.realand.com/DeviceSystem/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SyncTimeSegments([System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] TimeSegment[] TimeSegments, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeSegments", RequestElementName = "SyncTimeSegmentsRequest", RequestNamespace = "http://www.realand.com/DeviceSystem/", ResponseNamespace = "http://www.realand.com/DeviceSystem/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SyncTimeSegments([System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] TimeSegment[] TimeSegments, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages)
+        {
             object[] results = this.Invoke("SyncTimeSegments", new object[] {
                         Devices,
                         TimeSegments});
@@ -418,47 +429,55 @@ namespace Rld.Acs.WpfApplication.Service.DeviceService {
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public System.IAsyncResult BeginSyncTimeSegments(DeviceController[] Devices, TimeSegment[] TimeSegments, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginSyncTimeSegments(DeviceController[] Devices, TimeSegment[] TimeSegments, System.AsyncCallback callback, object asyncState)
+        {
             return this.BeginInvoke("SyncTimeSegments", new object[] {
                         Devices,
                         TimeSegments}, callback, asyncState);
         }
-        
+
         /// <remarks/>
-        public void EndSyncTimeSegments(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages) {
+        public void EndSyncTimeSegments(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages)
+        {
             object[] results = this.EndInvoke(asyncResult);
             ResultType = ((ResultTypes)(results[0]));
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public void SyncTimeSegmentsAsync(DeviceController[] Devices, TimeSegment[] TimeSegments) {
+        public void SyncTimeSegmentsAsync(DeviceController[] Devices, TimeSegment[] TimeSegments)
+        {
             this.SyncTimeSegmentsAsync(Devices, TimeSegments, null);
         }
-        
+
         /// <remarks/>
-        public void SyncTimeSegmentsAsync(DeviceController[] Devices, TimeSegment[] TimeSegments, object userState) {
-            if ((this.SyncTimeSegmentsOperationCompleted == null)) {
+        public void SyncTimeSegmentsAsync(DeviceController[] Devices, TimeSegment[] TimeSegments, object userState)
+        {
+            if ((this.SyncTimeSegmentsOperationCompleted == null))
+            {
                 this.SyncTimeSegmentsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncTimeSegmentsOperationCompleted);
             }
             this.InvokeAsync("SyncTimeSegments", new object[] {
                         Devices,
                         TimeSegments}, this.SyncTimeSegmentsOperationCompleted, userState);
         }
-        
-        private void OnSyncTimeSegmentsOperationCompleted(object arg) {
-            if ((this.SyncTimeSegmentsCompleted != null)) {
+
+        private void OnSyncTimeSegmentsOperationCompleted(object arg)
+        {
+            if ((this.SyncTimeSegmentsCompleted != null))
+            {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SyncTimeSegmentsCompleted(this, new SyncTimeSegmentsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeZones", RequestElementName="SyncTimeZonesRequest", RequestNamespace="http://www.realand.com/DeviceSystem/", ResponseNamespace="http://www.realand.com/DeviceSystem/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SyncTimeZones([System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] TimeZone[] TimeZones, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeZones", RequestElementName = "SyncTimeZonesRequest", RequestNamespace = "http://www.realand.com/DeviceSystem/", ResponseNamespace = "http://www.realand.com/DeviceSystem/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void SyncTimeZones([System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] DeviceController[] Devices, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")] TimeZone[] TimeZones, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages)
+        {
             object[] results = this.Invoke("SyncTimeZones", new object[] {
                         Devices,
                         TimeZones});
@@ -466,3963 +485,5100 @@ namespace Rld.Acs.WpfApplication.Service.DeviceService {
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public System.IAsyncResult BeginSyncTimeZones(DeviceController[] Devices, TimeZone[] TimeZones, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginSyncTimeZones(DeviceController[] Devices, TimeZone[] TimeZones, System.AsyncCallback callback, object asyncState)
+        {
             return this.BeginInvoke("SyncTimeZones", new object[] {
                         Devices,
                         TimeZones}, callback, asyncState);
         }
-        
+
         /// <remarks/>
-        public void EndSyncTimeZones(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages) {
+        public void EndSyncTimeZones(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages)
+        {
             object[] results = this.EndInvoke(asyncResult);
             ResultType = ((ResultTypes)(results[0]));
             ResultTypeSpecified = ((bool)(results[1]));
             Messages = ((string[])(results[2]));
         }
-        
+
         /// <remarks/>
-        public void SyncTimeZonesAsync(DeviceController[] Devices, TimeZone[] TimeZones) {
+        public void SyncTimeZonesAsync(DeviceController[] Devices, TimeZone[] TimeZones)
+        {
             this.SyncTimeZonesAsync(Devices, TimeZones, null);
         }
-        
+
         /// <remarks/>
-        public void SyncTimeZonesAsync(DeviceController[] Devices, TimeZone[] TimeZones, object userState) {
-            if ((this.SyncTimeZonesOperationCompleted == null)) {
+        public void SyncTimeZonesAsync(DeviceController[] Devices, TimeZone[] TimeZones, object userState)
+        {
+            if ((this.SyncTimeZonesOperationCompleted == null))
+            {
                 this.SyncTimeZonesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSyncTimeZonesOperationCompleted);
             }
             this.InvokeAsync("SyncTimeZones", new object[] {
                         Devices,
                         TimeZones}, this.SyncTimeZonesOperationCompleted, userState);
         }
-        
-        private void OnSyncTimeZonesOperationCompleted(object arg) {
-            if ((this.SyncTimeZonesCompleted != null)) {
+
+        private void OnSyncTimeZonesOperationCompleted(object arg)
+        {
+            if ((this.SyncTimeZonesCompleted != null))
+            {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SyncTimeZonesCompleted(this, new SyncTimeZonesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
         /// <remarks/>
-        public new void CancelAsync(object userState) {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/GetDoorState", RequestElementName = "GetDoorStateRequest", RequestNamespace = "http://www.realand.com/DeviceSystem/", ResponseNamespace = "http://www.realand.com/DeviceSystem/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetDoorState(int DeviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool DeviceIdSpecified, int DoorIndex, [System.Xml.Serialization.XmlIgnoreAttribute()] bool DoorIndexSpecified, out bool IsOpened, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool IsOpenedSpecified, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages)
+        {
+            object[] results = this.Invoke("GetDoorState", new object[] {
+                        DeviceId,
+                        DeviceIdSpecified,
+                        DoorIndex,
+                        DoorIndexSpecified});
+            IsOpened = ((bool)(results[0]));
+            IsOpenedSpecified = ((bool)(results[1]));
+            ResultType = ((ResultTypes)(results[2]));
+            ResultTypeSpecified = ((bool)(results[3]));
+            Messages = ((string[])(results[4]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginGetDoorState(int DeviceId, bool DeviceIdSpecified, int DoorIndex, bool DoorIndexSpecified, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("GetDoorState", new object[] {
+                        DeviceId,
+                        DeviceIdSpecified,
+                        DoorIndex,
+                        DoorIndexSpecified}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public void EndGetDoorState(System.IAsyncResult asyncResult, out bool IsOpened, out bool IsOpenedSpecified, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            IsOpened = ((bool)(results[0]));
+            IsOpenedSpecified = ((bool)(results[1]));
+            ResultType = ((ResultTypes)(results[2]));
+            ResultTypeSpecified = ((bool)(results[3]));
+            Messages = ((string[])(results[4]));
+        }
+
+        /// <remarks/>
+        public void GetDoorStateAsync(int DeviceId, bool DeviceIdSpecified, int DoorIndex, bool DoorIndexSpecified)
+        {
+            this.GetDoorStateAsync(DeviceId, DeviceIdSpecified, DoorIndex, DoorIndexSpecified, null);
+        }
+
+        /// <remarks/>
+        public void GetDoorStateAsync(int DeviceId, bool DeviceIdSpecified, int DoorIndex, bool DoorIndexSpecified, object userState)
+        {
+            if ((this.GetDoorStateOperationCompleted == null))
+            {
+                this.GetDoorStateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetDoorStateOperationCompleted);
+            }
+            this.InvokeAsync("GetDoorState", new object[] {
+                        DeviceId,
+                        DeviceIdSpecified,
+                        DoorIndex,
+                        DoorIndexSpecified}, this.GetDoorStateOperationCompleted, userState);
+        }
+
+        private void OnGetDoorStateOperationCompleted(object arg)
+        {
+            if ((this.GetDoorStateCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetDoorStateCompleted(this, new GetDoorStateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorState", RequestElementName = "UpdateDoorStateRequest", RequestNamespace = "http://www.realand.com/DeviceSystem/", ResponseNamespace = "http://www.realand.com/DeviceSystem/", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateDoorState(int DeviceId, [System.Xml.Serialization.XmlIgnoreAttribute()] bool DeviceIdSpecified, int DoorIndex, [System.Xml.Serialization.XmlIgnoreAttribute()] bool DoorIndexSpecified, DoorControlOption Option, [System.Xml.Serialization.XmlIgnoreAttribute()] bool OptionSpecified, out ResultTypes ResultType, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool ResultTypeSpecified, [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)] [System.Xml.Serialization.XmlArrayItemAttribute(Namespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays")] out string[] Messages)
+        {
+            object[] results = this.Invoke("UpdateDoorState", new object[] {
+                        DeviceId,
+                        DeviceIdSpecified,
+                        DoorIndex,
+                        DoorIndexSpecified,
+                        Option,
+                        OptionSpecified});
+            ResultType = ((ResultTypes)(results[0]));
+            ResultTypeSpecified = ((bool)(results[1]));
+            Messages = ((string[])(results[2]));
+        }
+
+        /// <remarks/>
+        public System.IAsyncResult BeginUpdateDoorState(int DeviceId, bool DeviceIdSpecified, int DoorIndex, bool DoorIndexSpecified, DoorControlOption Option, bool OptionSpecified, System.AsyncCallback callback, object asyncState)
+        {
+            return this.BeginInvoke("UpdateDoorState", new object[] {
+                        DeviceId,
+                        DeviceIdSpecified,
+                        DoorIndex,
+                        DoorIndexSpecified,
+                        Option,
+                        OptionSpecified}, callback, asyncState);
+        }
+
+        /// <remarks/>
+        public void EndUpdateDoorState(System.IAsyncResult asyncResult, out ResultTypes ResultType, out bool ResultTypeSpecified, out string[] Messages)
+        {
+            object[] results = this.EndInvoke(asyncResult);
+            ResultType = ((ResultTypes)(results[0]));
+            ResultTypeSpecified = ((bool)(results[1]));
+            Messages = ((string[])(results[2]));
+        }
+
+        /// <remarks/>
+        public void UpdateDoorStateAsync(int DeviceId, bool DeviceIdSpecified, int DoorIndex, bool DoorIndexSpecified, DoorControlOption Option, bool OptionSpecified)
+        {
+            this.UpdateDoorStateAsync(DeviceId, DeviceIdSpecified, DoorIndex, DoorIndexSpecified, Option, OptionSpecified, null);
+        }
+
+        /// <remarks/>
+        public void UpdateDoorStateAsync(int DeviceId, bool DeviceIdSpecified, int DoorIndex, bool DoorIndexSpecified, DoorControlOption Option, bool OptionSpecified, object userState)
+        {
+            if ((this.UpdateDoorStateOperationCompleted == null))
+            {
+                this.UpdateDoorStateOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateDoorStateOperationCompleted);
+            }
+            this.InvokeAsync("UpdateDoorState", new object[] {
+                        DeviceId,
+                        DeviceIdSpecified,
+                        DoorIndex,
+                        DoorIndexSpecified,
+                        Option,
+                        OptionSpecified}, this.UpdateDoorStateOperationCompleted, userState);
+        }
+
+        private void OnUpdateDoorStateOperationCompleted(object arg)
+        {
+            if ((this.UpdateDoorStateCompleted != null))
+            {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateDoorStateCompleted(this, new UpdateDoorStateCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+
+        /// <remarks/>
+        public new void CancelAsync(object userState)
+        {
             base.CancelAsync(userState);
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class DeviceController {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class DeviceController
+    {
+
         private string baudRateField;
-        
-        private CommunicationType communicationTypeField;
-        
+
+        private string codeField;
+
+        private int communicationTypeField;
+
         private bool communicationTypeFieldSpecified;
-        
+
         private System.DateTime createDateField;
-        
+
         private bool createDateFieldSpecified;
-        
+
         private int createUserIDField;
-        
+
         private bool createUserIDFieldSpecified;
-        
-        private string deviceCodeField;
-        
+
         private DeviceControllerParameter deviceControllerParameterField;
-        
+
         private DeviceDoor[] deviceDoorsField;
-        
+
         private DeviceHeadReading[] deviceHeadReadingsField;
-        
+
         private int deviceIDField;
-        
+
         private bool deviceIDFieldSpecified;
-        
+
         private string ipField;
-        
+
         private string labelField;
-        
+
         private string macField;
-        
-        private string modeField;
-        
+
+        private string modelField;
+
+        private string nameField;
+
         private string passwordField;
-        
+
         private string portField;
-        
-        private string protocolField;
-        
+
+        private int protocolField;
+
+        private bool protocolFieldSpecified;
+
         private string remarkField;
-        
+
         private string snField;
-        
+
         private string serialPortField;
-        
+
         private string serverURLField;
-        
+
         private GeneralStatus statusField;
-        
+
         private bool statusFieldSpecified;
-        
+
         private System.Nullable<System.DateTime> updateDateField;
-        
+
         private bool updateDateFieldSpecified;
-        
+
         private System.Nullable<int> updateUserIDField;
-        
+
         private bool updateUserIDFieldSpecified;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string BaudRate {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string BaudRate
+        {
+            get
+            {
                 return this.baudRateField;
             }
-            set {
+            set
+            {
                 this.baudRateField = value;
             }
         }
-        
+
         /// <remarks/>
-        public CommunicationType CommunicationType {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Code
+        {
+            get
+            {
+                return this.codeField;
+            }
+            set
+            {
+                this.codeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int CommunicationType
+        {
+            get
+            {
                 return this.communicationTypeField;
             }
-            set {
+            set
+            {
                 this.communicationTypeField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CommunicationTypeSpecified {
-            get {
+        public bool CommunicationTypeSpecified
+        {
+            get
+            {
                 return this.communicationTypeFieldSpecified;
             }
-            set {
+            set
+            {
                 this.communicationTypeFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public System.DateTime CreateDate {
-            get {
+        public System.DateTime CreateDate
+        {
+            get
+            {
                 return this.createDateField;
             }
-            set {
+            set
+            {
                 this.createDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateDateSpecified {
-            get {
+        public bool CreateDateSpecified
+        {
+            get
+            {
                 return this.createDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int CreateUserID {
-            get {
+        public int CreateUserID
+        {
+            get
+            {
                 return this.createUserIDField;
             }
-            set {
+            set
+            {
                 this.createUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateUserIDSpecified {
-            get {
+        public bool CreateUserIDSpecified
+        {
+            get
+            {
                 return this.createUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createUserIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string DeviceCode {
-            get {
-                return this.deviceCodeField;
-            }
-            set {
-                this.deviceCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public DeviceControllerParameter DeviceControllerParameter {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public DeviceControllerParameter DeviceControllerParameter
+        {
+            get
+            {
                 return this.deviceControllerParameterField;
             }
-            set {
+            set
+            {
                 this.deviceControllerParameterField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public DeviceDoor[] DeviceDoors {
-            get {
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+        public DeviceDoor[] DeviceDoors
+        {
+            get
+            {
                 return this.deviceDoorsField;
             }
-            set {
+            set
+            {
                 this.deviceDoorsField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public DeviceHeadReading[] DeviceHeadReadings {
-            get {
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+        public DeviceHeadReading[] DeviceHeadReadings
+        {
+            get
+            {
                 return this.deviceHeadReadingsField;
             }
-            set {
+            set
+            {
                 this.deviceHeadReadingsField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int DeviceID {
-            get {
+        public int DeviceID
+        {
+            get
+            {
                 return this.deviceIDField;
             }
-            set {
+            set
+            {
                 this.deviceIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceIDSpecified {
-            get {
+        public bool DeviceIDSpecified
+        {
+            get
+            {
                 return this.deviceIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.deviceIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string IP {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string IP
+        {
+            get
+            {
                 return this.ipField;
             }
-            set {
+            set
+            {
                 this.ipField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Label {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Label
+        {
+            get
+            {
                 return this.labelField;
             }
-            set {
+            set
+            {
                 this.labelField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Mac {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Mac
+        {
+            get
+            {
                 return this.macField;
             }
-            set {
+            set
+            {
                 this.macField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Mode {
-            get {
-                return this.modeField;
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Model
+        {
+            get
+            {
+                return this.modelField;
             }
-            set {
-                this.modeField = value;
+            set
+            {
+                this.modelField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Password {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Password
+        {
+            get
+            {
                 return this.passwordField;
             }
-            set {
+            set
+            {
                 this.passwordField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Port {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Port
+        {
+            get
+            {
                 return this.portField;
             }
-            set {
+            set
+            {
                 this.portField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Protocol {
-            get {
+        public int Protocol
+        {
+            get
+            {
                 return this.protocolField;
             }
-            set {
+            set
+            {
                 this.protocolField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Remark {
-            get {
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ProtocolSpecified
+        {
+            get
+            {
+                return this.protocolFieldSpecified;
+            }
+            set
+            {
+                this.protocolFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Remark
+        {
+            get
+            {
                 return this.remarkField;
             }
-            set {
+            set
+            {
                 this.remarkField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string SN {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string SN
+        {
+            get
+            {
                 return this.snField;
             }
-            set {
+            set
+            {
                 this.snField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string SerialPort {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string SerialPort
+        {
+            get
+            {
                 return this.serialPortField;
             }
-            set {
+            set
+            {
                 this.serialPortField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string ServerURL {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string ServerURL
+        {
+            get
+            {
                 return this.serverURLField;
             }
-            set {
+            set
+            {
                 this.serverURLField = value;
             }
         }
-        
+
         /// <remarks/>
-        public GeneralStatus Status {
-            get {
+        public GeneralStatus Status
+        {
+            get
+            {
                 return this.statusField;
             }
-            set {
+            set
+            {
                 this.statusField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified {
-            get {
+        public bool StatusSpecified
+        {
+            get
+            {
                 return this.statusFieldSpecified;
             }
-            set {
+            set
+            {
                 this.statusFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> UpdateDate {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<System.DateTime> UpdateDate
+        {
+            get
+            {
                 return this.updateDateField;
             }
-            set {
+            set
+            {
                 this.updateDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateDateSpecified {
-            get {
+        public bool UpdateDateSpecified
+        {
+            get
+            {
                 return this.updateDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> UpdateUserID {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> UpdateUserID
+        {
+            get
+            {
                 return this.updateUserIDField;
             }
-            set {
+            set
+            {
                 this.updateUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateUserIDSpecified {
-            get {
+        public bool UpdateUserIDSpecified
+        {
+            get
+            {
                 return this.updateUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateUserIDFieldSpecified = value;
             }
         }
     }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public enum CommunicationType {
-        
-        /// <remarks/>
-        USB,
-        
-        /// <remarks/>
-        P2P,
-        
-        /// <remarks/>
-        TCP_IP,
-    }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class DeviceControllerParameter {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class DeviceControllerParameter
+    {
+
+        private bool antiPassbackEnabledField;
+
+        private bool antiPassbackEnabledFieldSpecified;
+
         private int authticationTypeField;
-        
+
         private bool authticationTypeFieldSpecified;
-        
-        private System.Nullable<int> autoOpenTimeZoneField;
-        
-        private bool autoOpenTimeZoneFieldSpecified;
-        
+
         private int deviceParameterIDField;
-        
+
         private bool deviceParameterIDFieldSpecified;
-        
-        private System.Nullable<bool> duressAlarmField;
-        
+
+        private bool doorLinkageEnabledField;
+
+        private bool doorLinkageEnabledFieldSpecified;
+
+        private bool duressAlarmField;
+
         private bool duressAlarmFieldSpecified;
-        
-        private System.Nullable<int> duressFingerPrintField;
-        
-        private bool duressFingerPrintFieldSpecified;
-        
-        private System.Nullable<bool> duressOpenField;
-        
+
+        private bool duressEnabledField;
+
+        private bool duressEnabledFieldSpecified;
+
+        private int duressFingerPrintIndexField;
+
+        private bool duressFingerPrintIndexFieldSpecified;
+
+        private bool duressOpenField;
+
         private bool duressOpenFieldSpecified;
-        
+
         private string duressPasswordField;
-        
-        private System.Nullable<bool> isSneakField;
-        
-        private bool isSneakFieldSpecified;
-        
-        private System.Nullable<bool> launchDuressField;
-        
-        private bool launchDuressFieldSpecified;
-        
-        private System.Nullable<bool> linkageField;
-        
-        private bool linkageFieldSpecified;
-        
-        private System.Nullable<bool> multiPersonLockField;
-        
+
+        private bool multiPersonLockField;
+
         private bool multiPersonLockFieldSpecified;
-        
+
+        private System.Nullable<int> unlockOpenTimeZoneField;
+
+        private bool unlockOpenTimeZoneFieldSpecified;
+
         /// <remarks/>
-        public int AuthticationType {
-            get {
+        public bool AntiPassbackEnabled
+        {
+            get
+            {
+                return this.antiPassbackEnabledField;
+            }
+            set
+            {
+                this.antiPassbackEnabledField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AntiPassbackEnabledSpecified
+        {
+            get
+            {
+                return this.antiPassbackEnabledFieldSpecified;
+            }
+            set
+            {
+                this.antiPassbackEnabledFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public int AuthticationType
+        {
+            get
+            {
                 return this.authticationTypeField;
             }
-            set {
+            set
+            {
                 this.authticationTypeField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AuthticationTypeSpecified {
-            get {
+        public bool AuthticationTypeSpecified
+        {
+            get
+            {
                 return this.authticationTypeFieldSpecified;
             }
-            set {
+            set
+            {
                 this.authticationTypeFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> AutoOpenTimeZone {
-            get {
-                return this.autoOpenTimeZoneField;
-            }
-            set {
-                this.autoOpenTimeZoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AutoOpenTimeZoneSpecified {
-            get {
-                return this.autoOpenTimeZoneFieldSpecified;
-            }
-            set {
-                this.autoOpenTimeZoneFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int DeviceParameterID {
-            get {
+        public int DeviceParameterID
+        {
+            get
+            {
                 return this.deviceParameterIDField;
             }
-            set {
+            set
+            {
                 this.deviceParameterIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceParameterIDSpecified {
-            get {
+        public bool DeviceParameterIDSpecified
+        {
+            get
+            {
                 return this.deviceParameterIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.deviceParameterIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> DuressAlarm {
-            get {
+        public bool DoorLinkageEnabled
+        {
+            get
+            {
+                return this.doorLinkageEnabledField;
+            }
+            set
+            {
+                this.doorLinkageEnabledField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DoorLinkageEnabledSpecified
+        {
+            get
+            {
+                return this.doorLinkageEnabledFieldSpecified;
+            }
+            set
+            {
+                this.doorLinkageEnabledFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool DuressAlarm
+        {
+            get
+            {
                 return this.duressAlarmField;
             }
-            set {
+            set
+            {
                 this.duressAlarmField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DuressAlarmSpecified {
-            get {
+        public bool DuressAlarmSpecified
+        {
+            get
+            {
                 return this.duressAlarmFieldSpecified;
             }
-            set {
+            set
+            {
                 this.duressAlarmFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> DuressFingerPrint {
-            get {
-                return this.duressFingerPrintField;
+        public bool DuressEnabled
+        {
+            get
+            {
+                return this.duressEnabledField;
             }
-            set {
-                this.duressFingerPrintField = value;
+            set
+            {
+                this.duressEnabledField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DuressFingerPrintSpecified {
-            get {
-                return this.duressFingerPrintFieldSpecified;
+        public bool DuressEnabledSpecified
+        {
+            get
+            {
+                return this.duressEnabledFieldSpecified;
             }
-            set {
-                this.duressFingerPrintFieldSpecified = value;
+            set
+            {
+                this.duressEnabledFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> DuressOpen {
-            get {
+        public int DuressFingerPrintIndex
+        {
+            get
+            {
+                return this.duressFingerPrintIndexField;
+            }
+            set
+            {
+                this.duressFingerPrintIndexField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DuressFingerPrintIndexSpecified
+        {
+            get
+            {
+                return this.duressFingerPrintIndexFieldSpecified;
+            }
+            set
+            {
+                this.duressFingerPrintIndexFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool DuressOpen
+        {
+            get
+            {
                 return this.duressOpenField;
             }
-            set {
+            set
+            {
                 this.duressOpenField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DuressOpenSpecified {
-            get {
+        public bool DuressOpenSpecified
+        {
+            get
+            {
                 return this.duressOpenFieldSpecified;
             }
-            set {
+            set
+            {
                 this.duressOpenFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string DuressPassword {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string DuressPassword
+        {
+            get
+            {
                 return this.duressPasswordField;
             }
-            set {
+            set
+            {
                 this.duressPasswordField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsSneak {
-            get {
-                return this.isSneakField;
-            }
-            set {
-                this.isSneakField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsSneakSpecified {
-            get {
-                return this.isSneakFieldSpecified;
-            }
-            set {
-                this.isSneakFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> LaunchDuress {
-            get {
-                return this.launchDuressField;
-            }
-            set {
-                this.launchDuressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LaunchDuressSpecified {
-            get {
-                return this.launchDuressFieldSpecified;
-            }
-            set {
-                this.launchDuressFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> Linkage {
-            get {
-                return this.linkageField;
-            }
-            set {
-                this.linkageField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LinkageSpecified {
-            get {
-                return this.linkageFieldSpecified;
-            }
-            set {
-                this.linkageFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> MultiPersonLock {
-            get {
+        public bool MultiPersonLock
+        {
+            get
+            {
                 return this.multiPersonLockField;
             }
-            set {
+            set
+            {
                 this.multiPersonLockField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MultiPersonLockSpecified {
-            get {
+        public bool MultiPersonLockSpecified
+        {
+            get
+            {
                 return this.multiPersonLockFieldSpecified;
             }
-            set {
+            set
+            {
                 this.multiPersonLockFieldSpecified = value;
             }
         }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> UnlockOpenTimeZone
+        {
+            get
+            {
+                return this.unlockOpenTimeZoneField;
+            }
+            set
+            {
+                this.unlockOpenTimeZoneField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool UnlockOpenTimeZoneSpecified
+        {
+            get
+            {
+                return this.unlockOpenTimeZoneFieldSpecified;
+            }
+            set
+            {
+                this.unlockOpenTimeZoneFieldSpecified = value;
+            }
+        }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class TimeZoneGroup {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class TimeZoneGroup
+    {
+
         private int displayOrderField;
-        
+
         private bool displayOrderFieldSpecified;
-        
+
         private string mappingNameField;
-        
+
         private int timeGroupIDField;
-        
+
         private bool timeGroupIDFieldSpecified;
-        
+
         private int timeZoneGroupIDField;
-        
+
         private bool timeZoneGroupIDFieldSpecified;
-        
+
         private int timeZoneIDField;
-        
+
         private bool timeZoneIDFieldSpecified;
-        
+
         /// <remarks/>
-        public int DisplayOrder {
-            get {
+        public int DisplayOrder
+        {
+            get
+            {
                 return this.displayOrderField;
             }
-            set {
+            set
+            {
                 this.displayOrderField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DisplayOrderSpecified {
-            get {
+        public bool DisplayOrderSpecified
+        {
+            get
+            {
                 return this.displayOrderFieldSpecified;
             }
-            set {
+            set
+            {
                 this.displayOrderFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string MappingName {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string MappingName
+        {
+            get
+            {
                 return this.mappingNameField;
             }
-            set {
+            set
+            {
                 this.mappingNameField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int TimeGroupID {
-            get {
+        public int TimeGroupID
+        {
+            get
+            {
                 return this.timeGroupIDField;
             }
-            set {
+            set
+            {
                 this.timeGroupIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TimeGroupIDSpecified {
-            get {
+        public bool TimeGroupIDSpecified
+        {
+            get
+            {
                 return this.timeGroupIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.timeGroupIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int TimeZoneGroupID {
-            get {
+        public int TimeZoneGroupID
+        {
+            get
+            {
                 return this.timeZoneGroupIDField;
             }
-            set {
+            set
+            {
                 this.timeZoneGroupIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TimeZoneGroupIDSpecified {
-            get {
+        public bool TimeZoneGroupIDSpecified
+        {
+            get
+            {
                 return this.timeZoneGroupIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.timeZoneGroupIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int TimeZoneID {
-            get {
+        public int TimeZoneID
+        {
+            get
+            {
                 return this.timeZoneIDField;
             }
-            set {
+            set
+            {
                 this.timeZoneIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TimeZoneIDSpecified {
-            get {
+        public bool TimeZoneIDSpecified
+        {
+            get
+            {
                 return this.timeZoneIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.timeZoneIDFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class TimeZone {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class TimeZone
+    {
+
         private System.DateTime createDateField;
-        
+
         private bool createDateFieldSpecified;
-        
+
         private int createUserIDField;
-        
+
         private bool createUserIDFieldSpecified;
-        
+
         private GeneralStatus statusField;
-        
+
         private bool statusFieldSpecified;
-        
+
         private TimeZoneGroup[] timeGroupAssociationsField;
-        
+
         private int timeZoneIDField;
-        
+
         private bool timeZoneIDFieldSpecified;
-        
+
         private string timeZoneNameField;
-        
+
         private System.Nullable<System.DateTime> updateDateField;
-        
+
         private bool updateDateFieldSpecified;
-        
+
         private System.Nullable<int> updateUserIDField;
-        
+
         private bool updateUserIDFieldSpecified;
-        
+
         /// <remarks/>
-        public System.DateTime CreateDate {
-            get {
+        public System.DateTime CreateDate
+        {
+            get
+            {
                 return this.createDateField;
             }
-            set {
+            set
+            {
                 this.createDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateDateSpecified {
-            get {
+        public bool CreateDateSpecified
+        {
+            get
+            {
                 return this.createDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int CreateUserID {
-            get {
+        public int CreateUserID
+        {
+            get
+            {
                 return this.createUserIDField;
             }
-            set {
+            set
+            {
                 this.createUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateUserIDSpecified {
-            get {
+        public bool CreateUserIDSpecified
+        {
+            get
+            {
                 return this.createUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createUserIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public GeneralStatus Status {
-            get {
+        public GeneralStatus Status
+        {
+            get
+            {
                 return this.statusField;
             }
-            set {
+            set
+            {
                 this.statusField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified {
-            get {
+        public bool StatusSpecified
+        {
+            get
+            {
                 return this.statusFieldSpecified;
             }
-            set {
+            set
+            {
                 this.statusFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public TimeZoneGroup[] TimeGroupAssociations {
-            get {
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+        public TimeZoneGroup[] TimeGroupAssociations
+        {
+            get
+            {
                 return this.timeGroupAssociationsField;
             }
-            set {
+            set
+            {
                 this.timeGroupAssociationsField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int TimeZoneID {
-            get {
+        public int TimeZoneID
+        {
+            get
+            {
                 return this.timeZoneIDField;
             }
-            set {
+            set
+            {
                 this.timeZoneIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TimeZoneIDSpecified {
-            get {
+        public bool TimeZoneIDSpecified
+        {
+            get
+            {
                 return this.timeZoneIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.timeZoneIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string TimeZoneName {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string TimeZoneName
+        {
+            get
+            {
                 return this.timeZoneNameField;
             }
-            set {
+            set
+            {
                 this.timeZoneNameField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> UpdateDate {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<System.DateTime> UpdateDate
+        {
+            get
+            {
                 return this.updateDateField;
             }
-            set {
+            set
+            {
                 this.updateDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateDateSpecified {
-            get {
+        public bool UpdateDateSpecified
+        {
+            get
+            {
                 return this.updateDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> UpdateUserID {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> UpdateUserID
+        {
+            get
+            {
                 return this.updateUserIDField;
             }
-            set {
+            set
+            {
                 this.updateUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateUserIDSpecified {
-            get {
+        public bool UpdateUserIDSpecified
+        {
+            get
+            {
                 return this.updateUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateUserIDFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public enum GeneralStatus {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public enum GeneralStatus
+    {
+
         /// <remarks/>
         Disabled,
-        
+
         /// <remarks/>
         Enabled,
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class TimeSegment {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class TimeSegment
+    {
+
         private string beginTimeField;
-        
+
         private System.DateTime createDateField;
-        
+
         private bool createDateFieldSpecified;
-        
+
         private int createUserIDField;
-        
+
         private bool createUserIDFieldSpecified;
-        
+
         private string endTimeField;
-        
+
         private GeneralStatus statusField;
-        
+
         private bool statusFieldSpecified;
-        
+
         private int timeSegmentIDField;
-        
+
         private bool timeSegmentIDFieldSpecified;
-        
+
         private string timeSegmentNameField;
-        
+
         private System.Nullable<System.DateTime> updateDateField;
-        
+
         private bool updateDateFieldSpecified;
-        
+
         private System.Nullable<int> updateUserIDField;
-        
+
         private bool updateUserIDFieldSpecified;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string BeginTime {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string BeginTime
+        {
+            get
+            {
                 return this.beginTimeField;
             }
-            set {
+            set
+            {
                 this.beginTimeField = value;
             }
         }
-        
+
         /// <remarks/>
-        public System.DateTime CreateDate {
-            get {
+        public System.DateTime CreateDate
+        {
+            get
+            {
                 return this.createDateField;
             }
-            set {
+            set
+            {
                 this.createDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateDateSpecified {
-            get {
+        public bool CreateDateSpecified
+        {
+            get
+            {
                 return this.createDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int CreateUserID {
-            get {
+        public int CreateUserID
+        {
+            get
+            {
                 return this.createUserIDField;
             }
-            set {
+            set
+            {
                 this.createUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateUserIDSpecified {
-            get {
+        public bool CreateUserIDSpecified
+        {
+            get
+            {
                 return this.createUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createUserIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string EndTime {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string EndTime
+        {
+            get
+            {
                 return this.endTimeField;
             }
-            set {
+            set
+            {
                 this.endTimeField = value;
             }
         }
-        
+
         /// <remarks/>
-        public GeneralStatus Status {
-            get {
+        public GeneralStatus Status
+        {
+            get
+            {
                 return this.statusField;
             }
-            set {
+            set
+            {
                 this.statusField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified {
-            get {
+        public bool StatusSpecified
+        {
+            get
+            {
                 return this.statusFieldSpecified;
             }
-            set {
+            set
+            {
                 this.statusFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int TimeSegmentID {
-            get {
+        public int TimeSegmentID
+        {
+            get
+            {
                 return this.timeSegmentIDField;
             }
-            set {
+            set
+            {
                 this.timeSegmentIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TimeSegmentIDSpecified {
-            get {
+        public bool TimeSegmentIDSpecified
+        {
+            get
+            {
                 return this.timeSegmentIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.timeSegmentIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string TimeSegmentName {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string TimeSegmentName
+        {
+            get
+            {
                 return this.timeSegmentNameField;
             }
-            set {
+            set
+            {
                 this.timeSegmentNameField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> UpdateDate {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<System.DateTime> UpdateDate
+        {
+            get
+            {
                 return this.updateDateField;
             }
-            set {
+            set
+            {
                 this.updateDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateDateSpecified {
-            get {
+        public bool UpdateDateSpecified
+        {
+            get
+            {
                 return this.updateDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> UpdateUserID {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> UpdateUserID
+        {
+            get
+            {
                 return this.updateUserIDField;
             }
-            set {
+            set
+            {
                 this.updateUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateUserIDSpecified {
-            get {
+        public bool UpdateUserIDSpecified
+        {
+            get
+            {
                 return this.updateUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateUserIDFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class TimeGroup {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class TimeGroup
+    {
+
         private System.DateTime createDateField;
-        
+
         private bool createDateFieldSpecified;
-        
+
         private int createUserIDField;
-        
+
         private bool createUserIDFieldSpecified;
-        
+
         private GeneralStatus statusField;
-        
+
         private bool statusFieldSpecified;
-        
+
         private int timeGroupIDField;
-        
+
         private bool timeGroupIDFieldSpecified;
-        
+
         private string timeGroupNameField;
-        
+
         private TimeSegment[] timeSegmentsField;
-        
+
         private System.Nullable<System.DateTime> updateDateField;
-        
+
         private bool updateDateFieldSpecified;
-        
+
         private System.Nullable<int> updateUserIDField;
-        
+
         private bool updateUserIDFieldSpecified;
-        
+
         /// <remarks/>
-        public System.DateTime CreateDate {
-            get {
+        public System.DateTime CreateDate
+        {
+            get
+            {
                 return this.createDateField;
             }
-            set {
+            set
+            {
                 this.createDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateDateSpecified {
-            get {
+        public bool CreateDateSpecified
+        {
+            get
+            {
                 return this.createDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int CreateUserID {
-            get {
+        public int CreateUserID
+        {
+            get
+            {
                 return this.createUserIDField;
             }
-            set {
+            set
+            {
                 this.createUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateUserIDSpecified {
-            get {
+        public bool CreateUserIDSpecified
+        {
+            get
+            {
                 return this.createUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createUserIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public GeneralStatus Status {
-            get {
+        public GeneralStatus Status
+        {
+            get
+            {
                 return this.statusField;
             }
-            set {
+            set
+            {
                 this.statusField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified {
-            get {
+        public bool StatusSpecified
+        {
+            get
+            {
                 return this.statusFieldSpecified;
             }
-            set {
+            set
+            {
                 this.statusFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int TimeGroupID {
-            get {
+        public int TimeGroupID
+        {
+            get
+            {
                 return this.timeGroupIDField;
             }
-            set {
+            set
+            {
                 this.timeGroupIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TimeGroupIDSpecified {
-            get {
+        public bool TimeGroupIDSpecified
+        {
+            get
+            {
                 return this.timeGroupIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.timeGroupIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string TimeGroupName {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string TimeGroupName
+        {
+            get
+            {
                 return this.timeGroupNameField;
             }
-            set {
+            set
+            {
                 this.timeGroupNameField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public TimeSegment[] TimeSegments {
-            get {
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+        public TimeSegment[] TimeSegments
+        {
+            get
+            {
                 return this.timeSegmentsField;
             }
-            set {
+            set
+            {
                 this.timeSegmentsField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> UpdateDate {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<System.DateTime> UpdateDate
+        {
+            get
+            {
                 return this.updateDateField;
             }
-            set {
+            set
+            {
                 this.updateDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateDateSpecified {
-            get {
+        public bool UpdateDateSpecified
+        {
+            get
+            {
                 return this.updateDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> UpdateUserID {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> UpdateUserID
+        {
+            get
+            {
                 return this.updateUserIDField;
             }
-            set {
+            set
+            {
                 this.updateUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateUserIDSpecified {
-            get {
+        public bool UpdateUserIDSpecified
+        {
+            get
+            {
                 return this.updateUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateUserIDFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class DepartmentDevice {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class DepartmentDevice
+    {
+
         private int departmentDeviceIDField;
-        
+
         private bool departmentDeviceIDFieldSpecified;
-        
+
         private int departmentIDField;
-        
+
         private bool departmentIDFieldSpecified;
-        
+
         private int deviceIDField;
-        
+
         private bool deviceIDFieldSpecified;
-        
+
         /// <remarks/>
-        public int DepartmentDeviceID {
-            get {
+        public int DepartmentDeviceID
+        {
+            get
+            {
                 return this.departmentDeviceIDField;
             }
-            set {
+            set
+            {
                 this.departmentDeviceIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DepartmentDeviceIDSpecified {
-            get {
+        public bool DepartmentDeviceIDSpecified
+        {
+            get
+            {
                 return this.departmentDeviceIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.departmentDeviceIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int DepartmentID {
-            get {
+        public int DepartmentID
+        {
+            get
+            {
                 return this.departmentIDField;
             }
-            set {
+            set
+            {
                 this.departmentIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DepartmentIDSpecified {
-            get {
+        public bool DepartmentIDSpecified
+        {
+            get
+            {
                 return this.departmentIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.departmentIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int DeviceID {
-            get {
+        public int DeviceID
+        {
+            get
+            {
                 return this.deviceIDField;
             }
-            set {
+            set
+            {
                 this.deviceIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceIDSpecified {
-            get {
+        public bool DeviceIDSpecified
+        {
+            get
+            {
                 return this.deviceIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.deviceIDFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class Department {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class Department
+    {
+
         private System.DateTime createDateField;
-        
+
         private bool createDateFieldSpecified;
-        
+
         private int createUserIDField;
-        
+
         private bool createUserIDFieldSpecified;
-        
+
         private string departmentCodeField;
-        
+
         private int departmentIDField;
-        
+
         private bool departmentIDFieldSpecified;
-        
+
         private DepartmentDevice[] deviceAssociationsField;
-        
+
         private int deviceRoleIDField;
-        
+
         private bool deviceRoleIDFieldSpecified;
-        
+
         private string nameField;
-        
+
         private Department parentField;
-        
+
         private string remarkField;
-        
+
         private GeneralStatus statusField;
-        
+
         private bool statusFieldSpecified;
-        
+
         private System.Nullable<System.DateTime> updateDateField;
-        
+
         private bool updateDateFieldSpecified;
-        
+
         private System.Nullable<int> updateUserIDField;
-        
+
         private bool updateUserIDFieldSpecified;
-        
+
         /// <remarks/>
-        public System.DateTime CreateDate {
-            get {
+        public System.DateTime CreateDate
+        {
+            get
+            {
                 return this.createDateField;
             }
-            set {
+            set
+            {
                 this.createDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateDateSpecified {
-            get {
+        public bool CreateDateSpecified
+        {
+            get
+            {
                 return this.createDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int CreateUserID {
-            get {
+        public int CreateUserID
+        {
+            get
+            {
                 return this.createUserIDField;
             }
-            set {
+            set
+            {
                 this.createUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateUserIDSpecified {
-            get {
+        public bool CreateUserIDSpecified
+        {
+            get
+            {
                 return this.createUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createUserIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string DepartmentCode {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string DepartmentCode
+        {
+            get
+            {
                 return this.departmentCodeField;
             }
-            set {
+            set
+            {
                 this.departmentCodeField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int DepartmentID {
-            get {
+        public int DepartmentID
+        {
+            get
+            {
                 return this.departmentIDField;
             }
-            set {
+            set
+            {
                 this.departmentIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DepartmentIDSpecified {
-            get {
+        public bool DepartmentIDSpecified
+        {
+            get
+            {
                 return this.departmentIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.departmentIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public DepartmentDevice[] DeviceAssociations {
-            get {
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+        public DepartmentDevice[] DeviceAssociations
+        {
+            get
+            {
                 return this.deviceAssociationsField;
             }
-            set {
+            set
+            {
                 this.deviceAssociationsField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int DeviceRoleID {
-            get {
+        public int DeviceRoleID
+        {
+            get
+            {
                 return this.deviceRoleIDField;
             }
-            set {
+            set
+            {
                 this.deviceRoleIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceRoleIDSpecified {
-            get {
+        public bool DeviceRoleIDSpecified
+        {
+            get
+            {
                 return this.deviceRoleIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.deviceRoleIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Name {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Name
+        {
+            get
+            {
                 return this.nameField;
             }
-            set {
+            set
+            {
                 this.nameField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public Department Parent {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public Department Parent
+        {
+            get
+            {
                 return this.parentField;
             }
-            set {
+            set
+            {
                 this.parentField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Remark {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Remark
+        {
+            get
+            {
                 return this.remarkField;
             }
-            set {
+            set
+            {
                 this.remarkField = value;
             }
         }
-        
+
         /// <remarks/>
-        public GeneralStatus Status {
-            get {
+        public GeneralStatus Status
+        {
+            get
+            {
                 return this.statusField;
             }
-            set {
+            set
+            {
                 this.statusField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified {
-            get {
+        public bool StatusSpecified
+        {
+            get
+            {
                 return this.statusFieldSpecified;
             }
-            set {
+            set
+            {
                 this.statusFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> UpdateDate {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<System.DateTime> UpdateDate
+        {
+            get
+            {
                 return this.updateDateField;
             }
-            set {
+            set
+            {
                 this.updateDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateDateSpecified {
-            get {
+        public bool UpdateDateSpecified
+        {
+            get
+            {
                 return this.updateDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> UpdateUserID {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> UpdateUserID
+        {
+            get
+            {
                 return this.updateUserIDField;
             }
-            set {
+            set
+            {
                 this.updateUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateUserIDSpecified {
-            get {
+        public bool UpdateUserIDSpecified
+        {
+            get
+            {
                 return this.updateUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateUserIDFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class UserProperty {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class UserProperty
+    {
+
         private string addressField;
-        
+
         private System.DateTime birthdayField;
-        
+
         private bool birthdayFieldSpecified;
-        
+
         private string companyField;
-        
+
         private System.Nullable<int> degreeField;
-        
+
         private bool degreeFieldSpecified;
-        
+
         private string emailField;
-        
+
         private string englishNameField;
-        
+
         private string firstNameField;
-        
+
         private string homeNumberField;
-        
+
         private string iDNumberField;
-        
+
         private int iDTypeField;
-        
+
         private bool iDTypeFieldSpecified;
-        
+
         private string lastNameField;
-        
+
         private Marriage marriageField;
-        
+
         private bool marriageFieldSpecified;
-        
+
         private int nationalityField;
-        
+
         private bool nationalityFieldSpecified;
-        
+
         private string nativePlaceField;
-        
+
         private System.Nullable<int> politicalStatusField;
-        
+
         private bool politicalStatusFieldSpecified;
-        
+
         private string postcodeField;
-        
+
         private string remarkField;
-        
+
         private string socialNumberField;
-        
+
         private string technicalLevelField;
-        
+
         private string technicalTitleField;
-        
+
         private int userPropertyIDField;
-        
+
         private bool userPropertyIDFieldSpecified;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Address {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Address
+        {
+            get
+            {
                 return this.addressField;
             }
-            set {
+            set
+            {
                 this.addressField = value;
             }
         }
-        
+
         /// <remarks/>
-        public System.DateTime Birthday {
-            get {
+        public System.DateTime Birthday
+        {
+            get
+            {
                 return this.birthdayField;
             }
-            set {
+            set
+            {
                 this.birthdayField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BirthdaySpecified {
-            get {
+        public bool BirthdaySpecified
+        {
+            get
+            {
                 return this.birthdayFieldSpecified;
             }
-            set {
+            set
+            {
                 this.birthdayFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Company {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Company
+        {
+            get
+            {
                 return this.companyField;
             }
-            set {
+            set
+            {
                 this.companyField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> Degree {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> Degree
+        {
+            get
+            {
                 return this.degreeField;
             }
-            set {
+            set
+            {
                 this.degreeField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DegreeSpecified {
-            get {
+        public bool DegreeSpecified
+        {
+            get
+            {
                 return this.degreeFieldSpecified;
             }
-            set {
+            set
+            {
                 this.degreeFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Email {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Email
+        {
+            get
+            {
                 return this.emailField;
             }
-            set {
+            set
+            {
                 this.emailField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string EnglishName {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string EnglishName
+        {
+            get
+            {
                 return this.englishNameField;
             }
-            set {
+            set
+            {
                 this.englishNameField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string FirstName {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string FirstName
+        {
+            get
+            {
                 return this.firstNameField;
             }
-            set {
+            set
+            {
                 this.firstNameField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string HomeNumber {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string HomeNumber
+        {
+            get
+            {
                 return this.homeNumberField;
             }
-            set {
+            set
+            {
                 this.homeNumberField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string IDNumber {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string IDNumber
+        {
+            get
+            {
                 return this.iDNumberField;
             }
-            set {
+            set
+            {
                 this.iDNumberField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int IDType {
-            get {
+        public int IDType
+        {
+            get
+            {
                 return this.iDTypeField;
             }
-            set {
+            set
+            {
                 this.iDTypeField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IDTypeSpecified {
-            get {
+        public bool IDTypeSpecified
+        {
+            get
+            {
                 return this.iDTypeFieldSpecified;
             }
-            set {
+            set
+            {
                 this.iDTypeFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string LastName {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string LastName
+        {
+            get
+            {
                 return this.lastNameField;
             }
-            set {
+            set
+            {
                 this.lastNameField = value;
             }
         }
-        
+
         /// <remarks/>
-        public Marriage Marriage {
-            get {
+        public Marriage Marriage
+        {
+            get
+            {
                 return this.marriageField;
             }
-            set {
+            set
+            {
                 this.marriageField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MarriageSpecified {
-            get {
+        public bool MarriageSpecified
+        {
+            get
+            {
                 return this.marriageFieldSpecified;
             }
-            set {
+            set
+            {
                 this.marriageFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int Nationality {
-            get {
+        public int Nationality
+        {
+            get
+            {
                 return this.nationalityField;
             }
-            set {
+            set
+            {
                 this.nationalityField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool NationalitySpecified {
-            get {
+        public bool NationalitySpecified
+        {
+            get
+            {
                 return this.nationalityFieldSpecified;
             }
-            set {
+            set
+            {
                 this.nationalityFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string NativePlace {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string NativePlace
+        {
+            get
+            {
                 return this.nativePlaceField;
             }
-            set {
+            set
+            {
                 this.nativePlaceField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> PoliticalStatus {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> PoliticalStatus
+        {
+            get
+            {
                 return this.politicalStatusField;
             }
-            set {
+            set
+            {
                 this.politicalStatusField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PoliticalStatusSpecified {
-            get {
+        public bool PoliticalStatusSpecified
+        {
+            get
+            {
                 return this.politicalStatusFieldSpecified;
             }
-            set {
+            set
+            {
                 this.politicalStatusFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Postcode {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Postcode
+        {
+            get
+            {
                 return this.postcodeField;
             }
-            set {
+            set
+            {
                 this.postcodeField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Remark {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Remark
+        {
+            get
+            {
                 return this.remarkField;
             }
-            set {
+            set
+            {
                 this.remarkField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string SocialNumber {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string SocialNumber
+        {
+            get
+            {
                 return this.socialNumberField;
             }
-            set {
+            set
+            {
                 this.socialNumberField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string TechnicalLevel {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string TechnicalLevel
+        {
+            get
+            {
                 return this.technicalLevelField;
             }
-            set {
+            set
+            {
                 this.technicalLevelField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string TechnicalTitle {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string TechnicalTitle
+        {
+            get
+            {
                 return this.technicalTitleField;
             }
-            set {
+            set
+            {
                 this.technicalTitleField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int UserPropertyID {
-            get {
+        public int UserPropertyID
+        {
+            get
+            {
                 return this.userPropertyIDField;
             }
-            set {
+            set
+            {
                 this.userPropertyIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UserPropertyIDSpecified {
-            get {
+        public bool UserPropertyIDSpecified
+        {
+            get
+            {
                 return this.userPropertyIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.userPropertyIDFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public enum Marriage {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public enum Marriage
+    {
+
         /// <remarks/>
         Single,
-        
+
         /// <remarks/>
         Married,
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class UserDeviceRole {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class UserDeviceRole
+    {
+
         private int deviceRoleIDField;
-        
+
         private bool deviceRoleIDFieldSpecified;
-        
+
         private int userDeviceRoleIDField;
-        
+
         private bool userDeviceRoleIDFieldSpecified;
-        
+
         private int userIDField;
-        
+
         private bool userIDFieldSpecified;
-        
+
         /// <remarks/>
-        public int DeviceRoleID {
-            get {
+        public int DeviceRoleID
+        {
+            get
+            {
                 return this.deviceRoleIDField;
             }
-            set {
+            set
+            {
                 this.deviceRoleIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceRoleIDSpecified {
-            get {
+        public bool DeviceRoleIDSpecified
+        {
+            get
+            {
                 return this.deviceRoleIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.deviceRoleIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int UserDeviceRoleID {
-            get {
+        public int UserDeviceRoleID
+        {
+            get
+            {
                 return this.userDeviceRoleIDField;
             }
-            set {
+            set
+            {
                 this.userDeviceRoleIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UserDeviceRoleIDSpecified {
-            get {
+        public bool UserDeviceRoleIDSpecified
+        {
+            get
+            {
                 return this.userDeviceRoleIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.userDeviceRoleIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int UserID {
-            get {
+        public int UserID
+        {
+            get
+            {
                 return this.userIDField;
             }
-            set {
+            set
+            {
                 this.userIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UserIDSpecified {
-            get {
+        public bool UserIDSpecified
+        {
+            get
+            {
                 return this.userIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.userIDFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class UserAuthentication {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class UserAuthentication
+    {
+
         private string authenticationDataField;
-        
+
         private AuthenticationType authenticationTypeField;
-        
+
         private bool authenticationTypeFieldSpecified;
-        
+
         private System.DateTime createDateField;
-        
+
         private bool createDateFieldSpecified;
-        
+
         private int createUserIDField;
-        
+
         private bool createUserIDFieldSpecified;
-        
+
         private int deviceIDField;
-        
+
         private bool deviceIDFieldSpecified;
-        
+
         private DeviceType deviceTypeField;
-        
+
         private bool deviceTypeFieldSpecified;
-        
+
         private int deviceUserIDField;
-        
+
         private bool deviceUserIDFieldSpecified;
-        
+
         private bool isDuressField;
-        
+
         private bool isDuressFieldSpecified;
-        
+
         private string remarkField;
-        
+
         private GeneralStatus statusField;
-        
+
         private bool statusFieldSpecified;
-        
+
         private System.Nullable<System.DateTime> updateDateField;
-        
+
         private bool updateDateFieldSpecified;
-        
+
         private System.Nullable<int> updateUserIDField;
-        
+
         private bool updateUserIDFieldSpecified;
-        
+
         private int userAuthenticationIDField;
-        
+
         private bool userAuthenticationIDFieldSpecified;
-        
+
         private int userIDField;
-        
+
         private bool userIDFieldSpecified;
-        
+
         private string versionField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string AuthenticationData {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string AuthenticationData
+        {
+            get
+            {
                 return this.authenticationDataField;
             }
-            set {
+            set
+            {
                 this.authenticationDataField = value;
             }
         }
-        
+
         /// <remarks/>
-        public AuthenticationType AuthenticationType {
-            get {
+        public AuthenticationType AuthenticationType
+        {
+            get
+            {
                 return this.authenticationTypeField;
             }
-            set {
+            set
+            {
                 this.authenticationTypeField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AuthenticationTypeSpecified {
-            get {
+        public bool AuthenticationTypeSpecified
+        {
+            get
+            {
                 return this.authenticationTypeFieldSpecified;
             }
-            set {
+            set
+            {
                 this.authenticationTypeFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public System.DateTime CreateDate {
-            get {
+        public System.DateTime CreateDate
+        {
+            get
+            {
                 return this.createDateField;
             }
-            set {
+            set
+            {
                 this.createDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateDateSpecified {
-            get {
+        public bool CreateDateSpecified
+        {
+            get
+            {
                 return this.createDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int CreateUserID {
-            get {
+        public int CreateUserID
+        {
+            get
+            {
                 return this.createUserIDField;
             }
-            set {
+            set
+            {
                 this.createUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CreateUserIDSpecified {
-            get {
+        public bool CreateUserIDSpecified
+        {
+            get
+            {
                 return this.createUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.createUserIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int DeviceID {
-            get {
+        public int DeviceID
+        {
+            get
+            {
                 return this.deviceIDField;
             }
-            set {
+            set
+            {
                 this.deviceIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceIDSpecified {
-            get {
+        public bool DeviceIDSpecified
+        {
+            get
+            {
                 return this.deviceIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.deviceIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public DeviceType DeviceType {
-            get {
+        public DeviceType DeviceType
+        {
+            get
+            {
                 return this.deviceTypeField;
             }
-            set {
+            set
+            {
                 this.deviceTypeField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceTypeSpecified {
-            get {
+        public bool DeviceTypeSpecified
+        {
+            get
+            {
                 return this.deviceTypeFieldSpecified;
             }
-            set {
+            set
+            {
                 this.deviceTypeFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int DeviceUserID {
-            get {
+        public int DeviceUserID
+        {
+            get
+            {
                 return this.deviceUserIDField;
             }
-            set {
+            set
+            {
                 this.deviceUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceUserIDSpecified {
-            get {
+        public bool DeviceUserIDSpecified
+        {
+            get
+            {
                 return this.deviceUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.deviceUserIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public bool IsDuress {
-            get {
+        public bool IsDuress
+        {
+            get
+            {
                 return this.isDuressField;
             }
-            set {
+            set
+            {
                 this.isDuressField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsDuressSpecified {
-            get {
+        public bool IsDuressSpecified
+        {
+            get
+            {
                 return this.isDuressFieldSpecified;
             }
-            set {
+            set
+            {
                 this.isDuressFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Remark {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Remark
+        {
+            get
+            {
                 return this.remarkField;
             }
-            set {
+            set
+            {
                 this.remarkField = value;
             }
         }
-        
+
         /// <remarks/>
-        public GeneralStatus Status {
-            get {
+        public GeneralStatus Status
+        {
+            get
+            {
                 return this.statusField;
             }
-            set {
+            set
+            {
                 this.statusField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified {
-            get {
+        public bool StatusSpecified
+        {
+            get
+            {
                 return this.statusFieldSpecified;
             }
-            set {
+            set
+            {
                 this.statusFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> UpdateDate {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<System.DateTime> UpdateDate
+        {
+            get
+            {
                 return this.updateDateField;
             }
-            set {
+            set
+            {
                 this.updateDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateDateSpecified {
-            get {
+        public bool UpdateDateSpecified
+        {
+            get
+            {
                 return this.updateDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> UpdateUserID {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> UpdateUserID
+        {
+            get
+            {
                 return this.updateUserIDField;
             }
-            set {
+            set
+            {
                 this.updateUserIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UpdateUserIDSpecified {
-            get {
+        public bool UpdateUserIDSpecified
+        {
+            get
+            {
                 return this.updateUserIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.updateUserIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int UserAuthenticationID {
-            get {
+        public int UserAuthenticationID
+        {
+            get
+            {
                 return this.userAuthenticationIDField;
             }
-            set {
+            set
+            {
                 this.userAuthenticationIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UserAuthenticationIDSpecified {
-            get {
+        public bool UserAuthenticationIDSpecified
+        {
+            get
+            {
                 return this.userAuthenticationIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.userAuthenticationIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int UserID {
-            get {
+        public int UserID
+        {
+            get
+            {
                 return this.userIDField;
             }
-            set {
+            set
+            {
                 this.userIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UserIDSpecified {
-            get {
+        public bool UserIDSpecified
+        {
+            get
+            {
                 return this.userIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.userIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Version {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Version
+        {
+            get
+            {
                 return this.versionField;
             }
-            set {
+            set
+            {
                 this.versionField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public enum AuthenticationType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public enum AuthenticationType
+    {
+
         /// <remarks/>
         FingerPrint1,
-        
+
         /// <remarks/>
         FingerPrint2,
-        
+
         /// <remarks/>
         FingerPrint3,
-        
+
         /// <remarks/>
         FingerPrint4,
-        
+
         /// <remarks/>
         FingerPrint5,
-        
+
         /// <remarks/>
         FingerPrint6,
-        
+
         /// <remarks/>
         FingerPrint7,
-        
+
         /// <remarks/>
         FingerPrint8,
-        
+
         /// <remarks/>
         FingerPrint9,
-        
+
         /// <remarks/>
         FingerPrint10,
-        
+
         /// <remarks/>
         Password,
-        
+
         /// <remarks/>
         IcCard,
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public enum DeviceType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public enum DeviceType
+    {
+
         /// <remarks/>
         Type1,
-        
+
         /// <remarks/>
         Type2,
-        
+
         /// <remarks/>
         Type3,
-        
+
         /// <remarks/>
         Type4,
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class User {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class User
+    {
+
         private int departmentIDField;
-        
+
         private bool departmentIDFieldSpecified;
-        
+
         private System.Nullable<System.DateTime> endDateField;
-        
+
         private bool endDateFieldSpecified;
-        
+
         private GenderType genderField;
-        
+
         private bool genderFieldSpecified;
-        
+
         private string nameField;
-        
+
         private string phoneField;
-        
+
         private string photoField;
-        
+
         private string remarkField;
-        
+
         private System.DateTime startDateField;
-        
+
         private bool startDateFieldSpecified;
-        
+
         private GeneralStatus statusField;
-        
+
         private bool statusFieldSpecified;
-        
+
         private UserType typeField;
-        
+
         private bool typeFieldSpecified;
-        
+
         private UserAuthentication[] userAuthenticationsField;
-        
+
         private string userCodeField;
-        
+
         private UserDeviceRole[] userDeviceRolesField;
-        
+
         private int userIDField;
-        
+
         private bool userIDFieldSpecified;
-        
+
         private UserProperty userPropertyInfoField;
-        
+
         /// <remarks/>
-        public int DepartmentID {
-            get {
+        public int DepartmentID
+        {
+            get
+            {
                 return this.departmentIDField;
             }
-            set {
+            set
+            {
                 this.departmentIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DepartmentIDSpecified {
-            get {
+        public bool DepartmentIDSpecified
+        {
+            get
+            {
                 return this.departmentIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.departmentIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<System.DateTime> EndDate {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<System.DateTime> EndDate
+        {
+            get
+            {
                 return this.endDateField;
             }
-            set {
+            set
+            {
                 this.endDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool EndDateSpecified {
-            get {
+        public bool EndDateSpecified
+        {
+            get
+            {
                 return this.endDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.endDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public GenderType Gender {
-            get {
+        public GenderType Gender
+        {
+            get
+            {
                 return this.genderField;
             }
-            set {
+            set
+            {
                 this.genderField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool GenderSpecified {
-            get {
+        public bool GenderSpecified
+        {
+            get
+            {
                 return this.genderFieldSpecified;
             }
-            set {
+            set
+            {
                 this.genderFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Name {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Name
+        {
+            get
+            {
                 return this.nameField;
             }
-            set {
+            set
+            {
                 this.nameField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Phone {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Phone
+        {
+            get
+            {
                 return this.phoneField;
             }
-            set {
+            set
+            {
                 this.phoneField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Photo {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Photo
+        {
+            get
+            {
                 return this.photoField;
             }
-            set {
+            set
+            {
                 this.photoField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Remark {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Remark
+        {
+            get
+            {
                 return this.remarkField;
             }
-            set {
+            set
+            {
                 this.remarkField = value;
             }
         }
-        
+
         /// <remarks/>
-        public System.DateTime StartDate {
-            get {
+        public System.DateTime StartDate
+        {
+            get
+            {
                 return this.startDateField;
             }
-            set {
+            set
+            {
                 this.startDateField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StartDateSpecified {
-            get {
+        public bool StartDateSpecified
+        {
+            get
+            {
                 return this.startDateFieldSpecified;
             }
-            set {
+            set
+            {
                 this.startDateFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public GeneralStatus Status {
-            get {
+        public GeneralStatus Status
+        {
+            get
+            {
                 return this.statusField;
             }
-            set {
+            set
+            {
                 this.statusField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified {
-            get {
+        public bool StatusSpecified
+        {
+            get
+            {
                 return this.statusFieldSpecified;
             }
-            set {
+            set
+            {
                 this.statusFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public UserType Type {
-            get {
+        public UserType Type
+        {
+            get
+            {
                 return this.typeField;
             }
-            set {
+            set
+            {
                 this.typeField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TypeSpecified {
-            get {
+        public bool TypeSpecified
+        {
+            get
+            {
                 return this.typeFieldSpecified;
             }
-            set {
+            set
+            {
                 this.typeFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public UserAuthentication[] UserAuthentications {
-            get {
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+        public UserAuthentication[] UserAuthentications
+        {
+            get
+            {
                 return this.userAuthenticationsField;
             }
-            set {
+            set
+            {
                 this.userAuthenticationsField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string UserCode {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string UserCode
+        {
+            get
+            {
                 return this.userCodeField;
             }
-            set {
+            set
+            {
                 this.userCodeField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
-        public UserDeviceRole[] UserDeviceRoles {
-            get {
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable = true)]
+        public UserDeviceRole[] UserDeviceRoles
+        {
+            get
+            {
                 return this.userDeviceRolesField;
             }
-            set {
+            set
+            {
                 this.userDeviceRolesField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int UserID {
-            get {
+        public int UserID
+        {
+            get
+            {
                 return this.userIDField;
             }
-            set {
+            set
+            {
                 this.userIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UserIDSpecified {
-            get {
+        public bool UserIDSpecified
+        {
+            get
+            {
                 return this.userIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.userIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public UserProperty UserPropertyInfo {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public UserProperty UserPropertyInfo
+        {
+            get
+            {
                 return this.userPropertyInfoField;
             }
-            set {
+            set
+            {
                 this.userPropertyInfoField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public enum GenderType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public enum GenderType
+    {
+
         /// <remarks/>
         Male,
-        
+
         /// <remarks/>
         Female,
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public enum UserType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public enum UserType
+    {
+
         /// <remarks/>
         Employee,
-        
+
         /// <remarks/>
         Visitor,
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class DeviceHeadReading {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class DeviceHeadReading
+    {
+
+        private string codeField;
+
         private int deviceHeadReadingIDField;
-        
+
         private bool deviceHeadReadingIDFieldSpecified;
-        
+
         private int deviceIDField;
-        
+
         private bool deviceIDFieldSpecified;
-        
+
         private string headReadingPerformanceField;
-        
+
         private string headReadingSNField;
-        
+
         private int headReadingTypeField;
-        
+
         private bool headReadingTypeFieldSpecified;
-        
+
         private string macField;
-        
+
+        private string nameField;
+
         private int statusField;
-        
+
         private bool statusFieldSpecified;
-        
+
         /// <remarks/>
-        public int DeviceHeadReadingID {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Code
+        {
+            get
+            {
+                return this.codeField;
+            }
+            set
+            {
+                this.codeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int DeviceHeadReadingID
+        {
+            get
+            {
                 return this.deviceHeadReadingIDField;
             }
-            set {
+            set
+            {
                 this.deviceHeadReadingIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceHeadReadingIDSpecified {
-            get {
+        public bool DeviceHeadReadingIDSpecified
+        {
+            get
+            {
                 return this.deviceHeadReadingIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.deviceHeadReadingIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public int DeviceID {
-            get {
+        public int DeviceID
+        {
+            get
+            {
                 return this.deviceIDField;
             }
-            set {
+            set
+            {
                 this.deviceIDField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceIDSpecified {
-            get {
+        public bool DeviceIDSpecified
+        {
+            get
+            {
                 return this.deviceIDFieldSpecified;
             }
-            set {
+            set
+            {
                 this.deviceIDFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string HeadReadingPerformance {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string HeadReadingPerformance
+        {
+            get
+            {
                 return this.headReadingPerformanceField;
             }
-            set {
+            set
+            {
                 this.headReadingPerformanceField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string HeadReadingSN {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string HeadReadingSN
+        {
+            get
+            {
                 return this.headReadingSNField;
             }
-            set {
+            set
+            {
                 this.headReadingSNField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int HeadReadingType {
-            get {
+        public int HeadReadingType
+        {
+            get
+            {
                 return this.headReadingTypeField;
             }
-            set {
+            set
+            {
                 this.headReadingTypeField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool HeadReadingTypeSpecified {
-            get {
+        public bool HeadReadingTypeSpecified
+        {
+            get
+            {
                 return this.headReadingTypeFieldSpecified;
             }
-            set {
+            set
+            {
                 this.headReadingTypeFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Mac {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Mac
+        {
+            get
+            {
                 return this.macField;
             }
-            set {
+            set
+            {
                 this.macField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int Status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified {
-            get {
-                return this.statusFieldSpecified;
-            }
-            set {
-                this.statusFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
-    public partial class DeviceDoor {
-        
-        private System.Nullable<int> alertTypeField;
-        
-        private bool alertTypeFieldSpecified;
-        
-        private System.Nullable<bool> connectionAlermField;
-        
-        private bool connectionAlermFieldSpecified;
-        
-        private System.Nullable<int> delayTimeField;
-        
-        private bool delayTimeFieldSpecified;
-        
-        private int deviceDoorIDField;
-        
-        private bool deviceDoorIDFieldSpecified;
-        
-        private int deviceIDField;
-        
-        private bool deviceIDFieldSpecified;
-        
-        private System.Nullable<bool> duressAlarmField;
-        
-        private bool duressAlarmFieldSpecified;
-        
-        private System.Nullable<int> duressFingerPrintField;
-        
-        private bool duressFingerPrintFieldSpecified;
-        
-        private System.Nullable<bool> duressOpenField;
-        
-        private bool duressOpenFieldSpecified;
-        
-        private string duressPasswordField;
-        
-        private System.Nullable<int> electricalAppliancesField;
-        
-        private bool electricalAppliancesFieldSpecified;
-        
-        private System.Nullable<bool> forceOpenField;
-        
-        private bool forceOpenFieldSpecified;
-        
-        private System.Nullable<bool> isOverTimeField;
-        
-        private bool isOverTimeFieldSpecified;
-        
-        private System.Nullable<bool> launchDuressField;
-        
-        private bool launchDuressFieldSpecified;
-        
-        private string nameField;
-        
-        private System.Nullable<int> openTypeField;
-        
-        private bool openTypeFieldSpecified;
-        
-        private System.Nullable<int> overTimeOpenField;
-        
-        private bool overTimeOpenFieldSpecified;
-        
-        private string remarkField;
-        
-        private System.Nullable<int> statusField;
-        
-        private bool statusFieldSpecified;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> AlertType {
-            get {
-                return this.alertTypeField;
-            }
-            set {
-                this.alertTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AlertTypeSpecified {
-            get {
-                return this.alertTypeFieldSpecified;
-            }
-            set {
-                this.alertTypeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> ConnectionAlerm {
-            get {
-                return this.connectionAlermField;
-            }
-            set {
-                this.connectionAlermField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ConnectionAlermSpecified {
-            get {
-                return this.connectionAlermFieldSpecified;
-            }
-            set {
-                this.connectionAlermFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> DelayTime {
-            get {
-                return this.delayTimeField;
-            }
-            set {
-                this.delayTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DelayTimeSpecified {
-            get {
-                return this.delayTimeFieldSpecified;
-            }
-            set {
-                this.delayTimeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int DeviceDoorID {
-            get {
-                return this.deviceDoorIDField;
-            }
-            set {
-                this.deviceDoorIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceDoorIDSpecified {
-            get {
-                return this.deviceDoorIDFieldSpecified;
-            }
-            set {
-                this.deviceDoorIDFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int DeviceID {
-            get {
-                return this.deviceIDField;
-            }
-            set {
-                this.deviceIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DeviceIDSpecified {
-            get {
-                return this.deviceIDFieldSpecified;
-            }
-            set {
-                this.deviceIDFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> DuressAlarm {
-            get {
-                return this.duressAlarmField;
-            }
-            set {
-                this.duressAlarmField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DuressAlarmSpecified {
-            get {
-                return this.duressAlarmFieldSpecified;
-            }
-            set {
-                this.duressAlarmFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> DuressFingerPrint {
-            get {
-                return this.duressFingerPrintField;
-            }
-            set {
-                this.duressFingerPrintField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DuressFingerPrintSpecified {
-            get {
-                return this.duressFingerPrintFieldSpecified;
-            }
-            set {
-                this.duressFingerPrintFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> DuressOpen {
-            get {
-                return this.duressOpenField;
-            }
-            set {
-                this.duressOpenField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DuressOpenSpecified {
-            get {
-                return this.duressOpenFieldSpecified;
-            }
-            set {
-                this.duressOpenFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string DuressPassword {
-            get {
-                return this.duressPasswordField;
-            }
-            set {
-                this.duressPasswordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> ElectricalAppliances {
-            get {
-                return this.electricalAppliancesField;
-            }
-            set {
-                this.electricalAppliancesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ElectricalAppliancesSpecified {
-            get {
-                return this.electricalAppliancesFieldSpecified;
-            }
-            set {
-                this.electricalAppliancesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> ForceOpen {
-            get {
-                return this.forceOpenField;
-            }
-            set {
-                this.forceOpenField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ForceOpenSpecified {
-            get {
-                return this.forceOpenFieldSpecified;
-            }
-            set {
-                this.forceOpenFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> IsOverTime {
-            get {
-                return this.isOverTimeField;
-            }
-            set {
-                this.isOverTimeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsOverTimeSpecified {
-            get {
-                return this.isOverTimeFieldSpecified;
-            }
-            set {
-                this.isOverTimeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<bool> LaunchDuress {
-            get {
-                return this.launchDuressField;
-            }
-            set {
-                this.launchDuressField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool LaunchDuressSpecified {
-            get {
-                return this.launchDuressFieldSpecified;
-            }
-            set {
-                this.launchDuressFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Name {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Name
+        {
+            get
+            {
                 return this.nameField;
             }
-            set {
+            set
+            {
                 this.nameField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> OpenType {
-            get {
-                return this.openTypeField;
-            }
-            set {
-                this.openTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool OpenTypeSpecified {
-            get {
-                return this.openTypeFieldSpecified;
-            }
-            set {
-                this.openTypeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> OverTimeOpen {
-            get {
-                return this.overTimeOpenField;
-            }
-            set {
-                this.overTimeOpenField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool OverTimeOpenSpecified {
-            get {
-                return this.overTimeOpenFieldSpecified;
-            }
-            set {
-                this.overTimeOpenFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Remark {
-            get {
-                return this.remarkField;
-            }
-            set {
-                this.remarkField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public System.Nullable<int> Status {
-            get {
+        public int Status
+        {
+            get
+            {
                 return this.statusField;
             }
-            set {
+            set
+            {
                 this.statusField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool StatusSpecified {
-            get {
+        public bool StatusSpecified
+        {
+            get
+            {
                 return this.statusFieldSpecified;
             }
-            set {
+            set
+            {
                 this.statusFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.realand.com/DeviceSystem/")]
-    public enum ResultTypes {
-        
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public partial class DeviceDoor
+    {
+
+        private System.Nullable<int> checkOutOptionsField;
+
+        private bool checkOutOptionsFieldSpecified;
+
+        private string codeField;
+
+        private int delayOpenSecondsField;
+
+        private bool delayOpenSecondsFieldSpecified;
+
+        private int deviceDoorIDField;
+
+        private bool deviceDoorIDFieldSpecified;
+
+        private int deviceIDField;
+
+        private bool deviceIDFieldSpecified;
+
+        private int doorIndexField;
+
+        private bool doorIndexFieldSpecified;
+
+        private bool duressAlarmField;
+
+        private bool duressAlarmFieldSpecified;
+
+        private bool duressEnabledField;
+
+        private bool duressEnabledFieldSpecified;
+
+        private int duressFingerPrintIndexField;
+
+        private bool duressFingerPrintIndexFieldSpecified;
+
+        private bool duressOpenField;
+
+        private bool duressOpenFieldSpecified;
+
+        private string duressPasswordField;
+
+        private System.Nullable<int> electricalAppliancesField;
+
+        private bool electricalAppliancesFieldSpecified;
+
+        private int illegalOpenSecondsField;
+
+        private bool illegalOpenSecondsFieldSpecified;
+
+        private bool linkageAlarmField;
+
+        private bool linkageAlarmFieldSpecified;
+
+        private string nameField;
+
+        private int overTimeOpenSecondsField;
+
+        private bool overTimeOpenSecondsFieldSpecified;
+
+        private string remarkField;
+
+        private System.Nullable<int> ringTypeField;
+
+        private bool ringTypeFieldSpecified;
+
+        private System.Nullable<int> statusField;
+
+        private bool statusFieldSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> CheckOutOptions
+        {
+            get
+            {
+                return this.checkOutOptionsField;
+            }
+            set
+            {
+                this.checkOutOptionsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CheckOutOptionsSpecified
+        {
+            get
+            {
+                return this.checkOutOptionsFieldSpecified;
+            }
+            set
+            {
+                this.checkOutOptionsFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Code
+        {
+            get
+            {
+                return this.codeField;
+            }
+            set
+            {
+                this.codeField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int DelayOpenSeconds
+        {
+            get
+            {
+                return this.delayOpenSecondsField;
+            }
+            set
+            {
+                this.delayOpenSecondsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DelayOpenSecondsSpecified
+        {
+            get
+            {
+                return this.delayOpenSecondsFieldSpecified;
+            }
+            set
+            {
+                this.delayOpenSecondsFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public int DeviceDoorID
+        {
+            get
+            {
+                return this.deviceDoorIDField;
+            }
+            set
+            {
+                this.deviceDoorIDField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DeviceDoorIDSpecified
+        {
+            get
+            {
+                return this.deviceDoorIDFieldSpecified;
+            }
+            set
+            {
+                this.deviceDoorIDFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public int DeviceID
+        {
+            get
+            {
+                return this.deviceIDField;
+            }
+            set
+            {
+                this.deviceIDField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DeviceIDSpecified
+        {
+            get
+            {
+                return this.deviceIDFieldSpecified;
+            }
+            set
+            {
+                this.deviceIDFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public int DoorIndex
+        {
+            get
+            {
+                return this.doorIndexField;
+            }
+            set
+            {
+                this.doorIndexField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DoorIndexSpecified
+        {
+            get
+            {
+                return this.doorIndexFieldSpecified;
+            }
+            set
+            {
+                this.doorIndexFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool DuressAlarm
+        {
+            get
+            {
+                return this.duressAlarmField;
+            }
+            set
+            {
+                this.duressAlarmField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DuressAlarmSpecified
+        {
+            get
+            {
+                return this.duressAlarmFieldSpecified;
+            }
+            set
+            {
+                this.duressAlarmFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool DuressEnabled
+        {
+            get
+            {
+                return this.duressEnabledField;
+            }
+            set
+            {
+                this.duressEnabledField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DuressEnabledSpecified
+        {
+            get
+            {
+                return this.duressEnabledFieldSpecified;
+            }
+            set
+            {
+                this.duressEnabledFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public int DuressFingerPrintIndex
+        {
+            get
+            {
+                return this.duressFingerPrintIndexField;
+            }
+            set
+            {
+                this.duressFingerPrintIndexField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DuressFingerPrintIndexSpecified
+        {
+            get
+            {
+                return this.duressFingerPrintIndexFieldSpecified;
+            }
+            set
+            {
+                this.duressFingerPrintIndexFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool DuressOpen
+        {
+            get
+            {
+                return this.duressOpenField;
+            }
+            set
+            {
+                this.duressOpenField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DuressOpenSpecified
+        {
+            get
+            {
+                return this.duressOpenFieldSpecified;
+            }
+            set
+            {
+                this.duressOpenFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string DuressPassword
+        {
+            get
+            {
+                return this.duressPasswordField;
+            }
+            set
+            {
+                this.duressPasswordField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> ElectricalAppliances
+        {
+            get
+            {
+                return this.electricalAppliancesField;
+            }
+            set
+            {
+                this.electricalAppliancesField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ElectricalAppliancesSpecified
+        {
+            get
+            {
+                return this.electricalAppliancesFieldSpecified;
+            }
+            set
+            {
+                this.electricalAppliancesFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public int IllegalOpenSeconds
+        {
+            get
+            {
+                return this.illegalOpenSecondsField;
+            }
+            set
+            {
+                this.illegalOpenSecondsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool IllegalOpenSecondsSpecified
+        {
+            get
+            {
+                return this.illegalOpenSecondsFieldSpecified;
+            }
+            set
+            {
+                this.illegalOpenSecondsFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public bool LinkageAlarm
+        {
+            get
+            {
+                return this.linkageAlarmField;
+            }
+            set
+            {
+                this.linkageAlarmField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool LinkageAlarmSpecified
+        {
+            get
+            {
+                return this.linkageAlarmFieldSpecified;
+            }
+            set
+            {
+                this.linkageAlarmFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Name
+        {
+            get
+            {
+                return this.nameField;
+            }
+            set
+            {
+                this.nameField = value;
+            }
+        }
+
+        /// <remarks/>
+        public int OverTimeOpenSeconds
+        {
+            get
+            {
+                return this.overTimeOpenSecondsField;
+            }
+            set
+            {
+                this.overTimeOpenSecondsField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool OverTimeOpenSecondsSpecified
+        {
+            get
+            {
+                return this.overTimeOpenSecondsFieldSpecified;
+            }
+            set
+            {
+                this.overTimeOpenSecondsFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public string Remark
+        {
+            get
+            {
+                return this.remarkField;
+            }
+            set
+            {
+                this.remarkField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> RingType
+        {
+            get
+            {
+                return this.ringTypeField;
+            }
+            set
+            {
+                this.ringTypeField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool RingTypeSpecified
+        {
+            get
+            {
+                return this.ringTypeFieldSpecified;
+            }
+            set
+            {
+                this.ringTypeFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable = true)]
+        public System.Nullable<int> Status
+        {
+            get
+            {
+                return this.statusField;
+            }
+            set
+            {
+                this.statusField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool StatusSpecified
+        {
+            get
+            {
+                return this.statusFieldSpecified;
+            }
+            set
+            {
+                this.statusFieldSpecified = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.realand.com/DeviceSystem/")]
+    public enum ResultTypes
+    {
+
         /// <remarks/>
         Ok,
-        
+
         /// <remarks/>
         AuthenticationError,
-        
+
         /// <remarks/>
         AuthorizationError,
-        
+
         /// <remarks/>
         DataValidationError,
-        
+
         /// <remarks/>
         BussinessLogicError,
-        
+
         /// <remarks/>
         PartiallyOk,
-        
+
         /// <remarks/>
         Queued,
-        
+
         /// <remarks/>
         UnknownError,
     }
-    
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.datacontract.org/2004/07/Rld.Acs.Model")]
+    public enum DoorControlOption
+    {
+
+        /// <remarks/>
+        Open,
+
+        /// <remarks/>
+        KeepOpen,
+
+        /// <remarks/>
+        KeepClose,
+
+        /// <remarks/>
+        Auto,
+    }
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     public delegate void SyncDBUsersCompletedEventHandler(object sender, SyncDBUsersCompletedEventArgs e);
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SyncDBUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
+    public partial class SyncDBUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
         private object[] results;
-        
-        internal SyncDBUsersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
+
+        internal SyncDBUsersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
             this.results = results;
         }
-        
+
         /// <remarks/>
-        public ResultTypes ResultType {
-            get {
+        public ResultTypes ResultType
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((ResultTypes)(this.results[0]));
             }
         }
-        
+
         /// <remarks/>
-        public bool ResultTypeSpecified {
-            get {
+        public bool ResultTypeSpecified
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[1]));
             }
         }
-        
+
         /// <remarks/>
-        public string[] Messages {
-            get {
+        public string[] Messages
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((string[])(this.results[2]));
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     public delegate void SyncDepartmentUsersCompletedEventHandler(object sender, SyncDepartmentUsersCompletedEventArgs e);
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SyncDepartmentUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
+    public partial class SyncDepartmentUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
         private object[] results;
-        
-        internal SyncDepartmentUsersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
+
+        internal SyncDepartmentUsersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
             this.results = results;
         }
-        
+
         /// <remarks/>
-        public ResultTypes ResultType {
-            get {
+        public ResultTypes ResultType
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((ResultTypes)(this.results[0]));
             }
         }
-        
+
         /// <remarks/>
-        public bool ResultTypeSpecified {
-            get {
+        public bool ResultTypeSpecified
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[1]));
             }
         }
-        
+
         /// <remarks/>
-        public string[] Messages {
-            get {
+        public string[] Messages
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((string[])(this.results[2]));
             }
         }
     }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
-    public delegate void SyncDeviceOperationLogsCompletedEventHandler(object sender, SyncDeviceOperationLogsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SyncDeviceOperationLogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SyncDeviceOperationLogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public ResultTypes ResultType {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((ResultTypes)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public bool ResultTypeSpecified {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[1]));
-            }
-        }
-        
-        /// <remarks/>
-        public string[] Messages {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string[])(this.results[2]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
-    public delegate void SyncDeviceTrafficLogsCompletedEventHandler(object sender, SyncDeviceTrafficLogsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SyncDeviceTrafficLogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SyncDeviceTrafficLogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public ResultTypes ResultType {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((ResultTypes)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public bool ResultTypeSpecified {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((bool)(this.results[1]));
-            }
-        }
-        
-        /// <remarks/>
-        public string[] Messages {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string[])(this.results[2]));
-            }
-        }
-    }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     public delegate void SyncDeviceUsersCompletedEventHandler(object sender, SyncDeviceUsersCompletedEventArgs e);
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SyncDeviceUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
+    public partial class SyncDeviceUsersCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
         private object[] results;
-        
-        internal SyncDeviceUsersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
+
+        internal SyncDeviceUsersCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
             this.results = results;
         }
-        
+
         /// <remarks/>
-        public ResultTypes ResultType {
-            get {
+        public ResultTypes ResultType
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((ResultTypes)(this.results[0]));
             }
         }
-        
+
         /// <remarks/>
-        public bool ResultTypeSpecified {
-            get {
+        public bool ResultTypeSpecified
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[1]));
             }
         }
-        
+
         /// <remarks/>
-        public string[] Messages {
-            get {
+        public string[] Messages
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((string[])(this.results[2]));
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
-    public delegate void SyncDoorStateLogsCompletedEventHandler(object sender, SyncDoorStateLogsCompletedEventArgs e);
-    
+    public delegate void SyncDeviceTrafficLogsCompletedEventHandler(object sender, SyncDeviceTrafficLogsCompletedEventArgs e);
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SyncDoorStateLogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
+    public partial class SyncDeviceTrafficLogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
         private object[] results;
-        
-        internal SyncDoorStateLogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
+
+        internal SyncDeviceTrafficLogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
             this.results = results;
         }
-        
+
         /// <remarks/>
-        public ResultTypes ResultType {
-            get {
+        public ResultTypes ResultType
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((ResultTypes)(this.results[0]));
             }
         }
-        
+
         /// <remarks/>
-        public bool ResultTypeSpecified {
-            get {
+        public bool ResultTypeSpecified
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[1]));
             }
         }
-        
+
         /// <remarks/>
-        public string[] Messages {
-            get {
+        public string[] Messages
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((string[])(this.results[2]));
             }
         }
     }
-    
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
+    public delegate void SyncDeviceOperationLogsCompletedEventHandler(object sender, SyncDeviceOperationLogsCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SyncDeviceOperationLogsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal SyncDeviceOperationLogsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public ResultTypes ResultType
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((ResultTypes)(this.results[0]));
+            }
+        }
+
+        /// <remarks/>
+        public bool ResultTypeSpecified
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[1]));
+            }
+        }
+
+        /// <remarks/>
+        public string[] Messages
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((string[])(this.results[2]));
+            }
+        }
+    }
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     public delegate void SyncTimeGroupsCompletedEventHandler(object sender, SyncTimeGroupsCompletedEventArgs e);
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SyncTimeGroupsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
+    public partial class SyncTimeGroupsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
         private object[] results;
-        
-        internal SyncTimeGroupsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
+
+        internal SyncTimeGroupsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
             this.results = results;
         }
-        
+
         /// <remarks/>
-        public ResultTypes ResultType {
-            get {
+        public ResultTypes ResultType
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((ResultTypes)(this.results[0]));
             }
         }
-        
+
         /// <remarks/>
-        public bool ResultTypeSpecified {
-            get {
+        public bool ResultTypeSpecified
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[1]));
             }
         }
-        
+
         /// <remarks/>
-        public string[] Messages {
-            get {
+        public string[] Messages
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((string[])(this.results[2]));
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     public delegate void SyncTimeSegmentsCompletedEventHandler(object sender, SyncTimeSegmentsCompletedEventArgs e);
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SyncTimeSegmentsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
+    public partial class SyncTimeSegmentsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
         private object[] results;
-        
-        internal SyncTimeSegmentsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
+
+        internal SyncTimeSegmentsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
             this.results = results;
         }
-        
+
         /// <remarks/>
-        public ResultTypes ResultType {
-            get {
+        public ResultTypes ResultType
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((ResultTypes)(this.results[0]));
             }
         }
-        
+
         /// <remarks/>
-        public bool ResultTypeSpecified {
-            get {
+        public bool ResultTypeSpecified
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[1]));
             }
         }
-        
+
         /// <remarks/>
-        public string[] Messages {
-            get {
+        public string[] Messages
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((string[])(this.results[2]));
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     public delegate void SyncTimeZonesCompletedEventHandler(object sender, SyncTimeZonesCompletedEventArgs e);
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SyncTimeZonesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
+    public partial class SyncTimeZonesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
         private object[] results;
-        
-        internal SyncTimeZonesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
+
+        internal SyncTimeZonesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
             this.results = results;
         }
-        
+
         /// <remarks/>
-        public ResultTypes ResultType {
-            get {
+        public ResultTypes ResultType
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((ResultTypes)(this.results[0]));
             }
         }
-        
+
         /// <remarks/>
-        public bool ResultTypeSpecified {
-            get {
+        public bool ResultTypeSpecified
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((bool)(this.results[1]));
             }
         }
-        
+
         /// <remarks/>
-        public string[] Messages {
-            get {
+        public string[] Messages
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((string[])(this.results[2]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
+    public delegate void GetDoorStateCompletedEventHandler(object sender, GetDoorStateCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetDoorStateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal GetDoorStateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public bool IsOpened
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+
+        /// <remarks/>
+        public bool IsOpenedSpecified
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[1]));
+            }
+        }
+
+        /// <remarks/>
+        public ResultTypes ResultType
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((ResultTypes)(this.results[2]));
+            }
+        }
+
+        /// <remarks/>
+        public bool ResultTypeSpecified
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[3]));
+            }
+        }
+
+        /// <remarks/>
+        public string[] Messages
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((string[])(this.results[4]));
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
+    public delegate void UpdateDoorStateCompletedEventHandler(object sender, UpdateDoorStateCompletedEventArgs e);
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.33440")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class UpdateDoorStateCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+    {
+
+        private object[] results;
+
+        internal UpdateDoorStateCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+            base(exception, cancelled, userState)
+        {
+            this.results = results;
+        }
+
+        /// <remarks/>
+        public ResultTypes ResultType
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((ResultTypes)(this.results[0]));
+            }
+        }
+
+        /// <remarks/>
+        public bool ResultTypeSpecified
+        {
+            get
+            {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[1]));
+            }
+        }
+
+        /// <remarks/>
+        public string[] Messages
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((string[])(this.results[2]));
             }

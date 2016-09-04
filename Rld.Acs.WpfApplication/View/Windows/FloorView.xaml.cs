@@ -245,6 +245,9 @@ namespace Rld.Acs.WpfApplication.View.Windows
 
         private void SetFloorPhoto(string imagePath)
         {
+            if (string.IsNullOrWhiteSpace(imagePath))
+                return;
+
             var myBrush = new ImageBrush();
             var image = new Image()
             {
@@ -261,11 +264,11 @@ namespace Rld.Acs.WpfApplication.View.Windows
             var carImg = new Image();
             carImg.Source = carBitmap;
             carImg.Width = 25;
-            carImg.Height = 15;
+            carImg.Height = 20;
 
             var panel = new StackPanel() { Orientation = Orientation.Horizontal };
             panel.Children.Add(carImg);
-            panel.Children.Add(new TextBlock() { Text = floorDoor.DoorName });
+            panel.Children.Add(new TextBlock() { Text = floorDoor.DoorName, FontSize = 16 });
             panel.DataContext = floorDoor;
             panel.PreviewMouseLeftButtonDown += Door_PreviewMouseLeftButtonDown;
             Canvas.SetLeft(panel, floorDoor.LocationX * MyCanvas.ActualWidth);
