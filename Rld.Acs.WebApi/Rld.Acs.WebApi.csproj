@@ -176,7 +176,10 @@
     <Compile Include="Controllers\User\UserSummarysController.cs" />
     <Compile Include="Controllers\User\UsersController.cs" />
     <Compile Include="Framework\ActionWarpper.cs" />
+    <Compile Include="Framework\BasicAuthenticationIdentity.cs" />
+    <Compile Include="Framework\BasicAuthenticationMessageHandler.cs" />
     <Compile Include="Framework\HttpRequestMessageExtension.cs" />
+    <Compile Include="Framework\OperationCodes.cs" />
     <Compile Include="Framework\PersistenceOperationHelper.cs" />
     <Compile Include="Framework\SysOperatorExtension.cs" />
     <Compile Include="Global.asax.cs">

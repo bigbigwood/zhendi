@@ -23,7 +23,7 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, () =>
+            return ActionWarpper.Process(conditions, OperationCodes.QUS, () =>
             {
                 var repo = RepositoryManager.GetRepository<IUserRepository>();
                 var users = repo.Query(conditions);
@@ -34,7 +34,7 @@ namespace Rld.Acs.WebApi.Controllers
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, () =>
+            return ActionWarpper.Process(id, OperationCodes.GUS, () =>
             {
                 var repo = RepositoryManager.GetRepository<IUserRepository>();
                 var userInfo = repo.GetByKey(id);
@@ -47,9 +47,10 @@ namespace Rld.Acs.WebApi.Controllers
             }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]User userInfo)
         {
-            return ActionWarpper.Process(userInfo, () =>
+            return ActionWarpper.Process(userInfo, OperationCodes.AUS, () =>
             {
                 if (userInfo.UserAuthentications == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "UserAuthenticationInfo property cannot be null.");
@@ -79,9 +80,10 @@ namespace Rld.Acs.WebApi.Controllers
             }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]User userInfo)
         {
-            return ActionWarpper.Process(userInfo, () =>
+            return ActionWarpper.Process(userInfo, OperationCodes.MUS, () =>
             {
                 userInfo.UserID = id;
 
@@ -140,9 +142,10 @@ namespace Rld.Acs.WebApi.Controllers
             }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, () =>
+            return ActionWarpper.Process(id, OperationCodes.DUS, () =>
             {
                 var userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
                 var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();

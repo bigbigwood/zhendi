@@ -21,19 +21,19 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, OperationCodes.QSYSRLPMS, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysRolePermissionRepository>();
                 var sysRolePermissionInfos = repo.Query(conditions);
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysRolePermissionInfos.ToList());
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.GSYSRLPMS, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysRolePermissionRepository>();
                 var sysRolePermissionInfo = repo.GetByKey(id);
@@ -43,24 +43,26 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysRolePermissionInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]SysRolePermission sysRolePermissionInfo)
         {
-            return ActionWarpper.Process(sysRolePermissionInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysRolePermissionInfo, OperationCodes.ASYSRLPMS, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysRolePermissionRepository>();
                 repo.Insert(sysRolePermissionInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysRolePermissionInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]SysRolePermission sysRolePermissionInfo)
         {
-            return ActionWarpper.Process(sysRolePermissionInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysRolePermissionInfo, OperationCodes.MSYSRLPMS, () =>
             {
                 sysRolePermissionInfo.SysRolePermissionID = id;
                 var repo = RepositoryManager.GetRepository<ISysRolePermissionRepository>();
@@ -68,19 +70,20 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.DSYSRLPMS, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysRolePermissionRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Rld.Acs.WebApi.Framework;
 
 namespace Rld.Acs.WebApi
 {
@@ -19,6 +20,8 @@ namespace Rld.Acs.WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new BasicAuthenticationMessageHandler());
         }
     }
 }

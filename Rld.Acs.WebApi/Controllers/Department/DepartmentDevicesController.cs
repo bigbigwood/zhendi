@@ -21,7 +21,7 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, () =>
+            return ActionWarpper.Process(conditions, OperationCodes.QDEPTDV, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
                 var departmentDeviceInfos = repo.Query(conditions);
@@ -33,7 +33,7 @@ namespace Rld.Acs.WebApi.Controllers
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.GDEPTDV, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
                 var departmentDeviceInfo = repo.GetByKey(id);
@@ -43,24 +43,26 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, departmentDeviceInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]DepartmentDevice departmentDeviceInfo)
         {
-            return ActionWarpper.Process(departmentDeviceInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(departmentDeviceInfo, OperationCodes.ADEPTDV, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
                 repo.Insert(departmentDeviceInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, departmentDeviceInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]DepartmentDevice departmentDeviceInfo)
         {
-            return ActionWarpper.Process(departmentDeviceInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(departmentDeviceInfo, OperationCodes.MDEPTDV, () =>
             {
                 departmentDeviceInfo.DepartmentDeviceID = id;
                 var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
@@ -68,19 +70,20 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.DDEPTDV, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }

@@ -21,19 +21,19 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, OperationCodes.QSYSELEM, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysModuleElementRepository>();
                 var sysModuleElementInfos = repo.Query(conditions);
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysModuleElementInfos.ToList());
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.GSYSELEM, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysModuleElementRepository>();
                 var sysModuleElementInfo = repo.GetByKey(id);
@@ -43,24 +43,26 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysModuleElementInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]SysModuleElement sysModuleElementInfo)
         {
-            return ActionWarpper.Process(sysModuleElementInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysModuleElementInfo, OperationCodes.ASYSELEM, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysModuleElementRepository>();
                 repo.Insert(sysModuleElementInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysModuleElementInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]SysModuleElement sysModuleElementInfo)
         {
-            return ActionWarpper.Process(sysModuleElementInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysModuleElementInfo, OperationCodes.MSYSELEM, () =>
             {
                 sysModuleElementInfo.ElementID = id;
                 var repo = RepositoryManager.GetRepository<ISysModuleElementRepository>();
@@ -68,19 +70,20 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.DSYSELEM, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysModuleElementRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }

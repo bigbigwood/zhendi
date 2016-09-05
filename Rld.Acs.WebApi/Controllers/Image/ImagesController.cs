@@ -40,6 +40,7 @@ namespace Rld.Acs.WebApi.Controllers.Image
             }
         }
 
+        [Authorize]
         [Route("userImages")]
         public async Task<HttpResponseMessage> Post()
         {

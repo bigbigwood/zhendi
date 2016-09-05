@@ -23,7 +23,7 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, () =>
+            return ActionWarpper.Process(conditions, OperationCodes.QUSSMY, () =>
             {
                 IEnumerable<User> users = new List<User>();
                 if (conditions.ContainsKey("DepartmentID"))

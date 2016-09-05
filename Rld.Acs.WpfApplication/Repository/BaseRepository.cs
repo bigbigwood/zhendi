@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Configuration;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Text;
 using Rld.Acs.Repository.Framework;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,7 @@ namespace Rld.Acs.WpfApplication.Repository
         {
             using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
             {
+                httpClient.DefaultRequestHeaders.Authorization = BuildAuthHeader();
                 var response = httpClient.PostAsync<TEntity>(RelevantUri, entity, new JsonMediaTypeFormatter()).Result;
                 response.EnsureSuccessStatusCode(); // Throw on error code. 
                 var newEntity = response.Content.ReadAsAsync<TEntity>().Result;
@@ -40,6 +43,7 @@ namespace Rld.Acs.WpfApplication.Repository
         {
             using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
             {
+                httpClient.DefaultRequestHeaders.Authorization = BuildAuthHeader();
                 var response = httpClient.PutAsync<TEntity>(string.Format("{0}/{1}", RelevantUri, key), entity, new JsonMediaTypeFormatter()).Result;
                 response.EnsureSuccessStatusCode(); // Throw on error code. 
                 return true;
@@ -50,6 +54,7 @@ namespace Rld.Acs.WpfApplication.Repository
         {
             using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
             {
+                httpClient.DefaultRequestHeaders.Authorization = BuildAuthHeader();
                 var response = httpClient.DeleteAsync(string.Format("{0}/{1}", RelevantUri, key)).Result;
                 response.EnsureSuccessStatusCode(); // Throw on error code. 
                 return true;
@@ -125,6 +130,16 @@ namespace Rld.Acs.WpfApplication.Repository
         public Int32 QueryCount(Hashtable conditions)
         {
             throw new NotImplementedException();
+        }
+
+        private AuthenticationHeaderValue BuildAuthHeader()
+        {
+            var username = ApplicationManager.GetInstance().CurrentOperatorInfo.LoginName;
+            var password = ApplicationManager.GetInstance().CurrentOperatorInfo.Password;
+
+            var buffer = Encoding.ASCII.GetBytes(string.Format("{0}:{1}", username, password));
+            var authHeader = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(buffer));
+            return authHeader;
         }
     }
 }

@@ -76,7 +76,8 @@ namespace Rld.Acs.WpfApplication
         {
             var sysOperator = new SysOperator();
             sysOperator.OperatorID = 1;
-            sysOperator.LoginName = "管理员";
+            sysOperator.LoginName = "admin";
+            sysOperator.Password = "jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=";
             sysOperator.LanguageID = 2502;
             sysOperator.Photo = "";
             sysOperator.Status = GeneralStatus.Enabled;

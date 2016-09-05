@@ -21,7 +21,7 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, () =>
+            return ActionWarpper.Process(conditions, OperationCodes.QDV, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
                 var devices = repo.Query(conditions);
@@ -33,7 +33,7 @@ namespace Rld.Acs.WebApi.Controllers
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, () =>
+            return ActionWarpper.Process(id, OperationCodes.GDV, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
                 var device = repo.GetByKey(id);
@@ -46,9 +46,10 @@ namespace Rld.Acs.WebApi.Controllers
             }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]DeviceController deviceInfo)
         {
-            return ActionWarpper.Process(deviceInfo, () =>
+            return ActionWarpper.Process(deviceInfo, OperationCodes.ADV, () =>
             {
                 var deviceControllerParameterRepo = RepositoryManager.GetRepository<IDeviceControllerParameterRepository>();
                 var deviceDoorRepo = RepositoryManager.GetRepository<IDeviceDoorRepository>();
@@ -79,9 +80,10 @@ namespace Rld.Acs.WebApi.Controllers
             }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]DeviceController deviceInfo)
         {
-            return ActionWarpper.Process(deviceInfo, () =>
+            return ActionWarpper.Process(deviceInfo, OperationCodes.MDV, () =>
             {
                 deviceInfo.DeviceID = id;
 
@@ -151,9 +153,10 @@ namespace Rld.Acs.WebApi.Controllers
             }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, () =>
+            return ActionWarpper.Process(id, OperationCodes.DDV, () =>
             {
                 var deviceControllerParameterRepo = RepositoryManager.GetRepository<IDeviceControllerParameterRepository>();
                 var deviceDoorRepo = RepositoryManager.GetRepository<IDeviceDoorRepository>();

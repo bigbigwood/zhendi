@@ -21,19 +21,19 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, OperationCodes.QSYSOPLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysOperationLogRepository>();
                 var sysOperationLogInfos = repo.Query(conditions);
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysOperationLogInfos.ToList());
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.GSYSOPLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysOperationLogRepository>();
                 var sysOperationLogInfo = repo.GetByKey(id);
@@ -43,24 +43,26 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysOperationLogInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]SysOperationLog sysOperationLogInfo)
         {
-            return ActionWarpper.Process(sysOperationLogInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysOperationLogInfo, OperationCodes.ASYSOPLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysOperationLogRepository>();
                 repo.Insert(sysOperationLogInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysOperationLogInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]SysOperationLog sysOperationLogInfo)
         {
-            return ActionWarpper.Process(sysOperationLogInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysOperationLogInfo, OperationCodes.MSYSOPLOG, () =>
             {
                 sysOperationLogInfo.LogID = id;
                 var repo = RepositoryManager.GetRepository<ISysOperationLogRepository>();
@@ -68,19 +70,20 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.DSYSOPLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysOperationLogRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }

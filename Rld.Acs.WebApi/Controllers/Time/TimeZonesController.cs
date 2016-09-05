@@ -25,20 +25,20 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, OperationCodes.QTMZN, () =>
             {
                 var repo = RepositoryManager.GetRepository<ITimeZoneRepository>();
                 var timeZoneInfos = repo.Query(conditions);
 
                 return Request.CreateResponse(HttpStatusCode.OK, timeZoneInfos.ToList());
 
-            }), this);
+            }, this);
         }
 
         // GET api/customers/5
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.GTMZN, () =>
             {
                 var repo = RepositoryManager.GetRepository<ITimeZoneRepository>();
                 var timeZoneInfo = repo.GetByKey(id);
@@ -48,13 +48,14 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, timeZoneInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         // POST api/customers
         public HttpResponseMessage Post([FromBody]Rld.Acs.Model.TimeZone timeZoneInfo)
         {
-            return ActionWarpper.Process(timeZoneInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(timeZoneInfo, OperationCodes.ATMZN, () =>
             {
                 var timeZoneRepo = RepositoryManager.GetRepository<ITimeZoneRepository>();
                 var timeZoneGroupRepo = RepositoryManager.GetRepository<ITimeZoneGroupRepository>();
@@ -71,13 +72,14 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, timeZoneInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         // PUT api/customers/5
         public HttpResponseMessage Put(int id, [FromBody]Rld.Acs.Model.TimeZone timeZoneInfo)
         {
-            return ActionWarpper.Process(timeZoneInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(timeZoneInfo, OperationCodes.MTMZN, () =>
             {
                 if (timeZoneInfo == null)
                 {
@@ -117,13 +119,14 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         // DELETE api/customer/5
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.DTMZN, () =>
             {
                 var timeZoneRepo = RepositoryManager.GetRepository<ITimeZoneRepository>();
                 var timeZoneGroupRepo = RepositoryManager.GetRepository<ITimeZoneGroupRepository>();
@@ -137,7 +140,7 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }

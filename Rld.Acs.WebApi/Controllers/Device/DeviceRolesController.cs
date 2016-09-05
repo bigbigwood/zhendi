@@ -22,19 +22,19 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, OperationCodes.QDVRL, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceRoleRepository>();
                 var deviceRoleInfos = repo.Query(conditions);
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceRoleInfos.ToList());
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.GDVRL, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceRoleRepository>();
                 var deviceRoleInfo = repo.GetByKey(id);
@@ -44,12 +44,13 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceRoleInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]DeviceRole deviceRoleInfo)
         {
-            return ActionWarpper.Process(deviceRoleInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(deviceRoleInfo, OperationCodes.ADVRL, () =>
             {
                 var deviceRoleRepo = RepositoryManager.GetRepository<IDeviceRoleRepository>();
                 var deviceRolePermissionRepo = RepositoryManager.GetRepository<IDeviceRolePermissionRepository>();
@@ -66,12 +67,13 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceRoleInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]DeviceRole deviceRoleInfo)
         {
-            return ActionWarpper.Process(deviceRoleInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(deviceRoleInfo, OperationCodes.MDVRL, () =>
             {
                 deviceRoleInfo.DeviceRoleID = id;
 
@@ -105,12 +107,13 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.DDVRL, () =>
             {
                 var deviceRoleRepo = RepositoryManager.GetRepository<IDeviceRoleRepository>();
                 var deviceRolePermissionRepo = RepositoryManager.GetRepository<IDeviceRolePermissionRepository>();
@@ -124,7 +127,7 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, OperationCodes.QDVOPLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
 
@@ -33,12 +33,12 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceOperationLogInfos.ToList());
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.GDVOPLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
                 var deviceOperationLogInfo = repo.GetByKey(id);
@@ -48,24 +48,26 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceOperationLogInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]DeviceOperationLog deviceOperationLogInfo)
         {
-            return ActionWarpper.Process(deviceOperationLogInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(deviceOperationLogInfo, OperationCodes.ADVOPLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
                 repo.Insert(deviceOperationLogInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceOperationLogInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]DeviceOperationLog deviceOperationLogInfo)
         {
-            return ActionWarpper.Process(deviceOperationLogInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(deviceOperationLogInfo, OperationCodes.MDVOPLOG, () =>
             {
                 deviceOperationLogInfo.LogID = id;
                 var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
@@ -73,19 +75,20 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.DDVOPLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }

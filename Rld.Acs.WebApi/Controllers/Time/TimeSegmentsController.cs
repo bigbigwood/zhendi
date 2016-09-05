@@ -22,20 +22,20 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, OperationCodes.QTMSGM, () =>
             {
                 var repo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
                 var timeSegments = repo.Query(conditions);
 
                 return Request.CreateResponse(HttpStatusCode.OK, timeSegments.ToList());
 
-            }), this);
+            }, this);
         }
 
         // GET api/customers/5
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.GTMSGM, () =>
             {
                 var repo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
                 var timeSegment = repo.GetByKey(id);
@@ -45,26 +45,28 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, timeSegment);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         // POST api/customers
         public HttpResponseMessage Post([FromBody]TimeSegment timeSegmentDto)
         {
-            return ActionWarpper.Process(timeSegmentDto, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(timeSegmentDto, OperationCodes.ATMSGM, () =>
             {
                 var repo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
                 var timeSegment = repo.Insert(timeSegmentDto);
 
                 return Request.CreateResponse(HttpStatusCode.OK, timeSegment);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         // PUT api/customers/5
         public HttpResponseMessage Put(int id, [FromBody]TimeSegment timeSegmentDto)
         {
-            return ActionWarpper.Process(timeSegmentDto, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(timeSegmentDto, OperationCodes.MTMSGM, () =>
             {
                 timeSegmentDto.TimeSegmentID = id;
                 var repo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
@@ -72,13 +74,14 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         // DELETE api/customer/5
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.DTMSGM, () =>
             {
                 var timeSegmentRepo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
                 var timeGroupSegmentRepo = RepositoryManager.GetRepository<ITimeGroupSegmentRepository>();
@@ -93,7 +96,7 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, OperationCodes.QDVTFLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
 
@@ -33,12 +33,12 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceTrafficInfos.ToList());
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.GDVTFLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
                 var deviceTrafficInfo = repo.GetByKey(id);
@@ -48,24 +48,26 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceTrafficInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]DeviceTrafficLog deviceTrafficInfo)
         {
-            return ActionWarpper.Process(deviceTrafficInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(deviceTrafficInfo, OperationCodes.ADVTFLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
                 repo.Insert(deviceTrafficInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceTrafficInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]DeviceTrafficLog deviceTrafficInfo)
         {
-            return ActionWarpper.Process(deviceTrafficInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(deviceTrafficInfo, OperationCodes.MDVTFLOG, () =>
             {
                 deviceTrafficInfo.TrafficID = id;
                 var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
@@ -73,19 +75,20 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.DDVTFLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }

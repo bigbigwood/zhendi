@@ -50,6 +50,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             var sysOperator = new RldModel.SysOperator();
             sysOperator.OperatorID = operatorInfo.OperatorID;
             sysOperator.LoginName = operatorInfo.LoginName;
+            sysOperator.Password = operatorInfo.Password;
             sysOperator.LanguageID = operatorInfo.LanguageID;
             sysOperator.Photo = operatorInfo.Photo;
             sysOperator.Status = (operatorInfo.Status == GeneralStatus.Enabled) ? RldModel.GeneralStatus.Enabled : RldModel.GeneralStatus.Disabled;

@@ -22,7 +22,7 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, () =>
+            return ActionWarpper.Process(conditions, OperationCodes.QDVDR, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceDoorRepository>();
                 var doors = repo.Query(conditions);

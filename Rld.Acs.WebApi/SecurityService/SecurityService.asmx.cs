@@ -42,6 +42,7 @@ namespace Rld.Acs.WebApi.SecurityService
                     if (hashPassword == operatorInfo.Password)
                     {
                         operatorInfo.MaskPassword();
+                        operatorInfo.Password = password; // return password
                         return new AuthenticateResult() { ResultType = ResultType.OK, Messages = new[] { "OK" }, OperatorInfo = operatorInfo };
                     }
                     else

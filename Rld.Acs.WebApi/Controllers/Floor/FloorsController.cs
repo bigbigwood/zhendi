@@ -21,7 +21,7 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, () =>
+            return ActionWarpper.Process(conditions, OperationCodes.QFL, () =>
             {
                 var repo = RepositoryManager.GetRepository<IFloorRepository>();
                 var floors = repo.Query(conditions);
@@ -33,7 +33,7 @@ namespace Rld.Acs.WebApi.Controllers
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, () =>
+            return ActionWarpper.Process(id, OperationCodes.GFL, () =>
             {
                 var repo = RepositoryManager.GetRepository<IFloorRepository>();
                 var floor = repo.GetByKey(id);
@@ -46,9 +46,10 @@ namespace Rld.Acs.WebApi.Controllers
             }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]Floor floorInfo)
         {
-            return ActionWarpper.Process(floorInfo, () =>
+            return ActionWarpper.Process(floorInfo, OperationCodes.AFL, () =>
             {
                 var floorRepo = RepositoryManager.GetRepository<IFloorRepository>();
                 var floorDoorRepo = RepositoryManager.GetRepository<IFloorDoorRepository>();
@@ -68,9 +69,10 @@ namespace Rld.Acs.WebApi.Controllers
             }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]Floor floorInfo)
         {
-            return ActionWarpper.Process(floorInfo, () =>
+            return ActionWarpper.Process(floorInfo, OperationCodes.MFL, () =>
             {
                 floorInfo.FloorID = id;
 
@@ -111,9 +113,10 @@ namespace Rld.Acs.WebApi.Controllers
             }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, () =>
+            return ActionWarpper.Process(id, OperationCodes.DFL, () =>
             {
                 var floorRepo = RepositoryManager.GetRepository<IFloorRepository>();
                 var floorDoorRepo = RepositoryManager.GetRepository<IFloorDoorRepository>();

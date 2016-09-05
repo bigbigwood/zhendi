@@ -22,7 +22,7 @@ namespace Rld.Acs.WebApi.Controllers
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
-            return ActionWarpper.Process(conditions, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(conditions, OperationCodes.QSYSDICT, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
 
@@ -41,12 +41,12 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysDictionaryInfos.ToList());
 
-            }), this);
+            }, this);
         }
 
         public HttpResponseMessage GetById(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.GSYSDICT, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
                 var sysDictionaryInfo = repo.GetByKey(id);
@@ -56,24 +56,26 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysDictionaryInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Post([FromBody]SysDictionary sysDictionaryInfo)
         {
-            return ActionWarpper.Process(sysDictionaryInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysDictionaryInfo, OperationCodes.ASYSDICT, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
                 repo.Insert(sysDictionaryInfo);
 
                 return Request.CreateResponse(HttpStatusCode.OK, sysDictionaryInfo);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody]SysDictionary sysDictionaryInfo)
         {
-            return ActionWarpper.Process(sysDictionaryInfo, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(sysDictionaryInfo, OperationCodes.MSYSDICT, () =>
             {
                 sysDictionaryInfo.DictionaryID = id;
                 var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
@@ -81,19 +83,20 @@ namespace Rld.Acs.WebApi.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
 
+        [Authorize]
         public HttpResponseMessage Delete(int id)
         {
-            return ActionWarpper.Process(id, new Func<HttpResponseMessage>(() =>
+            return ActionWarpper.Process(id, OperationCodes.DSYSDICT, () =>
             {
                 var repo = RepositoryManager.GetRepository<ISysDictionaryRepository>();
                 repo.Delete(id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
 
-            }), this);
+            }, this);
         }
     }
 }
