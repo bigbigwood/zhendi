@@ -35,10 +35,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public String DoorName { get; set; }
 
-        public Boolean Enabled
-        {
-            get { return FloorDoorID == 0; }
-        }
+        public Boolean Enabled { get; set; }
 
         public FloorDoorViewModel()
         {
@@ -48,27 +45,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         private void Save()
         {
-            string message = "";
-            try
-            {
-                if (FloorDoorID == 0)
-                {
-
-                }
-                else
-                {
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Update device fails.", ex);
-                message = "保存设备权限失败";
-                SendMessage(message);
-                return;
-            }
-
             RaisePropertyChanged(null);
-            Close(message);
+            Close("");
         }
 
         private void Close(string message)

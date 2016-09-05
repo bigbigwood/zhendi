@@ -14,6 +14,7 @@ using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
+using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.Service.DeviceService;
 using Rld.Acs.WpfApplication.View.Windows;
 using Rld.Acs.WpfApplication.ViewModel.Pages;
@@ -76,7 +77,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
                     Log.InfoFormat("Floor monitor timer check doors for floor id: {0}", _selectedFloorViewModel.FloorID);
                     foreach (var floordoorId in _dropDoorDict.Keys)
                     {
-                        var doorInfo = ApplicationManager.GetInstance().AuthorizationDoors.FirstOrDefault(x => x.DeviceDoorID == floordoorId);
+                        var doorInfo = FloorDoorManager.GetInstance().AuthorizationDoors.FirstOrDefault(x => x.DeviceDoorID == floordoorId);
                         ResultTypes resultTypes;
                         bool resultTypeSpecified;
                         string[] messages;
@@ -264,7 +265,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
             var menuItem = (MenuItem)sender;
             var panel = menuItem.Tag as StackPanel;
             var floordoor = panel.DataContext as FloorDoorViewModel;
-            var doorInfo = ApplicationManager.GetInstance().AuthorizationDoors.FirstOrDefault(x => x.DeviceDoorID == floordoor.DoorID);
+            var doorInfo = FloorDoorManager.GetInstance().AuthorizationDoors.FirstOrDefault(x => x.DeviceDoorID == floordoor.DoorID);
 
             string message = "";
 

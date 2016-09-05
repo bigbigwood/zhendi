@@ -19,6 +19,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Validator;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.View.Windows
@@ -73,8 +74,6 @@ namespace Rld.Acs.WpfApplication.View.Windows
             }
         }
 
-     
-
         private void UploadPhothBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -110,17 +109,29 @@ namespace Rld.Acs.WpfApplication.View.Windows
                     coreModel.Doors.Add(floorDoorViewModel);
                 }
 
+                var validator = NinjectBinder.GetValidator<FloorValidator>();
+                var results = validator.Validate(coreModel);
+                if (!results.IsValid)
+                {
+                    var message = string.Join("\n", results.Errors);
+                    ShowSubViewNotification(new NotificationMessage(message));
+                    return;
+                }
+
                 if (coreModel.FloorID == 0)
                 {
 					coreModel.Status = GeneralStatus.Enabled;
                     coreModel = _floorRepo.Insert(coreModel);
                     _floorViewModel.FloorID = coreModel.FloorID;
                     _floorViewModel.BindDoors(coreModel.Doors);
+                    UpdateAuthorizationDoorsForFloor(coreModel);
                 }
                 else
                 {
                     _floorRepo.Update(coreModel);
+                    coreModel = _floorRepo.GetByKey(coreModel.FloorID);
                     _floorViewModel.BindDoors(coreModel.Doors);
+                    UpdateAuthorizationDoorsForFloor(coreModel);
                 }
 
                 ProcessCloseViewMessage(new NotificationMessage("保存成功"));
@@ -130,6 +141,26 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 Log.Error(ex);
                 ShowSubViewNotification(new NotificationMessage("保存失败"));
             }
+        }
+
+        public void UpdateAuthorizationDoorsForFloor(Floor floor)
+        {
+            var authorizationFloorDoors = FloorDoorManager.GetInstance().AuthorizationFloorDoor;
+            foreach (var floorDoor in floor.Doors)
+            {
+                var i = authorizationFloorDoors.FirstOrDefault(x => x.FloorDoorID == floorDoor.FloorDoorID);
+                if (i != null)
+                {
+                    i = floorDoor;
+                }
+                else
+                {
+                    authorizationFloorDoors.Add(floorDoor);
+                }
+            }
+
+            var removedDoors = authorizationFloorDoors.FindAll(x => x.FloorID == floor.FloorID && floor.Doors.All(y => y.FloorDoorID != x.FloorDoorID));
+            removedDoors.ForEach(x => authorizationFloorDoors.Remove(x));
         }
 
         private void CancelBtn_Click(object sender, System.Windows.RoutedEventArgs e)

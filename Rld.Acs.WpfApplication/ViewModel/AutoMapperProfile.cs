@@ -129,15 +129,13 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 ;
 
             CreateProvMap<FloorViewModel, Floor>()
-                 .ForMember(dest => dest.Doors, op => op.Ignore())
-                 ;
+                 .ForMember(dest => dest.Doors, op => op.Ignore());
             CreateProvMap<Floor, FloorViewModel>()
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.Doors, op => op.Ignore())
                 .ForMember(dest => dest.DoorNames, op => op.Ignore())
-                .AfterMap((src, dest) => dest.BindDoors(src.Doors))
-                ;
+                .AfterMap((src, dest) => dest.BindDoors(src.Doors));
 
             Log.Info("Verify mapper configuration..");
             Mapper.AssertConfigurationIsValid();

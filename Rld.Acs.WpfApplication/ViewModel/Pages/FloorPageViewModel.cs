@@ -70,6 +70,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
+                SelectedFloorViewModel.InitDoorListBox();
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
                     DataContext = SelectedFloorViewModel

@@ -82,11 +82,20 @@
                     <GroupBox Style="{StaticResource DefaultGroupBoxStyle}" Header="门列表" Margin="0,5,0,0">
                         <ListBox ItemsSource="{Binding Doors}" PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown"
                                  Drop="ListBox_OnDrop" AllowDrop="True" >
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="{x:Type ListBoxItem}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Enabled}" Value="False">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Margin="3">
                                         <Image Source="{StaticResource icon_door}" Height="15" Width="25"/>
-                                        <TextBlock Text="{Binding DoorName}" IsEnabled="{Binding Enabled}" />
+                                        <TextBlock Text="{Binding DoorName}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

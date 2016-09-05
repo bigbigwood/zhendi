@@ -160,6 +160,7 @@
     <Compile Include="Controllers\Device\DeviceStateHistorysController.cs" />
     <Compile Include="Controllers\Device\DeviceRolesController.cs" />
     <Compile Include="Controllers\Device\DevicesController.cs" />
+    <Compile Include="Controllers\Floor\FloorDoorsController.cs" />
     <Compile Include="Controllers\Floor\FloorsController.cs" />
     <Compile Include="Controllers\Image\ImagesController.cs" />
     <Compile Include="Controllers\System\SysRolePermissionsController.cs" />

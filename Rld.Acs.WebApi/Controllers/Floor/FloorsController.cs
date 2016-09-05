@@ -98,7 +98,7 @@ namespace Rld.Acs.WebApi.Controllers
                 }
                 else
                 {
-                    deletedDoorIds = floorInfo.Doors.Select(d => d.FloorDoorID).ToList();
+                    deletedDoorIds = originalFloorInfo.Doors.Select(d => d.FloorDoorID).ToList();
                     deletedDoorIds.ForEach(d => floorDoorRepo.Delete(d));
                 }
 

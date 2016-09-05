@@ -129,6 +129,7 @@
     <Compile Include="Models\PasswordBoxHelper.cs" />
     <Compile Include="Models\TriStateTreeViewNode.cs" />
     <Compile Include="Repository\DeviceDoorRepository.cs" />
+    <Compile Include="Repository\FloorDoorRepository.cs" />
     <Compile Include="Repository\FloorRepository.cs" />
     <Compile Include="Repository\DeviceOperationLogRepository.cs" />
     <Compile Include="Repository\DeviceTrafficLogRepository.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Service\Authorization\AuthProvider.cs" />
     <Compile Include="Service\Authorization\DefaultAuthProvider.cs" />
     <Compile Include="Service\Proxy\DeviceServiceProxy.cs" />
+    <Compile Include="Service\FloorDoorManager.cs" />
     <Compile Include="Service\SysPermissionProvider.cs" />
     <Compile Include="Service\Proxy\SecurityServiceProxy.cs" />
     <Compile Include="Service\Validator\DeviceParameterValidator.cs" />
@@ -152,6 +154,7 @@
     <Compile Include="Service\Validator\TimeSegmentValidator.cs" />
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
     <Compile Include="Service\Validator\DeviceValidator.cs" />
+    <Compile Include="Service\Validator\FloorValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
     <Compile Include="ViewModel\Pages\FloorMonitorPageViewModel.cs" />

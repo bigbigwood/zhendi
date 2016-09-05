@@ -48,6 +48,7 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<ISysOperatorRepository>().To<SysOperatorRepository>();
 
             InjectionKernel.Bind<IFloorRepository>().To<FloorRepository>();
+            InjectionKernel.Bind<IFloorDoorRepository>().To<FloorDoorRepository>();
         }
 
         private static void BindValidator()
@@ -64,6 +65,7 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<HeadReadingValidator>().To<HeadReadingValidator>();
             InjectionKernel.Bind<DeviceRoleValidator>().To<DeviceRoleValidator>();
             InjectionKernel.Bind<SysDictionaryValidator>().To<SysDictionaryValidator>();
+            InjectionKernel.Bind<FloorValidator>().To<FloorValidator>();
         }
 
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()

@@ -16,6 +16,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.Service.Validator;
 using TimeZone = Rld.Acs.Model.TimeZone;
 
@@ -39,9 +40,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             get
             {
                 var coremodel = Mapper.Map<Floor>(this);
-                return coremodel.GetDoorList(ApplicationManager.GetInstance().AuthorizationDoors);
+                return coremodel.GetDoorList(FloorDoorManager.GetInstance().AuthorizationDoors);
             }
-            
         }
 
         public FloorViewModel()
@@ -49,31 +49,31 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
 
-            Doors = new ObservableCollection<FloorDoorViewModel>();
-            ApplicationManager.GetInstance().AuthorizationDoors.ForEach(x => Doors.Add(new FloorDoorViewModel()
-            {
-                FloorDoorID = 0,
-                DoorID = x.DeviceDoorID,
-                DoorName = x.Name,
-            }));
+            InitDoorListBox();
         }
 
-        //public List<FloorDoor> GetUIDoors()
-        //{
-        //    var coreDoors = new List<FloorDoor>();
-        //    Doors.FindAll(x => x.FloorID != 0).ForEach(x => coreDoors.Add(new FloorDoor()
-        //    {
-        //        FloorDoorID = x.FloorDoorID,
-        //        DoorID = x.DoorID,
-        //        FloorID = x.FloorID,
-        //        DoorType = x.DoorType,
-        //        LocationX = x.LocationX,
-        //        LocationY = x.LocationY,
-        //        Rotation = x.Rotation,
-        //    }));
-
-        //    return coreDoors;
-        //}
+        public void InitDoorListBox()
+        {
+            Doors = new ObservableCollection<FloorDoorViewModel>();
+            foreach (var authDoor in FloorDoorManager.GetInstance().AuthorizationDoors)
+            {
+                var floorDoorViewModel = new FloorDoorViewModel();
+                var bindedDoor = FloorDoorManager.GetInstance().AuthorizationFloorDoor.FirstOrDefault(x => x.DoorID == authDoor.DeviceDoorID);
+                if (bindedDoor != null)
+                {
+                    floorDoorViewModel = Mapper.Map<FloorDoorViewModel>(bindedDoor);
+                    floorDoorViewModel.DoorName = authDoor.Name;
+                    floorDoorViewModel.Enabled = (bindedDoor.FloorDoorID == 0 || bindedDoor.FloorID == FloorID);
+                }
+                else
+                {
+                    floorDoorViewModel.DoorID = authDoor.DeviceDoorID;
+                    floorDoorViewModel.DoorName = authDoor.Name;
+                    floorDoorViewModel.Enabled = true;
+                }
+                Doors.Add(floorDoorViewModel);
+            }
+        }
 
         public void BindDoors(List<FloorDoor> coreDoors)
         {
@@ -85,31 +85,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 dtoDoor.LocationX = x.LocationX;
                 dtoDoor.LocationY = x.LocationY;
                 dtoDoor.Rotation = x.Rotation;
+                dtoDoor.Enabled = (x.FloorDoorID == 0 || x.FloorID == FloorID);
             });
         }
 
-        private void UploadImage()
-        {
-            try
-            {
-                if (!File.Exists(Photo))
-                    throw new Exception("file does not exist.");
-
-                string extension = new FileInfo(Photo).Extension;
-
-                string uniqueFileName = string.Format(@"{0}_{1}{2}", Guid.NewGuid(), DateTime.Now.ToString("yyyyMMddhhmmss"), extension);
-                string cacheFilePath = string.Format(@"{0}\{1}", ApplicationManager.GetInstance().LocalImageCachePath, uniqueFileName);
-                File.Copy(Photo, cacheFilePath);
-
-                //_userAvatorService.UploadAvatorToServer(uniqueFileName);
-                //Avator = cacheFilePath;
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-                throw;
-            }
-        }
 
         private void Save()
         {
