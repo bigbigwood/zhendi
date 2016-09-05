@@ -93,5 +93,47 @@
         </isNotNull>
       </dynamic>
     </select>
+
+    <select id="SysOperationLog.QueryPage" parameterClass="Hashtable" resultMap="SysOperationLogResult">
+      SELECT N.rownum, L.* FROM
+      (SELECT TOP $PageEnd$ row_number() OVER (ORDER BY LogID) rownum, LogID FROM SYS_OPERATION_LOG L
+      WHERE 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="StartDate">
+          L.CreateDate >= #StartDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="EndDate">
+          L.CreateDate  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="UserID">
+          L.UserID = #UserID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Keyword">
+          (L.UserName like '%$Keyword$%' or L.OperationName like '%$Keyword$%')
+        </isNotEmpty>
+      </dynamic>
+      ) N
+      INNER JOIN SYS_OPERATION_LOG L ON N.LogID = L.LogID
+      WHERE N.rownum >= $PageStart$
+    </select>
+
+    <select id="SysOperationLog.QueryCount" parameterClass="Hashtable" resultClass="int">
+      SELECT COUNT(1) FROM SYS_OPERATION_LOG L
+      Where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="StartDate">
+          L.CreateDate >= #StartDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="EndDate">
+          L.CreateDate  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="UserID">
+          L.UserID = #UserID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Keyword">
+          (L.UserName like '%$Keyword$%' or L.OperationName like '%$Keyword$%')
+        </isNotEmpty>
+      </dynamic>
+    </select>
   </statements>
 </sqlMap>

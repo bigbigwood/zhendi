@@ -133,6 +133,7 @@
     <Compile Include="Repository\FloorRepository.cs" />
     <Compile Include="Repository\DeviceOperationLogRepository.cs" />
     <Compile Include="Repository\DeviceTrafficLogRepository.cs" />
+    <Compile Include="Repository\System\SysOperationLogRepository.cs" />
     <Compile Include="Repository\System\SysModuleElementRepository.cs" />
     <Compile Include="Repository\System\SysModuleRepository.cs" />
     <Compile Include="Repository\System\SysOperatorRepository.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Service\Validator\FloorValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
+    <Compile Include="ViewModel\Pages\SysOperationLogPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\FloorMonitorPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\FloorPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\SysOperatorPageViewModel.cs" />
@@ -166,6 +168,7 @@
     <Compile Include="ViewModel\Pages\DeviceTrafficLogPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
+    <Compile Include="ViewModel\Views\SysOperationLogViewModel.cs" />
     <Compile Include="ViewModel\Views\FloorDoorViewModel.cs" />
     <Compile Include="ViewModel\Views\FloorViewModel.cs" />
     <Compile Include="ViewModel\Views\SysRolePermissionViewModel.cs" />
@@ -209,6 +212,9 @@
     <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Service\Navigation\FrameNavigationService.cs" />
     <Compile Include="Service\Navigation\IFrameNavigationService.cs" />
+    <Compile Include="View\Pages\SysOperationLogPage.xaml.cs">
+      <DependentUpon>SysOperationLogPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\FloorPage.xaml.cs">
       <DependentUpon>FloorPage.xaml</DependentUpon>
     </Compile>
@@ -352,6 +358,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CustomControls\TimeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Pages\SysOperationLogPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

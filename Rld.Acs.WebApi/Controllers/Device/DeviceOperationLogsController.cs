@@ -26,10 +26,19 @@ namespace Rld.Acs.WebApi.Controllers
             {
                 var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
 
-                var paginationResult = repo.QueryPage(conditions);
-                var totalCount = paginationResult.TotalCount;
-                var deviceOperationLogInfos = paginationResult.Entities;
-                System.Web.HttpContext.Current.Response.Headers.Add(ConstStrings.HTTP_HEADER_X_Pagination_TotalCount, totalCount.ToString());
+                IEnumerable<DeviceOperationLog> deviceOperationLogInfos;
+                if (conditions.ContainsKey(ConstStrings.PageStart) && conditions.ContainsKey(ConstStrings.PageEnd))
+                {
+                    var paginationResult = repo.QueryPage(conditions);
+                    var totalCount = paginationResult.TotalCount;
+                    deviceOperationLogInfos = paginationResult.Entities;
+                    System.Web.HttpContext.Current.Response.Headers.Add(ConstStrings.HTTP_HEADER_X_Pagination_TotalCount, totalCount.ToString());
+                }
+                else
+                {
+                    deviceOperationLogInfos = repo.Query(conditions);
+                }
+
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceOperationLogInfos.ToList());
 

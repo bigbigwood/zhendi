@@ -23,7 +23,7 @@ namespace Rld.Acs.WebApi.Framework
 
         public static HttpResponseMessage Process<T>(T t, OperationCodes operationCode, Func<HttpResponseMessage> fun, ApiController controller)
         {
-            Log.InfoFormat("Http Method: {0}, Request Uri: {1}.", controller.Request.Method, controller.Request.RequestUri);
+            Log.InfoFormat("{0} {1}", controller.Request.Method, controller.Request.RequestUri);
             var sw = Stopwatch.StartNew();
             IPersistanceTransaction transaction = null;
             HttpResponseMessage result = null;

@@ -328,7 +328,7 @@
                             </MenuItem>
 
                             <MenuItem x:Name="pub_xtczrz" FontSize="12" Width="180"  Header="系统操作日志" IsCheckable="False" 
-                                      Command="{Binding NatigatePageCmd}" CommandParameter="DeviceTrafficLogPage"
+                                      Command="{Binding NatigatePageCmd}" CommandParameter="SysOperationLogPage"
                                       IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_SystemOperationLog}}">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/操作日志.png"/>

@@ -91,6 +91,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
             CreateProvMap<DeviceOperationLogViewModel, DeviceOperationLog>();
             CreateProvMap<DeviceOperationLog, DeviceOperationLogViewModel>();
 
+            CreateProvMap<SysOperationLogViewModel, SysOperationLog>();
+            CreateProvMap<SysOperationLog, SysOperationLogViewModel>();
+
             CreateProvMap<SysDictionaryViewModel, SysDictionary>();
             CreateProvMap<SysDictionary, SysDictionaryViewModel>()
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())
