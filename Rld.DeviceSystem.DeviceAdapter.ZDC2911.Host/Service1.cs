@@ -12,6 +12,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Host
 {
     public partial class Service1 : ServiceBase
     {
+        private DeviceAdapter device;
         public Service1()
         {
             InitializeComponent();
@@ -19,10 +20,14 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Host
 
         protected override void OnStart(string[] args)
         {
+            var config = ConfigurationHelper.CreateConfiguration();
+            device = new Rld.DeviceSystem.DeviceAdapter.ZDC2911.DeviceAdapter();
+            device.Start(config);
         }
 
         protected override void OnStop()
         {
+            device.Stop();
         }
     }
 }
