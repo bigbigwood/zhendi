@@ -77,6 +77,28 @@
     </delete>
 
     <select id="DeviceTrafficLog.Query" parameterClass="Hashtable" resultMap="DeviceTrafficLogResult">
+      SELECT * From DEVICE_TRAFFIC_LOG
+      WHERE 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="StartDate">
+          RecordTime >= #StartDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="EndDate">
+          RecordTime  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceId">
+          DeviceId = #DeviceId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceUserId">
+          DeviceUserId = #DeviceUserId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="RecordType">
+          RecordType = #RecordType#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+
+    <select id="DeviceTrafficLog.QueryPage" parameterClass="Hashtable" resultMap="DeviceTrafficLogResult">
       SELECT N.rownum, L.* FROM
       (SELECT TOP $PageEnd$ row_number() OVER (ORDER BY TrafficID) rownum, TrafficID FROM DEVICE_TRAFFIC_LOG
       WHERE 1=1

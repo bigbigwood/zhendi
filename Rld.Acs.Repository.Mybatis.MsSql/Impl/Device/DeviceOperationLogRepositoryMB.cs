@@ -7,7 +7,7 @@ using Rld.Acs.Repository.Interfaces;
 
 namespace Rld.Acs.Repository.Mybatis.MsSql
 {
-    public class DeviceOperationLogRepositoryMB : MyBatisRepository<DeviceOperationLog, int>, IDeviceOperationLogRepository
+    public class DeviceOperationLogRepositoryMB : PaginationRepository<DeviceOperationLog, int>, IDeviceOperationLogRepository
     {
         #region Repository
         protected override string EntityCode
@@ -15,16 +15,5 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             get { return "DeviceOperationLog"; }
         }
         #endregion
-
-        public PaginationResult<DeviceOperationLog> QueryPage(Hashtable conditions)
-        {
-            Int32 totalCount = _sqlMapper.QueryForObject<Int32>("DeviceOperationLog.QueryCount", conditions);
-            var entities = Query(conditions);
-            return new PaginationResult<DeviceOperationLog>()
-            {
-                TotalCount = totalCount,
-                Entities = entities,
-            };
-        }
     }
 }

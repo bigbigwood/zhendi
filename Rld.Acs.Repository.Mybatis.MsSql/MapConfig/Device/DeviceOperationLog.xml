@@ -78,6 +78,31 @@
 
 
     <select id="DeviceOperationLog.Query" parameterClass="Hashtable" resultMap="DeviceOperationLogResult">
+      SELECT * FROM DEVICE_OPERATION_LOG L
+      WHERE 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="StartDate">
+          L.OperationTime >= #StartDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="EndDate">
+          L.OperationTime  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceId">
+          L.DeviceId = #DeviceId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceUserId">
+          L.DeviceUserId = #DeviceUserId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="OperatorId">
+          L.OperatorId = #OperatorId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="OperationType">
+          L.OperationType = #OperationType#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+
+    <select id="DeviceOperationLog.QueryPage" parameterClass="Hashtable" resultMap="DeviceOperationLogResult">
       SELECT N.rownum, L.* FROM
       (SELECT TOP $PageEnd$ row_number() OVER (ORDER BY LogID) rownum, LogID FROM DEVICE_OPERATION_LOG L
       WHERE 1=1

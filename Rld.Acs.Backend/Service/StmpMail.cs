@@ -31,6 +31,8 @@ namespace StmpMailTest
         {
             try
             {
+
+
                 MailSettingsSectionGroup sectionGroup = (MailSettingsSectionGroup)WebConfigurationManager.OpenWebConfiguration("~/").GetSectionGroup("system.net/mailSettings");
                 if (sectionGroup == null)
                 {

@@ -14,6 +14,7 @@ namespace Rld.Acs.Backend.Service
     public class BackendService
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private IScheduler scheduler;
         public BackendService()
         {
             InitScheduleTasks();
@@ -21,23 +22,24 @@ namespace Rld.Acs.Backend.Service
 
         public void OnStart()
         {
+            scheduler.Start();
             Log.Info("BackendService started.");
         }
 
         public void OnStop()
         {
+            scheduler.PauseAll();
             Log.Info("BackendService stopped.");
         }
 
         private void InitScheduleTasks()
         {
             var scheduleFactory = new StdSchedulerFactory();
-            var scheduler = scheduleFactory.GetScheduler();
+            scheduler = scheduleFactory.GetScheduler();
 
             var deviceAlarmJobCronExp = ConfigurationManager.AppSettings["DeviceAlarmJobCronExp"];
             InitJob(scheduler, typeof(DeviceAlarmJob), deviceAlarmJobCronExp);
 
-            scheduler.Start();
             Log.Info("Init schedule tasks completely.");
         }
 

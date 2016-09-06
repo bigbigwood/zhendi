@@ -25,11 +25,19 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(conditions, OperationCodes.QDVTFLOG, () =>
             {
                 var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
+                IEnumerable<DeviceTrafficLog> deviceTrafficInfos;
 
-                var paginationResult = repo.QueryPage(conditions);
-                var totalCount = paginationResult.TotalCount;
-                var deviceTrafficInfos = paginationResult.Entities;
-                System.Web.HttpContext.Current.Response.Headers.Add(ConstStrings.HTTP_HEADER_X_Pagination_TotalCount, totalCount.ToString());
+                if (conditions.ContainsKey(ConstStrings.PageStart) && conditions.ContainsKey(ConstStrings.PageEnd))
+                {
+                    var paginationResult = repo.QueryPage(conditions);
+                    var totalCount = paginationResult.TotalCount;
+                    deviceTrafficInfos = paginationResult.Entities;
+                    System.Web.HttpContext.Current.Response.Headers.Add(ConstStrings.HTTP_HEADER_X_Pagination_TotalCount, totalCount.ToString());
+                }
+                else
+                {
+                    deviceTrafficInfos = repo.Query(conditions);
+                }
 
                 return Request.CreateResponse(HttpStatusCode.OK, deviceTrafficInfos.ToList());
 
