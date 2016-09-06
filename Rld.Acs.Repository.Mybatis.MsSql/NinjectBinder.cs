@@ -39,6 +39,7 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             Bind<ISysRoleRepository>().To<SysRoleRepositoryMB>();
             Bind<ISysRolePermissionRepository>().To<SysRolePermissionRepositoryMB>();
             Bind<ISysOperatorRoleRepository>().To<SysOperatorRoleRepositoryMB>();
+            Bind<ISysConfigRepository>().To<SysConfigRepositoryMB>();
             //Time
             Bind<ITimeGroupRepository>().To<TimeGroupRepositoryMB>();
             Bind<ITimeGroupSegmentRepository>().To<TimeGroupSegmentRepositoryMB>();

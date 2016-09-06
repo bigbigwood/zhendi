@@ -106,6 +106,13 @@ alter table FLOOR_DOOR
 go
 
 if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('SYS_CONFIG') and o.name = 'PK_SYS_CONFIG')
+alter table SYS_CONFIG
+   drop constraint PK_SYS_CONFIG
+go
+
+if exists (select 1
             from  sysobjects
            where  id = object_id('DEVICE_CONTROLLERS')
             and   type = 'U')
@@ -316,6 +323,13 @@ if exists (select 1
    drop table FLOOR_DOOR
 go
 
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('SYS_CONFIG')
+            and   type = 'U')
+   drop table SYS_CONFIG
+go
+
 /*==============================================================*/
 /* Table: DEVICE_CONTROLLERS                                    */
 /*==============================================================*/
@@ -519,6 +533,20 @@ create table FLOOR_DOOR (
    LocationY            float                not null,
    Rotation             int                  not null,
    constraint PK_FLOOR_DOOR primary key nonclustered (FloorDoorID)
+)
+go
+
+
+/*==============================================================*/
+/* Table: SYS_CONFIG                                     */
+/*==============================================================*/
+create table SYS_CONFIG (
+   ID                   int                  identity(1,1),
+   Name					nvarchar(100)        NOT NULL,
+   Value				nvarchar(max)       NOT NULL,
+   Description			nvarchar(1024)       null,
+   Version              nvarchar(1024)       null,
+   constraint PK_SYS_CONFIG primary key nonclustered (ID)
 )
 go
 

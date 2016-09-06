@@ -51,6 +51,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{C3C54FFE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2D6689F4-BF6B-4727-B415-67C18AD68AB6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.Backend", "Rld.Acs.Backend\Rld.Acs.Backend.csproj", "{4E985E9C-8D81-4C6E-A4DC-32AA35892C17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,10 @@ Global
 		{6C4EFEAC-6AEB-481F-8088-1EACC2EAA399}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C4EFEAC-6AEB-481F-8088-1EACC2EAA399}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C4EFEAC-6AEB-481F-8088-1EACC2EAA399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E985E9C-8D81-4C6E-A4DC-32AA35892C17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E985E9C-8D81-4C6E-A4DC-32AA35892C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E985E9C-8D81-4C6E-A4DC-32AA35892C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E985E9C-8D81-4C6E-A4DC-32AA35892C17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

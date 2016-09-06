@@ -317,6 +317,10 @@ INSERT SYS_ROLE_PERMISSIONS VALUES (3, 31, NULL)
 INSERT SYS_ROLE_PERMISSIONS VALUES (3, 32, NULL)
 INSERT SYS_ROLE_PERMISSIONS VALUES (3, 33, NULL)
 
+--系统配置
+INSERT dbo.SYS_CONFIG VALUES (N'AlarmEmailAccounts', N'32990091@qq.com;', N'The email accounts which will receive a warning email while alarm case trigger.', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'AlarmSMSAccounts', N'13610080240;', N'The phones which will receive a warning sms while alarm case trigger.', N'1.0')
+
 --楼层
 INSERT dbo.FLOOR VALUES ('一楼', '840f3515-34f1-45fc-b49b-7c8c1fb1a258_20160903034944.jpg', 1)
 INSERT dbo.FLOOR VALUES ('二楼', '840f3515-34f1-45fc-b49b-7c8c1fb1a258_20160903034944.jpg', 1)

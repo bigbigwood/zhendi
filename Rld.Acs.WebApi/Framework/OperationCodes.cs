@@ -215,5 +215,15 @@ namespace Rld.Acs.WebApi.Framework
         MSYSRL,
         [Description("Delete System Role")]
         DSYSRL,
+        [Description("Query System Config")]
+        QSYSCONF,
+        [Description("Get System Config By Id")]
+        GSYSCONF,
+        [Description("Create System Config")]
+        ASYSCONF,
+        [Description("Modify System Config")]
+        MSYSCONF,
+        [Description("Delete System Config")]
+        DSYSCONF,
     }
 }

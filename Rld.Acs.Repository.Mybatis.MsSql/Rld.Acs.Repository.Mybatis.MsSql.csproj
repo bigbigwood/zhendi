@@ -81,6 +81,7 @@
     <Compile Include="Impl\Device\DeviceRoleRepositoryMB.cs" />
     <Compile Include="Impl\Floor\FloorDoorRepositoryMB.cs" />
     <Compile Include="Impl\Floor\FloorRepositoryMB.cs" />
+    <Compile Include="Impl\System\SysConfigRepositoryMB.cs" />
     <Compile Include="Impl\System\SysDictionaryRepositoryMB.cs" />
     <Compile Include="Impl\System\SysRoleRepositoryMB.cs" />
     <Compile Include="Impl\System\SysRolePermissionRepositoryMB.cs" />
@@ -217,6 +218,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MapConfig\Floor\FloorDoor.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\System\SysConfig.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

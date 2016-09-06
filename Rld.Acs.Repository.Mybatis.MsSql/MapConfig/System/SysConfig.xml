@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="SysConfig" type="Rld.Acs.Model.SysConfig" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="SysConfigResult" class="Rld.Acs.Model.SysConfig">
+      <result property="ID" column="ID"/>
+      <result property="Name" column="Name"/>
+      <result property="Value" column="Value"/>
+      <result property="Description" column="Description"/>
+      <result property="Version" column="Version"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="SysConfig.GetByKey" parameterClass="int" resultMap="SysConfigResult">
+      SELECT *
+      FROM [SYS_CONFIG]
+      WHERE
+      [ID] = #value#
+    </select>
+
+    <insert id="SysConfig.Insert" parameterClass="SysConfig">
+      INSERT INTO [SYS_CONFIG] (
+      [Name]
+      , [Value]
+      , [Description]
+      , [Version]
+      ) VALUES (
+      #Name#
+      , #Value#
+      , #Description#
+      , #Version#
+      )
+      <selectKey resultClass="int" type="post" property="ID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="SysConfig.Update" parameterClass="SysConfig">
+      UPDATE [SYS_CONFIG] SET
+      [Name] = #Name#
+      , [Value] = #Value#
+      , [Description] = #Description#
+      , [Version] = #Version#
+      WHERE
+      [ID] = #ID#
+    </update>
+
+    <delete id="SysConfig.Delete"  parameterClass="int">
+      DELETE FROM [SYS_CONFIG]
+      WHERE
+      [ID] = #ID#
+    </delete>
+
+    <select id="SysConfig.Query" parameterClass="Hashtable" resultMap="SysConfigResult">
+      SELECT * FROM SYS_CONFIG
+      Where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="Name">
+          Name = #Name#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Version">
+          Version = #Version#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+
+  </statements>
+</sqlMap>

@@ -57,6 +57,7 @@
     <Compile Include="Floor\Floor.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\SysConfig.cs" />
     <Compile Include="System\SysDictionary.cs" />
     <Compile Include="System\SysModule.cs" />
     <Compile Include="System\SysModuleElement.cs" />

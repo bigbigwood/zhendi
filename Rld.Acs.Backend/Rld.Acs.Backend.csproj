@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4E985E9C-8D81-4C6E-A4DC-32AA35892C17}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rld.Acs.Backend</RootNamespace>
+    <AssemblyName>Rld.Acs.Backend</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.DynamicProxy">
+      <HintPath>..\lib\Castle.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.2.3.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.Common">
+      <HintPath>..\lib\IBatisNet.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.Common.Logging.Log4Net">
+      <HintPath>..\lib\IBatisNet.Common.Logging.Log4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.DataAccess">
+      <HintPath>..\lib\IBatisNet.DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="IBatisNet.DataMapper">
+      <HintPath>..\lib\IBatisNet.DataMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Quartz, Version=3.0.0.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Quartz.2.3\lib\net40\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Jobs\DeviceAlarmJob.cs" />
+    <Compile Include="Service1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Service1.Designer.cs">
+      <DependentUpon>Service1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\BackendService.cs" />
+    <Compile Include="Service\StmpMail.cs" />
+    <Compile Include="Service\UcpaasMessage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Content Include="providers.config" />
+    <Content Include="SqlMap.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rld.Acs.Model.Extension\Rld.Acs.Model.Extension.csproj">
+      <Project>{6c4efeac-6aeb-481f-8088-1eacc2eaa399}</Project>
+      <Name>Rld.Acs.Model.Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Model\Rld.Acs.Model.csproj">
+      <Project>{1f0d7445-70c1-48be-8ecd-68f9b3a07d83}</Project>
+      <Name>Rld.Acs.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Repository.Mybatis.MsSql\Rld.Acs.Repository.Mybatis.MsSql.csproj">
+      <Project>{5bd9c61a-740d-4099-ade2-9e583b43df85}</Project>
+      <Name>Rld.Acs.Repository.Mybatis.MsSql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Repository.Mybatis.Mysql\Rld.Acs.Repository.Mybatis.MySql.csproj">
+      <Project>{c2908d59-ec4f-4cca-9dae-4d26d0e6b1e5}</Project>
+      <Name>Rld.Acs.Repository.Mybatis.MySql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Repository.Mybatis.Oracle\Rld.Acs.Repository.Mybatis.Oracle.csproj">
+      <Project>{bbe00324-9433-4d7f-a6b7-085eff851184}</Project>
+      <Name>Rld.Acs.Repository.Mybatis.Oracle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Repository\Rld.Acs.Repository.csproj">
+      <Project>{090002e5-ab29-4ff1-b6f0-2ea8aa8bcc9d}</Project>
+      <Name>Rld.Acs.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Rld.Acs.Unility\Rld.Acs.Unility.csproj">
+      <Project>{56cd6cfe-8104-4b3f-997c-d84e6788f259}</Project>
+      <Name>Rld.Acs.Unility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

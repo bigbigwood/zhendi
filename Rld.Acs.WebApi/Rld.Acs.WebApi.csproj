@@ -163,6 +163,7 @@
     <Compile Include="Controllers\Floor\FloorDoorsController.cs" />
     <Compile Include="Controllers\Floor\FloorsController.cs" />
     <Compile Include="Controllers\Image\ImagesController.cs" />
+    <Compile Include="Controllers\System\SysConfigsController.cs" />
     <Compile Include="Controllers\System\SysRolePermissionsController.cs" />
     <Compile Include="Controllers\System\SysRolesController.cs" />
     <Compile Include="Controllers\System\SysModulesController.cs" />
