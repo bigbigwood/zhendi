@@ -75,7 +75,7 @@
                                CurrentPage="{Binding Path=CurrentPage,Mode=TwoWay}" NavigationPage="{Binding NavigationPage}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger  EventName="PageChanged">
-                        <i:InvokeCommandAction  Command="{Binding Path=NextPageSearchCommand, Mode=TwoWay}" />
+                        <i:InvokeCommandAction  Command="{Binding NextPageSearchCommand}" CommandParameter="{x:Static a:ACL.E_QuerySysOperationLog}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </customControls:PagePicker>
