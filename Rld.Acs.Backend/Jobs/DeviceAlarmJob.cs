@@ -105,7 +105,7 @@ namespace Rld.Acs.Backend.Jobs
                 {
                     string msg = sysConfigRepo.GetConfigValueByName("DeviceAlarmJobSms_Body");
                     UcpaasMessage messageService = new UcpaasMessage();
-                    bool sendSuccess = messageService.SendMessage(account,((int) UcpaasMessage.MessageType.CancelFail).ToString(), msg);
+                    bool sendSuccess = messageService.SendMessage(account, msg);
 
                     Log.InfoFormat("send sms to {0}, result: {1}", account, sendSuccess);
                 }
