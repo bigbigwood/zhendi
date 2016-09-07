@@ -24,6 +24,8 @@ namespace Rld.Acs.WebApi.Controllers.Image
             {
                 string directory = ConfigurationManager.AppSettings.Get("ImagesFolder");
                 var filePath = string.Format(@"{0}\{1}", directory, name);
+                Log.InfoFormat("request file path is: {0}", filePath);
+
                 var stream = new FileStream(filePath, FileMode.Open);
                 HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
                 response.Content = new StreamContent(stream);
@@ -32,15 +34,16 @@ namespace Rld.Acs.WebApi.Controllers.Image
                 {
                     FileName = name
                 };
+                Log.Info(response);
                 return response;
             }
-            catch
+            catch (Exception ex)
             {
+                Log.Error(ex);
                 return new HttpResponseMessage(HttpStatusCode.NoContent);
             }
         }
 
-        [Authorize]
         [Route("userImages")]
         public async Task<HttpResponseMessage> Post()
         {
@@ -101,6 +104,7 @@ namespace Rld.Acs.WebApi.Controllers.Image
             }
             catch (Exception ex)
             {
+                Log.Error(ex);
                 var res = string.Format("some Message");
                 dict.Add("error", res);
                 return Request.CreateResponse(HttpStatusCode.NotFound, dict);
