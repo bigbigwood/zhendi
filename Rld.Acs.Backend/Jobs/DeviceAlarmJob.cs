@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using log4net;
 using Quartz;
+using Rld.Acs.Backend.Service.Email;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Framework;
@@ -24,12 +25,13 @@ namespace Rld.Acs.Backend.Jobs
     {
         private const string LastDeviceAlarmJobScanTime = "DeviceAlarmJobScanTime";
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private DeviceAlarmJobEmail emailTemplate;
 
         protected override void ProcessBusiness(IJobExecutionContext context)
         {
             var sysConfigRepo = RepositoryManager.GetRepository<ISysConfigRepository>();
             var deviceTrafficLogRepo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
-
+            emailTemplate = DeviceAlarmJobEmail.BuildEmailInfo();
             var lastDeviceAlarmJobScanTimeConfig = sysConfigRepo.Query(new Hashtable { { ConstStrings.Name, LastDeviceAlarmJobScanTime } }).FirstOrDefault();
             DateTime lastDeviceAlarmJobScanTime = DateTime.Parse(lastDeviceAlarmJobScanTimeConfig.Value);
             DateTime currentDeviceAlarmJobScanTime  = DateTime.Now;
@@ -44,14 +46,14 @@ namespace Rld.Acs.Backend.Jobs
             Log.InfoFormat("Detect {0} alarm logs...", alarmLogs.Count());
             if (alarmLogs.Any())
             {
-                var alarmEmailAccountsConfig = sysConfigRepo.Query(new Hashtable { { ConstStrings.Name, ConstStrings.AlarmEmailAccounts } }).FirstOrDefault();
+                var alarmEmailAccountsConfig = sysConfigRepo.GetConfigValueByName(ConstStrings.AlarmEmailAccounts);
                 var alarmEmailAccounts = ParseAccounts(alarmEmailAccountsConfig);
                 if (alarmEmailAccounts.Any())
                 {
                     alarmLogs.ForEach(x => SendEmail(x, alarmEmailAccounts));
                 }
 
-                var alarmSmsAccountsConfig = sysConfigRepo.Query(new Hashtable { { ConstStrings.Name, ConstStrings.AlarmSMSAccounts } }).FirstOrDefault();
+                var alarmSmsAccountsConfig = sysConfigRepo.GetConfigValueByName(ConstStrings.AlarmSMSAccounts);
                 var alarmSmsAccounts = ParseAccounts(alarmSmsAccountsConfig);
                 if (alarmSmsAccounts.Any())
                 {
@@ -63,13 +65,13 @@ namespace Rld.Acs.Backend.Jobs
             sysConfigRepo.Update(lastDeviceAlarmJobScanTimeConfig);
         }
 
-        private List<String> ParseAccounts(SysConfig config)
+        private List<String> ParseAccounts(string accountConfig)
         {
             List<string> result = new List<string>();
-            if (config == null || string.IsNullOrWhiteSpace(config.Value))
+            if (string.IsNullOrWhiteSpace(accountConfig))
                 return result;
 
-            var accounts = config.Value.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            var accounts = accountConfig.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             return accounts;
         }
 
@@ -79,11 +81,11 @@ namespace Rld.Acs.Backend.Jobs
             {
                 foreach (var account in accounts)
                 {
-                    SmtpConfig m = new SmtpConfig();
-                    MailAddress mFrom = new MailAddress("rld_acs_test@yeah.net", "设备告警服务", Encoding.UTF8);
-                    MailAddress mTo = new MailAddress(account, account, Encoding.UTF8);
-                    string subject = "这是一份测试邮件";
-                    string body = "测试邮件的主体信息";
+                    var m = new SmtpConfig();
+                    var mFrom = new MailAddress(emailTemplate.FromAddress, emailTemplate.FromAccountDisplayName, Encoding.UTF8);
+                    var mTo = new MailAddress(account, account, Encoding.UTF8);
+                    string subject = emailTemplate.Subject;
+                    string body = emailTemplate.Body;
                     string res = SmtpMail.MailTo(m, mFrom, mTo, subject, body);
                     Log.InfoFormat("send email to {0}, result:{1}", account, res);
                 }
@@ -98,9 +100,10 @@ namespace Rld.Acs.Backend.Jobs
         {
             try
             {
+                var sysConfigRepo = RepositoryManager.GetRepository<ISysConfigRepository>();
                 foreach (var account in accounts)
                 {
-                    string msg = "设备告警短信测试";
+                    string msg = sysConfigRepo.GetConfigValueByName("DeviceAlarmJobSms_Body");
                     UcpaasMessage messageService = new UcpaasMessage();
                     bool sendSuccess = messageService.SendMessage(account,((int) UcpaasMessage.MessageType.CancelFail).ToString(), msg);
 

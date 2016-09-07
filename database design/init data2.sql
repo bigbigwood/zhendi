@@ -319,8 +319,13 @@ INSERT SYS_ROLE_PERMISSIONS VALUES (3, 33, NULL)
 
 --系统配置
 INSERT dbo.SYS_CONFIG VALUES (N'AlarmEmailAccounts', N'32990091@qq.com;', N'The email accounts which will receive a warning email while alarm case trigger.', N'1.0')
-INSERT dbo.SYS_CONFIG VALUES (N'AlarmSMSAccounts', N'13610080240;', N'The phones which will receive a warning sms while alarm case trigger.', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'AlarmSMSAccounts', N'', N'The phones which will receive a warning sms while alarm case trigger.', N'1.0')
 INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobScanTime', N'2016-01-01 00:00:00.001', N'last Device Alarm Job Scan Time', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_FromAddress', N'rld_acs_test@yeah.net', N'', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_FromAccountDisplayName', N'设备告警服务', N'', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_Subject', N'设备告警服务标题', N'', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_Body', N'重要事情说三遍！发现设备告警记录！发现设备告警记录！发现设备告警记录！', N'', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobSms_Body', N'重要事情说三遍！发现设备告警记录！发现设备告警记录！发现设备告警记录！', N'', N'1.0')
 
 --楼层
 INSERT dbo.FLOOR VALUES ('一楼', '840f3515-34f1-45fc-b49b-7c8c1fb1a258_20160903034944.jpg', 1)

@@ -11,5 +11,6 @@ namespace Rld.Acs.Repository.Interfaces
 {
     public interface ISysConfigRepository : IRepository<SysConfig, Int32>
     {
+        String GetConfigValueByName(string name);
     }
 }

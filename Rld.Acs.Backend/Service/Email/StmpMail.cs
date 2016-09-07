@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Net;
@@ -11,6 +12,8 @@ using System.Net.Mail;
  * 建立人：   
  * 建立时间： 2016-08-08 
  ***********************************************/
+using System.Web.Hosting;
+
 namespace StmpMailTest
 {
     /// <summary>
@@ -31,33 +34,22 @@ namespace StmpMailTest
         {
             try
             {
-
-
-                MailSettingsSectionGroup sectionGroup = (MailSettingsSectionGroup)WebConfigurationManager.OpenWebConfiguration("~/").GetSectionGroup("system.net/mailSettings");
-                if (sectionGroup == null)
+                var mailHost = ConfigurationManager.AppSettings.Get("mailHost");
+                if (!string.IsNullOrWhiteSpace(mailHost))
                 {
-                    SmtpServer = "localhost";
-                    Port = 25;
-                    SSLConnect = false;
+                    SmtpServer = mailHost;
+                }
+                //Port = sectionGroup.Smtp.Network.Port;
+                UserName = ConfigurationManager.AppSettings.Get("mailUserName");
+                Password = ConfigurationManager.AppSettings.Get("mailPassword");
+                var mailDefaultCredentials = ConfigurationManager.AppSettings.Get("mailDefaultCredentials");
+                if (mailDefaultCredentials == "true")
+                {
+                    Credentials = null;
                 }
                 else
                 {
-                    if (sectionGroup.Smtp.Network.Host != "")
-                    {
-                        SmtpServer = sectionGroup.Smtp.Network.Host;
-                    }
-                    Port = sectionGroup.Smtp.Network.Port;
-                    UserName = sectionGroup.Smtp.Network.UserName;
-                    Password = sectionGroup.Smtp.Network.Password;
-
-                    if (sectionGroup.Smtp.Network.DefaultCredentials == true)
-                    {
-                        Credentials = null;
-                    }
-                    else
-                    {
-                        Credentials = new NetworkCredential(UserName, Password);
-                    }
+                    Credentials = new NetworkCredential(UserName, Password);
                 }
             }
             catch (Exception)

@@ -1,0 +1,4 @@
+GET /api/Departments?Status=1 HTTP/1.1
+Authorization: Basic YWRtaW46akdsMjViVkJCQlc5NlFpOVRlNFYzN0ZucWNoei9FdTRxQjl2S3JSSXFSZz0=
+Host: localhost:7361
+Connection: Keep-Alive
