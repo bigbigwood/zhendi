@@ -32,8 +32,6 @@ namespace Rld.Acs.WpfApplication
         public List<DeviceRole> AuthorizationDeviceRoles { get; set; }
         public List<Model.TimeZone> AuthorizationTimezones { get; set; }
         public SysOperator CurrentOperatorInfo { get; set; }
-        public string LocalCachePath { get; private set; }
-        public string LocalImageCachePath { get; private set; }
         public List<SysRolePermission> AuthorizationPermissions { get; set; }
 
         public static ApplicationManager GetInstance()
@@ -51,13 +49,7 @@ namespace Rld.Acs.WpfApplication
 
         private ApplicationManager()
         {
-            InitEnvironment();
-
             InitResource();
-
-            CurrentOperatorInfo = initFakeOperator();
-
-            ProvisioningModelMapper.BindModelMap();
         }
 
         public void UpdateCurrentOperatorAndPermission(SysOperator currentOperator)
@@ -72,25 +64,6 @@ namespace Rld.Acs.WpfApplication
             AuthProvider.Initialize<DefaultAuthProvider>(accessControlList.ToArray());
         }
 
-        private SysOperator initFakeOperator()
-        {
-            var sysOperator = new SysOperator();
-            sysOperator.OperatorID = 1;
-            sysOperator.LoginName = "admin";
-            sysOperator.Password = "jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=";
-            sysOperator.LanguageID = 2502;
-            sysOperator.Photo = "";
-            sysOperator.Status = GeneralStatus.Enabled;
-            sysOperator.UpdateUserID = null;
-            sysOperator.UpdateDate = null;
-            sysOperator.CreateUserID = 1;
-            sysOperator.CreateDate = DateTime.Now.AddYears(-1);
-            sysOperator.SysOperatorRoles.Add(new SysOperatorRole(){OperatorID = 1, RoleID = 1});
-            UpdateCurrentOperatorAndPermission(sysOperator);
-
-            return sysOperator;
-        }
-
         private void InitResource()
         {
             AuthorizationDepartments = _departmentRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
@@ -102,23 +75,6 @@ namespace Rld.Acs.WpfApplication
             var topDepartment = new Department() { DepartmentID = -1, Name = "总经办" };
             AuthorizationDepartments.Insert(0, topDepartment);
             AuthorizationDepartments.FindAll(d => d.Parent == null && d.DepartmentID != -1).ForEach(d => d.Parent = topDepartment);
-        }
-
-
-        private void InitEnvironment()
-        {
-            Log.Info("Init local cache...");
-            LocalCachePath = string.Format(@"{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AppConfiguration.LocalCachePath);
-            if (Directory.Exists(LocalCachePath) == false)
-            {
-                Directory.CreateDirectory(LocalCachePath);
-            }
-
-            LocalImageCachePath = string.Format(@"{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AppConfiguration.LocalCachePath + @"\images");
-            if (Directory.Exists(LocalImageCachePath) == false)
-            {
-                Directory.CreateDirectory(LocalImageCachePath);
-            }
         }
     }
 }

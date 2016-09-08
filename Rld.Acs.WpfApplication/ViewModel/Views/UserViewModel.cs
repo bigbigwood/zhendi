@@ -202,7 +202,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 string extension = new FileInfo(filePath).Extension;
 
                 string uniqueFileName = string.Format(@"{0}_{1}{2}", Guid.NewGuid(), DateTime.Now.ToString("yyyyMMddhhmmss"), extension);
-                string cacheFilePath = string.Format(@"{0}\{1}", ApplicationManager.GetInstance().LocalImageCachePath, uniqueFileName);
+                string cacheFilePath = string.Format(@"{0}\{1}", ApplicationEnvironment.LocalImageCachePath, uniqueFileName);
                 File.Copy(filePath, cacheFilePath);
 
                 _userAvatorService.UploadAvatorToServer(uniqueFileName);

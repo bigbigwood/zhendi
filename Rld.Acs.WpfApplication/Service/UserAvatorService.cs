@@ -20,7 +20,7 @@ namespace Rld.Acs.WpfApplication.Service
         public readonly string DefaultAvatorFileName = "avator.jpg";
         public string GetAvator(string fileName)
         {
-            string fileFullPath = string.Format(@"{0}\{1}", ApplicationManager.GetInstance().LocalImageCachePath, fileName);
+            string fileFullPath = string.Format(@"{0}\{1}", ApplicationEnvironment.LocalImageCachePath, fileName);
             if (!File.Exists(fileFullPath))
             {
                 fileFullPath = GetAvatorFromServer(fileName);
@@ -34,7 +34,7 @@ namespace Rld.Acs.WpfApplication.Service
             try
             {
                 string requestUri = string.Format(@"{0}?name={1}", serverUrl, fileName);
-                string fileFullPath =  string.Format(@"{0}\{1}", ApplicationManager.GetInstance().LocalImageCachePath, fileName);
+                string fileFullPath = string.Format(@"{0}\{1}", ApplicationEnvironment.LocalImageCachePath, fileName);
 
                 WebClient webClient = new WebClient();
                 webClient.DownloadFile(requestUri, fileFullPath);
@@ -50,7 +50,7 @@ namespace Rld.Acs.WpfApplication.Service
 
         public bool UploadAvatorToServer(string fileName)
         {
-            string filePath = string.Format(@"{0}\{1}", ApplicationManager.GetInstance().LocalImageCachePath, fileName);
+            string filePath = string.Format(@"{0}\{1}", ApplicationEnvironment.LocalImageCachePath, fileName);
             System.Net.WebClient myWebClient = new System.Net.WebClient();
             var byteArray = myWebClient.UploadFile(serverUrl, "POST", filePath);
             var response = System.Text.Encoding.UTF8.GetString(byteArray);

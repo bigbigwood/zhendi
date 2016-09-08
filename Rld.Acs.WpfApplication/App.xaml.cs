@@ -7,6 +7,9 @@ using System.Windows;
 using FluentValidation;
 using GalaSoft.MvvmLight.Threading;
 using log4net;
+using Rld.Acs.WpfApplication.Service.Lisence;
+using Rld.Acs.WpfApplication.View.Windows;
+using Rld.Acs.WpfApplication.ViewModel;
 
 namespace Rld.Acs.WpfApplication
 {
@@ -19,15 +22,17 @@ namespace Rld.Acs.WpfApplication
         public App()
         {
             log4net.Config.XmlConfigurator.Configure();
-            Log.Info("Application start");
+            Log.Info("Application start.");
 
             ValidatorOptions.CascadeMode = CascadeMode.StopOnFirstFailure;
 
             DispatcherHelper.Initialize();
 
-            ApplicationManager.Initialize();
+            ProvisioningModelMapper.BindModelMap();
 
-            DictionaryManager.Initialize();
+            ApplicationEnvironment.Initialize();
+
+            Log.Info("Application start completely.");
         }
     }
 }

@@ -20,6 +20,7 @@
 
     <ImageSource x:Key="icon_door">/Images/device/door.png</ImageSource>
     <ImageSource x:Key="icon_Monitor">/Images/device/Monitor.png</ImageSource>
+    <ImageSource x:Key="icon_app">/Images/app.ico</ImageSource>
 
     <ImageSource x:Key="DoubleDoorClosed_128">/Images/Door/DoubleDoorClosed_128.png</ImageSource>
     <ImageSource x:Key="DoubleDoorOpen_128">/Images/Door/DoubleDoorOpen_128.png</ImageSource>

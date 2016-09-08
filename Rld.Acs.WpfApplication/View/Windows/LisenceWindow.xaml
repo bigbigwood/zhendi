@@ -1,0 +1,70 @@
+﻿<windows:BaseWindow x:Class="Rld.Acs.WpfApplication.View.Windows.LisenceWindow"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:customControls="clr-namespace:Rld.Acs.WpfApplication.View.CustomControls"
+             Dialog:DialogParticipation.Register="{Binding}"
+             mc:Ignorable="d" 
+             ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
+             Height="335" Width="500" Unloaded="MetroWindow_Unloaded" Loaded="LisenceWindow_OnLoaded">
+    <controls:MetroWindow.Resources>
+        <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,2" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource ResourceKey={x:Type TextBox}}" >
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="2,1" />
+            <Setter Property="TextAlignment" Value="Left"></Setter>
+        </Style>
+    </controls:MetroWindow.Resources>
+        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" >
+            <TextBlock Text="激活" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+        </DockPanel>
+        <Separator Grid.Row="1"  Background="LightGray" />
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="{StaticResource icon_app}" Margin="5"/>
+
+            <TextBlock Grid.Column="1" Grid.Row="0" FontSize="16" Text="请输入您的软件许可证"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="1" ><Bold>本机序列号</Bold> (请提供这个序列号给您的软件供应商)</TextBlock>
+            <TextBox Name="tbSN" Grid.Column="1" Grid.Row="2" FontSize="12" Width="300" HorizontalAlignment="Left"></TextBox>
+            <TextBlock Grid.Column="1" Grid.Row="3" ><Bold>许可证号码</Bold> (请向您的软件供应商获取)</TextBlock>
+            <TextBox Name="tbKey" Grid.Column="1" Grid.Row="4" FontSize="12" Width="300" HorizontalAlignment="Left"></TextBox>
+
+            <TextBlock Name="tbInfo" Grid.Column="1" Grid.Row="6" Foreground="Red" />
+            <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Name="btnActivate" Content="激活" Margin="3,0" Width="60" Click="BtnActivate_OnClick" Height="35" VerticalAlignment="Top"/>
+                <Button Name="btnTrial" Content="试用14天" Margin="3,0" Width="60" Click="BtnTrial_OnClick"/>
+                <Button Name="btnCancel" Content="退出" Margin="3,0" Width="60" Click="BtnCancel_OnClick"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</windows:BaseWindow>

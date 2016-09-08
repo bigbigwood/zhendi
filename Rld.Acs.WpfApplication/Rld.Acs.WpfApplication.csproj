@@ -94,6 +94,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -138,9 +139,19 @@
     <Compile Include="Repository\System\SysModuleRepository.cs" />
     <Compile Include="Repository\System\SysOperatorRepository.cs" />
     <Compile Include="Repository\System\SysRoleRepository.cs" />
+    <Compile Include="Service\ApplicationEnvironment.cs" />
     <Compile Include="Service\Authorization\ACL.cs" />
     <Compile Include="Service\Authorization\AuthProvider.cs" />
     <Compile Include="Service\Authorization\DefaultAuthProvider.cs" />
+    <Compile Include="Service\Lisence\Encryption.cs" />
+    <Compile Include="Service\Lisence\FileReadWrite.cs" />
+    <Compile Include="Service\Lisence\LisenceService.cs" />
+    <Compile Include="Service\Lisence\LisenceCheckWorker.cs" />
+    <Compile Include="Service\Lisence\LisenceTool.cs" />
+    <Compile Include="Service\Lisence\LisenceType.cs" />
+    <Compile Include="Service\Lisence\SimpleLicense.cs" />
+    <Compile Include="Service\Lisence\SimpleLicenseProvider.cs" />
+    <Compile Include="Service\Lisence\SnProvider.cs" />
     <Compile Include="Service\Proxy\DeviceServiceProxy.cs" />
     <Compile Include="Service\FloorDoorManager.cs" />
     <Compile Include="Service\SysPermissionProvider.cs" />
@@ -273,6 +284,9 @@
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="Service\UserAvatorService.cs" />
+    <Compile Include="View\Windows\LisenceWindow.xaml.cs">
+      <DependentUpon>LisenceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\FloorView.xaml.cs">
       <DependentUpon>FloorView.xaml</DependentUpon>
     </Compile>
@@ -349,6 +363,9 @@
     <Compile Include="View\Windows\TimeSegmentView.xaml.cs">
       <DependentUpon>TimeSegmentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\WelcomeWindow.xaml.cs">
+      <DependentUpon>WelcomeWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\CustomControls\PagePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -398,6 +415,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\DeviceRolePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\LisenceWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -539,6 +560,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Windows\TimeSegmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\WelcomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
