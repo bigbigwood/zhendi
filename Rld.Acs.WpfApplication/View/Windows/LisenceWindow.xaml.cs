@@ -21,7 +21,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
         public bool Lisenced = false;
         private void BtnActivate_OnClick(object sender, RoutedEventArgs e)
         {
-            string key = tbKey.ToString();
+            string key = tbKey.Text;
 
             if (LisenceService.UpdateLisence(key))
             {

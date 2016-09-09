@@ -27,7 +27,7 @@ namespace Rld.Acs.WpfApplication.Service.Lisence
                 }
 
                 var info = readfile.Split(';');
-                return new SimpleLicense(info[1], long.Parse(info[0]), int.Parse(info[2]));
+                return new SimpleLicense(info[1], DateTime.Parse(info[0]), int.Parse(info[2]));
             }
             catch (Exception ex)
             {

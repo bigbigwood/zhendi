@@ -10,13 +10,13 @@ namespace Rld.Acs.WpfApplication.Service.Lisence
     class SimpleLicense : License
     {
         public string Password { get; private set; }
-        public long EnddateTick { get; private set; }
+        public DateTime ExpireDateTime { get; private set; }
         public int LicenseType { get; private set; }
 
-        public SimpleLicense(string password, long enddateTick, int licenseType)
+        public SimpleLicense(string password, DateTime expireDateTime, int licenseType)
         {
             Password = password;
-            EnddateTick = enddateTick;
+            ExpireDateTime = expireDateTime;
             LicenseType = licenseType;
         }
 
@@ -32,7 +32,7 @@ namespace Rld.Acs.WpfApplication.Service.Lisence
 
         public bool IsExpired
         {
-            get { return EnddateTick <= DateTime.Now.Ticks; }
+            get { return ExpireDateTime <= DateTime.Now; }
         }
     }
 }
