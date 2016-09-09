@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using log4net;
 using MahApps.Metro.Controls;
+using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.Service.Security;
 using RldModel = Rld.Acs.Model;
 
@@ -12,7 +13,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
     /// <summary>
     /// Interaction logic for sysLogin.xaml
     /// </summary>
-    public partial class sysLogin : MetroWindow
+    public partial class sysLogin : Window
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public sysLogin()
@@ -26,11 +27,19 @@ namespace Rld.Acs.WpfApplication.View.Windows
             string username = userName.Text;
             string password = passWord.Password;
 
+            ChangeButtonStatues(false);
             new Task(() => LoginInBackgroud(username, password)).Start();
         }
 
-        public void loginRevoke(object sender, RoutedEventArgs e)
+        private void ChangeButtonStatues(bool isBtnEnabled)
         {
+            btnLogin.IsEnabled = isBtnEnabled;
+            btnClose.IsEnabled = isBtnEnabled;
+        }
+
+        public void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
 
@@ -38,15 +47,13 @@ namespace Rld.Acs.WpfApplication.View.Windows
         {
             try
             {
-                byte[] passwordAndSaltBytes = System.Text.Encoding.UTF8.GetBytes(password);
-                byte[] hashBytes = new System.Security.Cryptography.SHA256Managed().ComputeHash(passwordAndSaltBytes);
-                string hashpassword = Convert.ToBase64String(hashBytes);
-
                 var service = new SecurityService();
+                string hashpassword = PasswordService.ExcryptPassword(password);
                 var authenticationResult = service.Authenticate(username, hashpassword);
                 if (authenticationResult.ResultType != ResultType.OK)
                 {
                     ShowMessage("登陆信息错误...");
+                    Dispatcher.Invoke(() => ChangeButtonStatues(true));
                     return;
                 }
 
@@ -65,6 +72,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             {
                 Log.Error(ex);
                 ShowMessage("登录异常...");
+                Dispatcher.Invoke(() =>ChangeButtonStatues(true));
             }
         }
 

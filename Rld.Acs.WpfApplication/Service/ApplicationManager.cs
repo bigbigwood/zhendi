@@ -54,6 +54,8 @@ namespace Rld.Acs.WpfApplication
 
         public void UpdateCurrentOperatorAndPermission(SysOperator currentOperator)
         {
+            CurrentOperatorInfo = currentOperator;
+
             var roles = new List<SysRole>();
             currentOperator.SysOperatorRoles.ForEach(x => roles.Add(_sysRoleRepo.GetByKey(x.RoleID)));
             AuthorizationPermissions = roles.SelectMany(x => x.SysRolePermissions).ToList();

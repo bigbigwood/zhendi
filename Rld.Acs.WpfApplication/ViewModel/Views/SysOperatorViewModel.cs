@@ -78,7 +78,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     if (NewPasswordEnabled)
                     {
-                        Password = NewPassword1;
+                        Password = PasswordService.ExcryptPassword(NewPassword1);
                     }
 
 
@@ -94,7 +94,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     if (NewPasswordEnabled)
                     {
-                        Password = NewPassword1;
+                        Password = PasswordService.ExcryptPassword(NewPassword1);
                     }
 
                     var coreModel = Mapper.Map<SysOperator>(this);

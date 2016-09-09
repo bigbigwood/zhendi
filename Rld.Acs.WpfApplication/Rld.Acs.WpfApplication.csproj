@@ -152,6 +152,7 @@
     <Compile Include="Service\Lisence\SimpleLicense.cs" />
     <Compile Include="Service\Lisence\SimpleLicenseProvider.cs" />
     <Compile Include="Service\Lisence\SnProvider.cs" />
+    <Compile Include="Service\PasswordService.cs" />
     <Compile Include="Service\Proxy\DeviceServiceProxy.cs" />
     <Compile Include="Service\FloorDoorManager.cs" />
     <Compile Include="Service\SysPermissionProvider.cs" />
