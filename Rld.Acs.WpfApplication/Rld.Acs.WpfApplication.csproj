@@ -699,6 +699,7 @@
     <Resource Include="Images\Logo.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\welcome.jpg" />
     <Resource Include="Images\device\door.png" />
     <Resource Include="Images\device\Monitor.png" />
     <Resource Include="Images\Door\DoubleDoorClosed_128.png" />
@@ -716,6 +717,7 @@
     <Resource Include="Images\Right.png" />
     <Resource Include="app.ico" />
     <Resource Include="Images\AllLeft.png" />
+    <Resource Include="Images\APP.png" />
     <Content Include="Images\delete_time.png" />
     <Resource Include="Images\app.ico" />
     <Resource Include="Images\avator.jpg" />

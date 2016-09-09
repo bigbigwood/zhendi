@@ -51,7 +51,7 @@
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
 
-            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="{StaticResource icon_app}" Margin="5"/>
+            <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="{StaticResource icon_app_64}" Margin="5"/>
 
             <TextBlock Grid.Column="1" Grid.Row="0" FontSize="16" Text="请输入您的软件许可证"></TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="1" ><Bold>本机序列号</Bold> (请提供这个序列号给您的软件供应商)</TextBlock>

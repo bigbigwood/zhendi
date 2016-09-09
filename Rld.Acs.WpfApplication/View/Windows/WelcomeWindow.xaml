@@ -3,18 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Width="800" Height="400" WindowStyle="None" AllowsTransparency="True"
         WindowStartupLocation="CenterScreen" Loaded="WelcomeWindow_OnLoaded">
-    <Grid>
-        <Grid.Background>
-            <ImageBrush  ImageSource="/Rld.Acs.WpfApplication;component/Images/loginImage/bg.PNG" />
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition Height="30"/>
-        </Grid.RowDefinitions>
-        <DockPanel Grid.Row="3" Dock="Right">
-            <TextBlock Name="tbInfo" Foreground="Red"/>
-        </DockPanel>
-    </Grid>
+        <Grid>
+            <Grid.Background>
+                <ImageBrush  ImageSource="/Rld.Acs.WpfApplication;component/Images/welcome.jpg" />
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="3" Dock="Right">
+                <TextBlock Name="tbInfo" Foreground="Red" Margin="10,0"/>
+            </DockPanel>
+        </Grid>
 </Window>
