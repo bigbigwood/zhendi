@@ -22,6 +22,11 @@ namespace Rld.Acs.WpfApplication.View.Windows
         private void BtnActivate_OnClick(object sender, RoutedEventArgs e)
         {
             string key = tbKey.Text;
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                tbInfo.Text = "请输入有效许可证。";
+                return;
+            }
 
             if (LisenceService.UpdateLisence(key))
             {
@@ -37,7 +42,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
         {
             if (LisenceService.ApplyTrialLisence())
             {
-                tbInfo.Text = "您可以试用14天，请在14天内联系您的软件供应商获取新的许可证。";
+                tbInfo.Text = "您可以试用14天，请及时联系您的软件供应商获取新的许可证。";
                 Lisenced = true;
             }
             else
@@ -56,6 +61,12 @@ namespace Rld.Acs.WpfApplication.View.Windows
             if (lisence != null && lisence.IsExpired)
             {
                 tbInfo.Text = "您的许可证已经到期，请联系您的软件供应商获取新的许可证。";
+                btnTrial.IsEnabled = false;
+            }
+            else if (lisence != null && lisence.LicenseType == (int)LisenceType.Trial)
+            {
+                int days = (lisence.ExpireDateTime - DateTime.Now).Days;
+                tbInfo.Text = string.Format("您的试用许可证还有{0}天到期，请及时联系您的软件供应商获取新的许可证。", days);
                 btnTrial.IsEnabled = false;
             }
         }

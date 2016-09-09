@@ -33,7 +33,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
         {
             ShowMessage("检查用户许可证...");
             var lisence = LisenceService.GetLicense();
-            if (lisence == null || lisence.IsExpired)
+            if (lisence == null || lisence.IsExpired || lisence.LicenseType == (int)LisenceType.Trial)
             {
                 var lisenceWindow = new LisenceWindow();
                 lisenceWindow.DataContext = lisence;

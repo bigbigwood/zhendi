@@ -16,7 +16,13 @@ namespace Rld.Acs.WpfApplication.Service.Lisence
         public static SimpleLicense GetLicense()
         {
             var worker = new LisenceCheckWorker();
-            return worker.GetLisence();
+            var lisence = worker.GetLisence();
+            if (lisence != null)
+            {
+                Log.DebugFormat("{0} lisence expired dateime is: {1}", (LisenceType)lisence.LicenseType, lisence.ExpireDateTime);
+            }
+
+            return lisence;
         }
 
         public static bool UpdateLisence(string key)
