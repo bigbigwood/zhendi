@@ -24,50 +24,41 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" >
-                <ToolBarTray>
-                    <ToolBar>
+        <StackPanel Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0" >
+            <ToolBarTray>
+                <ToolBar>
                     <Button Name="AddBtn" Command="{Binding AddDepartmentCmd}" CommandParameter="{x:Static a:ACL.E_AddDept}">
-                            <StackPanel Orientation="Horizontal" >
-                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
-                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_AddBtn}" />
-                            </StackPanel>
-                        </Button>
-                        <Separator/>
+                        <StackPanel Orientation="Horizontal" >
+                            <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
+                            <TextBlock Text="{StaticResource DepartmentPage_Toolbar_AddBtn}" />
+                        </StackPanel>
+                    </Button>
+                    <Separator/>
                     <Button Name="ModifyBtn" Command="{Binding ModifyDepartmentCmd}" CommandParameter="{x:Static a:ACL.E_MdfDept}">
-                            <StackPanel Orientation="Horizontal" >
-                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
-                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_ModifyBtn}" />
-                            </StackPanel>
-                        </Button>
-                        <Separator/>
+                        <StackPanel Orientation="Horizontal" >
+                            <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
+                            <TextBlock Text="{StaticResource DepartmentPage_Toolbar_ModifyBtn}" />
+                        </StackPanel>
+                    </Button>
+                    <Separator/>
                     <Button Name="DeleteBtn"  Command="{Binding DeleteDepartmentCmd}" CommandParameter="{x:Static a:ACL.E_DelDept}">
-                            <StackPanel Orientation="Horizontal" >
-                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
-                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_DeleteBtn}" />
-                            </StackPanel>
-                        </Button>
-                        <Separator/>
+                        <StackPanel Orientation="Horizontal" >
+                            <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
+                            <TextBlock Text="{StaticResource DepartmentPage_Toolbar_DeleteBtn}" />
+                        </StackPanel>
+                    </Button>
+                    <Separator/>
                     <Button Command="{Binding SyncDataCmd}" CommandParameter="{x:Static a:ACL.E_SyncDept}">
-                            <StackPanel Orientation="Horizontal" >
-                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_SyncDataBtn_img}" />
-                                <TextBlock Text="{StaticResource DepartmentPage_Toolbar_SyncDataBtn}" />
-                            </StackPanel>
-                        </Button>
-                        <Separator/>
-                    </ToolBar>
-                </ToolBarTray>
-            </StackPanel>
-            <DockPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
-                <TextBox Margin="0,0,5,0"
-                     Width="200"
-                         Name="SearchDepartmentTextBox"
-                         Controls:TextBoxHelper.Watermark="Search department..."
-                         Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmdWithParameter, Mode=OneWay}"
-                         Controls:TextBoxHelper.ButtonCommandParameter="{Binding ElementName=test2, Path=Text}"
-                         Style="{DynamicResource SearchMetroTextBox}" />
-            </DockPanel>
-            <DockPanel Grid.Row="1" Grid.Column="0" >
+                        <StackPanel Orientation="Horizontal" >
+                            <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_SyncDataBtn_img}" />
+                            <TextBlock Text="{StaticResource DepartmentPage_Toolbar_SyncDataBtn}" />
+                        </StackPanel>
+                    </Button>
+                    <Separator/>
+                </ToolBar>
+            </ToolBarTray>
+        </StackPanel>
+        <DockPanel Grid.Row="1" Grid.Column="0" >
                 <Border Margin="5" BorderBrush="LightGray" BorderThickness="2" VerticalAlignment="Stretch">
                     <TreeView Name="lstDepartment" ItemsSource="{Binding TreeViewSource}">
                         <TreeView.Resources>

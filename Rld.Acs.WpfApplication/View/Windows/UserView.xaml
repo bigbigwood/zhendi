@@ -81,13 +81,31 @@
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="姓名"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="性别"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="人员类型"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="手机号码"/>
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="部门"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="姓名" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="1" Grid.Column="0" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="性别" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="人员类型" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="3" Grid.Column="0" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="手机号码" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="0" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="部门" Margin="0"/>
+                    </TextBlock>
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="人员状态"/>
-                    <TextBlock Grid.Row="6" Grid.Column="0" Text="有效时间"/>
+                    <TextBlock Grid.Row="6" Grid.Column="0" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="有效时间" Margin="0"/>
+                    </TextBlock>
                     <TextBlock Grid.Row="7" Grid.Column="0" Text="至"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
@@ -149,60 +167,70 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="0*" />
+                        <ColumnDefinition/>
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="英文名"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="工号"/>
-                    <TextBlock Grid.Row="2" Grid.Column="0" Text="籍贯"/>
-                    <TextBlock Grid.Row="3" Grid.Column="0" Text="民族"/>
-                    <TextBlock Grid.Row="4" Grid.Column="0" Text="出生日期"/>
-                    <TextBlock Grid.Row="5" Grid.Column="0" Text="身份证号码"/>
-                    <TextBlock Grid.Row="6" Grid.Column="0" Text="婚姻状况"/>
-                    <TextBlock Grid.Row="7" Grid.Column="0" Text="政治面貌"/>
-                    <TextBlock Grid.Row="8" Grid.Column="0" Text="学历"/>
-                    <TextBlock Grid.Row="9" Grid.Column="0" Text="社保号码"/>
-                    <TextBlock Grid.Row="0" Grid.Column="2" Text="公司名称"/>
-                    <TextBlock Grid.Row="1" Grid.Column="2" Text="部门职称"/>
-                    <TextBlock Grid.Row="2" Grid.Column="2" Text="技术等级"/>
-                    <TextBlock Grid.Row="3" Grid.Column="2" Text="家庭电话"/>
-                    <TextBlock Grid.Row="4" Grid.Column="2" Text="电子邮箱"/>
-                    <TextBlock Grid.Row="5" Grid.Column="2" Text="通讯地址"/>
-                    <TextBlock Grid.Row="7" Grid.Column="2" Text="邮政编码"/>
-                    <TextBlock Grid.Row="8" Grid.Column="2" Text="备注"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding EnglishName}"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding UserCode}"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding NativePlace}"/>
-                    <ComboBox  Grid.Row="3" Grid.Column="1" ItemsSource="{Binding NationalityList, Mode=OneWay}" 
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="英文名" Grid.ColumnSpan="2" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,10,5" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="工号" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="籍贯" Grid.ColumnSpan="2" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="3" Grid.Column="0" Text="民族" Grid.ColumnSpan="2" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Text="出生日期" Grid.ColumnSpan="2" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,10,5" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="身份证号码" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="6" Grid.Column="0" Text="婚姻状况" Grid.ColumnSpan="2" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="7" Grid.Column="0" Text="政治面貌" Grid.ColumnSpan="2" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="8" Grid.Column="0" Text="学历" Grid.ColumnSpan="2" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="9" Grid.Column="0" Text="社保号码" Grid.ColumnSpan="2" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="0" Grid.Column="3" Text="公司名称" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="1" Grid.Column="3" Margin="0,5,10,5" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="部门职称" Margin="0"/>
+                    </TextBlock>
+                    <TextBlock Grid.Row="2" Grid.Column="3" Text="技术等级" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="3" Grid.Column="3" Text="家庭电话" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="4" Grid.Column="3" Text="电子邮箱" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="5" Grid.Column="3" Text="通讯地址" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="7" Grid.Column="3" Text="邮政编码" Margin="0,6,10,6"/>
+                    <TextBlock Grid.Row="8" Grid.Column="3" Text="备注" Margin="0,6,10,6"/>
+                    <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding EnglishName}"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding UserCode}"/>
+                    <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding NativePlace}"/>
+                    <ComboBox  Grid.Row="3" Grid.Column="2" ItemsSource="{Binding NationalityList, Mode=OneWay}" SelectedIndex="0"
                                SelectedValue="{Binding Nationality}" SelectedValuePath="ItemID" DisplayMemberPath="ItemValue"/>
-                    <DatePicker Grid.Row="4" Grid.Column="1" SelectedDate="{Binding Birthday}"/>
-                    <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding IDNumber}"/>
-                    <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                    <DatePicker Grid.Row="4" Grid.Column="2" SelectedDate="{Binding Birthday}"/>
+                    <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding IDNumber}"/>
+                    <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal">
                         <RadioButton IsChecked="{Binding Marriage, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Marriage.Single}}"
                             Content="未婚" GroupName="rb_marriage" VerticalAlignment="Center" Margin="3"/>
                         <RadioButton IsChecked="{Binding Marriage, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:Marriage.Married}}"
                             Content="已婚" GroupName="rb_marriage" VerticalAlignment="Center" Margin="3"/>
                     </StackPanel>
-                    <ComboBox Grid.Row="7" Grid.Column="1" SelectedItem="{Binding PoliticalStatus}"
+                    <ComboBox Grid.Row="7" Grid.Column="2" SelectedItem="{Binding PoliticalStatus}"
                               ItemsSource="{Binding Source={AppModels:EnumBindingSource {x:Type AppModels:PoliticalStatus}}}" />
-                    <ComboBox Grid.Row="8" Grid.Column="1" SelectedItem="{Binding Degree}"
+                    <ComboBox Grid.Row="8" Grid.Column="2" SelectedItem="{Binding Degree}"
                               ItemsSource="{Binding Source={AppModels:EnumBindingSource {x:Type AppModels:DegreeStatus}}}" />
-                    <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding SocialNumber}"/>
-                    <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Company}"/>
-                    <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding TechnicalTitle}"/>
-                    <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding TechnicalLevel}"/>
-                    <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding HomeNumber}"/>
-                    <TextBox Grid.Row="4" Grid.Column="3" Text="{Binding Email}"/>
-                    <TextBox Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Address}"
+                    <TextBox Grid.Row="9" Grid.Column="2" Text="{Binding SocialNumber}"/>
+                    <TextBox Grid.Row="0" Grid.Column="4" Text="{Binding Company}"/>
+                    <TextBox Grid.Row="1" Grid.Column="4" Text="{Binding TechnicalTitle}"/>
+                    <TextBox Grid.Row="2" Grid.Column="4" Text="{Binding TechnicalLevel}"/>
+                    <TextBox Grid.Row="3" Grid.Column="4" Text="{Binding HomeNumber}"/>
+                    <TextBox Grid.Row="4" Grid.Column="4" Text="{Binding Email}"/>
+                    <TextBox Grid.Row="5" Grid.Column="4" Grid.RowSpan="2" Text="{Binding Address}"
                              TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-                    <TextBox Grid.Row="7" Grid.Column="3" Text="{Binding Postcode}"/>
-                    <TextBox Grid.Row="8" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Remark}" 
+                    <TextBox Grid.Row="7" Grid.Column="4" Text="{Binding Postcode}"/>
+                    <TextBox Grid.Row="8" Grid.Column="4" Grid.RowSpan="2" Text="{Binding Remark}" 
                              TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
 
-                    <StackPanel Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <StackPanel Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" Orientation="Horizontal" Margin="115,0" >
                         <Button Content="下一页" Click="OnNextPageClicked" Margin="3,0"/>
                         <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
                     </StackPanel>

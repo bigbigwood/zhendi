@@ -99,6 +99,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             IsAddMode = userInfo.UserID == 0;
             StartDate = DateTime.Now;
             Birthday = DateTime.Now;
+            UserType = UserType.Employee;
             Avator = _userAvatorService.GetAvator(_userAvatorService.DefaultAvatorFileName);
             Title = IsAddMode ? "新增人员" : "修改人员";
 
@@ -110,6 +111,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 Status = userInfo.Status;
                 StartDate = userInfo.StartDate;
                 EndDate = userInfo.EndDate;
+                Phone = userInfo.Phone;
                 Avator = _userAvatorService.GetAvator(userInfo.Photo);
                 GenderInfo = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender)
                     .FirstOrDefault(x => x.ItemID == (int)userInfo.Gender);

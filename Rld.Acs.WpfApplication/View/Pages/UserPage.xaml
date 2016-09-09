@@ -119,7 +119,7 @@
                         <CheckBox Name="cb_visitor" Content="访客" Width="60"></CheckBox>
                     </StackPanel>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding UserViewModels}" SelectedItem="{Binding Path=SelectedUserViewModel}" 
-                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" >
+                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
                             <DataGridTemplateColumn Header="{DynamicResource UserPage_Label_Avator}" Width="64" IsReadOnly="True">

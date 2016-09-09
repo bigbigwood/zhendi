@@ -58,17 +58,33 @@ namespace Rld.Acs.WpfApplication.View.Windows
         {
             tbSN.Text = LisenceTool.ToProductCodeFormat(SnProvider.CalculateSN());
             var lisence = DataContext as SimpleLicense;
-            if (lisence != null && lisence.IsExpired)
+            if (lisence != null)
             {
-                tbInfo.Text = "您的许可证已经到期，请联系您的软件供应商获取新的许可证。";
-                btnTrial.IsEnabled = false;
-            }
-            else if (lisence != null && lisence.LicenseType == (int)LisenceType.Trial)
-            {
+                if (lisence.IsExpired)
+                {
+                    tbInfo.Text = "您的许可证已经到期，请联系您的软件供应商获取新的许可证。";
+                    btnTrial.IsEnabled = false;
+                    btnActivateLater.IsEnabled = false;
+                }
+
                 int days = (lisence.ExpireDateTime - DateTime.Now).Days;
-                tbInfo.Text = string.Format("您的试用许可证还有{0}天到期，请及时联系您的软件供应商获取新的许可证。", days);
-                btnTrial.IsEnabled = false;
+                if (days < 14)
+                {
+                    tbInfo.Text = string.Format("您的许可证还有{0}天到期，请及时联系您的软件供应商获取新的许可证。", days);
+                    btnTrial.IsEnabled = false;
+                }
             }
+        }
+
+        private void BtnActivateLater_OnClick(object sender, RoutedEventArgs e)
+        {
+            var lisence = DataContext as SimpleLicense;
+            if (lisence != null && !lisence.IsExpired)
+            {
+                Lisenced = true;
+            }
+
+            Close();
         }
     }
 }

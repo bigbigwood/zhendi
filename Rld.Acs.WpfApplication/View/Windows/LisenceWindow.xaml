@@ -62,7 +62,8 @@
             <TextBlock Name="tbInfo" Grid.Column="1" Grid.Row="6" Foreground="Red" />
             <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"  HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Name="btnActivate" Content="激活" Margin="3,0" Width="60" Click="BtnActivate_OnClick" Height="35" VerticalAlignment="Top"/>
-                <Button Name="btnTrial" Content="试用14天" Margin="3,0" Width="60" Click="BtnTrial_OnClick"/>
+                <Button Name="btnTrial" Content="试用" Margin="3,0" Width="60" Click="BtnTrial_OnClick"/>
+                <Button Name="btnActivateLater" Content="稍后激活" Margin="3,0" Width="60" Click="BtnActivateLater_OnClick"/>
                 <Button Name="btnCancel" Content="退出" Margin="3,0" Width="60" Click="BtnCancel_OnClick"/>
             </StackPanel>
         </Grid>
