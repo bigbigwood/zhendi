@@ -43,17 +43,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             try
             {
                 var viewModel = AutoMapper.Mapper.Map<SysOperatorViewModel>(new SysOperator());
-                Messenger.Default.Send(new OpenWindowMessage()
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.SysOperatorView_Open);
+                if (viewModel.NewCoreModel != null)
                 {
-                    DataContext = viewModel
-
-                }, Tokens.SysOperatorView_Open);
-
-                if (viewModel.OperatorID != 0)
-                {
-                    viewModel.NewPasswordEnabled = false;
-                    viewModel.NewPassword1 = null;
-                    viewModel.NewPassword2 = null;
+                    viewModel = AutoMapper.Mapper.Map<SysOperatorViewModel>(viewModel.NewCoreModel);
                     SysOperatorViewModels.Add(viewModel);
                 }
             }
@@ -73,12 +66,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = SelectedSysOperatorViewModel
-
-                }, Tokens.SysOperatorView_Open);
-
+                SelectedSysOperatorViewModel.NewPasswordEnabled = false;
+                //SelectedSysOperatorViewModel.NewPassword1 = ""; 
+                //SelectedSysOperatorViewModel.NewPassword2 = ""; // 会导致界面输入的值没办法在viewmodel获取到
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = SelectedSysOperatorViewModel }, Tokens.SysOperatorView_Open);
             }
             catch (Exception ex)
             {

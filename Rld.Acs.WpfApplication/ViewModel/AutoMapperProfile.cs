@@ -120,6 +120,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.NewPassword1, op => op.Ignore())
                 .ForMember(dest => dest.NewPassword2, op => op.Ignore())
                 .ForMember(dest => dest.Title, op => op.Ignore())
+                .ForMember(dest => dest.NewCoreModel, op => op.Ignore())
                 .ForMember(dest => dest.SysOperatorRoleItems, op => op.Ignore())
                 .AfterMap((src, dest) => dest.BindUI(src));
 

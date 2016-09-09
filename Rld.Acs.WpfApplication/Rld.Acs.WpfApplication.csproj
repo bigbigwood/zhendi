@@ -168,6 +168,7 @@
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
     <Compile Include="Service\Validator\DeviceValidator.cs" />
     <Compile Include="Service\Validator\FloorValidator.cs" />
+    <Compile Include="Service\Validator\SysOperatorValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
     <Compile Include="ViewModel\Pages\SysOperationLogPageViewModel.cs" />

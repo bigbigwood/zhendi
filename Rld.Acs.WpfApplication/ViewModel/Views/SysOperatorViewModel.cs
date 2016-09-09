@@ -14,6 +14,7 @@ using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Validator;
 
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
@@ -55,6 +56,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
         public ObservableCollection<ComboBoxItem> SysOperatorRoleItems { get; set; }
+        public SysOperator NewCoreModel { get; set; }
 
         public SysOperatorViewModel()
         {
@@ -71,33 +73,49 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
-                if (OperatorID == 0)
+                if (NewPasswordEnabled)
                 {
-                    //Status = GeneralStatus.Enabled;
-                    CreateDate = DateTime.Now;
-                    CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    if (NewPasswordEnabled)
+                    if (string.IsNullOrWhiteSpace(NewPassword1))
+                        message += "\n密码一不能为空";
+                    else if (string.IsNullOrWhiteSpace(NewPassword2))
+                        message += "\n密码二不能为空";
+                    else if (NewPassword1 != NewPassword2)
                     {
-                        Password = PasswordService.ExcryptPassword(NewPassword1);
+                        message += "\n两次输入密码不一致";
                     }
 
+                    if (!string.IsNullOrWhiteSpace(message))
+                    {
+                        message = message.Trim('\n');
+                        SendMessage(message);
+                        return;
+                    }
 
-                    var coreModel = Mapper.Map<SysOperator>(this);
+                    Password = PasswordService.ExcryptPassword(NewPassword1);
+                }
+
+                var coreModel = Mapper.Map<SysOperator>(this);
+                var validator = NinjectBinder.GetValidator<SysOperatorValidator>();
+                var results = validator.Validate(coreModel);
+                if (!results.IsValid)
+                {
+                    message = string.Join("\n", results.Errors);
+                    SendMessage(message);
+                    return;
+                }
+
+                if (OperatorID == 0)
+                {
+                    coreModel.CreateDate = DateTime.Now;
+                    coreModel.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     coreModel = _sysOperatorRepo.Insert(coreModel);
-
-                    OperatorID = coreModel.OperatorID;
+                    NewCoreModel = coreModel;
                     message = "增加成功!";
                 }
                 else
                 {
-                    UpdateDate = DateTime.Now;
-                    UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    if (NewPasswordEnabled)
-                    {
-                        Password = PasswordService.ExcryptPassword(NewPassword1);
-                    }
-
-                    var coreModel = Mapper.Map<SysOperator>(this);
+                    coreModel.UpdateDate = DateTime.Now;
+                    coreModel.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     _sysOperatorRepo.Update(coreModel);
                     message = "修改成功!";
                 }

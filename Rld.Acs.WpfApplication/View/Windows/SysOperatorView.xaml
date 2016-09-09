@@ -86,10 +86,7 @@
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                         <TextBlock Text="{DynamicResource SysOperatorView_Label_Status}" Margin="0"/>
             </TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="1" >
-                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="用户角色" Margin="0"/>
-            </TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="用户角色" />
             <CheckBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Right"
                       Content="新密码" IsChecked="{Binding NewPasswordEnabled}"/>
             <TextBlock Grid.Row="1" Grid.Column="4" Text="确认密码" HorizontalAlignment="Right"/>
