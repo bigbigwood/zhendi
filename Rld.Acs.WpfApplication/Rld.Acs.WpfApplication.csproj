@@ -177,6 +177,7 @@
     <Compile Include="Service\Validator\SysDictionaryValidator.cs" />
     <Compile Include="Service\Validator\HeadReadingValidator.cs" />
     <Compile Include="Service\Validator\DoorValidator.cs" />
+    <Compile Include="Service\Validator\SysRoleValidator.cs" />
     <Compile Include="Service\Validator\TimeZoneValidator.cs" />
     <Compile Include="Service\Validator\TimeGroupValidator.cs" />
     <Compile Include="Service\Validator\TimeSegmentValidator.cs" />

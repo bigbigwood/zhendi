@@ -14,6 +14,7 @@ using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -52,24 +53,29 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
+                var coreModel = Mapper.Map<SysRole>(this);
+                var validator = NinjectBinder.GetValidator<SysRoleValidator>();
+                var results = validator.Validate(coreModel);
+                if (!results.IsValid)
+                {
+                    message = string.Join("\n", results.Errors);
+                    SendMessage(message);
+                    return;
+                }
+
                 if (RoleID == 0)
                 {
                     Status = GeneralStatus.Enabled;
-                    CreateDate = DateTime.Now;
-                    CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-
-                    var coreModel = Mapper.Map<SysRole>(this);
+                    coreModel.CreateDate = DateTime.Now;
+                    coreModel.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     coreModel = _sysRoleRepo.Insert(coreModel);
-
                     RoleID = coreModel.RoleID;
                     message = "增加成功!";
                 }
                 else
                 {
-                    UpdateDate = DateTime.Now;
-                    UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    
-                    var coreModel = Mapper.Map<SysRole>(this);
+                    coreModel.UpdateDate = DateTime.Now;
+                    coreModel.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     _sysRoleRepo.Update(coreModel);
                     message = "修改成功!";
                 }

@@ -22,7 +22,10 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Host
         {
             var config = ConfigurationHelper.CreateConfiguration();
             device = new Rld.DeviceSystem.DeviceAdapter.ZDC2911.DeviceAdapter();
-            device.Start(config);
+            if (!device.Start(config))
+            {
+                throw new Exception("device starts fails");
+            }
         }
 
         protected override void OnStop()

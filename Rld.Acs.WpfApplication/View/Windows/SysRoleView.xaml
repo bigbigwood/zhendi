@@ -76,13 +76,11 @@
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                         <TextBlock Text="角色名称" Margin="0"/>
             </TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="1" >
-                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="描述" Margin="0"/>
-            </TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="描述" />
 
             <TextBox Grid.Row="0" Grid.Column="2" Margin="2,3" HorizontalAlignment="Stretch" Text="{Binding RoleName}"/>
-            <TextBox Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Margin="2,3" HorizontalAlignment="Stretch" Text="{Binding Description}"/>
+            <TextBox Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Margin="2,3" HorizontalAlignment="Stretch" Text="{Binding Description}"
+                     TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
 
             <GroupBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
                             Style="{StaticResource DefaultGroupBoxStyle}" 

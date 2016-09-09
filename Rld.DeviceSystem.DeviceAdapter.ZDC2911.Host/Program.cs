@@ -28,7 +28,11 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Host
 
                     var config = ConfigurationHelper.CreateConfiguration();
                     var device = new Rld.DeviceSystem.DeviceAdapter.ZDC2911.DeviceAdapter();
-                    device.Start(config);
+                    bool result = device.Start(config);
+                    if (!result)
+                    {
+                        System.Console.WriteLine("device start fails!");
+                    }
 
                     System.Console.WriteLine("presss enter to close!");
                     System.Console.ReadLine();

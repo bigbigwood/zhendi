@@ -48,7 +48,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 }, Tokens.SysRoleView_Open);
 
                 if (viewModel.RoleID != 0)
+                {
+                    var coreModel = _sysRoleRepo.GetByKey(viewModel.RoleID);
+                    viewModel = AutoMapper.Mapper.Map<SysRoleViewModel>(coreModel);
                     SysRoleViewModels.Add(viewModel);
+                }
             }
             catch (Exception ex)
             {

@@ -52,13 +52,6 @@
             <Grid Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" >
                 <DataGrid ItemsSource="{Binding SysOperatorViewModels}" SelectedItem="{Binding Path=SelectedSysOperatorViewModel}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
-                    <DataGrid.ContextMenu>
-                        <ContextMenu >
-                            <MenuItem Header="{DynamicResource Add}" Command="{Binding AddCmd}"/>
-                            <MenuItem Header="{DynamicResource Modify}" Command="{Binding ModifyCmd}"  />
-                            <MenuItem Header="{DynamicResource Delete}" Command="{Binding DeleteCmd}"  />
-                        </ContextMenu>
-                    </DataGrid.ContextMenu>
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
                         <DataGridTextColumn Header="{DynamicResource SysOperatorPage_Label_Name}" Binding="{Binding LoginName}" Width="200" />
