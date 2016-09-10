@@ -4,7 +4,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:authorization="clr-namespace:Rld.Acs.WpfApplication.Models.Authorization"
         xmlns:authorization1="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
-        TitlebarHeight="50" Width="1200" Height="800" 
+        TitlebarHeight="50" Width="1200" Height="800" MinWidth="900" MinHeight="600"
         NonActiveWindowTitleBrush="White" WindowTitleBrush="White"
         WindowCloseButtonStyle="{DynamicResource MetroWindowCloseButtonStyle}"
         WindowMaxButtonStyle="{DynamicResource MetroWindowCloseButtonStyle}"

@@ -16,6 +16,8 @@ namespace Rld.Acs.WpfApplication.View.Pages
         public DeviceOperationLogPage()
         {
             InitializeComponent();
+
+            Messenger.Default.Register(this, Tokens.DeviceOperationLogPage_ShowNotification, new Action<NotificationMessage>(ShowMessage));
         }
 
     }

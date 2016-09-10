@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 using System.Windows.Documents;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Command;
+using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
@@ -40,6 +43,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 {
                     int totalCount = 0;
                     var pageIndex = 1;
+                    var conditions = GetConditions();
                     DeviceOperationLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
                     if (totalCount % PageSize == 0)
                     {
@@ -72,6 +76,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 {
                     int totalCount = 0;
                     var pageIndex = Convert.ToInt32(CurrentPage);
+                    var conditions = GetConditions();
                     DeviceOperationLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
                     if (totalCount%PageSize == 0)
                     {
@@ -205,21 +210,53 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         private Hashtable GetConditions()
         {
+            var errors = new List<string>();
+
             var conditions = new Hashtable()
                 {
                     {"StartDate",StartDate},
                     {"EndDate", EndDate},
                 };
 
-
             if (!string.IsNullOrWhiteSpace(DeviceId))
+            {
+                if (DeviceId.ToInt32() == ConvertorExtension.ConvertionFailureValue)
+                {
+                    errors.Add("设备ID的输入值必须是数字");
+                }
+
                 conditions.Add("DeviceId", DeviceId);
+            }
 
             if (!string.IsNullOrWhiteSpace(DeviceUserId))
+            {
+                if (DeviceUserId.ToInt32() == ConvertorExtension.ConvertionFailureValue)
+                {
+                    errors.Add("用户设备ID的输入值必须是数字");
+                }
+
                 conditions.Add("DeviceUserId", DeviceUserId);
+            }
 
             if (!string.IsNullOrWhiteSpace(OperatorId))
+            {
+                if (OperatorId.ToInt32() == ConvertorExtension.ConvertionFailureValue)
+                {
+                    errors.Add("操作人员ID的输入值必须是数字");
+                }
+
                 conditions.Add("OperatorId", OperatorId);
+            }
+
+            if (errors.Any())
+            {
+                var message = string.Join("\n", errors);
+                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                {
+                    Messenger.Default.Send(new NotificationMessage(message), Tokens.DeviceOperationLogPage_ShowNotification);
+                });
+                throw new Exception("非法输入");
+            }
 
             return conditions;
         }

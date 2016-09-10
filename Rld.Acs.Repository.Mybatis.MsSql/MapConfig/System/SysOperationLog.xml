@@ -109,7 +109,7 @@
           L.UserID = #UserID#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="Keyword">
-          (L.UserName like '%$Keyword$%' or L.OperationName like '%$Keyword$%')
+          (L.UserName like '%$Keyword$%' or L.OperationName like '%$Keyword$%' or L.OperationCode like '%$Keyword$%')
         </isNotEmpty>
       </dynamic>
       ) N
@@ -131,7 +131,7 @@
           L.UserID = #UserID#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="Keyword">
-          (L.UserName like '%$Keyword$%' or L.OperationName like '%$Keyword$%')
+          (L.UserName like '%$Keyword$%' or L.OperationName like '%$Keyword$%' or L.OperationCode like '%$Keyword$%')
         </isNotEmpty>
       </dynamic>
     </select>

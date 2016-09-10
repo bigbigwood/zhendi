@@ -88,5 +88,9 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string FloorView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string FloorPage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string FloorPage_ShowQuestion = Guid.NewGuid().ToString();
+
+        public static readonly string DeviceOperationLogPage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string DeviceTrafficLogPage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string SysOperationLogPage_ShowNotification = Guid.NewGuid().ToString();
     }
 }

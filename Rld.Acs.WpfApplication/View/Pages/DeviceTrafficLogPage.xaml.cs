@@ -16,6 +16,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
         public DeviceTrafficLogPage()
         {
             InitializeComponent();
+            Messenger.Default.Register(this, Tokens.DeviceTrafficLogPage_ShowNotification, new Action<NotificationMessage>(ShowMessage));
         }
 
     }

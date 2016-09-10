@@ -42,20 +42,34 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="WhiteSmoke">
-                <TextBlock Text="操作人员ID:" Margin="5,0"/>
-                <TextBox  Width="100" Text="{Binding OperatorId}" />
-                <TextBlock Text="关键字:" Margin="5,0"/>
-                <TextBox  Width="100" Text="{Binding Keyword}" />
-                <TextBlock Text="时间:" Margin="5,0"/>
-                <DatePicker SelectedDate ="{Binding StartDate}" Width="120"/>
-                <TextBlock Text="至" Margin="5,0" />
-                <DatePicker SelectedDate ="{Binding EndDate}" Width="120"/>
-                <Button  Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
+            <Grid Grid.Row="0" Background="WhiteSmoke">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1.4*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1.4*" />
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="操作人员ID:" Margin="5,0"/>
+                <TextBox Grid.Column="1" Text="{Binding OperatorId}" />
+                <TextBlock Grid.Column="2"  Text="关键字:" Margin="5,0"/>
+                <TextBox Grid.Column="3" Text="{Binding Keyword}" />
+                <TextBlock Grid.Column="4" Text="时间:" Margin="5,0"/>
+                <DatePicker Grid.Column="5" SelectedDate ="{Binding StartDate}"/>
+                <TextBlock Grid.Column="6" Text="至" Margin="5,0" />
+                <DatePicker Grid.Column="7"  SelectedDate ="{Binding EndDate}"/>
+                <Button Grid.Column="8"  Margin="5,2" Height="25" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
                          Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_QuerySysOperationLog}" />
-                <Button  Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
+                <Button Grid.Column="9"  Margin="5,2" Height="25" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
                          Content="{DynamicResource Export}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_ExportsysOperationLog}" />
-            </StackPanel>
+            </Grid>
+
             <Grid Grid.Row="1" Margin="0,0,0,0" >
                 <DataGrid ItemsSource="{Binding SysOperationLogViewModels}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"

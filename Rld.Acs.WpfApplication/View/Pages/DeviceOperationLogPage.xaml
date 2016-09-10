@@ -3,10 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:converter1="clr-namespace:Rld.Acs.WpfApplication.View.Converter"
       xmlns:pages="clr-namespace:Rld.Acs.WpfApplication.View.Pages"
-      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:customControls="clr-namespace:Rld.Acs.WpfApplication.View.CustomControls"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
@@ -41,24 +38,39 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="WhiteSmoke">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1.4*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1.4*" />
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="WhiteSmoke">
-                <TextBlock Text="操作人员ID:" Margin="5,0"/>
-                <TextBox  Width="100" Text="{Binding OperatorId}" />
-                <TextBlock Text="设备ID:" Margin="5,0"/>
-                <TextBox  Width="100" Text="{Binding DeviceId}" />
-                <TextBlock Text="用户设备ID:" Margin="5,0"/>
-                <TextBox  Width="100" Text="{Binding DeviceUserId}" />
-                <TextBlock Text="时间:" Margin="5,0"/>
-                <DatePicker SelectedDate ="{Binding StartDate}" Width="120"/>
-                <TextBlock Text="至" Margin="5,0" />
-                <DatePicker SelectedDate ="{Binding EndDate}" Width="120"/>
-                <Button  Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
-                         Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_QueryDeviceOperationLog}" />
-                <Button  Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
-                         Content="{DynamicResource Export}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_ExportDeviceOperationLog}" />
-            </StackPanel>
-            <Grid Grid.Row="1" Margin="0,0,0,0" >
+                <TextBlock Grid.Column="0" Text="操作人员ID:" Margin="5,0"/>
+                <TextBox  Grid.Column="1" Text="{Binding OperatorId}" />
+                <TextBlock Grid.Column="2" Text="设备ID:" Margin="5,0"/>
+                <TextBox  Grid.Column="3"  Text="{Binding DeviceId}" />
+                <TextBlock Grid.Column="4" Text="用户设备ID:" Margin="5,0"/>
+                <TextBox  Grid.Column="5" Text="{Binding DeviceUserId}" />
+                <TextBlock Grid.Column="6" Text="时间:" Margin="5,0"/>
+                <DatePicker Grid.Column="7" SelectedDate ="{Binding StartDate}"/>
+                <TextBlock Grid.Column="8" Text="至" Margin="5,0" />
+                <DatePicker Grid.Column="9" SelectedDate ="{Binding EndDate}"/>
+                <Button Grid.Column="10" Margin="5,2" Height="25" FontSize ="12" Style="{StaticResource FlatButtonStyle}" 
+                        Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_QueryDeviceOperationLog}" />
+                <Button Grid.Column="11" Margin="5,2" Height="25" FontSize ="12" Style="{StaticResource FlatButtonStyle}" 
+                        Content="{DynamicResource Export}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_ExportDeviceOperationLog}" />
+            </Grid>
+
+            <Grid Grid.Row="1">
                 <DataGrid ItemsSource="{Binding DeviceOperationLogViewModels}" SelectedItem="{Binding Path=SelectedTrafficLogViewModel}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"
                           LoadingRow ="DataGrid_LoadingRow" UnloadingRow="DataGrid_UnloadingRow">
