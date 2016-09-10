@@ -76,9 +76,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 if (NewPasswordEnabled)
                 {
                     if (string.IsNullOrWhiteSpace(NewPassword1))
-                        message += "\n密码一不能为空";
+                        message += "\n密码不能为空";
                     else if (string.IsNullOrWhiteSpace(NewPassword2))
-                        message += "\n密码二不能为空";
+                        message += "\n确认密码不能为空";
                     else if (NewPassword1 != NewPassword2)
                     {
                         message += "\n两次输入密码不一致";

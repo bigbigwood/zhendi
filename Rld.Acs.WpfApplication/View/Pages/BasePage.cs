@@ -21,5 +21,32 @@ namespace Rld.Acs.WpfApplication.View.Pages
         {
             Messenger.Default.Unregister(this);
         }
+
+        protected void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = e.Row.GetIndex() + 1;
+        }
+
+        protected void DataGrid_UnloadingRow(object sender, DataGridRowEventArgs e)
+        {
+            DataGrid_LoadingRow(sender, e);
+            var datagrid = sender as DataGrid;
+            if (datagrid.Items != null)
+            {
+                for (int i = 0; i < datagrid.Items.Count; i++)
+                {
+                    try
+                    {
+                        DataGridRow row = datagrid.ItemContainerGenerator.ContainerFromIndex(i) as DataGridRow;
+                        if (row != null)
+                        {
+                            row.Header = (i + 1).ToString();
+                        }
+                    }
+                    catch { }
+                }
+            }
+
+        }
     }
 }

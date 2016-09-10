@@ -97,9 +97,16 @@
 
             <Grid Grid.Row="1" Margin="0,0,0,0" >
                 <DataGrid ItemsSource="{Binding SysDictionaryViewModels}" SelectedItem="{Binding Path=SelectedSysDictionaryViewModel}" 
-                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
+                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True" 
+                          LoadingRow ="DataGrid_LoadingRow" UnloadingRow="DataGrid_UnloadingRow">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
+                        <DataGridTemplateColumn IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGridRow}}, Path=Header}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="{DynamicResource SysDictionaryPage_Label_Name}" Binding="{Binding Name}" Width="*" />
                         <DataGridTextColumn Header="{DynamicResource SysDictionaryPage_Label_TypeID}" Binding="{Binding TypeID}" Width="*"  />
                         <DataGridTextColumn Header="{DynamicResource SysDictionaryPage_Label_TypeName}" Binding="{Binding TypeName}" Width="*"  />

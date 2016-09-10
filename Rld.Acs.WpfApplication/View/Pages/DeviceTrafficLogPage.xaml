@@ -62,9 +62,16 @@
             </StackPanel>
             <Grid Grid.Row="1" Margin="0,0,0,0" >
                 <DataGrid ItemsSource="{Binding DeviceTrafficLogViewModels}" SelectedItem="{Binding Path=SelectedTrafficLogViewModel}" 
-                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
+                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"
+                           LoadingRow ="DataGrid_LoadingRow" UnloadingRow="DataGrid_UnloadingRow">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
+                        <DataGridTemplateColumn IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGridRow}}, Path=Header}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceID}" Binding="{Binding DeviceID}" Width="*" />
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceType}" Binding="{Binding DeviceType}" Width="*"  />
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceSN}" Binding="{Binding DeviceSN}" Width="*"  />

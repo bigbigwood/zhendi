@@ -51,9 +51,16 @@
 
             <Grid Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="0" Margin="0,0,0,0" >
                 <DataGrid ItemsSource="{Binding SysOperatorViewModels}" SelectedItem="{Binding Path=SelectedSysOperatorViewModel}" 
-                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
+                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"
+                          LoadingRow ="DataGrid_LoadingRow" UnloadingRow="DataGrid_UnloadingRow">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
+                        <DataGridTemplateColumn IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGridRow}}, Path=Header}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="{DynamicResource SysOperatorPage_Label_Name}" Binding="{Binding LoginName}" Width="200" />
                         <DataGridTextColumn Header="{DynamicResource SysOperatorPage_Label_Status}" Binding="{Binding Status}" Width="150"  />
                         <DataGridTextColumn Header="{DynamicResource SysOperatorPage_Label_CreateUserID}" Binding="{Binding CreateUserID}" Width="150"  />

@@ -235,7 +235,12 @@ namespace Rld.Acs.WpfApplication.View.CustomControls
         /// <param name="e"></param>
         private void btnGoPage_Click(object sender, RoutedEventArgs e)
         {
+            totalPage = GetIntVal(TotalPage);
             currentPage = GetIntVal(NavigationPage);
+            if (currentPage > totalPage)
+            {
+                currentPage = 1;
+            }
             CurrentPage = currentPage.ToString();
             PageChangedFunc();
         }

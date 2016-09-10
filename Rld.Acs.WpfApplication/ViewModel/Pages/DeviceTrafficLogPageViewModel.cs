@@ -38,19 +38,26 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             await Task.Run(() =>
             {
-                int totalCount = 0;
-                var pageIndex = 1;
-                DeviceTrafficLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
-                if (totalCount % PageSize == 0)
+                try
                 {
-                    TotalPage = (totalCount / PageSize).ToString();
-                }
-                else
-                {
-                    TotalPage = ((totalCount / PageSize) + 1).ToString();
-                }
+                    int totalCount = 0;
+                    var pageIndex = 1;
+                    DeviceTrafficLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
+                    if (totalCount % PageSize == 0)
+                    {
+                        TotalPage = (totalCount / PageSize).ToString();
+                    }
+                    else
+                    {
+                        TotalPage = ((totalCount / PageSize) + 1).ToString();
+                    }
 
-                RaisePropertyChanged(null);
+                    RaisePropertyChanged(null);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
             });
         }
 
@@ -63,19 +70,26 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             await Task.Run(() =>
             {
-                int totalCount = 0;
-                var pageIndex = Convert.ToInt32(CurrentPage);
-                DeviceTrafficLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
-                if (totalCount % PageSize == 0)
+                try
                 {
-                    TotalPage = (totalCount / PageSize).ToString();
-                }
-                else
-                {
-                    TotalPage = ((totalCount / PageSize) + 1).ToString();
-                }
+                    int totalCount = 0;
+                    var pageIndex = Convert.ToInt32(CurrentPage);
+                    DeviceTrafficLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
+                    if (totalCount % PageSize == 0)
+                    {
+                        TotalPage = (totalCount / PageSize).ToString();
+                    }
+                    else
+                    {
+                        TotalPage = ((totalCount / PageSize) + 1).ToString();
+                    }
 
-                RaisePropertyChanged(null);
+                    RaisePropertyChanged(null);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
             });
         }
         private string _totalPage = string.Empty;

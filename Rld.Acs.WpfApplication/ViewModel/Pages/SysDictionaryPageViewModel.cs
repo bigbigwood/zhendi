@@ -40,19 +40,26 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             await Task.Run(() =>
             {
-                int totalCount = 0;
-                var pageIndex = 1;
-                SysDictionaryViewModels = QueryData(pageIndex, PageSize, out totalCount);
-                if (totalCount % PageSize == 0)
+                try
                 {
-                    TotalPage = (totalCount / PageSize).ToString();
-                }
-                else
-                {
-                    TotalPage = ((totalCount / PageSize) + 1).ToString();
-                }
+                    int totalCount = 0;
+                    var pageIndex = 1;
+                    SysDictionaryViewModels = QueryData(pageIndex, PageSize, out totalCount);
+                    if (totalCount % PageSize == 0)
+                    {
+                        TotalPage = (totalCount / PageSize).ToString();
+                    }
+                    else
+                    {
+                        TotalPage = ((totalCount / PageSize) + 1).ToString();
+                    }
 
-                RaisePropertyChanged(null);
+                    RaisePropertyChanged(null);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
             });
         }
 
@@ -65,19 +72,26 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             await Task.Run(() =>
             {
-                int totalCount = 0;
-                var pageIndex = Convert.ToInt32(CurrentPage);
-                SysDictionaryViewModels = QueryData(pageIndex, PageSize, out totalCount);
-                if (totalCount % PageSize == 0)
+                try
                 {
-                    TotalPage = (totalCount / PageSize).ToString();
-                }
-                else
-                {
-                    TotalPage = ((totalCount / PageSize) + 1).ToString();
-                }
+                    int totalCount = 0;
+                    var pageIndex = Convert.ToInt32(CurrentPage);
+                    SysDictionaryViewModels = QueryData(pageIndex, PageSize, out totalCount);
+                    if (totalCount % PageSize == 0)
+                    {
+                        TotalPage = (totalCount / PageSize).ToString();
+                    }
+                    else
+                    {
+                        TotalPage = ((totalCount / PageSize) + 1).ToString();
+                    }
 
-                RaisePropertyChanged(null);
+                    RaisePropertyChanged(null);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
             });
         }
         private string _totalPage = string.Empty;
@@ -205,7 +219,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedSysDictionaryViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择选项!"), Tokens.SysDictionaryPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage("请先选择字典项!"), Tokens.SysDictionaryPage_ShowNotification);
                     return;
                 }
 
@@ -228,11 +242,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedSysDictionaryViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择选项!"), Tokens.SysDictionaryPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage("请先选择字典项!"), Tokens.SysDictionaryPage_ShowNotification);
                     return;
                 }
 
-                string question = string.Format("确定删除选项:{0}吗？", SelectedSysDictionaryViewModel.ItemValue);
+                string question = string.Format("确定删除字典项:{0}吗？", SelectedSysDictionaryViewModel.ItemValue);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDelete), Tokens.SysDictionaryPage_ShowQuestion);
 
             }
@@ -250,14 +264,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 try
                 {
                     _sysDictionaryRepo.Delete(SelectedSysDictionaryViewModel.DictionaryID);
-                    message = "删除设备成功!";
+                    message = "删除成功!";
 
                     SysDictionaryViewModels.Remove(SelectedSysDictionaryViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除设备失败！";
+                    message = "删除失败！";
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.SysDictionaryPage_ShowNotification);
             });
