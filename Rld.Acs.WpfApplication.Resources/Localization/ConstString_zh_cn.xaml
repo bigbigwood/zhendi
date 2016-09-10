@@ -109,6 +109,9 @@
     <sys:String x:Key="SysOperationLogPage_Label_OperationDetail">操作详情</sys:String>
     <sys:String x:Key="SysOperationLogPage_Label_OperationTime">操作时间</sys:String>
 
+	<sys:String x:Key="SysDictionaryPage_AddBtn">增加字典项</sys:String>
+    <sys:String x:Key="SysDictionaryPage_ModifyBtn">修改字典项</sys:String>
+    <sys:String x:Key="SysDictionaryPage_DeleteBtn">删除字典项</sys:String>
     <sys:String x:Key="SysDictionaryPage_Label_Name">名称</sys:String>
 	<sys:String x:Key="SysDictionaryPage_Label_TypeID">类型ID</sys:String>
 	<sys:String x:Key="SysDictionaryPage_Label_TypeName">类型名称</sys:String>

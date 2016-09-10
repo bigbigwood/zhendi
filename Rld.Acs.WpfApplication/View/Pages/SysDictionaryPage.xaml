@@ -37,12 +37,39 @@
     <Border Style="{StaticResource ContainerBorderStyle}">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="25"></RowDefinition>
                 <RowDefinition Height="28"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="WhiteSmoke">
+            <DockPanel Grid.Row="0" Grid.Column="0" >
+                <ToolBarTray  HorizontalAlignment="Stretch" IsLocked="True" >
+                    <ToolBar>
+                        <Button Name="AddBtn" Command="{Binding AddCmd}" CommandParameter="{x:Static a:ACL.E_AddSysDict}">
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
+                                <TextBlock Text="{DynamicResource SysDictionaryPage_AddBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                        <Button Name="ModifyBtn" Command="{Binding ModifyCmd}" CommandParameter="{x:Static a:ACL.E_MdfSysDict}">
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
+                                <TextBlock Text="{DynamicResource SysDictionaryPage_ModifyBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                        <Button Name="DeleteBtn"  Command="{Binding DeleteCmd}" CommandParameter="{x:Static a:ACL.E_DelSysDict}">
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
+                                <TextBlock Text="{DynamicResource SysDictionaryPage_DeleteBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                    </ToolBar>
+                </ToolBarTray>
+            </DockPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Background="WhiteSmoke">
                 <TextBlock Text="类型:" Margin="5,0"/>
                 <ComboBox Width="120" Margin="2,3" HorizontalAlignment="Left"
                         ItemsSource="{Binding TypeHeadersDict, Mode=OneWay}" 
@@ -54,16 +81,9 @@
                          Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_QuerySysDict}"/>
 
             </StackPanel>
-            <Grid Grid.Row="1" Margin="0,0,0,0" >
+            <Grid Grid.Row="2" Margin="0,0,0,0" >
                 <DataGrid ItemsSource="{Binding SysDictionaryViewModels}" SelectedItem="{Binding Path=SelectedSysDictionaryViewModel}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True">
-                    <DataGrid.ContextMenu>
-                        <ContextMenu >
-                            <MenuItem Header="{DynamicResource Add}" Command="{Binding AddCmd}" CommandParameter="{x:Static a:ACL.E_AddSysDict}"/>
-                            <MenuItem Header="{DynamicResource Modify}" Command="{Binding ModifyCmd}" CommandParameter="{x:Static a:ACL.E_MdfSysDict}" />
-                            <MenuItem Header="{DynamicResource Delete}" Command="{Binding DeleteCmd}" CommandParameter="{x:Static a:ACL.E_DelSysDict}" />
-                        </ContextMenu>
-                    </DataGrid.ContextMenu>
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={converter1:RowToIndexConverter}}" />
                         <DataGridTextColumn Header="{DynamicResource SysDictionaryPage_Label_Name}" Binding="{Binding Name}" Width="*" />
@@ -76,7 +96,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-            <customControls:PagePicker Grid.Row="2" HorizontalAlignment="Right"
+            <customControls:PagePicker Grid.Row="3" HorizontalAlignment="Right"
                                        TotalPage="{Binding Path=TotalPage,Mode=TwoWay}" PageSize="{Binding Path=PageSize,Mode=TwoWay}" 
                                CurrentPage="{Binding Path=CurrentPage,Mode=TwoWay}" NavigationPage="{Binding NavigationPage}">
                 <i:Interaction.Triggers>
