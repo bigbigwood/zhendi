@@ -37,19 +37,24 @@
             <RowDefinition Height="5" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="35" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Grid.ColumnSpan="4" >
             <TextBlock Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
         </DockPanel>
         <Separator Grid.Row="1" Grid.ColumnSpan="4" Background="LightGray" />
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{StaticResource TimeSegmentView_Label_Name}"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="{DynamicResource TimeSegmentView_Label_Name}" Margin="0"/>
+        </TextBlock>
+
         <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Name}"/>
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="{StaticResource TimeSegmentView_Label_Setting}"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="{DynamicResource TimeSegmentView_Label_Setting}" Margin="0"/>
+        </TextBlock>
         <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal">
             <TextBox Width="30" Text="{Binding StartHour}"/>
             <TextBlock Text="{StaticResource TimeSegmentView_Label_Hour}"/>
@@ -61,7 +66,7 @@
             <TextBox Width="30" Text="{Binding EndMinute}"/>
             <TextBlock Text="{StaticResource TimeSegmentView_Label_Minute}"/>
         </StackPanel>
-        <StackPanel  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Content="{StaticResource Ok}" Command="{Binding SaveCmd}" Margin="3,0" />
             <Button Content="{StaticResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0" />
         </StackPanel>

@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
+using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service.Validator;
@@ -57,22 +62,33 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
-                if (StartHour.Length == 1) StartHour = "0" + StartHour;
-                if (EndHour.Length == 1) StartHour = "0" + EndHour;
-
-                CurrentTimeSegment.BeginTime = string.Format("{0}:{1}", StartHour, StartMinute);
-                CurrentTimeSegment.EndTime = string.Format("{0}:{1}", EndHour, EndMinute);
-                CurrentTimeSegment.TimeSegmentName = Name;
-                CurrentTimeSegment.Status = GeneralStatus.Enabled;
-
-                var validator = NinjectBinder.GetValidator<TimeSegmentValidator>();
-                var results = validator.Validate(CurrentTimeSegment);
+                var validator = NinjectBinder.GetValidator<TimeSegmentViewModelValidator>();
+                var results = validator.Validate(this);
                 if (!results.IsValid)
                 {
                     message = string.Join("\n", results.Errors);
                     SendMessage(message);
                     return;
                 }
+
+                var beginDateTime = new DateTime(2000, 1, 1, StartHour.ToInt32(), StartMinute.ToInt32(), 0);
+                var endDateTime = new DateTime(2000, 1, 1, EndHour.ToInt32(), EndMinute.ToInt32(), 0);
+                if (endDateTime.Ticks - beginDateTime.Ticks < 0)
+                {
+                    message = "开始时间不能大于结束时间";
+                    SendMessage(message);
+                    return;
+                }
+
+                if (StartHour.Length == 1) StartHour = "0" + StartHour;
+                if (EndHour.Length == 1) StartHour = "0" + EndHour;
+                if (StartMinute.Length == 1) StartMinute = "0" + StartMinute;
+                if (EndMinute.Length == 1) EndMinute = "0" + EndMinute;
+
+                CurrentTimeSegment.BeginTime = string.Format("{0}:{1}", StartHour, StartMinute);
+                CurrentTimeSegment.EndTime = string.Format("{0}:{1}", EndHour, EndMinute);
+                CurrentTimeSegment.TimeSegmentName = Name;
+                CurrentTimeSegment.Status = GeneralStatus.Enabled;
 
                 if (CurrentTimeSegment.TimeSegmentID == 0)
                 {
