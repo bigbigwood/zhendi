@@ -223,7 +223,6 @@
     <Compile Include="Service\ApplicationManager.cs" />
     <Compile Include="View\Converter\EnumDescriptionTypeConverter.cs" />
     <Compile Include="View\Converter\EnumToBooleanConverter.cs" />
-    <Compile Include="View\Converter\RowToIndexConverter.cs" />
     <Compile Include="View\CustomControls\TileIconBox.xaml.cs">
       <DependentUpon>TileIconBox.xaml</DependentUpon>
     </Compile>

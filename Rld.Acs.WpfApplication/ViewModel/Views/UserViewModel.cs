@@ -47,37 +47,46 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public Boolean IsAddMode { get; set; }
         public string Title { get; set; }
         public string Avator { get; set; }
-        public virtual UserType UserType { get; set; }
-        public virtual String UserCode { get; set; }
-        public virtual String Name { get; set; }
-        public SysDictionary GenderInfo { get; set; }
-        public virtual String Phone { get; set; }
-        public virtual String Photo { get; set; }
-        public virtual GeneralStatus Status { get; set; }
-        public virtual DateTime StartDate { get; set; }
-        public virtual DateTime? EndDate { get; set; }
+        public UserType UserType { get; set; }
+        public String UserCode { get; set; }
+        public String Name { get; set; }
+        public GenderType Gender { get; set; }
+        public String Phone { get; set; }
+        public String Photo { get; set; }
+        public GeneralStatus Status { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
-        public virtual String LastName { get; set; }
-        public virtual String FirstName { get; set; }
-        public virtual Int32 Nationality { get; set; }
-        public virtual String NativePlace { get; set; }
-        public virtual DateTime Birthday { get; set; }
-        public virtual Marriage Marriage { get; set; }
-        public virtual PoliticalStatus PoliticalStatus { get; set; }
-        public virtual DegreeStatus Degree { get; set; }
-        public virtual String HomeNumber { get; set; }
-        public virtual String EnglishName { get; set; }
-        public virtual String Company { get; set; }
-        public virtual String TechnicalTitle { get; set; }
-        public virtual String TechnicalLevel { get; set; }
-        public virtual Int32 IDType { get; set; }
-        public virtual String IDNumber { get; set; }
-        public virtual String SocialNumber { get; set; }
-        public virtual String Email { get; set; }
-        public virtual String Address { get; set; }
-        public virtual String Postcode { get; set; }
-        public virtual String Remark { get; set; }
-        public virtual String CurrentDepartmentName { get; set; }
+        public String LastName { get; set; }
+        public String FirstName { get; set; }
+        public Int32 Nationality { get; set; }
+        public String NativePlace { get; set; }
+        public DateTime Birthday { get; set; }
+        public Marriage Marriage { get; set; }
+        public PoliticalStatus PoliticalStatus { get; set; }
+        public DegreeStatus Degree { get; set; }
+        public String HomeNumber { get; set; }
+        public String EnglishName { get; set; }
+        public String Company { get; set; }
+        public String TechnicalTitle { get; set; }
+        public String TechnicalLevel { get; set; }
+        public Int32 IDType { get; set; }
+        public String IDNumber { get; set; }
+        public String SocialNumber { get; set; }
+        public String Email { get; set; }
+        public String Address { get; set; }
+        public String Postcode { get; set; }
+        public String Remark { get; set; }
+        public String CurrentDepartmentName { get; set; }
+
+        public SysDictionary GenderInfo
+        {
+            get
+            {
+                return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender)
+                  .FirstOrDefault(x => x.ItemID == (int)Gender);
+            }
+        }
 
 
         public User CurrentUser { get; set; }
@@ -94,8 +103,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             NationalityList = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Nationality);
 
             DepartmentInfo = new Department();
-            GenderInfo =
-                DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int) DictionaryType.Gender).FirstOrDefault();
             UserID = userInfo.UserID;
             IsAddMode = userInfo.UserID == 0;
             StartDate = DateTime.Now;
@@ -114,11 +121,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 EndDate = userInfo.EndDate;
                 Phone = userInfo.Phone;
                 Avator = _userAvatorService.GetAvator(userInfo.Photo);
-                GenderInfo = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender)
-                    .FirstOrDefault(x => x.ItemID == (int)userInfo.Gender);
                 DepartmentInfo = AuthorizationDepartments.FirstOrDefault(d => d.DepartmentID == userInfo.DepartmentID);
                 CurrentDepartmentName = DepartmentInfo.Name;
-
+                Gender = userInfo.Gender;
                 LastName = userInfo.UserPropertyInfo.FirstName;
                 FirstName = userInfo.UserPropertyInfo.FirstName;
                 Nationality = userInfo.UserPropertyInfo.Nationality;
@@ -279,7 +284,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             CurrentUser.Type = UserType;
             CurrentUser.UserCode = UserCode;
             CurrentUser.Name = Name;
-            CurrentUser.Gender = (GenderType)GenderInfo.ItemID;
+            CurrentUser.Gender = Gender;
             CurrentUser.Phone = Phone;
             CurrentUser.Status = Status;
             CurrentUser.StartDate = StartDate;

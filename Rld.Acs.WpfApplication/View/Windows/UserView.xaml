@@ -109,9 +109,9 @@
                     <TextBlock Grid.Row="7" Grid.Column="0" Text="至"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                        <RadioButton IsChecked="{Binding GenderInfo.ItemID, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={StaticResource IntZero}}"
+                        <RadioButton IsChecked="{Binding Gender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GenderType.Male}}"
                             Content="男" GroupName="rb_gender" VerticalAlignment="Center" Margin="3"/>
-                        <RadioButton IsChecked="{Binding GenderInfo.ItemID, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={StaticResource IntOne}}"
+                        <RadioButton IsChecked="{Binding Gender, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static  model:GenderType.Female}}"
                             Content="女" GroupName="rb_gender" VerticalAlignment="Center" Margin="3"/>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
