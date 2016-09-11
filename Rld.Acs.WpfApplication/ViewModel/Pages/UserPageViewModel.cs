@@ -31,6 +31,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public RelayCommand DeleteUserCmd { get; private set; }
         public RelayCommand MoveUserCmd { get; private set; }
         public RelayCommand SyncUserCmd { get; private set; }
+        public RelayCommand FilterUserCmd { get; private set; }
+        public RelayCommand<string> SearchUserCmd { get; private set; }
         public RelayCommand<TreeViewNode> SelectedTreeNodeChangedCmd { get; private set; }
 
         public List<Department> AuthorizationDepartments { get; set; }
@@ -38,14 +40,22 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public List<TreeViewNode> TreeViewSource { get; private set; }
         public ObservableCollection<UserViewModel> UserViewModels { get; set; }
         public UserViewModel SelectedUserViewModel { get; set; }
+        public Boolean ShowEmployee { get; set; }
+        public Boolean ShowVisitor { get; set; }
+        public List<User> CurrentDepartmentUsers { get; set; }
 
         public UserPageViewModel()
         {
+            ShowEmployee = true;
+            ShowVisitor = true;
+
             AddUserCmd = new AuthCommand(AddUser);
             ModifyUserCmd = new AuthCommand(ModifyUser);
             DeleteUserCmd = new AuthCommand(DeleteUser);
             MoveUserCmd = new AuthCommand(MoveUser);
             SyncUserCmd = new AuthCommand(SyncUser);
+            FilterUserCmd = new RelayCommand(FilterUsers);
+            SearchUserCmd = new RelayCommand<string>(SearchUser);
             SelectedTreeNodeChangedCmd = new RelayCommand<TreeViewNode>(ShowUserBySelectedDepartmentNode);
 
             UserViewModels = new ObservableCollection<UserViewModel>();
@@ -60,18 +70,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 if (selectedNode.ID == -1)
                     return;
 
-                
-                UserViewModels = new ObservableCollection<UserViewModel>();
-                var users = _userRepo.Query(new Hashtable { { "DepartmentID", selectedNode.ID } });
-                if (users.Any())
-                {
-                    foreach (var user in users)
-                    {
-                        UserViewModels.Add(new UserViewModel(user));
-                        
-                    }
-                }
+                CurrentDepartmentUsers = _userRepo.QueryUsersForSummaryData(new Hashtable { { "DepartmentID", selectedNode.ID } }).ToList();
 
+                var filterUesrs = GetFilterUsers();
+                var listUserViewModel = filterUesrs.Select(x => new UserViewModel(x));
+                UserViewModels = new ObservableCollection<UserViewModel>(listUserViewModel);
                 RaisePropertyChanged(null);
             }
             catch (Exception ex)
@@ -79,6 +82,45 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 Log.Error(ex);
             }
         }
+
+        private void FilterUsers()
+        {
+            var filterUesrs = GetFilterUsers();
+            var listUserViewModel = filterUesrs.Select(x => new UserViewModel(x));
+            UserViewModels = new ObservableCollection<UserViewModel>(listUserViewModel);
+            RaisePropertyChanged(null);
+        }
+
+        private void SearchUser(string keyword)
+        {
+            CurrentDepartmentUsers = _userRepo.QueryUsersForSummaryData(new Hashtable { { "Keyword", keyword } }).ToList();
+
+            var filterUesrs = GetFilterUsers();
+            var listUserViewModel = filterUesrs.Select(x => new UserViewModel(x));
+            UserViewModels = new ObservableCollection<UserViewModel>(listUserViewModel);
+            RaisePropertyChanged(null);
+        }
+
+        private List<User> GetFilterUsers()
+        {
+            if (ShowEmployee && ShowVisitor)
+            {
+                return CurrentDepartmentUsers;
+            }
+            else if (ShowEmployee)
+            {
+                return CurrentDepartmentUsers.FindAll(x => x.Type == UserType.Employee);
+            }
+            else if (ShowVisitor)
+            {
+                return CurrentDepartmentUsers.FindAll(x => x.Type == UserType.Visitor);
+            }
+            else
+            {
+                return new List<User>();
+            }
+        }
+
 
         private void AddUser()
         {
@@ -106,15 +148,20 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedUserViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择用户!"), Tokens.UserPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage("请先选择人员!"), Tokens.UserPage_ShowNotification);
                     return;
                 }
 
+                var coreModel = _userRepo.GetByKey(SelectedUserViewModel.UserID);
+                var vm = new UserViewModel(coreModel);
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = SelectedUserViewModel
+                    DataContext = vm
 
                 }, Tokens.OpenUserView);
+
+                var index = UserViewModels.IndexOf(SelectedUserViewModel);
+                UserViewModels[index] = vm;
             }
             catch (Exception ex)
             {
@@ -128,11 +175,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedUserViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择用户!"), Tokens.UserPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage("请先选择人员!"), Tokens.UserPage_ShowNotification);
                     return;
                 }
 
-                string question = string.Format("确定删除用户:{0}吗？", SelectedUserViewModel.Name);
+                string question = string.Format("确定删除人员:{0}吗？", SelectedUserViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteUser), Tokens.UserPage_ShowQuestion);
             }
             catch (Exception ex)
@@ -148,16 +195,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 try
                 {
                     _userRepo.Delete(SelectedUserViewModel.CurrentUser.UserID);
-                    message = "删除用户成功!";
+                    message = "删除人员成功!";
 
                     UserViewModels.Remove(SelectedUserViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除用户失败！";
+                    message = "删除人员失败！";
                 }
-                Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeGroupPage_ShowNotification);
+                Messenger.Default.Send(new NotificationMessage(message), Tokens.UserPage_ShowNotification);
             });
         }
 
@@ -168,7 +215,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedUserViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择用户!"), Tokens.UserPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage("请先选择人员!"), Tokens.UserPage_ShowNotification);
                     return;
                 }
 

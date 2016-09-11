@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace Rld.Acs.Repository.Interfaces
 {
     public interface IUserRepository : IRepository<User, Int32>
     {
-        IEnumerable<User> GetDepartmentSummaryUsers(Int32 departmentId);
+        IEnumerable<User> QueryUsersForSummaryData(Hashtable conditions);
     }
 }

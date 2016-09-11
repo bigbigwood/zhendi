@@ -26,11 +26,9 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(conditions, OperationCodes.QUSSMY, () =>
             {
                 IEnumerable<User> users = new List<User>();
-                if (conditions.ContainsKey("DepartmentID"))
-                {
-                    var repo = RepositoryManager.GetRepository<IUserRepository>();
-                    users = repo.GetDepartmentSummaryUsers(conditions["DepartmentID"].ToInt32());
-                }
+
+                var repo = RepositoryManager.GetRepository<IUserRepository>();
+                users = repo.QueryUsersForSummaryData(conditions);
 
                 return Request.CreateResponse(HttpStatusCode.OK, users.ToList());
                

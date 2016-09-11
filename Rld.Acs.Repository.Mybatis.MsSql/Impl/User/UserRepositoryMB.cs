@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using Rld.Acs.Model;
@@ -15,9 +16,9 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
         }
         #endregion
 
-        public IEnumerable<User> GetDepartmentSummaryUsers(Int32 departmentId)
+        public IEnumerable<User> QueryUsersForSummaryData(Hashtable conditions)
         {
-            return _sqlMapper.QueryForList<User>("User.GetDepartmentSummaryUsers", departmentId);
+            return _sqlMapper.QueryForList<User>("User.QueryUsersForSummaryData", conditions);
         }
     }
 }

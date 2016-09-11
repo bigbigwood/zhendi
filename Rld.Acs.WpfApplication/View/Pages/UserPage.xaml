@@ -65,13 +65,10 @@
                 </ToolBarTray>
             </DockPanel>
             <DockPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
-                <TextBox Margin="0,0,5,0"
-                     Width="200"
-                         Name="SearchDepartmentTextBox"
-                         controls:TextBoxHelper.Watermark="Search stuff..."
-                         controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmdWithParameter, Mode=OneWay}"
-                         controls:TextBoxHelper.ButtonCommandParameter="{Binding ElementName=test2, Path=Text}"
-                         Style="{DynamicResource SearchMetroTextBox}" />
+                <TextBox Name="test2" Margin="0,0,5,0" Width="200" Style="{DynamicResource SearchMetroTextBox}" 
+                         controls:TextBoxHelper.Watermark="查询人员"
+                         controls:TextBoxHelper.ButtonCommand="{Binding SearchUserCmd, Mode=OneWay}"
+                         controls:TextBoxHelper.ButtonCommandParameter="{Binding ElementName=test2, Path=Text}" />
             </DockPanel>
             <DockPanel Grid.Row="1" Grid.Column="0" >
                 <Border Margin="5" BorderBrush="LightGray" BorderThickness="2" VerticalAlignment="Stretch">
@@ -114,9 +111,9 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock Text="人员类型" VerticalAlignment="Center" Width="60"></TextBlock>
-                        <CheckBox Name="cb_stuff" Content="职员" Width="60"></CheckBox>
-                        <CheckBox Name="cb_visitor" Content="访客" Width="60"></CheckBox>
+                        <TextBlock Text="人员类型" VerticalAlignment="Center" Width="60" />
+                        <CheckBox Content="职员" Width="60" IsChecked="{Binding ShowEmployee}" Command="{Binding FilterUserCmd}" />
+                        <CheckBox Content="访客" Width="60"  IsChecked="{Binding ShowVisitor}" Command="{Binding FilterUserCmd}"/>
                     </StackPanel>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding UserViewModels}" SelectedItem="{Binding Path=SelectedUserViewModel}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"

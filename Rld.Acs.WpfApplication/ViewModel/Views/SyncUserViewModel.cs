@@ -175,7 +175,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     return;
 
                 DepartmentUserDtos = new ObservableCollection<SelectableItem>();
-                var users = _userRepo.GetDepartmentSummaryUsers(selectedNode.ID);
+                var users = _userRepo.QueryUsersForSummaryData(new Hashtable { { "DepartmentID", selectedNode.ID } }).ToList();
                 if (users != null && users.Any())
                 {
                     users.ForEach(user => DepartmentUserDtos.Add(new ComboBoxItem() { ID = user.UserID, DisplayName = user.Name }));

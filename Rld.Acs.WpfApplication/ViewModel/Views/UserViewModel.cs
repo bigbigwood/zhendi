@@ -42,7 +42,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
 
         public virtual Department DepartmentInfo { get; set; }
-
+        public Int32 UserID { get; set; }
+        
         public Boolean IsAddMode { get; set; }
         public string Title { get; set; }
         public string Avator { get; set; }
@@ -95,7 +96,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             DepartmentInfo = new Department();
             GenderInfo =
                 DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int) DictionaryType.Gender).FirstOrDefault();
-
+            UserID = userInfo.UserID;
             IsAddMode = userInfo.UserID == 0;
             StartDate = DateTime.Now;
             Birthday = DateTime.Now;
