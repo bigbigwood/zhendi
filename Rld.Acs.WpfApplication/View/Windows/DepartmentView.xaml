@@ -71,7 +71,7 @@
         <ComboBox  Grid.Row="4" Grid.Column="2" Margin="2"
                    Style="{DynamicResource VirtualisedMetroComboBox}"
                    controls:TextBoxHelper.Watermark="请选择上级部门"
-                   IsEditable="True"
+                   IsEditable="False"
                    MaxDropDownHeight="100"
                    ItemsSource="{Binding AuthorizationDepartments, Mode=OneWay}" 
                    SelectedItem="{Binding ParentDepartment}" 

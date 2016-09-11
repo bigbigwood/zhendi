@@ -35,18 +35,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand<string> UploadImageCmd { get; private set; }
         public RelayCommand DepartmentChangedCmd { get; private set; }
 
-
-        public List<Department> AuthorizationDepartments { get; set; }
-        public List<SysDictionary> NationalityList { get; set; }
-        public ObservableCollection<ListBoxItem> DeviceRoleListBoxSource { get; set; }
-
-
-        public virtual Department DepartmentInfo { get; set; }
-        public Int32 UserID { get; set; }
-        
         public Boolean IsAddMode { get; set; }
         public string Title { get; set; }
         public string Avator { get; set; }
+        public Int32 UserID { get; set; }
         public UserType UserType { get; set; }
         public String UserCode { get; set; }
         public String Name { get; set; }
@@ -87,21 +79,31 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                   .FirstOrDefault(x => x.ItemID == (int)Gender);
             }
         }
+        public List<Department> AuthorizationDepartments
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDepartments.FindAll(x => x.DepartmentID != -1); }
+        }
+        public List<SysDictionary> NationalityList
+        {
+            get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Nationality); }
+        }
+        public ObservableCollection<ListBoxItem> DeviceRoleListBoxSource { get; set; }
 
+        public ViewModelAttachment<User> ViewModelAttachment { get; set; }
+        public virtual Department DepartmentInfo { get; set; }
+       
 
         public User CurrentUser { get; set; }
 
         public UserViewModel(User userInfo)
         {
+            ViewModelAttachment= new ViewModelAttachment<User>();
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
             UploadImageCmd = new RelayCommand<string>(UploadImage);
             DepartmentChangedCmd = new RelayCommand(ProcessDepartmentChangedCmd);
 
             CurrentUser = userInfo;
-            AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
-            NationalityList = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Nationality);
-
             DepartmentInfo = new Department();
             UserID = userInfo.UserID;
             IsAddMode = userInfo.UserID == 0;
@@ -167,7 +169,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     return;
                 }
 
-                if (CurrentUser.UserID == 0)
+                if (IsAddMode)
                 {
                     CurrentUser = _userRepo.Insert(CurrentUser);
                     message = "增加人员成功!";
@@ -186,6 +188,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 return;
             }
 
+            ViewModelAttachment.CoreModel = CurrentUser;
+            ViewModelAttachment.LastOperationSuccess = true;
             RaisePropertyChanged(null);
             Close(message);
         }

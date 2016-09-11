@@ -40,9 +40,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public List<TreeViewNode> TreeViewSource { get; private set; }
         public ObservableCollection<UserViewModel> UserViewModels { get; set; }
         public UserViewModel SelectedUserViewModel { get; set; }
+        public Int32 SelectedDepartmentId { get; set; }
         public Boolean ShowEmployee { get; set; }
         public Boolean ShowVisitor { get; set; }
         public List<User> CurrentDepartmentUsers { get; set; }
+
 
         public UserPageViewModel()
         {
@@ -70,6 +72,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 if (selectedNode.ID == -1)
                     return;
 
+                SelectedDepartmentId = selectedNode.ID;
                 CurrentDepartmentUsers = _userRepo.QueryUsersForSummaryData(new Hashtable { { "DepartmentID", selectedNode.ID } }).ToList();
 
                 var filterUesrs = GetFilterUsers();
@@ -133,8 +136,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                 }, Tokens.OpenUserView);
 
-                if (userViewModel.CurrentUser.UserID != 0)
+                if (userViewModel.ViewModelAttachment.LastOperationSuccess && userViewModel.DepartmentInfo.DepartmentID == SelectedDepartmentId)
+                {
                     UserViewModels.Add(userViewModel);
+                    CurrentDepartmentUsers.Add(userViewModel.ViewModelAttachment.CoreModel);
+                }
             }
             catch (Exception ex)
             {
@@ -153,15 +159,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 }
 
                 var coreModel = _userRepo.GetByKey(SelectedUserViewModel.UserID);
-                var vm = new UserViewModel(coreModel);
+                var viewModel = new UserViewModel(coreModel);
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = vm
+                    DataContext = viewModel
 
                 }, Tokens.OpenUserView);
 
-                var index = UserViewModels.IndexOf(SelectedUserViewModel);
-                UserViewModels[index] = vm;
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    var index = UserViewModels.IndexOf(SelectedUserViewModel);
+                    UserViewModels[index] = viewModel;
+                }
             }
             catch (Exception ex)
             {

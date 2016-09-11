@@ -73,8 +73,7 @@ namespace Rld.Acs.WpfApplication
             AuthorizationDeviceRoles = _deviceRoleRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
             AuthorizationTimezones = _timeZoneRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
 
-
-            var topDepartment = new Department() { DepartmentID = -1, Name = "总经办" };
+            var topDepartment = new Department() { DepartmentID = -1, Name = "公司" };
             AuthorizationDepartments.Insert(0, topDepartment);
             AuthorizationDepartments.FindAll(d => d.Parent == null && d.DepartmentID != -1).ForEach(d => d.Parent = topDepartment);
         }
