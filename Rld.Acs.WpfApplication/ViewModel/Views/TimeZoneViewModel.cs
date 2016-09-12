@@ -29,12 +29,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
+        
 
         public TimeZoneViewModel(RldModel.TimeZone timeZone)
         {
             ViewModelAttachment = new ViewModelAttachment<RldModel.TimeZone>();
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
+            
 
             CurrentTimeZone = timeZone;
             if (timeZone.TimeZoneID != 0)
@@ -132,6 +134,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeZoneView_ShowNotification);
         }
+
+
 
         private TimeZoneGroupMappingInfo BuildMappingInfo(RldModel.TimeZone timeZone, int index)
         {

@@ -7,6 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:wpfApplication="clr-namespace:Rld.Acs.WpfApplication"
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" d:DesignHeight="650" d:DesignWidth="900"
              Height="650" Width="900" Unloaded="MetroWindow_Unloaded"
              d:DataContext= "{d:DesignInstance Type= vm:TimeZoneViewModel, IsDesignTimeCreatable=True}"
@@ -34,14 +35,18 @@
                                 <TextBlock Text="选择时组:" Margin="0"/>
                             </TextBlock>
 
-                            <ComboBox  Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="135" 
+                            <ComboBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="135" 
                                Style="{DynamicResource VirtualisedMetroComboBox}"
                                controls:TextBoxHelper.Watermark="请选择时组"
                                IsEditable="True"
                                MaxDropDownHeight="100"
                                ItemsSource="{Binding AllTimeGroupNames, Mode=OneWay}" 
-                                       SelectedValue="{Binding SelectedTimeGroupName}">
-
+                                       SelectedValue="{Binding SelectedTimeGroupName}" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding ComboSelectionChangedCmd}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ComboBox>
                         </DockPanel>
 
