@@ -24,22 +24,21 @@ namespace Rld.Acs.WpfApplication.ViewModel
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ITimeSegmentRepository _timeSegmentRepository = NinjectBinder.GetRepository<ITimeSegmentRepository>();
-        public RelayCommand AddTimeSegmentCmd { get; private set; }
-        public RelayCommand ModifyTimeSegmentCmd { get; private set; }
-        public RelayCommand DeleteTimeSegmentCmd { get; private set; }
-        public List<TimeSegment> TimeSegments { get; set; }
+        public RelayCommand AddCmd { get; private set; }
+        public RelayCommand ModifyCmd { get; private set; }
+        public RelayCommand DeleteCmd { get; private set; }
         public ObservableCollection<TimeSegmentViewModel> TimeSegmentViewModels { get; set; }
         public TimeSegmentViewModel SelectedTimeSegmentViewModel { get; set; }
 
         public TimeSegmentPageViewModel()
         {
-            AddTimeSegmentCmd = new AuthCommand(AddTimeSegment);
-            ModifyTimeSegmentCmd = new AuthCommand(ModifyTimeSegment);
-            DeleteTimeSegmentCmd = new AuthCommand(DeleteTimeSegment);
+            AddCmd = new AuthCommand(AddTimeSegment);
+            ModifyCmd = new AuthCommand(ModifyTimeSegment);
+            DeleteCmd = new AuthCommand(DeleteTimeSegment);
 
-            TimeSegmentViewModels = new ObservableCollection<TimeSegmentViewModel>();
-            TimeSegments = _timeSegmentRepository.Query(new Hashtable()).ToList();
-            TimeSegments.ForEach(t => TimeSegmentViewModels.Add(new TimeSegmentViewModel(t)));
+            var TimeSegments = _timeSegmentRepository.Query(new Hashtable()).ToList();
+            var viewmodels = TimeSegments.Select(x => new TimeSegmentViewModel(x));
+            TimeSegmentViewModels = new ObservableCollection<TimeSegmentViewModel>(viewmodels);
         }
 
         private void AddTimeSegment()
@@ -53,8 +52,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
                 }, Tokens.OpenTimeSegmentView);
 
-                if (timeSegmentViewModel.CurrentTimeSegment.TimeSegmentID != 0)
+                if (timeSegmentViewModel.ViewModelAttachment.LastOperationSuccess)
+                {
                     TimeSegmentViewModels.Add(timeSegmentViewModel);
+                }
             }
             catch (Exception ex)
             {
@@ -72,11 +73,18 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
+                var viewModel = new TimeSegmentViewModel(SelectedTimeSegmentViewModel.CurrentTimeSegment);
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = SelectedTimeSegmentViewModel
+                    DataContext = viewModel
 
                 }, Tokens.OpenTimeSegmentView);
+
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    var index = TimeSegmentViewModels.IndexOf(SelectedTimeSegmentViewModel);
+                    TimeSegmentViewModels[index] = viewModel;
+                }
 
             }
             catch (Exception ex)
@@ -95,15 +103,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
-                //if (AuthorizationDepartments.Any(d => d.Parent != null && d.Parent.DepartmentID == SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID))
-                //{
-                //    Messenger.Default.Send(new NotificationMessage("选中部门存在子部门，请先删除所属子部门!"), Tokens.DepartmentPage_ShowNotification);
-                //    return;
-                //}
-
                 string question = string.Format("确定删除时间段:{0}吗？", SelectedTimeSegmentViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteTimeSegment), Tokens.TimeSegmentPage_ShowQuestion);
-
             }
             catch (Exception ex)
             {
@@ -126,7 +127,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除时间段失败！";
+                    message = string.Format("删除时间段失败!\n{0}", ex.Message);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeSegmentPage_ShowQuestion);
             });

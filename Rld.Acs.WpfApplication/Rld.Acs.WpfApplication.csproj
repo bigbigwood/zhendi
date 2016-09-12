@@ -116,6 +116,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -144,6 +145,7 @@
     <Compile Include="Models\Command\AuthCommand.cs" />
     <Compile Include="Models\PasswordBoxHelper.cs" />
     <Compile Include="Models\TriStateTreeViewNode.cs" />
+    <Compile Include="Repository\CacheableRepository.cs" />
     <Compile Include="Repository\DeviceDoorRepository.cs" />
     <Compile Include="Repository\FloorDoorRepository.cs" />
     <Compile Include="Repository\FloorRepository.cs" />

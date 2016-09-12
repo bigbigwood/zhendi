@@ -20,9 +20,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ITimeZoneRepository _timeZoneRepo = NinjectBinder.GetRepository<ITimeZoneRepository>();
         private ITimeGroupRepository _timeGroupRepo = NinjectBinder.GetRepository<ITimeGroupRepository>();
-        public RelayCommand AddTimeZoneCmd { get; private set; }
-        public RelayCommand ModifyTimeZoneCmd { get; private set; }
-        public RelayCommand DeleteTimeZoneCmd { get; private set; }
+        public RelayCommand AddCmd { get; private set; }
+        public RelayCommand ModifyCmd { get; private set; }
+        public RelayCommand DeleteCmd { get; private set; }
         public RelayCommand TimeZoneDashboardCmd { get; private set; }
 
         public ObservableCollection<TimeZoneViewModel> TimeZoneViewModels { get; set; }
@@ -30,9 +30,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         public TimeZonePageViewModel()
         {
-            AddTimeZoneCmd = new AuthCommand(AddTimeZone);
-            ModifyTimeZoneCmd = new AuthCommand(ModifyTimeZone);
-            DeleteTimeZoneCmd = new AuthCommand(DeleteTimeZone);
+            AddCmd = new AuthCommand(AddTimeZone);
+            ModifyCmd = new AuthCommand(ModifyTimeZone);
+            DeleteCmd = new AuthCommand(DeleteTimeZone);
             TimeZoneDashboardCmd = new RelayCommand(OpenTimeZoneDetail);
 
             TimeZoneViewModels = new ObservableCollection<TimeZoneViewModel>();
@@ -93,12 +93,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
-                //if (AuthorizationDepartments.Any(d => d.Parent != null && d.Parent.DepartmentID == SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID))
-                //{
-                //    Messenger.Default.Send(new NotificationMessage("选中部门存在子部门，请先删除所属子部门!"), Tokens.DepartmentPage_ShowNotification);
-                //    return;
-                //}
-
                 string question = string.Format("确定删除时间区:{0}吗？", SelectedTimeZoneViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteTimeZone), Tokens.TimeZonePage_ShowQuestion);
 
@@ -143,7 +137,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             catch (Exception ex)
             {
                 Log.Error(ex);
-
             }
         }
     }

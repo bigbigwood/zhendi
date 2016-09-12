@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Messaging;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
@@ -34,8 +35,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
 
-            AllTimeGroups = _timeGroupRepo.Query(new Hashtable { { "Status", "1" } }).ToList();
-
             CurrentTimeZone = timeZone;
             if (timeZone.TimeZoneID != 0)
             {
@@ -43,16 +42,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 Name = timeZone.TimeZoneName;
             }
 
-            TimeGroupAssociationsDtos = new ObservableCollection<TimeZoneGroupMappingInfo>();
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 1));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 2));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 3));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 4));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 5));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 6));
-            TimeGroupAssociationsDtos.Add(BuildMappingInfo(timeZone, 7));
-
-            Title = (timeZone.TimeZoneID == 0) ? "新增时间组" : "修改时间组";
+            Title = (timeZone.TimeZoneID == 0) ? "新增时间区" : "修改时间区";
         }
 
         public string Title { get; set; }
@@ -62,8 +52,27 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public RldModel.TimeZone CurrentTimeZone { get; set; }
-        public ObservableCollection<TimeZoneGroupMappingInfo> TimeGroupAssociationsDtos { get; set; }
-        public List<TimeGroup> AllTimeGroups { get; set; }
+
+        public ObservableCollection<TimeZoneGroupMappingInfo> TimeGroupAssociationsDtos
+        {
+            get
+            {
+                var dtos = new ObservableCollection<TimeZoneGroupMappingInfo>();
+                dtos.Add(BuildMappingInfo(CurrentTimeZone, 1));
+                dtos.Add(BuildMappingInfo(CurrentTimeZone, 2));
+                dtos.Add(BuildMappingInfo(CurrentTimeZone, 3));
+                dtos.Add(BuildMappingInfo(CurrentTimeZone, 4));
+                dtos.Add(BuildMappingInfo(CurrentTimeZone, 5));
+                dtos.Add(BuildMappingInfo(CurrentTimeZone, 6));
+                dtos.Add(BuildMappingInfo(CurrentTimeZone, 7));
+                return dtos;
+            }
+        }
+
+        public List<TimeGroup> AllTimeGroups
+        {
+            get { return _timeGroupRepo.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled); }
+        }
 
         private void Save()
         {

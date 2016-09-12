@@ -23,21 +23,21 @@
             <DockPanel Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0" >
                 <ToolBarTray HorizontalAlignment="Stretch" IsLocked="True" >
                     <ToolBar>
-                        <Button Name="AddBtn" Command="{Binding AddTimeZoneCmd}" CommandParameter="{x:Static a:ACL.E_AddTimeZone}">
+                        <Button Name="AddBtn" Command="{Binding AddCmd}" CommandParameter="{x:Static a:ACL.E_AddTimeZone}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
                                 <TextBlock Text="{DynamicResource TimeZonePage_AddBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="ModifyBtn" Command="{Binding ModifyTimeZoneCmd}" CommandParameter="{x:Static a:ACL.E_MdfTimeZone}">
+                        <Button Name="ModifyBtn" Command="{Binding ModifyCmd}" CommandParameter="{x:Static a:ACL.E_MdfTimeZone}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
                                 <TextBlock Text="{DynamicResource TimeZonePage_ModifyBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="DeleteBtn"  Command="{Binding DeleteTimeZoneCmd}" CommandParameter="{x:Static a:ACL.E_DelTimeZone}">
+                        <Button Name="DeleteBtn"  Command="{Binding DeleteCmd}" CommandParameter="{x:Static a:ACL.E_DelTimeZone}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
                                 <TextBlock Text="{DynamicResource TimeZonePage_DeleteBtn}" />

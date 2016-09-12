@@ -24,21 +24,21 @@
             <DockPanel Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0" >
                 <ToolBarTray  HorizontalAlignment="Stretch" IsLocked="True" >
                     <ToolBar>
-                        <Button Name="AddBtn" Command="{Binding AddTimeSegmentCmd}" CommandParameter="{x:Static a:ACL.E_AddTimeSegment}">
+                        <Button Name="AddBtn" Command="{Binding AddCmd}" CommandParameter="{x:Static a:ACL.E_AddTimeSegment}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
                                 <TextBlock Text="{StaticResource TimeSegmentPage_AddBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="ModifyBtn" Command="{Binding ModifyTimeSegmentCmd}" CommandParameter="{x:Static a:ACL.E_MdfTimeSegment}">
+                        <Button Name="ModifyBtn" Command="{Binding ModifyCmd}" CommandParameter="{x:Static a:ACL.E_MdfTimeSegment}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
                                 <TextBlock Text="{StaticResource TimeSegmentPage_ModifyBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="DeleteBtn"  Command="{Binding DeleteTimeSegmentCmd}" CommandParameter="{x:Static a:ACL.E_DelTimeSegment}">
+                        <Button Name="DeleteBtn"  Command="{Binding DeleteCmd}" CommandParameter="{x:Static a:ACL.E_DelTimeSegment}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
                                 <TextBlock Text="{StaticResource TimeSegmentPage_DeleteBtn}" />

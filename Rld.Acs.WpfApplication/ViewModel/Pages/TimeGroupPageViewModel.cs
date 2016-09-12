@@ -26,18 +26,18 @@ namespace Rld.Acs.WpfApplication.ViewModel
         private ITimeGroupRepository _timeGroupRepo = NinjectBinder.GetRepository<ITimeGroupRepository>();
         private ITimeSegmentRepository _timeSegmentRepo = NinjectBinder.GetRepository<ITimeSegmentRepository>();
 
-        public RelayCommand AddTimeGroupCmd { get; private set; }
-        public RelayCommand ModifyTimeGroupCmd { get; private set; }
-        public RelayCommand DeleteTimeGroupCmd { get; private set; }
+        public RelayCommand AddCmd { get; private set; }
+        public RelayCommand ModifyCmd { get; private set; }
+        public RelayCommand DeleteCmd { get; private set; }
 
         public ObservableCollection<TimeGroupViewModel> TimeGroupViewModels { get; set; }
         public TimeGroupViewModel SelectedTimeGroupViewModel { get; set; }
 
         public TimeGroupPageViewModel()
         {
-            AddTimeGroupCmd = new AuthCommand(AddTimeGroup);
-            ModifyTimeGroupCmd = new AuthCommand(ModifyTimeGroup);
-            DeleteTimeGroupCmd = new AuthCommand(DeleteTimeGroup);
+            AddCmd = new AuthCommand(AddTimeGroup);
+            ModifyCmd = new AuthCommand(ModifyTimeGroup);
+            DeleteCmd = new AuthCommand(DeleteTimeGroup);
 
             TimeGroupViewModels = new ObservableCollection<TimeGroupViewModel>();
             var timegroups = _timeGroupRepo.Query(new Hashtable()).ToList();
@@ -96,12 +96,6 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     Messenger.Default.Send(new NotificationMessage("请先选择时间组!"), Tokens.TimeGroupPage_ShowNotification);
                     return;
                 }
-
-                //if (AuthorizationDepartments.Any(d => d.Parent != null && d.Parent.DepartmentID == SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID))
-                //{
-                //    Messenger.Default.Send(new NotificationMessage("选中部门存在子部门，请先删除所属子部门!"), Tokens.DepartmentPage_ShowNotification);
-                //    return;
-                //}
 
                 string question = string.Format("确定删除时间组:{0}吗？", SelectedTimeGroupViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteTimeGroup), Tokens.TimeGroupPage_ShowQuestion);

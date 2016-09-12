@@ -26,8 +26,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public TimeSegmentViewModel(TimeSegment timeSegment)
         {
+            ViewModelAttachment = new ViewModelAttachment<TimeSegment>();
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
+            
 
             CurrentTimeSegment = timeSegment;
             if (timeSegment.TimeSegmentID != 0)
@@ -54,6 +56,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             get { return string.Format("{0}-{1}", CurrentTimeSegment.BeginTime, CurrentTimeSegment.EndTime); }
         }
+        public ViewModelAttachment<TimeSegment> ViewModelAttachment { get; set; }
 
         public TimeSegment CurrentTimeSegment { get; set; }
 
@@ -81,7 +84,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 }
 
                 if (StartHour.Length == 1) StartHour = "0" + StartHour;
-                if (EndHour.Length == 1) StartHour = "0" + EndHour;
+                if (EndHour.Length == 1) EndHour = "0" + EndHour;
                 if (StartMinute.Length == 1) StartMinute = "0" + StartMinute;
                 if (EndMinute.Length == 1) EndMinute = "0" + EndMinute;
 
@@ -115,6 +118,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 return;
             }
 
+            ViewModelAttachment.CoreModel = CurrentTimeSegment;
+            ViewModelAttachment.LastOperationSuccess = true;
             RaisePropertyChanged(null);
             Close(message);
         }

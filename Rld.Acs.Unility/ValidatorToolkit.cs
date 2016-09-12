@@ -58,17 +58,17 @@ namespace Rld.Acs.Unility
 
         public static bool VerifyHourFormat(string str)
         {
-            if (string.IsNullOrWhiteSpace(str)) return false;
+            if (string.IsNullOrWhiteSpace(str) || str.Length > 2) return false;
 
             var intValue = str.ToInt32();
             if (intValue == ConvertorExtension.ConvertionFailureValue) return false;
 
-            return intValue >= 0 && intValue < 23;
+            return intValue >= 0 && intValue < 24;
         }
 
         public static bool VerifyMinuteFormat(string str)
         {
-            if (string.IsNullOrWhiteSpace(str)) return false;
+            if (string.IsNullOrWhiteSpace(str) || str.Length > 2) return false;
 
             var intValue = str.ToInt32();
             if (intValue == ConvertorExtension.ConvertionFailureValue) return false;
