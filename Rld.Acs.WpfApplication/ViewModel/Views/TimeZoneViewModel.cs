@@ -32,6 +32,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public TimeZoneViewModel(RldModel.TimeZone timeZone)
         {
+            ViewModelAttachment = new ViewModelAttachment<RldModel.TimeZone>();
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
 
@@ -52,6 +53,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public RldModel.TimeZone CurrentTimeZone { get; set; }
+        public ViewModelAttachment<RldModel.TimeZone> ViewModelAttachment { get; set; }
 
         public ObservableCollection<TimeZoneGroupMappingInfo> TimeGroupAssociationsDtos
         {
@@ -79,12 +81,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
-                CurrentTimeZone.TimeZoneName = Name;
-                CurrentTimeZone.Status = GeneralStatus.Enabled;
-                CurrentTimeZone.TimeGroupAssociations = GetTimeGroupAssociations();
-
-                var validator = NinjectBinder.GetValidator<TimeZoneValidator>();
-                var results = validator.Validate(CurrentTimeZone);
+                var validator = NinjectBinder.GetValidator<TimeZoneViewModelValidator>();
+                var results = validator.Validate(this);
                 if (!results.IsValid)
                 {
                     message = string.Join("\n", results.Errors);
@@ -92,9 +90,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     return;
                 }
 
+                CurrentTimeZone.TimeZoneName = Name;
+                CurrentTimeZone.Status = GeneralStatus.Enabled;
+                CurrentTimeZone.TimeGroupAssociations = GetTimeGroupAssociations();
+
                 if (CurrentTimeZone.TimeZoneID == 0)
                 {
-                    
                     CurrentTimeZone.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentTimeZone.CreateDate = DateTime.Now;
                     CurrentTimeZone = _timeZoneRepo.Insert(CurrentTimeZone);
@@ -116,6 +117,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 return;
             }
 
+            ViewModelAttachment.CoreModel = CurrentTimeZone;
+            ViewModelAttachment.LastOperationSuccess = true;
             RaisePropertyChanged(null);
             Close(message);
         }

@@ -7,8 +7,8 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:wpfApplication="clr-namespace:Rld.Acs.WpfApplication"
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
-             mc:Ignorable="d" d:DesignHeight="625" d:DesignWidth="900"
-                     Height="650" Width="900" 
+             mc:Ignorable="d" d:DesignHeight="650" d:DesignWidth="900"
+             Height="650" Width="900" Unloaded="MetroWindow_Unloaded"
              d:DataContext= "{d:DesignInstance Type= vm:TimeZoneViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" >
     <Grid>

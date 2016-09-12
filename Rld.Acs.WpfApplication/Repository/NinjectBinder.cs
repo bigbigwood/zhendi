@@ -58,8 +58,8 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<UserPropertyInfoValidator>().To<UserPropertyInfoValidator>();
             InjectionKernel.Bind<Department>().To<Department>();
             InjectionKernel.Bind<TimeSegmentViewModelValidator>().To<TimeSegmentViewModelValidator>();
-            InjectionKernel.Bind<TimeGroup>().To<TimeGroup>();
-            InjectionKernel.Bind<RldModel.TimeZone>().To<RldModel.TimeZone>();
+            InjectionKernel.Bind<TimeGroupViewModelValidator>().To<TimeGroupViewModelValidator>();
+            InjectionKernel.Bind<TimeZoneViewModelValidator>().To<TimeZoneViewModelValidator>();
             InjectionKernel.Bind<DeviceValidator>().To<DeviceValidator>();
             InjectionKernel.Bind<DeviceParameterValidator>().To<DeviceParameterValidator>();
             InjectionKernel.Bind<DoorValidator>().To<DoorValidator>();

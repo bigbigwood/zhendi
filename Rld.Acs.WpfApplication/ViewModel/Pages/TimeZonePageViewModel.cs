@@ -19,7 +19,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ITimeZoneRepository _timeZoneRepo = NinjectBinder.GetRepository<ITimeZoneRepository>();
-        private ITimeGroupRepository _timeGroupRepo = NinjectBinder.GetRepository<ITimeGroupRepository>();
         public RelayCommand AddCmd { get; private set; }
         public RelayCommand ModifyCmd { get; private set; }
         public RelayCommand DeleteCmd { get; private set; }
@@ -51,8 +50,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                 }, Tokens.OpenTimeZoneView);
 
-                if (timeZoneViewModel.CurrentTimeZone.TimeZoneID != 0)
+                if (timeZoneViewModel.ViewModelAttachment.LastOperationSuccess)
+                {
                     TimeZoneViewModels.Add(timeZoneViewModel);
+                }
             }
             catch (Exception ex)
             {
@@ -70,11 +71,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
+                var viewModel = new TimeZoneViewModel(SelectedTimeZoneViewModel.CurrentTimeZone);
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = SelectedTimeZoneViewModel
+                    DataContext = viewModel
 
                 }, Tokens.OpenTimeZoneView);
+
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    var index = TimeZoneViewModels.IndexOf(SelectedTimeZoneViewModel);
+                    TimeZoneViewModels[index] = viewModel;
+                }
             }
             catch (Exception ex)
             {

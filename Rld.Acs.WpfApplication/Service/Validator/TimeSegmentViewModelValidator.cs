@@ -12,8 +12,8 @@ namespace Rld.Acs.WpfApplication.Service.Validator
         {
             RuleFor(m => m.Name)
                 .NotEmpty().WithMessage("时间段名称不能为空")
-                .Length(1, 50).When(m => !string.IsNullOrWhiteSpace(m.Name)).WithMessage("时间段名称为1-50")
-                .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("时间段名称不能有特殊字符");
+                .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("时间段名称不能有特殊字符")
+                .Length(1, 50).WithMessage("时间段名称长度为1-50"); 
             RuleFor(m => m.StartHour)
                 .NotEmpty().WithMessage("开始时间小时数值不能为空")
                 .Must(ValidatorToolkit.VerifyHourFormat).WithMessage("开始时间小时数值无效");

@@ -39,9 +39,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
             ModifyCmd = new AuthCommand(ModifyTimeGroup);
             DeleteCmd = new AuthCommand(DeleteTimeGroup);
 
-            TimeGroupViewModels = new ObservableCollection<TimeGroupViewModel>();
             var timegroups = _timeGroupRepo.Query(new Hashtable()).ToList();
-            timegroups.ForEach(t => TimeGroupViewModels.Add(new TimeGroupViewModel(t)));
+            var viewModels = timegroups.Select(x => new TimeGroupViewModel(x));
+            TimeGroupViewModels = new ObservableCollection<TimeGroupViewModel>(viewModels);
         }
 
         private void AddTimeGroup()
@@ -55,8 +55,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
                 }, Tokens.OpenTimeGroupView);
 
-                if (timeGroupViewModel.CurrentTimeGroup.TimeGroupID!= 0)
+                if (timeGroupViewModel.ViewModelAttachment.LastOperationSuccess)
+                {
                     TimeGroupViewModels.Add(timeGroupViewModel);
+                }
             }
             catch (Exception ex)
             {
@@ -74,12 +76,18 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
+                var viewModel = new TimeGroupViewModel(SelectedTimeGroupViewModel.CurrentTimeGroup);
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = SelectedTimeGroupViewModel
+                    DataContext = viewModel
 
                 }, Tokens.OpenTimeGroupView);
 
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    var index = TimeGroupViewModels.IndexOf(SelectedTimeGroupViewModel);
+                    TimeGroupViewModels[index] = viewModel;
+                }
             }
             catch (Exception ex)
             {

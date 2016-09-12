@@ -37,7 +37,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
                 {
                     try
                     {
-                        DataGridRow row = datagrid.ItemContainerGenerator.ContainerFromIndex(i) as DataGridRow;
+                        var row = datagrid.ItemContainerGenerator.ContainerFromIndex(i) as DataGridRow;
                         if (row != null)
                         {
                             row.Header = (i + 1).ToString();

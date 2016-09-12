@@ -78,6 +78,8 @@ namespace Rld.Acs.Unility
 
         public static bool HasSpecialChar(string str)
         {
+            if (string.IsNullOrWhiteSpace(str)) return false;
+
             return Regex.IsMatch(str, @"[，。；？~！：‘“”’【】（）!@#$%^&*()=-_+{}:<>?\|';.,\[\]]");
         }
     }

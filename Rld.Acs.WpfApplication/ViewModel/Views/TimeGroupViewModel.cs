@@ -29,6 +29,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public TimeGroupViewModel(TimeGroup timeGroup)
         {
+            ViewModelAttachment = new ViewModelAttachment<TimeGroup>();
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
 
@@ -63,24 +64,25 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public ObservableCollection<string> SelectedFormattingTimeSegmentList { get; set; }
         public ObservableCollection<SelectableItem> TimeSegmentDtos { get; set; }
         public List<TimeSegment> AllTimeSegments { get; set; }
+        public ViewModelAttachment<TimeGroup> ViewModelAttachment { get; set; }
 
         private void Save()
         {
             string message = "";
             try
             {
-                CurrentTimeGroup.TimeGroupName = Name;
-                CurrentTimeGroup.Status = GeneralStatus.Enabled;
-                CurrentTimeGroup.TimeSegments = GetSelectedTimeSegments();
-
-                var validator = NinjectBinder.GetValidator<TimeGroupValidator>();
-                var results = validator.Validate(CurrentTimeGroup);
+                var validator = NinjectBinder.GetValidator<TimeGroupViewModelValidator>();
+                var results = validator.Validate(this);
                 if (!results.IsValid)
                 {
                     message = string.Join("\n", results.Errors);
                     SendMessage(message);
                     return;
                 }
+
+                CurrentTimeGroup.TimeGroupName = Name;
+                CurrentTimeGroup.Status = GeneralStatus.Enabled;
+                CurrentTimeGroup.TimeSegments = GetSelectedTimeSegments();
 
                 if (CurrentTimeGroup.TimeGroupID == 0)
                 {
@@ -109,6 +111,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
             SelectedFormattingTimeSegmentList = GetSelectedFormattingTimeSegmentList();
 
+            ViewModelAttachment.CoreModel = CurrentTimeGroup;
+            ViewModelAttachment.LastOperationSuccess = true;
             RaisePropertyChanged(null);
             Close(message);
         }

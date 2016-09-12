@@ -13,8 +13,6 @@ namespace Rld.Acs.WpfApplication.View.Windows
         public TimeZoneDashboardView()
         {
             InitializeComponent();
-
-            Messenger.Default.Register(this, Tokens.CloseTimeZoneDashboardView, new Action<NotificationMessage>(ProcessCloseViewMessage));
         }
 
         private void BtnQuit_OnClick(object sender, RoutedEventArgs e)

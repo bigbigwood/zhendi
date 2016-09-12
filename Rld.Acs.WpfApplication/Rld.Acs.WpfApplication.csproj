@@ -181,8 +181,8 @@
     <Compile Include="Service\Validator\DoorValidator.cs" />
     <Compile Include="Service\Validator\SysRoleValidator.cs" />
     <Compile Include="Service\Validator\TimeSegmentViewModelValidator.cs" />
-    <Compile Include="Service\Validator\TimeZoneValidator.cs" />
-    <Compile Include="Service\Validator\TimeGroupValidator.cs" />
+    <Compile Include="Service\Validator\TimeZoneViewModelValidator.cs" />
+    <Compile Include="Service\Validator\TimeGroupViewModelValidator.cs" />
     <Compile Include="Service\Validator\DepartmentValidator.cs" />
     <Compile Include="Service\Validator\DeviceValidator.cs" />
     <Compile Include="Service\Validator\FloorValidator.cs" />
