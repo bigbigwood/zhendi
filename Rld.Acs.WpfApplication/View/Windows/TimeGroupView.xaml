@@ -44,8 +44,12 @@
             <TextBlock Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
         </DockPanel>
         <Separator Grid.Row="1" Grid.ColumnSpan="4" Background="LightGray" />
-        
-        <TextBlock Grid.Row="2" Grid.Column="1" Text="{StaticResource TimeGroupView_Label_Name}" />
+
+        <TextBlock Grid.Row="2" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="{DynamicResource TimeGroupView_Label_Name}" Margin="0"/>
+        </TextBlock>
+
         <TextBox   Grid.Row="2" Grid.Column="2" Text="{Binding Name}" />
 
         <DockPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" >

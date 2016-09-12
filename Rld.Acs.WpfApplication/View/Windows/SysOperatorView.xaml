@@ -93,7 +93,12 @@
 
 
             <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding LoginName}"/>
-            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding LanguageID}"/>
+
+            <ComboBox Grid.Row="1" Grid.Column="2" SelectedValuePath="Tag" SelectedValue="{Binding LanguageID}">
+                <ComboBoxItem Tag="2052" Content="{DynamicResource Language_Chinese}" IsSelected="True" />
+                <ComboBoxItem Tag="1033" Content="{DynamicResource Language_English}"  />
+            </ComboBox>
+            
 
             <CheckBox IsChecked="{Binding Status, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GeneralStatus.Enabled}}"
                         Grid.Row="2" Grid.Column="2" Content="启用" HorizontalAlignment="Left"/>

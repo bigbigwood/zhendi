@@ -19,8 +19,9 @@ namespace Rld.Acs.WpfApplication.Service.Validator
                 .Must(ValidatorToolkit.IsNumeric).WithMessage("人员编号只能为数字");
             
             RuleFor(m => m.Phone)
-                .Must(ValidatorToolkit.IsPhoneNumberFormat).When(m => !string.IsNullOrWhiteSpace(m.Phone)).WithMessage("号码格式错误")
-                .Length(7,13).When(m => !string.IsNullOrWhiteSpace(m.Phone)).WithMessage("号码长度为7-13");
+                .NotEmpty().WithMessage("手机号码不能为空")
+                .Must(ValidatorToolkit.IsPhoneNumberFormat).WithMessage("号码格式错误")
+                .Length(7,13).WithMessage("号码长度为7-13");
 
             RuleFor(m => m.StartDate.Date)
                 .LessThan(m => m.EndDate.Value.Date).When(m => m.EndDate.HasValue).WithMessage("开始时间必须小于结束时间");

@@ -74,9 +74,18 @@
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="同步类型"/>
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="选择设备"/>
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="选择人员"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="同步类型" Margin="0"/>
+            </TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="选择设备" Margin="0"/>
+            </TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="选择人员" Margin="0"/>
+            </TextBlock>
 
             <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SyncUserType}"
                               ItemsSource="{Binding Source={AppModels:EnumBindingSource {x:Type AppModels:SyncUserType}}}" 

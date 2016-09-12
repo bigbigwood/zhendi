@@ -91,7 +91,10 @@
             <ComboBox Grid.Row="0" Grid.Column="2" Margin="2,3" 
                         ItemsSource="{Binding TypeHeadersDict, Mode=OneWay}" SelectedValuePath="ItemID" DisplayMemberPath="ItemValue" 
                         SelectedValue="{Binding TypeID}" />
-            <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding LanguageID}"/>
+            <ComboBox Grid.Row="1" Grid.Column="2" SelectedValuePath="Tag" SelectedValue="{Binding LanguageID}">
+                <ComboBoxItem Tag="2052" Content="{DynamicResource Language_Chinese}" IsSelected="True" />
+                <ComboBoxItem Tag="1033" Content="{DynamicResource Language_English}"  />
+            </ComboBox>
             <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding ItemID}"/>
             <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding ItemValue}"/>
             <TextBox Grid.Row="4" Grid.Column="2" Grid.RowSpan="2" Text="{Binding Description}"

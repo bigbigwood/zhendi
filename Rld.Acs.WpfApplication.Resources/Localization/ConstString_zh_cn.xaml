@@ -24,6 +24,9 @@
 	<sys:String x:Key="ExportResult">导出结果</sys:String>
 	<sys:String x:Key="SaveResult">保存结果</sys:String>
     <sys:String x:Key="SettingDetail">设置详情</sys:String>
+	
+	<sys:String x:Key="Language_Chinese">中文</sys:String>
+	<sys:String x:Key="Language_English">英文</sys:String>
 
 
     <sys:String x:Key="UserPage_AddBtn">增加人员</sys:String>
