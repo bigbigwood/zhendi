@@ -14,16 +14,16 @@
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="600" Unloaded="Page_Unloaded">
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="3" Grid.Row="0" Grid.Column="0" >
             <ToolBarTray>
                 <ToolBar>
@@ -59,42 +59,42 @@
             </ToolBarTray>
         </StackPanel>
         <DockPanel Grid.Row="1" Grid.Column="0" >
-                <Border Margin="5" BorderBrush="LightGray" BorderThickness="2" VerticalAlignment="Stretch">
-                    <TreeView Name="lstDepartment" ItemsSource="{Binding TreeViewSource}">
-                        <TreeView.Resources>
-                            <Style x:Key="ExpandingImageStyle" TargetType="{x:Type Image}">
-                                <Setter Property="Source" Value="{DynamicResource icon_treeitem_closed}"/>
-                                <Setter Property="Width" Value="12" />
-                                <Setter Property="Height" Value="12" />
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="Margin" Value="0,0,3,0" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsExpanded}" Value="True">
-                                        <Setter Property="Source" Value="{DynamicResource icon_treeitem_opened}"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TreeView.Resources>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectedItemChanged">
-                                <command:EventToCommand Command="{Binding SelectedTreeNodeChangedCmd}" CommandParameter="{Binding ElementName=lstDepartment,Path=SelectedValue}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <TreeView.ItemTemplate>
-                            <HierarchicalDataTemplate DataType="{x:Type models:TreeViewNode}" ItemsSource="{Binding Path=Children}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Style="{StaticResource ExpandingImageStyle}"/>
-                                    <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
-                                </StackPanel>
-                            </HierarchicalDataTemplate>
-                        </TreeView.ItemTemplate>
-                    </TreeView>
-                </Border>
-            </DockPanel>
-            <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="0" Visibility="{Binding HasSelectedDepartment, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Border Margin="5" BorderBrush="LightGray" BorderThickness="2" VerticalAlignment="Stretch">
-                    <views:DepartmentDetailPanel DataContext="{Binding SelectedDepartmentDetailViewModel}" />
-                </Border>
-            </Grid>
+            <Border Margin="5" BorderBrush="LightGray" BorderThickness="2" VerticalAlignment="Stretch">
+                <TreeView Name="lstDepartment" ItemsSource="{Binding TreeViewSource}">
+                    <TreeView.Resources>
+                        <Style x:Key="ExpandingImageStyle" TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="{DynamicResource icon_treeitem_closed}"/>
+                            <Setter Property="Width" Value="12" />
+                            <Setter Property="Height" Value="12" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="0,0,3,0" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsExpanded}" Value="True">
+                                    <Setter Property="Source" Value="{DynamicResource icon_treeitem_opened}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TreeView.Resources>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedItemChanged">
+                            <command:EventToCommand Command="{Binding SelectedTreeNodeChangedCmd}" CommandParameter="{Binding ElementName=lstDepartment,Path=SelectedValue}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate  DataType="{x:Type models:TreeViewNode}" ItemsSource="{Binding Path=Children}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Style="{StaticResource ExpandingImageStyle}"/>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </Border>
+        </DockPanel>
+        <Grid Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="1" Margin="0" Visibility="{Binding HasSelectedDepartment, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Margin="5" BorderBrush="LightGray" BorderThickness="2" VerticalAlignment="Stretch">
+                <views:DepartmentDetailPanel DataContext="{Binding SelectedDepartmentDetailViewModel}" />
+            </Border>
         </Grid>
+    </Grid>
 </pages:BasePage>

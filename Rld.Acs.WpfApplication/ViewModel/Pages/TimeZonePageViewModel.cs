@@ -33,7 +33,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             AddTimeZoneCmd = new AuthCommand(AddTimeZone);
             ModifyTimeZoneCmd = new AuthCommand(ModifyTimeZone);
             DeleteTimeZoneCmd = new AuthCommand(DeleteTimeZone);
-            TimeZoneDashboardCmd = new AuthCommand(OpenTimeZoneDetail);
+            TimeZoneDashboardCmd = new RelayCommand(OpenTimeZoneDetail);
 
             TimeZoneViewModels = new ObservableCollection<TimeZoneViewModel>();
             var timezones = _timeZoneRepo.Query(new Hashtable()).ToList();

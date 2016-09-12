@@ -38,6 +38,7 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string OpenTimeZoneDashboardView = Guid.NewGuid().ToString();
         public static readonly string OpenTimeZoneView = Guid.NewGuid().ToString();
         public static readonly string CloseTimeZoneView = Guid.NewGuid().ToString();
+        public static readonly string CloseTimeZoneDashboardView = Guid.NewGuid().ToString();
         public static readonly string TimeZonePage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string TimeZonePage_ShowQuestion = Guid.NewGuid().ToString();
         public static readonly string TimeZoneView_ShowNotification = Guid.NewGuid().ToString();

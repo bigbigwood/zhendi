@@ -42,6 +42,10 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MetroTreeViewItem}">
+        <Setter Property="IsExpanded" Value="True" />
+    </Style>
 
     <Style x:Key="LargeTileStyle" TargetType="controls:Tile">
         <Setter Property="Width" Value="180" />

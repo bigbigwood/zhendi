@@ -26,7 +26,7 @@
                         <Button Name="AddBtn" Command="{Binding AddTimeZoneCmd}" CommandParameter="{x:Static a:ACL.E_AddTimeZone}">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
-                                <TextBlock Text="{DynamicResource TimeGroupPage_AddBtn}" />
+                                <TextBlock Text="{DynamicResource TimeZonePage_AddBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>

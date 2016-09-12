@@ -25,7 +25,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
         private void ProcessOpenView(OpenWindowMessage msg)
         {
-            var view = new TimeZoneDashboardView() { DataContext = msg.DataContext };
+            var view = new TimeZoneView() { DataContext = msg.DataContext };
             view.BorderThickness = new Thickness(1);
             view.GlowBrush = null;
             view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");

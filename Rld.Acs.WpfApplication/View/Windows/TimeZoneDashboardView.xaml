@@ -6,10 +6,8 @@
              xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:wpfApplication="clr-namespace:Rld.Acs.WpfApplication"
-             xmlns:view="clr-namespace:Rld.Acs.WpfApplication.View"
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
-             mc:Ignorable="d" d:DesignHeight="625" d:DesignWidth="900"
-                     Height="650" Width="900" 
+             mc:Ignorable="d" d:DesignHeight="650" d:DesignWidth="900" Height="650" Width="900" 
              d:DataContext= "{d:DesignInstance Type= vm:TimeZoneViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" >
     <Grid>
@@ -34,11 +32,10 @@
                             <ComboBox  Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="135" 
                                Style="{DynamicResource VirtualisedMetroComboBox}"
                                controls:TextBoxHelper.Watermark="请选择时组"
-                               IsEditable="True"
+                               IsEditable="False" IsEnabled="False"
                                MaxDropDownHeight="100"
                                ItemsSource="{Binding AllTimeGroupNames, Mode=OneWay}" 
                                        SelectedValue="{Binding SelectedTimeGroupName}">
-                                
                             </ComboBox>
                         </DockPanel>
 
@@ -60,28 +57,20 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" >
-            <TextBlock Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+            <TextBlock Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" />
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
         <DockPanel Grid.Row="2" >
             <TextBlock Text="{DynamicResource TimeZoneView_Label_Name}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
-            <TextBox Text="{Binding Name}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" Width="200"/>
+            <TextBox Text="{Binding Name}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" Width="200" IsEnabled="False"/>
         </DockPanel>
         <ListBox Grid.Row="3" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"
                  ItemsSource="{Binding TimeGroupAssociationsDtos}"
                     ItemTemplate="{StaticResource TimeGroupAssociationsDtoTemplate}" >
         </ListBox>
-        
-        <Grid Grid.Row="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition Width="120"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="{StaticResource Ok}" Command="{Binding SaveCmd}" Width="100" FontSize="12" Margin="5"/>
-            <Button Grid.Column="2" Content="{StaticResource Cancel}" Command="{Binding CancelCmd}" Width="100" FontSize="12" Margin="5"/>
-        </Grid>
+        <StackPanel Grid.Row="4" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Name="btnQuit" Content="{StaticResource Quit}" Click="BtnQuit_OnClick" Width="100" FontSize="12" Margin="5"/>
+        </StackPanel>
     </Grid>
 </windows:BaseWindow>

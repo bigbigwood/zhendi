@@ -4,28 +4,84 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
-             xmlns:view="clr-namespace:Rld.Acs.WpfApplication.View"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:wpfApplication="clr-namespace:Rld.Acs.WpfApplication"
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="600"
+             mc:Ignorable="d" d:DesignHeight="625" d:DesignWidth="900"
+                     Height="650" Width="900" 
              d:DataContext= "{d:DesignInstance Type= vm:TimeZoneViewModel, IsDesignTimeCreatable=True}"
-             ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-                      Unloaded="MetroWindow_Unloaded">
+             ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.Resources>
+            <DataTemplate x:Key="TimeGroupAssociationsDtoTemplate" DataType="{x:Type vm:TimeZoneGroupMappingInfo}">
+                <Border Margin="5" Padding="5">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="5"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Width="65"/>
+                        </StackPanel>
+                        <DockPanel Grid.Row="1" Grid.Column="0">
+                            <TextBlock  Width="65" VerticalAlignment="Center" HorizontalAlignment="Left" DockPanel.Dock="Left" >
+                                <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                                <TextBlock Text="选择时组:" Margin="0"/>
+                            </TextBlock>
+
+                            <ComboBox  Margin="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="135" 
+                               Style="{DynamicResource VirtualisedMetroComboBox}"
+                               controls:TextBoxHelper.Watermark="请选择时组"
+                               IsEditable="True"
+                               MaxDropDownHeight="100"
+                               ItemsSource="{Binding AllTimeGroupNames, Mode=OneWay}" 
+                                       SelectedValue="{Binding SelectedTimeGroupName}">
+
+                            </ComboBox>
+                        </DockPanel>
+
+                        <wpfApplication:TimeControl Grid.Column="1" Grid.RowSpan="2" 
+                                                    HorizontalAlignment="Stretch" DurationsSource="{Binding TimeGroupViewModel.SelectedFormattingTimeSegmentList}"/>
+                        <Separator Grid.Row="2" Grid.ColumnSpan="2" Background="LightGray" Margin="5,0,5,0" />
+                    </Grid>
+                </Border>
+            </DataTemplate>
         </Grid.Resources>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="28"/>
             <RowDefinition Height="5"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="550"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" >
             <TextBlock Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
-        <TabControl Grid.Row="2" >
+        <DockPanel Grid.Row="2" >
+            <TextBlock FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0">
+                <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                <TextBlock Text="{DynamicResource TimeZoneView_Label_Name}" Margin="0"/>
+            </TextBlock>
 
-        </TabControl>
+            <TextBox Text="{Binding Name}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" Width="200"/>
+        </DockPanel>
+        <ListBox Grid.Row="3" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 ItemsSource="{Binding TimeGroupAssociationsDtos}"
+                    ItemTemplate="{StaticResource TimeGroupAssociationsDtoTemplate}" >
+        </ListBox>
+
+        <StackPanel Grid.Row="4" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Content="{StaticResource Ok}" Command="{Binding SaveCmd}" Width="100" FontSize="12" Margin="5"/>
+            <Button Content="{StaticResource Cancel}" Command="{Binding CancelCmd}" Width="100" FontSize="12" Margin="5"/>
+        </StackPanel>
     </Grid>
 </windows:BaseWindow>
