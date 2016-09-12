@@ -46,6 +46,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             }
 
             Title = (timeZone.TimeZoneID == 0) ? "新增时间区" : "修改时间区";
+            TimeGroupAssociationsDtos = InitTimeZoneGroupDtos();
         }
 
         public string Title { get; set; }
@@ -56,22 +57,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public DateTime EndDate { get; set; }
         public RldModel.TimeZone CurrentTimeZone { get; set; }
         public ViewModelAttachment<RldModel.TimeZone> ViewModelAttachment { get; set; }
-
-        public ObservableCollection<TimeZoneGroupMappingInfo> TimeGroupAssociationsDtos
-        {
-            get
-            {
-                var dtos = new ObservableCollection<TimeZoneGroupMappingInfo>();
-                dtos.Add(BuildMappingInfo(CurrentTimeZone, 1));
-                dtos.Add(BuildMappingInfo(CurrentTimeZone, 2));
-                dtos.Add(BuildMappingInfo(CurrentTimeZone, 3));
-                dtos.Add(BuildMappingInfo(CurrentTimeZone, 4));
-                dtos.Add(BuildMappingInfo(CurrentTimeZone, 5));
-                dtos.Add(BuildMappingInfo(CurrentTimeZone, 6));
-                dtos.Add(BuildMappingInfo(CurrentTimeZone, 7));
-                return dtos;
-            }
-        }
+        public ObservableCollection<TimeZoneGroupMappingInfo> TimeGroupAssociationsDtos { get; set; }
 
         public List<TimeGroup> AllTimeGroups
         {
@@ -135,8 +121,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeZoneView_ShowNotification);
         }
 
-
-
+        private ObservableCollection<TimeZoneGroupMappingInfo> InitTimeZoneGroupDtos()
+        {
+            var dtos = new ObservableCollection<TimeZoneGroupMappingInfo>();
+            dtos.Add(BuildMappingInfo(CurrentTimeZone, 1));
+            dtos.Add(BuildMappingInfo(CurrentTimeZone, 2));
+            dtos.Add(BuildMappingInfo(CurrentTimeZone, 3));
+            dtos.Add(BuildMappingInfo(CurrentTimeZone, 4));
+            dtos.Add(BuildMappingInfo(CurrentTimeZone, 5));
+            dtos.Add(BuildMappingInfo(CurrentTimeZone, 6));
+            dtos.Add(BuildMappingInfo(CurrentTimeZone, 7));
+            return dtos;
+        }
         private TimeZoneGroupMappingInfo BuildMappingInfo(RldModel.TimeZone timeZone, int index)
         {
             int id = 0;
@@ -170,7 +166,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 ID = id,
                 DisplayOrder = index,
                 Name = name,
-                AllTimeGroupNames = AllTimeGroups.Select(t => t.TimeGroupName).ToList(),
                 SelectedTimeGroupName = timeGroup.TimeGroupName,
                 TimeGroupViewModel = new TimeGroupViewModel(timeGroup),
             };

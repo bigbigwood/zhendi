@@ -22,8 +22,17 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public string Name { get; set; }
         public Int32 DisplayOrder { get; set; }
         public string SelectedTimeGroupName { get; set; }
-        public List<string> AllTimeGroupNames { get; set; }
         public TimeGroupViewModel TimeGroupViewModel { get; set; }
+
+        public List<TimeGroup> AllTiemGroups
+        {
+            get { return _timeGroupRepo.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled); }
+        }
+
+        public List<string> AllTimeGroupNames
+        {
+            get { return AllTiemGroups.Select(x => x.TimeGroupName).ToList(); }
+        }
 
         public RelayCommand ComboSelectionChangedCmd { get; private set; }
 
@@ -31,10 +40,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             ComboSelectionChangedCmd = new RelayCommand(ComboSelectionChanged);
         }
+
         private void ComboSelectionChanged()
         {
-            var timegroups = _timeGroupRepo.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled);
-            var selectedTimeGroup = timegroups.FirstOrDefault(x => x.TimeGroupName == SelectedTimeGroupName);
+            var selectedTimeGroup = AllTiemGroups.FirstOrDefault(x => x.TimeGroupName == SelectedTimeGroupName);
             TimeGroupViewModel = new TimeGroupViewModel(selectedTimeGroup);
             RaisePropertyChanged(null);
         }
