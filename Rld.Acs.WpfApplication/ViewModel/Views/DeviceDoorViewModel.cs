@@ -45,8 +45,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
         public RelayCommand<DeviceDoorViewModel> ModifyDoorCmd { get; private set; }
-        public List<SysDictionary> CheckOutOptionsDict { get; set; }
-        public List<SysDictionary> RingTypeDict { get; set; }
+
+        public List<SysDictionary> CheckOutOptionsDict
+        {
+            get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.CheckOutOptions); }
+        }
+
+        public List<SysDictionary> RingTypeDict
+        {
+            get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.RingType); }
+        }
 
 
         public DeviceDoorViewModel()
@@ -54,9 +62,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
             ModifyDoorCmd = new RelayCommand<DeviceDoorViewModel>(ModifyDeviceDoor);
-
-            CheckOutOptionsDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.CheckOutOptions);
-            RingTypeDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.RingType);
         }
 
         private void Save()

@@ -40,14 +40,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-        public List<SysDictionary> TypeHeadersDict { get; set; }
+
+        public List<SysDictionary> TypeHeadersDict
+        {
+            get { return DictionaryManager.GetInstance().GetAllTypeHeaders(); }
+        }
 
         public SysDictionaryViewModel()
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
-
-            TypeHeadersDict = DictionaryManager.GetInstance().GetAllTypeHeaders();
         }
 
 

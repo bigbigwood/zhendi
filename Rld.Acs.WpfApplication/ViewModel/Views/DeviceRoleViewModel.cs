@@ -28,7 +28,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand CancelCmd { get; private set; }
         public List<DeviceController> AuthorizationDevices { get; set; }
         public List<TimeZone> Timezones { get; set; }
-        public List<SysDictionary> PermissionActionDict { get; set; }
+
+        public List<SysDictionary> PermissionActionDict
+        {
+            get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.DevicePermission); }
+        }
         public TimeZone SelectedTimezone { get; set; }
         public Int32 SelectedPermissionAction { get; set; }
         public DeviceRole CurrentDeviceRole { get; set; }
@@ -62,7 +66,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 {
                     ID = d.DeviceID, DisplayName = d.Name, IsSelected =  deviceRole.HasDeviceAuthorization(d.DeviceID)
                 }));
-            PermissionActionDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.DevicePermission);
 
             CurrentDeviceRole = deviceRole;
             if (deviceRole.DeviceRoleID != 0)

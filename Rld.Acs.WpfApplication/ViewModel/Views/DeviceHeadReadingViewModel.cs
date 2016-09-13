@@ -35,8 +35,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
         public RelayCommand<DeviceHeadReadingViewModel> ModifyHeadReadingCmd { get; private set; }
-        public List<SysDictionary> HeadReaderTypeDict { get; set; }
-        //private DeviceHeadReadingViewModel backup { get; set; }
+
+        public List<SysDictionary> HeadReaderTypeDict
+        {
+            get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.HeadReaderType); }
+        }
 
 
         public DeviceHeadReadingViewModel()
@@ -44,9 +47,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
             ModifyHeadReadingCmd = new RelayCommand<DeviceHeadReadingViewModel>(ModifyDeviceHeadReading);
-            HeadReaderTypeDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.HeadReaderType);
-
-          //backup = MemberwiseClone() as DeviceHeadReadingViewModel;
         }
 
         private void Save()

@@ -33,9 +33,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public ObservableCollection<DeviceTrafficLogViewModel> DeviceTrafficLogViewModels { get; set; }
         public DeviceTrafficLogViewModel SelectedTrafficLogViewModel { get; set; }
         public Int32 SelectedLogType { get; set; }
-        public List<SysDictionary> DeviceTrafficLogTypeDict { get; set; }
+
+        public List<SysDictionary> DeviceTrafficLogTypeDict
+        {
+            get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.DeviceTrafficLogType); }
+        }
 
         public RelayCommand QueryCommand { get; set; }
+
+        #region 分页相关属性
 
         private async void QueryCommandFunc()
         {
@@ -64,8 +70,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 }
             });
         }
-
-        #region 分页相关属性
 
         /// <summary>
         /// 分页查询命令
@@ -188,7 +192,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             NextPageSearchCommand = new AuthCommand(NextPageSearchCommandFunc);
 
             DeviceTrafficLogViewModels = new ObservableCollection<DeviceTrafficLogViewModel>();
-            DeviceTrafficLogTypeDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.DeviceTrafficLogType);
 
             StartDate = DateTime.Now.AddDays(-7);
             EndDate = DateTime.Now;

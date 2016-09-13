@@ -30,11 +30,22 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public SysDictionaryViewModel SelectedSysDictionaryViewModel { get; set; }
         public ObservableCollection<SysDictionaryViewModel> SysDictionaryViewModels { get; set; }
         public Int32 SelectedTypeHeader { get; set; }
-        public List<SysDictionary> TypeHeadersDict { get; set; }
+
+        public List<SysDictionary> TypeHeadersDict
+        {
+            get
+            {
+                var dict = new List<SysDictionary>() { new SysDictionary() { ItemID = -1, ItemValue = "" } };
+                dict.AddRange(DictionaryManager.GetInstance().GetAllTypeHeaders());
+                return dict;
+            }
+        }
         public RelayCommand AddCmd { get; private set; }
         public RelayCommand ModifyCmd { get; private set; }
         public RelayCommand DeleteCmd { get; private set; }
         public RelayCommand QueryCommand { get; set; }
+
+        #region 分页相关属性
 
         private async void QueryCommandFunc()
         {
@@ -63,7 +74,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             });
         }
 
-        #region 分页相关属性
 
         /// <summary>
         /// 分页查询命令
@@ -187,8 +197,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             DeleteCmd = new AuthCommand(DeleteItem);
 
             SysDictionaryViewModels = new ObservableCollection<SysDictionaryViewModel>();
-            TypeHeadersDict = new List<SysDictionary>() {new SysDictionary() {ItemID = -1, ItemValue = ""}};
-            TypeHeadersDict.AddRange(DictionaryManager.GetInstance().GetAllTypeHeaders());
             SelectedTypeHeader = -1;
         }
 

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Repository;
 
 namespace Rld.Acs.WpfApplication
@@ -16,7 +17,6 @@ namespace Rld.Acs.WpfApplication
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ISysDictionaryRepository _sysDictionaryRepo = NinjectBinder.GetRepository<ISysDictionaryRepository>();
-        private IDictionary<int, List<SysDictionary>> dictionary = new Dictionary<int, List<SysDictionary>>();
 
         private static DictionaryManager _instance = null;
 
@@ -39,36 +39,16 @@ namespace Rld.Acs.WpfApplication
 
         public List<SysDictionary> GetDictionaryItemsByTypeId(Int32 typeId)
         {
-            List<SysDictionary> dic = null;
-            if (!dictionary.TryGetValue(typeId, out dic))
-            {
-                dic = _sysDictionaryRepo.Query(new Hashtable
-                {
-                    { "Status", (int)GeneralStatus.Enabled }, 
-                    { "TypeID", typeId }, 
-                    { "Level", (int)DictionaryLevel.TypeItemsLevel }
-                }).ToList();
-                dictionary.Add(typeId, dic);
-            }
-
-            return dic;
+            return _sysDictionaryRepo.Query(new Hashtable())
+                   .FindAll(x => x.Status == GeneralStatus.Enabled && x.Level == (int)DictionaryLevel.TypeItemsLevel & x.TypeID == typeId)
+                   .ToList();
         }
 
         public List<SysDictionary> GetAllTypeHeaders()
         {
-            Int32 headerTypeId = -1;
-            List<SysDictionary> dic = null;
-            if (!dictionary.TryGetValue(headerTypeId, out dic))
-            {
-                dic = _sysDictionaryRepo.Query(new Hashtable
-                {
-                    { "Status", (int)GeneralStatus.Enabled }, 
-                    { "Level", (int)DictionaryLevel.TypeHeaderLevel }
-                }).ToList();
-                dictionary.Add(headerTypeId, dic);
-            }
-
-            return dic;
+            return _sysDictionaryRepo.Query(new Hashtable())
+                   .FindAll(x => x.Status == GeneralStatus.Enabled && x.Level == (int) DictionaryLevel.TypeHeaderLevel)
+                   .ToList();
         }
     }
 }

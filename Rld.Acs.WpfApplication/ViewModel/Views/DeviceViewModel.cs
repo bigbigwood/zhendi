@@ -56,9 +56,20 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public DeviceExtensionViewModel DeviceExtensionViewModel { get; set; }
         public String DoorListString { get; set; }
         public String HeadReadingListString { get; set; }
-        public List<SysDictionary> CommunicationTypeDict { get; set; }
-        public List<SysDictionary> ProtocolDict { get; set; }
-        public List<SysDictionary> AuthticationTypeDict { get; set; }
+
+        public List<SysDictionary> CommunicationTypeDict
+        {
+            get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.CommunicationType); }
+        }
+        public List<SysDictionary> ProtocolDict
+        {
+            get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Protocol); }
+        }
+
+        public List<SysDictionary> AuthticationTypeDict
+        {
+            get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.AuthticationType); }
+        }
 
         public List<NullableSelectableItem> Timezones
         {
@@ -75,10 +86,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
-
-            CommunicationTypeDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.CommunicationType);
-            ProtocolDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Protocol);
-            AuthticationTypeDict = DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.AuthticationType);
         }
 
 

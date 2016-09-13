@@ -10,16 +10,23 @@ using System.Threading.Tasks;
 
 namespace Rld.Acs.WpfApplication.Repository
 {
-    public class SysDictionaryRepository : BaseRepository<SysDictionary, int>, ISysDictionaryRepository
+    public class SysDictionaryRepository : CacheableRepository<SysDictionary, int>, ISysDictionaryRepository
     {
         public SysDictionaryRepository()
         {
             RelevantUri = "/api/SysDictionarys";
+            CacheKey = "CacheKey_SysDictionarys";
+            CacheExpireMinutes = SystemCacheExpireMinutes;
         }
 
         public override bool Update(SysDictionary sysDictionary)
         {
             return Update(sysDictionary, sysDictionary.DictionaryID);
+        }
+
+        public override SysDictionary GetByKey(int key)
+        {
+            return CacheableQuery().FirstOrDefault(x => x.DictionaryID == key);
         }
     }
 }
