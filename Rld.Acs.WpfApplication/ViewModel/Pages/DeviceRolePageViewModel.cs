@@ -27,7 +27,11 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public RelayCommand AddCmd { get; private set; }
         public RelayCommand ModifyCmd { get; private set; }
         public RelayCommand DeleteCmd { get; private set; }
-        public List<DeviceRole> DeviceRoles { get; set; }
+
+        public List<DeviceRole> DeviceRoles
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDeviceRoles; }
+        }
         public ObservableCollection<DeviceRoleViewModel> DeviceRoleViewModels { get; set; }
         public DeviceRoleViewModel SelectedDeviceRoleViewModel { get; set; }
 
@@ -37,9 +41,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
             ModifyCmd = new AuthCommand(ModifyDeviceController);
             DeleteCmd = new AuthCommand(DeleteDeviceController);
 
-            DeviceRoleViewModels = new ObservableCollection<DeviceRoleViewModel>();
-            DeviceRoles = ApplicationManager.GetInstance().AuthorizationDeviceRoles;
-            DeviceRoles.ForEach(t => DeviceRoleViewModels.Add(new DeviceRoleViewModel(t)));
+            var viewmodels = DeviceRoles.Select(x => new DeviceRoleViewModel(x));
+            DeviceRoleViewModels = new ObservableCollection<DeviceRoleViewModel>(viewmodels);
         }
 
         private void AddDeviceController()

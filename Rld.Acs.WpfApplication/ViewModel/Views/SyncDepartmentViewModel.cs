@@ -41,11 +41,21 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand RemoveAllSelectedDepartmentsCmd { get; private set; }
 
 
-        public List<DeviceController> AuthorizationDevices { get; set; }
-        public List<Department> AuthorizationDepartments { get; set; }
+        public List<DeviceController> AuthorizationDevices
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDevices; }
+        }
+        public List<Department> AuthorizationDepartments
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDepartments; }
+        }
 
         public ObservableCollection<SelectableItem> DeviceDtos { get; set; }
-        public List<TreeViewNode> TreeViewSource { get; private set; }
+
+        public List<TreeViewNode> TreeViewSource
+        {
+            get { return BuildTreeViewSource(); }
+        }
         public ObservableCollection<SelectableItem> SelectedSyncDepartmentDtos { get; set; }
         public TreeViewNode SelectedNode { get; set; }
 
@@ -60,14 +70,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SelectAllDepartmentsCmd = new RelayCommand(SelectAllDepartments);
             RemoveAllSelectedDepartmentsCmd = new RelayCommand(RemoveAllSelectedDepartments);
 
-            DeviceDtos = new ObservableCollection<SelectableItem>();
             SelectedSyncDepartmentDtos = new ObservableCollection<SelectableItem>();
 
-            AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
-            AuthorizationDevices.ForEach(d => DeviceDtos.Add(new ListBoxItem { ID = d.DeviceID, DisplayName = d.Code }));
-
-            AuthorizationDepartments = AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
-            TreeViewSource = BuildTreeViewSource();
+            var dtos = AuthorizationDevices.Select(x => new ListBoxItem {ID = x.DeviceID, DisplayName = x.Code});
+            DeviceDtos = new ObservableCollection<SelectableItem>(dtos);
         }
 
 

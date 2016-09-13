@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Rld.Acs.WpfApplication.Repository
 {
+    /// <summary>
+    /// TODO, 不知道有没有用到
+    /// </summary>
     public class DepartmentDeviceRepository : BaseRepository<DepartmentDevice, int>, IDepartmentDeviceRepository
     {
         public DepartmentDeviceRepository()

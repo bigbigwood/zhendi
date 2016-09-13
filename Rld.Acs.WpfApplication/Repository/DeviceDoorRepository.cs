@@ -11,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace Rld.Acs.WpfApplication.Repository
 {
-    public class DeviceDoorRepository : BaseRepository<DeviceDoor, int>, IDeviceDoorRepository
+    public class DeviceDoorRepository : CacheableRepository<DeviceDoor, int>, IDeviceDoorRepository
     {
         public DeviceDoorRepository()
         {
             RelevantUri = "/api/DeviceDoors";
+            CacheKey = "CacheKey_DeviceDoors";
+            CacheExpireMinutes = DepartmentCacheExpireMinutes;
         }
 
         public override bool Update(DeviceDoor deviceDoor)
@@ -23,9 +25,9 @@ namespace Rld.Acs.WpfApplication.Repository
             return Update(deviceDoor, deviceDoor.DeviceDoorID);
         }
 
-        public Int32 QueryCount(Hashtable conditions)
+        public override DeviceDoor GetByKey(int key)
         {
-            throw new NotImplementedException();
+            return CacheableQuery().FirstOrDefault(x => x.DeviceDoorID == key);
         }
     }
 }

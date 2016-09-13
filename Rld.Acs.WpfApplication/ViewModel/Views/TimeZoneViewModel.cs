@@ -36,7 +36,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             ViewModelAttachment = new ViewModelAttachment<RldModel.TimeZone>();
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
-            
 
             CurrentTimeZone = timeZone;
             if (timeZone.TimeZoneID != 0)

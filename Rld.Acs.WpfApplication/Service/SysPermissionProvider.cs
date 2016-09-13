@@ -17,11 +17,6 @@ namespace Rld.Acs.WpfApplication.Service
         private ISysModuleRepository _sysModuleRepo = NinjectBinder.GetRepository<ISysModuleRepository>();
         private ISysModuleElementRepository _sysModuleElementRepo = NinjectBinder.GetRepository<ISysModuleElementRepository>();
 
-
-        public List<SysRole> AllSysRoles { get; set; }
-        public List<SysModule> AllSysModules { get; set; }
-        public List<SysModuleElement> AllSysModuleElements { get; set; }
-
         private static SysPermissionProvider _instance = null;
 
         public static SysPermissionProvider GetInstance()
@@ -33,15 +28,20 @@ namespace Rld.Acs.WpfApplication.Service
         }
         private SysPermissionProvider()
         {
-            InitResource();
         }
 
 
-        private void InitResource()
+        public List<SysRole> AllSysRoles
         {
-            AllSysRoles = _sysRoleRepo.Query(new Hashtable()).ToList();
-            AllSysModules = _sysModuleRepo.Query(new Hashtable()).ToList();
-            AllSysModuleElements = _sysModuleElementRepo.Query(new Hashtable()).ToList();
+            get { return _sysRoleRepo.Query(new Hashtable()).ToList(); }
+        }
+        public List<SysModule> AllSysModules
+        {
+            get { return _sysModuleRepo.Query(new Hashtable()).ToList(); }
+        }
+        public List<SysModuleElement> AllSysModuleElements
+        {
+            get { return _sysModuleElementRepo.Query(new Hashtable()).ToList(); }
         }
     }
 }

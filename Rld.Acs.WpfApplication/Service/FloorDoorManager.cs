@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Repository;
 
 namespace Rld.Acs.WpfApplication.Service
@@ -16,8 +17,14 @@ namespace Rld.Acs.WpfApplication.Service
         private IDeviceDoorRepository _deviceDoorRepository = NinjectBinder.GetRepository<IDeviceDoorRepository>();
         private IFloorDoorRepository _floorDoorRepository = NinjectBinder.GetRepository<IFloorDoorRepository>();
 
-        public List<DeviceDoor> AuthorizationDoors { get; set; }
-        public List<FloorDoor> AuthorizationFloorDoor { get; set; }
+        public List<DeviceDoor> AuthorizationDoors
+        {
+            get { return _deviceDoorRepository.Query(new Hashtable()).FindAll(x => x.Status == (int)GeneralStatus.Enabled); }
+        }
+        public List<FloorDoor> AuthorizationFloorDoor
+        {
+            get { return _floorDoorRepository.Query(new Hashtable()).ToList(); }
+        }
         private static FloorDoorManager _instance = null;
 
         public static FloorDoorManager GetInstance()
@@ -29,16 +36,6 @@ namespace Rld.Acs.WpfApplication.Service
         }
         private FloorDoorManager()
         {
-            InitResource();
         }
-
-
-        private void InitResource()
-        {
-            AuthorizationDoors = _deviceDoorRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
-            AuthorizationFloorDoor = _floorDoorRepository.Query(new Hashtable ()).ToList();
-        }
-
-
     }
 }

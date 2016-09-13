@@ -23,6 +23,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
     public class DepartmentPageViewModel : ViewModelBase
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private IDepartmentRepository _departmentRepository = NinjectBinder.GetRepository<IDepartmentRepository>();
+
         public RelayCommand<TreeViewNode> SelectedTreeNodeChangedCmd { get; private set; }
         public RelayCommand AddDepartmentCmd { get; private set; }
         public RelayCommand ModifyDepartmentCmd { get; private set; }
@@ -41,13 +43,21 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 RaisePropertyChanged("TreeViewSource");
             }
         }
-        public List<Department> AuthorizationDepartments { get; set; }
-        public List<DeviceController> AuthorizationDevices { get; set; }
-        public List<DeviceRole> AuthorizationDeviceRoles { get; set; }
+
+        public List<Department> AuthorizationDepartments
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDepartments; }
+        }
+        public List<DeviceController> AuthorizationDevices
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDevices; }
+        }
+        public List<DeviceRole> AuthorizationDeviceRoles
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDeviceRoles; }
+        }
         public DepartmentDetailViewModel SelectedDepartmentDetailViewModel { get; set; }
         public Boolean HasSelectedDepartment { get { return SelectedDepartmentDetailViewModel != null; } }
-        private IDepartmentRepository _departmentRepository = NinjectBinder.GetRepository<IDepartmentRepository>();
-
 
         public DepartmentPageViewModel()
         {
@@ -56,10 +66,6 @@ namespace Rld.Acs.WpfApplication.ViewModel
             ModifyDepartmentCmd = new AuthCommand(ModifyDepartment);
             DeleteDepartmentCmd = new AuthCommand(ProcessDeleteDepartmentCmd);
             SyncDataCmd = new AuthCommand(SyncDepartment);
-
-            AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
-            AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
-            AuthorizationDeviceRoles = ApplicationManager.GetInstance().AuthorizationDeviceRoles;
 
             TreeViewSource = BuildTreeViewSource();
         }
@@ -182,13 +188,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             try
             {
-                var departmentDetailViewModel = new DepartmentDetailViewModel()
-                {
-                    AuthorizationDepartments = AuthorizationDepartments,
-                    AuthorizationDeviceRoles = AuthorizationDeviceRoles,
-                    AuthorizationDevices = AuthorizationDevices,
-                };
-
+                var departmentDetailViewModel = new DepartmentDetailViewModel();
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
                     DataContext = departmentDetailViewModel

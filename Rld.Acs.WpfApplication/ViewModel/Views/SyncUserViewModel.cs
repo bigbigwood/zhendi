@@ -46,12 +46,23 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand SelectedAllTargetUserCmd { get; private set; }
 
 
-        public List<DeviceController> AuthorizationDevices { get; set; }
-        public List<Department> AuthorizationDepartments { get; set; }
+        public List<DeviceController> AuthorizationDevices
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDevices; }
+        }
+
+        public List<Department> AuthorizationDepartments
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDepartments; }
+        }
 
         public SyncUserType SyncUserType { get; set; }
         public ObservableCollection<SelectableItem> DeviceDtos { get; set; }
-        public List<TreeViewNode> TreeViewSource { get; private set; }
+
+        public List<TreeViewNode> TreeViewSource
+        {
+            get { return BuildTreeViewSource(); }
+        }
         public ObservableCollection<SelectableItem> DepartmentUserDtos { get; set; }
         public ObservableCollection<SelectableItem> SelectedSyncUserDtos { get; set; }
 
@@ -67,15 +78,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SelectedAllSourceUserCmd = new RelayCommand(SelectAllDepartmentUsers);
             SelectedAllTargetUserCmd = new RelayCommand(RemoveAllSelectedUsers);
 
-            DeviceDtos = new ObservableCollection<SelectableItem>();
             DepartmentUserDtos = new ObservableCollection<SelectableItem>();
             SelectedSyncUserDtos = new ObservableCollection<SelectableItem>();
 
-            AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
-            AuthorizationDevices.ForEach(d => DeviceDtos.Add(new ListBoxItem { ID = d.DeviceID, DisplayName = d.Code }));
-
-            AuthorizationDepartments = AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
-            TreeViewSource = BuildTreeViewSource();
+            var dtos = AuthorizationDevices.Select(x => new ListBoxItem {ID = x.DeviceID, DisplayName = x.Code});
+            DeviceDtos = new ObservableCollection<SelectableItem>(dtos);
         }
 
 

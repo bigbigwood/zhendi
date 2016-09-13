@@ -25,21 +25,28 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         private UserAvatorService _userAvatorService = new UserAvatorService();
 
         public Int32 IntervalSeconds { get; set; }
-        public ObservableCollection<FloorViewModel> FloorViewModels { get; set; }
+
+        public ObservableCollection<FloorViewModel> FloorViewModels
+        {
+            get
+            {
+                var operators = _floorRepo.Query(new Hashtable());
+                var vms = operators.Select(AutoMapper.Mapper.Map<FloorViewModel>);
+                var viewmodels = new ObservableCollection<FloorViewModel>(vms);
+
+                viewmodels.ForEach(x =>
+                {
+                    if (!string.IsNullOrWhiteSpace(x.Photo))
+                        x.Photo = _userAvatorService.GetAvator(x.Photo);
+                });
+                return viewmodels;
+            }
+        }
         public FloorViewModel SelectedFloorViewModel { get; set; }
 
         public FloorMonitorPageViewModel()
         {
-            IntervalSeconds = 10;
-            var operators = _floorRepo.Query(new Hashtable());
-            var vms = operators.Select(AutoMapper.Mapper.Map<FloorViewModel>);
-            FloorViewModels = new ObservableCollection<FloorViewModel>(vms);
-
-            FloorViewModels.ForEach(x =>
-            {
-                if (!string.IsNullOrWhiteSpace(x.Photo))
-                    x.Photo = _userAvatorService.GetAvator(x.Photo);
-            });
+            IntervalSeconds = 15;
         }
     }
 }

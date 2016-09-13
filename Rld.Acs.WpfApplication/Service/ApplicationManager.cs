@@ -24,13 +24,27 @@ namespace Rld.Acs.WpfApplication
         private IDepartmentRepository _departmentRepository = NinjectBinder.GetRepository<IDepartmentRepository>();
         private IDeviceRoleRepository _deviceRoleRepository = NinjectBinder.GetRepository<IDeviceRoleRepository>();
         private IDeviceControllerRepository _deviceControllerRepository = NinjectBinder.GetRepository<IDeviceControllerRepository>();
-        private ITimeZoneRepository _timeZoneRepository = NinjectBinder.GetRepository<ITimeZoneRepository>();
         private ISysRoleRepository _sysRoleRepo = NinjectBinder.GetRepository<ISysRoleRepository>();
 
-        public List<Department> AuthorizationDepartments { get; set; }
-        public List<DeviceController> AuthorizationDevices { get; set; }
-        public List<DeviceRole> AuthorizationDeviceRoles { get; set; }
-        public List<Model.TimeZone> AuthorizationTimezones { get; set; }
+        public List<Department> AuthorizationDepartments
+        {
+            get
+            {
+                var allDept = _departmentRepository.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled);
+                var topDepartment = new Department() { DepartmentID = -1, Name = "公司" };
+                allDept.Insert(0, topDepartment);
+                allDept.FindAll(d => d.Parent == null && d.DepartmentID != -1).ForEach(d => d.Parent = topDepartment);
+                return allDept;
+            }
+        }
+        public List<DeviceController> AuthorizationDevices
+        {
+            get { return _deviceControllerRepository.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled); }
+        }
+        public List<DeviceRole> AuthorizationDeviceRoles
+        {
+            get { return _deviceRoleRepository.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled); }
+        }
         public SysOperator CurrentOperatorInfo { get; set; }
         public List<SysRolePermission> AuthorizationPermissions { get; set; }
 
@@ -68,14 +82,9 @@ namespace Rld.Acs.WpfApplication
 
         private void InitResource()
         {
-            AuthorizationDepartments = _departmentRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
-            AuthorizationDevices = _deviceControllerRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
-            AuthorizationDeviceRoles = _deviceRoleRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
-            AuthorizationTimezones = _timeZoneRepository.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
-
-            var topDepartment = new Department() { DepartmentID = -1, Name = "公司" };
-            AuthorizationDepartments.Insert(0, topDepartment);
-            AuthorizationDepartments.FindAll(d => d.Parent == null && d.DepartmentID != -1).ForEach(d => d.Parent = topDepartment);
+            _departmentRepository.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled);
+            _deviceControllerRepository.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled);
+            _deviceRoleRepository.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled);
         }
     }
 }

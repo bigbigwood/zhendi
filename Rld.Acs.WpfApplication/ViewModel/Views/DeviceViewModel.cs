@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IDeviceControllerRepository _deviceControllerRepo = NinjectBinder.GetRepository<IDeviceControllerRepository>();
+        private ITimeZoneRepository _timeZoneRepository = NinjectBinder.GetRepository<ITimeZoneRepository>();
 
         public Int32 Id { get; set; }
         public String Mac { get; set; }
@@ -75,10 +77,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             get
             {
-                return ApplicationManager.GetInstance().AuthorizationTimezones.Select(x => new NullableSelectableItem
-                {
-                    ID = x.TimeZoneID, DisplayName = x.TimeZoneName
-                }).ToList();
+                var allTimezones = _timeZoneRepository.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled);
+                return allTimezones.Select(x => new NullableSelectableItem { ID = x.TimeZoneID, DisplayName = x.TimeZoneName }).ToList();
             }
         }
 

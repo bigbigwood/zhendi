@@ -55,9 +55,21 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public Department CurrentDepartment { get; set; }
         public DeviceRole DeviceRole { get; set; }
         public List<DepartmentDevice> OwnedDevices { get; set; }
-        public List<Department> AuthorizationDepartments { get; set; }
-        public List<DeviceController> AuthorizationDevices { get; set; }
-        public List<DeviceRole> AuthorizationDeviceRoles { get; set; }
+
+        public List<Department> AuthorizationDepartments
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDepartments; }
+        }
+
+        public List<DeviceController> AuthorizationDevices
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDevices; }
+        }
+
+        public List<DeviceRole> AuthorizationDeviceRoles
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDeviceRoles; }
+        }
 
         public DepartmentDetailViewModel()
         {
@@ -67,9 +79,6 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
             ParentDepartment = new Department();
             CurrentDepartment = new Department();
-            AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
-            AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
-            AuthorizationDeviceRoles = ApplicationManager.GetInstance().AuthorizationDeviceRoles;
             OwnedDevices = new List<DepartmentDevice>();
             DeviceListBoxSource = new List<ListBoxItem>();
             DeviceRole = AuthorizationDeviceRoles.First();

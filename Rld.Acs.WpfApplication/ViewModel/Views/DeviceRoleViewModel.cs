@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -23,12 +24,19 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IDeviceRoleRepository _deviceRoleRepo = NinjectBinder.GetRepository<IDeviceRoleRepository>();
+        private ITimeZoneRepository _timeZoneRepository = NinjectBinder.GetRepository<ITimeZoneRepository>();
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-        public List<DeviceController> AuthorizationDevices { get; set; }
-        public List<TimeZone> Timezones { get; set; }
 
+        public List<DeviceController> AuthorizationDevices
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDevices; }
+        }
+        public List<TimeZone> Timezones
+        {
+            get { return _timeZoneRepository.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled); }
+        }
         public List<SysDictionary> PermissionActionDict
         {
             get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.DevicePermission); }
@@ -58,14 +66,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
 
-            DeviceDtos = new ObservableCollection<SelectableItem>();
-
-            Timezones = ApplicationManager.GetInstance().AuthorizationTimezones;
-            AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
-            AuthorizationDevices.ForEach(d => DeviceDtos.Add(new ListBoxItem
-                {
-                    ID = d.DeviceID, DisplayName = d.Name, IsSelected =  deviceRole.HasDeviceAuthorization(d.DeviceID)
-                }));
+            var dtos = AuthorizationDevices.Select(x => new ListBoxItem
+            {
+                ID = x.DeviceID,
+                DisplayName = x.Name,
+                IsSelected = deviceRole.HasDeviceAuthorization(x.DeviceID)
+            });
+            DeviceDtos = new ObservableCollection<SelectableItem>(dtos);
 
             CurrentDeviceRole = deviceRole;
             if (deviceRole.DeviceRoleID != 0)

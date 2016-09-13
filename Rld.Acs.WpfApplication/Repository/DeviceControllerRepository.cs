@@ -11,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace Rld.Acs.WpfApplication.Repository
 {
-    public class DeviceControllerRepository : BaseRepository<DeviceController, int>, IDeviceControllerRepository
+    public class DeviceControllerRepository : CacheableRepository<DeviceController, int>, IDeviceControllerRepository
     {
         public DeviceControllerRepository()
         {
             RelevantUri = "/api/Devices";
+            CacheKey = "CacheKey_Devices";
+            CacheExpireMinutes = DepartmentCacheExpireMinutes;
         }
 
         public override bool Update(DeviceController deviceController)
@@ -23,9 +25,9 @@ namespace Rld.Acs.WpfApplication.Repository
             return Update(deviceController, deviceController.DeviceID);
         }
 
-        public Int32 QueryCount(Hashtable conditions)
+        public override DeviceController GetByKey(int key)
         {
-            throw new NotImplementedException();
+            return CacheableQuery().FirstOrDefault(x => x.DeviceID == key);
         }
     }
 }

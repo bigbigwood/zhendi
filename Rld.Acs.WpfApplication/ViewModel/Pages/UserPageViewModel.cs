@@ -35,15 +35,24 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public RelayCommand<string> SearchUserCmd { get; private set; }
         public RelayCommand<TreeViewNode> SelectedTreeNodeChangedCmd { get; private set; }
 
-        public List<Department> AuthorizationDepartments { get; set; }
         public TreeViewNode SelectedTreeNode { get; private set; }
-        public List<TreeViewNode> TreeViewSource { get; private set; }
+        
         public ObservableCollection<UserViewModel> UserViewModels { get; set; }
         public UserViewModel SelectedUserViewModel { get; set; }
         public Int32 SelectedDepartmentId { get; set; }
         public Boolean ShowEmployee { get; set; }
         public Boolean ShowVisitor { get; set; }
         public List<User> CurrentDepartmentUsers { get; set; }
+
+        public List<Department> AuthorizationDepartments
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDepartments; }
+        }
+
+        public List<TreeViewNode> TreeViewSource
+        {
+            get { return BuildTreeViewSource(); }
+        }
 
 
         public UserPageViewModel()
@@ -61,8 +70,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             SelectedTreeNodeChangedCmd = new RelayCommand<TreeViewNode>(ShowUserBySelectedDepartmentNode);
 
             UserViewModels = new ObservableCollection<UserViewModel>();
-            AuthorizationDepartments = AuthorizationDepartments = ApplicationManager.GetInstance().AuthorizationDepartments;
-            TreeViewSource = BuildTreeViewSource();
         }
 
         private void ShowUserBySelectedDepartmentNode(TreeViewNode selectedNode)

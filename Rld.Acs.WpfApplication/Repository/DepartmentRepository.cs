@@ -10,16 +10,23 @@ using System.Threading.Tasks;
 
 namespace Rld.Acs.WpfApplication.Repository
 {
-    public class DepartmentRepository : BaseRepository<Department, int>, IDepartmentRepository
+    public class DepartmentRepository : CacheableRepository<Department, int>, IDepartmentRepository
     {
         public DepartmentRepository()
         {
             RelevantUri = "/api/Departments";
+            CacheKey = "CacheKey_Departments";
+            CacheExpireMinutes = DepartmentCacheExpireMinutes;
         }
 
         public override bool Update(Department department)
         {
             return Update(department, department.DepartmentID);
+        }
+
+        public override Department GetByKey(int key)
+        {
+            return CacheableQuery().FirstOrDefault(x => x.DepartmentID == key);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,11 +23,19 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
     public class DeviceRolePermissionViewModel : ViewModelBase
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private ITimeZoneRepository _timeZoneRepository = NinjectBinder.GetRepository<ITimeZoneRepository>();
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-        public List<DeviceController> AuthorizationDevices { get; set; }
-        public List<TimeZone> AuthorizationTimezones { get; set; }
+
+        public List<DeviceController> AuthorizationDevices
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDevices; }
+        }
+        public List<TimeZone> AuthorizationTimezones
+        {
+            get { return _timeZoneRepository.Query(new Hashtable ()).FindAll(x => x.Status == GeneralStatus.Enabled); }
+        }
 
         public Boolean IsSelected { get; set; }
         public Int32 Id { get; set; }
@@ -43,9 +52,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
-
-            AuthorizationTimezones = ApplicationManager.GetInstance().AuthorizationTimezones;
-            AuthorizationDevices = ApplicationManager.GetInstance().AuthorizationDevices;
 
             FromCoreModel(deviceRolePermission);
         }

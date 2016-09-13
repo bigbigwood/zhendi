@@ -29,7 +29,11 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public RelayCommand AddCmd { get; private set; }
         public RelayCommand ModifyCmd { get; private set; }
         public RelayCommand DeleteCmd { get; private set; }
-        public List<DeviceController> DeviceControllers { get; set; }
+
+        public List<DeviceController> DeviceControllers
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDevices; }
+        }
         public ObservableCollection<DeviceViewModel> DeviceControllerViewModels { get; set; }
         public DeviceViewModel SelectedDeviceViewModel { get; set; }
 
@@ -39,8 +43,6 @@ namespace Rld.Acs.WpfApplication.ViewModel
             ModifyCmd = new AuthCommand(ModifyDeviceController);
             DeleteCmd = new AuthCommand(DeleteDeviceController);
 
-            
-            DeviceControllers = ApplicationManager.GetInstance().AuthorizationDevices;
             var deviceViewModels = DeviceControllers.Select(x => x.ToViewModel());
             DeviceControllerViewModels = new ObservableCollection<DeviceViewModel>(deviceViewModels);
         }

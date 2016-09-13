@@ -39,13 +39,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public String Title { get; set; }
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-        public ObservableCollection<TriStateTreeViewNode> TreeViewSource { get; set; }
+
+        public ObservableCollection<TriStateTreeViewNode> TreeViewSource
+        {
+            get { return BuildTreeViewSource(); }
+        }
 
         public SysRoleViewModel()
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
-            TreeViewSource = BuildTreeViewSource();
         }
 
         private void Save()
