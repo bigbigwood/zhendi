@@ -51,15 +51,17 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             try
             {
-                var deviceViewModel = new DeviceController().ToViewModel();
+                var viewModel = new DeviceController().ToViewModel();
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = deviceViewModel
+                    DataContext = viewModel
 
                 }, Tokens.OpenDeviceView);
 
-                if (deviceViewModel.Id != 0)
-                    DeviceControllerViewModels.Add(deviceViewModel);
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    DeviceControllerViewModels.Add(viewModel);
+                }
             }
             catch (Exception ex)
             {
@@ -77,12 +79,19 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
+                var coreModel = SelectedDeviceViewModel.ToCoreModel();
+                var viewModel = coreModel.ToViewModel();
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = SelectedDeviceViewModel
+                    DataContext = viewModel
 
                 }, Tokens.OpenDeviceView);
 
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    var index = DeviceControllerViewModels.IndexOf(SelectedDeviceViewModel);
+                    DeviceControllerViewModels[index] = viewModel;
+                }
             }
             catch (Exception ex)
             {

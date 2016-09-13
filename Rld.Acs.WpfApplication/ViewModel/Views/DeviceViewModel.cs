@@ -50,14 +50,21 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public DateTime? UpdateDate { get; set; }
         public String Title { get; set; }
 
-
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
         public ObservableCollection<DeviceDoorViewModel> DoorViewModels { get; set; }
         public ObservableCollection<DeviceHeadReadingViewModel> HeadReadingViewModels { get; set; }
         public DeviceExtensionViewModel DeviceExtensionViewModel { get; set; }
-        public String DoorListString { get; set; }
-        public String HeadReadingListString { get; set; }
+
+        public String DoorListString
+        {
+            get { return string.Join(", ", DoorViewModels.FindAll(x => x.IsSelected).Select(x => x.Name)); }
+        }
+        public String HeadReadingListString
+        {
+            get { return string.Join(", ", HeadReadingViewModels.FindAll(x => x.IsSelected).Select(x => x.Name)); }
+        }
+        public ViewModelAttachment<DeviceController> ViewModelAttachment { get; set; }
 
         public List<SysDictionary> CommunicationTypeDict
         {
@@ -86,8 +93,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
-        }
 
+            ViewModelAttachment = new ViewModelAttachment<DeviceController>();
+            DoorViewModels = new ObservableCollection<DeviceDoorViewModel>();
+            HeadReadingViewModels = new ObservableCollection<DeviceHeadReadingViewModel>();
+        }
 
         private void Save()
         {
@@ -132,6 +142,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
                     message = "修改设备成功!";
                 }
+
+                ViewModelAttachment.CoreModel = deviceController;
+                ViewModelAttachment.LastOperationSuccess = true;
             }
             catch (Exception ex)
             {

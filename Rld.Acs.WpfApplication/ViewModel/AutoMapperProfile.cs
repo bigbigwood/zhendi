@@ -75,8 +75,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.ProtocolDict, op => op.Ignore())
                 .ForMember(dest => dest.AuthticationTypeDict, op => op.Ignore())
                 .ForMember(dest => dest.Timezones, op => op.Ignore())
-                .ForMember(dest => dest.DoorListString, op => op.MapFrom(src => src.GetDeviceAssociatedDoorList()))
-                .ForMember(dest => dest.HeadReadingListString, op => op.MapFrom(src => src.GetDeviceAssociatedHeadReadingList()));
+                .ForMember(dest => dest.ViewModelAttachment, op => op.Ignore())
+                .ForMember(dest => dest.DoorListString, op => op.Ignore())
+                .ForMember(dest => dest.HeadReadingListString, op => op.Ignore());
 
             CreateProvMap<DeviceViewModel, DeviceController>()
                 .ForMember(dest => dest.DeviceID, op => op.MapFrom(x => x.Id))

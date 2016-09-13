@@ -136,17 +136,17 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             try
             {
-                var userViewModel = new UserViewModel(new User());
+                var viewModel = new UserViewModel(new User());
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = userViewModel
+                    DataContext = viewModel
 
                 }, Tokens.OpenUserView);
 
-                if (userViewModel.ViewModelAttachment.LastOperationSuccess && userViewModel.DepartmentInfo.DepartmentID == SelectedDepartmentId)
+                if (viewModel.ViewModelAttachment.LastOperationSuccess && viewModel.DepartmentInfo.DepartmentID == SelectedDepartmentId)
                 {
-                    UserViewModels.Add(userViewModel);
-                    CurrentDepartmentUsers.Add(userViewModel.ViewModelAttachment.CoreModel);
+                    UserViewModels.Add(viewModel);
+                    CurrentDepartmentUsers.Add(viewModel.ViewModelAttachment.CoreModel);
                 }
             }
             catch (Exception ex)

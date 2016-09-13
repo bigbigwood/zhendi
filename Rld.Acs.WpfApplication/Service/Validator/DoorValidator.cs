@@ -10,12 +10,12 @@ namespace Rld.Acs.WpfApplication.Service.Validator
         public DoorValidator()
         {
             RuleFor(m => m.Name)
-                .NotEmpty().WithMessage("设备名称不能为空")
-                .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("设备名称不能有特殊字符");
+                .NotEmpty().WithMessage("门名称不能为空")
+                .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("门名称不能有特殊字符");
             
             RuleFor(m => m.Code)
-                .NotEmpty().WithMessage("设备编号不能为空")
-                .Must(ValidatorToolkit.IsNumberOrChar).WithMessage("设备编号只能为数字或者字母");
+                .NotEmpty().WithMessage("门编号不能为空")
+                .Must(ValidatorToolkit.IsNumberOrChar).WithMessage("门编号只能为数字或者字母");
         }
     }
 }
