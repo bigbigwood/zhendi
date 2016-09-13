@@ -55,6 +55,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public Department CurrentDepartment { get; set; }
         public DeviceRole DeviceRole { get; set; }
         public List<DepartmentDevice> OwnedDevices { get; set; }
+        public ViewModelAttachment<Department> ViewModelAttachment { get; set; }
 
         public List<Department> AuthorizationDepartments
         {
@@ -82,6 +83,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             OwnedDevices = new List<DepartmentDevice>();
             DeviceListBoxSource = new List<ListBoxItem>();
             DeviceRole = AuthorizationDeviceRoles.First();
+            ViewModelAttachment = new ViewModelAttachment<Department>();
         }
 
         private void PrepareData()
@@ -171,9 +173,12 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 Log.Error("Update department fails.", ex);
                 message = "保存部门失败";
+                SendMessage(message);
                 return;
             }
 
+            ViewModelAttachment.CoreModel = CurrentDepartment;
+            ViewModelAttachment.LastOperationSuccess = true;
             RaisePropertyChanged(null);
             Close(message);
         }
