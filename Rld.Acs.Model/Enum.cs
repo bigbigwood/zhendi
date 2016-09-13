@@ -115,5 +115,6 @@ namespace Rld.Acs.Model
         AuthticationType = 10010, //验证模式
         DeviceTrafficLogType = 10011, //日志记录类型
         CheckInOptions = 10012, //访问记录验证选择
+        GeneralStatus = 10013, //人员状态
     }
 }

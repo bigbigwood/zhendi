@@ -33,7 +33,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public String Photo { get; set; }
         public Int32 CreateUserID { get; set; }
         public DateTime CreateDate { get; set; }
-        public GeneralStatus Status { get; set; }
+        public Boolean Status { get; set; }
         public Int32? UpdateUserID { get; set; }
         public DateTime? UpdateDate { get; set; }
         public String Title { get; set; }
@@ -53,13 +53,22 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         }
         public String NewPassword1 { get; set; }
         public String NewPassword2 { get; set; }
+        public SysDictionary StatusInfo
+        {
+            get
+            {
+                return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.GeneralStatus)
+                  .FirstOrDefault(x => x.ItemID == Convert.ToInt32(Status));
+            }
+        }
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
         public ObservableCollection<ComboBoxItem> SysOperatorRoleItems { get; set; }
-        public SysOperator NewCoreModel { get; set; }
+        public ViewModelAttachment<SysOperator> ViewModelAttachment { get; set; }
 
         public SysOperatorViewModel()
         {
+            ViewModelAttachment = new ViewModelAttachment<SysOperator>();
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
 
@@ -109,7 +118,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     coreModel.CreateDate = DateTime.Now;
                     coreModel.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     coreModel = _sysOperatorRepo.Insert(coreModel);
-                    NewCoreModel = coreModel;
+                   
                     message = "增加成功!";
                 }
                 else
@@ -119,6 +128,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     _sysOperatorRepo.Update(coreModel);
                     message = "修改成功!";
                 }
+
+                ViewModelAttachment.CoreModel = coreModel;
+                ViewModelAttachment.LastOperationSuccess = true;
             }
             catch (Exception ex)
             {
@@ -128,6 +140,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 return;
             }
 
+           
             RaisePropertyChanged(null);
             Close(message);
         }
@@ -162,12 +175,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             if (OperatorID == 0)
             {
-                NewPasswordEnabled = true;
                 LanguageID = 2052;
-                Status = GeneralStatus.Enabled;
+                NewPasswordEnabled = true;
+                Status = true;
             }
             else
             {
+                Status = coreModel.Status == GeneralStatus.Enabled;
                 coreModel.SysOperatorRoles.ForEach(x =>
                 {
                     var item = SysOperatorRoleItems.FirstOrDefault(i => i.ID == x.RoleID);

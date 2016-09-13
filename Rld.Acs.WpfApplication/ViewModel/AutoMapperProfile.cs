@@ -112,7 +112,12 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
             CreateProvMap<SysOperatorViewModel, SysOperator>()
                 .ForMember(dest => dest.SysOperatorRoles, op => op.Ignore())
-                .AfterMap((src, dest) => dest.SysOperatorRoles = src.GetRolesFromUI(dest));
+                .ForMember(dest => dest.Status, op => op.Ignore())
+                .AfterMap((src, dest) =>
+                {
+                    dest.SysOperatorRoles = src.GetRolesFromUI(dest);
+                    dest.Status = src.Status ? GeneralStatus.Enabled : GeneralStatus.Disabled;
+                });
             CreateProvMap<SysOperator, SysOperatorViewModel>()
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
@@ -120,9 +125,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.NewPassword1, op => op.Ignore())
                 .ForMember(dest => dest.NewPassword2, op => op.Ignore())
                 .ForMember(dest => dest.Title, op => op.Ignore())
-                .ForMember(dest => dest.NewCoreModel, op => op.Ignore())
+                .ForMember(dest => dest.ViewModelAttachment, op => op.Ignore())
+                .ForMember(dest => dest.StatusInfo, op => op.Ignore())
                 .ForMember(dest => dest.SysOperatorRoleItems, op => op.Ignore())
-                .AfterMap((src, dest) => dest.BindUI(src));
+                .ForMember(dest => dest.Status, op => op.Ignore())
+                .AfterMap((src, dest) =>
+                {
+                    dest.BindUI(src);
+                });
 
             CreateProvMap<FloorDoorViewModel, FloorDoor>();
             CreateProvMap<FloorDoor, FloorDoorViewModel>()

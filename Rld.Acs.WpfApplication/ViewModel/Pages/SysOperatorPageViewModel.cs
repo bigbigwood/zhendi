@@ -27,6 +27,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public ObservableCollection<SysOperatorViewModel> SysOperatorViewModels { get; set; }
         public SysOperatorViewModel SelectedSysOperatorViewModel { get; set; }
 
+
         public SysOperatorPageViewModel()
         {
             AddCmd = new AuthCommand(Add);
@@ -44,9 +45,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 var viewModel = AutoMapper.Mapper.Map<SysOperatorViewModel>(new SysOperator());
                 Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.SysOperatorView_Open);
-                if (viewModel.NewCoreModel != null)
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
-                    viewModel = AutoMapper.Mapper.Map<SysOperatorViewModel>(viewModel.NewCoreModel);
+                    viewModel = AutoMapper.Mapper.Map<SysOperatorViewModel>(viewModel.ViewModelAttachment.CoreModel);
                     SysOperatorViewModels.Add(viewModel);
                 }
             }

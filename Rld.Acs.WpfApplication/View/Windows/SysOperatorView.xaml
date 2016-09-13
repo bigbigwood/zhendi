@@ -98,10 +98,7 @@
                 <ComboBoxItem Tag="2052" Content="{DynamicResource Language_Chinese}" IsSelected="True" />
                 <ComboBoxItem Tag="1033" Content="{DynamicResource Language_English}"  />
             </ComboBox>
-            
-
-            <CheckBox IsChecked="{Binding Status, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GeneralStatus.Enabled}}"
-                        Grid.Row="2" Grid.Column="2" Content="启用" HorizontalAlignment="Left"/>
+            <CheckBox Grid.Row="2" Grid.Column="2" Content="启用" HorizontalAlignment="Left" IsChecked="{Binding Status}"/>
 
             <PasswordBox Grid.Row="0" Grid.Column="5" IsEnabled="{Binding NewPasswordEnabled}" 
                Margin="2,1" models:PasswordBoxHelper.Password="{Binding Path=NewPassword1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">

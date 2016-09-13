@@ -131,7 +131,7 @@
                         </i:Interaction.Triggers>
                     </ComboBox>
 
-                    <CheckBox IsChecked="{Binding Status, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter={x:Static model:GeneralStatus.Enabled}}"
+                    <CheckBox IsChecked="{Binding Status}"
                         Grid.Row="5" Grid.Column="1" Content="启用"/>
                     <DatePicker Grid.Row="6" Grid.Column="1" SelectedDate ="{Binding StartDate}" />
                     <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate ="{Binding EndDate}" />

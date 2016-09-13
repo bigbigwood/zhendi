@@ -45,7 +45,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public GenderType Gender { get; set; }
         public String Phone { get; set; }
         public String Photo { get; set; }
-        public GeneralStatus Status { get; set; }
+        public Boolean Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
 
@@ -118,7 +118,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 UserType = userInfo.Type;
                 UserCode = userInfo.UserCode;
                 Name = userInfo.Name;
-                Status = userInfo.Status;
+                Status = userInfo.Status == GeneralStatus.Enabled;
                 StartDate = userInfo.StartDate;
                 EndDate = userInfo.EndDate;
                 Phone = userInfo.Phone;
@@ -290,7 +290,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             CurrentUser.Name = Name;
             CurrentUser.Gender = Gender;
             CurrentUser.Phone = Phone;
-            CurrentUser.Status = Status;
+            CurrentUser.Status = Status ? GeneralStatus.Enabled : GeneralStatus.Disabled ;
             CurrentUser.StartDate = StartDate;
             CurrentUser.EndDate = EndDate;
             CurrentUser.DepartmentID = DepartmentInfo.DepartmentID;

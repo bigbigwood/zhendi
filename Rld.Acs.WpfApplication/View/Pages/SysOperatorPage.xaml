@@ -62,7 +62,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="{DynamicResource SysOperatorPage_Label_Name}" Binding="{Binding LoginName}" Width="200" />
-                        <DataGridTextColumn Header="{DynamicResource SysOperatorPage_Label_Status}" Binding="{Binding Status}" Width="150"  />
+                        <DataGridTextColumn Header="{DynamicResource SysOperatorPage_Label_Status}" Binding="{Binding StatusInfo.ItemValue}" Width="150"  />
                         <DataGridTextColumn Header="{DynamicResource SysOperatorPage_Label_CreateUserID}" Binding="{Binding CreateUserID}" Width="150"  />
                         <DataGridTextColumn Header="{DynamicResource SysOperatorPage_Label_CreateDate}" Binding="{Binding CreateDate}" Width="*"  />
                     </DataGrid.Columns>
