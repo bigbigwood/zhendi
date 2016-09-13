@@ -27,5 +27,11 @@ namespace Rld.Acs.WpfApplication.View.Windows
 
             Messenger.Default.Register(this, Tokens.CloseUserView, new Action<NotificationMessage>(ProcessCloseViewMessage));
         }
+        public override void ProcessCloseViewMessage(NotificationMessage msg)
+        {
+            MessageBoxSingleton.Instance.ShowDialog("移动人员成功", "");
+
+            Close();
+        }
     }
 }

@@ -145,7 +145,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                 if (viewModel.ViewModelAttachment.LastOperationSuccess && viewModel.DepartmentInfo.DepartmentID == SelectedDepartmentId)
                 {
-                    UserViewModels.Add(viewModel);
+                    UserViewModels.Add(new UserViewModel(viewModel.ViewModelAttachment.CoreModel));
                     CurrentDepartmentUsers.Add(viewModel.ViewModelAttachment.CoreModel);
                 }
             }
@@ -176,7 +176,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
                     var index = UserViewModels.IndexOf(SelectedUserViewModel);
-                    UserViewModels[index] = viewModel;
+                    UserViewModels[index] = new UserViewModel(viewModel.ViewModelAttachment.CoreModel);
+
+                    var coreUser = CurrentDepartmentUsers.FirstOrDefault(x => x.UserID == coreModel.UserID);
+                    CurrentDepartmentUsers.Remove(coreUser);
+                    CurrentDepartmentUsers.Add(viewModel.ViewModelAttachment.CoreModel);
                 }
             }
             catch (Exception ex)
@@ -235,11 +239,33 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
+                var coreModel = _userRepo.GetByKey(SelectedUserViewModel.UserID);
+                var viewModel = new UserViewModel(coreModel);
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = SelectedUserViewModel,
+                    DataContext = viewModel,
                     WindowType = "MoveUserView",
                 }, Tokens.OpenUserView);
+
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    if (viewModel.DepartmentInfo.DepartmentID != SelectedDepartmentId)
+                    {
+                        UserViewModels.Remove(SelectedUserViewModel);
+
+                        var coreUser = CurrentDepartmentUsers.FirstOrDefault(x => x.UserID == coreModel.UserID);
+                        CurrentDepartmentUsers.Remove(coreUser);
+                    }
+                    else
+                    {
+                        var index = UserViewModels.IndexOf(SelectedUserViewModel);
+                        UserViewModels[index] = viewModel;
+
+                        var coreUser = CurrentDepartmentUsers.FirstOrDefault(x => x.UserID == coreModel.UserID);
+                        CurrentDepartmentUsers.Remove(coreUser);
+                        CurrentDepartmentUsers.Add(viewModel.ViewModelAttachment.CoreModel);
+                    }
+                }
             }
             catch (Exception ex)
             {
