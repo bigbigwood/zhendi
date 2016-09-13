@@ -109,12 +109,12 @@
                 </ListView>
             </Border>
 
-            <ComboBox Grid.Row="2" Grid.Column="1" Width="180" Margin="2,3" HorizontalAlignment="Left"
-                        ItemsSource="{Binding PermissionActionDict, Mode=OneWay}" 
+            <ComboBox Grid.Row="2" Grid.Column="1" Width="180" Margin="2,3" HorizontalAlignment="Left" 
+                        ItemsSource="{Binding PermissionActionDict, Mode=OneWay}" SelectedIndex="0"
                                SelectedValue="{Binding SelectedPermissionAction}" SelectedValuePath="ItemID" DisplayMemberPath="ItemValue" />
 
             <ComboBox Grid.Row="3" Grid.Column="1" Width="180" Margin="2,3" HorizontalAlignment="Left"
-                       ItemsSource="{Binding Timezones, Mode=OneWay}"  
+                       ItemsSource="{Binding Timezones, Mode=OneWay}" 
                        SelectedItem="{Binding SelectedTimezone}" SelectedValuePath="TimeZoneID" DisplayMemberPath="TimeZoneName" />
 
                 <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"  HorizontalAlignment="Center" Orientation="Horizontal">

@@ -64,7 +64,7 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<DeviceParameterValidator>().To<DeviceParameterValidator>();
             InjectionKernel.Bind<DoorValidator>().To<DoorValidator>();
             InjectionKernel.Bind<HeadReadingValidator>().To<HeadReadingValidator>();
-            InjectionKernel.Bind<DeviceRoleValidator>().To<DeviceRoleValidator>();
+            InjectionKernel.Bind<DeviceRoleViewModelValidator>().To<DeviceRoleViewModelValidator>();
             InjectionKernel.Bind<SysDictionaryValidator>().To<SysDictionaryValidator>();
             InjectionKernel.Bind<FloorValidator>().To<FloorValidator>();
         }

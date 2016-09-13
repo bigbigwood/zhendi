@@ -49,15 +49,17 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             try
             {
-                var deviceRoleViewModel = new DeviceRoleViewModel(new DeviceRole());
+                var viewModel = new DeviceRoleViewModel(new DeviceRole());
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = deviceRoleViewModel
+                    DataContext = viewModel
 
                 }, Tokens.OpenDeviceRoleView);
 
-                if (deviceRoleViewModel.CurrentDeviceRole.DeviceRoleID != 0)
-                    DeviceRoleViewModels.Add(deviceRoleViewModel);
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    DeviceRoleViewModels.Add(viewModel);
+                }
             }
             catch (Exception ex)
             {
@@ -75,12 +77,18 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
+                var viewModel = new DeviceRoleViewModel(SelectedDeviceRoleViewModel.CurrentDeviceRole);
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
-                    DataContext = SelectedDeviceRoleViewModel
+                    DataContext = viewModel
 
                 }, Tokens.OpenDeviceRoleView);
 
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    var index = DeviceRoleViewModels.IndexOf(SelectedDeviceRoleViewModel);
+                    DeviceRoleViewModels[index] = new DeviceRoleViewModel(viewModel.ViewModelAttachment.CoreModel);
+                }
             }
             catch (Exception ex)
             {

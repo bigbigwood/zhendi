@@ -45,6 +45,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public Int32 SelectedPermissionAction { get; set; }
         public DeviceRole CurrentDeviceRole { get; set; }
         public ObservableCollection<SelectableItem> DeviceDtos { get; set; }
+        public ViewModelAttachment<DeviceRole> ViewModelAttachment { get; set; }
         public String Name { get; set; }
         public String Title { get; set; }
         public String DeviceListString
@@ -65,6 +66,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
+            ViewModelAttachment = new ViewModelAttachment<DeviceRole>();
 
             var dtos = AuthorizationDevices.Select(x => new ListBoxItem
             {
@@ -85,6 +87,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     SelectedPermissionAction = (int)firstPermission.PermissionAction;
                 }
             }
+            else
+            {
+                SelectedTimezone = Timezones.FirstOrDefault();
+                SelectedPermissionAction = PermissionActionDict.FirstOrDefault().ItemID.Value;
+            }
             
             Title = (deviceRole.DeviceRoleID == 0) ? "新增设备角色" : "修改设备角色";
         }
@@ -94,24 +101,23 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
+                var validator = NinjectBinder.GetValidator<DeviceRoleViewModelValidator>();
+                var results = validator.Validate(this);
+                if (!results.IsValid)
+                {
+                    message = string.Join("\n", results.Errors);
+                    SendMessage(message);
+                    return;
+                }
+
                 CurrentDeviceRole.RoleName = Name;
-                CurrentDeviceRole.Status = GeneralStatus.Enabled;
                 CurrentDeviceRole.DeviceRolePermissions = GetDeviceRolePermissionFromUI();
 
                 if (CurrentDeviceRole.DeviceRoleID == 0)
                 {
+                    CurrentDeviceRole.Status = GeneralStatus.Enabled;
                     CurrentDeviceRole.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentDeviceRole.CreateDate = DateTime.Now;
-
-                    var validator = NinjectBinder.GetValidator<DeviceRoleValidator>();
-                    var results = validator.Validate(CurrentDeviceRole);
-                    if (!results.IsValid)
-                    {
-                        message = string.Join("\n", results.Errors);
-                        SendMessage(message);
-                        return;
-                    }
-
                     CurrentDeviceRole = _deviceRoleRepo.Insert(CurrentDeviceRole);
 
                     message = "增加设备权限成功!";
@@ -120,16 +126,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 {
                     CurrentDeviceRole.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentDeviceRole.UpdateDate = DateTime.Now;
-
-                    var validator = NinjectBinder.GetValidator<DeviceRoleValidator>();
-                    var results = validator.Validate(CurrentDeviceRole);
-                    if (!results.IsValid)
-                    {
-                        message = string.Join("\n", results.Errors);
-                        SendMessage(message);
-                        return;
-                    }
-
                     _deviceRoleRepo.Update(CurrentDeviceRole);
 
                     message = "修改设备权限成功!";
@@ -143,6 +139,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 return;
             }
 
+            ViewModelAttachment.CoreModel = CurrentDeviceRole;
+            ViewModelAttachment.LastOperationSuccess = true;
             RaisePropertyChanged(null);
             Close(message);
         }
