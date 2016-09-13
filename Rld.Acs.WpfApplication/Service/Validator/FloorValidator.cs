@@ -12,6 +12,9 @@ namespace Rld.Acs.WpfApplication.Service.Validator
             RuleFor(m => m.Name)
                 .NotEmpty().WithMessage("楼层名称不能为空")
                 .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("楼层名称不能有特殊字符");
+
+            RuleFor(m => m.Photo)
+                .NotEmpty().WithMessage("请上传楼层平面图");
         }
     }
 }

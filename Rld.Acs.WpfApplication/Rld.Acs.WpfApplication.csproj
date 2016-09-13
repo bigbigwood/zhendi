@@ -325,9 +325,6 @@
     <Compile Include="View\Windows\DeviceDoorView.xaml.cs">
       <DependentUpon>DeviceDoorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Windows\DeviceRolePermissionView.xaml.cs">
-      <DependentUpon>DeviceRolePermissionView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Windows\DeviceView.xaml.cs">
       <DependentUpon>DeviceView.xaml</DependentUpon>
     </Compile>
@@ -463,10 +460,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Windows\DeviceDoorView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Windows\DeviceRolePermissionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
