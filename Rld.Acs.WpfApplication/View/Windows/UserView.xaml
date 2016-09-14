@@ -12,7 +12,7 @@
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:UserViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="500" Width="600" Unloaded="MetroWindow_Unloaded">
+             Height="430" Width="600" Unloaded="MetroWindow_Unloaded">
 
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
@@ -71,8 +71,8 @@
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="10"/>
-                        <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -143,7 +143,7 @@
                         <Button Width="65" Content="上传" Margin="3, 0" Command="{Binding UploadImageCmd}" CommandParameter="{Binding ElementName=tb_AvatorfilePath, Path=Text}"></Button>
                     </StackPanel>
 
-                    <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Center" Orientation="Horizontal" >
                         <Button Content="下一页" Click="OnNextPageClicked" Margin="3,0"/>
                         <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
                     </StackPanel>
@@ -163,8 +163,8 @@
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="10"/>
-                        <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0*" />
@@ -230,7 +230,7 @@
                     <TextBox Grid.Row="8" Grid.Column="4" Grid.RowSpan="2" Text="{Binding Remark}" 
                              TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
 
-                    <StackPanel Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" Orientation="Horizontal" Margin="115,0" >
+                    <StackPanel Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" Orientation="Horizontal" Margin="115,0" >
                         <Button Content="下一页" Click="OnNextPageClicked" Margin="3,0"/>
                         <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
                     </StackPanel>
@@ -247,8 +247,8 @@
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="10"/>
-                        <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="30"/>
@@ -270,7 +270,7 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </GroupBox>
-                    <StackPanel Grid.Row="8" Grid.Column="1"  HorizontalAlignment="Center" Orientation="Horizontal">
+                    <StackPanel Grid.Row="9" Grid.Column="1"  HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0"/>
                         <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
                     </StackPanel>

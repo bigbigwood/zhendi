@@ -73,11 +73,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public SysDictionary GenderInfo
         {
-            get
-            {
-                return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender)
-                  .FirstOrDefault(x => x.ItemID == (int)Gender);
-            }
+            get{ return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.Gender).FirstOrDefault(x => x.ItemID == (int)Gender); }
         }
         public List<Department> AuthorizationDepartments
         {
@@ -97,7 +93,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public UserViewModel(User userInfo)
         {
-            ViewModelAttachment= new ViewModelAttachment<User>();
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
             UploadImageCmd = new RelayCommand<string>(UploadImage);
@@ -110,6 +105,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             StartDate = DateTime.Now;
             Birthday = DateTime.Now;
             UserType = UserType.Employee;
+            ViewModelAttachment = new ViewModelAttachment<User>();
             Avator = _userAvatorService.GetAvator(_userAvatorService.DefaultAvatorFileName);
             Title = IsAddMode ? "新增人员" : "修改人员";
 
@@ -266,7 +262,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         private List<UserDeviceRole> GetUserDeviceFromUI()
         {
             List<UserDeviceRole> result = new List<UserDeviceRole>();
-            var AuthorizationDeviceRoles = ApplicationManager.GetInstance().AuthorizationDeviceRoles;
             var selected = DeviceRoleListBoxSource.FindAll(x => x.IsSelected);
             foreach (var listBoxItem in selected)
             {
