@@ -26,37 +26,43 @@
             <DockPanel Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" >
                 <ToolBarTray HorizontalAlignment="Stretch" IsLocked="True" >
                     <ToolBar>
-                        <Button Name="AddBtn" Command="{Binding AddUserCmd}" CommandParameter="{x:Static a:ACL.E_AddStuff}" >
+                        <Button Command="{Binding AddUserCmd}" CommandParameter="{x:Static a:ACL.E_AddStuff}" >
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
                                 <TextBlock Text="{DynamicResource UserPage_AddBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="ModifyBtn" Command="{Binding ModifyUserCmd}" CommandParameter="{x:Static a:ACL.E_MdfStuff}" >
+                        <Button Command="{Binding ModifyUserCmd}" CommandParameter="{x:Static a:ACL.E_MdfStuff}" >
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
                                 <TextBlock Text="{DynamicResource UserPage_ModifyBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="DeleteBtn"  Command="{Binding DeleteUserCmd}" CommandParameter="{x:Static a:ACL.E_DelStuff}" >
+                        <Button Command="{Binding DeleteUserCmd}" CommandParameter="{x:Static a:ACL.E_DelStuff}" >
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
                                 <TextBlock Text="{DynamicResource UserPage_DeleteBtn}" />
                             </StackPanel>
                         </Button>
                         <Separator/>
-                        <Button Name="MoveBtn"  Command="{Binding MoveUserCmd}" CommandParameter="{x:Static a:ACL.E_MoveStuff}" >
+                        <Button Command="{Binding MoveUserCmd}" CommandParameter="{x:Static a:ACL.E_MoveStuff}" >
                             <StackPanel Orientation="Horizontal" >
-                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
                                 <TextBlock Text="{DynamicResource UserPage_MoveUserBtn}" />
                             </StackPanel>
                         </Button>
-                        <Separator/>
-                        <Button Name="SyncUserBtn"  Command="{Binding SyncUserCmd}" CommandParameter="{x:Static a:ACL.E_SyncStuff}" >
+                        <Button Command="{Binding UpdateUserAuthCmd}" CommandParameter="{x:Static a:ACL.E_UpdateUserAuth}" >
                             <StackPanel Orientation="Horizontal" >
-                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_DeleteBtn_img}" />
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
+                                <TextBlock Text="{DynamicResource UserPage_UserAuthenticationBtn}" />
+                            </StackPanel>
+                        </Button>
+                        <Separator/>
+                        <Button Command="{Binding SyncUserCmd}" CommandParameter="{x:Static a:ACL.E_SyncStuff}" >
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
                                 <TextBlock Text="{DynamicResource UserPage_SyncDataBtn}" />
                             </StackPanel>
                         </Button>

@@ -87,7 +87,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public ViewModelAttachment<User> ViewModelAttachment { get; set; }
         public virtual Department DepartmentInfo { get; set; }
-       
 
         public User CurrentUser { get; set; }
 

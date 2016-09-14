@@ -33,6 +33,7 @@
     <sys:String x:Key="UserPage_ModifyBtn">修改人员</sys:String>
     <sys:String x:Key="UserPage_DeleteBtn">删除人员</sys:String>
     <sys:String x:Key="UserPage_MoveUserBtn">移动人员</sys:String>
+	<sys:String x:Key="UserPage_UserAuthenticationBtn">更新凭证</sys:String>
     <sys:String x:Key="UserPage_SyncDataBtn">同步数据</sys:String>
     <sys:String x:Key="UserPage_Label_Avator">头像</sys:String>
     <sys:String x:Key="UserPage_Label_Name">姓名</sys:String>
@@ -40,6 +41,7 @@
     <sys:String x:Key="UserPage_Label_Position">职位</sys:String>
     <sys:String x:Key="UserPage_Label_UserCode">工号</sys:String>
     <sys:String x:Key="UserPage_Label_Phone">联系电话</sys:String>
+	<sys:String x:Key="UserView_Permission">设备角色</sys:String>
 
     <sys:String x:Key="DepartmentPage_Toolbar_AddBtn">增加部门</sys:String>
     <sys:String x:Key="DepartmentPage_Toolbar_ModifyBtn">修改部门</sys:String>

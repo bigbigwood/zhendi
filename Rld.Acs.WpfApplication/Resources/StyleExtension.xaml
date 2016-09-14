@@ -107,4 +107,37 @@
             </Setter.Value>
         </Setter>
     </Style>-->
+
+    <Style x:Key="GTextBlockStyle" TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Margin" Value="0,0,10,0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+    <Style x:Key="GTextBox" TargetType="TextBox" BasedOn="{StaticResource ResourceKey={x:Type TextBox}}" >
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Margin" Value="2,1" />
+    </Style>
+    <Style x:Key="GComboBox" TargetType="ComboBox" BasedOn="{StaticResource ResourceKey={x:Type ComboBox}}" >
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Margin" Value="2,1" />
+    </Style>
+    <Style x:Key="GDatePicker" TargetType="DatePicker" BasedOn="{StaticResource ResourceKey={x:Type DatePicker}}" >
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Margin" Value="2,1" />
+    </Style>
+    <Style x:Key="GButton" TargetType="Button" BasedOn="{StaticResource ResourceKey={x:Type Button}}" >
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Width" Value="75"/>
+    </Style>
+    <Style x:Key="GRadioButton" TargetType="RadioButton" BasedOn="{StaticResource ResourceKey={x:Type RadioButton}}" >
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Margin" Value="2,1" />
+    </Style>
+    <Style x:Key="GCheckBox" TargetType="CheckBox" BasedOn="{StaticResource ResourceKey={x:Type CheckBox}}" >
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Margin" Value="2,1" />
+        <Setter Property="Width" Value="120" />
+    </Style>
 </ResourceDictionary>

@@ -34,6 +34,7 @@ namespace Rld.Acs.WpfApplication.Service.Authorization
         public const string E_MdfStuff = "E_MdfStuff";
         public const string E_DelStuff = "E_DelStuff";
         public const string E_MoveStuff = "E_MoveStuff";
+        public const string E_UpdateUserAuth = "E_UpdateUserAuth";
         public const string E_SyncStuff = "E_SyncStuff";
         public const string E_AddDept = "E_AddDept";
         public const string E_MdfDept = "E_MdfDept";

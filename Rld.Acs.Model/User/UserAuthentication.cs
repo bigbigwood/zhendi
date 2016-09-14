@@ -10,7 +10,6 @@ namespace Rld.Acs.Model
         public virtual Int32 UserID { get; set; }
         public virtual Int32 DeviceID { get; set; }
         public virtual Int32 DeviceUserID { get; set; }
-        public virtual DeviceType DeviceType { get; set; }
         public virtual AuthenticationType AuthenticationType { get; set; }
         public virtual String AuthenticationData { get; set; }
         public virtual String Version { get; set; }

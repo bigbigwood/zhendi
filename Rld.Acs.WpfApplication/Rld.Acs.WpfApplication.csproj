@@ -200,6 +200,8 @@
     <Compile Include="ViewModel\Pages\DeviceTrafficLogPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
+    <Compile Include="ViewModel\Views\UserAuthenticationViewModel.cs" />
+    <Compile Include="ViewModel\Views\UserAuthMngtViewModel.cs" />
     <Compile Include="ViewModel\Views\SysOperationLogViewModel.cs" />
     <Compile Include="ViewModel\Views\FloorDoorViewModel.cs" />
     <Compile Include="ViewModel\Views\FloorViewModel.cs" />
@@ -304,6 +306,12 @@
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
     <Compile Include="Repository\NinjectBinder.cs" />
     <Compile Include="Service\UserAvatorService.cs" />
+    <Compile Include="View\Windows\FingerPrintCredentialView.xaml.cs">
+      <DependentUpon>FingerPrintCredentialView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\UserAuthenticationView.xaml.cs">
+      <DependentUpon>UserAuthenticationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\LisenceWindow.xaml.cs">
       <DependentUpon>LisenceWindow.xaml</DependentUpon>
     </Compile>
@@ -432,6 +440,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Pages\DeviceRolePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\FingerPrintCredentialView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\UserAuthenticationView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

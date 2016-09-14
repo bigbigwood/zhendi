@@ -257,7 +257,7 @@
                     </Grid.ColumnDefinitions>
                     <GroupBox Grid.Row="1" Grid.Column="1" Grid.RowSpan="6"
                             Style="{StaticResource DefaultGroupBoxStyle}" 
-                              Header="{StaticResource DepartmentDetail_Label_DepartmentOwnedDevices}">
+                              Header="{DynamicResource UserView_Permission}">
                         <ListBox ItemsSource="{Binding DeviceRoleListBoxSource}" >
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -275,7 +275,6 @@
                         <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
                     </StackPanel>
                 </Grid>
-
             </TabItem>
         </TabControl>
     </Grid>

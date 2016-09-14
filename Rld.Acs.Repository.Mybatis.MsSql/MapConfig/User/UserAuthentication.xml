@@ -11,7 +11,6 @@
       <result property="UserID" column="UserID"/>
       <result property="DeviceUserID" column="DeviceUserID"/>
       <result property="DeviceID" column="DeviceID"/>
-      <result property="DeviceType" column="DeviceType"/>
       <result property="AuthenticationType" column="AuthenticationType"/>
       <result property="AuthenticationData" column="AuthenticationData"/>
       <result property="Version" column="Version"/>
@@ -42,7 +41,6 @@
       [UserID]
       , [DeviceUserID]
       , [DeviceID]
-      , [DeviceType]
       , [AuthenticationType]
       , [AuthenticationData]
       , [Version]
@@ -57,7 +55,6 @@
       #UserID#
       , #DeviceUserID#
       , #DeviceID#
-      , #DeviceType#
       , #AuthenticationType#
       , #AuthenticationData#
       , #Version#
@@ -79,7 +76,6 @@
       [UserID] = #UserID#
       , [DeviceUserID] = #DeviceUserID#
       , [DeviceID] = #DeviceID#
-      , [DeviceType] = #DeviceType#
       , [AuthenticationType] = #AuthenticationType#
       , [AuthenticationData] = #AuthenticationData#
       , [Version] = #Version#

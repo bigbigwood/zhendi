@@ -12,6 +12,11 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string CloseSyncUserView = Guid.NewGuid().ToString();
         public static readonly string SyncUserView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string SyncUserView_ShowQuestion = Guid.NewGuid().ToString();
+        public static readonly string UserDeviceAuthView_Close = Guid.NewGuid().ToString();
+        public static readonly string UserDeviceAuthView_Open = Guid.NewGuid().ToString();
+        public static readonly string UserDeviceAuthView_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string UserAuthenticationView_Close = Guid.NewGuid().ToString();
+        public static readonly string UserAuthenticationView_Open = Guid.NewGuid().ToString();
 
         public static readonly string OpenDepartmentView = Guid.NewGuid().ToString();
         public static readonly string CloseDepartmentView = Guid.NewGuid().ToString();

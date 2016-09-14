@@ -721,7 +721,6 @@ create table SYS_USER_AUTHENTICATION (
    UserID               int                  not null,
    DeviceUserID         int                  not null,
    DeviceID             int                  not null,
-   DeviceType           int                  not null,
    AuthenticationType   int                  not null,
    AuthenticationData   nvarchar(1024)       not null,
    Version              nvarchar(50)         null,

@@ -30,6 +30,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public RelayCommand ModifyUserCmd { get; private set; }
         public RelayCommand DeleteUserCmd { get; private set; }
         public RelayCommand MoveUserCmd { get; private set; }
+        public RelayCommand UpdateUserAuthCmd { get; private set; }
         public RelayCommand SyncUserCmd { get; private set; }
         public RelayCommand FilterUserCmd { get; private set; }
         public RelayCommand<string> SearchUserCmd { get; private set; }
@@ -64,6 +65,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             ModifyUserCmd = new AuthCommand(ModifyUser);
             DeleteUserCmd = new AuthCommand(DeleteUser);
             MoveUserCmd = new AuthCommand(MoveUser);
+            UpdateUserAuthCmd = new AuthCommand(UpdateUserAuthentication);
             SyncUserCmd = new AuthCommand(SyncUser);
             FilterUserCmd = new RelayCommand(FilterUsers);
             SearchUserCmd = new RelayCommand<string>(SearchUser);
@@ -265,6 +267,40 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                         CurrentDepartmentUsers.Remove(coreUser);
                         CurrentDepartmentUsers.Add(viewModel.ViewModelAttachment.CoreModel);
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        private void UpdateUserAuthentication()
+        {
+            try
+            {
+                if (SelectedUserViewModel == null)
+                {
+                    Messenger.Default.Send(new NotificationMessage("请先选择人员!"), Tokens.UserPage_ShowNotification);
+                    return;
+                }
+
+                var coreModel = _userRepo.GetByKey(SelectedUserViewModel.UserID);
+                var viewModel = new UserAuthMngtViewModel(coreModel);
+                Messenger.Default.Send(new OpenWindowMessage()
+                {
+                    DataContext = viewModel,
+                    WindowType = "UserAuthenticationView",
+                }, Tokens.OpenUserView);
+
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    var index = UserViewModels.IndexOf(SelectedUserViewModel);
+                    UserViewModels[index] = new UserViewModel(viewModel.ViewModelAttachment.CoreModel);
+
+                    var coreUser = CurrentDepartmentUsers.FirstOrDefault(x => x.UserID == coreModel.UserID);
+                    CurrentDepartmentUsers.Remove(coreUser);
+                    CurrentDepartmentUsers.Add(viewModel.ViewModelAttachment.CoreModel);
                 }
             }
             catch (Exception ex)

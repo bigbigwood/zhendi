@@ -14,7 +14,6 @@ namespace Rld.Acs.Model
                 UserID = userAuthentication.UserID,
                 DeviceID = userAuthentication.DeviceID,
                 DeviceUserID = userAuthentication.DeviceUserID,
-                DeviceType = userAuthentication.DeviceType,
                 AuthenticationType = userAuthentication.AuthenticationType,
                 AuthenticationData = userAuthentication.AuthenticationData,
                 Version = userAuthentication.Version,
