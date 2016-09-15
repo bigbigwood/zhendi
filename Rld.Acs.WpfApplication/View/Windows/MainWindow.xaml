@@ -407,10 +407,11 @@
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </Border>
-                        </StackPanel>
+                        </StackPanel> 
                         <!--后台服务:折叠节点-->
                         <StackPanel x:Name="suppor_control" Style="{StaticResource stack_tree_open}">
-                            <MenuItem x:Name="suppor_sjtb" FontSize="12" Width="180"  Header="数据同步" 
+                            <MenuItem x:Name="suppor_sjtb" FontSize="12" Width="180"  Header="数据同步" IsCheckable="False" 
+                                       Command="{Binding NatigatePageCmd}" CommandParameter="DataSyncPage"
                                          IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_DataSynchorization}}">
                                 <MenuItem.Icon >
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/数据同步.png"/>

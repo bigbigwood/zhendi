@@ -1,0 +1,60 @@
+﻿<pages:BasePage x:Class="Rld.Acs.WpfApplication.View.Pages.DataSyncPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:converter1="clr-namespace:Rld.Acs.WpfApplication.View.Converter"
+      xmlns:pages="clr-namespace:Rld.Acs.WpfApplication.View.Pages"
+      xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:views="clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
+      DataContext="{Binding DataSyncPage, Source={StaticResource Locator}}"
+      mc:Ignorable="d"  d:DesignHeight="400" d:DesignWidth="600" Unloaded="Page_Unloaded">
+    <Border Style="{StaticResource ContainerBorderStyle}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="0" >
+                <DataGrid ItemsSource="{Binding DataSyncConfigViewModels}" SelectedItem="{Binding SelectedDataSyncConfigViewModel}" 
+                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True" 
+                          LoadingRow ="DataGrid_LoadingRow" UnloadingRow="DataGrid_UnloadingRow" >
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center">
+                            </Setter>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn IsReadOnly="True">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGridRow}}, Path=Header}"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="启用" Width="80">
+                            <DataGridTemplateColumn.CellTemplate >
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected}" HorizontalAlignment="Center" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="{DynamicResource DataSyncView_Label_TriggerTime}" Width="250" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <xctk:TimePicker Margin="2,3" Format="LongTime" Value="{Binding Value}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Button Grid.Row="1" Width="80" Content="保存" Style="{StaticResource GButton}" Command="{Binding SaveCmd}"></Button>
+        </Grid>
+    </Border>
+</pages:BasePage>

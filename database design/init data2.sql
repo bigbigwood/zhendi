@@ -330,6 +330,9 @@ INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_Subject', N'设备告警服�
 INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_Body', N'重要事情说三遍！发现设备告警记录！发现设备告警记录！发现设备告警记录！', N'', N'1.0')
 INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobSms_Body', N'重要事情说三遍！发现设备告警记录！发现设备告警记录！发现设备告警记录！', N'', N'1.0')
 
+INSERT dbo.SYS_CONFIG VALUES (N'DataSyncConfig', N'00:00:00', N'', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DataSyncConfig', N'12:00:00', N'', N'1.0')
+
 --楼层
 INSERT dbo.FLOOR VALUES ('一楼', '840f3515-34f1-45fc-b49b-7c8c1fb1a258_20160903034944.jpg', 1)
 INSERT dbo.FLOOR VALUES ('二楼', '840f3515-34f1-45fc-b49b-7c8c1fb1a258_20160903034944.jpg', 1)

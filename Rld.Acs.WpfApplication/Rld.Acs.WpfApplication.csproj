@@ -134,6 +134,24 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.9\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -156,6 +174,7 @@
     <Compile Include="Repository\System\SysModuleRepository.cs" />
     <Compile Include="Repository\System\SysOperatorRepository.cs" />
     <Compile Include="Repository\System\SysRoleRepository.cs" />
+    <Compile Include="Repository\System\SysConfigRepository.cs" />
     <Compile Include="Service\ApplicationEnvironment.cs" />
     <Compile Include="Service\Authorization\ACL.cs" />
     <Compile Include="Service\Authorization\AuthProvider.cs" />
@@ -188,6 +207,7 @@
     <Compile Include="Service\Validator\FloorValidator.cs" />
     <Compile Include="Service\Validator\SysOperatorValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
+    <Compile Include="ViewModel\Pages\DataSyncPageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelAttachment.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
     <Compile Include="ViewModel\Pages\SysOperationLogPageViewModel.cs" />
@@ -200,6 +220,7 @@
     <Compile Include="ViewModel\Pages\DeviceTrafficLogPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
+    <Compile Include="ViewModel\Views\DataSyncConfigViewModel.cs" />
     <Compile Include="ViewModel\Views\UserAuthenticationViewModel.cs" />
     <Compile Include="ViewModel\Views\UserAuthMngtViewModel.cs" />
     <Compile Include="ViewModel\Views\SysOperationLogViewModel.cs" />
@@ -275,6 +296,9 @@
     <Compile Include="View\Pages\DeviceRolePage.xaml.cs">
       <DependentUpon>DeviceRolePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Pages\DataSyncPage.xaml.cs">
+      <DependentUpon>DataSyncPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Windows\BaseWindow.cs" />
     <Compile Include="View\Pages\DepartmentPage.xaml.cs">
       <DependentUpon>DepartmentPage.xaml</DependentUpon>
@@ -308,6 +332,9 @@
     <Compile Include="Service\UserAvatorService.cs" />
     <Compile Include="View\Windows\FingerPrintCredentialView.xaml.cs">
       <DependentUpon>FingerPrintCredentialView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\DataSyncConfigView.xaml.cs">
+      <DependentUpon>DataSyncConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\UserAuthenticationView.xaml.cs">
       <DependentUpon>UserAuthenticationView.xaml</DependentUpon>
@@ -443,7 +470,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Pages\DataSyncPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Windows\FingerPrintCredentialView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\DataSyncConfigView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

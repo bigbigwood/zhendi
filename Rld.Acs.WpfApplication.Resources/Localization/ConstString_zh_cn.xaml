@@ -156,5 +156,11 @@
 	<sys:String x:Key="FloorPage_Label_Description">关联的门</sys:String>
 	
 	<sys:String x:Key="FloorMonitorPage_Label_IntervalSeconds">运行间隔时间(秒)</sys:String>
+	
+	<sys:String x:Key="DataSyncPage_AddBtn">增加同步时间</sys:String>
+    <sys:String x:Key="DataSyncPage_ModifyBtn">修改同步时间</sys:String>
+    <sys:String x:Key="DataSyncPage_DeleteBtn">删除同步时间</sys:String>
+    <sys:String x:Key="DataSyncView_Label_Name">配置名称</sys:String>
+	<sys:String x:Key="DataSyncView_Label_TriggerTime">同步时间</sys:String>
 
 </ResourceDictionary>

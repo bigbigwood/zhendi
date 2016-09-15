@@ -52,6 +52,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Register<SysOperationLogPageViewModel>();
             SimpleIoc.Default.Register<FloorPageViewModel>();
             SimpleIoc.Default.Register<FloorMonitorPageViewModel>();
+            SimpleIoc.Default.Register<DataSyncPageViewModel>();
 
             SetupNavigation();
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -86,6 +87,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             navigationService.Configure("FloorPage", new Uri("../Pages/FloorPage.xaml", UriKind.Relative));
             navigationService.Configure("FloorMonitorPage", new Uri("../Pages/FloorMonitorPage.xaml", UriKind.Relative));
             navigationService.Configure("SysOperationLogPage", new Uri("../Pages/SysOperationLogPage.xaml", UriKind.Relative));
+            navigationService.Configure("DataSyncPage", new Uri("../Pages/DataSyncPage.xaml", UriKind.Relative));
             
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
@@ -159,6 +161,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public FloorMonitorPageViewModel FloorMonitorPage
         {
             get { return ServiceLocator.Current.GetInstance<FloorMonitorPageViewModel>(); }
+        }
+        public DataSyncPageViewModel DataSyncPage
+        {
+            get { return ServiceLocator.Current.GetInstance<DataSyncPageViewModel>(); }
         }
         
 

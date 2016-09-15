@@ -47,6 +47,7 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<ISysModuleElementRepository>().To<SysModuleElementRepository>();
             InjectionKernel.Bind<ISysOperatorRepository>().To<SysOperatorRepository>();
             InjectionKernel.Bind<ISysOperationLogRepository>().To<SysOperationLogRepository>();
+            InjectionKernel.Bind<ISysConfigRepository>().To<SysConfigRepository>();
 
             InjectionKernel.Bind<IFloorRepository>().To<FloorRepository>();
             InjectionKernel.Bind<IFloorDoorRepository>().To<FloorDoorRepository>();
