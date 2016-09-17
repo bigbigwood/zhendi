@@ -79,6 +79,7 @@
     <sys:String x:Key="DevicePage_AddBtn">增加设备</sys:String>
     <sys:String x:Key="DevicePage_ModifyBtn">修改设备</sys:String>
     <sys:String x:Key="DevicePage_DeleteBtn">删除设备</sys:String>
+	<sys:String x:Key="DevicePage_SearchBtn">搜索设备</sys:String>
     <sys:String x:Key="DevicePage_Label_Name">设备名称</sys:String>
     <sys:String x:Key="DevicePage_Label_Code">设备编号</sys:String>
     <sys:String x:Key="DevicePage_Label_Doors">关联的门</sys:String>

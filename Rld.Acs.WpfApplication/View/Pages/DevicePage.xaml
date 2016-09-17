@@ -44,6 +44,12 @@
                                 <TextBlock Text="{DynamicResource DevicePage_DeleteBtn}" />
                             </StackPanel>
                         </Button>
+                        <Button Command="{Binding DeleteCmd}" CommandParameter="{x:Static a:ACL.E_SearchDevice}">
+                            <StackPanel Orientation="Horizontal" >
+                                <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_AddBtn_img}" />
+                                <TextBlock Text="{DynamicResource DevicePage_SearchBtn}" />
+                            </StackPanel>
+                        </Button>
                         <Separator/>
                     </ToolBar>
                 </ToolBarTray>

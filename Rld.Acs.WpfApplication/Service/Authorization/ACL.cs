@@ -43,6 +43,7 @@ namespace Rld.Acs.WpfApplication.Service.Authorization
         public const string E_AddDevice = "E_AddDevice";
         public const string E_MdfDevice = "E_MdfDevice";
         public const string E_DelDevice = "E_DelDevice";
+        public const string E_SearchDevice = "E_SearchDevice";
         public const string E_AddFloor = "E_AddFloor";
         public const string E_MdfFloor = "E_MdfFloor";
         public const string E_DelFloor = "E_DelFloor";

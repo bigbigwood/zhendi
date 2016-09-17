@@ -64,7 +64,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 {
                     tbInfo.Text = "您的许可证已经到期，请联系您的软件供应商获取新的许可证。";
                     btnTrial.IsEnabled = false;
-                    btnActivateLater.IsEnabled = false;
+                    //btnActivateLater.IsEnabled = false;
                 }
 
                 int days = (lisence.ExpireDateTime - DateTime.Now).Days;
