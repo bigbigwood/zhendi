@@ -39,16 +39,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public String Title { get; set; }
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-
-        public ObservableCollection<TriStateTreeViewNode> TreeViewSource
-        {
-            get { return BuildTreeViewSource(); }
-        }
+        public ObservableCollection<TriStateTreeViewNode> TreeViewSource { get; set; }
+        public ViewModelAttachment<SysRole> ViewModelAttachment { get; set; }
 
         public SysRoleViewModel()
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
+            ViewModelAttachment = new ViewModelAttachment<SysRole>();
+            TreeViewSource = BuildTreeViewSource();
         }
 
         private void Save()
@@ -82,6 +81,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     _sysRoleRepo.Update(coreModel);
                     message = "修改成功!";
                 }
+
+                ViewModelAttachment.CoreModel = coreModel;
+                ViewModelAttachment.LastOperationSuccess = true;
             }
             catch (Exception ex)
             {

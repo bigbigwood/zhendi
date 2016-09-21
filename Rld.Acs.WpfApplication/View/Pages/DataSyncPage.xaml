@@ -54,7 +54,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-            <Button Grid.Row="1" Width="80" Content="保存" Style="{StaticResource GButton}" Command="{Binding SaveCmd}"></Button>
+            <Button Grid.Row="1" Width="80" Content="保存" Style="{StaticResource GButton}" Command="{Binding SaveCmd}" CommandParameter="{x:Static a:ACL.E_SaveDataSyncConfig}" />
         </Grid>
     </Border>
 </pages:BasePage>

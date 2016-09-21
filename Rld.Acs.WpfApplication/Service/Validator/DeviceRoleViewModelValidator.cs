@@ -13,8 +13,8 @@ namespace Rld.Acs.WpfApplication.Service.Validator
         public DeviceRoleViewModelValidator()
         {
             RuleFor(m => m.Name)
-                .NotEmpty().WithMessage("设备名称不能为空")
-                .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("设备名称不能有特殊字符");
+                .NotEmpty().WithMessage("设备角色名称不能为空")
+                .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("设备角色名称不能有特殊字符");
 
             RuleFor(m => m.DeviceDtos)
                 .Must(m => m.Any(x => x.IsSelected)).WithMessage("必须至少关联一台设备");

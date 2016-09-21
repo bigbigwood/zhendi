@@ -76,9 +76,8 @@
                     </ToolBar>
                 </ToolBarTray>
                 <TextBlock Grid.Column="1" Text="类型:" Margin="5,0"/>
-                <ComboBox Grid.Column="2" 
-                        ItemsSource="{Binding TypeHeadersDict, Mode=OneWay}" 
-                               SelectedValue="{Binding SelectedTypeHeader}" SelectedValuePath="ItemID" DisplayMemberPath="ItemValue" />
+                <ComboBox Grid.Column="2" ItemsSource="{Binding TypeHeadersDict}" 
+                           SelectedItem="{Binding SelectedTypeHeader}" SelectedValuePath="ItemID" DisplayMemberPath="ItemValue" />
                 <TextBlock Grid.Column="3" Text="关键字:" Margin="5,0"/>
                 <TextBox  Grid.Column="4" Text="{Binding Keyword}" />
 

@@ -120,7 +120,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentDeviceRole.CreateDate = DateTime.Now;
                     CurrentDeviceRole = _deviceRoleRepo.Insert(CurrentDeviceRole);
 
-                    message = "增加设备权限成功!";
+                    message = "增加设备角色成功!";
                 }
                 else
                 {
@@ -128,13 +128,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentDeviceRole.UpdateDate = DateTime.Now;
                     _deviceRoleRepo.Update(CurrentDeviceRole);
 
-                    message = "修改设备权限成功!";
+                    message = "修改设备角色成功!";
                 }
             }
             catch (Exception ex)
             {
-                Log.Error("Update device fails.", ex);
-                message = "保存设备权限失败";
+                Log.Error("Update device role fails.", ex);
+                message = "保存设备角色失败";
                 SendMessage(message);
                 return;
             }

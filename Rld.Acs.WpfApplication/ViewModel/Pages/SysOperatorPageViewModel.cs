@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -35,7 +36,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             DeleteCmd = new AuthCommand(ShowDeletionQuestion);
 
             var operators = _sysOperatorRepo.Query(new Hashtable());
-            var vms = operators.Select(AutoMapper.Mapper.Map<SysOperatorViewModel>);
+            var vms = operators.Select(Mapper.Map<SysOperatorViewModel>);
             SysOperatorViewModels = new ObservableCollection<SysOperatorViewModel>(vms);
         }
 
@@ -43,11 +44,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             try
             {
-                var viewModel = AutoMapper.Mapper.Map<SysOperatorViewModel>(new SysOperator());
+                var viewModel = Mapper.Map<SysOperatorViewModel>(new SysOperator());
                 Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.SysOperatorView_Open);
                 if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
-                    viewModel = AutoMapper.Mapper.Map<SysOperatorViewModel>(viewModel.ViewModelAttachment.CoreModel);
+                    viewModel = Mapper.Map<SysOperatorViewModel>(viewModel.ViewModelAttachment.CoreModel);
                     SysOperatorViewModels.Add(viewModel);
                 }
             }
@@ -67,10 +68,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
-                SelectedSysOperatorViewModel.NewPasswordEnabled = false;
-                //SelectedSysOperatorViewModel.NewPassword1 = ""; 
-                //SelectedSysOperatorViewModel.NewPassword2 = ""; // 会导致界面输入的值没办法在viewmodel获取到
-                Messenger.Default.Send(new OpenWindowMessage() { DataContext = SelectedSysOperatorViewModel }, Tokens.SysOperatorView_Open);
+                var coreModel = Mapper.Map<SysOperator>(SelectedSysOperatorViewModel);
+                var viewModel = Mapper.Map<SysOperatorViewModel>(coreModel);
+
+                //SelectedSysOperatorViewModel.NewPasswordEnabled = false;
+                ////SelectedSysOperatorViewModel.NewPassword1 = ""; 
+                ////SelectedSysOperatorViewModel.NewPassword2 = ""; // 会导致界面输入的值没办法在viewmodel获取到
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.SysOperatorView_Open);
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
+                {
+                    var index = SysOperatorViewModels.IndexOf(SelectedSysOperatorViewModel);
+                    SysOperatorViewModels[index] = viewModel;
+                }
             }
             catch (Exception ex)
             {

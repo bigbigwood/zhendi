@@ -77,5 +77,6 @@ namespace Rld.Acs.WpfApplication.Service.Authorization
         public const string E_DelSysRole = "E_DelSysRole";
         public const string E_RunMonitor = "E_RunMonitor";
         public const string E_PauseMonitor = "E_PauseMonitor";
+        public const string E_SaveDataSyncConfig = "E_SaveDataSyncConfig";
     }
 }

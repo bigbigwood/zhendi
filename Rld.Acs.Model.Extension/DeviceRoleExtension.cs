@@ -29,7 +29,7 @@ namespace Rld.Acs.Model.Extension
             if (timeZones == null || timeZones.Count == 0) 
                 return string.Empty;
 
-            var permissions = deviceRole.DeviceRolePermissions.Where(x => timeZones.Select(d => d.TimeZoneID).Contains(x.DeviceID));
+            var permissions = deviceRole.DeviceRolePermissions.Where(x => timeZones.Select(d => d.TimeZoneID).Contains(x.AllowedAccessTimeZoneID));
             var timezoneNames = permissions.Select(x => timeZones.First(d => d.TimeZoneID == x.AllowedAccessTimeZoneID).TimeZoneName).Distinct();
             return string.Join(", ", timezoneNames);
         }

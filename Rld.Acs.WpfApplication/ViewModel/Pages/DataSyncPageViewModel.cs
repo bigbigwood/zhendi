@@ -32,7 +32,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         public DataSyncPageViewModel()
         {
-            SaveCmd = new RelayCommand(SaveSysConfigs);
+            SaveCmd = new AuthCommand(SaveSysConfigs);
             DataSyncConfigViewModels = new ObservableCollection<DataSyncConfigViewModel>(InitDataSyncConfigs());
         }
 

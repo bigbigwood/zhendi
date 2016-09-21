@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -31,7 +32,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             get
             {
                 var operators = _floorRepo.Query(new Hashtable());
-                var vms = operators.Select(AutoMapper.Mapper.Map<FloorViewModel>);
+                var vms = operators.Select(Mapper.Map<FloorViewModel>);
                 var viewmodels = new ObservableCollection<FloorViewModel>(vms);
 
                 viewmodels.ForEach(x =>

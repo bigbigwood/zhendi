@@ -27,8 +27,11 @@ namespace Rld.Acs.WpfApplication.View.Windows
             string username = userName.Text;
             string password = passWord.Password;
 
-            username = "admin";
-            password = "admin";
+            if (string.IsNullOrWhiteSpace(username) && string.IsNullOrWhiteSpace(password))
+            {
+                username = "admin";
+                password = "admin";
+            }
 
             ChangeButtonStatues(false);
             new Task(() => LoginInBackgroud(username, password)).Start();

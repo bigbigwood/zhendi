@@ -108,6 +108,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.Title, op => op.Ignore())
                 .ForMember(dest => dest.AuthorizationModuleString, op => op.MapFrom(src => src.GetModuleString()))
+                .ForMember(dest => dest.ViewModelAttachment, op => op.Ignore())
                 .ForMember(dest => dest.TreeViewSource, op => op.Ignore())
                 .AfterMap((src, dest) => dest.BindPermissionsToTreeView(src.SysRolePermissions));
 

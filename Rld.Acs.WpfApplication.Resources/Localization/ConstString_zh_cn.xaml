@@ -88,7 +88,7 @@
 	<sys:String x:Key="DeviceRolePage_AddBtn">增加设备角色</sys:String>
     <sys:String x:Key="DeviceRolePage_ModifyBtn">修改设备角色</sys:String>
     <sys:String x:Key="DeviceRolePage_DeleteBtn">删除设备角色</sys:String>
-    <sys:String x:Key="DeviceRolePage_Label_Name">设备名称</sys:String>
+    <sys:String x:Key="DeviceRolePage_Label_Name">设备角色名称</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_Code">设备编号</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_Device">关联设备</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_DevicePermission">关联设备权限</sys:String>

@@ -136,7 +136,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     Log.Error(ex);
                     message = "删除设备失败！";
                 }
-                Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowQuestion);
+                Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
             });
         }
     }

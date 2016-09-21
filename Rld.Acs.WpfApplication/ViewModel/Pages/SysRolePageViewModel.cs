@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -32,7 +33,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             ModifyCmd = new AuthCommand(Modify);
             DeleteCmd = new AuthCommand(ShowDeletionQuestion);
 
-            var vms = SysPermissionProvider.GetInstance().AllSysRoles.Select(AutoMapper.Mapper.Map<SysRoleViewModel>);
+            var vms = SysPermissionProvider.GetInstance().AllSysRoles.Select(Mapper.Map<SysRoleViewModel>);
             SysRoleViewModels = new ObservableCollection<SysRoleViewModel>(vms);
         }
 
@@ -40,17 +41,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             try
             {
-                var viewModel = AutoMapper.Mapper.Map<SysRoleViewModel>(new SysRole());
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = viewModel
-
-                }, Tokens.SysRoleView_Open);
-
-                if (viewModel.RoleID != 0)
+                var viewModel = Mapper.Map<SysRoleViewModel>(new SysRole());
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.SysRoleView_Open);
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
                     var coreModel = _sysRoleRepo.GetByKey(viewModel.RoleID);
-                    viewModel = AutoMapper.Mapper.Map<SysRoleViewModel>(coreModel);
+                    viewModel = Mapper.Map<SysRoleViewModel>(coreModel);
                     SysRoleViewModels.Add(viewModel);
                 }
             }
@@ -70,12 +66,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
-                Messenger.Default.Send(new OpenWindowMessage()
+                var coreModel = Mapper.Map<SysRole>(SelectedSysRoleViewModel);
+                var viewModel = Mapper.Map<SysRoleViewModel>(coreModel);
+                Messenger.Default.Send(new OpenWindowMessage(){ DataContext = viewModel }, Tokens.SysRoleView_Open);
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
-                    DataContext = SelectedSysRoleViewModel
-
-                }, Tokens.SysRoleView_Open);
-
+                    var index = SysRoleViewModels.IndexOf(SelectedSysRoleViewModel);
+                    SysRoleViewModels[index] = viewModel;
+                }
             }
             catch (Exception ex)
             {

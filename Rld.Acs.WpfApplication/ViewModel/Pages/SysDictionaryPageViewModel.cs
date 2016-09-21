@@ -29,7 +29,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public String Keyword { get; set; }
         public SysDictionaryViewModel SelectedSysDictionaryViewModel { get; set; }
         public ObservableCollection<SysDictionaryViewModel> SysDictionaryViewModels { get; set; }
-        public Int32 SelectedTypeHeader { get; set; }
+
+        public SysDictionary SelectedTypeHeader { get; set; }
 
         public List<SysDictionary> TypeHeadersDict
         {
@@ -197,7 +198,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             DeleteCmd = new AuthCommand(DeleteItem);
 
             SysDictionaryViewModels = new ObservableCollection<SysDictionaryViewModel>();
-            SelectedTypeHeader = -1;
+            SelectedTypeHeader = TypeHeadersDict.First();
         }
 
 
@@ -312,8 +313,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             if (!string.IsNullOrWhiteSpace(Keyword))
                 conditions.Add("Keyword", Keyword);
 
-            if (SelectedTypeHeader != -1)
-                conditions.Add("TypeID", SelectedTypeHeader);
+            if (SelectedTypeHeader != null && SelectedTypeHeader.ItemID != -1)
+                conditions.Add("TypeID", SelectedTypeHeader.ItemID);
 
             return conditions;
         }
