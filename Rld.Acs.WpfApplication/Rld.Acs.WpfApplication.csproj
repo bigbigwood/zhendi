@@ -211,6 +211,7 @@
     <Compile Include="Service\Validator\DeviceValidator.cs" />
     <Compile Include="Service\Validator\FloorValidator.cs" />
     <Compile Include="Service\Validator\SysOperatorValidator.cs" />
+    <Compile Include="Service\Validator\SyncUserViewModelValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Pages\DataSyncPageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelAttachment.cs" />

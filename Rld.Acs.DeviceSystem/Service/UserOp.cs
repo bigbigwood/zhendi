@@ -161,6 +161,11 @@ namespace Rld.Acs.DeviceSystem.Service
             Log.DebugFormat("Request: {0}", rawRequest);
             var rawResponse = operation.Execute(rawRequest);
             Log.DebugFormat("Response: {0}", rawResponse);
+            if (string.IsNullOrWhiteSpace(rawResponse))
+            {
+                throw new Exception(string.Format("Getting user id:[{0}], device user id:[{1}] from device id:[{2}]. Response is empty, maybe the device is not register to device system.",
+                    user.UserID, deviceUserId, deviceID));
+            }
 
             var response = DataContractSerializationHelper.Deserialize<GetUserInfoResponse>(rawResponse);
             Log.InfoFormat("Getting user id:[{0}], device user id:[{1}] from device id:[{2}], result:[{3}]", user.UserID, deviceUserId, deviceID, response.ResultType);
@@ -171,10 +176,10 @@ namespace Rld.Acs.DeviceSystem.Service
             }
 
             var deviceUser = response.UserInfo;
-            //user.Name = deviceUser.UserName;
+            user.Name = deviceUser.UserName;
             //user.Status = deviceUser.UserStatus == true ? GeneralStatus.Enabled : GeneralStatus.Disabled;
-            //user.DepartmentID = deviceUser.DepartmentId ?? 0;
-            //user.Remark = deviceUser.Comment;
+            user.DepartmentID = deviceUser.DepartmentId ?? 0;
+            user.Remark = deviceUser.Comment;
 
             //Role
             //deviceUser.Role = (Rld.DeviceSystem.Contract.Model.UserRole)userDevicePermission.PermissionAction.GetHashCode();

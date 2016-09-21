@@ -89,6 +89,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         private void Save()
         {
+            var validator = NinjectBinder.GetValidator<SyncUserViewModelValidator>();
+            var results = validator.Validate(this);
+            if (!results.IsValid)
+            {
+                var message = string.Join("\n", results.Errors);
+                SendMessage(message);
+                return;
+            }
+
             string question = "确定同步数据吗？";
             Messenger.Default.Send(new NotificationMessageAction(this, question, SyncData), Tokens.SyncUserView_ShowQuestion);
         }
@@ -120,6 +129,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                         {
                             resultTypes = new DSProxy.DeviceServiceClient().SyncDeviceUsers(devices.ToArray(), users.ToArray(),out messages);
                         }
+
+                        if (resultTypes != DSProxy.ResultTypes.Ok)
+                        {
+                            throw new Exception(resultTypes.ToString());
+                        }
+
                         message = "同步数据成功！";
                     }
                     catch (Exception ex)

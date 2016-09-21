@@ -68,6 +68,8 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<DeviceRoleViewModelValidator>().To<DeviceRoleViewModelValidator>();
             InjectionKernel.Bind<SysDictionaryValidator>().To<SysDictionaryValidator>();
             InjectionKernel.Bind<FloorValidator>().To<FloorValidator>();
+
+            InjectionKernel.Bind<SyncUserViewModelValidator>().To<SyncUserViewModelValidator>();
         }
 
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()
