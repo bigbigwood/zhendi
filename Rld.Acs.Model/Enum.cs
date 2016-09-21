@@ -31,6 +31,7 @@ namespace Rld.Acs.Model
 
     public enum UserType
     {
+        Unknown = 0,
         Employee = 1,
         Visitor = 2,
     }

@@ -117,6 +117,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -175,6 +176,11 @@
     <Compile Include="Repository\System\SysOperatorRepository.cs" />
     <Compile Include="Repository\System\SysRoleRepository.cs" />
     <Compile Include="Repository\System\SysConfigRepository.cs" />
+    <Compile Include="Service References\DeviceProxy\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service\ApplicationEnvironment.cs" />
     <Compile Include="Service\Authorization\ACL.cs" />
     <Compile Include="Service\Authorization\AuthProvider.cs" />
@@ -189,7 +195,6 @@
     <Compile Include="Service\Lisence\SimpleLicenseProvider.cs" />
     <Compile Include="Service\Lisence\SnProvider.cs" />
     <Compile Include="Service\PasswordService.cs" />
-    <Compile Include="Service\Proxy\DeviceServiceProxy.cs" />
     <Compile Include="Service\FloorDoorManager.cs" />
     <Compile Include="Service\SysPermissionProvider.cs" />
     <Compile Include="Service\Proxy\SecurityServiceProxy.cs" />
@@ -657,6 +662,53 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\DeviceProxy\DeviceService.wsdl" />
+    <None Include="Service References\DeviceProxy\DeviceService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DeviceProxy\DeviceService1.wsdl" />
+    <None Include="Service References\DeviceProxy\DeviceService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DeviceProxy\DeviceService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DeviceProxy\DeviceService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.ResultTypes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rld.Acs.Model.Extension\Rld.Acs.Model.Extension.csproj">
@@ -761,6 +813,13 @@
     <Resource Include="Images\Logo.PNG" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\DeviceProxy\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\DeviceProxy\configuration.svcinfo" />
+    <None Include="Service References\DeviceProxy\configuration91.svcinfo" />
+    <None Include="Service References\DeviceProxy\DeviceService.disco" />
     <Resource Include="Images\welcome.jpg" />
     <Resource Include="Images\device\door.png" />
     <Resource Include="Images\device\Monitor.png" />
@@ -785,6 +844,12 @@
     <Resource Include="Images\avator.jpg" />
     <Resource Include="Images\add_time.png" />
     <Resource Include="Images\edit_time.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DeviceProxy\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />

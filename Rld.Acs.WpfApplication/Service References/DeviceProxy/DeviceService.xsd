@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:11727/DeviceService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfDeviceController">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceController" nillable="true" type="tns:DeviceController" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeviceController" nillable="true" type="tns:ArrayOfDeviceController" />
+  <xs:complexType name="DeviceController">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BaudRate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CommunicationType" type="xs:int" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateUserID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeviceControllerParameter" nillable="true" type="tns:DeviceControllerParameter" />
+      <xs:element minOccurs="0" name="DeviceDoors" nillable="true" type="tns:ArrayOfDeviceDoor" />
+      <xs:element minOccurs="0" name="DeviceHeadReadings" nillable="true" type="tns:ArrayOfDeviceHeadReading" />
+      <xs:element minOccurs="0" name="DeviceID" type="xs:int" />
+      <xs:element minOccurs="0" name="IP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Mac" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Port" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Protocol" type="xs:int" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SerialPort" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServerURL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:GeneralStatus" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateUserID" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeviceController" nillable="true" type="tns:DeviceController" />
+  <xs:complexType name="DeviceControllerParameter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AntiPassbackEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="AuthticationType" type="xs:int" />
+      <xs:element minOccurs="0" name="DeviceParameterID" type="xs:int" />
+      <xs:element minOccurs="0" name="DoorLinkageEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DuressAlarm" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DuressEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DuressFingerPrintIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="DuressOpen" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DuressPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MultiPersonLock" type="xs:boolean" />
+      <xs:element minOccurs="0" name="UnlockOpenTimeZone" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeviceControllerParameter" nillable="true" type="tns:DeviceControllerParameter" />
+  <xs:complexType name="ArrayOfDeviceDoor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceDoor" nillable="true" type="tns:DeviceDoor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeviceDoor" nillable="true" type="tns:ArrayOfDeviceDoor" />
+  <xs:complexType name="DeviceDoor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CheckOutOptions" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DelayOpenSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="DeviceDoorID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeviceID" type="xs:int" />
+      <xs:element minOccurs="0" name="DoorIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="DuressAlarm" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DuressEnabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DuressFingerPrintIndex" type="xs:int" />
+      <xs:element minOccurs="0" name="DuressOpen" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DuressPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ElectricalAppliances" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IllegalOpenSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="LinkageAlarm" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OverTimeOpenSeconds" type="xs:int" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RingType" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeviceDoor" nillable="true" type="tns:DeviceDoor" />
+  <xs:complexType name="ArrayOfDeviceHeadReading">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceHeadReading" nillable="true" type="tns:DeviceHeadReading" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeviceHeadReading" nillable="true" type="tns:ArrayOfDeviceHeadReading" />
+  <xs:complexType name="DeviceHeadReading">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeviceHeadReadingID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeviceID" type="xs:int" />
+      <xs:element minOccurs="0" name="HeadReadingPerformance" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HeadReadingSN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HeadReadingType" type="xs:int" />
+      <xs:element minOccurs="0" name="Mac" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeviceHeadReading" nillable="true" type="tns:DeviceHeadReading" />
+  <xs:simpleType name="GeneralStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Disabled" />
+      <xs:enumeration value="Enabled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GeneralStatus" nillable="true" type="tns:GeneralStatus" />
+  <xs:complexType name="ArrayOfUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUser" nillable="true" type="tns:ArrayOfUser" />
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DepartmentID" type="xs:int" />
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Gender" type="tns:GenderType" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Photo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Status" type="tns:GeneralStatus" />
+      <xs:element minOccurs="0" name="Type" type="tns:UserType" />
+      <xs:element minOccurs="0" name="UserAuthentications" nillable="true" type="tns:ArrayOfUserAuthentication" />
+      <xs:element minOccurs="0" name="UserCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserDeviceRoles" nillable="true" type="tns:ArrayOfUserDeviceRole" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+      <xs:element minOccurs="0" name="UserPropertyInfo" nillable="true" type="tns:UserProperty" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:simpleType name="GenderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Male" />
+      <xs:enumeration value="Female" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GenderType" nillable="true" type="tns:GenderType" />
+  <xs:simpleType name="UserType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Employee">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Visitor">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UserType" nillable="true" type="tns:UserType" />
+  <xs:complexType name="ArrayOfUserAuthentication">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserAuthentication" nillable="true" type="tns:UserAuthentication" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserAuthentication" nillable="true" type="tns:ArrayOfUserAuthentication" />
+  <xs:complexType name="UserAuthentication">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthenticationData" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AuthenticationType" type="tns:AuthenticationType" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateUserID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeviceID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeviceUserID" type="xs:int" />
+      <xs:element minOccurs="0" name="IsDuress" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:GeneralStatus" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateUserID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="UserAuthenticationID" type="xs:int" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+      <xs:element minOccurs="0" name="Version" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserAuthentication" nillable="true" type="tns:UserAuthentication" />
+  <xs:simpleType name="AuthenticationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FingerPrint1" />
+      <xs:enumeration value="FingerPrint2" />
+      <xs:enumeration value="FingerPrint3" />
+      <xs:enumeration value="FingerPrint4" />
+      <xs:enumeration value="FingerPrint5" />
+      <xs:enumeration value="FingerPrint6" />
+      <xs:enumeration value="FingerPrint7" />
+      <xs:enumeration value="FingerPrint8" />
+      <xs:enumeration value="FingerPrint9" />
+      <xs:enumeration value="FingerPrint10" />
+      <xs:enumeration value="Password" />
+      <xs:enumeration value="IcCard" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AuthenticationType" nillable="true" type="tns:AuthenticationType" />
+  <xs:complexType name="ArrayOfUserDeviceRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UserDeviceRole" nillable="true" type="tns:UserDeviceRole" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUserDeviceRole" nillable="true" type="tns:ArrayOfUserDeviceRole" />
+  <xs:complexType name="UserDeviceRole">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DeviceRoleID" type="xs:int" />
+      <xs:element minOccurs="0" name="UserDeviceRoleID" type="xs:int" />
+      <xs:element minOccurs="0" name="UserID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserDeviceRole" nillable="true" type="tns:UserDeviceRole" />
+  <xs:complexType name="UserProperty">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Birthday" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Company" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Degree" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EnglishName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HomeNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IDNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IDType" type="xs:int" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Marriage" type="tns:Marriage" />
+      <xs:element minOccurs="0" name="Nationality" type="xs:int" />
+      <xs:element minOccurs="0" name="NativePlace" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PoliticalStatus" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Postcode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SocialNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TechnicalLevel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TechnicalTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserPropertyID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserProperty" nillable="true" type="tns:UserProperty" />
+  <xs:simpleType name="Marriage">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single" />
+      <xs:enumeration value="Married" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Marriage" nillable="true" type="tns:Marriage" />
+  <xs:complexType name="ArrayOfDepartment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Department" nillable="true" type="tns:Department" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDepartment" nillable="true" type="tns:ArrayOfDepartment" />
+  <xs:complexType name="Department">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateUserID" type="xs:int" />
+      <xs:element minOccurs="0" name="DepartmentCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DepartmentID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeviceAssociations" nillable="true" type="tns:ArrayOfDepartmentDevice" />
+      <xs:element minOccurs="0" name="DeviceRoleID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Parent" nillable="true" type="tns:Department" />
+      <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:GeneralStatus" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateUserID" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Department" nillable="true" type="tns:Department" />
+  <xs:complexType name="ArrayOfDepartmentDevice">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DepartmentDevice" nillable="true" type="tns:DepartmentDevice" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDepartmentDevice" nillable="true" type="tns:ArrayOfDepartmentDevice" />
+  <xs:complexType name="DepartmentDevice">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DepartmentDeviceID" type="xs:int" />
+      <xs:element minOccurs="0" name="DepartmentID" type="xs:int" />
+      <xs:element minOccurs="0" name="DeviceID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DepartmentDevice" nillable="true" type="tns:DepartmentDevice" />
+  <xs:complexType name="ArrayOfTimeGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TimeGroup" nillable="true" type="tns:TimeGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTimeGroup" nillable="true" type="tns:ArrayOfTimeGroup" />
+  <xs:complexType name="TimeGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateUserID" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" type="tns:GeneralStatus" />
+      <xs:element minOccurs="0" name="TimeGroupID" type="xs:int" />
+      <xs:element minOccurs="0" name="TimeGroupName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TimeSegments" nillable="true" type="tns:ArrayOfTimeSegment" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateUserID" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TimeGroup" nillable="true" type="tns:TimeGroup" />
+  <xs:complexType name="ArrayOfTimeSegment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TimeSegment" nillable="true" type="tns:TimeSegment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTimeSegment" nillable="true" type="tns:ArrayOfTimeSegment" />
+  <xs:complexType name="TimeSegment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BeginTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateUserID" type="xs:int" />
+      <xs:element minOccurs="0" name="EndTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:GeneralStatus" />
+      <xs:element minOccurs="0" name="TimeSegmentID" type="xs:int" />
+      <xs:element minOccurs="0" name="TimeSegmentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateUserID" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TimeSegment" nillable="true" type="tns:TimeSegment" />
+  <xs:complexType name="ArrayOfTimeZone">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TimeZone" nillable="true" type="tns:TimeZone" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTimeZone" nillable="true" type="tns:ArrayOfTimeZone" />
+  <xs:complexType name="TimeZone">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateUserID" type="xs:int" />
+      <xs:element minOccurs="0" name="Status" type="tns:GeneralStatus" />
+      <xs:element minOccurs="0" name="TimeGroupAssociations" nillable="true" type="tns:ArrayOfTimeZoneGroup" />
+      <xs:element minOccurs="0" name="TimeZoneID" type="xs:int" />
+      <xs:element minOccurs="0" name="TimeZoneName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UpdateUserID" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TimeZone" nillable="true" type="tns:TimeZone" />
+  <xs:complexType name="ArrayOfTimeZoneGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TimeZoneGroup" nillable="true" type="tns:TimeZoneGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTimeZoneGroup" nillable="true" type="tns:ArrayOfTimeZoneGroup" />
+  <xs:complexType name="TimeZoneGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DisplayOrder" type="xs:int" />
+      <xs:element minOccurs="0" name="MappingName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TimeGroupID" type="xs:int" />
+      <xs:element minOccurs="0" name="TimeZoneGroupID" type="xs:int" />
+      <xs:element minOccurs="0" name="TimeZoneID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TimeZoneGroup" nillable="true" type="tns:TimeZoneGroup" />
+</xs:schema>

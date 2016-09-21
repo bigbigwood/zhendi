@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://www.realand.com/DeviceSystem/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DeviceService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://www.realand.com/DeviceSystem/" location="http://localhost:11727/DeviceService.svc?wsdl=wsdl0" />
+  <wsdl:types />
+  <wsdl:binding name="BasicHttpBinding_IDeviceService" type="i0:IDeviceService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SyncDBUsers">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDBUsers" style="document" />
+      <wsdl:input name="SyncDBUsersRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SyncDBUsersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncDepartmentUsers">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDepartmentUsers" style="document" />
+      <wsdl:input name="SyncDepartmentUsersRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SyncDepartmentUsersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncDeviceUsers">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsers" style="document" />
+      <wsdl:input name="SyncDeviceUsersRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SyncDeviceUsersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncDeviceTrafficLogs">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogs" style="document" />
+      <wsdl:input name="SyncDeviceTrafficLogsRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SyncDeviceTrafficLogsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncDeviceOperationLogs">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceOperationLogs" style="document" />
+      <wsdl:input name="SyncDeviceOperationLogsRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SyncDeviceOperationLogsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncTimeGroups">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeGroups" style="document" />
+      <wsdl:input name="SyncTimeGroupsRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SyncTimeGroupsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncTimeSegments">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeSegments" style="document" />
+      <wsdl:input name="SyncTimeSegmentsRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SyncTimeSegmentsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SyncTimeZones">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeZones" style="document" />
+      <wsdl:input name="SyncTimeZonesRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SyncTimeZonesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDoorState">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/GetDoorState" style="document" />
+      <wsdl:input name="GetDoorStateRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="GetDoorStateResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDoorState">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorState" style="document" />
+      <wsdl:input name="UpdateDoorStateRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="UpdateDoorStateResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DeviceService">
+    <wsdl:port name="BasicHttpBinding_IDeviceService" binding="tns:BasicHttpBinding_IDeviceService">
+      <soap:address location="http://localhost:11727/DeviceService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

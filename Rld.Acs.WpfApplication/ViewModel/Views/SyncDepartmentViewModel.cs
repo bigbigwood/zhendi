@@ -24,7 +24,7 @@ using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.Service.Validator;
-using DSProxy = Rld.Acs.WpfApplication.Service.DeviceService;
+using DSProxy = Rld.Acs.WpfApplication.DeviceProxy;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -96,14 +96,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 {
                     try
                     {
-                        var devices = DeviceDtos.FindAll(d => d.IsSelected).Select(dd => new DSProxy.DeviceController() { DeviceID = dd.ID });
-                        var departments = SelectedSyncDepartmentDtos.Select(u => new DSProxy.Department() { DepartmentID = u.ID });
+                        var devices = DeviceDtos.FindAll(d => d.IsSelected).Select(dd => new DeviceController() { DeviceID = dd.ID });
+                        var departments = SelectedSyncDepartmentDtos.Select(u => new Department() { DepartmentID = u.ID });
 
-                        Service.DeviceService.ResultTypes resultTypes;
-                        bool resultTypeSpecified;
                         string[] messages;
-
-                        new Service.DeviceService.DeviceService().SyncDepartmentUsers(departments.ToArray(), devices.ToArray(), out resultTypes, out resultTypeSpecified, out messages);
+                        DSProxy.ResultTypes resultTypes = new DSProxy.DeviceServiceClient().SyncDepartmentUsers(departments.ToArray(), devices.ToArray(), out messages);
 
                         message = "同步数据成功！";
                     }

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.WpfApplication", "Rld.Acs.WpfApplication\Rld.Acs.WpfApplication.csproj", "{EACD48D5-33B5-42F6-B357-8582B193A048}"
+	ProjectSection(ProjectDependencies) = postProject
+		{265F3AA8-972D-4722-B182-8D0F593B05F0} = {265F3AA8-972D-4722-B182-8D0F593B05F0}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.Repository", "Rld.Acs.Repository\Rld.Acs.Repository.csproj", "{090002E5-AB29-4FF1-B6F0-2EA8AA8BCC9D}"
 EndProject

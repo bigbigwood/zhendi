@@ -26,18 +26,28 @@ namespace Rld.Acs.DeviceSystem.Framework
         {
             var task1 = new Task<string>(() =>
             {
-                OperationManager.GetInstance().AddOperation(Token, this);
-                WebSocketClientManager.GetInstance().GetClientById(_websocketClientId).Send(request);
-                Log.InfoFormat("request {0}", request);
-
-                while (!blockToken.IsCancellationRequested)
+                var webSocketClient = WebSocketClientManager.GetInstance().GetClientById(_websocketClientId);
+                if (webSocketClient != null)
                 {
-                    Thread.Sleep(300);
+                    OperationManager.GetInstance().AddOperation(Token, this);
+                    webSocketClient.Send(request);
+                    Log.InfoFormat("request {0}", request);
+
+                    while (!blockToken.IsCancellationRequested)
+                    {
+                        Thread.Sleep(300);
+                    }
+
+                    OperationManager.GetInstance().RemoveOperation(Token);
+                    Log.InfoFormat("return {0}", _response);
+                    return _response;
+                }
+                else
+                {
+                    Log.WarnFormat("Cannot file websocket client={0}", _websocketClientId);
+                    return "";
                 }
 
-                OperationManager.GetInstance().RemoveOperation(Token);
-                Log.InfoFormat("return {0}", _response);
-                return _response;
             }, blockToken.Token);
 
             task1.Start();

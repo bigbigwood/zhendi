@@ -122,6 +122,11 @@ namespace Rld.Acs.DeviceSystem.Service
             Log.DebugFormat("Request: {0}", rawRequest);
             var rawResponse = operation.Execute(rawRequest);
             Log.DebugFormat("Response: {0}", rawResponse);
+            if (string.IsNullOrWhiteSpace(rawResponse))
+            {
+                throw new Exception(string.Format("Update user id:[{0}], device user id:[{1}] to device id:[{2}] fails]. Response is empty, maybe the device is not register to device system." , 
+                    user.UserID, deviceUser.UserId, deviceID));
+            }
 
             var response = DataContractSerializationHelper.Deserialize<UpdateUserInfoResponse>(rawResponse);
             Log.InfoFormat("Update user id:[{0}], device user id:[{1}] to device id:[{2}], result:[{3}]", user.UserID, deviceUser.UserId, deviceID, response.ResultType);

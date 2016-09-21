@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://www.realand.com/DeviceSystem/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.realand.com/DeviceSystem/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.realand.com/DeviceSystem/Imports">
+      <xsd:import schemaLocation="http://localhost:11727/DeviceService.svc?xsd=xsd0" namespace="http://www.realand.com/DeviceSystem/" />
+      <xsd:import schemaLocation="http://localhost:11727/DeviceService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:11727/DeviceService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" />
+      <xsd:import schemaLocation="http://localhost:11727/DeviceService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SyncDBUsersRequest">
+    <wsdl:part name="parameters" element="tns:SyncDBUsersRequest" />
+  </wsdl:message>
+  <wsdl:message name="SyncDBUsersResponse">
+    <wsdl:part name="parameters" element="tns:SyncDBUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncDepartmentUsersRequest">
+    <wsdl:part name="parameters" element="tns:SyncDepartmentUsersRequest" />
+  </wsdl:message>
+  <wsdl:message name="SyncDepartmentUsersResponse">
+    <wsdl:part name="parameters" element="tns:SyncDepartmentUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncDeviceUsersRequest">
+    <wsdl:part name="parameters" element="tns:SyncDeviceUsersRequest" />
+  </wsdl:message>
+  <wsdl:message name="SyncDeviceUsersResponse">
+    <wsdl:part name="parameters" element="tns:SyncDeviceUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncDeviceTrafficLogsRequest">
+    <wsdl:part name="parameters" element="tns:SyncDeviceTrafficLogsRequest" />
+  </wsdl:message>
+  <wsdl:message name="SyncDeviceTrafficLogsResponse">
+    <wsdl:part name="parameters" element="tns:SyncDeviceTrafficLogsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncDeviceOperationLogsRequest">
+    <wsdl:part name="parameters" element="tns:SyncDeviceOperationLogsRequest" />
+  </wsdl:message>
+  <wsdl:message name="SyncDeviceOperationLogsResponse">
+    <wsdl:part name="parameters" element="tns:SyncDeviceOperationLogsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncTimeGroupsRequest">
+    <wsdl:part name="parameters" element="tns:SyncTimeGroupsRequest" />
+  </wsdl:message>
+  <wsdl:message name="SyncTimeGroupsResponse">
+    <wsdl:part name="parameters" element="tns:SyncTimeGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncTimeSegmentsRequest">
+    <wsdl:part name="parameters" element="tns:SyncTimeSegmentsRequest" />
+  </wsdl:message>
+  <wsdl:message name="SyncTimeSegmentsResponse">
+    <wsdl:part name="parameters" element="tns:SyncTimeSegmentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SyncTimeZonesRequest">
+    <wsdl:part name="parameters" element="tns:SyncTimeZonesRequest" />
+  </wsdl:message>
+  <wsdl:message name="SyncTimeZonesResponse">
+    <wsdl:part name="parameters" element="tns:SyncTimeZonesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDoorStateRequest">
+    <wsdl:part name="parameters" element="tns:GetDoorStateRequest" />
+  </wsdl:message>
+  <wsdl:message name="GetDoorStateResponse">
+    <wsdl:part name="parameters" element="tns:GetDoorStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDoorStateRequest">
+    <wsdl:part name="parameters" element="tns:UpdateDoorStateRequest" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDoorStateResponse">
+    <wsdl:part name="parameters" element="tns:UpdateDoorStateResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDeviceService">
+    <wsdl:operation name="SyncDBUsers">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDBUsers" name="SyncDBUsersRequest" message="tns:SyncDBUsersRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDBUsersResponse" name="SyncDBUsersResponse" message="tns:SyncDBUsersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncDepartmentUsers">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDepartmentUsers" name="SyncDepartmentUsersRequest" message="tns:SyncDepartmentUsersRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDepartmentUsersResponse" name="SyncDepartmentUsersResponse" message="tns:SyncDepartmentUsersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncDeviceUsers">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsers" name="SyncDeviceUsersRequest" message="tns:SyncDeviceUsersRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsersResponse" name="SyncDeviceUsersResponse" message="tns:SyncDeviceUsersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncDeviceTrafficLogs">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogs" name="SyncDeviceTrafficLogsRequest" message="tns:SyncDeviceTrafficLogsRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogsResponse" name="SyncDeviceTrafficLogsResponse" message="tns:SyncDeviceTrafficLogsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncDeviceOperationLogs">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceOperationLogs" name="SyncDeviceOperationLogsRequest" message="tns:SyncDeviceOperationLogsRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceOperationLogsResponse" name="SyncDeviceOperationLogsResponse" message="tns:SyncDeviceOperationLogsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncTimeGroups">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeGroups" name="SyncTimeGroupsRequest" message="tns:SyncTimeGroupsRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeGroupsResponse" name="SyncTimeGroupsResponse" message="tns:SyncTimeGroupsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncTimeSegments">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeSegments" name="SyncTimeSegmentsRequest" message="tns:SyncTimeSegmentsRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeSegmentsResponse" name="SyncTimeSegmentsResponse" message="tns:SyncTimeSegmentsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncTimeZones">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeZones" name="SyncTimeZonesRequest" message="tns:SyncTimeZonesRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeZonesResponse" name="SyncTimeZonesResponse" message="tns:SyncTimeZonesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDoorState">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/GetDoorState" name="GetDoorStateRequest" message="tns:GetDoorStateRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/GetDoorStateResponse" name="GetDoorStateResponse" message="tns:GetDoorStateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDoorState">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorState" name="UpdateDoorStateRequest" message="tns:UpdateDoorStateRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorStateResponse" name="UpdateDoorStateResponse" message="tns:UpdateDoorStateResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

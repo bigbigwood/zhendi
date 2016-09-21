@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c060e691-aa7d-40e8-9816-e7e546a6c08d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:11727/DeviceService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DeviceService.disco" MetadataType="Disco" ID="3a56dc8e-c018-4030-9d6f-74373fd3391f" SourceId="1" SourceUrl="http://localhost:11727/DeviceService.svc?disco" />
+    <MetadataFile FileName="DeviceService.xsd" MetadataType="Schema" ID="e8c4d088-4b0f-4db8-b602-541d63e4e069" SourceId="1" SourceUrl="http://localhost:11727/DeviceService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DeviceService1.xsd" MetadataType="Schema" ID="798a39e5-c00e-4149-a027-fdee887924c4" SourceId="1" SourceUrl="http://localhost:11727/DeviceService.svc?xsd=xsd3" />
+    <MetadataFile FileName="DeviceService2.xsd" MetadataType="Schema" ID="2a568135-4c5e-4549-a100-2af03c6f81c1" SourceId="1" SourceUrl="http://localhost:11727/DeviceService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DeviceService3.xsd" MetadataType="Schema" ID="c0237d02-4300-4e3d-b92f-ffec506dd59e" SourceId="1" SourceUrl="http://localhost:11727/DeviceService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DeviceService.wsdl" MetadataType="Wsdl" ID="1d269b03-767c-4787-aace-d130db7375eb" SourceId="1" SourceUrl="http://localhost:11727/DeviceService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="DeviceService1.wsdl" MetadataType="Wsdl" ID="d04a9591-0b17-4116-9188-b14d67556abc" SourceId="1" SourceUrl="http://localhost:11727/DeviceService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

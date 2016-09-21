@@ -13,11 +13,11 @@ using MahApps.Metro.Controls.Dialogs;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
+using Rld.Acs.WpfApplication.DeviceProxy;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
-using Rld.Acs.WpfApplication.Service.DeviceService;
 using Rld.Acs.WpfApplication.View.Windows;
 using Rld.Acs.WpfApplication.ViewModel.Pages;
 using Rld.Acs.WpfApplication.ViewModel.Views;
@@ -81,15 +81,11 @@ namespace Rld.Acs.WpfApplication.View.Pages
                     {
                         var doorInfo = FloorDoorManager.GetInstance().AuthorizationDoors.FirstOrDefault(x => x.DeviceDoorID == floordoorId);
                         ResultTypes resultTypes;
-                        bool resultTypeSpecified;
                         string[] messages;
-                        bool isopened;
-                        bool isopenedSpecified;
                         Int32 deviceId = doorInfo.DeviceID;
                         Int32 doorIndex = doorInfo.DoorIndex;
 
-                        new DeviceService().GetDoorState(deviceId, true, doorIndex, true,
-                            out isopened, out isopenedSpecified, out resultTypes, out resultTypeSpecified, out messages);
+                        bool isopened = new DeviceServiceClient().GetDoorState(deviceId, doorIndex, out resultTypes, out messages);
                         if (resultTypes == ResultTypes.Ok)
                         {
                             Log.InfoFormat("Floor monitor timer gets state result: [doorId={0}, isopened={1}]", floordoorId, isopened);
@@ -281,17 +277,12 @@ namespace Rld.Acs.WpfApplication.View.Pages
             {
                 try
                 {
-                    ResultTypes resultTypes;
-                    bool resultTypeSpecified;
                     string[] messages;
                     Int32 deviceId = doorInfo.DeviceID;
                     Int32 doorIndex = doorInfo.DoorIndex;
-                    var selectedOption = (Service.DeviceService.DoorControlOption)option.GetHashCode();
+                    var selectedOption = (DeviceProxy.DoorControlOption)option.GetHashCode();
 
-                    new DeviceService().UpdateDoorState(deviceId, true, doorIndex, true,
-                        selectedOption, true,
-                        out resultTypes, out resultTypeSpecified, out messages);
-
+                    ResultTypes resultTypes = new DeviceServiceClient().UpdateDoorState(deviceId, doorIndex, selectedOption, out messages);
                     message = "同步数据成功！";
                 }
                 catch (Exception ex)
