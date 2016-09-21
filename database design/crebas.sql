@@ -697,7 +697,7 @@ go
 /*==============================================================*/
 create table SYS_USER (
    UserID               int                  identity(1,1),
-   DepartmentID         int                  null,
+   DepartmentID         int                  not null,
    Type                 int                  not null,
    UserCode             nvarchar(25)         not null,
    Name                 nvarchar(100)        not null,

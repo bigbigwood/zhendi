@@ -1,4 +1,5 @@
 <GetSystemInfoRequest xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Token></Token>
 </GetSystemInfoRequest>
 
 
