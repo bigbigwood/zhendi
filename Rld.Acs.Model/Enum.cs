@@ -92,6 +92,9 @@ namespace Rld.Acs.Model
         KeepOpen = 1,
         KeepClose = 2,
         Auto = 3,
+        Close = 4,
+        CancelAlarm = 5,
+        ViewStuff = 6,
     }
 
     public enum DictionaryType

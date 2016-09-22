@@ -159,7 +159,7 @@ namespace Rld.Acs.DeviceSystem.Service
             var deviceUser = response.UserInfo;
             user.Name = deviceUser.UserName;
             //user.Status = deviceUser.UserStatus == true ? GeneralStatus.Enabled : GeneralStatus.Disabled;
-            user.DepartmentID = deviceUser.DepartmentId ?? 0;
+            //user.DepartmentID = deviceUser.DepartmentId ?? 0;
             user.Remark = deviceUser.Comment;
 
             //Role

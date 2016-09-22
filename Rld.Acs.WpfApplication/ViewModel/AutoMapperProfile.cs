@@ -157,9 +157,16 @@ namespace Rld.Acs.WpfApplication.ViewModel
             CreateProvMap<SysConfig, DataSyncConfigViewModel>()
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
+                .ForMember(dest => dest.IsSelected, op => op.Ignore());
+
+            CreateProvMap<UserAuthenticationViewModel, UserAuthentication>();
+            CreateProvMap<UserAuthentication, UserAuthenticationViewModel>()
+                .ForMember(dest => dest.SaveCmd, op => op.Ignore())
+                .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.IsSelected, op => op.Ignore())
-                ;
-            
+                .ForMember(dest => dest.Name, op => op.Ignore())
+                .ForMember(dest => dest.UploadFingerPrintPicCmd, op => op.Ignore())
+                .ForMember(dest => dest.ModifyCmd, op => op.Ignore());
 
             Log.Info("Verify mapper configuration..");
             Mapper.AssertConfigurationIsValid();

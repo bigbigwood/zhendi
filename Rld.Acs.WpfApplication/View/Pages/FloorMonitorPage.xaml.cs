@@ -239,21 +239,27 @@ namespace Rld.Acs.WpfApplication.View.Pages
             panel.DataContext = floorDoor;
 
             var menu_open = new MenuItem() { Header = "开门", Tag = panel };
+            var menu_close = new MenuItem() { Header = "关门", Tag = panel };
             var menu_keepOpen = new MenuItem() { Header = "常开门", Tag = panel };
             var menu_keepClose = new MenuItem() { Header = "常关门", Tag = panel };
             var menu_autoControl = new MenuItem() { Header = "自动控制", Tag = panel };
+            var menu_cancleAlarm = new MenuItem() { Header = "取消报警", Tag = panel };
             var menu_viewStuffList = new MenuItem() { Header = "门内人员列表", Tag = panel };
             menu_open.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.Open);
+            menu_close.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.Close);
             menu_keepOpen.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.KeepOpen);
             menu_keepClose.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.KeepClose);
             menu_autoControl.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.Auto);
-            menu_viewStuffList.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.Auto);
+            menu_cancleAlarm.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.CancelAlarm);
+            menu_viewStuffList.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.ViewStuff);
 
             panel.ContextMenu = new ContextMenu();
             panel.ContextMenu.Items.Add(menu_open);
+            panel.ContextMenu.Items.Add(menu_close);
             panel.ContextMenu.Items.Add(menu_keepOpen);
             panel.ContextMenu.Items.Add(menu_keepClose);
             panel.ContextMenu.Items.Add(menu_autoControl);
+            panel.ContextMenu.Items.Add(menu_cancleAlarm);
             panel.ContextMenu.Items.Add(menu_viewStuffList);
 
             Canvas.SetLeft(panel, floorDoor.LocationX * canvas.ActualWidth);
@@ -263,6 +269,17 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
         private async void UpdateDoorState(object sender, DoorControlOption option)
         {
+            if (option == DoorControlOption.Close || option == DoorControlOption.CancelAlarm)
+            {
+                MessageBoxSingleton.Instance.ShowDialog("当前设备无法支持此功能", "");
+                return;
+            }
+            if (option == DoorControlOption.ViewStuff)
+            {
+                MessageBoxSingleton.Instance.ShowDialog("尚未实现此功能", "");
+                return;
+            }
+
             var menuItem = (MenuItem)sender;
             var panel = menuItem.Tag as StackPanel;
             var floordoor = panel.DataContext as FloorDoorViewModel;

@@ -52,8 +52,21 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         private void Save()
         {
-            RaisePropertyChanged(null);
-            Close("");
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(AuthenticationData))
+                    AuthenticationData = AuthenticationData.Replace(' ', '-');
+
+                CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                CreateDate = DateTime.Now;
+
+                RaisePropertyChanged(null);
+                Close("");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
         private void UploadFingerPrintPic()
         {

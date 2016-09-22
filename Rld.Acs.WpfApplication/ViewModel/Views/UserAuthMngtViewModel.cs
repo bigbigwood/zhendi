@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Documents;
+using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -43,11 +44,56 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             var authDeviceIds = CurrentUser.GetUserRoleAuthorizedDeviceIds(ApplicationManager.GetInstance().AuthorizationDeviceRoles);
             foreach (var authDeviceId in authDeviceIds)
             {
-                var userDeviceAuthViewModel = new UserDeviceAuthViewModel() { UserId = CurrentUser.UserID, DeviceId = authDeviceId, DeviceUserId = CurrentUser.UserCode.ToInt32()};
+                var userDeviceAuthViewModel = new UserDeviceAuthViewModel(authDeviceId, CurrentUser.UserID, CurrentUser.UserCode.ToInt32());
                 userDeviceAuthViewModel.DeviceName = ApplicationManager.GetInstance().AuthorizationDevices.FirstOrDefault(x => x.DeviceID == authDeviceId).Name;
+
+                var auths = CurrentUser.UserAuthentications.FindAll(x => x.DeviceID == authDeviceId);
+                auths.ForEach(x =>
+                {
+                    if (x.AuthenticationType == AuthenticationType.Password)
+                    {
+                        userDeviceAuthViewModel.PasswordCredential = Mapper.Map<UserAuthenticationViewModel>(x);
+                        userDeviceAuthViewModel.PasswordCredential.IsSelected = true;
+                    }
+                    else if (x.AuthenticationType == AuthenticationType.IcCard)
+                    {
+                        userDeviceAuthViewModel.IcCardCredential = Mapper.Map<UserAuthenticationViewModel>(x);
+                        userDeviceAuthViewModel.IcCardCredential.IsSelected = true;
+                    }
+                    else
+                    {
+                        var fp = userDeviceAuthViewModel.FingerPrintCredentials.FirstOrDefault(e => e.AuthenticationType == x.AuthenticationType);
+                        if (fp != null)
+                        {
+                            var fpname = fp.Name;
+                            var index = userDeviceAuthViewModel.FingerPrintCredentials.IndexOf(fp);
+                            userDeviceAuthViewModel.FingerPrintCredentials[index] = Mapper.Map<UserAuthenticationViewModel>(x);
+                            userDeviceAuthViewModel.FingerPrintCredentials[index].IsSelected = true;
+                            userDeviceAuthViewModel.FingerPrintCredentials[index].Name = fpname;
+                        }
+                    }
+
+                });
 
                 result.Add(userDeviceAuthViewModel);
             }
+            return result;
+        }
+
+        private List<UserAuthentication> GetAuthentications()
+        {
+            var result = new List<UserAuthentication>();
+            UserDeviceAuthViewModels.ForEach(x =>
+            {
+                if(x.PasswordCredential.IsSelected)
+                    result.Add(Mapper.Map<UserAuthentication>(x.PasswordCredential));
+
+                if (x.IcCardCredential.IsSelected)
+                    result.Add(Mapper.Map<UserAuthentication>(x.IcCardCredential));
+
+                result.AddRange(x.FingerPrintCredentials.FindAll(xx => xx.IsSelected).Select(Mapper.Map<UserAuthentication>));
+            });
+
             return result;
         }
 
@@ -57,14 +103,17 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
-                var validator = NinjectBinder.GetValidator<UserValidator>();
-                var results = validator.Validate(CurrentUser);
-                if (!results.IsValid)
+                CurrentUser.UserAuthentications = GetAuthentications();
+                CurrentUser.UserAuthentications.FindAll(x => x.UserAuthenticationID == 0).ForEach(xx =>
                 {
-                    message = string.Join("\n", results.Errors);
-                    SendMessage(message);
-                    return;
-                }
+                    xx.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                    xx.CreateDate = DateTime.Now;
+                });
+                CurrentUser.UserAuthentications.FindAll(x => x.UserAuthenticationID != 0).ForEach(xx =>
+                {
+                    xx.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                    xx.UpdateDate = DateTime.Now;
+                });
 
                 _userRepo.Update(CurrentUser);
                 message = "更新凭证成功!";
@@ -96,14 +145,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
     public class UserDeviceAuthViewModel : ViewModelBase
     {
         public string DeviceName { get; set; }
-        public int DeviceId { get; set; }
-        public int UserId { get; set; }
-        public int DeviceUserId { get; set; }
         public ObservableCollection<UserAuthenticationViewModel> FingerPrintCredentials { get; set; }
         public UserAuthenticationViewModel PasswordCredential { get; set; }
         public UserAuthenticationViewModel IcCardCredential { get; set; }
 
-        public UserDeviceAuthViewModel()
+        public UserDeviceAuthViewModel(int DeviceId, int UserId, int DeviceUserId)
         {
             var fp1 = new UserAuthenticationViewModel { UserID = UserId, DeviceID = DeviceId, DeviceUserID = DeviceUserId, AuthenticationType = AuthenticationType.FingerPrint1, Name = "指纹一"};
             var fp2 = new UserAuthenticationViewModel { UserID = UserId, DeviceID = DeviceId, DeviceUserID = DeviceUserId, AuthenticationType = AuthenticationType.FingerPrint2, Name = "指纹二" };
