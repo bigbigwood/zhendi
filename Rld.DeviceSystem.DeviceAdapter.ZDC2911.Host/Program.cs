@@ -33,6 +33,10 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Host
                     {
                         System.Console.WriteLine("device start fails!");
                     }
+                    else
+                    {
+                        System.Console.WriteLine("device start successfully!");
+                    }
 
                     System.Console.WriteLine("presss enter to close!");
                     System.Console.ReadLine();

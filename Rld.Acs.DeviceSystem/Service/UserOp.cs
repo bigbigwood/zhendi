@@ -20,6 +20,7 @@ namespace Rld.Acs.DeviceSystem.Service
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IUserRepository _userRepo = RepositoryManager.GetRepository<IUserRepository>();
+        private IUserAuthenticationRepository _userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
         private IDeviceRoleRepository _deviceRole = RepositoryManager.GetRepository<IDeviceRoleRepository>();
         private const Int32 SyncUserID = 14;
 
@@ -49,9 +50,9 @@ namespace Rld.Acs.DeviceSystem.Service
             deviceUser.Role = (Rld.DeviceSystem.Contract.Model.UserRole)userDevicePermission.PermissionAction.GetHashCode();
             deviceUser.AccessTimeZoneId = userDevicePermission.AllowedAccessTimeZoneID;
 
-            foreach (AuthenticationType type in Enum.GetValues(typeof(AuthenticationType)))
+            foreach (var userAuthentication in authenticationsOfDevice)
             {
-                switch (type)
+                switch (userAuthentication.AuthenticationType)
                 {
                     case AuthenticationType.FingerPrint1:
                     case AuthenticationType.FingerPrint2:
@@ -64,55 +65,35 @@ namespace Rld.Acs.DeviceSystem.Service
                     case AuthenticationType.FingerPrint9:
                     case AuthenticationType.FingerPrint10:
                         {
-                            var service = new FingerPrintService() { Index = (int)type, Enabled = false };
-
-                            var userAuthentication = authenticationsOfDevice.FirstOrDefault(a => a.AuthenticationType == type);
-                            if (userAuthentication != null)
-                            {
-                                service.Enabled = true;
-                                service.FingerPrintData = userAuthentication.AuthenticationData;
-                                service.UseForDuress = userAuthentication.IsDuress;
-                            }
-
+                            var service = new FingerPrintService() { Index = (int)userAuthentication.AuthenticationType, Enabled = true };
+                            service.FingerPrintData = userAuthentication.AuthenticationData;
+                            service.UseForDuress = userAuthentication.IsDuress;
                             deviceUser.CredentialServices.Add(service);
                         }
                         break;
                     case AuthenticationType.Password:
                         {
-                            var service = new PasswordService() { Enabled = false };
-
-                            var userAuthentication = authenticationsOfDevice.FirstOrDefault(a => a.AuthenticationType == type);
-                            if (userAuthentication != null)
-                            {
-                                service.Enabled = true;
-                                service.Password = userAuthentication.AuthenticationData;
-                                service.UseForDuress = userAuthentication.IsDuress;
-                            }
-
+                            var service = new PasswordService() { Enabled = true };
+                            service.Password = userAuthentication.AuthenticationData;
+                            service.UseForDuress = userAuthentication.IsDuress;
                             deviceUser.CredentialServices.Add(service);
                         }
                         break;
                     case AuthenticationType.IcCard:
                         {
-                            var service = new CredentialCardService() { Enabled = false };
-
-                            var userAuthentication = authenticationsOfDevice.FirstOrDefault(a => a.AuthenticationType == type);
-                            if (userAuthentication != null)
-                            {
-                                service.Enabled = true;
-                                service.CardNumber = userAuthentication.AuthenticationData;
-                                service.UseForDuress = userAuthentication.IsDuress;
-                            }
-
+                            var service = new CredentialCardService() { Enabled = true };
+                            service.CardNumber = userAuthentication.AuthenticationData;
+                            service.UseForDuress = userAuthentication.IsDuress;
                             deviceUser.CredentialServices.Add(service);
                         }
                         break;
-                    //case AuthenticationType.FacePrint:
-                    //    break;
                     default:
                         break;
                 }
             }
+
+
+
 
             Log.Info("Invoke WebSocketOperation...");
             var operation = new WebSocketOperation(deviceID);
@@ -124,7 +105,7 @@ namespace Rld.Acs.DeviceSystem.Service
             Log.DebugFormat("Response: {0}", rawResponse);
             if (string.IsNullOrWhiteSpace(rawResponse))
             {
-                throw new Exception(string.Format("Update user id:[{0}], device user id:[{1}] to device id:[{2}] fails]. Response is empty, maybe the device is not register to device system." , 
+                throw new Exception(string.Format("Update user id:[{0}], device user id:[{1}] to device id:[{2}] fails]. Response is empty, maybe the device is not register to device system.",
                     user.UserID, deviceUser.UserId, deviceID));
             }
 
@@ -185,79 +166,86 @@ namespace Rld.Acs.DeviceSystem.Service
             //deviceUser.Role = (Rld.DeviceSystem.Contract.Model.UserRole)userDevicePermission.PermissionAction.GetHashCode();
             //deviceUser.AccessTimeZoneId = userDevicePermission.AllowedAccessTimeZoneID;
 
-            foreach (var service in  deviceUser.CredentialServices)
+            var userAuthenticationFromDevice = new List<UserAuthentication>();
+            foreach (var service in deviceUser.CredentialServices)
             {
+                var userAuthentication = new UserAuthentication()
+                {
+                    UserID = user.UserID,
+                    DeviceID = deviceID,
+                    DeviceUserID = deviceUserId,
+                    Status = GeneralStatus.Enabled,
+                    CreateDate = DateTime.Now,
+                    CreateUserID = SyncUserID,
+                };
+
                 if (service is PasswordService)
                 {
                     var passwordService = service as PasswordService;
-                    var userAuthentication = authenticationsOfDevice.FirstOrDefault(a => a.AuthenticationType == AuthenticationType.Password);
-                    if (userAuthentication == null)
-                    {
-                        userAuthentication = new UserAuthentication()
-                        {
-                            UserID = user.UserID,
-                            DeviceID = deviceID,
-                            DeviceUserID = deviceUserId,
-                            AuthenticationType = AuthenticationType.Password,
-                            Status = GeneralStatus.Enabled,
-                            CreateDate = DateTime.Now,
-                            CreateUserID = SyncUserID,
-                        };
-                        user.UserAuthentications.Add(userAuthentication);
-                    }
-
+                    var originalUserAuthentication = authenticationsOfDevice.FirstOrDefault(a => a.AuthenticationType == AuthenticationType.Password);
+                    userAuthentication.UserAuthenticationID = originalUserAuthentication != null ? originalUserAuthentication.UserAuthenticationID : 0;
+                    userAuthentication.AuthenticationType = AuthenticationType.Password;
                     userAuthentication.AuthenticationData = passwordService.Password;
                     userAuthentication.IsDuress = passwordService.UseForDuress;
                 }
                 else if (service is CredentialCardService)
                 {
                     var credentialCardService = service as CredentialCardService;
-                    var userAuthentication = authenticationsOfDevice.FirstOrDefault(a => a.AuthenticationType == AuthenticationType.IcCard);
-                    if (userAuthentication == null)
-                    {
-                        userAuthentication = new UserAuthentication()
-                        {
-                            UserID = user.UserID,
-                            DeviceID = deviceID,
-                            DeviceUserID = deviceUserId,
-                            AuthenticationType = AuthenticationType.IcCard,
-                            Status = GeneralStatus.Enabled,
-                            CreateDate = DateTime.Now,
-                            CreateUserID = SyncUserID,
-                        };
-                        user.UserAuthentications.Add(userAuthentication);
-                    }
-
+                    var originalUserAuthentication = authenticationsOfDevice.FirstOrDefault(a => a.AuthenticationType == AuthenticationType.IcCard);
+                    userAuthentication.UserAuthenticationID = originalUserAuthentication != null ? originalUserAuthentication.UserAuthenticationID : 0;
+                    userAuthentication.AuthenticationType = AuthenticationType.IcCard;
                     userAuthentication.AuthenticationData = credentialCardService.CardNumber;
                     userAuthentication.IsDuress = credentialCardService.UseForDuress;
                 }
                 else if (service is FingerPrintService)
                 {
                     var fpService = service as FingerPrintService;
-
-                    var userAuthentication = authenticationsOfDevice.FirstOrDefault(a => a.AuthenticationType.GetHashCode() == fpService.Index);
-                    if (userAuthentication == null)
-                    {
-                        userAuthentication = new UserAuthentication()
-                        {
-                            UserID = user.UserID,
-                            DeviceID = deviceID,
-                            DeviceUserID = deviceUserId,
-                            AuthenticationType = (AuthenticationType)fpService.Index,
-                            Status = GeneralStatus.Enabled,
-                            CreateDate = DateTime.Now,
-                            CreateUserID = SyncUserID,
-                        };
-
-                        user.UserAuthentications.Add(userAuthentication);
-                    }
-
+                    var originalUserAuthentication = authenticationsOfDevice.FirstOrDefault(a => a.AuthenticationType.GetHashCode() == fpService.Index);
+                    userAuthentication.UserAuthenticationID = originalUserAuthentication != null ? originalUserAuthentication.UserAuthenticationID : 0;
+                    userAuthentication.AuthenticationType = (AuthenticationType) fpService.Index;
                     userAuthentication.AuthenticationData = fpService.FingerPrintData;
                     userAuthentication.IsDuress = fpService.UseForDuress;
                 }
+
+                userAuthenticationFromDevice.Add(userAuthentication);
             }
 
             Log.Info("Sync user to database...");
+
+            var addedAuthentications = new List<UserAuthentication>();
+            var deletedAuthenticationIds = new List<int>();
+            if (userAuthenticationFromDevice.Any())
+            {
+                var originalUserAuthenticationIDs = user.UserAuthentications.Select(d => d.UserAuthenticationID);
+                var UserAuthenticationIDs = userAuthenticationFromDevice.Select(d => d.UserAuthenticationID);
+                deletedAuthenticationIds = originalUserAuthenticationIDs.Except(UserAuthenticationIDs).ToList();
+
+                addedAuthentications = userAuthenticationFromDevice.FindAll(d => d.UserAuthenticationID == 0);
+            }
+            else
+            {
+                deletedAuthenticationIds = user.UserAuthentications.Select(d => d.UserAuthenticationID).ToList();
+            }
+
+            userAuthenticationFromDevice.FindAll(d => d.UserAuthenticationID != 0).ForEach(d =>
+            {
+                var auth = user.UserAuthentications.First(x => x.UserAuthenticationID == d.UserAuthenticationID);
+                auth.AuthenticationData = d.AuthenticationData;
+
+                _userAuthenticationRepo.Update(auth);
+                Log.InfoFormat("User authentication id={0} updated", d.UserAuthenticationID);
+            });
+            deletedAuthenticationIds.ForEach(d =>
+            {
+                _userAuthenticationRepo.Delete(d);
+                Log.InfoFormat("User authentication id={0} deleted", d);
+            });
+            addedAuthentications.ForEach(d =>
+            {
+                var auth = _userAuthenticationRepo.Insert(d);
+                Log.InfoFormat("User authentication id={0} inserted", auth.UserAuthenticationID);
+            });
+
             _userRepo.Update(user);
         }
     }

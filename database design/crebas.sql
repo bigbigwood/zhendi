@@ -722,7 +722,7 @@ create table SYS_USER_AUTHENTICATION (
    DeviceUserID         int                  not null,
    DeviceID             int                  not null,
    AuthenticationType   int                  not null,
-   AuthenticationData   nvarchar(1024)       not null,
+   AuthenticationData   nvarchar(max)       not null,
    Version              nvarchar(50)         null,
    IsDuress             bit                  not null,
    Remark               nvarchar(1024)       null,

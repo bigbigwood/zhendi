@@ -33,7 +33,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
 
                 if (!result)
                 {
-                    throw new Exception("Get user enrool fails");
+                    Log.WarnFormat("Cannot get enroll for useid: {0}", userId);
+                    return null;
                 }
 
                 var rawUser = (User)extraData;

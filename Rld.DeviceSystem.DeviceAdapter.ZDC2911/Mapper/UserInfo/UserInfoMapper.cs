@@ -26,7 +26,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.UserInfo
                 userInfo.Role = (UserRole)deviceUser.Privilege;
                 userInfo.Comment = deviceUser.Comment;
                 userInfo.UserStatus = deviceUser.Enable;
-                userInfo.DepartmentId = !string.IsNullOrWhiteSpace(deviceUser.DeptId) ? int.Parse(deviceUser.DeptId) : 0;
+                userInfo.DepartmentId = deviceUser.Department;
                 userInfo.AccessTimeZoneId = deviceUser.AccessTimeZone;
 
                 var enroll = deviceUser.Enrolls.First();
@@ -73,7 +73,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.UserInfo
                 deviceUser.Enable = userInfo.UserStatus.Value;
 
             if (userInfo.DepartmentId != null)
-                deviceUser.DeptId = userInfo.DepartmentId.ToString();
+                deviceUser.Department = userInfo.DepartmentId.Value;
 
             if (userInfo.AccessTimeZoneId != null)
                 deviceUser.AccessTimeZone = userInfo.AccessTimeZoneId.Value;

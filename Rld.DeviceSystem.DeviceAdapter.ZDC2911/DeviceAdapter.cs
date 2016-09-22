@@ -42,6 +42,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 _udpListener.Start();
                 _webSocketClient.Start();
                 IsRunning = true;
+                Log.Info("DeviceAdapter starts finished...");
                 return true;
             }
             catch (Exception ex)
@@ -67,6 +68,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 _udpListener.Stop();
                 _webSocketClient.Stop();
                 IsRunning = false;
+                Log.Info("DeviceAdapter stops finished...");
                 return true;
             }
             catch (Exception ex)
@@ -78,9 +80,17 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
 
         public void ReceiveMessage(String message)
         {
-            DeviceProxyManager.Bind(_deviceProxy);
-            var response = _deviceProxy.ProcessReceiveEvent(message);
-            SendMessage(response);
+            try
+            {
+                DeviceProxyManager.Bind(_deviceProxy);
+                var response = _deviceProxy.ProcessReceiveEvent(message);
+                SendMessage(response);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                SendMessage(ex.Message);
+            }
         }
 
         public void SendMessage(String message)

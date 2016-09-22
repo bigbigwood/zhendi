@@ -25,7 +25,9 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation
 
             if (request.UserInfo.CredentialServices != null)
             {
-                enroll.EnrollType = userEnrollInfoDao.GetEnroll(request.UserInfo.UserId).EnrollType;
+                var originalEnroll = userEnrollInfoDao.GetEnroll(request.UserInfo.UserId);
+                if (originalEnroll != null)
+                    enroll.EnrollType = originalEnroll.EnrollType;
             }
 
             UserInfoMapper.UpdateSystemInfo(ref deviceUser, request.UserInfo);
