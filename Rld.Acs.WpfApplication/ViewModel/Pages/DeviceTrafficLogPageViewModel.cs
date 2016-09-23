@@ -16,6 +16,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -40,6 +41,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         }
 
         public RelayCommand QueryCommand { get; set; }
+        public RelayCommand ExportCommand { get; set; }
 
         #region 分页相关属性
 
@@ -189,6 +191,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public DeviceTrafficLogPageViewModel()
         {
             QueryCommand = new AuthCommand(QueryCommandFunc);
+            ExportCommand = new AuthCommand(ExportCommandFunc);
             NextPageSearchCommand = new AuthCommand(NextPageSearchCommandFunc);
 
             DeviceTrafficLogViewModels = new ObservableCollection<DeviceTrafficLogViewModel>();
@@ -259,6 +262,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             }
 
             return conditions;
+        }
+
+        private void ExportCommandFunc()
+        {
+            if (!DeviceTrafficLogViewModels.Any())
+            {
+                Messenger.Default.Send(new NotificationMessage("没有数据可以导出！"), Tokens.DeviceTrafficLogPage_ShowNotification);
+                return;
+            }
+
+            var dt = ExcelOperation<DeviceTrafficLogViewModel>.ListToDataTable(DeviceTrafficLogViewModels.ToList());
+            Messenger.Default.Send(new OpenWindowMessage() { DataContext = dt }, Tokens.DeviceTrafficLogPage_OpenExportView);
         }
     }
 }

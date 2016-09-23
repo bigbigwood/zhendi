@@ -72,7 +72,7 @@
                 <Button Grid.Column="10" Margin="5,2" Height="25" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
                          Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_QueryDeviceTrafficLog}"/>
                 <Button Grid.Column="11" Margin="5,2" Height="25" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
-                         Content="{DynamicResource Export}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_ExportDeviceTrafficLog}"/>
+                         Content="{DynamicResource Export}"  Command="{Binding ExportCommand}" CommandParameter="{x:Static a:ACL.E_ExportDeviceTrafficLog}"/>
             </Grid>
 
             <Grid Grid.Row="1" Margin="0,0,0,0" >

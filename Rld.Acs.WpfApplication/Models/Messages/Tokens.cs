@@ -96,8 +96,13 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string FloorPage_ShowQuestion = Guid.NewGuid().ToString();
 
         public static readonly string DeviceOperationLogPage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string DeviceOperationLogPage_OpenExportView = Guid.NewGuid().ToString();
+
         public static readonly string DeviceTrafficLogPage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string DeviceTrafficLogPage_OpenExportView = Guid.NewGuid().ToString();
+
         public static readonly string SysOperationLogPage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string SysOperationLogPage_OpenExportView = Guid.NewGuid().ToString();
 
         public static readonly string DataSyncView_Open = Guid.NewGuid().ToString();
         public static readonly string DataSyncView_Close = Guid.NewGuid().ToString();

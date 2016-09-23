@@ -1,0 +1,40 @@
+﻿<windows:BaseWindow x:Class="Rld.Acs.WpfApplication.View.Windows.ExportFileView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
+        xmlns:views="clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= views:UserViewModel, IsDesignTimeCreatable=True}"
+        Width="280" Height="160" Unloaded="MetroWindow_Unloaded"
+        ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" >
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Margin" Value="6,3" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+            </Style>
+            <Style TargetType="TextBox" BasedOn="{StaticResource ResourceKey={x:Type TextBox}}" >
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <WrapPanel Grid.Row="2">
+            <Button Name="btnExport2003" Style="{StaticResource FlatButtonStyle}" Height="30" Width="140" Margin="8"  Content="导出为Excel(2003)" Click="BtnExport2003_OnClick"/>
+            <Button Name="btnExportPDF" Style="{StaticResource FlatButtonStyle}" Height="30" Width="100" Margin="8" Content="导出为PDF" Click="BtnExportPDF_OnClick"/>
+            <Button Name="btnExport2007" Style="{StaticResource FlatButtonStyle}" Height="30" Width="140" Margin="8" Content="导出为Excel(2007)" Click="BtnExport2007_OnClick"/>
+            <Button Name="btnExportCSV" Style="{StaticResource FlatButtonStyle}" Height="30" Width="100" Margin="8" Content="导出为CSV" Click="BtnExportCSV_OnClick"/>
+        </WrapPanel>
+    </Grid>
+</windows:BaseWindow>
