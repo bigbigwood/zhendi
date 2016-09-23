@@ -50,7 +50,7 @@ namespace Rld.Acs.WpfApplication.Service.Excel
 
                 int rowIndex = 0;
                 int sheetcount = 1;
-                ISheet sheet = workbook.CreateSheet(String.Format("{0}【{1}】", sheetName, sheetcount));
+                ISheet sheet = workbook.CreateSheet(String.Format("{0}{1}", sheetName, sheetcount));
                 CreateHeaderRow(sheet, sourceTable);
 
                 foreach (DataRow row in sourceTable.Rows)
@@ -59,7 +59,7 @@ namespace Rld.Acs.WpfApplication.Service.Excel
                     if (rowIndex == 65536)//新建一个sheet
                     {
                         sheetcount++;
-                        sheet = workbook.CreateSheet(String.Format("{0}【{1}】", sheetName, sheetcount));
+                        sheet = workbook.CreateSheet(String.Format("{0}{1}", sheetName, sheetcount));
                         CreateHeaderRow(sheet, sourceTable);
                         rowIndex = 1;
                     }
@@ -295,7 +295,7 @@ namespace Rld.Acs.WpfApplication.Service.Excel
 
                 int rowIndex = 0;
                 int sheetcount = 1;
-                ISheet sheet = workbook.CreateSheet(String.Format("{0}【{1}】", sheetName, sheetcount));
+                ISheet sheet = workbook.CreateSheet(String.Format("{0}{1}", sheetName, sheetcount));
                 CreateHeaderRow2007(sheet, sourceTable);
 
                 foreach (DataRow row in sourceTable.Rows)
@@ -304,7 +304,7 @@ namespace Rld.Acs.WpfApplication.Service.Excel
                     if (rowIndex == 1000000)//新建一个sheet
                     {
                         sheetcount++;
-                        sheet = workbook.CreateSheet(String.Format("{0}【{1}】", sheetName, sheetcount));
+                        sheet = workbook.CreateSheet(String.Format("{0}{1}", sheetName, sheetcount));
                         CreateHeaderRow2007(sheet, sourceTable);
                         rowIndex = 1;
                     }

@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Threading;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
@@ -272,7 +273,25 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 return;
             }
 
-            var dt = ExcelOperation<DeviceTrafficLogViewModel>.ListToDataTable(DeviceTrafficLogViewModels.ToList());
+            var dt = DataHelper<DeviceTrafficLogViewModel>.ListToDataTable(DeviceTrafficLogViewModels.ToList());
+            dt.Columns.Remove("TrafficID");
+            dt.Columns.Remove("RecordType");
+            dt.Columns.Remove("RecordUploadTime");
+            dt.Columns.Remove("AuthenticationType");
+            dt.Columns.Remove("IsInDesignMode");
+
+            dt.Columns["DeviceUserID"].SetOrdinal(3);
+            dt.Columns["AuthenticationString"].SetOrdinal(4);
+            dt.Columns["RecordTime"].SetOrdinal(6);
+
+            dt.Columns["DeviceID"].ColumnName = "设备ID";
+            dt.Columns["DeviceType"].ColumnName = "设备类型";
+            dt.Columns["DeviceSN"].ColumnName = "设备序列号";
+            dt.Columns["DeviceUserID"].ColumnName = "用户设备ID";
+            dt.Columns["AuthenticationString"].ColumnName = "验证方式";
+            dt.Columns["Remark"].ColumnName = "验证结果";
+            dt.Columns["RecordTime"].ColumnName = "记录时间";
+
             Messenger.Default.Send(new OpenWindowMessage() { DataContext = dt }, Tokens.DeviceTrafficLogPage_OpenExportView);
         }
     }

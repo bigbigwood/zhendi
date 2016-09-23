@@ -46,7 +46,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 if (dlg.ShowDialog() == true)
                 {
                     var dt = DataContext as DataTable;
-                    ExcelService.ExportDataTableToExcel(dt, dlg.FileName, "Sheet1");
+                    ExcelService.ExportDataTableToExcel(dt, dlg.FileName, "Sheet");
                     ShowSubViewNotification(new NotificationMessage("导出成功"));
                 }
             }
@@ -94,7 +94,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 if (dlg.ShowDialog() == true)
                 {
                     var dt = DataContext as DataTable;
-                    ExcelService.ExportDataTableToExcel2007(dt, dlg.FileName, "Sheet1");
+                    ExcelService.ExportDataTableToExcel2007(dt, dlg.FileName, "Sheet");
                     ShowSubViewNotification(new NotificationMessage("导出成功"));
                 }
                 }
@@ -118,10 +118,34 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 if (dlg.ShowDialog() == true)
                 {
                     var dt = DataContext as DataTable;
-                    TextExportingService.ExportDataTable(dt, dlg.FileName);
+                    TextExportingService.ExportDataTable(dt, dlg.FileName, ",");
                     ShowSubViewNotification(new NotificationMessage("导出成功"));
                 }
                 }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                ShowSubViewNotification(new NotificationMessage("导出失败"));
+            }
+        }
+
+        private void BtnExportTxt_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var dlg = new Microsoft.Win32.SaveFileDialog()
+                {
+                    FileName = "工作簿1",
+                    DefaultExt = ".txt",
+                    Filter = "Txt (*.txt)|*.txt",
+                };
+                if (dlg.ShowDialog() == true)
+                {
+                    var dt = DataContext as DataTable;
+                    TextExportingService.ExportDataTable(dt, dlg.FileName, " ");
+                    ShowSubViewNotification(new NotificationMessage("导出成功"));
+                }
+            }
             catch (Exception ex)
             {
                 Log.Error(ex);

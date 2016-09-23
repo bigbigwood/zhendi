@@ -26,13 +26,13 @@ namespace Rld.Acs.WpfApplication.Service.ExportFile
                     BaseFont bfChinese = BaseFont.CreateFont("C:\\WINDOWS\\Fonts\\STSONG.TTF", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
                     Font fontChinese = new Font(bfChinese, 12);
 
-                    //document.Add(new Paragraph(this.TextBox1.Text.ToString(), fontChinese));
-
-                    //iTextSharp.text.Image jpeg = iTextSharp.text.Image.GetInstance(Server.MapPath("xxx.jpg"));
-
-                    //document.Add(jpeg);
-
                     PdfPTable table = new PdfPTable(datatable.Columns.Count);
+                    //table header
+                    for (int j = 0; j < datatable.Columns.Count; j++)
+                    {
+                        table.AddCell(new Phrase(datatable.Columns[j].ColumnName, fontChinese));
+                    }
+                    //table body
                     for (int i = 0; i < datatable.Rows.Count; i++)
                     {
                         for (int j = 0; j < datatable.Columns.Count; j++)
