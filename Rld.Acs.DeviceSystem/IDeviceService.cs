@@ -21,6 +21,8 @@ namespace Rld.Acs.DeviceSystem
         [OperationContract]
         SyncDeviceUsersResponse SyncDeviceUsers(SyncDeviceUsersRequest request);
         [OperationContract]
+        SyncDevicesResponse SyncDevices(SyncDevicesRequest request);
+        [OperationContract]
         SyncDeviceTrafficLogsResponse SyncDeviceTrafficLogs(SyncDeviceTrafficLogsRequest request);
         [OperationContract]
         SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(SyncDeviceOperationLogsRequest request);
@@ -34,5 +36,7 @@ namespace Rld.Acs.DeviceSystem
         GetDoorStateResponse GetDoorState(GetDoorStateRequest request);
         [OperationContract]
         UpdateDoorStateResponse UpdateDoorState(UpdateDoorStateRequest request);
+        [OperationContract]
+        SearchNewDevicesResponse SearchNewDevices(SearchNewDevicesRequest request);
     }
 }

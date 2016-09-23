@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading;
@@ -8,6 +10,11 @@ using Rld.Acs.DeviceSystem.Message;
 using Rld.Acs.DeviceSystem.Service;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.DeviceSystem.Contract.Message;
+using GetDoorStateRequest = Rld.Acs.DeviceSystem.Message.GetDoorStateRequest;
+using GetDoorStateResponse = Rld.Acs.DeviceSystem.Message.GetDoorStateResponse;
+using UpdateDoorStateRequest = Rld.Acs.DeviceSystem.Message.UpdateDoorStateRequest;
+using UpdateDoorStateResponse = Rld.Acs.DeviceSystem.Message.UpdateDoorStateResponse;
 
 
 namespace Rld.Acs.DeviceSystem
@@ -110,9 +117,36 @@ namespace Rld.Acs.DeviceSystem
         public UpdateDoorStateResponse UpdateDoorState(UpdateDoorStateRequest request)
         {
             var op = new DoorStateOp();
-            op.UpdateDoorState(request.DeviceId, request.DoorIndex, request.Option);
+            var resultTypes = op.UpdateDoorState(request.DeviceId, request.DoorIndex, request.Option);
 
-            return new UpdateDoorStateResponse() { ResultType = ResultTypes.Ok};
+            return new UpdateDoorStateResponse() { ResultType = (resultTypes == ResultType.NotSupport) ? ResultTypes.NotSupportError : ResultTypes.Ok};
+        }
+
+        public SearchNewDevicesResponse SearchNewDevices(SearchNewDevicesRequest request)
+        {
+            return PersistenceOperation.Process(request, () =>
+            {
+                var newDeviceIds = new List<String>();
+
+                var registerClients = WebSocketClientManager.GetInstance().GetAllClients();
+                if (registerClients.Any())
+                {
+                    var repo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
+                    var existDevices = repo.Query(new Hashtable() { { "Status", "1" } });
+
+                    var registerDeviceIds = registerClients.Select(x => x.Id.ToString());
+                    var existDeviceIds = existDevices.Select(x => x.Code);
+
+                    newDeviceIds = registerDeviceIds.Except(existDeviceIds).ToList();
+                }
+
+                return new SearchNewDevicesResponse() { ResultType = ResultTypes.Ok, NewDeviceIds = newDeviceIds };
+            });
+        }
+
+        public SyncDevicesResponse SyncDevices(SyncDevicesRequest request)
+        {
+             return new SyncDevicesResponse();
         }
     }
 }

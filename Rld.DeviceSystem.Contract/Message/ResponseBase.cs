@@ -36,5 +36,7 @@ namespace Rld.DeviceSystem.Contract.Message
         OK = 0,
         [EnumMember]
         Error = 1,
+        [EnumMember]
+        NotSupport = 2,
     }
 }

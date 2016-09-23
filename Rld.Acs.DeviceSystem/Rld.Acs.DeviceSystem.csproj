@@ -101,8 +101,10 @@
     <Compile Include="Message\MessageBase.cs" />
     <Compile Include="Framework\OperationManager.cs" />
     <Compile Include="Message\GetDoorState.cs" />
+    <Compile Include="Message\SyncDevices.cs" />
     <Compile Include="Message\SyncDeviceTrafficLogs.cs" />
     <Compile Include="Message\SyncDeviceOperationLogs.cs" />
+    <Compile Include="Message\SearchNewDevices.cs" />
     <Compile Include="Message\UpdateDoorState.cs" />
     <Compile Include="Message\SyncTimeZones.cs" />
     <Compile Include="Message\SyncTimeGroups.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Message\SyncDepartmentUsers.cs" />
     <Compile Include="Message\SyncDBUsers.cs" />
     <Compile Include="Message\SyncDeviceUsers.cs" />
+    <Compile Include="Service\DeviceOp.cs" />
     <Compile Include="Service\DoorStateOp.cs" />
     <Compile Include="Service\DeviceMessageProcessor.cs" />
     <Compile Include="Service\OperationLogOp.cs" />

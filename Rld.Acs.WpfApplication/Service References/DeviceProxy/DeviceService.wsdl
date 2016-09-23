@@ -26,6 +26,12 @@
   <wsdl:message name="SyncDeviceUsersResponse">
     <wsdl:part name="parameters" element="tns:SyncDeviceUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="SyncDevicesRequest">
+    <wsdl:part name="parameters" element="tns:SyncDevicesRequest" />
+  </wsdl:message>
+  <wsdl:message name="SyncDevicesResponse">
+    <wsdl:part name="parameters" element="tns:SyncDevicesResponse" />
+  </wsdl:message>
   <wsdl:message name="SyncDeviceTrafficLogsRequest">
     <wsdl:part name="parameters" element="tns:SyncDeviceTrafficLogsRequest" />
   </wsdl:message>
@@ -68,6 +74,12 @@
   <wsdl:message name="UpdateDoorStateResponse">
     <wsdl:part name="parameters" element="tns:UpdateDoorStateResponse" />
   </wsdl:message>
+  <wsdl:message name="SearchNewDevicesRequest">
+    <wsdl:part name="parameters" element="tns:SearchNewDevicesRequest" />
+  </wsdl:message>
+  <wsdl:message name="SearchNewDevicesResponse">
+    <wsdl:part name="parameters" element="tns:SearchNewDevicesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IDeviceService">
     <wsdl:operation name="SyncDBUsers">
       <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDBUsers" name="SyncDBUsersRequest" message="tns:SyncDBUsersRequest" />
@@ -80,6 +92,10 @@
     <wsdl:operation name="SyncDeviceUsers">
       <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsers" name="SyncDeviceUsersRequest" message="tns:SyncDeviceUsersRequest" />
       <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsersResponse" name="SyncDeviceUsersResponse" message="tns:SyncDeviceUsersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SyncDevices">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevices" name="SyncDevicesRequest" message="tns:SyncDevicesRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevicesResponse" name="SyncDevicesResponse" message="tns:SyncDevicesResponse" />
     </wsdl:operation>
     <wsdl:operation name="SyncDeviceTrafficLogs">
       <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogs" name="SyncDeviceTrafficLogsRequest" message="tns:SyncDeviceTrafficLogsRequest" />
@@ -108,6 +124,10 @@
     <wsdl:operation name="UpdateDoorState">
       <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorState" name="UpdateDoorStateRequest" message="tns:UpdateDoorStateRequest" />
       <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorStateResponse" name="UpdateDoorStateResponse" message="tns:UpdateDoorStateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchNewDevices">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevices" name="SearchNewDevicesRequest" message="tns:SearchNewDevicesRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevicesResponse" name="SearchNewDevicesResponse" message="tns:SearchNewDevicesResponse" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

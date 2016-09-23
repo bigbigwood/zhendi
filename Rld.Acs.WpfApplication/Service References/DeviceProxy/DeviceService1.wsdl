@@ -31,6 +31,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SyncDevices">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevices" style="document" />
+      <wsdl:input name="SyncDevicesRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SyncDevicesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SyncDeviceTrafficLogs">
       <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogs" style="document" />
       <wsdl:input name="SyncDeviceTrafficLogsRequest">
@@ -91,6 +100,15 @@
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output name="UpdateDoorStateResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchNewDevices">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevices" style="document" />
+      <wsdl:input name="SearchNewDevicesRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="SearchNewDevicesResponse">
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

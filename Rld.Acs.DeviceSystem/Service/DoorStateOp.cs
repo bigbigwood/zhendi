@@ -20,7 +20,7 @@ namespace Rld.Acs.DeviceSystem.Service
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public void UpdateDoorState(Int32 deviceId, Int32 doorIndex, DoorControlOption option)
+        public ResultType UpdateDoorState(Int32 deviceId, Int32 doorIndex, DoorControlOption option)
         {
             Log.Info("Invoke WebSocketOperation...");
             var operation = new WebSocketOperation(deviceId);
@@ -34,10 +34,11 @@ namespace Rld.Acs.DeviceSystem.Service
             var response = DataContractSerializationHelper.Deserialize<UpdateDoorStateResponse>(rawResponse);
             Log.InfoFormat("Update door index:[{0}] for device id:[{1}], result:[{2}]", doorIndex, deviceId, response.ResultType);
 
-            if (response.ResultType != ResultType.OK)
+            if (response.ResultType != ResultType.OK && response.ResultType != ResultType.NotSupport)
             {
                 throw new Exception(string.Format("Update door index:[{0}] for device id:[{1}], result:[{2}]", doorIndex, deviceId, response.ResultType));
             }
+            return response.ResultType;
         }
 
         public bool GetDoorState(Int32 deviceId, Int32 doorIndex)

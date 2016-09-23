@@ -159,8 +159,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.IsSelected, op => op.Ignore());
 
-            CreateProvMap<UserAuthenticationViewModel, UserAuthentication>();
+            CreateProvMap<UserAuthenticationViewModel, UserAuthentication>()
+                .ForMember(dest => dest.AuthenticationData, op => op.MapFrom(src => src.AuthenticationData.Replace(' ', '-')));
             CreateProvMap<UserAuthentication, UserAuthenticationViewModel>()
+                .ForMember(dest => dest.AuthenticationData, op => op.MapFrom(src => src.AuthenticationData.Replace('-', ' ')))
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.IsSelected, op => op.Ignore())

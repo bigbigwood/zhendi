@@ -26,7 +26,7 @@
       <xs:enumeration value="AuthorizationError" />
       <xs:enumeration value="DataValidationError" />
       <xs:enumeration value="BussinessLogicError" />
-      <xs:enumeration value="PartiallyOk" />
+      <xs:enumeration value="NotSupportError" />
       <xs:enumeration value="Queued">
         <xs:annotation>
           <xs:appinfo>
@@ -76,14 +76,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SyncDeviceTrafficLogsRequest">
+  <xs:element name="SyncDevicesRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="Devices" nillable="true" type="q10:ArrayOfDeviceController" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DeviceIds" nillable="true" type="q10:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SyncDeviceTrafficLogsResponse">
+  <xs:element name="SyncDevicesResponse">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
@@ -91,14 +91,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SyncDeviceOperationLogsRequest">
+  <xs:element name="SyncDeviceTrafficLogsRequest">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="Devices" nillable="true" type="q12:ArrayOfDeviceController" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SyncDeviceOperationLogsResponse">
+  <xs:element name="SyncDeviceTrafficLogsResponse">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
@@ -106,11 +106,26 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SyncTimeGroupsRequest">
+  <xs:element name="SyncDeviceOperationLogsRequest">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="Devices" nillable="true" type="q14:ArrayOfDeviceController" />
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="TimeGroups" nillable="true" type="q15:ArrayOfTimeGroup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SyncDeviceOperationLogsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q15:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SyncTimeGroupsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="Devices" nillable="true" type="q16:ArrayOfDeviceController" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="TimeGroups" nillable="true" type="q17:ArrayOfTimeGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -118,15 +133,15 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
-        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q16:ArrayOfstring" />
+        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q18:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SyncTimeSegmentsRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="Devices" nillable="true" type="q17:ArrayOfDeviceController" />
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="TimeSegments" nillable="true" type="q18:ArrayOfTimeSegment" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="Devices" nillable="true" type="q19:ArrayOfDeviceController" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="TimeSegments" nillable="true" type="q20:ArrayOfTimeSegment" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -134,15 +149,15 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
-        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q19:ArrayOfstring" />
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q21:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SyncTimeZonesRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="Devices" nillable="true" type="q20:ArrayOfDeviceController" />
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="TimeZones" nillable="true" type="q21:ArrayOfTimeZone" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="Devices" nillable="true" type="q22:ArrayOfDeviceController" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="TimeZones" nillable="true" type="q23:ArrayOfTimeZone" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -150,7 +165,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
-        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q22:ArrayOfstring" />
+        <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q24:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -167,7 +182,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="IsOpened" type="xs:boolean" />
         <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
-        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q23:ArrayOfstring" />
+        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q25:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -210,6 +225,20 @@
           </xs:appinfo>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="Close">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CancelAlarm">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="DoorControlOption" nillable="true" type="tns:DoorControlOption" />
@@ -217,7 +246,21 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
-        <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q24:ArrayOfstring" />
+        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q26:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchNewDevicesRequest">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchNewDevicesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="NewDeviceIds" nillable="true" type="q27:ArrayOfstring" />
+        <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
+        <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q28:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

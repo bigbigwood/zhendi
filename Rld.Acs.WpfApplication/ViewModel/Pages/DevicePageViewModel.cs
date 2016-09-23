@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
+using System.Windows.Markup;
 using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -19,6 +20,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Rld.Acs.WpfApplication.ViewModel.Converter;
 using Rld.Acs.WpfApplication.ViewModel.Views;
+using Rld.Acs.WpfApplication.DeviceProxy;
 
 namespace Rld.Acs.WpfApplication.ViewModel
 {
@@ -29,6 +31,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public RelayCommand AddCmd { get; private set; }
         public RelayCommand ModifyCmd { get; private set; }
         public RelayCommand DeleteCmd { get; private set; }
+        public RelayCommand SearchNewDeviceCmd { get; private set; }
 
         public List<DeviceController> DeviceControllers
         {
@@ -42,6 +45,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             AddCmd = new AuthCommand(AddDeviceController);
             ModifyCmd = new AuthCommand(ModifyDeviceController);
             DeleteCmd = new AuthCommand(DeleteDeviceController);
+            SearchNewDeviceCmd = new AuthCommand(SearchNewDevices);
 
             var deviceViewModels = DeviceControllers.Select(x => x.ToViewModel());
             DeviceControllerViewModels = new ObservableCollection<DeviceViewModel>(deviceViewModels);
@@ -136,6 +140,60 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     Log.Error(ex);
                     message = "删除设备失败！";
                 }
+                Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
+            });
+        }
+
+        private void SearchNewDevices()
+        {
+            try
+            {
+                string[] messages;
+                ResultTypes resultTypes;
+                var deviceCodes = new DeviceServiceClient().SearchNewDevices(out resultTypes, out messages);
+                if (resultTypes == ResultTypes.Ok)
+                {
+                    if (deviceCodes != null && deviceCodes.Any())
+                    {
+                        var deviceCodeString = string.Join(", ", deviceCodes);
+                        string question = string.Format("发现新设备ID:{0}, 现在导入系统吗？", deviceCodeString);
+                        Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmImportNewController), Tokens.DevicePage_ShowQuestion);
+                    }
+                    else
+                    {
+                        var message = "没有发现新设备";
+                        Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
+                    }
+                }
+                else
+                {
+                    var message = "搜索设备失败！";
+                    Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        private void ConfirmImportNewController()
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                string message = "导入新设备成功！";
+                //try
+                //{
+                //    _deviceControllerRepo.Delete(SelectedDeviceViewModel.Id);
+                //    message = "删除设备成功!";
+
+                //    DeviceControllerViewModels.Remove(SelectedDeviceViewModel);
+                //}
+                //catch (Exception ex)
+                //{
+                //    Log.Error(ex);
+                //    message = "删除设备失败！";
+                //}
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
             });
         }

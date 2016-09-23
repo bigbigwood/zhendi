@@ -269,11 +269,6 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
         private async void UpdateDoorState(object sender, DoorControlOption option)
         {
-            if (option == DoorControlOption.Close || option == DoorControlOption.CancelAlarm)
-            {
-                MessageBoxSingleton.Instance.ShowDialog("当前设备无法支持此功能", "");
-                return;
-            }
             if (option == DoorControlOption.ViewStuff)
             {
                 MessageBoxSingleton.Instance.ShowDialog("尚未实现此功能", "");
@@ -300,7 +295,12 @@ namespace Rld.Acs.WpfApplication.View.Pages
                     var selectedOption = (DeviceProxy.DoorControlOption)option.GetHashCode();
 
                     ResultTypes resultTypes = new DeviceServiceClient().UpdateDoorState(deviceId, doorIndex, selectedOption, out messages);
-                    message = "同步数据成功！";
+                    if (resultTypes == ResultTypes.Ok)
+                        message = "同步数据成功!";
+                    else if (resultTypes == ResultTypes.NotSupportError)
+                        message = "当前设备无法支持此功能";
+                    else
+                        message = "同步数据失败！";
                 }
                 catch (Exception ex)
                 {

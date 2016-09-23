@@ -32,7 +32,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         BussinessLogicError = 4,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        PartiallyOk = 5,
+        NotSupportError = 5,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Queued = 98,
@@ -56,6 +56,12 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         KeepClose = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Close = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CancelAlarm = 6,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -82,6 +88,13 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsers", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsersResponse")]
         System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersResponse> SyncDeviceUsersAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevices", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevicesResponse")]
+        Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse SyncDevices(Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest request);
+        
+        // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevices", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevicesResponse")]
+        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse> SyncDevicesAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogs", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogsResponse")]
         Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsResponse SyncDeviceTrafficLogs(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsRequest request);
@@ -133,6 +146,13 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorState", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorStateResponse")]
         System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateResponse> UpdateDoorStateAsync(Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevices", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevicesResponse")]
+        Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse SearchNewDevices(Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest request);
+        
+        // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevices", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevicesResponse")]
+        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse> SearchNewDevicesAsync(Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -250,6 +270,42 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         }
         
         public SyncDeviceUsersResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+            this.ResultType = ResultType;
+            this.Messages = Messages;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="SyncDevicesRequest", WrapperNamespace="http://www.realand.com/DeviceSystem/", IsWrapped=true)]
+    public partial class SyncDevicesRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
+        public int[] DeviceIds;
+        
+        public SyncDevicesRequest() {
+        }
+        
+        public SyncDevicesRequest(int[] DeviceIds) {
+            this.DeviceIds = DeviceIds;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="SyncDevicesResponse", WrapperNamespace="http://www.realand.com/DeviceSystem/", IsWrapped=true)]
+    public partial class SyncDevicesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
+        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
+        public string[] Messages;
+        
+        public SyncDevicesResponse() {
+        }
+        
+        public SyncDevicesResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -535,6 +591,39 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="SearchNewDevicesRequest", WrapperNamespace="http://www.realand.com/DeviceSystem/", IsWrapped=true)]
+    public partial class SearchNewDevicesRequest {
+        
+        public SearchNewDevicesRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="SearchNewDevicesResponse", WrapperNamespace="http://www.realand.com/DeviceSystem/", IsWrapped=true)]
+    public partial class SearchNewDevicesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
+        public string[] NewDeviceIds;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
+        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=2)]
+        public string[] Messages;
+        
+        public SearchNewDevicesResponse() {
+        }
+        
+        public SearchNewDevicesResponse(string[] NewDeviceIds, Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+            this.NewDeviceIds = NewDeviceIds;
+            this.ResultType = ResultType;
+            this.Messages = Messages;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IDeviceServiceChannel : Rld.Acs.WpfApplication.DeviceProxy.IDeviceService, System.ServiceModel.IClientChannel {
     }
@@ -614,6 +703,23 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         
         public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersResponse> SyncDeviceUsersAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersRequest request) {
             return base.Channel.SyncDeviceUsersAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SyncDevices(Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest request) {
+            return base.Channel.SyncDevices(request);
+        }
+        
+        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes SyncDevices(int[] DeviceIds, out string[] Messages) {
+            Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest();
+            inValue.DeviceIds = DeviceIds;
+            Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncDevices(inValue);
+            Messages = retVal.Messages;
+            return retVal.ResultType;
+        }
+        
+        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse> SyncDevicesAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest request) {
+            return base.Channel.SyncDevicesAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -740,6 +846,23 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         
         public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateResponse> UpdateDoorStateAsync(Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateRequest request) {
             return base.Channel.UpdateDoorStateAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SearchNewDevices(Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest request) {
+            return base.Channel.SearchNewDevices(request);
+        }
+        
+        public string[] SearchNewDevices(out Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, out string[] Messages) {
+            Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest();
+            Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SearchNewDevices(inValue);
+            ResultType = retVal.ResultType;
+            Messages = retVal.Messages;
+            return retVal.NewDeviceIds;
+        }
+        
+        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse> SearchNewDevicesAsync(Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest request) {
+            return base.Channel.SearchNewDevicesAsync(request);
         }
     }
 }

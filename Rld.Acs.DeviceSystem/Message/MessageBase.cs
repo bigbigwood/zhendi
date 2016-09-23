@@ -22,7 +22,7 @@ namespace Rld.Acs.DeviceSystem.Message
         [EnumMember]
         BussinessLogicError = 4,
         [EnumMember]
-        PartiallyOk = 5,
+        NotSupportError = 5,
         [EnumMember]
         Queued = 98,
         [EnumMember]

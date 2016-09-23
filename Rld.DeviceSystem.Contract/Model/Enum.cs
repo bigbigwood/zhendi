@@ -211,5 +211,9 @@ namespace Rld.DeviceSystem.Contract.Model
         KeepOpen = 3,
         [EnumMember]
         KeepClose = 4,
+        [EnumMember]
+        Close = 5,
+        [EnumMember]
+        CancelAlarm = 6,
     }
 }

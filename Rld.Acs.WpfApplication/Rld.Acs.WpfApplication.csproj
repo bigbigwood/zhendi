@@ -683,6 +683,9 @@
     <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.ResultTypes.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -690,6 +693,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsResponse.datasource">
