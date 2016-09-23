@@ -67,7 +67,7 @@
                 <Button Grid.Column="8"  Margin="5,2" Height="25" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
                          Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_QuerySysOperationLog}" />
                 <Button Grid.Column="9"  Margin="5,2" Height="25" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
-                         Content="{DynamicResource Export}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_ExportsysOperationLog}" />
+                         Content="{DynamicResource Export}"  Command="{Binding ExportCommand}" CommandParameter="{x:Static a:ACL.E_ExportsysOperationLog}" />
             </Grid>
 
             <Grid Grid.Row="1" Margin="0,0,0,0" >

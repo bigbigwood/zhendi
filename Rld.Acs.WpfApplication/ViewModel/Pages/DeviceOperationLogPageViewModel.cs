@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Threading;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
@@ -34,6 +35,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public ObservableCollection<DeviceOperationLogViewModel> DeviceOperationLogViewModels { get; set; }
 
         public RelayCommand QueryCommand { get; set; }
+        public RelayCommand ExportCommand { get; set; }
 
         private async void QueryCommandFunc()
         {
@@ -182,6 +184,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public DeviceOperationLogPageViewModel()
         {
             QueryCommand = new AuthCommand(QueryCommandFunc);
+            ExportCommand = new AuthCommand(ExportCommandFunc);
             NextPageSearchCommand = new AuthCommand(NextPageSearchCommandFunc);
 
             DeviceOperationLogViewModels = new ObservableCollection<DeviceOperationLogViewModel>();
@@ -259,6 +262,40 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             }
 
             return conditions;
+        }
+
+        private void ExportCommandFunc()
+        {
+            if (!DeviceOperationLogViewModels.Any())
+            {
+                Messenger.Default.Send(new NotificationMessage("没有数据可以导出！"), Tokens.DeviceOperationLogPage_ShowNotification);
+                return;
+            }
+
+            var dt = DataHelper<DeviceTrafficLogViewModel>.ListToDataTable(DeviceOperationLogViewModels.ToList());
+            dt.Columns.Remove("LogID");
+            dt.Columns.Remove("OperationUploadTime");
+            dt.Columns.Remove("IsInDesignMode");
+
+            dt.Columns["DeviceId"].SetOrdinal(0);
+            dt.Columns["DeviceType"].SetOrdinal(1);
+            dt.Columns["OperatorId"].SetOrdinal(2);
+            dt.Columns["DeviceUserId"].SetOrdinal(3);
+            dt.Columns["OperationType"].SetOrdinal(4);
+            dt.Columns["OperationDescription"].SetOrdinal(5);
+            dt.Columns["OperationContent"].SetOrdinal(6);
+            dt.Columns["OperationTime"].SetOrdinal(7);
+
+            dt.Columns["DeviceId"].ColumnName = "设备ID";
+            dt.Columns["DeviceType"].ColumnName = "设备类型";
+            dt.Columns["OperatorId"].ColumnName = "操作人员ID";
+            dt.Columns["DeviceUserId"].ColumnName = "用户设备ID";
+            dt.Columns["OperationType"].ColumnName = "操作类型";
+            dt.Columns["OperationDescription"].ColumnName = "操作描述";
+            dt.Columns["OperationContent"].ColumnName = "操作内容";
+            dt.Columns["OperationTime"].ColumnName = "操作时间";
+
+            Messenger.Default.Send(new OpenWindowMessage() { DataContext = dt }, Tokens.DeviceOperationLogPage_OpenExportView);
         }
     }
 }

@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Threading;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
@@ -33,6 +34,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public ObservableCollection<SysOperationLogViewModel> SysOperationLogViewModels { get; set; }
 
         public RelayCommand QueryCommand { get; set; }
+        public RelayCommand ExportCommand { get; set; }
 
         private async void QueryCommandFunc()
         {
@@ -182,6 +184,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public SysOperationLogPageViewModel()
         {
             QueryCommand = new AuthCommand(QueryCommandFunc);
+            ExportCommand = new AuthCommand(ExportCommandFunc);
             NextPageSearchCommand = new AuthCommand(NextPageSearchCommandFunc);
 
             SysOperationLogViewModels = new ObservableCollection<SysOperationLogViewModel>();
@@ -242,6 +245,30 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             }
 
             return conditions;
+        }
+
+        private void ExportCommandFunc()
+        {
+            if (!SysOperationLogViewModels.Any())
+            {
+                Messenger.Default.Send(new NotificationMessage("没有数据可以导出！"), Tokens.SysOperationLogPage_ShowNotification);
+                return;
+            }
+
+            var dt = DataHelper<DeviceTrafficLogViewModel>.ListToDataTable(SysOperationLogViewModels.ToList());
+            dt.Columns.Remove("LogID");
+            dt.Columns.Remove("DepartmentID");
+            dt.Columns.Remove("Remark");
+            dt.Columns.Remove("IsInDesignMode");
+
+            dt.Columns["UserID"].ColumnName = "操作人员ID";
+            dt.Columns["UserName"].ColumnName = "操作人员名称";
+            dt.Columns["OperationCode"].ColumnName = "操作代码";
+            dt.Columns["OperationName"].ColumnName = "操作名称";
+            dt.Columns["Detail"].ColumnName = "操作详情";
+            dt.Columns["CreateDate"].ColumnName = "操作时间";
+
+            Messenger.Default.Send(new OpenWindowMessage() { DataContext = dt }, Tokens.SysOperationLogPage_OpenExportView);
         }
     }
 }

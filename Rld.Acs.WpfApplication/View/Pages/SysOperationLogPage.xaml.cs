@@ -16,8 +16,18 @@ namespace Rld.Acs.WpfApplication.View.Pages
         public SysOperationLogPage()
         {
             InitializeComponent();
+
+            Messenger.Default.Register<OpenWindowMessage>(this, Tokens.SysOperationLogPage_OpenExportView, OpenDepartmentView);
             Messenger.Default.Register(this, Tokens.SysOperationLogPage_ShowNotification, new Action<NotificationMessage>(ShowMessage));
         }
 
+        private void OpenDepartmentView(OpenWindowMessage msg)
+        {
+            var view = new ExportFileView() { DataContext = msg.DataContext };
+            view.BorderThickness = new Thickness(1);
+            view.GlowBrush = null;
+            view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
+            view.ShowDialog();
+        }
     }
 }
