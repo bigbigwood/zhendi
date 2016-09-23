@@ -38,14 +38,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public DateTime? UpdateDate { get; set; }
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-        public RelayCommand UploadFingerPrintPicCmd { get; private set; }
         public RelayCommand<UserAuthenticationViewModel> ModifyCmd { get; private set; }
 
         public UserAuthenticationViewModel()
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
-            UploadFingerPrintPicCmd = new RelayCommand(UploadFingerPrintPic);
             ModifyCmd = new RelayCommand<UserAuthenticationViewModel>(Modify);
             Status = GeneralStatus.Enabled;
         }
