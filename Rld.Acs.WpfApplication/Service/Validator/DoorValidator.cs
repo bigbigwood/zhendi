@@ -11,7 +11,7 @@ namespace Rld.Acs.WpfApplication.Service.Validator
         {
             RuleFor(m => m.Name)
                 .NotEmpty().WithMessage("门名称不能为空")
-                .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("门名称不能有特殊字符");
+                .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("门名称:[{0}]不能有特殊字符", x => x.Name);
             
             RuleFor(m => m.Code)
                 .NotEmpty().WithMessage("门编号不能为空")

@@ -10,7 +10,7 @@ namespace Rld.Acs.WpfApplication.Service.Validator
         {
             RuleFor(m => m.IDNumber)
                 .NotEmpty().WithMessage("身份证不能为空")
-                .Must(ValidatorToolkit.IsIDCardFormat).WithMessage("身份证长度为15或18位数字和x字符");
+                .Must(ValidatorToolkit.IsIDCardFormat).WithMessage("身份证长度为15或18位数字和X字符");
 
             RuleFor(m => m.TechnicalTitle)
                 .NotEmpty().WithMessage("部门职称不能为空");

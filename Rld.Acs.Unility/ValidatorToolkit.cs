@@ -37,7 +37,7 @@ namespace Rld.Acs.Unility
         public static bool IsIDCardFormat(string str)
         {
             if (string.IsNullOrWhiteSpace(str)) return false;
-            return Regex.IsMatch(str, @"(^\d{17}(?:\d|x)$)|(^\d{15}$)");
+            return Regex.IsMatch(str, @"(^\d{17}(?:\d|X)$)|(^\d{15}$)");
         }
 
         public static bool IsTimeSegmentFormat(string str)
@@ -76,11 +76,19 @@ namespace Rld.Acs.Unility
             return intValue >= 0 && intValue < 60;
         }
 
+        public static bool HasSpecialCharRegex(string str)
+        {
+            if (string.IsNullOrWhiteSpace(str)) return false;
+
+            return Regex.IsMatch(str, @"[!@#$%^&*()_+{}:|<>?""]");
+        }
+
         public static bool HasSpecialChar(string str)
         {
             if (string.IsNullOrWhiteSpace(str)) return false;
 
-            return Regex.IsMatch(str, @"[，。；？~！：‘“”’【】（）!@#$%^&*()=-_+{}:<>?\|';.,\[\]]");
+            var specialChars = @"[，。；？~！：‘“”’【】（）!@#$%^&*()=-_+{}:<>?\|';.,]";
+            return specialChars.Any(sc => str.Contains(sc));
         }
     }
 }
