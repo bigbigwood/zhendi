@@ -75,7 +75,7 @@
                     <TextBox Text="{Binding Name}" Width="80"/>
                 </StackPanel>
                 
-                <Button Margin="0,5" Height="25"  FontSize ="12" Style="{StaticResource FlatButtonStyle}" Background="LightGray" 
+                <Button Margin="0,5" FontSize ="12" HorizontalAlignment="Stretch" Width="{Binding}"
                         Content="上传楼层平面图" Click="UploadPhothBtn_Click"/>
 
                 <Border Height="450">

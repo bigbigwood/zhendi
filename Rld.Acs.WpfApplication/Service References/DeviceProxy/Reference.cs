@@ -280,14 +280,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     [System.ServiceModel.MessageContractAttribute(WrapperName="SyncDevicesRequest", WrapperNamespace="http://www.realand.com/DeviceSystem/", IsWrapped=true)]
     public partial class SyncDevicesRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public int[] DeviceIds;
-        
         public SyncDevicesRequest() {
-        }
-        
-        public SyncDevicesRequest(int[] DeviceIds) {
-            this.DeviceIds = DeviceIds;
         }
     }
     
@@ -297,15 +290,19 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SyncDevicesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Model.DeviceController[] NewDeviceControllers;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
+        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=2)]
         public string[] Messages;
         
         public SyncDevicesResponse() {
         }
         
-        public SyncDevicesResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SyncDevicesResponse(Rld.Acs.Model.DeviceController[] NewDeviceControllers, Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+            this.NewDeviceControllers = NewDeviceControllers;
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -606,7 +603,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SearchNewDevicesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public string[] NewDeviceIds;
+        public int[] NewDeviceIds;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
@@ -617,7 +614,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SearchNewDevicesResponse() {
         }
         
-        public SearchNewDevicesResponse(string[] NewDeviceIds, Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SearchNewDevicesResponse(int[] NewDeviceIds, Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
             this.NewDeviceIds = NewDeviceIds;
             this.ResultType = ResultType;
             this.Messages = Messages;
@@ -710,12 +707,12 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
             return base.Channel.SyncDevices(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes SyncDevices(int[] DeviceIds, out string[] Messages) {
+        public Rld.Acs.Model.DeviceController[] SyncDevices(out Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, out string[] Messages) {
             Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest();
-            inValue.DeviceIds = DeviceIds;
             Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncDevices(inValue);
+            ResultType = retVal.ResultType;
             Messages = retVal.Messages;
-            return retVal.ResultType;
+            return retVal.NewDeviceControllers;
         }
         
         public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse> SyncDevicesAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest request) {
@@ -853,7 +850,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
             return base.Channel.SearchNewDevices(request);
         }
         
-        public string[] SearchNewDevices(out Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, out string[] Messages) {
+        public int[] SearchNewDevices(out Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, out string[] Messages) {
             Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest();
             Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SearchNewDevices(inValue);
             ResultType = retVal.ResultType;

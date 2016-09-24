@@ -6,7 +6,7 @@
 
 <GetSystemInfoResponse xmlns="http://www.realand.com/DeviceSystem/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
 	<ResultType>OK</ResultType>
-	<Token>d4400ffa-45c8-4b24-b1e8-64c6d5f7d539</Token>
+	<Token>c212e3e3-2479-4df9-a762-3f72762629dd</Token>
 	<SystemInfo>
 		<CommunitionType i:nil="true"/>
 		<DeviceId>1</DeviceId>

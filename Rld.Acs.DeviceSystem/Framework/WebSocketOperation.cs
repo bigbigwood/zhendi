@@ -14,7 +14,7 @@ namespace Rld.Acs.DeviceSystem.Framework
         private String _response;
         private Int32 _websocketClientId;
         private CancellationTokenSource blockToken;
-        public String Token { get; private set; }
+        public String Token { get; set; }
         public WebSocketOperation(int websocketClientId)
         {
             blockToken = new CancellationTokenSource();

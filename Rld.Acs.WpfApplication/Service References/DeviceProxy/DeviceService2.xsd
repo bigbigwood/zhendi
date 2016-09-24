@@ -78,14 +78,13 @@
   </xs:element>
   <xs:element name="SyncDevicesRequest">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DeviceIds" nillable="true" type="q10:ArrayOfint" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="SyncDevicesResponse">
     <xs:complexType>
       <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="NewDeviceControllers" nillable="true" type="q10:ArrayOfDeviceController" />
         <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
         <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q11:ArrayOfstring" />
       </xs:sequence>
@@ -258,7 +257,7 @@
   <xs:element name="SearchNewDevicesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="NewDeviceIds" nillable="true" type="q27:ArrayOfstring" />
+        <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="NewDeviceIds" nillable="true" type="q27:ArrayOfint" />
         <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
         <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q28:ArrayOfstring" />
       </xs:sequence>

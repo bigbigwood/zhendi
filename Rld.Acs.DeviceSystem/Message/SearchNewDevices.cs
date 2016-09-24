@@ -17,11 +17,11 @@ namespace Rld.Acs.DeviceSystem.Message
     public class SearchNewDevicesResponse : ResponseBase
     {
         [MessageBodyMember]
-        public List<string> NewDeviceIds { get; set; }
+        public List<int> NewDeviceIds { get; set; }
 
         public SearchNewDevicesResponse()
         {
-            NewDeviceIds = new List<string>();
+            NewDeviceIds = new List<int>();
         }
     }
 }

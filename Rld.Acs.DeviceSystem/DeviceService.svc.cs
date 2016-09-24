@@ -8,6 +8,7 @@ using log4net;
 using Rld.Acs.DeviceSystem.Framework;
 using Rld.Acs.DeviceSystem.Message;
 using Rld.Acs.DeviceSystem.Service;
+using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
 using Rld.DeviceSystem.Contract.Message;
@@ -126,27 +127,28 @@ namespace Rld.Acs.DeviceSystem
         {
             return PersistenceOperation.Process(request, () =>
             {
-                var newDeviceIds = new List<String>();
-
-                var registerClients = WebSocketClientManager.GetInstance().GetAllClients();
-                if (registerClients.Any())
-                {
-                    var repo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
-                    var existDevices = repo.Query(new Hashtable() { { "Status", "1" } });
-
-                    var registerDeviceIds = registerClients.Select(x => x.Id.ToString());
-                    var existDeviceIds = existDevices.Select(x => x.Code);
-
-                    newDeviceIds = registerDeviceIds.Except(existDeviceIds).ToList();
-                }
-
+                var op = new DeviceOp();
+                var newDeviceIds = op.SearchNewDevices();
                 return new SearchNewDevicesResponse() { ResultType = ResultTypes.Ok, NewDeviceIds = newDeviceIds };
             });
         }
 
         public SyncDevicesResponse SyncDevices(SyncDevicesRequest request)
         {
-             return new SyncDevicesResponse();
+            return PersistenceOperation.Process(request, () =>
+            {
+                var newDeviceControllers = new List<DeviceController>();
+                var op = new DeviceOp();
+                var newDeviceIds = op.SearchNewDevices();
+                newDeviceIds.ForEach(x =>
+                {
+                    Log.InfoFormat("sync device id={0} to system", x);
+                    newDeviceControllers.Add(op.SyncDeviceToSystem(x));
+                    Log.Info("sync device to system successfully");
+                });
+
+                return new SyncDevicesResponse() { ResultType = ResultTypes.Ok, NewDeviceControllers = newDeviceControllers };
+            });
         }
     }
 }

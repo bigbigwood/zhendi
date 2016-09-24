@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Threading;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
@@ -181,19 +182,28 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             DispatcherHelper.CheckBeginInvokeOnUI(() =>
             {
-                string message = "导入新设备成功！";
-                //try
-                //{
-                //    _deviceControllerRepo.Delete(SelectedDeviceViewModel.Id);
-                //    message = "删除设备成功!";
+                string message = "";
+                try
+                {
+                    string[] messages;
+                    ResultTypes resultTypes;
+                    var newDevices = new DeviceServiceClient().SyncDevices(out resultTypes, out messages);
 
-                //    DeviceControllerViewModels.Remove(SelectedDeviceViewModel);
-                //}
-                //catch (Exception ex)
-                //{
-                //    Log.Error(ex);
-                //    message = "删除设备失败！";
-                //}
+                    if (resultTypes == ResultTypes.Ok && newDevices != null && newDevices.Any())
+                    {
+                        newDevices.ForEach(x => DeviceControllerViewModels.Add(x.ToViewModel()));
+
+                        var cacheableRepo = _deviceControllerRepo as CacheableRepository<DeviceController, int>;
+                        cacheableRepo.Refresh();
+                    }
+
+                    message = "导入新设备成功！";
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                    message = "删除设备失败！";
+                }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
             });
         }

@@ -94,7 +94,7 @@
         <ComboBox  Grid.Row="5" Grid.Column="2" Margin="2"
                    Style="{DynamicResource VirtualisedMetroComboBox}"
                    controls:TextBoxHelper.Watermark="请选择默认设备权限角色"
-                   IsEditable="True"
+                   IsEditable="False"
                    MaxDropDownHeight="100"
                    ItemsSource="{Binding AuthorizationDeviceRoles, Mode=OneWay}" 
                    SelectedItem="{Binding DeviceRole}" 

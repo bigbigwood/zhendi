@@ -11,12 +11,12 @@ namespace Rld.Acs.DeviceSystem.Message
     [MessageContract(IsWrapped = true)]
     public class SyncDevicesRequest : RequestBase
     {
-        [MessageBodyMember]
-        public List<int> DeviceIds { get; set; }
     }
 
     [MessageContract(IsWrapped = true)]
     public class SyncDevicesResponse : ResponseBase
     {
+        [MessageBodyMember]
+        public List<DeviceController> NewDeviceControllers { get; set; }
     }
 }

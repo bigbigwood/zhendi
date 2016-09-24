@@ -102,6 +102,20 @@ namespace Rld.Acs.WpfApplication.Repository
             return entities;
         }
 
+        public virtual void Refresh()
+        {
+            ObjectCache cache = MemoryCache.Default;
+            if (cache.Contains(CacheKey))
+            {
+                Log.InfoFormat("Remove cache data key= {0}", CacheKey);
+                cache.Remove(CacheKey);
+            }
+
+            Log.InfoFormat("Loading data for cacheable repository, cache key= {0}", CacheKey);
+            var entities = base.Query(new Hashtable()).ToList();
+            cache.Set(CacheKey, entities, GetPolicy());
+        }
+
         private CacheItemPolicy GetPolicy()
         {
             return new CacheItemPolicy { Priority = CacheItemPriority.NotRemovable, SlidingExpiration = TimeSpan.FromMinutes(CacheExpireMinutes) };
