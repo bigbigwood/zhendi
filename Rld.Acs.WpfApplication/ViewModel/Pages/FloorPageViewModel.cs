@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -42,14 +43,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             try
             {
-                var viewModel = AutoMapper.Mapper.Map<FloorViewModel>(new Floor());
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = viewModel
-
-                }, Tokens.FloorView_Open);
-
-                if (viewModel.FloorID != 0)
+                var viewModel = Mapper.Map<FloorViewModel>(new Floor());
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.FloorView_Open);
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
                     FloorViewModels.Add(viewModel);
                 }
@@ -70,14 +66,17 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
-                SelectedFloorViewModel.InitDoorListBox();
-                Messenger.Default.Send(new OpenWindowMessage()
+                var coreModel = Mapper.Map<Floor>(SelectedFloorViewModel);
+                var viewModel = Mapper.Map<FloorViewModel>(coreModel);
+                viewModel.InitDoorListBox();
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.FloorView_Open);
+
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
-                    DataContext = SelectedFloorViewModel
-
-                }, Tokens.FloorView_Open);
-
-                RaisePropertyChanged(null);
+                    var index = FloorViewModels.IndexOf(SelectedFloorViewModel);
+                    FloorViewModels[index] = viewModel;
+                    //RaisePropertyChanged(null);
+                }
             }
             catch (Exception ex)
             {

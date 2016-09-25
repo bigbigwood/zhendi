@@ -82,6 +82,13 @@ namespace Rld.Acs.WpfApplication.View.Windows
             if (openFileDialog.ShowDialog() == true)
             {
                 var filename = openFileDialog.FileName;
+                var fileInfo = new FileInfo(filename);
+                if (fileInfo.Length > 4*1024*1024)
+                {
+                    ShowSubViewNotification(new NotificationMessage("平面图文件大小不能超过4M"));
+                    return;
+                }
+
                 string extension = new FileInfo(filename).Extension;
                 string uniqueFileName = string.Format(@"{0}_{1}{2}", Guid.NewGuid(), DateTime.Now.ToString("yyyyMMddhhmmss"), extension);
                 string cacheFilePath = string.Format(@"{0}\{1}", ApplicationEnvironment.LocalImageCachePath, uniqueFileName);
@@ -134,6 +141,8 @@ namespace Rld.Acs.WpfApplication.View.Windows
                     UpdateAuthorizationDoorsForFloor(coreModel);
                 }
 
+                _floorViewModel.ViewModelAttachment.CoreModel = coreModel;
+                _floorViewModel.ViewModelAttachment.LastOperationSuccess = true;
                 ProcessCloseViewMessage(new NotificationMessage("保存成功"));
             }
             catch (Exception ex)

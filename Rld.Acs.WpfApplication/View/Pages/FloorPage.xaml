@@ -61,8 +61,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Header="{DynamicResource FloorPage_Label_Name}" Binding="{Binding Name}" Width="200" />
-                        <DataGridTextColumn Width="*"/>
-                        <!--<DataGridTextColumn Header="{DynamicResource FloorPage_Label_Description}" Binding="{Binding DoorNames}" Width="*" />-->
+                        <DataGridTextColumn Header="{DynamicResource FloorPage_Label_Description}" Binding="{Binding DoorNames}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

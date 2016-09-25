@@ -29,6 +29,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
+        public ViewModelAttachment<Floor> ViewModelAttachment { get; set; }
+
         public ObservableCollection<FloorDoorViewModel> Doors { get; set; }
         public virtual Int32 FloorID { get; set; }
         public String Name { get; set; }
@@ -39,8 +41,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             get
             {
-                var coremodel = Mapper.Map<Floor>(this);
-                return coremodel.GetDoorList(FloorDoorManager.GetInstance().AuthorizationDoors);
+                var names = Doors.FindAll(x => x.FloorID == FloorID).Select(x => x.DoorName);
+                return string.Join(", ", names);
             }
         }
 
@@ -48,6 +50,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
+            ViewModelAttachment = new ViewModelAttachment<Floor>();
 
             InitDoorListBox();
         }
@@ -95,20 +98,22 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
+                var coreModel = Mapper.Map<Floor>(this);
                 if (FloorID == 0)
                 {
-                    var coreModel = Mapper.Map<Floor>(this);
                     coreModel = _floorRepo.Insert(coreModel);
                     FloorID = coreModel.FloorID;
                     message = "增加楼层成功!";
                 }
                 else
                 {
-                    var coreModel = Mapper.Map<Floor>(this);
                     coreModel = _floorRepo.Insert(coreModel);
                     _floorRepo.Update(coreModel);
                     message = "修改设楼层成功!";
                 }
+
+                ViewModelAttachment.CoreModel = coreModel;
+                ViewModelAttachment.LastOperationSuccess = true;
             }
             catch (Exception ex)
             {

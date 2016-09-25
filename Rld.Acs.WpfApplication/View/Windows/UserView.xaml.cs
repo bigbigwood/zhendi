@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight.Messaging;
@@ -27,6 +28,13 @@ namespace Rld.Acs.WpfApplication.View.Windows
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() == true)
             {
+                var fileInfo = new FileInfo(openFileDialog.FileName);
+                if (fileInfo.Length > 500 * 1024)
+                {
+                    ShowSubViewNotification(new NotificationMessage("头像文件大小不能超过500Kb"));
+                    return;
+                }
+
                 tb_AvatorfilePath.Text = openFileDialog.FileName;
                 img_avator.Source = new BitmapImage(new Uri(openFileDialog.FileName));
             }
