@@ -131,14 +131,14 @@ namespace Rld.Acs.WpfApplication.View.Windows
                     coreModel = _floorRepo.Insert(coreModel);
                     _floorViewModel.FloorID = coreModel.FloorID;
                     _floorViewModel.BindDoors(coreModel.Doors);
-                    UpdateAuthorizationDoorsForFloor(coreModel);
+                    //UpdateAuthorizationDoorsForFloor(coreModel);
                 }
                 else
                 {
                     _floorRepo.Update(coreModel);
                     coreModel = _floorRepo.GetByKey(coreModel.FloorID);
                     _floorViewModel.BindDoors(coreModel.Doors);
-                    UpdateAuthorizationDoorsForFloor(coreModel);
+                    //UpdateAuthorizationDoorsForFloor(coreModel);
                 }
 
                 _floorViewModel.ViewModelAttachment.CoreModel = coreModel;
@@ -152,25 +152,25 @@ namespace Rld.Acs.WpfApplication.View.Windows
             }
         }
 
-        public void UpdateAuthorizationDoorsForFloor(Floor floor)
-        {
-            var authorizationFloorDoors = FloorDoorManager.GetInstance().AuthorizationFloorDoor;
-            foreach (var floorDoor in floor.Doors)
-            {
-                var i = authorizationFloorDoors.FirstOrDefault(x => x.FloorDoorID == floorDoor.FloorDoorID);
-                if (i != null)
-                {
-                    i = floorDoor;
-                }
-                else
-                {
-                    authorizationFloorDoors.Add(floorDoor);
-                }
-            }
+        //public void UpdateAuthorizationDoorsForFloor(Floor floor)
+        //{
+        //    var authorizationFloorDoors = FloorDoorManager.GetInstance().AuthorizationFloorDoor;
+        //    foreach (var floorDoor in floor.Doors)
+        //    {
+        //        var i = authorizationFloorDoors.FirstOrDefault(x => x.FloorDoorID == floorDoor.FloorDoorID);
+        //        if (i != null)
+        //        {
+        //            i = floorDoor;
+        //        }
+        //        else
+        //        {
+        //            authorizationFloorDoors.Add(floorDoor);
+        //        }
+        //    }
 
-            var removedDoors = authorizationFloorDoors.FindAll(x => x.FloorID == floor.FloorID && floor.Doors.All(y => y.FloorDoorID != x.FloorDoorID));
-            removedDoors.ForEach(x => authorizationFloorDoors.Remove(x));
-        }
+        //    var removedDoors = authorizationFloorDoors.FindAll(x => x.FloorID == floor.FloorID && floor.Doors.All(y => y.FloorDoorID != x.FloorDoorID));
+        //    removedDoors.ForEach(x => authorizationFloorDoors.Remove(x));
+        //}
 
         private void CancelBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {

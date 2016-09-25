@@ -15,7 +15,7 @@ namespace Rld.Acs.WpfApplication.Service
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IDeviceControllerRepository _deviceControllerRepo = NinjectBinder.GetRepository<IDeviceControllerRepository>();
-        private IFloorDoorRepository _floorDoorRepository = NinjectBinder.GetRepository<IFloorDoorRepository>();
+        private IFloorRepository _floorRepo = NinjectBinder.GetRepository<IFloorRepository>();
 
         public List<DeviceDoor> AuthorizationDoors
         {
@@ -27,7 +27,11 @@ namespace Rld.Acs.WpfApplication.Service
         }
         public List<FloorDoor> AuthorizationFloorDoor
         {
-            get { return _floorDoorRepository.Query(new Hashtable()).ToList(); }
+            get
+            {
+                var floors = _floorRepo.Query(new Hashtable());
+                return floors.SelectMany(x => x.Doors).ToList();
+            }
         }
         private static FloorDoorManager _instance = null;
 

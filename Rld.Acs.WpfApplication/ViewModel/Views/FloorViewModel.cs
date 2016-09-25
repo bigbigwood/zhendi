@@ -66,7 +66,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 {
                     floorDoorViewModel = Mapper.Map<FloorDoorViewModel>(bindedDoor);
                     floorDoorViewModel.DoorName = authDoor.Name;
-                    floorDoorViewModel.Enabled = (bindedDoor.FloorDoorID == 0 || bindedDoor.FloorID == FloorID);
+                    floorDoorViewModel.Enabled = (bindedDoor.FloorID == 0 || bindedDoor.FloorID == FloorID);
                 }
                 else
                 {

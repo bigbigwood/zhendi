@@ -35,7 +35,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             DeleteCmd = new AuthCommand(ShowDeletionQuestion);
 
             var operators = _floorRepo.Query(new Hashtable());
-            var vms = operators.Select(AutoMapper.Mapper.Map<FloorViewModel>);
+            var vms = operators.Select(Mapper.Map<FloorViewModel>);
             FloorViewModels = new ObservableCollection<FloorViewModel>(vms);
         }
 

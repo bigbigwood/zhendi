@@ -49,7 +49,6 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<ISysConfigRepository>().To<SysConfigRepository>();
 
             InjectionKernel.Bind<IFloorRepository>().To<FloorRepository>();
-            InjectionKernel.Bind<IFloorDoorRepository>().To<FloorDoorRepository>();
         }
 
         private static void BindValidator()
