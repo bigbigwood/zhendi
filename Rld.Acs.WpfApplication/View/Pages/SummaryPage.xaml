@@ -10,48 +10,77 @@
 	Title="SummaryPage">
 
     <Grid Margin="30,25,3,3">
-        <WrapPanel Grid.Row="1"
-                       Grid.Column="1"
-                       Width="800"
-                       Height="300"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top">
-            <Controls:Tile Title="Stuff -70"
-                               Style="{StaticResource LargeTileStyle}"
-                               Command="{Binding Path=GotoStuffCommand}"
-                               Margin="3" Background="#FFD76C1F" >
-
-                <Grid Width="40" Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+        <WrapPanel Width="800" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Controls:Tile Title="人员总数" TiltFactor="2" Style="{StaticResource LargeTileStyle}" Margin="3" Background="#FFD76C1F" 
+                           Command="{Binding Path=GotoStuffCommand}">
+            <Grid Width="160" Height="{Binding Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Width="70" Margin="3,10,3,30" HorizontalAlignment="Left"
+                          Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
                     <Grid.OpacityMask>
-                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_email}" />
+                            <ImageBrush ImageSource="{DynamicResource icon_summary_stuff}"></ImageBrush>
                     </Grid.OpacityMask>
                 </Grid>
+                <TextBlock Grid.Column="1" Margin="3,10,3,30" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding StuffCount}" />
+            </Grid>
             </Controls:Tile>
-            <Controls:Tile Title="Department"
-                               Style="{StaticResource LargeTileStyle}"
-                               Background="#FFB71A1A" 
-                           Command="{Binding Path=GotoDepartmentCommand}"
-                            Count="20"/>
-            <Controls:Tile Title="Device"
-                               Style="{StaticResource LargeTileStyle}"
-                               Background="#FF5D83C6" 
+            <Controls:Tile Title="部门总数"
+                           Style="{StaticResource LargeTileStyle}"
+                           Background="#FFB71A1A" 
+                           Command="{Binding Path=GotoDepartmentCommand}" >
+                <Grid Width="160" Height="{Binding Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Width="70" Margin="3,10,3,30" HorizontalAlignment="Left"
+                          Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                        <Grid.OpacityMask>
+                            <ImageBrush ImageSource="{DynamicResource icon_summary_department}"></ImageBrush>
+                        </Grid.OpacityMask>
+                    </Grid>
+                    <TextBlock Grid.Column="1" Margin="3,10,3,30" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding DepartmentCount}" />
+                </Grid>
+            </Controls:Tile>
+            
+            <Controls:Tile Title="设备总数"
+                           Style="{StaticResource LargeTileStyle}"
+                           Background="#FF5D83C6" 
                            Command="{Binding Path=GotoDeviceCommand}" >
-            <Grid Width="40" Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
-                <Grid.OpacityMask>
-                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_email}" />
-                </Grid.OpacityMask>
-            </Grid>
+                <Grid Width="160" Height="{Binding Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Width="70" Margin="3,10,3,30" HorizontalAlignment="Left"
+                          Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                        <Grid.OpacityMask>
+                            <ImageBrush ImageSource="{DynamicResource icon_summary_device}"></ImageBrush>
+                        </Grid.OpacityMask>
+                    </Grid>
+                    <TextBlock Grid.Column="1" Margin="3,10,3,30" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding DeviceCount}" />
+                </Grid>
             </Controls:Tile>
-            <Controls:Tile Title="Door"
-                               Style="{StaticResource LargeTileStyle}"
-                               Background="#FFC8AE12"
-                           Command="{Binding Path=GotoDoorCommand}"
-                           >
-            <Grid Width="40" Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
-                <Grid.OpacityMask>
-                    <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_email}" />
-                </Grid.OpacityMask>
-            </Grid>
+            <Controls:Tile Title="门总数"
+                           Style="{StaticResource LargeTileStyle}"
+                           Background="#FFC8AE12"
+                           Command="{Binding Path=GotoDoorCommand}" >
+                <Grid Width="160" Height="{Binding Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Width="70" Margin="3,10,3,30" HorizontalAlignment="Left"
+                          Background="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
+                        <Grid.OpacityMask>
+                            <ImageBrush ImageSource="{DynamicResource icon_summary_floor}"></ImageBrush>
+                        </Grid.OpacityMask>
+                    </Grid>
+                    <TextBlock Grid.Column="1" Margin="3,10,3,30" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding DoorCount}" />
+                </Grid>
             </Controls:Tile>
         </WrapPanel>
     </Grid>

@@ -12,5 +12,7 @@ namespace Rld.Acs.Repository.Interfaces
     public interface IUserRepository : IRepository<User, Int32>
     {
         IEnumerable<User> QueryUsersForSummaryData(Hashtable conditions);
+
+        Int32 QueryUsersCount(Hashtable conditions);
     }
 }

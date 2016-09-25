@@ -20,5 +20,10 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
         {
             return _sqlMapper.QueryForList<User>("User.QueryUsersForSummaryData", conditions);
         }
+
+        public Int32 QueryUsersCount(Hashtable conditions)
+        {
+            return _sqlMapper.QueryForObject<int>(QueryCountStatement, conditions);
+        }
     }
 }

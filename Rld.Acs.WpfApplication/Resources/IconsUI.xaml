@@ -31,4 +31,9 @@
     <ImageSource x:Key="SingleDoorClosed_64">/Images/Door/SingleDoorClosed_64.png</ImageSource>
     <ImageSource x:Key="SingleDoorOpen64">/Images/Door/SingleDoorOpen64.png</ImageSource>
     <ImageSource x:Key="SingleDoorOpen_128">/Images/Door/SingleDoorOpen_128.png</ImageSource>
+
+    <ImageSource x:Key="icon_summary_stuff">/Images/currentPerson.png</ImageSource>
+	<ImageSource x:Key="icon_summary_device">/Images/device_summary.png</ImageSource>
+	<ImageSource x:Key="icon_summary_floor">/Images/door_summary.png</ImageSource>
+	<ImageSource x:Key="icon_summary_department">/Images/department_summary.png</ImageSource>
 </ResourceDictionary>

@@ -128,6 +128,31 @@
       </dynamic>
     </select>
 
+    <select id="User.QueryCount" parameterClass="Hashtable" resultClass="int">
+      SELECT Count(1)
+      FROM SYS_USER
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="AND" property="DepartmentID">
+          DepartmentID = #DepartmentID#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Type">
+          Type = #Type#
+        </isNotNull>
+        <isNotNull prepend="AND" property="UserCode">
+          UserCode = #UserCode#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Name">
+          Name = #Name#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Photo">
+          Photo = #Photo#
+        </isNotNull>
+        <isNotNull prepend="AND" property="Status">
+          Status = #Status#
+        </isNotNull>
+      </dynamic>
+    </select>
+
 
     <select id="User.QueryUsersForSummaryData" parameterClass="Hashtable" resultMap="SummaryUserResult">
       SELECT U.UserID, U.Name, U.Photo, U.Gender, U.UserCode, U.Phone, U.DepartmentID, U.Type, P.TechnicalTitle
