@@ -15,7 +15,7 @@ namespace Rld.Acs.WpfApplication.Service.Validator
             
             RuleFor(m => m.Code)
                 .NotEmpty().WithMessage("读头编号不能为空")
-                .Must(ValidatorToolkit.IsNumberOrChar).WithMessage("读头编号只能为数字或者字母");
+                .Must(ValidatorToolkit.IsNumeric).WithMessage("读头编号只能为数字");
 
             RuleFor(m => m.Mac)
                 .NotEmpty().WithMessage("读头Mac地址不能为空");

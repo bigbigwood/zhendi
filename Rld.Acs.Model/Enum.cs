@@ -88,13 +88,13 @@ namespace Rld.Acs.Model
 
     public enum DoorControlOption
     {
-        Open = 0,
-        KeepOpen = 1,
-        KeepClose = 2,
-        Auto = 3,
-        Close = 4,
-        CancelAlarm = 5,
-        ViewStuff = 6,
+        Open = 1,
+        Auto = 2,
+        KeepOpen = 3,
+        KeepClose = 4,
+        Close = 5,
+        CancelAlarm = 6,
+        ViewStuff = 7,
     }
 
     public enum DictionaryType

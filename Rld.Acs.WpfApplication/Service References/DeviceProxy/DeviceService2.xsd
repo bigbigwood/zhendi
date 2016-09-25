@@ -27,6 +27,7 @@
       <xs:enumeration value="DataValidationError" />
       <xs:enumeration value="BussinessLogicError" />
       <xs:enumeration value="NotSupportError" />
+      <xs:enumeration value="DeviceNotConnected" />
       <xs:enumeration value="Queued">
         <xs:annotation>
           <xs:appinfo>
@@ -171,7 +172,7 @@
   <xs:element name="GetDoorStateRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeviceId" type="xs:int" />
+        <xs:element minOccurs="0" name="DeviceCode" type="xs:int" />
         <xs:element minOccurs="0" name="DoorIndex" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -188,7 +189,7 @@
   <xs:element name="UpdateDoorStateRequest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="DeviceId" type="xs:int" />
+        <xs:element minOccurs="0" name="DeviceCode" type="xs:int" />
         <xs:element minOccurs="0" name="DoorIndex" type="xs:int" />
         <xs:element minOccurs="0" name="Option" type="tns:DoorControlOption" />
       </xs:sequence>
@@ -257,7 +258,7 @@
   <xs:element name="SearchNewDevicesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="NewDeviceIds" nillable="true" type="q27:ArrayOfint" />
+        <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="NewDeviceCodes" nillable="true" type="q27:ArrayOfint" />
         <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
         <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q28:ArrayOfstring" />
       </xs:sequence>

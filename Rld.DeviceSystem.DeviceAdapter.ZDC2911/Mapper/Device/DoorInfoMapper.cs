@@ -15,7 +15,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Device
             var doors = new List<DoorInfo>();
 
             var masterDoor = new DoorInfo();
-            masterDoor.Name = "Master Door";
+            masterDoor.Name = "门一";
             masterDoor.DoorIndex = 1;
             masterDoor.DoorType = DoorType.Master;
             //masterDoor.ElectricalAppliances = 0;
@@ -32,7 +32,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Device
             doors.Add(masterDoor);
 
             var slaveDoor = new DoorInfo();
-            slaveDoor.Name = "Slave Door";
+            slaveDoor.Name = "门二";
             slaveDoor.DoorIndex = 2;
             slaveDoor.DoorType = DoorType.Slave;
             //slaveDoor.ElectricalAppliances = 0;

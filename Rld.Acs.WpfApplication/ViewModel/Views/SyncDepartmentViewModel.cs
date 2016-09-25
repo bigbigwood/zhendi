@@ -102,7 +102,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                         string[] messages;
                         DSProxy.ResultTypes resultTypes = new DSProxy.DeviceServiceClient().SyncDepartmentUsers(departments.ToArray(), devices.ToArray(), out messages);
 
-                        message = "同步数据成功！";
+                        message = MessageHandler.GenerateDeviceMessage(resultTypes, "同步数据成功！", "同步数据失败！");
                     }
                     catch (Exception ex)
                     {

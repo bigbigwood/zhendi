@@ -29,14 +29,21 @@ namespace Rld.Acs.DeviceSystem
         {
             return PersistenceOperation.Process(request, () =>
             {
-                var repo = RepositoryManager.GetRepository<IUserRepository>();
-                request.Users.ForEach(user => request.Devices.ForEach(device =>
+                try
                 {
-                    var userInfo = repo.GetByKey(user.UserID);
-                    new UserOp().UpdateDeviceUser(userInfo, device);
-                }));
+                    var repo = RepositoryManager.GetRepository<IUserRepository>();
+                    request.Users.ForEach(user => request.Devices.ForEach(device =>
+                    {
+                        var userInfo = repo.GetByKey(user.UserID);
+                        new UserOp().UpdateDeviceUser(userInfo, device);
+                    }));
 
-                return new SyncDeviceUsersResponse() { ResultType = ResultTypes.Ok };
+                    return new SyncDeviceUsersResponse() { ResultType = ResultTypes.Ok };
+                }
+                catch (DeviceNotConnectedException dex)
+                {
+                    return new SyncDeviceUsersResponse() { ResultType = ResultTypes.DeviceNotConnected };
+                }
             });
         }
 
@@ -44,49 +51,71 @@ namespace Rld.Acs.DeviceSystem
         {
             return PersistenceOperation.Process(request, () =>
             {
-                var repo = RepositoryManager.GetRepository<IUserRepository>();
-                request.Users.ForEach(user => request.Devices.ForEach(device =>
+                try
                 {
-                    var userInfo = repo.GetByKey(user.UserID);
-                    new UserOp().UpdateDBUser(userInfo, device);
-                }));
+                    var repo = RepositoryManager.GetRepository<IUserRepository>();
+                    request.Users.ForEach(user => request.Devices.ForEach(device =>
+                    {
+                        var userInfo = repo.GetByKey(user.UserID);
+                        new UserOp().UpdateDBUser(userInfo, device);
+                    }));
 
-                return new SyncDBUsersResponse() { ResultType = ResultTypes.Ok };
+                    return new SyncDBUsersResponse() { ResultType = ResultTypes.Ok };
+                }
+                catch (DeviceNotConnectedException dex)
+                {
+                    return new SyncDBUsersResponse() { ResultType = ResultTypes.DeviceNotConnected };
+                }
             });
         }
 
         public SyncDepartmentUsersResponse SyncDepartmentUsers(SyncDepartmentUsersRequest request)
         {
-            if ((request.Departments == null || !request.Departments.Any()) ||
-                request.Devices == null || !request.Devices.Any())
+            try
             {
-                return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.Ok };
+                if ((request.Departments == null || !request.Departments.Any()) ||
+                    request.Devices == null || !request.Devices.Any())
+                {
+                    return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.Ok };
+                }
+
+                return PersistenceOperation.Process(request, () =>
+                {
+                    request.Departments.ForEach(department => new DepartmentOp().SyncDepartment(department, request.Devices));
+
+                    return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.Ok };
+                });
             }
-
-            return PersistenceOperation.Process(request, () =>
+            catch (DeviceNotConnectedException dex)
             {
-                request.Departments.ForEach(department => new DepartmentOp().SyncDepartment(department, request.Devices));
-
-                return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.Ok };
-            });
+                return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.DeviceNotConnected };
+            }
         }
 
         public SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(SyncDeviceOperationLogsRequest request)
         {
             return PersistenceOperation.Process(request, () =>
             {
-                request.Devices.ForEach(d =>
+                try
                 {
-                    var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
-                    var logs = new OperationLogOp().QueryNewOperationLogs(d.DeviceID);
-                    foreach (var deviceOperationLog in logs)
+                    request.Devices.ForEach(d =>
                     {
-                        repo.Insert(deviceOperationLog);
-                    }
-                });
+                        var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
+                        var logs = new OperationLogOp().QueryNewOperationLogs(d.DeviceID);
+                        foreach (var deviceOperationLog in logs)
+                        {
+                            repo.Insert(deviceOperationLog);
+                        }
+                    });
 
-                return new SyncDeviceOperationLogsResponse() { ResultType = ResultTypes.Ok };
+                    return new SyncDeviceOperationLogsResponse() {ResultType = ResultTypes.Ok};
+                }
+                catch (DeviceNotConnectedException dex)
+                {
+                    return new SyncDeviceOperationLogsResponse() { ResultType = ResultTypes.DeviceNotConnected };
+                }
             });
+
         }
 
         public SyncDeviceTrafficLogsResponse SyncDeviceTrafficLogs(SyncDeviceTrafficLogsRequest request)
@@ -112,15 +141,21 @@ namespace Rld.Acs.DeviceSystem
         }
         public GetDoorStateResponse GetDoorState(GetDoorStateRequest request)
         {
-            var bOpened = new DoorStateOp().GetDoorState(request.DeviceId, request.DoorIndex);
+            if (WebSocketClientManager.GetInstance().GetClientById(request.DeviceCode) == null)
+                return new GetDoorStateResponse() { ResultType = ResultTypes.DeviceNotConnected };
+
+            var bOpened = new DoorStateOp().GetDoorState(request.DeviceCode, request.DoorIndex);
             return new GetDoorStateResponse() { ResultType = ResultTypes.Ok, IsOpened = bOpened };
         }
         public UpdateDoorStateResponse UpdateDoorState(UpdateDoorStateRequest request)
         {
-            var op = new DoorStateOp();
-            var resultTypes = op.UpdateDoorState(request.DeviceId, request.DoorIndex, request.Option);
+            if (WebSocketClientManager.GetInstance().GetClientById(request.DeviceCode) == null)
+                return new UpdateDoorStateResponse() { ResultType = ResultTypes.DeviceNotConnected };
 
-            return new UpdateDoorStateResponse() { ResultType = (resultTypes == ResultType.NotSupport) ? ResultTypes.NotSupportError : ResultTypes.Ok};
+            var op = new DoorStateOp();
+            var resultTypes = op.UpdateDoorState(request.DeviceCode, request.DoorIndex, request.Option);
+
+            return new UpdateDoorStateResponse() { ResultType = (resultTypes == ResultType.NotSupport) ? ResultTypes.NotSupportError : ResultTypes.Ok };
         }
 
         public SearchNewDevicesResponse SearchNewDevices(SearchNewDevicesRequest request)
@@ -129,7 +164,7 @@ namespace Rld.Acs.DeviceSystem
             {
                 var op = new DeviceOp();
                 var newDeviceIds = op.SearchNewDevices();
-                return new SearchNewDevicesResponse() { ResultType = ResultTypes.Ok, NewDeviceIds = newDeviceIds };
+                return new SearchNewDevicesResponse() { ResultType = ResultTypes.Ok, NewDeviceCodes = newDeviceIds };
             });
         }
 

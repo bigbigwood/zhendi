@@ -24,6 +24,8 @@ namespace Rld.Acs.DeviceSystem.Message
         [EnumMember]
         NotSupportError = 5,
         [EnumMember]
+        DeviceNotConnected = 6,
+        [EnumMember]
         Queued = 98,
         [EnumMember]
         UnknownError = 99,

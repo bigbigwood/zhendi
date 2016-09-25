@@ -35,6 +35,9 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         NotSupportError = 5,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
+        DeviceNotConnected = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
         Queued = 98,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
@@ -506,7 +509,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class GetDoorStateRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public int DeviceId;
+        public int DeviceCode;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public int DoorIndex;
@@ -514,8 +517,8 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public GetDoorStateRequest() {
         }
         
-        public GetDoorStateRequest(int DeviceId, int DoorIndex) {
-            this.DeviceId = DeviceId;
+        public GetDoorStateRequest(int DeviceCode, int DoorIndex) {
+            this.DeviceCode = DeviceCode;
             this.DoorIndex = DoorIndex;
         }
     }
@@ -550,7 +553,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class UpdateDoorStateRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public int DeviceId;
+        public int DeviceCode;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public int DoorIndex;
@@ -561,8 +564,8 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public UpdateDoorStateRequest() {
         }
         
-        public UpdateDoorStateRequest(int DeviceId, int DoorIndex, Rld.Acs.WpfApplication.DeviceProxy.DoorControlOption Option) {
-            this.DeviceId = DeviceId;
+        public UpdateDoorStateRequest(int DeviceCode, int DoorIndex, Rld.Acs.WpfApplication.DeviceProxy.DoorControlOption Option) {
+            this.DeviceCode = DeviceCode;
             this.DoorIndex = DoorIndex;
             this.Option = Option;
         }
@@ -603,7 +606,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SearchNewDevicesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public int[] NewDeviceIds;
+        public int[] NewDeviceCodes;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
@@ -614,8 +617,8 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SearchNewDevicesResponse() {
         }
         
-        public SearchNewDevicesResponse(int[] NewDeviceIds, Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
-            this.NewDeviceIds = NewDeviceIds;
+        public SearchNewDevicesResponse(int[] NewDeviceCodes, Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+            this.NewDeviceCodes = NewDeviceCodes;
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -812,9 +815,9 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
             return base.Channel.GetDoorState(request);
         }
         
-        public bool GetDoorState(int DeviceId, int DoorIndex, out Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, out string[] Messages) {
+        public bool GetDoorState(int DeviceCode, int DoorIndex, out Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, out string[] Messages) {
             Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateRequest();
-            inValue.DeviceId = DeviceId;
+            inValue.DeviceCode = DeviceCode;
             inValue.DoorIndex = DoorIndex;
             Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).GetDoorState(inValue);
             ResultType = retVal.ResultType;
@@ -831,9 +834,9 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
             return base.Channel.UpdateDoorState(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes UpdateDoorState(int DeviceId, int DoorIndex, Rld.Acs.WpfApplication.DeviceProxy.DoorControlOption Option, out string[] Messages) {
+        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes UpdateDoorState(int DeviceCode, int DoorIndex, Rld.Acs.WpfApplication.DeviceProxy.DoorControlOption Option, out string[] Messages) {
             Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateRequest();
-            inValue.DeviceId = DeviceId;
+            inValue.DeviceCode = DeviceCode;
             inValue.DoorIndex = DoorIndex;
             inValue.Option = Option;
             Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).UpdateDoorState(inValue);
@@ -855,7 +858,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
             Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SearchNewDevices(inValue);
             ResultType = retVal.ResultType;
             Messages = retVal.Messages;
-            return retVal.NewDeviceIds;
+            return retVal.NewDeviceCodes;
         }
         
         public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse> SearchNewDevicesAsync(Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest request) {

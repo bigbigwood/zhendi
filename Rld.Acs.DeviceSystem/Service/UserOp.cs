@@ -31,6 +31,10 @@ namespace Rld.Acs.DeviceSystem.Service
             if (user.GetUserAccessableDeviceIds().Contains(device.DeviceID) == false) return;
 
             var deviceID = device.DeviceID;
+            var deviceCode = device.Code.ToInt32();
+            if (WebSocketClientManager.GetInstance().GetClientById(deviceCode) == null)
+                throw new DeviceNotConnectedException();
+
             Log.Info("Getting user authentication infos...");
             var userAuthenticationsOfDevice = user.UserAuthentications.Where(a => a.DeviceID == deviceID);
             var authenticationsOfDevice = userAuthenticationsOfDevice as IList<UserAuthentication> ?? userAuthenticationsOfDevice.ToList();
@@ -96,7 +100,7 @@ namespace Rld.Acs.DeviceSystem.Service
 
 
             Log.Info("Invoke WebSocketOperation...");
-            var operation = new WebSocketOperation(deviceID);
+            var operation = new WebSocketOperation(deviceCode);
             var updateUserInfoRequest = new UpdateUserInfoRequest() { Token = operation.Token, UserInfo = deviceUser };
             string rawRequest = DataContractSerializationHelper.Serialize(updateUserInfoRequest);
 
@@ -125,6 +129,9 @@ namespace Rld.Acs.DeviceSystem.Service
             if (user.GetUserAccessableDeviceIds().Contains(device.DeviceID) == false) return;
 
             var deviceID = device.DeviceID;
+            var deviceCode = device.Code.ToInt32();
+            if (WebSocketClientManager.GetInstance().GetClientById(deviceCode) == null)
+                throw new DeviceNotConnectedException();
 
             Log.Info("Getting user authentication infos...");
             var userAuthenticationsOfDevice = user.UserAuthentications.Where(a => a.DeviceID == deviceID);
@@ -135,7 +142,7 @@ namespace Rld.Acs.DeviceSystem.Service
             //var userDevicePermission = user.GetUserDevicePermission(deviceID, deviceRoles);
 
             Log.Info("Invoke WebSocketOperation...");
-            var operation = new WebSocketOperation(deviceID);
+            var operation = new WebSocketOperation(deviceCode);
             var getUserInfoRequest = new GetUserInfoRequest() { Token = operation.Token, UserId = deviceUserId };
             string rawRequest = DataContractSerializationHelper.Serialize(getUserInfoRequest);
 

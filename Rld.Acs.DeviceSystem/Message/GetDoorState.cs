@@ -15,7 +15,7 @@ namespace Rld.Acs.DeviceSystem.Message
         public Int32 DoorIndex { get; set; }
 
         [MessageBodyMember]
-        public Int32 DeviceId { get; set; }
+        public Int32 DeviceCode { get; set; }
     }
 
     [MessageContract(IsWrapped = true)]

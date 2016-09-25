@@ -15,7 +15,7 @@ namespace Rld.Acs.WpfApplication.Service.Validator
             
             RuleFor(m => m.Code)
                 .NotEmpty().WithMessage("门编号不能为空")
-                .Must(ValidatorToolkit.IsNumberOrChar).WithMessage("门编号只能为数字或者字母");
+                .Must(ValidatorToolkit.IsNumeric).WithMessage("门编号只能为数字");
         }
     }
 }

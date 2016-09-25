@@ -80,12 +80,12 @@ namespace Rld.Acs.WpfApplication.View.Pages
                     foreach (var floordoorId in _dropDoorDict.Keys)
                     {
                         var doorInfo = FloorDoorManager.GetInstance().AuthorizationDoors.FirstOrDefault(x => x.DeviceDoorID == floordoorId);
+                        var deviceCode = ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.DeviceID == doorInfo.DeviceID).Code.ToInt32();
                         ResultTypes resultTypes;
                         string[] messages;
-                        Int32 deviceId = doorInfo.DeviceID;
                         Int32 doorIndex = doorInfo.DoorIndex;
 
-                        bool isopened = new DeviceServiceClient().GetDoorState(deviceId, doorIndex, out resultTypes, out messages);
+                        bool isopened = new DeviceServiceClient().GetDoorState(deviceCode, doorIndex, out resultTypes, out messages);
                         if (resultTypes == ResultTypes.Ok)
                         {
                             Log.InfoFormat("Floor monitor timer gets state result: [doorId={0}, isopened={1}]", floordoorId, isopened);
@@ -279,6 +279,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
             var panel = menuItem.Tag as StackPanel;
             var floordoor = panel.DataContext as FloorDoorViewModel;
             var doorInfo = FloorDoorManager.GetInstance().AuthorizationDoors.FirstOrDefault(x => x.DeviceDoorID == floordoor.DoorID);
+            var deviceCode = ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.DeviceID == doorInfo.DeviceID).Code.ToInt32();
 
             string message = "";
 
@@ -290,22 +291,17 @@ namespace Rld.Acs.WpfApplication.View.Pages
                 try
                 {
                     string[] messages;
-                    Int32 deviceId = doorInfo.DeviceID;
+                    
                     Int32 doorIndex = doorInfo.DoorIndex;
                     var selectedOption = (DeviceProxy.DoorControlOption)option.GetHashCode();
 
-                    ResultTypes resultTypes = new DeviceServiceClient().UpdateDoorState(deviceId, doorIndex, selectedOption, out messages);
-                    if (resultTypes == ResultTypes.Ok)
-                        message = "同步数据成功!";
-                    else if (resultTypes == ResultTypes.NotSupportError)
-                        message = "当前设备无法支持此功能";
-                    else
-                        message = "同步数据失败！";
+                    ResultTypes resultTypes = new DeviceServiceClient().UpdateDoorState(deviceCode, doorIndex, selectedOption, out messages);
+                    message = MessageHandler.GenerateDeviceMessage(resultTypes, "操作设备成功！", "操作设备失败！");
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "同步数据失败！";
+                    message = "操作设备失败！";
                 }
             });
 

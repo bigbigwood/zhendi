@@ -5,6 +5,9 @@ using log4net;
 using Rld.Acs.DeviceSystem.Framework;
 using Rld.Acs.Model;
 using Rld.Acs.Model.Extension;
+using Rld.Acs.Repository;
+using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Extension;
 using Rld.Acs.Unility.Serialization;
 using Rld.DeviceSystem.Contract.Message;
 using Rld.DeviceSystem.Contract.Model;
@@ -17,8 +20,13 @@ namespace Rld.Acs.DeviceSystem.Service
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public IList<DeviceOperationLog> QueryNewOperationLogs(Int32 deviceID)
         {
-            var operation = new WebSocketOperation(deviceID);
+            var repo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
+            var deviceInfo = repo.GetByKey(deviceID);
+            var deviceCode = deviceInfo.Code.ToInt32();
+            if (WebSocketClientManager.GetInstance().GetClientById(deviceCode) == null)
+                throw new DeviceNotConnectedException();
 
+            var operation = new WebSocketOperation(deviceCode);
             var getDeviceOperationLogRequest = new GetDeviceOperationLogRequest()
             {
                 Token = operation.Token, 

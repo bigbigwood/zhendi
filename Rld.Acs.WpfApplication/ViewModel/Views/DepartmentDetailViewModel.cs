@@ -94,7 +94,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 items.Add(new ListBoxItem()
                 {
                     ID = device.DeviceID,
-                    DisplayName = device.Code,
+                    DisplayName = device.Name,
                     Description = device.Remark,
                     IsSelected = OwnedDevices.Select(d => d.DeviceID).Contains(device.DeviceID)
                 });

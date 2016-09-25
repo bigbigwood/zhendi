@@ -157,7 +157,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     if (deviceCodes != null && deviceCodes.Any())
                     {
                         var deviceCodeString = string.Join(", ", deviceCodes);
-                        string question = string.Format("发现新设备ID:{0}, 现在导入系统吗？", deviceCodeString);
+                        string question = string.Format("发现新设备编号:{0}, 现在导入系统吗？", deviceCodeString);
                         Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmImportNewController), Tokens.DevicePage_ShowQuestion);
                     }
                     else

@@ -82,7 +82,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             DepartmentUserDtos = new ObservableCollection<SelectableItem>();
             SelectedSyncUserDtos = new ObservableCollection<SelectableItem>();
 
-            var dtos = AuthorizationDevices.Select(x => new ListBoxItem {ID = x.DeviceID, DisplayName = x.Code});
+            var dtos = AuthorizationDevices.Select(x => new ListBoxItem {ID = x.DeviceID, DisplayName = x.Name});
             DeviceDtos = new ObservableCollection<SelectableItem>(dtos);
         }
 
@@ -130,12 +130,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                             resultTypes = new DSProxy.DeviceServiceClient().SyncDeviceUsers(devices.ToArray(), users.ToArray(),out messages);
                         }
 
-                        if (resultTypes != DSProxy.ResultTypes.Ok)
-                        {
-                            throw new Exception(resultTypes.ToString());
-                        }
-
-                        message = "同步数据成功！";
+                        message = MessageHandler.GenerateDeviceMessage(resultTypes, "同步数据成功！", "同步数据失败！");
                     }
                     catch (Exception ex)
                     {

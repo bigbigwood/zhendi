@@ -15,7 +15,7 @@ namespace Rld.Acs.WpfApplication.Service.Validator
             
             RuleFor(m => m.Code)
                 .NotEmpty().WithMessage("设备编号不能为空")
-                .Must(ValidatorToolkit.IsNumberOrChar).WithMessage("设备编号只能为数字或者字母");
+                .Must(ValidatorToolkit.IsNumeric).WithMessage("设备编号只能为数字");
 
             RuleFor(m => m.Model)
                 .NotEmpty().WithMessage("设备型号不能为空");
