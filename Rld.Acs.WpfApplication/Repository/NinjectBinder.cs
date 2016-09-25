@@ -33,7 +33,6 @@ namespace Rld.Acs.WpfApplication.Repository
 
             InjectionKernel.Bind<IDeviceRoleRepository>().To<DeviceRoleRepository>();
             InjectionKernel.Bind<IDeviceControllerRepository>().To<DeviceControllerRepository>();
-            InjectionKernel.Bind<IDeviceDoorRepository>().To<DeviceDoorRepository>();
             InjectionKernel.Bind<IDeviceTrafficLogRepository>().To<DeviceTrafficLogRepository>();
             InjectionKernel.Bind<IDeviceOperationLogRepository>().To<DeviceOperationLogRepository>();
 

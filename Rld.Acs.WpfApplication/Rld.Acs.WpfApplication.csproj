@@ -174,7 +174,6 @@
     <Compile Include="Models\PasswordBoxHelper.cs" />
     <Compile Include="Models\TriStateTreeViewNode.cs" />
     <Compile Include="Repository\CacheableRepository.cs" />
-    <Compile Include="Repository\DeviceDoorRepository.cs" />
     <Compile Include="Repository\FloorDoorRepository.cs" />
     <Compile Include="Repository\FloorRepository.cs" />
     <Compile Include="Repository\DeviceOperationLogRepository.cs" />

@@ -14,12 +14,16 @@ namespace Rld.Acs.WpfApplication.Service
     public class FloorDoorManager
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private IDeviceDoorRepository _deviceDoorRepository = NinjectBinder.GetRepository<IDeviceDoorRepository>();
+        private IDeviceControllerRepository _deviceControllerRepo = NinjectBinder.GetRepository<IDeviceControllerRepository>();
         private IFloorDoorRepository _floorDoorRepository = NinjectBinder.GetRepository<IFloorDoorRepository>();
 
         public List<DeviceDoor> AuthorizationDoors
         {
-            get { return _deviceDoorRepository.Query(new Hashtable()).FindAll(x => x.Status == (int)GeneralStatus.Enabled); }
+            get
+            {
+                var devices = _deviceControllerRepo.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled);
+                return devices.SelectMany(x => x.DeviceDoors).ToList();
+            }
         }
         public List<FloorDoor> AuthorizationFloorDoor
         {
