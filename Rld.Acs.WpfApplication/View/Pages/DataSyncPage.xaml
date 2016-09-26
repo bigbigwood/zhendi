@@ -39,14 +39,14 @@
                         <DataGridTemplateColumn Header="启用" Width="80">
                             <DataGridTemplateColumn.CellTemplate >
                                 <DataTemplate>
-                                    <CheckBox IsChecked="{Binding IsSelected}" HorizontalAlignment="Center" />
+                                    <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn Header="{DynamicResource DataSyncView_Label_TriggerTime}" Width="250" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <xctk:TimePicker Margin="2,3" Format="LongTime" Value="{Binding Value}" />
+                                    <xctk:TimePicker Margin="2,3" FormatString="HH:mm:ss" Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsSelected}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

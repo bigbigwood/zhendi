@@ -44,12 +44,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 configViewModels.Add(new DataSyncConfigViewModel() { Value = "00:00:00" });
             }
 
-            var configs = _sysConfigRepository.Query(new Hashtable()).FindAll(x => x.Name == "DataSyncConfig");
-            if (configs.Any())
+            var config = _sysConfigRepository.Query(new Hashtable()).FirstOrDefault(x => x.Name == DataSyncConfig);
+            if (config != null)
             {
-                for (int index = 0; index < configs.Count; index++)
+                var configs = config.Value.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries);
+                for (int index = 0; index < configs.Count(); index++)
                 {
-                    configViewModels[index] = Mapper.Map<DataSyncConfigViewModel>(configs[index]);
+                    configViewModels[index].Value = configs[index];
                     configViewModels[index].IsSelected = true;
                 }
             }
@@ -59,24 +60,29 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         private void SaveSysConfigs()
         {
-            //try
-            //{
-            //    var viewModel = Mapper.Map<DataSyncConfigViewModel>(new SysConfig());
-            //    Messenger.Default.Send(new OpenWindowMessage()
-            //    {
-            //        DataContext = viewModel
+            try
+            {
+                string configValues = "";
 
-            //    }, Tokens.DataSyncView_Open);
+                var enabledItems = DataSyncConfigViewModels.FindAll(x => x.IsSelected);
+                if (enabledItems.Any())
+                {
+                    configValues = string.Join(";", enabledItems.Select(x =>
+                    {
+                        var mydt = DateTime.Parse(x.Value);
+                        return mydt.ToString("HH:mm:ss");
+                    }));
+                }
 
-            //    if (viewModel.ViewModelAttachment.LastOperationSuccess)
-            //    {
-            //        DataSyncConfigViewModels.Add(viewModel);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error(ex);
-            //}
+                var config = _sysConfigRepository.Query(new Hashtable()).FirstOrDefault(x => x.Name == DataSyncConfig);
+                config.Value = configValues;
+                _sysConfigRepository.Update(config);
+                Messenger.Default.Send(new NotificationMessage("保存成功!"), Tokens.DataSyncPage_ShowNotification);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             set
             {
                 _isSelected = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("IsSelected");
             }
         }
         public Int32 ID { get; set; }
@@ -38,7 +38,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             set
             {
                 _value = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("Value");
             }
         }
         public String Description { get; set; }

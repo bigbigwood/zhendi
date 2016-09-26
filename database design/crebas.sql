@@ -879,6 +879,16 @@ create table TIME_ZONE_GROUP (
 )
 go
 
+/*==============================================================*/
+/* Table: DEVICE_GROUP                                 */
+/*==============================================================*/
+create table DEVICE_GROUP (
+   DeviceGroupID            int                  identity(1,1),
+   CheckInDeviceID          int                  not null,
+   CheckOutDeviceID         int                  not null,
+   constraint PK_SYS_USER_DEVICE_ROLES primary key nonclustered (USERDEVICEROLEID)
+)
+go
 
 alter table DEVICE_DOORS
    add constraint FK_DEVICE_D_REFERENCE_DEVICE_R foreign key (DEVICEID)
