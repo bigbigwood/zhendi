@@ -19,7 +19,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Grid.Column="0" >
-                <DataGrid ItemsSource="{Binding DataSyncConfigViewModels}" SelectedItem="{Binding SelectedDataSyncConfigViewModel}" 
+                <DataGrid ItemsSource="{Binding DataSyncConfigViewModels}" SelectedItem="{Binding SelectedSysConfigViewModel}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True" 
                           LoadingRow ="DataGrid_LoadingRow" UnloadingRow="DataGrid_UnloadingRow" >
                     <DataGrid.ColumnHeaderStyle>

@@ -179,6 +179,7 @@ INSERT dbo.SYS_MODULE VALUES ('数据字典维护', 'M2_SysDictionary', '数据�
 INSERT dbo.SYS_MODULE VALUES ('角色',       'M2_SystemRole', '角色模块', 4, 'SystemRolePage', 'SystemRolePage', 2, '', '2016-01-01', 1, 1, NULL, NULL)
 INSERT dbo.SYS_MODULE VALUES ('用户',       'M2_Operator','用户模块', 4, 'OperatorPage', 'OperatorPage', 2, '', '2016-01-01', 1, 1, NULL, NULL)
 INSERT dbo.SYS_MODULE VALUES ('数据同步',    'M2_DataSynchorization', '数据同步模块', 5, 'DataSynchorizationPage', 'DataSynchorizationPage', 2, '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('数据同步',    'M2_DataClean', '数据清理模块', 5, 'DataCleanPage', 'DataCleanPage', 2, '', '2016-01-01', 1, 1, NULL, NULL)
 	
 INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('增加人员', 'E_AddStuff', 6, '', '', '2016-01-01', 1, 1, NULL, NULL)
 INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改人员', 'E_MdfStuff', 6, '', '', '2016-01-01', 1, 1, NULL, NULL)
@@ -228,6 +229,7 @@ INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('新增系统用户', 'E_AddSysOperator',
 INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改系统用户', 'E_MdfSysOperator', 20, '', '', '2016-01-01', 1, 1, NULL, NULL)
 INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('删除系统用户', 'E_DelSysOperator', 20, '', '', '2016-01-01', 1, 1, NULL, NULL)
 INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('保存同步时间配置', 'E_SaveDataSyncConfig', 21, '', '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('保存数据清理配置', 'E_SaveDataCleanConfig', 22, '', '', '2016-01-01', 1, 1, NULL, NULL)
 
 INSERT SYS_ROLE VALUES (N'系统管理员',  N'',  N'', '2016-01-01', 1, 1, NULL, NULL)
 INSERT SYS_ROLE VALUES (N'人员管理员',  N'',  N'', '2016-01-01', 1, 1, NULL, NULL)
@@ -265,6 +267,7 @@ INSERT SYS_ROLE_PERMISSIONS VALUES (1, NULL, 18)
 INSERT SYS_ROLE_PERMISSIONS VALUES (1, NULL, 19)
 INSERT SYS_ROLE_PERMISSIONS VALUES (1, NULL, 20)
 INSERT SYS_ROLE_PERMISSIONS VALUES (1, NULL, 21)
+INSERT SYS_ROLE_PERMISSIONS VALUES (1, NULL, 22)
 INSERT SYS_ROLE_PERMISSIONS VALUES (1, 1, NULL)
 INSERT SYS_ROLE_PERMISSIONS VALUES (1, 2, NULL)
 INSERT SYS_ROLE_PERMISSIONS VALUES (1, 3, NULL)
@@ -313,6 +316,7 @@ INSERT SYS_ROLE_PERMISSIONS VALUES (1, 45, NULL)
 INSERT SYS_ROLE_PERMISSIONS VALUES (1, 46, NULL)
 INSERT SYS_ROLE_PERMISSIONS VALUES (1, 47, NULL)
 INSERT SYS_ROLE_PERMISSIONS VALUES (1, 48, NULL)
+INSERT SYS_ROLE_PERMISSIONS VALUES (1, 49, NULL)
 
 --人员管理员
 INSERT SYS_ROLE_PERMISSIONS VALUES (2, NULL, 1)
@@ -346,7 +350,8 @@ INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_Subject', N'设备告警服�
 INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_Body', N'重要事情说三遍！发现设备告警记录！发现设备告警记录！发现设备告警记录！', N'', N'1.0')
 INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobSms_Body', N'重要事情说三遍！发现设备告警记录！发现设备告警记录！发现设备告警记录！', N'', N'1.0')
 
-INSERT dbo.SYS_CONFIG VALUES (N'DataSyncConfig', N'12:00:00', N'', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DataSyncConfig', N'02:00:00', N'', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'AutoCleanConfig', N'SysLogExpireMonths=3;DeviceTrafficLogExpiredMonths=3;DeviceMngtLogExpiredMonths=3;DoorHistoryExpiredMonths=3;', N'', N'1.0')
 
 --楼层
 INSERT dbo.FLOOR VALUES ('一楼', '840f3515-34f1-45fc-b49b-7c8c1fb1a258_20160903034944.jpg', 1)

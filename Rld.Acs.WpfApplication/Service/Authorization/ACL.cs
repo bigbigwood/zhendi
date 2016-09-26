@@ -29,6 +29,7 @@ namespace Rld.Acs.WpfApplication.Service.Authorization
         public const string M2_SystemRole = "M2_SystemRole";
         public const string M2_Operator = "M2_Operator";
         public const string M2_DataSynchorization = "M2_DataSynchorization";
+        public const string M2_DataClean = "M2_DataClean";
 
         public const string E_AddStuff = "E_AddStuff";
         public const string E_MdfStuff = "E_MdfStuff";
@@ -78,5 +79,6 @@ namespace Rld.Acs.WpfApplication.Service.Authorization
         public const string E_RunMonitor = "E_RunMonitor";
         public const string E_PauseMonitor = "E_PauseMonitor";
         public const string E_SaveDataSyncConfig = "E_SaveDataSyncConfig";
+        public const string E_SaveDataCleanConfig = "E_SaveDataCleanConfig";
     }
 }

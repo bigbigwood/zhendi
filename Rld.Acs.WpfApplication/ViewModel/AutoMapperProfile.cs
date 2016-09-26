@@ -154,10 +154,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.DoorNames, op => op.Ignore())
                 .AfterMap((src, dest) => dest.BindDoors(src.Doors));
 
-            CreateProvMap<DataSyncConfigViewModel, SysConfig>();
-            CreateProvMap<SysConfig, DataSyncConfigViewModel>()
-                .ForMember(dest => dest.SaveCmd, op => op.Ignore())
-                .ForMember(dest => dest.CancelCmd, op => op.Ignore())
+            CreateProvMap<SysConfigViewModel, SysConfig>();
+            CreateProvMap<SysConfig, SysConfigViewModel>()
                 .ForMember(dest => dest.IsSelected, op => op.Ignore());
 
             CreateProvMap<UserAuthenticationViewModel, UserAuthentication>()

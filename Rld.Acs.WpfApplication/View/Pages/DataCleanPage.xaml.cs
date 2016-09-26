@@ -11,12 +11,12 @@ namespace Rld.Acs.WpfApplication.View.Pages
     /// <summary>
     /// Interaction logic for TimeGroupPage.xaml
     /// </summary>
-    public partial class DataSyncPage : BasePage
+    public partial class DataCleanPage : BasePage
     {
-        public DataSyncPage()
+        public DataCleanPage()
         {
             InitializeComponent();
-            Messenger.Default.Register(this, Tokens.DataSyncPage_ShowNotification, new Action<NotificationMessage>(ShowMessage));
+            Messenger.Default.Register(this, Tokens.DataCleanPage_ShowNotification, new Action<NotificationMessage>(ShowMessage));
         }
     }
 }

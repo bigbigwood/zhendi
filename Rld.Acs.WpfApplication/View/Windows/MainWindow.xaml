@@ -417,6 +417,13 @@
                                     <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/数据同步.png"/>
                                 </MenuItem.Icon>
                             </MenuItem>
+                            <MenuItem x:Name="suppor_sjql" FontSize="12" Width="180"  Header="数据清理" IsCheckable="False" 
+                                       Command="{Binding NatigatePageCmd}" CommandParameter="DataCleanPage"
+                                         IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_DataClean}}">
+                                <MenuItem.Icon >
+                                    <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/数据同步.png"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </StackPanel>
                     </StackPanel>
                     <!--end dp-->

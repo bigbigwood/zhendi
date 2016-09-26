@@ -15,7 +15,7 @@ using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
-    public class DataSyncConfigViewModel : ViewModelBase
+    public class SysConfigViewModel : ViewModelBase
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -43,9 +43,5 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         }
         public String Description { get; set; }
         public String Version { get; set; }
-        public RelayCommand SaveCmd { get; private set; }
-        public RelayCommand CancelCmd { get; private set; }
-
-
     }
 }

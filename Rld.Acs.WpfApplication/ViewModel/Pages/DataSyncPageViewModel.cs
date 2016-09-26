@@ -27,21 +27,21 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         private ISysConfigRepository _sysConfigRepository = NinjectBinder.GetRepository<ISysConfigRepository>();
         private const String DataSyncConfig = "DataSyncConfig";
         public RelayCommand SaveCmd { get; private set; }
-        public ObservableCollection<DataSyncConfigViewModel> DataSyncConfigViewModels { get; set; }
-        public DataSyncConfigViewModel SelectedDataSyncConfigViewModel { get; set; }
+        public ObservableCollection<SysConfigViewModel> DataSyncConfigViewModels { get; set; }
+        public SysConfigViewModel SelectedSysConfigViewModel { get; set; }
 
         public DataSyncPageViewModel()
         {
             SaveCmd = new AuthCommand(SaveSysConfigs);
-            DataSyncConfigViewModels = new ObservableCollection<DataSyncConfigViewModel>(InitDataSyncConfigs());
+            DataSyncConfigViewModels = new ObservableCollection<SysConfigViewModel>(InitDataSyncConfigs());
         }
 
-        private List<DataSyncConfigViewModel> InitDataSyncConfigs()
+        private List<SysConfigViewModel> InitDataSyncConfigs()
         {
-            var configViewModels = new List<DataSyncConfigViewModel>();
+            var configViewModels = new List<SysConfigViewModel>();
             for (int index = 0; index < 10; index++)
             {
-                configViewModels.Add(new DataSyncConfigViewModel() { Value = "00:00:00" });
+                configViewModels.Add(new SysConfigViewModel() { Value = "00:00:00" });
             }
 
             var config = _sysConfigRepository.Query(new Hashtable()).FirstOrDefault(x => x.Name == DataSyncConfig);

@@ -104,10 +104,7 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string SysOperationLogPage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string SysOperationLogPage_OpenExportView = Guid.NewGuid().ToString();
 
-        public static readonly string DataSyncView_Open = Guid.NewGuid().ToString();
-        public static readonly string DataSyncView_Close = Guid.NewGuid().ToString();
-        public static readonly string DataSyncView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DataSyncPage_ShowNotification = Guid.NewGuid().ToString();
-        public static readonly string DataSyncPage_ShowQuestion = Guid.NewGuid().ToString();
+        public static readonly string DataCleanPage_ShowNotification = Guid.NewGuid().ToString();
     }
 }

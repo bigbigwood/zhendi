@@ -53,6 +53,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Register<FloorPageViewModel>();
             SimpleIoc.Default.Register<FloorMonitorPageViewModel>();
             SimpleIoc.Default.Register<DataSyncPageViewModel>();
+            SimpleIoc.Default.Register<DataCleanPageViewModel>();
 
             SetupNavigation();
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -88,6 +89,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             navigationService.Configure("FloorMonitorPage", new Uri("../Pages/FloorMonitorPage.xaml", UriKind.Relative));
             navigationService.Configure("SysOperationLogPage", new Uri("../Pages/SysOperationLogPage.xaml", UriKind.Relative));
             navigationService.Configure("DataSyncPage", new Uri("../Pages/DataSyncPage.xaml", UriKind.Relative));
+            navigationService.Configure("DataCleanPage", new Uri("../Pages/DataCleanPage.xaml", UriKind.Relative));
             
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
@@ -166,7 +168,10 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<DataSyncPageViewModel>(); }
         }
-        
+        public DataCleanPageViewModel DataCleanPage
+        {
+            get { return ServiceLocator.Current.GetInstance<DataCleanPageViewModel>(); }
+        }
 
         public static void Cleanup()
         {

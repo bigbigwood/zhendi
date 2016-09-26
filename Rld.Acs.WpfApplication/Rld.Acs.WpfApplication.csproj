@@ -224,6 +224,7 @@
     <Compile Include="Service\Validator\SysOperatorValidator.cs" />
     <Compile Include="Service\Validator\SyncUserViewModelValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
+    <Compile Include="ViewModel\Pages\DataCleanPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DataSyncPageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelAttachment.cs" />
     <Compile Include="ViewModel\Converter\DeviceConverter.cs" />
@@ -237,7 +238,7 @@
     <Compile Include="ViewModel\Pages\DeviceTrafficLogPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
-    <Compile Include="ViewModel\Views\DataSyncConfigViewModel.cs" />
+    <Compile Include="ViewModel\Views\SysConfigViewModel.cs" />
     <Compile Include="ViewModel\Views\UserAuthenticationViewModel.cs" />
     <Compile Include="ViewModel\Views\UserAuthMngtViewModel.cs" />
     <Compile Include="ViewModel\Views\SysOperationLogViewModel.cs" />
@@ -283,6 +284,9 @@
     <Compile Include="Models\TreeViewNode.cs" />
     <Compile Include="Service\Navigation\FrameNavigationService.cs" />
     <Compile Include="Service\Navigation\IFrameNavigationService.cs" />
+    <Compile Include="View\Pages\DataCleanPage.xaml.cs">
+      <DependentUpon>DataCleanPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Pages\SysOperationLogPage.xaml.cs">
       <DependentUpon>SysOperationLogPage.xaml</DependentUpon>
     </Compile>
@@ -349,9 +353,6 @@
     <Compile Include="Service\UserAvatorService.cs" />
     <Compile Include="View\Windows\FingerPrintCredentialView.xaml.cs">
       <DependentUpon>FingerPrintCredentialView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Windows\DataSyncConfigView.xaml.cs">
-      <DependentUpon>DataSyncConfigView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\ExportFileView.xaml.cs">
       <DependentUpon>ExportFileView.xaml</DependentUpon>
@@ -450,6 +451,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Pages\DataCleanPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Pages\SysOperationLogPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -495,10 +500,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Windows\FingerPrintCredentialView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\Windows\DataSyncConfigView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

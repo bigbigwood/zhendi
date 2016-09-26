@@ -113,6 +113,13 @@ alter table SYS_CONFIG
 go
 
 if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('DEVICE_GROUP') and o.name = 'PK_DEVICE_GROUP')
+alter table DEVICE_GROUP
+   drop constraint PK_DEVICE_GROUP
+go
+
+if exists (select 1
             from  sysobjects
            where  id = object_id('DEVICE_CONTROLLERS')
             and   type = 'U')
@@ -328,6 +335,13 @@ if exists (select 1
            where  id = object_id('SYS_CONFIG')
             and   type = 'U')
    drop table SYS_CONFIG
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('DEVICE_GROUP')
+            and   type = 'U')
+   drop table DEVICE_GROUP
 go
 
 /*==============================================================*/
@@ -886,7 +900,7 @@ create table DEVICE_GROUP (
    DeviceGroupID            int                  identity(1,1),
    CheckInDeviceID          int                  not null,
    CheckOutDeviceID         int                  not null,
-   constraint PK_SYS_USER_DEVICE_ROLES primary key nonclustered (USERDEVICEROLEID)
+   constraint PK_DEVICE_GROUP primary key nonclustered (DeviceGroupID)
 )
 go
 
