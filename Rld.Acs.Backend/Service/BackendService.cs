@@ -40,6 +40,9 @@ namespace Rld.Acs.Backend.Service
             var deviceAlarmJobCronExp = ConfigurationManager.AppSettings["DeviceAlarmJobCronExp"];
             InitJob(scheduler, typeof(DeviceAlarmJob), deviceAlarmJobCronExp);
 
+            var dataCleanJobCronExp = ConfigurationManager.AppSettings["DataCleanJobCronExp"];
+            InitJob(scheduler, typeof(DataCleanJob), dataCleanJobCronExp);
+
             Log.Info("Init schedule tasks completely.");
         }
 

@@ -76,6 +76,12 @@
       SELECT *
       FROM [SYS_OPERATION_LOG]
       <dynamic prepend="WHERE">
+        <isNotEmpty prepend="AND" property="StartDate">
+          CreateDate >= #StartDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="EndDate">
+          CreateDate  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
         <isNotEmpty prepend="AND" property="DepartmentID">
           DepartmentID = #DepartmentID#
         </isNotEmpty>

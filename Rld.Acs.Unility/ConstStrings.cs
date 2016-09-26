@@ -19,5 +19,11 @@ namespace Rld.Acs.Unility
 
         public const string AlarmEmailAccounts = "AlarmEmailAccounts";
         public const string AlarmSMSAccounts = "AlarmSMSAccounts";
+
+        public const string AutoCleanConfig = "AutoCleanConfig";
+        public const string SysLogExpireMonths = "SysLogExpireMonths";
+        public const string DeviceTrafficLogExpiredMonths = "DeviceTrafficLogExpiredMonths";
+        public const string DeviceMngtLogExpiredMonths = "DeviceMngtLogExpiredMonths";
+        public const string DoorHistoryExpiredMonths = "DoorHistoryExpiredMonths";
     }
 }

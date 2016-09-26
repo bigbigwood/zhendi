@@ -72,6 +72,17 @@
       SELECT *
       FROM DEVICE_STATE_HISTORY
       where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="StartDate">
+          RecordTime >= #StartDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="EndDate">
+          RecordTime  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceID">
+          DeviceID = #DeviceID#
+        </isNotEmpty>
+      </dynamic>
     </select>
   </statements>
 </sqlMap>
