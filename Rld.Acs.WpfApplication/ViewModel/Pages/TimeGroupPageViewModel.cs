@@ -24,6 +24,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ITimeGroupRepository _timeGroupRepo = NinjectBinder.GetRepository<ITimeGroupRepository>();
+        private ITimeZoneRepository _timeZoneRepo = NinjectBinder.GetRepository<ITimeZoneRepository>();
 
         public RelayCommand AddCmd { get; private set; }
         public RelayCommand ModifyCmd { get; private set; }
@@ -48,15 +49,11 @@ namespace Rld.Acs.WpfApplication.ViewModel
             try
             {
                 var timeGroupViewModel = new TimeGroupViewModel(new TimeGroup());
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = timeGroupViewModel
 
-                }, Tokens.OpenTimeGroupView);
-
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = timeGroupViewModel }, Tokens.OpenTimeGroupView);
                 if (timeGroupViewModel.ViewModelAttachment.LastOperationSuccess)
                 {
-                    TimeGroupViewModels.Add(timeGroupViewModel);
+                    TimeGroupViewModels.Add(new TimeGroupViewModel(timeGroupViewModel.ViewModelAttachment.CoreModel));
                 }
             }
             catch (Exception ex)
@@ -76,12 +73,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 }
 
                 var viewModel = new TimeGroupViewModel(SelectedTimeGroupViewModel.CurrentTimeGroup);
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = viewModel
 
-                }, Tokens.OpenTimeGroupView);
-
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.OpenTimeGroupView);
                 if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
                     var index = TimeGroupViewModels.IndexOf(SelectedTimeGroupViewModel);
@@ -104,9 +97,19 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
+                var timeZones = _timeZoneRepo.Query(new Hashtable());
+                if (timeZones.Any())
+                {
+                    var timeGroupsInUsing = timeZones.SelectMany(x => x.TimeGroupAssociations);
+                    if (timeGroupsInUsing.Any(x => x.TimeGroupID == SelectedTimeGroupViewModel.TimeGroupID))
+                    {
+                        Messenger.Default.Send(new NotificationMessage("该时间组已经被关联到时间区，不能删除!"), Tokens.TimeGroupPage_ShowNotification);
+                        return;
+                    }
+                }
+
                 string question = string.Format("确定删除时间组:{0}吗？", SelectedTimeGroupViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteTimeGroup), Tokens.TimeGroupPage_ShowQuestion);
-
             }
             catch (Exception ex)
             {

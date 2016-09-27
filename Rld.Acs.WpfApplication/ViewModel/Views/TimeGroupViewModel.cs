@@ -24,9 +24,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         private ITimeGroupRepository _timeGroupRepo = NinjectBinder.GetRepository<ITimeGroupRepository>();
         private ITimeSegmentRepository _timeSegmentRepo = NinjectBinder.GetRepository<ITimeSegmentRepository>();
 
-        public RelayCommand SaveCmd { get; private set; }
-        public RelayCommand CancelCmd { get; private set; }
-
         public TimeGroupViewModel(TimeGroup timeGroup)
         {
             ViewModelAttachment = new ViewModelAttachment<TimeGroup>();
@@ -34,7 +31,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             CancelCmd = new RelayCommand(() => Close(""));
 
             TimeSegmentDtos = new ObservableCollection<SelectableItem>();
-            AllTimeSegments = _timeSegmentRepo.Query(new Hashtable { { "Status", "1" } }).ToList();
             foreach (var timeSegment in AllTimeSegments)
             {
                 TimeSegmentDtos.Add(new ListBoxItem { ID = timeSegment.TimeSegmentID, DisplayName = timeSegment.TimeSegmentName, IsSelected = false });
@@ -43,7 +39,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             CurrentTimeGroup = timeGroup;
             if (timeGroup.TimeGroupID != 0)
             {
-                ID = timeGroup.TimeGroupID;
+                TimeGroupID = timeGroup.TimeGroupID;
                 Name = timeGroup.TimeGroupName;
 
                 foreach (var timeSegment in timeGroup.TimeSegments)
@@ -51,19 +47,25 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     TimeSegmentDtos.First(t => t.ID == timeSegment.TimeSegmentID).IsSelected = true;
                 }
             }
-
-            SelectedFormattingTimeSegmentList = GetSelectedFormattingTimeSegmentList();
-
-            Title = (timeGroup.TimeGroupID == 0) ? "新增时间组" : "修改时间组";
         }
 
-        public string Title { get; set; }
-        public Int32 ID { get; set; }
+        public RelayCommand SaveCmd { get; private set; }
+        public RelayCommand CancelCmd { get; private set; }
+        public string Title { get { return (TimeGroupID == 0) ? "新增时间组" : "修改时间组"; } }
+        public Int32 TimeGroupID { get; set; }
         public string Name { get; set; }
         public TimeGroup CurrentTimeGroup { get; set; }
-        public ObservableCollection<string> SelectedFormattingTimeSegmentList { get; set; }
+        public ObservableCollection<string> SelectedFormattingTimeSegmentList 
+        { 
+            get { return GetSelectedFormattingTimeSegmentList();}
+        }
         public ObservableCollection<SelectableItem> TimeSegmentDtos { get; set; }
-        public List<TimeSegment> AllTimeSegments { get; set; }
+
+        public List<TimeSegment> AllTimeSegments
+        {
+            get { return _timeSegmentRepo.Query(new Hashtable { { "Status", "1" } }).ToList(); }
+        }
+
         public ViewModelAttachment<TimeGroup> ViewModelAttachment { get; set; }
 
         private void Save()
@@ -108,8 +110,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 SendMessage(message);
                 return;
             }
-
-            SelectedFormattingTimeSegmentList = GetSelectedFormattingTimeSegmentList();
 
             ViewModelAttachment.CoreModel = CurrentTimeGroup;
             ViewModelAttachment.LastOperationSuccess = true;
