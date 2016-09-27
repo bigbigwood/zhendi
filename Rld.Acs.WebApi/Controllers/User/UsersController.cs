@@ -3,6 +3,7 @@ using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility;
+using Rld.Acs.Unility.Encryption;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WebApi.Framework;
 using System;
@@ -27,6 +28,8 @@ namespace Rld.Acs.WebApi.Controllers
             {
                 var repo = RepositoryManager.GetRepository<IUserRepository>();
                 var users = repo.Query(conditions);
+
+                users.ForEach(DecodePassword);
                 return Request.CreateResponse(HttpStatusCode.OK, users.ToList());
                
             }, this);
@@ -42,6 +45,7 @@ namespace Rld.Acs.WebApi.Controllers
                 if (userInfo == null)
                     return Request.CreateResponse(HttpStatusCode.NotFound);
 
+                DecodePassword(userInfo);
                 return Request.CreateResponse(HttpStatusCode.OK, userInfo);
 
             }, this);
@@ -69,6 +73,7 @@ namespace Rld.Acs.WebApi.Controllers
                 userPropertyRepo.Insert(userInfo.UserPropertyInfo);
                 userRepo.Insert(userInfo);
 
+                EncodePassword(userInfo);
                 userInfo.UserAuthentications.ForEach(a => a.UserID = userInfo.UserID);
                 userInfo.UserAuthentications.ForEach(a => userAuthenticationRepo.Insert(a));
 
@@ -111,6 +116,7 @@ namespace Rld.Acs.WebApi.Controllers
                     deletedAuthenticationIds = originalUserInfo.UserAuthentications.Select(d => d.UserAuthenticationID).ToList();
                 }
 
+                EncodePassword(userInfo);
                 deletedAuthenticationIds.ForEach(d => userAuthenticationRepo.Delete(d));
                 addedAuthentications.ForEach(d => userAuthenticationRepo.Insert(d));
                 userInfo.UserAuthentications.FindAll(d => d.UserAuthenticationID != 0).ForEach(d => userAuthenticationRepo.Update(d));
@@ -164,6 +170,31 @@ namespace Rld.Acs.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK);
 
             }, this);
+        }
+
+        
+        public static void EncodePassword(User user)
+        {
+            if (user != null && user.UserAuthentications != null)
+            {
+                var passwords = user.UserAuthentications.FindAll(x => x.AuthenticationType == AuthenticationType.Password);
+                if (passwords.Any())
+                {
+                    passwords.ForEach(x => x.AuthenticationData = SimpleEncryption.Encode(x.AuthenticationData));
+                }
+            }
+        }
+
+        public static void DecodePassword(User user)
+        {
+            if (user != null && user.UserAuthentications != null)
+            {
+                var password = user.UserAuthentications.FirstOrDefault(x => x.AuthenticationType == AuthenticationType.Password);
+                if (password != null)
+                {
+                    password.AuthenticationData = SimpleEncryption.Decode(password.AuthenticationData);
+                }
+            }
         }
     }
 }

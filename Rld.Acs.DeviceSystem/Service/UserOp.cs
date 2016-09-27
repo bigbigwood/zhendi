@@ -8,6 +8,7 @@ using Rld.Acs.Model;
 using Rld.Acs.Model.Extension;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Encryption;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.Unility.Serialization;
 using Rld.DeviceSystem.Contract.Message;
@@ -77,7 +78,7 @@ namespace Rld.Acs.DeviceSystem.Service
                     case AuthenticationType.Password:
                         {
                             var service = new PasswordService() { Enabled = true };
-                            service.Password = userAuthentication.AuthenticationData;
+                            service.Password = SimpleEncryption.Decode(userAuthentication.AuthenticationData);
                             service.UseForDuress = userAuthentication.IsDuress;
                             deviceUser.CredentialServices.Add(service);
                         }
@@ -191,7 +192,7 @@ namespace Rld.Acs.DeviceSystem.Service
                     var originalUserAuthentication = authenticationsOfDevice.FirstOrDefault(a => a.AuthenticationType == AuthenticationType.Password);
                     userAuthentication.UserAuthenticationID = originalUserAuthentication != null ? originalUserAuthentication.UserAuthenticationID : 0;
                     userAuthentication.AuthenticationType = AuthenticationType.Password;
-                    userAuthentication.AuthenticationData = passwordService.Password;
+                    userAuthentication.AuthenticationData = SimpleEncryption.Encode(passwordService.Password);
                     userAuthentication.IsDuress = passwordService.UseForDuress;
                 }
                 else if (service is CredentialCardService)

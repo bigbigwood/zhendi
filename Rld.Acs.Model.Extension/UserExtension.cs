@@ -57,5 +57,6 @@ namespace Rld.Acs.Model.Extension
             var userDevicePermissions = GetUserDeviceRoleAuthorizedPermissions(user, deviceRole);
             return userDevicePermissions.Select(p => p.DeviceID).Distinct().ToList();
         }
+
     }
 }
