@@ -37,8 +37,20 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         public RelayCommand<TreeViewNode> SelectedTreeNodeChangedCmd { get; private set; }
 
         public TreeViewNode SelectedTreeNode { get; private set; }
-        
-        public ObservableCollection<UserViewModel> UserViewModels { get; set; }
+
+        private ObservableCollection<UserViewModel> _userViewModels;
+        public ObservableCollection<UserViewModel> UserViewModels
+        {
+            get { return _userViewModels; }
+            set
+            {
+                if (_userViewModels != value)
+                {
+                    _userViewModels = value;
+                    RaisePropertyChanged("UserViewModels");
+                }
+            }
+        }
         public UserViewModel SelectedUserViewModel { get; set; }
         public Int32 SelectedDepartmentId { get; set; }
         public Boolean ShowEmployee { get; set; }
@@ -87,7 +99,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 var filterUesrs = GetFilterUsers();
                 var listUserViewModel = filterUesrs.Select(x => new UserViewModel(x));
                 UserViewModels = new ObservableCollection<UserViewModel>(listUserViewModel);
-                RaisePropertyChanged(null);
+                //RaisePropertyChanged(null);
             }
             catch (Exception ex)
             {
