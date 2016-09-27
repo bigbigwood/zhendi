@@ -33,7 +33,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
                 view.SetResourceReference(MetroWindow.BorderBrushProperty, "AccentColorBrush");
                 view.ShowDialog();
             }
-            if (msg.WindowType == "UserAuthenticationView")
+            else if (msg.WindowType == "UserAuthenticationView")
             {
                 view = new UserAuthenticationView { DataContext = msg.DataContext };
                 view.BorderThickness = new Thickness(1);

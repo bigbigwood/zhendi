@@ -239,6 +239,7 @@
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
     <Compile Include="ViewModel\Views\SysConfigViewModel.cs" />
+    <Compile Include="ViewModel\Views\MoveUserViewModel.cs" />
     <Compile Include="ViewModel\Views\UserAuthenticationViewModel.cs" />
     <Compile Include="ViewModel\Views\UserAuthMngtViewModel.cs" />
     <Compile Include="ViewModel\Views\SysOperationLogViewModel.cs" />

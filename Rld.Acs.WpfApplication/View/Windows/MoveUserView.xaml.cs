@@ -25,13 +25,14 @@ namespace Rld.Acs.WpfApplication.View.Windows
         {
             InitializeComponent();
 
-            Messenger.Default.Register(this, Tokens.CloseUserView, new Action<NotificationMessage>(ProcessCloseViewMessage));
+            Messenger.Default.Register(this, Tokens.MoveUserView_Close, new Action<NotificationMessage>(ProcessCloseViewMessage));
+            Messenger.Default.Register(this, Tokens.MoveUserView_ShowNotification, new Action<NotificationMessage>(ShowSubViewNotification));
         }
-        public override void ProcessCloseViewMessage(NotificationMessage msg)
-        {
-            MessageBoxSingleton.Instance.ShowDialog("移动人员成功", "");
+        //public override void ProcessCloseViewMessage(NotificationMessage msg)
+        //{
+        //    MessageBoxSingleton.Instance.ShowDialog("移动人员成功", "");
 
-            Close();
-        }
+        //    Close();
+        //}
     }
 }

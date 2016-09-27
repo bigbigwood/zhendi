@@ -242,7 +242,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 }
 
                 var coreModel = _userRepo.GetByKey(SelectedUserViewModel.UserID);
-                var viewModel = new UserViewModel(coreModel);
+                var viewModel = new MoveUserViewModel(coreModel);
                 Messenger.Default.Send(new OpenWindowMessage()
                 {
                     DataContext = viewModel,
@@ -251,7 +251,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                 if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
-                    if (viewModel.DepartmentInfo.DepartmentID != SelectedDepartmentId)
+                    if (viewModel.ViewModelAttachment.CoreModel.DepartmentID != SelectedDepartmentId)
                     {
                         UserViewModels.Remove(SelectedUserViewModel);
 
@@ -261,7 +261,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     else
                     {
                         var index = UserViewModels.IndexOf(SelectedUserViewModel);
-                        UserViewModels[index] = viewModel;
+                        UserViewModels[index] = new UserViewModel(viewModel.ViewModelAttachment.CoreModel);
 
                         var coreUser = CurrentDepartmentUsers.FirstOrDefault(x => x.UserID == coreModel.UserID);
                         CurrentDepartmentUsers.Remove(coreUser);

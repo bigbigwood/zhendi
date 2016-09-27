@@ -6,7 +6,7 @@
         xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
         xmlns:views="clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= views:UserViewModel, IsDesignTimeCreatable=True}"
+        mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= views:MoveUserViewModel, IsDesignTimeCreatable=True}"
         Width="400" Height="200" Unloaded="MetroWindow_Unloaded"
         ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen">
     <Grid>
@@ -37,21 +37,21 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="28" />
             <RowDefinition Height="5" />
-            <RowDefinition Height="28" />
-            <RowDefinition Height="28" />
-            <RowDefinition Height="28" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="32" />
+            <RowDefinition Height="32" />
             <RowDefinition Height="10" />
-            <RowDefinition Height="35" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" Grid.ColumnSpan="4" >
-            <TextBlock Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+            <TextBlock Text="移动人员" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
         </DockPanel>
         <Separator Grid.Row="1" Grid.ColumnSpan="4" Background="LightGray" />
 
         <TextBlock Grid.Row="2" Grid.Column="1" Text="姓名"/>
-        <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Name}" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding CurrentUser.Name}" HorizontalAlignment="Left"/>
         <TextBlock Grid.Row="3" Grid.Column="1" Text="当前部门"/>
         <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding CurrentDepartmentName}" HorizontalAlignment="Left"/>
         <TextBlock Grid.Row="4" Grid.Column="1" >
@@ -61,13 +61,8 @@
         <ComboBox Grid.Row="4" Grid.Column="2" 
                   ItemsSource="{Binding AuthorizationDepartments, Mode=OneWay}"  
                   SelectedItem="{Binding DepartmentInfo}" SelectedValuePath="DepartmentID" DisplayMemberPath="Name">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding DepartmentChangedCmd}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
         </ComboBox>
-        <StackPanel  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Content="{StaticResource Ok}" Command="{Binding SaveCmd}" Margin="3,0" />
             <Button Content="{StaticResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0" />
         </StackPanel>
