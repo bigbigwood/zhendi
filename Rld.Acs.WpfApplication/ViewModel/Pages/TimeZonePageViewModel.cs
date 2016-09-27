@@ -127,7 +127,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     Log.Error(ex);
                     message = "删除时间区失败！";
                 }
-                Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeGroupPage_ShowNotification);
+                Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeZonePage_ShowNotification);
             });
         }
 

@@ -129,7 +129,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     Log.Error(ex);
                     message = string.Format("删除时间段失败!\n{0}", ex.Message);
                 }
-                Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeSegmentPage_ShowQuestion);
+                Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeSegmentPage_ShowNotification);
             });
         }
     }
