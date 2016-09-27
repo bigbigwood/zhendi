@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
+using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -21,44 +22,35 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ITimeSegmentRepository _timeSegmentRepo = NinjectBinder.GetRepository<ITimeSegmentRepository>();
 
-        public RelayCommand SaveCmd { get; private set; }
-        public RelayCommand CancelCmd { get; private set; }
-
-        public TimeSegmentViewModel(TimeSegment timeSegment)
-        {
-            ViewModelAttachment = new ViewModelAttachment<TimeSegment>();
-            SaveCmd = new RelayCommand(Save);
-            CancelCmd = new RelayCommand(() => Close(""));
-            
-
-            CurrentTimeSegment = timeSegment;
-            if (timeSegment.TimeSegmentID != 0)
-            {
-                ID = timeSegment.TimeSegmentID;
-                Name = timeSegment.TimeSegmentName;
-                StartHour = timeSegment.BeginTime.Substring(0, 2);
-                StartMinute = timeSegment.BeginTime.Substring(3, 2);
-                EndHour = timeSegment.EndTime.Substring(0, 2);
-                EndMinute = timeSegment.EndTime.Substring(3, 2);
-            }
-
-            Title = (timeSegment.TimeSegmentID == 0) ? "新增时间段" : "修改时间段";
-        }
-
-        public string Title { get; set; }
-        public Int32 ID { get; set; }
-        public string Name { get; set; }
+        public Int32 TimeSegmentID { get; set; }
+        public String TimeSegmentName { get; set; }
+        public String BeginTime { get; set; }
+        public String EndTime { get; set; }
+        public Int32 CreateUserID { get; set; }
+        public DateTime CreateDate { get; set; }
+        public GeneralStatus Status { get; set; }
+        public Int32? UpdateUserID { get; set; }
+        public DateTime? UpdateDate { get; set; }
         public string StartHour { get; set; }
         public string StartMinute { get; set; }
         public string EndHour { get; set; }
         public string EndMinute { get; set; }
         public string FullSegment
         {
-            get { return string.Format("{0}-{1}", CurrentTimeSegment.BeginTime, CurrentTimeSegment.EndTime); }
+            get { return string.Format("{0}-{1}", BeginTime, EndTime); }
         }
+        public string Title { get { return (TimeSegmentID == 0) ? "新增时间段" : "修改时间段"; } }
         public ViewModelAttachment<TimeSegment> ViewModelAttachment { get; set; }
+        public RelayCommand SaveCmd { get; private set; }
+        public RelayCommand CancelCmd { get; private set; }
 
-        public TimeSegment CurrentTimeSegment { get; set; }
+        public TimeSegmentViewModel()
+        {
+            ViewModelAttachment = new ViewModelAttachment<TimeSegment>();
+            SaveCmd = new RelayCommand(Save);
+            CancelCmd = new RelayCommand(() => Close(""));
+        }
+
 
         private void Save()
         {
@@ -83,32 +75,29 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     return;
                 }
 
-                if (StartHour.Length == 1) StartHour = "0" + StartHour;
-                if (EndHour.Length == 1) EndHour = "0" + EndHour;
-                if (StartMinute.Length == 1) StartMinute = "0" + StartMinute;
-                if (EndMinute.Length == 1) EndMinute = "0" + EndMinute;
+                BeginTime = beginDateTime.ToString("HH:mm");
+                EndTime = endDateTime.ToString("HH:mm");
+                Status = GeneralStatus.Enabled;
 
-                CurrentTimeSegment.BeginTime = string.Format("{0}:{1}", StartHour, StartMinute);
-                CurrentTimeSegment.EndTime = string.Format("{0}:{1}", EndHour, EndMinute);
-                CurrentTimeSegment.TimeSegmentName = Name;
-                CurrentTimeSegment.Status = GeneralStatus.Enabled;
+                var coreModel = Mapper.Map<TimeSegment>(this);
 
-                if (CurrentTimeSegment.TimeSegmentID == 0)
+                if (TimeSegmentID == 0)
                 {
-                    CurrentTimeSegment.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    CurrentTimeSegment.CreateDate = DateTime.Now;
-                    CurrentTimeSegment = _timeSegmentRepo.Insert(CurrentTimeSegment);
-
+                    coreModel.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                    coreModel.CreateDate = DateTime.Now;
+                    coreModel = _timeSegmentRepo.Insert(coreModel);
                     message = "增加时间段成功!";
                 }
                 else
                 {
-                    CurrentTimeSegment.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
-                    CurrentTimeSegment.UpdateDate = DateTime.Now;
-                    _timeSegmentRepo.Update(CurrentTimeSegment);
-
+                    coreModel.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
+                    coreModel.UpdateDate = DateTime.Now;
+                    _timeSegmentRepo.Update(coreModel);
                     message = "修改时间段成功!";
                 }
+
+                ViewModelAttachment.CoreModel = coreModel;
+                ViewModelAttachment.LastOperationSuccess = true;
             }
             catch (Exception ex)
             {
@@ -118,8 +107,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 return;
             }
 
-            ViewModelAttachment.CoreModel = CurrentTimeSegment;
-            ViewModelAttachment.LastOperationSuccess = true;
             RaisePropertyChanged(null);
             Close(message);
         }

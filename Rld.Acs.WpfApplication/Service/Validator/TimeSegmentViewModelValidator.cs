@@ -10,7 +10,7 @@ namespace Rld.Acs.WpfApplication.Service.Validator
     {
         public TimeSegmentViewModelValidator()
         {
-            RuleFor(m => m.Name)
+            RuleFor(m => m.TimeSegmentName)
                 .NotEmpty().WithMessage("时间段名称不能为空")
                 .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("时间段名称不能有特殊字符")
                 .Length(1, 50).WithMessage("时间段名称长度为1-50"); 

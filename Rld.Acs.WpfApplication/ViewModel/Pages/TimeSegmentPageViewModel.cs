@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.ObjectModel;
+using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -37,8 +38,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
             ModifyCmd = new AuthCommand(ModifyTimeSegment);
             DeleteCmd = new AuthCommand(DeleteTimeSegment);
 
-            var TimeSegments = _timeSegmentRepository.Query(new Hashtable()).ToList();
-            var viewmodels = TimeSegments.Select(x => new TimeSegmentViewModel(x));
+            var timeSegments = _timeSegmentRepository.Query(new Hashtable()).ToList();
+            var viewmodels = timeSegments.Select(Mapper.Map<TimeSegmentViewModel>);
             TimeSegmentViewModels = new ObservableCollection<TimeSegmentViewModel>(viewmodels);
         }
 
@@ -46,16 +47,13 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             try
             {
-                var timeSegmentViewModel = new TimeSegmentViewModel(new TimeSegment());
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = timeSegmentViewModel
+                var viewModel = Mapper.Map<TimeSegmentViewModel>(new TimeSegment());
 
-                }, Tokens.OpenTimeSegmentView);
-
-                if (timeSegmentViewModel.ViewModelAttachment.LastOperationSuccess)
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.OpenTimeSegmentView);
+                if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
-                    TimeSegmentViewModels.Add(timeSegmentViewModel);
+                    viewModel = Mapper.Map<TimeSegmentViewModel>(viewModel.ViewModelAttachment.CoreModel);
+                    TimeSegmentViewModels.Add(viewModel);
                 }
             }
             catch (Exception ex)
@@ -74,19 +72,15 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
-                var viewModel = new TimeSegmentViewModel(SelectedTimeSegmentViewModel.CurrentTimeSegment);
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = viewModel
+                var coreModel = Mapper.Map<TimeSegment>(SelectedTimeSegmentViewModel);
+                var viewModel = Mapper.Map<TimeSegmentViewModel>(coreModel);
 
-                }, Tokens.OpenTimeSegmentView);
-
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.OpenTimeSegmentView);
                 if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
                     var index = TimeSegmentViewModels.IndexOf(SelectedTimeSegmentViewModel);
                     TimeSegmentViewModels[index] = viewModel;
                 }
-
             }
             catch (Exception ex)
             {
@@ -108,14 +102,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 if (timegroups.Any())
                 {
                     var timesegmentsInUsing = timegroups.SelectMany(x => x.TimeSegments);
-                    if (timesegmentsInUsing.Any(x => x.TimeSegmentID == SelectedTimeSegmentViewModel.ID))
+                    if (timesegmentsInUsing.Any(x => x.TimeSegmentID == SelectedTimeSegmentViewModel.TimeSegmentID))
                     {
                         Messenger.Default.Send(new NotificationMessage("该时间段已经被关联到时间组，不能删除!"), Tokens.TimeSegmentPage_ShowNotification);
                         return;
                     }
                 }
 
-                string question = string.Format("确定删除时间段:{0}吗？", SelectedTimeSegmentViewModel.Name);
+                string question = string.Format("确定删除时间段:{0}吗？", SelectedTimeSegmentViewModel.TimeSegmentName);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteTimeSegment), Tokens.TimeSegmentPage_ShowQuestion);
             }
             catch (Exception ex)
@@ -131,7 +125,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 string message = "";
                 try
                 {
-                    _timeSegmentRepository.Delete(SelectedTimeSegmentViewModel.CurrentTimeSegment.TimeSegmentID);
+                    _timeSegmentRepository.Delete(SelectedTimeSegmentViewModel.TimeSegmentID);
                     message = "删除时间段成功!";
 
                     TimeSegmentViewModels.Remove(SelectedTimeSegmentViewModel);

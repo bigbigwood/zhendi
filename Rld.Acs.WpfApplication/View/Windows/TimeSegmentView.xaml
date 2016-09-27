@@ -50,7 +50,7 @@
                         <TextBlock Text="{DynamicResource TimeSegmentView_Label_Name}" Margin="0"/>
         </TextBlock>
 
-        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Name}"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding TimeSegmentName}"/>
         <TextBlock Grid.Row="3" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                         <TextBlock Text="{DynamicResource TimeSegmentView_Label_Setting}" Margin="0"/>

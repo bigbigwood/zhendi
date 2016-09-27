@@ -61,7 +61,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="{DynamicResource TimeSegmentView_Label_Name}" Binding="{Binding Name}" Width="200" />
+                        <DataGridTextColumn Header="{DynamicResource TimeSegmentView_Label_Name}" Binding="{Binding TimeSegmentName}" Width="200" />
                         <DataGridTextColumn Header="{DynamicResource TimeSegmentView_Label_Setting}" Binding="{Binding FullSegment}" Width="*"  />
                     </DataGrid.Columns>
                 </DataGrid>

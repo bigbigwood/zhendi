@@ -41,6 +41,18 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
         public static void BindModelMap()
         {
+            CreateProvMap<TimeSegmentViewModel, TimeSegment>();
+            CreateProvMap<TimeSegment, TimeSegmentViewModel>()
+                .ForMember(dest => dest.SaveCmd, op => op.Ignore())
+                .ForMember(dest => dest.CancelCmd, op => op.Ignore())
+                .ForMember(dest => dest.Title, op => op.Ignore())
+                .ForMember(dest => dest.ViewModelAttachment, op => op.Ignore())
+                .ForMember(dest => dest.StartHour, op => op.MapFrom(src => (src.TimeSegmentID != 0) ?  src.BeginTime.Substring(0, 2) : ""))
+                .ForMember(dest => dest.StartMinute, op => op.MapFrom(src => (src.TimeSegmentID != 0) ? src.BeginTime.Substring(3, 2) : ""))
+                .ForMember(dest => dest.EndHour, op => op.MapFrom(src => (src.TimeSegmentID != 0) ? src.EndTime.Substring(0, 2) : ""))
+                .ForMember(dest => dest.EndMinute, op => op.MapFrom(src => (src.TimeSegmentID != 0) ? src.EndTime.Substring(3, 2) : ""))
+                .ForMember(dest => dest.FullSegment, op => op.Ignore());
+
             CreateProvMap<DeviceDoor, DeviceDoorViewModel>()
                 .ForMember(dest => dest.IsSelected, op => op.Ignore())
                 .ForMember(dest => dest.RingTypeDict, op => op.Ignore())
