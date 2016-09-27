@@ -94,7 +94,7 @@ namespace Rld.Acs.DeviceSystem.Service
             deviceController.ServerURL = "";
             deviceController.Remark = "";
             deviceController.Protocol = 0; // set to websocket by default
-            deviceController.CreateUserID = Global.UserId;
+            deviceController.CreateUserID = Global.DeviceSystemOperatorId;
             deviceController.CreateDate = DateTime.Now;
             deviceController.Status = GeneralStatus.Enabled;
 

@@ -43,6 +43,9 @@ namespace Rld.Acs.Backend.Service
             var dataCleanJobCronExp = ConfigurationManager.AppSettings["DataCleanJobCronExp"];
             InitJob(scheduler, typeof(DataCleanJob), dataCleanJobCronExp);
 
+            var dataSyncJobCronExp = ConfigurationManager.AppSettings["DataSyncJobCronExp"];
+            InitJob(scheduler, typeof(DataSyncJob), dataSyncJobCronExp);
+
             Log.Info("Init schedule tasks completely.");
         }
 

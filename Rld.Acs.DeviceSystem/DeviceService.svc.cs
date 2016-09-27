@@ -120,7 +120,27 @@ namespace Rld.Acs.DeviceSystem
 
         public SyncDeviceTrafficLogsResponse SyncDeviceTrafficLogs(SyncDeviceTrafficLogsRequest request)
         {
-            throw new NotImplementedException();
+            return PersistenceOperation.Process(request, () =>
+            {
+                try
+                {
+                    request.Devices.ForEach(d =>
+                    {
+                        var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
+                        var logs = new TrafficLogOp().QueryNewTrafficLogs(d.DeviceID);
+                        foreach (var deviceOperationLog in logs)
+                        {
+                            repo.Insert(deviceOperationLog);
+                        }
+                    });
+
+                    return new SyncDeviceTrafficLogsResponse() { ResultType = ResultTypes.Ok };
+                }
+                catch (DeviceNotConnectedException dex)
+                {
+                    return new SyncDeviceTrafficLogsResponse() { ResultType = ResultTypes.DeviceNotConnected };
+                }
+            });
         }
 
 

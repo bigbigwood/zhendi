@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Jobs\DataSyncJob.cs" />
     <Compile Include="Jobs\DataCleanJob.cs" />
     <Compile Include="Jobs\DeviceAlarmJob.cs" />
     <Compile Include="Jobs\JobBase.cs" />

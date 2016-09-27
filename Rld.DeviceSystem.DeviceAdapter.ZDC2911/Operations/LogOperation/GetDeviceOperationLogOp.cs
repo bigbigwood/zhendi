@@ -16,7 +16,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.LogOperation
                 Options = GetLogOptions.GetNewLogs,
                 BeginTime = request.BeginTime,
                 EndTime = request.EndTime,
-                CleanNewLogPosition = false,
+                CleanNewLogPosition = true,
             });
 
             var serviceData = rawData.Select(DeviceAdminLogMapper.ToModel).ToList();

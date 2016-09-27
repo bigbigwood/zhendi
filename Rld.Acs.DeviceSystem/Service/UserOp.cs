@@ -22,7 +22,6 @@ namespace Rld.Acs.DeviceSystem.Service
         private IUserRepository _userRepo = RepositoryManager.GetRepository<IUserRepository>();
         private IUserAuthenticationRepository _userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
         private IDeviceRoleRepository _deviceRole = RepositoryManager.GetRepository<IDeviceRoleRepository>();
-        private const Int32 SyncUserID = 14;
 
         public void UpdateDeviceUser(User user, DeviceController device)
         {
@@ -183,7 +182,7 @@ namespace Rld.Acs.DeviceSystem.Service
                     DeviceUserID = deviceUserId,
                     Status = GeneralStatus.Enabled,
                     CreateDate = DateTime.Now,
-                    CreateUserID = SyncUserID,
+                    CreateUserID = Global.DeviceSystemOperatorId,
                 };
 
                 if (service is PasswordService)
