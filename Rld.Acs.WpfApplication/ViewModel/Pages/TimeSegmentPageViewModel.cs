@@ -24,6 +24,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ITimeSegmentRepository _timeSegmentRepository = NinjectBinder.GetRepository<ITimeSegmentRepository>();
+        private ITimeGroupRepository _timeGroupRepository = NinjectBinder.GetRepository<ITimeGroupRepository>();
         public RelayCommand AddCmd { get; private set; }
         public RelayCommand ModifyCmd { get; private set; }
         public RelayCommand DeleteCmd { get; private set; }
@@ -101,6 +102,17 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 {
                     Messenger.Default.Send(new NotificationMessage("请先选择时间段!"), Tokens.TimeSegmentPage_ShowNotification);
                     return;
+                }
+
+                var timegroups = _timeGroupRepository.Query(new Hashtable());
+                if (timegroups.Any())
+                {
+                    var timesegmentsInUsing = timegroups.SelectMany(x => x.TimeSegments);
+                    if (timesegmentsInUsing.Any(x => x.TimeSegmentID == SelectedTimeSegmentViewModel.ID))
+                    {
+                        Messenger.Default.Send(new NotificationMessage("该时间段已经被关联到时间组，不能删除!"), Tokens.TimeSegmentPage_ShowNotification);
+                        return;
+                    }
                 }
 
                 string question = string.Format("确定删除时间段:{0}吗？", SelectedTimeSegmentViewModel.Name);
