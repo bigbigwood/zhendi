@@ -44,15 +44,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             try
             {
                 var timeZoneViewModel = new TimeZoneViewModel(new Model.TimeZone());
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = timeZoneViewModel
 
-                }, Tokens.OpenTimeZoneView);
-
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = timeZoneViewModel }, Tokens.OpenTimeZoneView);
                 if (timeZoneViewModel.ViewModelAttachment.LastOperationSuccess)
                 {
-                    TimeZoneViewModels.Add(timeZoneViewModel);
+                    TimeZoneViewModels.Add(new TimeZoneViewModel((timeZoneViewModel.ViewModelAttachment.CoreModel)));
                 }
             }
             catch (Exception ex)
@@ -72,12 +68,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 }
 
                 var viewModel = new TimeZoneViewModel(SelectedTimeZoneViewModel.CurrentTimeZone);
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = viewModel
 
-                }, Tokens.OpenTimeZoneView);
-
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.OpenTimeZoneView);
                 if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
                     var index = TimeZoneViewModels.IndexOf(SelectedTimeZoneViewModel);
@@ -101,9 +93,30 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
+                string assiciationErrorMessage = "";
+                var deviceAssiciationTimeZoneIds = ApplicationManager.GetInstance().AuthorizationDevices
+                    .Select(x => x.DeviceControllerParameter.UnlockOpenTimeZone);
+                if (deviceAssiciationTimeZoneIds.Contains(SelectedTimeZoneViewModel.ID))
+                {
+                    assiciationErrorMessage += "该时间组已经被关联到设备，不能删除!\n";
+                }
+
+                var deviceRoleAssiciationTimeZoneIds = ApplicationManager.GetInstance().AuthorizationDeviceRoles
+                    .SelectMany(x => x.DeviceRolePermissions)
+                    .Select(x => x.AllowedAccessTimeZoneID);
+                if (deviceRoleAssiciationTimeZoneIds.Contains(SelectedTimeZoneViewModel.ID))
+                {
+                    assiciationErrorMessage += "该时间组已经被关联到设备角色，不能删除!\n";
+                }
+
+                if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))
+                {
+                    Messenger.Default.Send(new NotificationMessage(assiciationErrorMessage), Tokens.TimeZonePage_ShowNotification);
+                    return;
+                }
+
                 string question = string.Format("确定删除时间区:{0}吗？", SelectedTimeZoneViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteTimeZone), Tokens.TimeZonePage_ShowQuestion);
-
             }
             catch (Exception ex)
             {
