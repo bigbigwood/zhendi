@@ -68,6 +68,7 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<FloorValidator>().To<FloorValidator>();
 
             InjectionKernel.Bind<SyncUserViewModelValidator>().To<SyncUserViewModelValidator>();
+            InjectionKernel.Bind<UserAuthenticationViewModelValidator>().To<UserAuthenticationViewModelValidator>();
         }
 
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()

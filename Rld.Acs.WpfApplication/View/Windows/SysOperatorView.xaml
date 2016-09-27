@@ -42,7 +42,6 @@
         </Style>
         <Style TargetType="CheckBox" BasedOn="{StaticResource ResourceKey={x:Type CheckBox}}" >
             <Setter Property="Margin" Value="2,1" />
- 
         </Style>
     </controls:MetroWindow.Resources>
     <Grid>

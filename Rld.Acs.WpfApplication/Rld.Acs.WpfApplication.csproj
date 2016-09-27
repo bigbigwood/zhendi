@@ -223,6 +223,7 @@
     <Compile Include="Service\Validator\FloorValidator.cs" />
     <Compile Include="Service\Validator\SysOperatorValidator.cs" />
     <Compile Include="Service\Validator\SyncUserViewModelValidator.cs" />
+    <Compile Include="Service\Validator\UserAuthenticationViewModelValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Pages\DataCleanPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DataSyncPageViewModel.cs" />
@@ -350,7 +351,7 @@
     <Compile Include="Repository\DeviceRoleRepository.cs" />
     <Compile Include="Repository\DeviceControllerRepository.cs" />
     <Compile Include="Repository\DepartmentDeviceRepository.cs" />
-    <Compile Include="Repository\NinjectBinder.cs" />
+    <Compile Include="Service\NinjectBinder.cs" />
     <Compile Include="Service\UserAvatorService.cs" />
     <Compile Include="View\Windows\FingerPrintCredentialView.xaml.cs">
       <DependentUpon>FingerPrintCredentialView.xaml</DependentUpon>

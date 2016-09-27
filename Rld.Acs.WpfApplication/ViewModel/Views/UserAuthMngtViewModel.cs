@@ -103,6 +103,21 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             string message = "";
             try
             {
+                string errorMessage = "";
+                var passwordCredentials = UserDeviceAuthViewModels.Select(x => x.PasswordCredential);
+                var validator = NinjectBinder.GetValidator<UserAuthenticationViewModelValidator>();
+                passwordCredentials.ForEach(p =>
+                {
+                    var results = validator.Validate(p);
+                    if (!results.IsValid)
+                        errorMessage = string.Join("\n", results.Errors);
+                });
+                if (!string.IsNullOrWhiteSpace(errorMessage))
+                {
+                    SendMessage(errorMessage);
+                    return;
+                }
+
                 CurrentUser.UserAuthentications = GetAuthentications();
                 CurrentUser.UserAuthentications.FindAll(x => x.UserAuthenticationID == 0).ForEach(xx =>
                 {

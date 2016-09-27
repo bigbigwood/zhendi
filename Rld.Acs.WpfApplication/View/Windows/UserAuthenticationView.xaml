@@ -7,7 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
              xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-             xmlns:customControls="clr-namespace:Rld.Acs.WpfApplication.View.CustomControls"
+             xmlns:models="clr-namespace:Rld.Acs.WpfApplication.Models"
              Dialog:DialogParticipation.Register="{Binding}"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:UserAuthMngtViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
@@ -60,7 +60,9 @@
 
                 <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="3">
                     <CheckBox Width="50" Style="{StaticResource GCheckBox}" Name ="passwordCb" IsChecked="{Binding PasswordCredential.IsSelected}" Content="启用" />
-                    <TextBox  Width="180" Style="{StaticResource GTextBox}"  Text="{Binding PasswordCredential.AuthenticationData}" IsEnabled="{Binding ElementName=passwordCb, Path=IsChecked}"/>
+                    <PasswordBox Width="180" Margin="2,1" IsEnabled="{Binding ElementName=passwordCb, Path=IsChecked}"
+                        models:PasswordBoxHelper.Password="{Binding Path=PasswordCredential.AuthenticationData,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                    </PasswordBox>
                     <CheckBox Width="100" Style="{StaticResource GCheckBox}" IsChecked="{Binding PasswordCredential.IsDuress}" Content="是否胁迫" IsEnabled="{Binding ElementName=passwordCb, Path=IsChecked}"/>
                 </StackPanel>
 
