@@ -114,6 +114,28 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
+                string assiciationErrorMessage = "";
+                var departmentAssiciationDeviceIds = ApplicationManager.GetInstance().AuthorizationDepartments
+                    .SelectMany(x => x.DeviceAssociations).Select(x => x.DeviceID);
+                if (departmentAssiciationDeviceIds.Contains(SelectedDeviceViewModel.Id))
+                {
+                    assiciationErrorMessage += "该设备已经被关联到部门，不能删除!\n";
+                }
+
+                var deviceRoleAssiciationDeviceIds = ApplicationManager.GetInstance().AuthorizationDeviceRoles
+                    .SelectMany(x => x.DeviceRolePermissions)
+                    .Select(x => x.DeviceID);
+                if (deviceRoleAssiciationDeviceIds.Contains(SelectedDeviceViewModel.Id))
+                {
+                    assiciationErrorMessage += "该设备已经被关联到设备角色，不能删除!\n";
+                }
+
+                if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))
+                {
+                    Messenger.Default.Send(new NotificationMessage(assiciationErrorMessage), Tokens.DevicePage_ShowNotification);
+                    return;
+                }
+
                 string question = string.Format("确定删除设备:{0}吗？", SelectedDeviceViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeviceController), Tokens.DevicePage_ShowQuestion);
 
