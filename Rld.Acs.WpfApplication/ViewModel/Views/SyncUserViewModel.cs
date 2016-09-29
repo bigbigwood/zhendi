@@ -64,8 +64,34 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             get { return BuildTreeViewSource(); }
         }
-        public ObservableCollection<SelectableItem> DepartmentUserDtos { get; set; }
-        public ObservableCollection<SelectableItem> SelectedSyncUserDtos { get; set; }
+
+        private ObservableCollection<SelectableItem> _departmentUserDtos;
+        public ObservableCollection<SelectableItem> DepartmentUserDtos
+        {
+            get { return _departmentUserDtos; }
+            set
+            {
+                if (_departmentUserDtos != value)
+                {
+                    _departmentUserDtos = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        private ObservableCollection<SelectableItem> _selectedSyncUserDtos;
+
+        public ObservableCollection<SelectableItem> SelectedSyncUserDtos
+        {
+            get { return _selectedSyncUserDtos; }
+            set
+            {
+                if (_selectedSyncUserDtos != value)
+                {
+                    _selectedSyncUserDtos = value;
+                    RaisePropertyChanged();
+                }
+            }
+        } 
 
 
 
@@ -195,8 +221,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 {
                     users.ForEach(user => DepartmentUserDtos.Add(new ComboBoxItem() { ID = user.UserID, DisplayName = user.Name }));
                 }
-
-                RaisePropertyChanged(null);
             }
             catch (Exception ex)
             {
@@ -216,8 +240,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     SelectedSyncUserDtos.Add(new ComboBoxItem() { ID = u.ID, DisplayName = u.DisplayName });
                 }
             });
-
-            RaisePropertyChanged(null);
         }
 
         private void RemoveSelected()
@@ -226,7 +248,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             if (selectedUsers == null || !selectedUsers.Any()) return;
 
             selectedUsers.ForEach(u => SelectedSyncUserDtos.Remove(u));
-            RaisePropertyChanged(null);
         }
 
         private void SelectAllDepartmentUsers()
@@ -241,7 +262,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     SelectedSyncUserDtos.Add(new ComboBoxItem() { ID = u.ID, DisplayName = u.DisplayName });
                 }
             });
-            RaisePropertyChanged(null);
         }
 
         private void RemoveAllSelectedUsers()
@@ -251,7 +271,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             //temp.ForEach(t => SelectedSyncUserDtos.Add(new ComboBoxItem() { ID = t.ID, DisplayName = t.DisplayName, IsSelected = true }));
 
             SelectedSyncUserDtos = new ObservableCollection<SelectableItem>();
-            RaisePropertyChanged(null);
         }
     }
 }

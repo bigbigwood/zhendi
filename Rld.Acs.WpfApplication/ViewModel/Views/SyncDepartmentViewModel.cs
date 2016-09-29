@@ -56,7 +56,21 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             get { return BuildTreeViewSource(); }
         }
-        public ObservableCollection<SelectableItem> SelectedSyncDepartmentDtos { get; set; }
+
+        private ObservableCollection<SelectableItem> _selectedSyncDepartmentDtos;
+
+        public ObservableCollection<SelectableItem> SelectedSyncDepartmentDtos
+        {
+            get { return _selectedSyncDepartmentDtos; }
+            set
+            {
+                if (_selectedSyncDepartmentDtos != value)
+                {
+                    _selectedSyncDepartmentDtos = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
         public TreeViewNode SelectedNode { get; set; }
 
 
@@ -72,13 +86,22 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
             SelectedSyncDepartmentDtos = new ObservableCollection<SelectableItem>();
 
-            var dtos = AuthorizationDevices.Select(x => new ListBoxItem {ID = x.DeviceID, DisplayName = x.Code});
+            var dtos = AuthorizationDevices.Select(x => new ListBoxItem {ID = x.DeviceID, DisplayName = x.Name});
             DeviceDtos = new ObservableCollection<SelectableItem>(dtos);
         }
 
 
         private void Save()
         {
+            var validator = NinjectBinder.GetValidator<SyncDepartmentViewModelValidator>();
+            var results = validator.Validate(this);
+            if (!results.IsValid)
+            {
+                var message = string.Join("\n", results.Errors);
+                SendMessage(message);
+                return;
+            }
+
             string question = "确定同步数据吗？";
             Messenger.Default.Send(new NotificationMessageAction(this, question, SyncData), Tokens.SyncDepartmentView_ShowQuestion);
         }
@@ -113,7 +136,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
                 await controller.CloseAsync();
 
-                Messenger.Default.Send(new NotificationMessage(message), Tokens.SyncDepartmentView_ShowNotification);
+                SendMessage(message);
             });
         }
 
@@ -178,7 +201,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 SelectedSyncDepartmentDtos.Add(new ComboBoxItem() { ID = SelectedNode.ID, DisplayName = SelectedNode.Name });
             }
-            RaisePropertyChanged(null);
         }
 
         private void RemoveSelectedDepartment()
@@ -187,7 +209,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             if (selectedDepartments == null || !selectedDepartments.Any()) return;
 
             selectedDepartments.ForEach(u => SelectedSyncDepartmentDtos.Remove(u));
-            RaisePropertyChanged(null);
         }
 
         private void SelectAllDepartments()
@@ -199,14 +220,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     SelectedSyncDepartmentDtos.Add(new ComboBoxItem() { ID = t.DepartmentID, DisplayName = t.Name });
                 }
             });
-
-            RaisePropertyChanged(null);
         }
 
         private void RemoveAllSelectedDepartments()
         {
             SelectedSyncDepartmentDtos = new ObservableCollection<SelectableItem>();
-            RaisePropertyChanged(null);
         }
     }
 }

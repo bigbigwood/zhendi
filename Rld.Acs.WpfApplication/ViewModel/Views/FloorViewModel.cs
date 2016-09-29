@@ -36,6 +36,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public String Name { get; set; }
         public String Photo { get; set; }
         public GeneralStatus Status { get; set; }
+        public String Title { get { return (FloorID == 0) ? "新增楼层" : "修改楼层"; } }
 
         public string DoorNames
         {

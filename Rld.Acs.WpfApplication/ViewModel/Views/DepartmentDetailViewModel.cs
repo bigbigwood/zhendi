@@ -38,7 +38,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             set
             {
                 _title = value;
-                RaisePropertyChanged("Title");
+                RaisePropertyChanged();
             }
         }
         private List<ListBoxItem> _deviceListBoxSource;
@@ -48,7 +48,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             set
             {
                 _deviceListBoxSource = value;
-                RaisePropertyChanged("DeviceListBoxSource");
+                RaisePropertyChanged();
             }
         }
         public Department ParentDepartment { get; set; }

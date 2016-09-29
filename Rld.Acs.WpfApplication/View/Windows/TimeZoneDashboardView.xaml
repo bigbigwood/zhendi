@@ -57,7 +57,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" >
-            <TextBlock Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" />
+            <TextBlock Text="时间区详情" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" />
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
         <DockPanel Grid.Row="2" >

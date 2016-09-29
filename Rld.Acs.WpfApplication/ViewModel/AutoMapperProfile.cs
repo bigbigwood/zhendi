@@ -165,6 +165,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.ViewModelAttachment, op => op.Ignore())
                 .ForMember(dest => dest.Doors, op => op.Ignore())
                 .ForMember(dest => dest.DoorNames, op => op.Ignore())
+                .ForMember(dest => dest.Title, op => op.Ignore())
                 .AfterMap((src, dest) => dest.BindDoors(src.Doors));
 
             CreateProvMap<SysConfigViewModel, SysConfig>();

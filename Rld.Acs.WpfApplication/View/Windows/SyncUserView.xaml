@@ -152,7 +152,7 @@
                         <ListBox  Grid.Column="1" ItemsSource="{Binding DepartmentUserDtos}" HorizontalAlignment="Left">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}"/>
+                                    <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}" Width="Auto"/>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -177,7 +177,7 @@
                     <ListBox ItemsSource="{Binding SelectedSyncUserDtos}" HorizontalAlignment="Left">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}"/>
+                                <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}" Width="Auto"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

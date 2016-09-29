@@ -213,6 +213,7 @@
     <Compile Include="Service\Proxy\SecurityServiceProxy.cs" />
     <Compile Include="Service\Validator\DeviceParameterValidator.cs" />
     <Compile Include="Service\Validator\DeviceRoleViewModelValidator.cs" />
+    <Compile Include="Service\Validator\SyncDepartmentViewModelValidator.cs" />
     <Compile Include="Service\Validator\SysDictionaryValidator.cs" />
     <Compile Include="Service\Validator\HeadReadingValidator.cs" />
     <Compile Include="Service\Validator\DoorValidator.cs" />
