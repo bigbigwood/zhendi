@@ -180,6 +180,7 @@
     <Compile Include="Repository\System\SysOperationLogRepository.cs" />
     <Compile Include="Repository\System\SysModuleElementRepository.cs" />
     <Compile Include="Repository\System\SysModuleRepository.cs" />
+    <Compile Include="Repository\System\SysOperatorRoleRepository.cs" />
     <Compile Include="Repository\System\SysOperatorRepository.cs" />
     <Compile Include="Repository\System\SysRoleRepository.cs" />
     <Compile Include="Repository\System\SysConfigRepository.cs" />

@@ -229,5 +229,7 @@ namespace Rld.Acs.WebApi.Framework
         QUC,
         [Description("Query User Device Role")]
         QUDR,
+        [Description("Query Operator Role")]
+        QOR,
     }
 }

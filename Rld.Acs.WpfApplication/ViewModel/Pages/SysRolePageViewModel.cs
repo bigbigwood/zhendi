@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using AutoMapper;
@@ -21,6 +22,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private ISysRoleRepository _sysRoleRepo = NinjectBinder.GetRepository<ISysRoleRepository>();
+        private ISysOperatorRoleRepository _sysOperatorRoleRepo = NinjectBinder.GetRepository<ISysOperatorRoleRepository>();
         public RelayCommand AddCmd { get; private set; }
         public RelayCommand ModifyCmd { get; private set; }
         public RelayCommand DeleteCmd { get; private set; }
@@ -68,7 +70,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                 var coreModel = Mapper.Map<SysRole>(SelectedSysRoleViewModel);
                 var viewModel = Mapper.Map<SysRoleViewModel>(coreModel);
-                Messenger.Default.Send(new OpenWindowMessage(){ DataContext = viewModel }, Tokens.SysRoleView_Open);
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.SysRoleView_Open);
                 if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
                     var index = SysRoleViewModels.IndexOf(SelectedSysRoleViewModel);
@@ -88,6 +90,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 if (SelectedSysRoleViewModel == null)
                 {
                     Messenger.Default.Send(new NotificationMessage("请先选择有效数据!"), Tokens.SysRolePage_ShowNotification);
+                    return;
+                }
+
+                var operatorRoles = _sysOperatorRoleRepo.Query(new Hashtable() { { "RoleID", SelectedSysRoleViewModel.RoleID } });
+                if (operatorRoles.Any())
+                {
+                    Messenger.Default.Send(new NotificationMessage("该系统角色已经被系统用户使用，不能删除!"), Tokens.SysRolePage_ShowNotification);
                     return;
                 }
 
