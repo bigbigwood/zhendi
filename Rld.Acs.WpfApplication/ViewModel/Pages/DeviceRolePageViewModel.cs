@@ -50,12 +50,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             try
             {
                 var viewModel = new DeviceRoleViewModel(new DeviceRole());
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = viewModel
-
-                }, Tokens.OpenDeviceRoleView);
-
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.OpenDeviceRoleView);
                 if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
                     DeviceRoleViewModels.Add(viewModel);
@@ -78,11 +73,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 }
 
                 var viewModel = new DeviceRoleViewModel(SelectedDeviceRoleViewModel.CurrentDeviceRole);
-                Messenger.Default.Send(new OpenWindowMessage()
-                {
-                    DataContext = viewModel
-
-                }, Tokens.OpenDeviceRoleView);
+                Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.OpenDeviceRoleView);
 
                 if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
@@ -103,6 +94,26 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 if (SelectedDeviceRoleViewModel == null)
                 {
                     Messenger.Default.Send(new NotificationMessage("请先选择设备角色!"), Tokens.DeviceRolePage_ShowNotification);
+                    return;
+                }
+
+                string assiciationErrorMessage = "";
+                var departmentAssiciationRoleIds = ApplicationManager.GetInstance().AuthorizationDepartments.Select(x => x.DeviceRoleID);
+                if (departmentAssiciationRoleIds.Contains(SelectedDeviceRoleViewModel.CurrentDeviceRole.DeviceRoleID))
+                {
+                    assiciationErrorMessage += "该设备角色已经被部门使用，不能删除!\n";
+                }
+
+                var userDeviceRoleRepo = NinjectBinder.GetRepository<IUserDeviceRoleRepository>();
+                var userDeviceRoleAssiciation = userDeviceRoleRepo.Query(new Hashtable() { { "DeviceRoleID", SelectedDeviceRoleViewModel.CurrentDeviceRole.DeviceRoleID } });
+                if (userDeviceRoleAssiciation.Any())
+                {
+                    assiciationErrorMessage += "该设备角色已经被人员使用，不能删除!\n";
+                }
+
+                if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))
+                {
+                    Messenger.Default.Send(new NotificationMessage(assiciationErrorMessage), Tokens.DeviceRolePage_ShowNotification);
                     return;
                 }
 

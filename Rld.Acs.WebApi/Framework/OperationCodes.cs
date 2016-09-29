@@ -225,5 +225,9 @@ namespace Rld.Acs.WebApi.Framework
         MSYSCONF,
         [Description("Delete System Config")]
         DSYSCONF,
+        [Description("Query User Counts")]
+        QUC,
+        [Description("Query User Device Role")]
+        QUDR,
     }
 }

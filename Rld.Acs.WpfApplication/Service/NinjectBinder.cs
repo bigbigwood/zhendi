@@ -28,6 +28,8 @@ namespace Rld.Acs.WpfApplication.Repository
         private static void BindRepository()
         {
             InjectionKernel.Bind<IUserRepository>().To<UserRepository>();
+            InjectionKernel.Bind<IUserDeviceRoleRepository>().To<UserDeviceRoleRepository>();
+
             InjectionKernel.Bind<IDepartmentRepository>().To<DepartmentRepository>();
             InjectionKernel.Bind<IDepartmentDeviceRepository>().To<DepartmentDeviceRepository>();
 

@@ -183,6 +183,7 @@
     <Compile Include="Repository\System\SysOperatorRepository.cs" />
     <Compile Include="Repository\System\SysRoleRepository.cs" />
     <Compile Include="Repository\System\SysConfigRepository.cs" />
+    <Compile Include="Repository\UserDeviceRoleRepository.cs" />
     <Compile Include="Service References\DeviceProxy\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
