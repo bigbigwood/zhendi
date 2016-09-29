@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -72,14 +73,51 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 }
 
                 var coreModel = Mapper.Map<DeviceGroup>(this);
-
                 if (DeviceGroupID == 0)
                 {
+                    var deviceGroups = _deviceGroupRepo.Query(new Hashtable());
+                    var checkinDeviceIds = deviceGroups.Select(x => x.CheckInDeviceID);
+                    var checkoutDeviceIds = deviceGroups.Select(x => x.CheckOutDeviceID);
+                    string errorMessage = "";
+                    if (checkinDeviceIds.Contains(CheckInDeviceID) || checkoutDeviceIds.Contains(CheckInDeviceID))
+                    {
+                        errorMessage += string.Format("{0}已绑定别的设备组!\n", CheckInDeviceName);
+                    }
+                    if (checkinDeviceIds.Contains(CheckOutDeviceID) || checkoutDeviceIds.Contains(CheckOutDeviceID))
+                    {
+                        errorMessage += string.Format("{0}已绑定别的设备组!\n", CheckOutDeviceName);
+                    }
+                    if (!string.IsNullOrWhiteSpace(errorMessage))
+                    {
+                        SendMessage(errorMessage);
+                        return;
+                    }
+
                     coreModel = _deviceGroupRepo.Insert(coreModel);
                     message = "增加设备组成功!";
                 }
                 else
                 {
+                    var deviceGroups = _deviceGroupRepo.Query(new Hashtable()).ToList();
+                    var originalDeviceGroup = deviceGroups.First(x => x.DeviceGroupID == DeviceGroupID);
+                    deviceGroups.Remove(originalDeviceGroup);
+                    var checkinDeviceIds = deviceGroups.Select(x => x.CheckInDeviceID);
+                    var checkoutDeviceIds = deviceGroups.Select(x => x.CheckOutDeviceID);
+                    string errorMessage = "";
+                    if (checkinDeviceIds.Contains(CheckInDeviceID) || checkoutDeviceIds.Contains(CheckInDeviceID))
+                    {
+                        errorMessage += string.Format("{0}已绑定别的设备组!\n", CheckInDeviceName);
+                    }
+                    if (checkinDeviceIds.Contains(CheckOutDeviceID) || checkoutDeviceIds.Contains(CheckOutDeviceID))
+                    {
+                        errorMessage += string.Format("{0}已绑定别的设备组!\n", CheckOutDeviceName);
+                    }
+                    if (!string.IsNullOrWhiteSpace(errorMessage))
+                    {
+                        SendMessage(errorMessage);
+                        return;
+                    }
+
                     _deviceGroupRepo.Update(coreModel);
                     message = "增加设备组成功!";
                 }

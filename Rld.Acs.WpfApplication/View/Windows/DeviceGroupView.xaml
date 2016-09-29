@@ -63,14 +63,14 @@
             <TextBlock Text="出门设备组" Margin="0"/>
         </TextBlock>
         
-        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding DeviceGroupName}" HorizontalAlignment="Stretch"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding DeviceGroupName}" HorizontalAlignment="Stretch" Margin="2,3"/>
         <ComboBox Grid.Row="3" Grid.Column="2" 
                   ItemsSource="{Binding AuthorizationDevices, Mode=OneWay}"  
-                  SelectedValue="{Binding CheckInDeviceID}" SelectedValuePath="DeviceID" DisplayMemberPath="Name">
+                  SelectedValue="{Binding CheckInDeviceID}" SelectedValuePath="DeviceID" DisplayMemberPath="Name" Margin="2,3">
         </ComboBox>
         <ComboBox Grid.Row="4" Grid.Column="2" 
                   ItemsSource="{Binding AuthorizationDevices, Mode=OneWay}"  
-                  SelectedValue="{Binding CheckOutDeviceID}" SelectedValuePath="DeviceID" DisplayMemberPath="Name">
+                  SelectedValue="{Binding CheckOutDeviceID}" SelectedValuePath="DeviceID" DisplayMemberPath="Name" Margin="2,3">
         </ComboBox>
         
         <StackPanel  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
