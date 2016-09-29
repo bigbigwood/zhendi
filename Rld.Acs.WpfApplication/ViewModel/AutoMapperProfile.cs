@@ -180,7 +180,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.IsSelected, op => op.Ignore())
                 .ForMember(dest => dest.Name, op => op.Ignore())
-                .ForMember(dest => dest.ModifyCmd, op => op.Ignore());
+                .ForMember(dest => dest.ModifyCmd, op => op.Ignore())
+                .ForMember(dest => dest.SelectUserAuthenticationCmd, op => op.Ignore());
 
             Log.Info("Verify mapper configuration..");
             Mapper.AssertConfigurationIsValid();

@@ -14,12 +14,7 @@
              Height="335" Width="600" Unloaded="MetroWindow_Unloaded">
     <controls:MetroWindow.Resources>
         <DataTemplate x:Key="MyTabHeaderTemplate">
-            <Grid Margin="2,5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding DeviceName}" FontSize="12"/>
-            </Grid>
+            <TextBlock Text="{Binding DeviceName}" FontSize="12" Margin="2,5" Width="80"/>
         </DataTemplate>
         <DataTemplate x:Key="MyDataTemplate" DataType="vm:UserDeviceAuthViewModel">
             <Grid>
@@ -51,7 +46,7 @@
                                 <StackPanel Orientation="Horizontal" Height="25" Width="130"  Margin="5">
                                     <Button Height="23" Width="80" FontSize ="12"  Style="{StaticResource FlatButtonStyle}" Background="LightGray" 
                                             Content="{Binding Name}" Command="{Binding ModifyCmd}" CommandParameter="{Binding}"/>
-                                    <CheckBox Style="{StaticResource GCheckBox}" IsChecked="{Binding IsSelected}" Content="启用" />
+                                    <CheckBox Style="{StaticResource GCheckBox}" IsChecked="{Binding IsSelected}" Content="启用" Command="{Binding SelectUserAuthenticationCmd}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
