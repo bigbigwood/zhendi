@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.Messaging;
 using log4net;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
@@ -284,28 +285,39 @@ namespace Rld.Acs.WpfApplication.View.Pages
                 return;
             }
 
-            string message = "";
+            string errorMessage = "";
+            List<User> inHouseUsers = null;
 
-            var controller = await MessageBoxSingleton.Instance.ShowProgressAsync("同步数据", "同步数据中，请稍等", false);
+            var controller = await MessageBoxSingleton.Instance.ShowProgressAsync("准备数据", "准备数据中，请稍等", false);
             controller.SetIndeterminate();
 
             await Task.Run(() =>
             {
                 try
                 {
-                    var userCodes = inHouseUserService.GetInHouseUsers(deviceInfo);
-                    Log.Info(string.Join(",", userCodes));
+                    inHouseUsers = inHouseUserService.GetInHouseUsers(deviceInfo);
+
 
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "操作设备失败！";
+                    errorMessage = "查看人员列表失败！";
                 }
             });
 
             await controller.CloseAsync();
-            MessageBoxSingleton.Instance.ShowDialog(message, "");
+
+            if (!string.IsNullOrWhiteSpace(errorMessage))
+            {
+                MessageBoxSingleton.Instance.ShowDialog(errorMessage, "");
+                return;
+            }
+
+            if (inHouseUsers != null)
+            {
+                
+            }
         }
 
         private async void UpdateDoorState(object sender, DoorControlOption option)
@@ -326,7 +338,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
                 try
                 {
                     string[] messages;
-                    
+
                     Int32 doorIndex = doorInfo.DoorIndex;
                     var selectedOption = (DeviceProxy.DoorControlOption)option.GetHashCode();
 

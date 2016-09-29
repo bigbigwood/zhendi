@@ -22,6 +22,7 @@ namespace Rld.Acs.WpfApplication.Service
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IDeviceGroupRepository _deviceGroupRepo = NinjectBinder.GetRepository<IDeviceGroupRepository>();
         private IDeviceTrafficLogRepository _deviceTrafficLogRepo = NinjectBinder.GetRepository<IDeviceTrafficLogRepository>();
+        private IUserRepository _userRepo = NinjectBinder.GetRepository<IUserRepository>();
 
         public readonly List<string> IOMessages = new List<string>()
         {
@@ -45,7 +46,7 @@ namespace Rld.Acs.WpfApplication.Service
             return checkinDeviceIds.Contains(device.DeviceID) || checkoutDeviceIds.Contains(device.DeviceID);
         }
 
-        public List<Int32> GetInHouseUsers(DeviceController device)
+        public List<User> GetInHouseUsers(DeviceController device)
         {
             var deviceGroups = _deviceGroupRepo.Query(new Hashtable());
             var checkinDeviceIds = deviceGroups.Select(x => x.CheckInDeviceID);
@@ -82,8 +83,19 @@ namespace Rld.Acs.WpfApplication.Service
             var checkoutLogs = _deviceTrafficLogRepo.Query(conditions).FindAll(IsIOMessage);
             var checkoutUserCodes = checkoutLogs.Select(x => x.DeviceUserID);
 
-            var inHouseUsers = checkinUserCodes.Except(checkoutUserCodes);
-            return inHouseUsers.ToList();
+            var inHouseUserCodes = checkinUserCodes.Except(checkoutUserCodes);
+            Log.InfoFormat("门内人员编号有{0}", string.Join(",", inHouseUserCodes));
+
+            List<User> inHouseUsers = new List<User>();
+            inHouseUserCodes.ForEach(x =>
+            {
+                var userinfo  = _userRepo.QueryUsersForSummaryData(new Hashtable {{"UserCode", x}}).FirstOrDefault();
+                if (userinfo != null)
+                    inHouseUsers.Add(userinfo);
+            });
+           ;
+
+            return inHouseUsers;
         }
 
         public bool IsIOMessage(DeviceTrafficLog deviceTrafficLogInfo)
