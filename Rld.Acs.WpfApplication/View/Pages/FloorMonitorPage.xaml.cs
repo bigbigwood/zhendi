@@ -251,7 +251,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
             menu_keepClose.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.KeepClose);
             menu_autoControl.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.Auto);
             menu_cancleAlarm.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.CancelAlarm);
-            menu_viewStuffList.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.ViewStuff);
+            menu_viewStuffList.Click += (sender, args) => ViewStuff(sender);
 
             panel.ContextMenu = new ContextMenu();
             panel.ContextMenu.Items.Add(menu_open);
@@ -267,14 +267,49 @@ namespace Rld.Acs.WpfApplication.View.Pages
             return panel;
         }
 
-        private async void UpdateDoorState(object sender, DoorControlOption option)
+        private async void ViewStuff(object sender)
         {
-            if (option == DoorControlOption.ViewStuff)
+            var menuItem = (MenuItem)sender;
+            var panel = menuItem.Tag as StackPanel;
+            var floordoor = panel.DataContext as FloorDoorViewModel;
+            var doorInfo = FloorDoorManager.GetInstance().AuthorizationDoors.FirstOrDefault(x => x.DeviceDoorID == floordoor.DoorID);
+            var deviceInfo = ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.DeviceID == doorInfo.DeviceID);
+
+            var inHouseUserService = new InHouseUserService();
+            var deviceGroupEnabled = inHouseUserService.HasBindDeviceGroup(deviceInfo);
+
+            if (deviceGroupEnabled == false)
             {
-                MessageBoxSingleton.Instance.ShowDialog("尚未实现此功能", "");
+                MessageBoxSingleton.Instance.ShowDialog("此设备还未绑定设备组，无法查看人员列表", "");
                 return;
             }
 
+            string message = "";
+
+            var controller = await MessageBoxSingleton.Instance.ShowProgressAsync("同步数据", "同步数据中，请稍等", false);
+            controller.SetIndeterminate();
+
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var userCodes = inHouseUserService.GetInHouseUsers(deviceInfo);
+                    Log.Info(string.Join(",", userCodes));
+
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                    message = "操作设备失败！";
+                }
+            });
+
+            await controller.CloseAsync();
+            MessageBoxSingleton.Instance.ShowDialog(message, "");
+        }
+
+        private async void UpdateDoorState(object sender, DoorControlOption option)
+        {
             var menuItem = (MenuItem)sender;
             var panel = menuItem.Tag as StackPanel;
             var floordoor = panel.DataContext as FloorDoorViewModel;

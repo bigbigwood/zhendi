@@ -24,8 +24,8 @@
 
     <insert id="DeviceGroup.Insert" parameterClass="DeviceGroup">
       INSERT INTO [DEVICE_GROUP] (
-      [CheckInDeviceID]
-      , [DeviceGroupName]
+      [DeviceGroupName]
+      , [CheckInDeviceID]
       , [CheckOutDeviceID]
       ) VALUES (
       #DeviceGroupName#

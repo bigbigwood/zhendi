@@ -119,7 +119,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     }
 
                     _deviceGroupRepo.Update(coreModel);
-                    message = "增加设备组成功!";
+                    message = "修改设备组成功!";
                 }
 
                 ViewModelAttachment.CoreModel = coreModel;

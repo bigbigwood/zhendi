@@ -169,7 +169,7 @@
     <sys:String x:Key="DeviceGroupPage_ModifyBtn">修改设备组</sys:String>
     <sys:String x:Key="DeviceGroupPage_DeleteBtn">删除设备组</sys:String>
     <sys:String x:Key="DeviceGroupPage_Label_Name">设备组名称</sys:String>
-    <sys:String x:Key="DeviceGroupPage_Label_CheckInDeviceName">进门设备名</sys:String>
-    <sys:String x:Key="DeviceGroupPage_Label_CheckOutDeviceName">出门设备名</sys:String>
+    <sys:String x:Key="DeviceGroupPage_Label_CheckInDeviceName">进门设备</sys:String>
+    <sys:String x:Key="DeviceGroupPage_Label_CheckOutDeviceName">出门设备</sys:String>
 
 </ResourceDictionary>

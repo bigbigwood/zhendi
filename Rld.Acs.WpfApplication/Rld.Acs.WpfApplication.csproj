@@ -212,6 +212,7 @@
     <Compile Include="Service\FloorDoorManager.cs" />
     <Compile Include="Service\SysPermissionProvider.cs" />
     <Compile Include="Service\Proxy\SecurityServiceProxy.cs" />
+    <Compile Include="Service\InHouseUserService.cs" />
     <Compile Include="Service\Validator\DeviceParameterValidator.cs" />
     <Compile Include="Service\Validator\DeviceRoleViewModelValidator.cs" />
     <Compile Include="Service\Validator\DeviceGroupViewModelValidator.cs" />
