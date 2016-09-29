@@ -33,6 +33,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
         public RelayCommand ModifyCmd { get; private set; }
         public RelayCommand DeleteCmd { get; private set; }
         public RelayCommand SearchNewDeviceCmd { get; private set; }
+        public RelayCommand DeviceGroupMgntCmd { get; private set; }
 
         public List<DeviceController> DeviceControllers
         {
@@ -47,6 +48,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             ModifyCmd = new AuthCommand(ModifyDeviceController);
             DeleteCmd = new AuthCommand(DeleteDeviceController);
             SearchNewDeviceCmd = new AuthCommand(SearchNewDevices);
+            DeviceGroupMgntCmd = new RelayCommand(DeviceGroupMgnt);
 
             var deviceViewModels = DeviceControllers.Select(x => x.ToViewModel());
             DeviceControllerViewModels = new ObservableCollection<DeviceViewModel>(deviceViewModels);
@@ -228,6 +230,18 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
             });
+        }
+
+        private void DeviceGroupMgnt()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
         }
     }
 }

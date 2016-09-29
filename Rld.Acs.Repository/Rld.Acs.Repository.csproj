@@ -60,6 +60,7 @@
     <Compile Include="Interfaces\Department\IDepartmentRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceControllerRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceControllerParameterRepository.cs" />
+    <Compile Include="Interfaces\Device\IDeviceGroupRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceTrafficLogRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceStateHistoryRepository.cs" />
     <Compile Include="Interfaces\Device\IDeviceOperationLogRepository.cs" />

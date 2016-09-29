@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="DeviceGroup" type="Rld.Acs.Model.DeviceGroup" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="DeviceGroupResult" class="Rld.Acs.Model.DeviceGroup">
+      <result property="DeviceGroupID" column="DeviceGroupID"/>
+      <result property="DeviceGroupName" column="DeviceGroupName"/>
+      <result property="CheckInDeviceID" column="CheckInDeviceID"/>
+      <result property="CheckOutDeviceID" column="CheckOutDeviceID"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="DeviceGroup.GetByKey" parameterClass="int" resultMap="DeviceGroupResult">
+      SELECT *
+      FROM [DEVICE_GROUP]
+      WHERE
+      [DeviceGroupID] = #value#
+    </select>
+
+    <insert id="DeviceGroup.Insert" parameterClass="DeviceGroup">
+      INSERT INTO [DEVICE_GROUP] (
+      [CheckInDeviceID]
+      , [DeviceGroupName]
+      , [CheckOutDeviceID]
+      ) VALUES (
+      #DeviceGroupName#
+      , #CheckInDeviceID#
+      , #CheckOutDeviceID#
+      )
+      <selectKey resultClass="int" type="post" property="DeviceGroupID" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="DeviceGroup.Update" parameterClass="DeviceGroup">
+      UPDATE [DEVICE_GROUP] SET
+      [DeviceGroupName] = #DeviceGroupName#
+      , [CheckInDeviceID] = #CheckInDeviceID#
+      , [CheckOutDeviceID] = #CheckOutDeviceID#
+      WHERE
+      ([DeviceGroupID] = #DeviceGroupID#)
+    </update>
+
+    <delete id="DeviceGroup.Delete"  parameterClass="int">
+      DELETE FROM [DEVICE_GROUP]
+      WHERE
+      ([DeviceGroupID] = #DeviceGroupID#)
+    </delete>
+
+    <select id="DeviceGroup.Query" parameterClass="Hashtable" resultMap="DeviceGroupResult">
+      SELECT *
+      FROM DEVICE_GROUP
+      where 1=1
+    </select>
+  </statements>
+</sqlMap>

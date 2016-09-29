@@ -231,5 +231,15 @@ namespace Rld.Acs.WebApi.Framework
         QUDR,
         [Description("Query Operator Role")]
         QOR,
+        [Description("Query Device Group")]
+        QDVG,
+        [Description("Get Device Group By Id")]
+        GDVG,
+        [Description("Create Device Group")]
+        ADVG,
+        [Description("Modify Device Group")]
+        MDVG,
+        [Description("Delete Device Group")]
+        DDVG,
     }
 }

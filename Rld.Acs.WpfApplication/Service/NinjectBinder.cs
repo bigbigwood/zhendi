@@ -37,6 +37,7 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<IDeviceControllerRepository>().To<DeviceControllerRepository>();
             InjectionKernel.Bind<IDeviceTrafficLogRepository>().To<DeviceTrafficLogRepository>();
             InjectionKernel.Bind<IDeviceOperationLogRepository>().To<DeviceOperationLogRepository>();
+            InjectionKernel.Bind<IDeviceGroupRepository>().To<DeviceGroupRepository>();
 
             InjectionKernel.Bind<ITimeSegmentRepository>().To<TimeSegmentRepository>();
             InjectionKernel.Bind<ITimeGroupRepository>().To<TimeGroupRepository>();

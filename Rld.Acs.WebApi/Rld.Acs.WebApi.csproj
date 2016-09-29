@@ -153,6 +153,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\Department\DepartmentDevicesController.cs" />
     <Compile Include="Controllers\Department\DepartmentsController.cs" />
+    <Compile Include="Controllers\Device\DeviceGroupsController.cs" />
     <Compile Include="Controllers\Device\DeviceRolePermissionsController.cs" />
     <Compile Include="Controllers\Device\DeviceOperationLogsController.cs" />
     <Compile Include="Controllers\Device\DeviceDoorsController.cs" />

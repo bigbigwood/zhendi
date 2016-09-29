@@ -898,6 +898,7 @@ go
 /*==============================================================*/
 create table DEVICE_GROUP (
    DeviceGroupID            int                  identity(1,1),
+   DeviceGroupName          nvarchar(100)        not null,
    CheckInDeviceID          int                  not null,
    CheckOutDeviceID         int                  not null,
    constraint PK_DEVICE_GROUP primary key nonclustered (DeviceGroupID)
