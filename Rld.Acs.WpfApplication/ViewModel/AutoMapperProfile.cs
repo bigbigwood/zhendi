@@ -59,7 +59,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.CheckOutOptionsDict, op => op.Ignore())
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.SaveCmd, op => op.Ignore())
-                .ForMember(dest => dest.ModifyDoorCmd, op => op.Ignore());
+                .ForMember(dest => dest.ModifyDoorCmd, op => op.Ignore())
+                .ForMember(dest => dest.SelectDoorCmd, op => op.Ignore());
 
             CreateProvMap<DeviceDoorViewModel, DeviceDoor>();
 

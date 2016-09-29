@@ -223,7 +223,7 @@
                                     <StackPanel Orientation="Horizontal" Height="25" Width="180"  Margin="5">
                                         <controls:Tile Content="{Binding Name}" Command="{Binding ModifyDoorCmd}" CommandParameter="{Binding}"
                                                        Height="25" Width="100" Background="WhiteSmoke" Foreground="Black"/>
-                                        <CheckBox IsChecked="{Binding IsSelected}" Content="启用" />
+                                        <CheckBox IsChecked="{Binding IsSelected}" Content="启用" Command="{Binding SelectDoorCmd}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>

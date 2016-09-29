@@ -13,6 +13,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
+using Rld.Acs.WpfApplication.Service;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -45,6 +46,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
         public RelayCommand<DeviceDoorViewModel> ModifyDoorCmd { get; private set; }
+        public RelayCommand SelectDoorCmd { get; private set; }
 
         public List<SysDictionary> CheckOutOptionsDict
         {
@@ -62,6 +64,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             SaveCmd = new RelayCommand(Save);
             CancelCmd = new RelayCommand(() => Close(""));
             ModifyDoorCmd = new RelayCommand<DeviceDoorViewModel>(ModifyDeviceDoor);
+            SelectDoorCmd = new RelayCommand(SelectDeviceDoor);
         }
 
         private void Save()
@@ -80,11 +83,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             Messenger.Default.Send(new NotificationMessage(this, message), Tokens.CloseDeviceDoorView);
         }
 
-        private void SendMessage(string message)
-        {
-            Messenger.Default.Send(new NotificationMessage(message), Tokens.DeviceDoorView_ShowNotification);
-        }
-
         private void ModifyDeviceDoor(DeviceDoorViewModel doorViewModel)
         {
             try
@@ -95,6 +93,28 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     WindowType = "DeviceDoorView"
                 }, Tokens.OpenDeviceDoorView);
 
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        private void SelectDeviceDoor()
+        {
+            try
+            {
+                if (IsSelected == false)
+                {
+                    if (FloorDoorManager.GetInstance().AuthorizationFloorDoor.Any(x => x.DoorID == DeviceDoorID))
+                    {
+                        string message = "门已经和楼层绑定，不能禁用！";
+                        Messenger.Default.Send(new NotificationMessage(message), Tokens.DeviceView_ShowNotification);
+                        IsSelected = true;
+                        RaisePropertyChanged("IsSelected");
+                        return;
+                    }
+                }
             }
             catch (Exception ex)
             {
