@@ -164,5 +164,12 @@
     <sys:String x:Key="DataSyncPage_DeleteBtn">删除同步时间</sys:String>
     <sys:String x:Key="DataSyncView_Label_Name">配置名称</sys:String>
 	<sys:String x:Key="DataSyncView_Label_TriggerTime">同步时间</sys:String>
+	
+	<sys:String x:Key="DeviceGroupPage_AddBtn">增加设备组</sys:String>
+    <sys:String x:Key="DeviceGroupPage_ModifyBtn">修改设备组</sys:String>
+    <sys:String x:Key="DeviceGroupPage_DeleteBtn">删除设备组</sys:String>
+    <sys:String x:Key="DeviceGroupPage_Label_Name">设备组名称</sys:String>
+    <sys:String x:Key="DeviceGroupPage_Label_CheckInDeviceName">进门设备名</sys:String>
+    <sys:String x:Key="DeviceGroupPage_Label_CheckOutDeviceName">出门设备名</sys:String>
 
 </ResourceDictionary>

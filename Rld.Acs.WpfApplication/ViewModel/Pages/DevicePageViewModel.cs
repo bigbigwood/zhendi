@@ -236,7 +236,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             try
             {
-
+                Messenger.Default.Send(new OpenWindowMessage(), Tokens.DeviceGroupPage_Open);
             }
             catch (Exception ex)
             {

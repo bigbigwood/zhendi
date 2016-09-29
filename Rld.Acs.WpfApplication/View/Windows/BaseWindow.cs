@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -19,6 +20,8 @@ namespace Rld.Acs.WpfApplication.View.Windows
             if (!string.IsNullOrWhiteSpace(msg.Notification))
                 ShowDialog(msg.Notification, "");
         }
+
+
 
         public virtual void ProcessCloseViewMessage(NotificationMessage msg)
         {
@@ -71,5 +74,31 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 await Task.Factory.StartNew(action);
         }
         #endregion
+
+        protected void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = e.Row.GetIndex() + 1;
+        }
+
+        protected void DataGrid_UnloadingRow(object sender, DataGridRowEventArgs e)
+        {
+            DataGrid_LoadingRow(sender, e);
+            var datagrid = sender as DataGrid;
+            if (datagrid.Items != null)
+            {
+                for (int i = 0; i < datagrid.Items.Count; i++)
+                {
+                    try
+                    {
+                        var row = datagrid.ItemContainerGenerator.ContainerFromIndex(i) as DataGridRow;
+                        if (row != null)
+                        {
+                            row.Header = (i + 1).ToString();
+                        }
+                    }
+                    catch { }
+                }
+            }
+        }
     }
 }

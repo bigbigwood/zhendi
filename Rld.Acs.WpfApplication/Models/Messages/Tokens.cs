@@ -55,6 +55,7 @@ namespace Rld.Acs.WpfApplication.Models.Messages
         public static readonly string DeviceView_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DevicePage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DevicePage_ShowQuestion = Guid.NewGuid().ToString();
+        public static readonly string DeviceGroupPage_Open = Guid.NewGuid().ToString();
 
         public static readonly string OpenDeviceDoorView = Guid.NewGuid().ToString();
         public static readonly string CloseDeviceDoorView = Guid.NewGuid().ToString();
@@ -108,5 +109,13 @@ namespace Rld.Acs.WpfApplication.Models.Messages
 
         public static readonly string DataSyncPage_ShowNotification = Guid.NewGuid().ToString();
         public static readonly string DataCleanPage_ShowNotification = Guid.NewGuid().ToString();
+
+        public static readonly string DeviceGroupView_Open = Guid.NewGuid().ToString();
+        public static readonly string DeviceGroupView_Close = Guid.NewGuid().ToString();
+        public static readonly string DeviceGroupView_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string DeviceGroupPage_ShowNotification = Guid.NewGuid().ToString();
+        public static readonly string DeviceGroupPage_ShowQuestion = Guid.NewGuid().ToString();
+        public static readonly string DeviceGroupPage_Close = Guid.NewGuid().ToString();
+        
     }
 }

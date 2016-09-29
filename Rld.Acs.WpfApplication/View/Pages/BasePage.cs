@@ -46,7 +46,6 @@ namespace Rld.Acs.WpfApplication.View.Pages
                     catch { }
                 }
             }
-
         }
     }
 }

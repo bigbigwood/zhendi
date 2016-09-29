@@ -183,6 +183,17 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.ModifyCmd, op => op.Ignore())
                 .ForMember(dest => dest.SelectUserAuthenticationCmd, op => op.Ignore());
 
+            CreateProvMap<DeviceGroupViewModel, DeviceGroup>();
+            CreateProvMap<DeviceGroup, DeviceGroupViewModel>()
+                .ForMember(dest => dest.SaveCmd, op => op.Ignore())
+                .ForMember(dest => dest.CancelCmd, op => op.Ignore())
+                .ForMember(dest => dest.Title, op => op.Ignore())
+                .ForMember(dest => dest.AuthorizationDevices, op => op.Ignore())
+                .ForMember(dest => dest.CheckInDeviceName, op => op.Ignore())
+                .ForMember(dest => dest.CheckOutDeviceName, op => op.Ignore())
+                .ForMember(dest => dest.ViewModelAttachment, op => op.Ignore());
+
+
             Log.Info("Verify mapper configuration..");
             Mapper.AssertConfigurationIsValid();
         }

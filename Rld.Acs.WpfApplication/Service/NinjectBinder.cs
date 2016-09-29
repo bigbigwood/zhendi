@@ -71,6 +71,7 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<DeviceRoleViewModelValidator>().To<DeviceRoleViewModelValidator>();
             InjectionKernel.Bind<SysDictionaryValidator>().To<SysDictionaryValidator>();
             InjectionKernel.Bind<FloorValidator>().To<FloorValidator>();
+            InjectionKernel.Bind<DeviceGroupViewModelValidator>().To<DeviceGroupViewModelValidator>();
 
             InjectionKernel.Bind<SyncUserViewModelValidator>().To<SyncUserViewModelValidator>();
             InjectionKernel.Bind<UserAuthenticationViewModelValidator>().To<UserAuthenticationViewModelValidator>();

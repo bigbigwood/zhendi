@@ -54,6 +54,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             SimpleIoc.Default.Register<FloorMonitorPageViewModel>();
             SimpleIoc.Default.Register<DataSyncPageViewModel>();
             SimpleIoc.Default.Register<DataCleanPageViewModel>();
+            SimpleIoc.Default.Register<DeviceGroupMgntViewModel>();
 
             SetupNavigation();
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -172,7 +173,11 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<DataCleanPageViewModel>(); }
         }
-
+        public DeviceGroupMgntViewModel DeviceGroupPage
+        {
+            get { return ServiceLocator.Current.GetInstance<DeviceGroupMgntViewModel>(); }
+        }
+        
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

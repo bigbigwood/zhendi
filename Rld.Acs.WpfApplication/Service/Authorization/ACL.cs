@@ -45,6 +45,7 @@ namespace Rld.Acs.WpfApplication.Service.Authorization
         public const string E_MdfDevice = "E_MdfDevice";
         public const string E_DelDevice = "E_DelDevice";
         public const string E_SearchDevice = "E_SearchDevice";
+        public const string E_DeviceGroupMgnt = "E_DeviceGroupMgnt";
         public const string E_AddFloor = "E_AddFloor";
         public const string E_MdfFloor = "E_MdfFloor";
         public const string E_DelFloor = "E_DelFloor";
@@ -60,6 +61,9 @@ namespace Rld.Acs.WpfApplication.Service.Authorization
         public const string E_AddDeviceRole = "E_AddDeviceRole";
         public const string E_MdfDeviceRole = "E_MdfDeviceRole";
         public const string E_DelDeviceRole = "E_DelDeviceRole";
+        public const string E_AddDeviceGroup = "E_AddDeviceGroup";
+        public const string E_MdfDeviceGroup = "E_MdfDeviceGroup";
+        public const string E_DelDeviceGroup = "E_DelDeviceGroup";
         public const string E_QueryDeviceTrafficLog = "E_QueryDeviceTrafficLog";
         public const string E_ExportDeviceTrafficLog = "E_ExportDeviceTrafficLog";
         public const string E_QueryDeviceOperationLog = "E_QueryDeviceOperationLog";
