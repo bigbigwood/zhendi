@@ -109,9 +109,22 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
+                string assiciationErrorMessage = "";
                 if (AuthorizationDepartments.Any(d => d.Parent != null && d.Parent.DepartmentID == SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID))
                 {
-                    Messenger.Default.Send(new NotificationMessage("选中部门存在子部门，请先删除所属子部门!"), Tokens.DepartmentPage_ShowNotification);
+                    assiciationErrorMessage += "选中部门存在子部门，请先删除所属子部门!\n";
+                }
+
+                var userRepo = NinjectBinder.GetRepository<IUserRepository>();
+                var departmentUsers = userRepo.Query(new Hashtable() { { "DepartmentID", SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID } });
+                if (departmentUsers.Any())
+                {
+                    assiciationErrorMessage += "选择部门存在人员，请先删除部门所属人员!\n";
+                }
+
+                if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))
+                {
+                    Messenger.Default.Send(new NotificationMessage(assiciationErrorMessage), Tokens.DepartmentPage_ShowNotification);
                     return;
                 }
 

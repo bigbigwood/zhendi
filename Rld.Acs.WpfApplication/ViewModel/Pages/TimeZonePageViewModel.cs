@@ -98,7 +98,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     .Select(x => x.DeviceControllerParameter.UnlockOpenTimeZone);
                 if (deviceAssiciationTimeZoneIds.Contains(SelectedTimeZoneViewModel.ID))
                 {
-                    assiciationErrorMessage += "该时间组已经被关联到设备，不能删除!\n";
+                    assiciationErrorMessage += "该时间区已经被关联到设备，不能删除!\n";
                 }
 
                 var deviceRoleAssiciationTimeZoneIds = ApplicationManager.GetInstance().AuthorizationDeviceRoles
@@ -106,7 +106,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     .Select(x => x.AllowedAccessTimeZoneID);
                 if (deviceRoleAssiciationTimeZoneIds.Contains(SelectedTimeZoneViewModel.ID))
                 {
-                    assiciationErrorMessage += "该时间组已经被关联到设备角色，不能删除!\n";
+                    assiciationErrorMessage += "该时间区已经被关联到设备角色，不能删除!\n";
                 }
 
                 if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))
