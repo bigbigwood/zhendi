@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Timers;
 using System.Windows;
@@ -316,7 +317,16 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
             if (inHouseUsers != null)
             {
-                
+                var vms = new List<UserViewModel>();
+                inHouseUsers.ForEach(x => vms.Add(new UserViewModel(x)));
+
+                var inHouseUserViewModel = new InHouseUserViewModel()
+                {
+                    UserViewModels = new ObservableCollection<UserViewModel>(vms)
+                };
+
+                var view = new InHouseUserView() { DataContext = inHouseUserViewModel };
+                view.ShowDialog();
             }
         }
 

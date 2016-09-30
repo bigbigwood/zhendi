@@ -246,6 +246,7 @@
     <Compile Include="ViewModel\Pages\DeviceRolePageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DevicePageViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceGroupViewModel.cs" />
+    <Compile Include="ViewModel\Views\InHouseUserViewModel.cs" />
     <Compile Include="ViewModel\Views\SysConfigViewModel.cs" />
     <Compile Include="ViewModel\Views\MoveUserViewModel.cs" />
     <Compile Include="ViewModel\Views\DeviceGroupMgntViewModel.cs" />
@@ -372,6 +373,9 @@
     </Compile>
     <Compile Include="View\Windows\DeviceGroupView.xaml.cs">
       <DependentUpon>DeviceGroupView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\InHouseUserView.xaml.cs">
+      <DependentUpon>InHouseUserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\UserAuthenticationView.xaml.cs">
       <DependentUpon>UserAuthenticationView.xaml</DependentUpon>
@@ -528,6 +532,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Windows\DeviceGroupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Windows\InHouseUserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

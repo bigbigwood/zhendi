@@ -1,0 +1,60 @@
+﻿<windows:BaseWindow x:Class="Rld.Acs.WpfApplication.View.Windows.InHouseUserView"
+   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm= "clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:models="clr-namespace:Rld.Acs.WpfApplication.Models"
+             Dialog:DialogParticipation.Register="{Binding}"
+             mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:InHouseUserViewModel, IsDesignTimeCreatable=True}"
+             ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
+             Height="335" Width="600" Unloaded="MetroWindow_Unloaded"
+             BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" >
+            <TextBlock Text="门内人员列表" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+        </DockPanel>
+        <Separator Grid.Row="1"  Background="LightGray" />
+
+        <DataGrid Grid.Row="2" ItemsSource="{Binding UserViewModels}" SelectedItem="{Binding Path=SelectedUserViewModel}" 
+                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"
+                                LoadingRow ="DataGrid_LoadingRow" UnloadingRow="DataGrid_UnloadingRow">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type DataGridRow}}, Path=Header}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{DynamicResource UserPage_Label_Avator}" Width="64" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Height="48"  Source="{Binding Path=Avator}" Margin="3"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="{DynamicResource UserPage_Label_Name}" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="{DynamicResource UserPage_Label_Gender}" Binding="{Binding GenderInfo.ItemValue}" Width="*" />
+                <DataGridTextColumn Header="{DynamicResource UserPage_Label_Position}" Binding="{Binding TechnicalTitle}" Width="*" />
+                <DataGridTextColumn Header="{DynamicResource UserPage_Label_UserCode}" Binding="{Binding UserCode}" Width="*" />
+                <DataGridTextColumn Header="{DynamicResource UserPage_Label_Phone}" Binding="{Binding Phone}" Width="*" />
+                <DataGridTextColumn Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="3" HorizontalAlignment="Center" Orientation="Horizontal" >
+            <Button Name="btnQuit" Content="{StaticResource Quit}" Click="BtnQuit_OnClick" Width="100" FontSize="12" Margin="2"/>
+        </StackPanel>
+    </Grid>
+</windows:BaseWindow>
