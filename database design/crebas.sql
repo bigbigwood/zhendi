@@ -120,6 +120,13 @@ alter table DEVICE_GROUP
 go
 
 if exists (select 1
+   from sys.sysreferences r join sys.sysobjects o on (o.id = r.constid and o.type = 'F')
+   where r.fkeyid = object_id('SYS_USER_EVENT') and o.name = 'PK_SYS_USER_EVENT')
+alter table SYS_USER_EVENT
+   drop constraint PK_SYS_USER_EVENT
+go
+
+if exists (select 1
             from  sysobjects
            where  id = object_id('DEVICE_CONTROLLERS')
             and   type = 'U')
@@ -342,6 +349,13 @@ if exists (select 1
            where  id = object_id('DEVICE_GROUP')
             and   type = 'U')
    drop table DEVICE_GROUP
+go
+
+if exists (select 1
+            from  sysobjects
+           where  id = object_id('SYS_USER_EVENT')
+            and   type = 'U')
+   drop table SYS_USER_EVENT
 go
 
 /*==============================================================*/
@@ -821,7 +835,6 @@ create table SYS_USER_PROPERTY (
 go
 
 
-
 /*==============================================================*/
 /* Table: TIME_GROUPS                                           */
 /*==============================================================*/
@@ -905,6 +918,22 @@ create table DEVICE_GROUP (
 )
 go
 
+/*==============================================================*/
+/* Table: SYS_USER_EVENT                                        */
+/*==============================================================*/
+create table SYS_USER_EVENT (
+   EventId 				BIGINT                 identity(1,1),
+   EventType            int                  not null,
+   EventData         	nvarchar(max)        not null,
+   UserID             	int                  not null,
+   CreateUserID         int                  not null,
+   CreateDate           datetime             not null,
+   IsFinished           bit                  not null,
+   constraint PK_SYS_USER_EVENT primary key nonclustered (EventId)
+)
+go
+
+
 alter table DEVICE_DOORS
    add constraint FK_DEVICE_D_REFERENCE_DEVICE_R foreign key (DEVICEID)
       references DEVICE_CONTROLLERS (DEVICEID)
@@ -968,5 +997,5 @@ alter table SYS_OPERATOR_ROLE
       references SYS_OPERATOR (OperatorID)
 go
 
-
-
+CREATE INDEX index_IsFinished ON SYS_USER_EVENT (IsFinished)
+go

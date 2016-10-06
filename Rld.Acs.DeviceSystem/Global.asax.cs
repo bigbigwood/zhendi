@@ -11,8 +11,6 @@ namespace Rld.Acs.DeviceSystem
 {
     public class Global : System.Web.HttpApplication
     {
-        public const Int32 DeviceSystemOperatorId = 3;
-
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         protected void Application_Start()
         {

@@ -47,6 +47,7 @@
     <Compile Include="Extension\ConvertorExtension.cs" />
     <Compile Include="Extension\EnumerableExtension.cs" />
     <Compile Include="FilePathHelper.cs" />
+    <Compile Include="GlobalSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\DataContractSerializationHelper.cs" />
     <Compile Include="StringHelper.cs" />

@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace Rld.Acs.Model
 {
+    public enum UserEventType
+    {
+        Add,
+        Modify,
+        Delete,
+    }
+
     public enum GeneralStatus
     {
         Disabled = 0,

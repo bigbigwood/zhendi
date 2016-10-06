@@ -57,7 +57,7 @@ namespace Rld.Acs.DeviceSystem
                     request.Users.ForEach(user => request.Devices.ForEach(device =>
                     {
                         var userInfo = repo.GetByKey(user.UserID);
-                        new UserOp().UpdateDBUser(userInfo, device);
+                        new UserOp().UpdateSystemUser(userInfo, device);
                     }));
 
                     return new SyncDBUsersResponse() { ResultType = ResultTypes.Ok };

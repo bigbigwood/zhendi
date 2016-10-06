@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="Framework\DeviceNotConnectedException.cs" />
     <Compile Include="Service\TrafficLogOp.cs" />
+    <Compile Include="Service\UserLightOp.cs" />
     <Compile Include="TestHandler.ashx.cs">
       <DependentUpon>TestHandler.ashx</DependentUpon>
     </Compile>

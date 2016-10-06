@@ -9,6 +9,7 @@ using Rld.Acs.Model.Extension;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Repository.Mybatis.MsSql;
+using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.Unility.Serialization;
 using Rld.DeviceSystem.Contract.Message;
@@ -94,7 +95,7 @@ namespace Rld.Acs.DeviceSystem.Service
             deviceController.ServerURL = "";
             deviceController.Remark = "";
             deviceController.Protocol = 0; // set to websocket by default
-            deviceController.CreateUserID = Global.DeviceSystemOperatorId;
+            deviceController.CreateUserID = GlobalSetting.DeviceSystemId;
             deviceController.CreateDate = DateTime.Now;
             deviceController.Status = GeneralStatus.Enabled;
 

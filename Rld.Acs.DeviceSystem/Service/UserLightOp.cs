@@ -18,7 +18,7 @@ using Rld.DeviceSystem.Contract.Model.Services.UserCredential;
 
 namespace Rld.Acs.DeviceSystem.Service
 {
-    public class UserOp
+    public class UserLightOp
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IUserRepository _userRepo = RepositoryManager.GetRepository<IUserRepository>();

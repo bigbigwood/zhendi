@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
+
+  <alias>
+    <typeAlias alias="UserEvent" type="Rld.Acs.Model.UserEvent" />
+  </alias>
+
+  <resultMaps>
+    <resultMap id="UserEventResult" class="Rld.Acs.Model.UserEvent">
+      <result property="EventId" column="EventId"/>
+      <result property="EventType" column="EventType"/>
+      <result property="EventData" column="EventData"/>
+      <result property="UserID" column="UserID"/>
+      <result property="CreateUserID" column="CreateUserID"/>
+      <result property="CreateDate" column="CreateDate"/>
+      <result property="IsFinished" column="IsFinished"/>
+    </resultMap>
+  </resultMaps>
+
+  <statements>
+    <select id="UserEvent.GetByKey" parameterClass="Int64" resultMap="UserEventResult">
+      SELECT *
+      FROM [SYS_USER_EVENT]
+      WHERE
+      [EventId] = #value#
+    </select>
+
+    <insert id="UserEvent.Insert" parameterClass="UserEvent">
+      INSERT INTO [SYS_USER_EVENT] (
+      [EventType]
+      , [EventData]
+      , [UserID]
+      , [CreateUserID]
+      , [CreateDate]
+      , [IsFinished]
+      ) VALUES (
+      #EventType#
+      , #EventData#
+      , #UserID#
+      , #CreateUserID#
+      , #CreateDate#
+      , #IsFinished#
+      )
+      <selectKey resultClass="Int64" type="post" property="EventId" >
+        select @@IDENTITY as value
+      </selectKey>
+    </insert>
+
+    <update id="UserEvent.Update" parameterClass="UserEvent">
+      UPDATE [SYS_USER_EVENT] SET
+      [EventType] = #EventType#
+      , [EventData] = #EventData#
+      , [UserID] = #UserID#
+      , [CreateUserID] = #CreateUserID#
+      , [CreateDate] = #CreateDate#
+      , [IsFinished] = #IsFinished#
+      WHERE
+      [EventId] = #EventId#
+    </update>
+
+    <delete id="UserEvent.Delete"  parameterClass="Int64">
+      DELETE FROM [SYS_USER_EVENT]
+      WHERE
+      [EventId] = #EventId#
+    </delete>
+
+    <select id="UserEvent.Query" parameterClass="Hashtable" resultMap="UserEventResult">
+      SELECT *
+      FROM SYS_USER_EVENT
+      <dynamic prepend="WHERE">
+        <isNotNull prepend="and" property="UserID">
+          UserID=#UserID#
+        </isNotNull>
+        <isNotNull prepend="and" property="IsFinished">
+          IsFinished=#IsFinished#
+        </isNotNull>
+        <isNotNull prepend="and" property="EventType">
+          EventType=#EventType#
+        </isNotNull>
+      </dynamic>
+    </select>
+  </statements>
+</sqlMap>

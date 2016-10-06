@@ -52,6 +52,7 @@ namespace Rld.Acs.Repository.Mybatis.MsSql
             Bind<IUserPropertyRepository>().To<UserPropertyRepositoryMB>();
             Bind<IUserAuthenticationRepository>().To<UserAuthenticationRepositoryMB>();
             Bind<IUserDeviceRoleRepository>().To<UserDeviceRoleRepositoryMB>();
+            Bind<IUserEventRepository>().To<UserEventRepositoryMB>();
             //Floor
             Bind<IFloorRepository>().To<FloorRepositoryMB>();
             Bind<IFloorDoorRepository>().To<FloorDoorRepositoryMB>();

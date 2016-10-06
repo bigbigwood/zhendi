@@ -71,6 +71,7 @@
     <Compile Include="Time\TimeSegment.cs" />
     <Compile Include="Time\TimeZone.cs" />
     <Compile Include="Time\TimeZoneGroup.cs" />
+    <Compile Include="User\UserEvent.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserAuthentication.cs" />
     <Compile Include="User\UserDeviceRole.cs" />

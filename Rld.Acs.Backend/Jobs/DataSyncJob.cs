@@ -24,7 +24,6 @@ namespace Rld.Acs.Backend.Jobs
     class DataSyncJob : JobBase
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private static Int32 BackendOperatorId = 2;
 
 
         protected override void ProcessBusiness(IJobExecutionContext context)

@@ -99,6 +99,7 @@
     <Compile Include="Impl\User\UserAuthenticationRepositoryMB.cs" />
     <Compile Include="Impl\User\UserDeviceRoleRepositoryMB.cs" />
     <Compile Include="Impl\System\SysOperatorRoleRepositoryMB.cs" />
+    <Compile Include="Impl\User\UserEventRepositoryMB.cs" />
     <Compile Include="Impl\User\UserRepositoryMB.cs" />
     <Compile Include="NinjectBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -229,6 +230,9 @@
     <EmbeddedResource Include="MapConfig\Device\DeviceGroup.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MapConfig\User\UserEvent.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -69,6 +69,7 @@ namespace Rld.Acs.WebApi.Controllers
                 var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
                 var userRepo = RepositoryManager.GetRepository<IUserRepository>();
                 var userDeviceRoleRepo = RepositoryManager.GetRepository<IUserDeviceRoleRepository>();
+                var userEventRepo = RepositoryManager.GetRepository<IUserEventRepository>();
 
                 userPropertyRepo.Insert(userInfo.UserPropertyInfo);
                 userRepo.Insert(userInfo);
@@ -79,6 +80,14 @@ namespace Rld.Acs.WebApi.Controllers
 
                 userInfo.UserDeviceRoles.ForEach(a => a.UserID = userInfo.UserID);
                 userInfo.UserDeviceRoles.ForEach(a => userDeviceRoleRepo.Insert(a));
+
+                userEventRepo.Insert(new UserEvent()
+                {
+                    EventType = UserEventType.Add,
+                    UserID = userInfo.UserID,
+                    CreateDate = DateTime.Now,
+                    CreateUserID = GlobalSetting.WebApiUserId,
+                });
 
                 return Request.CreateResponse(HttpStatusCode.OK, userInfo);
 
@@ -96,6 +105,7 @@ namespace Rld.Acs.WebApi.Controllers
                 var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
                 var userRepo = RepositoryManager.GetRepository<IUserRepository>();
                 var userDeviceRoleRepo = RepositoryManager.GetRepository<IUserDeviceRoleRepository>();
+                var userEventRepo = RepositoryManager.GetRepository<IUserEventRepository>();
 
                 var originalUserInfo = userRepo.GetByKey(id);
                 if (originalUserInfo == null)
@@ -143,6 +153,14 @@ namespace Rld.Acs.WebApi.Controllers
                 userPropertyRepo.Update(userInfo.UserPropertyInfo);
                 userRepo.Update(userInfo);
 
+                userEventRepo.Insert(new UserEvent()
+                {
+                    EventType = UserEventType.Modify,
+                    UserID = userInfo.UserID,
+                    CreateDate = DateTime.Now,
+                    CreateUserID = GlobalSetting.WebApiUserId,
+                });
+
                 return Request.CreateResponse(HttpStatusCode.OK);
 
             }, this);
@@ -157,6 +175,7 @@ namespace Rld.Acs.WebApi.Controllers
                 var userPropertyRepo = RepositoryManager.GetRepository<IUserPropertyRepository>();
                 var userRepo = RepositoryManager.GetRepository<IUserRepository>();
                 var userDeviceRoleRepo = RepositoryManager.GetRepository<IUserDeviceRoleRepository>();
+                var userEventRepo = RepositoryManager.GetRepository<IUserEventRepository>();
 
                 var userInfo = userRepo.GetByKey(id);
                 if (userInfo != null)
@@ -165,6 +184,14 @@ namespace Rld.Acs.WebApi.Controllers
                     userPropertyRepo.Delete(userInfo.UserPropertyInfo.UserPropertyID);
                     userInfo.UserDeviceRoles.ForEach(a => userDeviceRoleRepo.Delete(a.UserDeviceRoleID));
                     userRepo.Delete(id);
+
+                    userEventRepo.Insert(new UserEvent()
+                    {
+                        EventType = UserEventType.Delete,
+                        UserID = userInfo.UserID,
+                        CreateDate = DateTime.Now,
+                        CreateUserID = GlobalSetting.WebApiUserId,
+                    });
                 }
 
                 return Request.CreateResponse(HttpStatusCode.OK);
