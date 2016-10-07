@@ -26,9 +26,6 @@ namespace Rld.Acs.Backend.Jobs
             var syncConfigTime = TryGetSyncDataConfigTime();
             if (syncConfigTime.HasValue)
             {
-                syncConfigTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
-                    syncConfigTime.Value.Hour, syncConfigTime.Value.Minute, syncConfigTime.Value.Second);
-
                 Log.Info("Get last data sync job scan time.");
                 var sysConfigRepo = RepositoryManager.GetRepository<ISysConfigRepository>();
                 var lastDataSyncJobScanTimeConfig = sysConfigRepo.Query(new Hashtable { { ConstStrings.Name, LastDataSyncJobScanTimeString } }).FirstOrDefault();
@@ -114,7 +111,7 @@ namespace Rld.Acs.Backend.Jobs
                     var result = proxy.SyncSystemUsers(devices.ToArray(), new[] { userInfo }, out message);
                     if (result != ResultTypes.Ok)
                     {
-                        string errorMessage = string.Join(",", message);
+                        string errorMessage = string.Join(",", message ?? new string[]{});
                         throw new Exception("sync system user fails." + errorMessage);
                     }
                 }
@@ -155,8 +152,10 @@ namespace Rld.Acs.Backend.Jobs
             if (config != null)
             {
                 var configs = config.Value.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
-                return configs.Select(c => DateTime.Parse(c))
-                    .FirstOrDefault(mydt => mydt.Hour == DateTime.Now.Hour && mydt.Minute == DateTime.Now.Minute);
+                var findConfigredTime = configs.Select(c => DateTime.Parse(c))
+                    .FirstOrDefault(x => x.Hour == DateTime.Now.Hour && x.Minute == DateTime.Now.Minute);
+                if (findConfigredTime != DateTime.MinValue)
+                    return findConfigredTime;
             }
 
             return null;
@@ -168,19 +167,15 @@ namespace Rld.Acs.Backend.Jobs
 
             string[] messages;
             var resultTypes =  new DeviceServiceClient().SyncDeviceOperationLogs(devices.ToArray(), out messages);
-            Log.InfoFormat("SyncDeviceOperationLogs result = {0}", resultTypes.ToString());
+            Log.InfoFormat("SyncDeviceOperationLogs result = {0}", resultTypes);
 
-            if (resultTypes == ResultTypes.Ok)
+            var conditions = new Hashtable()
             {
-                var conditions = new Hashtable()
-                {
-                    {"StartDate",startTime},
-                    {"EndDate", endTime},
-                };
-
-                var deviceOperationLogRepo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
-                events = deviceOperationLogRepo.Query(conditions).ToList();
-            }
+                {"StartDate",startTime},
+                {"EndDate", endTime},
+            };
+            var deviceOperationLogRepo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
+            events = deviceOperationLogRepo.Query(conditions).ToList();
 
             return events;
         }

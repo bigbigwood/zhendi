@@ -25,14 +25,19 @@ namespace Rld.Acs.DeviceSystem.Service
         private IUserAuthenticationRepository _userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
         private IDeviceRoleRepository _deviceRole = RepositoryManager.GetRepository<IDeviceRoleRepository>();
         private IUserEventRepository _userEventRepo = RepositoryManager.GetRepository<IUserEventRepository>();
+        private IDeviceControllerRepository _deviceRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
 
 
         public void SyncUser(User user, DeviceController device)
         {
             var deviceID = device.DeviceID;
-            var deviceCode = device.Code.ToInt32();
+            var deviceInfo = _deviceRepo.GetByKey(deviceID);
+            var deviceCode = deviceInfo.Code.ToInt32();
             if (WebSocketClientManager.GetInstance().GetClientById(deviceCode) == null)
                 throw new DeviceNotConnectedException();
+
+            if (user.UserID != 0)
+                user = _userRepo.GetByKey(user.UserID);
 
             Log.Info("Invoke WebSocketOperation...");
             var deviceUserId = user.UserCode.ToInt32();
@@ -63,16 +68,16 @@ namespace Rld.Acs.DeviceSystem.Service
             if (deviceUserExists && systemUserExists)
             {
                 var userInfo = _userRepo.GetByKey(user.UserID);
-                UpdateUser(userInfo, response.UserInfo, device);
+                UpdateUser(userInfo, response.UserInfo, deviceInfo);
             }
             else if (!deviceUserExists && systemUserExists)
             {
                 var userInfo = _userRepo.GetByKey(user.UserID);
-                DeleteUser(userInfo, device);
+                DeleteUser(userInfo, deviceInfo);
             }
             else if (deviceUserExists && !systemUserExists)
             {
-                AddUser(user, response.UserInfo, device);
+                AddUser(user, response.UserInfo, deviceInfo);
             }
         }
 
@@ -264,7 +269,6 @@ namespace Rld.Acs.DeviceSystem.Service
                 IsFinished = true,
                 EventData = "Add user by sync system user operation",
             });
-
         }
         public void UpdateUser(User systemUserInfo, UserInfo deviceUserInfo, DeviceController device)
         {

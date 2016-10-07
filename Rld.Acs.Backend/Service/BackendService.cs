@@ -28,7 +28,7 @@ namespace Rld.Acs.Backend.Service
 
         public void OnStop()
         {
-            scheduler.PauseAll();
+            scheduler.Shutdown();
             Log.Info("BackendService stopped.");
         }
 

@@ -24,10 +24,13 @@ namespace Rld.Acs.DeviceSystem.Service
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IUserRepository _userRepo = RepositoryManager.GetRepository<IUserRepository>();
         private IDeviceRoleRepository _deviceRole = RepositoryManager.GetRepository<IDeviceRoleRepository>();
+        private IDeviceControllerRepository _deviceRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
 
         public void SyncUser(SyncOption option, User user, DeviceController device)
         {
-            var deviceCode = device.Code.ToInt32();
+            var deviceInfo = _deviceRepo.GetByKey(device.DeviceID);
+
+            var deviceCode = deviceInfo.Code.ToInt32();
             if (WebSocketClientManager.GetInstance().GetClientById(deviceCode) == null)
                 throw new DeviceNotConnectedException();
 
@@ -36,14 +39,14 @@ namespace Rld.Acs.DeviceSystem.Service
             switch (option)
             {
                 case SyncOption.Create:
-                    AddUser(userInfo, device);
+                    AddUser(userInfo, deviceInfo);
                     break;
                 case SyncOption.Delete:
-                    DeleteUser(userInfo, device);
+                    DeleteUser(userInfo, deviceInfo);
                     break;
                 case SyncOption.Update:
                 case SyncOption.Unknown:
-                    UpdateUser(userInfo, device);
+                    UpdateUser(userInfo, deviceInfo);
                     break;
             }
         }

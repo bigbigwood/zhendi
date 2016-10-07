@@ -24,7 +24,8 @@ namespace Rld.Acs.DeviceSystem
     public class DeviceService : IDeviceService
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private static Int32 index = 0;
+
+
         public SyncDeviceUsersResponse SyncDeviceUsers(SyncDeviceUsersRequest request)
         {
             return PersistenceOperation.Process(request, () =>

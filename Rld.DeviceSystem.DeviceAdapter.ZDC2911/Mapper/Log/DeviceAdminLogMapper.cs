@@ -20,8 +20,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.Log
 
             try
             {
-                logInfo.AdminId = (int)record.MDIN;
-                logInfo.UserId = (int) record.DIN;
+                logInfo.AdminId = (int)record.DIN;
+                logInfo.UserId = (int)record.MDIN;
                 logInfo.Enroll = record.Verify.ToString();
                 logInfo.OperationType = record.Action;
                 logInfo.Message = SLogType(record.Action);
