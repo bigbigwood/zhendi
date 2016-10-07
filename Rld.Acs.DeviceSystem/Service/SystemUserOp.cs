@@ -157,7 +157,7 @@ namespace Rld.Acs.DeviceSystem.Service
             systemUserInfo.UserPropertyInfo.TechnicalTitle = "";
             systemUserInfo.UserPropertyInfo.TechnicalLevel = "";
             systemUserInfo.UserPropertyInfo.IDType = (int)IDType.ID;
-            systemUserInfo.UserPropertyInfo.IDNumber = "100000000000000000";
+            systemUserInfo.UserPropertyInfo.IDNumber = "";
             systemUserInfo.UserPropertyInfo.SocialNumber = "";
             systemUserInfo.UserPropertyInfo.Email = "";
             systemUserInfo.UserPropertyInfo.Address = "";
@@ -217,16 +217,25 @@ namespace Rld.Acs.DeviceSystem.Service
             if (deviceUser.AccessTimeZoneId.HasValue && deviceUser.Role.HasValue)
             {
                 var deviceRoles = _deviceRole.Query(new Hashtable { { "Status", (int)GeneralStatus.Enabled } }).ToList();
-                var deviceRole = deviceRoles.FirstOrDefault(x =>
+
+                bool permissionExist = deviceRoles.FindAll(x => systemUserInfo.UserDeviceRoles.Select(e => e.DeviceRoleID).Contains(x.DeviceRoleID))
+                    .SelectMany(x => x.DeviceRolePermissions)
+                    .Any(x => x.DeviceID == deviceID && (int) x.PermissionAction == (int) deviceUser.Role);
+
+                if (!permissionExist)
                 {
-                    if (x.DeviceRolePermissions.Count() != 1) return false;
+                    var deviceRole = deviceRoles.FirstOrDefault(x =>
+                    {
+                        if (x.DeviceRolePermissions.Count() != 1) return false;
 
-                    var permission = x.DeviceRolePermissions.FirstOrDefault();
-                    return (permission.DeviceID == deviceID &&
-                            (int) permission.PermissionAction == (int) deviceUser.Role);
-                });
+                        var permission = x.DeviceRolePermissions.FirstOrDefault();
+                        return (permission.DeviceID == deviceID &&
+                                (int)permission.PermissionAction == (int)deviceUser.Role);
+                    });
 
-                systemUserInfo.UserDeviceRoles.Add(new UserDeviceRole() { UserDeviceRoleID = deviceRole.DeviceRoleID });
+                    if (deviceRole != null)
+                        systemUserInfo.UserDeviceRoles.Add(new UserDeviceRole() { UserDeviceRoleID = deviceRole.DeviceRoleID });
+                }
             }
 
             var userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
@@ -253,7 +262,7 @@ namespace Rld.Acs.DeviceSystem.Service
                 CreateDate = DateTime.Now,
                 CreateUserID = GlobalSetting.DeviceSystemId,
                 IsFinished = true,
-                EventData = "Add user authentication by sync system user operation",
+                EventData = "Add user by sync system user operation",
             });
 
         }

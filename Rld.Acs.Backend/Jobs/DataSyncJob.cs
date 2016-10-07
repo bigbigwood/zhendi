@@ -26,6 +26,9 @@ namespace Rld.Acs.Backend.Jobs
             var syncConfigTime = TryGetSyncDataConfigTime();
             if (syncConfigTime.HasValue)
             {
+                syncConfigTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,
+                    syncConfigTime.Value.Hour, syncConfigTime.Value.Minute, syncConfigTime.Value.Second);
+
                 Log.Info("Get last data sync job scan time.");
                 var sysConfigRepo = RepositoryManager.GetRepository<ISysConfigRepository>();
                 var lastDataSyncJobScanTimeConfig = sysConfigRepo.Query(new Hashtable { { ConstStrings.Name, LastDataSyncJobScanTimeString } }).FirstOrDefault();
