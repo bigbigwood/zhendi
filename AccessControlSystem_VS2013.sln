@@ -55,6 +55,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2D6689F4-BF6B-4727-B415-67C18AD68AB6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.Backend", "Rld.Acs.Backend\Rld.Acs.Backend.csproj", "{4E985E9C-8D81-4C6E-A4DC-32AA35892C17}"
+	ProjectSection(ProjectDependencies) = postProject
+		{265F3AA8-972D-4722-B182-8D0F593B05F0} = {265F3AA8-972D-4722-B182-8D0F593B05F0}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.WpfApplication.LisenceTool", "Rld.Acs.WpfApplication.LisenceTool\Rld.Acs.WpfApplication.LisenceTool.csproj", "{34CCE799-DE43-4BA5-9654-2EA73298890A}"
 EndProject

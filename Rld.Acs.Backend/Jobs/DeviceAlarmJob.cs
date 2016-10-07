@@ -23,7 +23,7 @@ namespace Rld.Acs.Backend.Jobs
 {
     class DeviceAlarmJob : JobBase
     {
-        private const string LastDeviceAlarmJobScanTime = "DeviceAlarmJobScanTime";
+        private const string LastDeviceAlarmJobScanTimeString = "DeviceAlarmJobScanTime";
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private DeviceAlarmJobEmail emailTemplate;
 
@@ -32,7 +32,7 @@ namespace Rld.Acs.Backend.Jobs
             var sysConfigRepo = RepositoryManager.GetRepository<ISysConfigRepository>();
             var deviceTrafficLogRepo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
             emailTemplate = DeviceAlarmJobEmail.BuildEmailInfo();
-            var lastDeviceAlarmJobScanTimeConfig = sysConfigRepo.Query(new Hashtable { { ConstStrings.Name, LastDeviceAlarmJobScanTime } }).FirstOrDefault();
+            var lastDeviceAlarmJobScanTimeConfig = sysConfigRepo.Query(new Hashtable { { ConstStrings.Name, LastDeviceAlarmJobScanTimeString } }).FirstOrDefault();
             DateTime lastDeviceAlarmJobScanTime = DateTime.Parse(lastDeviceAlarmJobScanTimeConfig.Value);
             DateTime currentDeviceAlarmJobScanTime  = DateTime.Now;
 

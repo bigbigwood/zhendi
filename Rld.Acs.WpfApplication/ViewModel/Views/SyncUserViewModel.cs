@@ -149,11 +149,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
                         if (SyncUserType == SyncUserType.SyncDeviceToUser)
                         {
-                            resultTypes = new DSProxy.DeviceServiceClient().SyncDBUsers(devices.ToArray(), users.ToArray(), out messages);
+                            resultTypes = new DSProxy.DeviceServiceClient().SyncSystemUsers(devices.ToArray(), users.ToArray(), out messages);
                         }
                         else
                         {
-                            resultTypes = new DSProxy.DeviceServiceClient().SyncDeviceUsers(devices.ToArray(), users.ToArray(),out messages);
+                            resultTypes = new DSProxy.DeviceServiceClient().SyncDeviceUsers(devices.ToArray(), DSProxy.SyncOption.Unknown, users.ToArray(),out messages);
                         }
 
                         message = MessageHandler.GenerateDeviceMessage(resultTypes, "同步数据成功！", "同步数据失败！");

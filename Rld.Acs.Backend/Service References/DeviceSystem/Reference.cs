@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rld.Acs.WpfApplication.DeviceProxy {
+namespace Rld.Acs.Backend.DeviceSystem {
     using System.Runtime.Serialization;
     
     
@@ -85,94 +85,94 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.realand.com/DeviceSystem/", ConfigurationName="DeviceProxy.IDeviceService")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.realand.com/DeviceSystem/", ConfigurationName="DeviceSystem.IDeviceService")]
     public interface IDeviceService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncSystemUsers", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncSystemUsersResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersResponse SyncSystemUsers(Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersRequest request);
+        Rld.Acs.Backend.DeviceSystem.SyncDBUsersResponse SyncSystemUsers(Rld.Acs.Backend.DeviceSystem.SyncDBUsersRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncSystemUsers", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncSystemUsersResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersResponse> SyncSystemUsersAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDBUsersResponse> SyncSystemUsersAsync(Rld.Acs.Backend.DeviceSystem.SyncDBUsersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDepartmentUsers", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDepartmentUsersResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersResponse SyncDepartmentUsers(Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersRequest request);
+        Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersResponse SyncDepartmentUsers(Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDepartmentUsers", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDepartmentUsersResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersResponse> SyncDepartmentUsersAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersResponse> SyncDepartmentUsersAsync(Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsers", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsersResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersResponse SyncDeviceUsers(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersRequest request);
+        Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersResponse SyncDeviceUsers(Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsers", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceUsersResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersResponse> SyncDeviceUsersAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersResponse> SyncDeviceUsersAsync(Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevices", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevicesResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse SyncDevices(Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest request);
+        Rld.Acs.Backend.DeviceSystem.SyncDevicesResponse SyncDevices(Rld.Acs.Backend.DeviceSystem.SyncDevicesRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevices", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDevicesResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse> SyncDevicesAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDevicesResponse> SyncDevicesAsync(Rld.Acs.Backend.DeviceSystem.SyncDevicesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogs", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogsResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsResponse SyncDeviceTrafficLogs(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsRequest request);
+        Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsResponse SyncDeviceTrafficLogs(Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogs", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceTrafficLogsResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsResponse> SyncDeviceTrafficLogsAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsResponse> SyncDeviceTrafficLogsAsync(Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceOperationLogs", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceOperationLogsRespons" +
             "e")]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsRequest request);
+        Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceOperationLogs", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncDeviceOperationLogsRespons" +
             "e")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsResponse> SyncDeviceOperationLogsAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsResponse> SyncDeviceOperationLogsAsync(Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeGroups", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeGroupsResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsResponse SyncTimeGroups(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsRequest request);
+        Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsResponse SyncTimeGroups(Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeGroups", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeGroupsResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsResponse> SyncTimeGroupsAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsResponse> SyncTimeGroupsAsync(Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeSegments", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeSegmentsResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsResponse SyncTimeSegments(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsRequest request);
+        Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsResponse SyncTimeSegments(Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeSegments", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeSegmentsResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsResponse> SyncTimeSegmentsAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsResponse> SyncTimeSegmentsAsync(Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeZones", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeZonesResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesResponse SyncTimeZones(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesRequest request);
+        Rld.Acs.Backend.DeviceSystem.SyncTimeZonesResponse SyncTimeZones(Rld.Acs.Backend.DeviceSystem.SyncTimeZonesRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeZones", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SyncTimeZonesResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesResponse> SyncTimeZonesAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncTimeZonesResponse> SyncTimeZonesAsync(Rld.Acs.Backend.DeviceSystem.SyncTimeZonesRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/GetDoorState", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/GetDoorStateResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateResponse GetDoorState(Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateRequest request);
+        Rld.Acs.Backend.DeviceSystem.GetDoorStateResponse GetDoorState(Rld.Acs.Backend.DeviceSystem.GetDoorStateRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/GetDoorState", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/GetDoorStateResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateResponse> GetDoorStateAsync(Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.GetDoorStateResponse> GetDoorStateAsync(Rld.Acs.Backend.DeviceSystem.GetDoorStateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorState", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorStateResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateResponse UpdateDoorState(Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateRequest request);
+        Rld.Acs.Backend.DeviceSystem.UpdateDoorStateResponse UpdateDoorState(Rld.Acs.Backend.DeviceSystem.UpdateDoorStateRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorState", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/UpdateDoorStateResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateResponse> UpdateDoorStateAsync(Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.UpdateDoorStateResponse> UpdateDoorStateAsync(Rld.Acs.Backend.DeviceSystem.UpdateDoorStateRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevices", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevicesResponse")]
-        Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse SearchNewDevices(Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest request);
+        Rld.Acs.Backend.DeviceSystem.SearchNewDevicesResponse SearchNewDevices(Rld.Acs.Backend.DeviceSystem.SearchNewDevicesRequest request);
         
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevices", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevicesResponse")]
-        System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse> SearchNewDevicesAsync(Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest request);
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SearchNewDevicesResponse> SearchNewDevicesAsync(Rld.Acs.Backend.DeviceSystem.SearchNewDevicesRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -201,7 +201,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SyncDBUsersResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public string[] Messages;
@@ -209,7 +209,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SyncDBUsersResponse() {
         }
         
-        public SyncDBUsersResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SyncDBUsersResponse(Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -241,7 +241,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SyncDepartmentUsersResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public string[] Messages;
@@ -249,7 +249,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SyncDepartmentUsersResponse() {
         }
         
-        public SyncDepartmentUsersResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SyncDepartmentUsersResponse(Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -264,7 +264,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public Rld.Acs.Model.DeviceController[] Devices;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
-        public Rld.Acs.WpfApplication.DeviceProxy.SyncOption Option;
+        public Rld.Acs.Backend.DeviceSystem.SyncOption Option;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=2)]
         public Rld.Acs.Model.User[] Users;
@@ -272,7 +272,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SyncDeviceUsersRequest() {
         }
         
-        public SyncDeviceUsersRequest(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.WpfApplication.DeviceProxy.SyncOption Option, Rld.Acs.Model.User[] Users) {
+        public SyncDeviceUsersRequest(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.Backend.DeviceSystem.SyncOption Option, Rld.Acs.Model.User[] Users) {
             this.Devices = Devices;
             this.Option = Option;
             this.Users = Users;
@@ -285,7 +285,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SyncDeviceUsersResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public string[] Messages;
@@ -293,7 +293,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SyncDeviceUsersResponse() {
         }
         
-        public SyncDeviceUsersResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SyncDeviceUsersResponse(Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -317,7 +317,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public Rld.Acs.Model.DeviceController[] NewDeviceControllers;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=2)]
         public string[] Messages;
@@ -325,7 +325,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SyncDevicesResponse() {
         }
         
-        public SyncDevicesResponse(Rld.Acs.Model.DeviceController[] NewDeviceControllers, Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SyncDevicesResponse(Rld.Acs.Model.DeviceController[] NewDeviceControllers, Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.NewDeviceControllers = NewDeviceControllers;
             this.ResultType = ResultType;
             this.Messages = Messages;
@@ -354,7 +354,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SyncDeviceTrafficLogsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public string[] Messages;
@@ -362,7 +362,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SyncDeviceTrafficLogsResponse() {
         }
         
-        public SyncDeviceTrafficLogsResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SyncDeviceTrafficLogsResponse(Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -390,7 +390,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SyncDeviceOperationLogsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public string[] Messages;
@@ -398,7 +398,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SyncDeviceOperationLogsResponse() {
         }
         
-        public SyncDeviceOperationLogsResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SyncDeviceOperationLogsResponse(Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -430,7 +430,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SyncTimeGroupsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public string[] Messages;
@@ -438,7 +438,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SyncTimeGroupsResponse() {
         }
         
-        public SyncTimeGroupsResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SyncTimeGroupsResponse(Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -470,7 +470,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SyncTimeSegmentsResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public string[] Messages;
@@ -478,7 +478,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SyncTimeSegmentsResponse() {
         }
         
-        public SyncTimeSegmentsResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SyncTimeSegmentsResponse(Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -510,7 +510,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class SyncTimeZonesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public string[] Messages;
@@ -518,7 +518,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SyncTimeZonesResponse() {
         }
         
-        public SyncTimeZonesResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SyncTimeZonesResponse(Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -553,7 +553,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public bool IsOpened;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=2)]
         public string[] Messages;
@@ -561,7 +561,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public GetDoorStateResponse() {
         }
         
-        public GetDoorStateResponse(bool IsOpened, Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public GetDoorStateResponse(bool IsOpened, Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.IsOpened = IsOpened;
             this.ResultType = ResultType;
             this.Messages = Messages;
@@ -580,12 +580,12 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public int DoorIndex;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=2)]
-        public Rld.Acs.WpfApplication.DeviceProxy.DoorControlOption Option;
+        public Rld.Acs.Backend.DeviceSystem.DoorControlOption Option;
         
         public UpdateDoorStateRequest() {
         }
         
-        public UpdateDoorStateRequest(int DeviceCode, int DoorIndex, Rld.Acs.WpfApplication.DeviceProxy.DoorControlOption Option) {
+        public UpdateDoorStateRequest(int DeviceCode, int DoorIndex, Rld.Acs.Backend.DeviceSystem.DoorControlOption Option) {
             this.DeviceCode = DeviceCode;
             this.DoorIndex = DoorIndex;
             this.Option = Option;
@@ -598,7 +598,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     public partial class UpdateDoorStateResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
         public string[] Messages;
@@ -606,7 +606,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public UpdateDoorStateResponse() {
         }
         
-        public UpdateDoorStateResponse(Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public UpdateDoorStateResponse(Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.ResultType = ResultType;
             this.Messages = Messages;
         }
@@ -630,7 +630,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public int[] NewDeviceCodes;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType;
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=2)]
         public string[] Messages;
@@ -638,7 +638,7 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         public SearchNewDevicesResponse() {
         }
         
-        public SearchNewDevicesResponse(int[] NewDeviceCodes, Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, string[] Messages) {
+        public SearchNewDevicesResponse(int[] NewDeviceCodes, Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
             this.NewDeviceCodes = NewDeviceCodes;
             this.ResultType = ResultType;
             this.Messages = Messages;
@@ -646,12 +646,12 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDeviceServiceChannel : Rld.Acs.WpfApplication.DeviceProxy.IDeviceService, System.ServiceModel.IClientChannel {
+    public interface IDeviceServiceChannel : Rld.Acs.Backend.DeviceSystem.IDeviceService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DeviceServiceClient : System.ServiceModel.ClientBase<Rld.Acs.WpfApplication.DeviceProxy.IDeviceService>, Rld.Acs.WpfApplication.DeviceProxy.IDeviceService {
+    public partial class DeviceServiceClient : System.ServiceModel.ClientBase<Rld.Acs.Backend.DeviceSystem.IDeviceService>, Rld.Acs.Backend.DeviceSystem.IDeviceService {
         
         public DeviceServiceClient() {
         }
@@ -673,217 +673,217 @@ namespace Rld.Acs.WpfApplication.DeviceProxy {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SyncSystemUsers(Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersRequest request) {
+        Rld.Acs.Backend.DeviceSystem.SyncDBUsersResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.SyncSystemUsers(Rld.Acs.Backend.DeviceSystem.SyncDBUsersRequest request) {
             return base.Channel.SyncSystemUsers(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes SyncSystemUsers(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.Model.User[] Users, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersRequest();
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes SyncSystemUsers(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.Model.User[] Users, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.SyncDBUsersRequest inValue = new Rld.Acs.Backend.DeviceSystem.SyncDBUsersRequest();
             inValue.Devices = Devices;
             inValue.Users = Users;
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncSystemUsers(inValue);
+            Rld.Acs.Backend.DeviceSystem.SyncDBUsersResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).SyncSystemUsers(inValue);
             Messages = retVal.Messages;
             return retVal.ResultType;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersResponse> SyncSystemUsersAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDBUsersRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDBUsersResponse> SyncSystemUsersAsync(Rld.Acs.Backend.DeviceSystem.SyncDBUsersRequest request) {
             return base.Channel.SyncSystemUsersAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SyncDepartmentUsers(Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersRequest request) {
+        Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.SyncDepartmentUsers(Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersRequest request) {
             return base.Channel.SyncDepartmentUsers(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes SyncDepartmentUsers(Rld.Acs.Model.Department[] Departments, Rld.Acs.Model.DeviceController[] Devices, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersRequest();
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes SyncDepartmentUsers(Rld.Acs.Model.Department[] Departments, Rld.Acs.Model.DeviceController[] Devices, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersRequest inValue = new Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersRequest();
             inValue.Departments = Departments;
             inValue.Devices = Devices;
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncDepartmentUsers(inValue);
+            Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).SyncDepartmentUsers(inValue);
             Messages = retVal.Messages;
             return retVal.ResultType;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersResponse> SyncDepartmentUsersAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDepartmentUsersRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersResponse> SyncDepartmentUsersAsync(Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersRequest request) {
             return base.Channel.SyncDepartmentUsersAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SyncDeviceUsers(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersRequest request) {
+        Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.SyncDeviceUsers(Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersRequest request) {
             return base.Channel.SyncDeviceUsers(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes SyncDeviceUsers(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.WpfApplication.DeviceProxy.SyncOption Option, Rld.Acs.Model.User[] Users, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersRequest();
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes SyncDeviceUsers(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.Backend.DeviceSystem.SyncOption Option, Rld.Acs.Model.User[] Users, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersRequest inValue = new Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersRequest();
             inValue.Devices = Devices;
             inValue.Option = Option;
             inValue.Users = Users;
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncDeviceUsers(inValue);
+            Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).SyncDeviceUsers(inValue);
             Messages = retVal.Messages;
             return retVal.ResultType;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersResponse> SyncDeviceUsersAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceUsersRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersResponse> SyncDeviceUsersAsync(Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersRequest request) {
             return base.Channel.SyncDeviceUsersAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SyncDevices(Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest request) {
+        Rld.Acs.Backend.DeviceSystem.SyncDevicesResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.SyncDevices(Rld.Acs.Backend.DeviceSystem.SyncDevicesRequest request) {
             return base.Channel.SyncDevices(request);
         }
         
-        public Rld.Acs.Model.DeviceController[] SyncDevices(out Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest();
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncDevices(inValue);
+        public Rld.Acs.Model.DeviceController[] SyncDevices(out Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.SyncDevicesRequest inValue = new Rld.Acs.Backend.DeviceSystem.SyncDevicesRequest();
+            Rld.Acs.Backend.DeviceSystem.SyncDevicesResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).SyncDevices(inValue);
             ResultType = retVal.ResultType;
             Messages = retVal.Messages;
             return retVal.NewDeviceControllers;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesResponse> SyncDevicesAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDevicesRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDevicesResponse> SyncDevicesAsync(Rld.Acs.Backend.DeviceSystem.SyncDevicesRequest request) {
             return base.Channel.SyncDevicesAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SyncDeviceTrafficLogs(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsRequest request) {
+        Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.SyncDeviceTrafficLogs(Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsRequest request) {
             return base.Channel.SyncDeviceTrafficLogs(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes SyncDeviceTrafficLogs(Rld.Acs.Model.DeviceController[] Devices, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsRequest();
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes SyncDeviceTrafficLogs(Rld.Acs.Model.DeviceController[] Devices, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsRequest inValue = new Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsRequest();
             inValue.Devices = Devices;
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncDeviceTrafficLogs(inValue);
+            Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).SyncDeviceTrafficLogs(inValue);
             Messages = retVal.Messages;
             return retVal.ResultType;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsResponse> SyncDeviceTrafficLogsAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceTrafficLogsRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsResponse> SyncDeviceTrafficLogsAsync(Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsRequest request) {
             return base.Channel.SyncDeviceTrafficLogsAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SyncDeviceOperationLogs(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsRequest request) {
+        Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.SyncDeviceOperationLogs(Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsRequest request) {
             return base.Channel.SyncDeviceOperationLogs(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes SyncDeviceOperationLogs(Rld.Acs.Model.DeviceController[] Devices, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsRequest();
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes SyncDeviceOperationLogs(Rld.Acs.Model.DeviceController[] Devices, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsRequest inValue = new Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsRequest();
             inValue.Devices = Devices;
-            Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncDeviceOperationLogs(inValue);
+            Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).SyncDeviceOperationLogs(inValue);
             Messages = retVal.Messages;
             return retVal.ResultType;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsResponse> SyncDeviceOperationLogsAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncDeviceOperationLogsRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsResponse> SyncDeviceOperationLogsAsync(Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsRequest request) {
             return base.Channel.SyncDeviceOperationLogsAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SyncTimeGroups(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsRequest request) {
+        Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.SyncTimeGroups(Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsRequest request) {
             return base.Channel.SyncTimeGroups(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes SyncTimeGroups(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.Model.TimeGroup[] TimeGroups, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsRequest();
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes SyncTimeGroups(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.Model.TimeGroup[] TimeGroups, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsRequest inValue = new Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsRequest();
             inValue.Devices = Devices;
             inValue.TimeGroups = TimeGroups;
-            Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncTimeGroups(inValue);
+            Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).SyncTimeGroups(inValue);
             Messages = retVal.Messages;
             return retVal.ResultType;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsResponse> SyncTimeGroupsAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeGroupsRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsResponse> SyncTimeGroupsAsync(Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsRequest request) {
             return base.Channel.SyncTimeGroupsAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SyncTimeSegments(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsRequest request) {
+        Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.SyncTimeSegments(Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsRequest request) {
             return base.Channel.SyncTimeSegments(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes SyncTimeSegments(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.Model.TimeSegment[] TimeSegments, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsRequest();
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes SyncTimeSegments(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.Model.TimeSegment[] TimeSegments, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsRequest inValue = new Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsRequest();
             inValue.Devices = Devices;
             inValue.TimeSegments = TimeSegments;
-            Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncTimeSegments(inValue);
+            Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).SyncTimeSegments(inValue);
             Messages = retVal.Messages;
             return retVal.ResultType;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsResponse> SyncTimeSegmentsAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeSegmentsRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsResponse> SyncTimeSegmentsAsync(Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsRequest request) {
             return base.Channel.SyncTimeSegmentsAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SyncTimeZones(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesRequest request) {
+        Rld.Acs.Backend.DeviceSystem.SyncTimeZonesResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.SyncTimeZones(Rld.Acs.Backend.DeviceSystem.SyncTimeZonesRequest request) {
             return base.Channel.SyncTimeZones(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes SyncTimeZones(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.Model.TimeZone[] TimeZones, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesRequest();
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes SyncTimeZones(Rld.Acs.Model.DeviceController[] Devices, Rld.Acs.Model.TimeZone[] TimeZones, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.SyncTimeZonesRequest inValue = new Rld.Acs.Backend.DeviceSystem.SyncTimeZonesRequest();
             inValue.Devices = Devices;
             inValue.TimeZones = TimeZones;
-            Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SyncTimeZones(inValue);
+            Rld.Acs.Backend.DeviceSystem.SyncTimeZonesResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).SyncTimeZones(inValue);
             Messages = retVal.Messages;
             return retVal.ResultType;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesResponse> SyncTimeZonesAsync(Rld.Acs.WpfApplication.DeviceProxy.SyncTimeZonesRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SyncTimeZonesResponse> SyncTimeZonesAsync(Rld.Acs.Backend.DeviceSystem.SyncTimeZonesRequest request) {
             return base.Channel.SyncTimeZonesAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.GetDoorState(Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateRequest request) {
+        Rld.Acs.Backend.DeviceSystem.GetDoorStateResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.GetDoorState(Rld.Acs.Backend.DeviceSystem.GetDoorStateRequest request) {
             return base.Channel.GetDoorState(request);
         }
         
-        public bool GetDoorState(int DeviceCode, int DoorIndex, out Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateRequest();
+        public bool GetDoorState(int DeviceCode, int DoorIndex, out Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.GetDoorStateRequest inValue = new Rld.Acs.Backend.DeviceSystem.GetDoorStateRequest();
             inValue.DeviceCode = DeviceCode;
             inValue.DoorIndex = DoorIndex;
-            Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).GetDoorState(inValue);
+            Rld.Acs.Backend.DeviceSystem.GetDoorStateResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).GetDoorState(inValue);
             ResultType = retVal.ResultType;
             Messages = retVal.Messages;
             return retVal.IsOpened;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateResponse> GetDoorStateAsync(Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.GetDoorStateResponse> GetDoorStateAsync(Rld.Acs.Backend.DeviceSystem.GetDoorStateRequest request) {
             return base.Channel.GetDoorStateAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.UpdateDoorState(Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateRequest request) {
+        Rld.Acs.Backend.DeviceSystem.UpdateDoorStateResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.UpdateDoorState(Rld.Acs.Backend.DeviceSystem.UpdateDoorStateRequest request) {
             return base.Channel.UpdateDoorState(request);
         }
         
-        public Rld.Acs.WpfApplication.DeviceProxy.ResultTypes UpdateDoorState(int DeviceCode, int DoorIndex, Rld.Acs.WpfApplication.DeviceProxy.DoorControlOption Option, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateRequest();
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes UpdateDoorState(int DeviceCode, int DoorIndex, Rld.Acs.Backend.DeviceSystem.DoorControlOption Option, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.UpdateDoorStateRequest inValue = new Rld.Acs.Backend.DeviceSystem.UpdateDoorStateRequest();
             inValue.DeviceCode = DeviceCode;
             inValue.DoorIndex = DoorIndex;
             inValue.Option = Option;
-            Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).UpdateDoorState(inValue);
+            Rld.Acs.Backend.DeviceSystem.UpdateDoorStateResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).UpdateDoorState(inValue);
             Messages = retVal.Messages;
             return retVal.ResultType;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateResponse> UpdateDoorStateAsync(Rld.Acs.WpfApplication.DeviceProxy.UpdateDoorStateRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.UpdateDoorStateResponse> UpdateDoorStateAsync(Rld.Acs.Backend.DeviceSystem.UpdateDoorStateRequest request) {
             return base.Channel.UpdateDoorStateAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse Rld.Acs.WpfApplication.DeviceProxy.IDeviceService.SearchNewDevices(Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest request) {
+        Rld.Acs.Backend.DeviceSystem.SearchNewDevicesResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.SearchNewDevices(Rld.Acs.Backend.DeviceSystem.SearchNewDevicesRequest request) {
             return base.Channel.SearchNewDevices(request);
         }
         
-        public int[] SearchNewDevices(out Rld.Acs.WpfApplication.DeviceProxy.ResultTypes ResultType, out string[] Messages) {
-            Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest inValue = new Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest();
-            Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse retVal = ((Rld.Acs.WpfApplication.DeviceProxy.IDeviceService)(this)).SearchNewDevices(inValue);
+        public int[] SearchNewDevices(out Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.SearchNewDevicesRequest inValue = new Rld.Acs.Backend.DeviceSystem.SearchNewDevicesRequest();
+            Rld.Acs.Backend.DeviceSystem.SearchNewDevicesResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).SearchNewDevices(inValue);
             ResultType = retVal.ResultType;
             Messages = retVal.Messages;
             return retVal.NewDeviceCodes;
         }
         
-        public System.Threading.Tasks.Task<Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesResponse> SearchNewDevicesAsync(Rld.Acs.WpfApplication.DeviceProxy.SearchNewDevicesRequest request) {
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SearchNewDevicesResponse> SearchNewDevicesAsync(Rld.Acs.Backend.DeviceSystem.SearchNewDevicesRequest request) {
             return base.Channel.SearchNewDevicesAsync(request);
         }
     }

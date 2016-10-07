@@ -924,7 +924,7 @@ go
 create table SYS_USER_EVENT (
    EventId 				BIGINT                 identity(1,1),
    EventType            int                  not null,
-   EventData         	nvarchar(max)        not null,
+   EventData         	nvarchar(max)        null,
    UserID             	int                  not null,
    CreateUserID         int                  not null,
    CreateDate           datetime             not null,

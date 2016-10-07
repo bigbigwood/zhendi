@@ -15,7 +15,7 @@ namespace Rld.Acs.DeviceSystem
     public interface IDeviceService
     {
         [OperationContract]
-        SyncDBUsersResponse SyncDBUsers(SyncDBUsersRequest request);
+        SyncDBUsersResponse SyncSystemUsers(SyncDBUsersRequest request);
         [OperationContract]
         SyncDepartmentUsersResponse SyncDepartmentUsers(SyncDepartmentUsersRequest request);
         [OperationContract]

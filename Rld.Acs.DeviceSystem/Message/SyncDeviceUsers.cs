@@ -11,6 +11,8 @@ namespace Rld.Acs.DeviceSystem.Message
     public class SyncDeviceUsersRequest : RequestBase
     {
         [MessageBodyMember]
+        public SyncOption Option { get; set; }
+        [MessageBodyMember]
         public List<User> Users { get; set; }
 
         [MessageBodyMember]

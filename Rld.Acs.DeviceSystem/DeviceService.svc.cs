@@ -31,11 +31,9 @@ namespace Rld.Acs.DeviceSystem
             {
                 try
                 {
-                    var repo = RepositoryManager.GetRepository<IUserRepository>();
                     request.Users.ForEach(user => request.Devices.ForEach(device =>
                     {
-                        var userInfo = repo.GetByKey(user.UserID);
-                        new UserOp().UpdateDeviceUser(userInfo, device);
+                        new DeviceUserOp().SyncUser(request.Option, user, device);
                     }));
 
                     return new SyncDeviceUsersResponse() { ResultType = ResultTypes.Ok };
@@ -47,17 +45,15 @@ namespace Rld.Acs.DeviceSystem
             });
         }
 
-        public SyncDBUsersResponse SyncDBUsers(SyncDBUsersRequest request)
+        public SyncDBUsersResponse SyncSystemUsers(SyncDBUsersRequest request)
         {
             return PersistenceOperation.Process(request, () =>
             {
                 try
                 {
-                    var repo = RepositoryManager.GetRepository<IUserRepository>();
                     request.Users.ForEach(user => request.Devices.ForEach(device =>
                     {
-                        var userInfo = repo.GetByKey(user.UserID);
-                        new UserOp().UpdateSystemUser(userInfo, device);
+                        new SystemUserOp().SyncUser(user, device);
                     }));
 
                     return new SyncDBUsersResponse() { ResultType = ResultTypes.Ok };
@@ -108,7 +104,7 @@ namespace Rld.Acs.DeviceSystem
                         }
                     });
 
-                    return new SyncDeviceOperationLogsResponse() {ResultType = ResultTypes.Ok};
+                    return new SyncDeviceOperationLogsResponse() { ResultType = ResultTypes.Ok };
                 }
                 catch (DeviceNotConnectedException dex)
                 {

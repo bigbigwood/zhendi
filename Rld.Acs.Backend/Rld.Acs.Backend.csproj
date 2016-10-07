@@ -70,6 +70,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -83,6 +84,11 @@
     <Compile Include="Jobs\DataCleanJob.cs" />
     <Compile Include="Jobs\DeviceAlarmJob.cs" />
     <Compile Include="Jobs\JobBase.cs" />
+    <Compile Include="Service References\DeviceSystem\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -101,11 +107,72 @@
     <Content Include="providers.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\DataSources\Rld.Acs.Model.DeviceController.datasource" />
+    <None Include="Service References\DeviceSystem\DeviceService.disco" />
+    <None Include="Service References\DeviceSystem\configuration91.svcinfo" />
+    <None Include="Service References\DeviceSystem\configuration.svcinfo" />
+    <None Include="Service References\DeviceSystem\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="SqlMap.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <None Include="Service References\DeviceSystem\DeviceService.wsdl" />
+    <None Include="Service References\DeviceSystem\DeviceService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DeviceSystem\DeviceService1.wsdl" />
+    <None Include="Service References\DeviceSystem\DeviceService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DeviceSystem\DeviceService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DeviceSystem\DeviceService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.GetDoorStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.ResultTypes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.SearchNewDevicesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.SyncDBUsersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.SyncDepartmentUsersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.SyncDeviceOperationLogsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.SyncDevicesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.SyncDeviceTrafficLogsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.SyncDeviceUsersResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.SyncTimeGroupsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.SyncTimeSegmentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.SyncTimeZonesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.UpdateDoorStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Rld.Acs.Model.Extension\Rld.Acs.Model.Extension.csproj">
@@ -136,6 +203,12 @@
       <Project>{56cd6cfe-8104-4b3f-997c-d84e6788f259}</Project>
       <Name>Rld.Acs.Unility</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DeviceSystem\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

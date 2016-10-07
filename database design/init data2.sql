@@ -356,6 +356,7 @@ INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_Body', N'重要事情说三�
 INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobSms_Body', N'重要事情说三遍！发现设备告警记录！发现设备告警记录！发现设备告警记录！', N'', N'1.0')
 
 INSERT dbo.SYS_CONFIG VALUES (N'DataSyncConfig', N'02:00:00', N'', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DataSyncJobScanTime', N'2016-01-01 00:00:00.001', N'last data sync job scan time', N'1.0')
 INSERT dbo.SYS_CONFIG VALUES (N'AutoCleanConfig', N'SysLogExpireMonths=3;DeviceTrafficLogExpiredMonths=3;DeviceMngtLogExpiredMonths=3;DoorHistoryExpiredMonths=3;', N'', N'1.0')
 
 --楼层
