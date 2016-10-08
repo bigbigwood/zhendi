@@ -80,12 +80,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             get { return DictionaryManager.GetInstance().GetDictionaryItemsByTypeId((int)DictionaryType.AuthticationType); }
         }
 
-        public List<NullableSelectableItem> Timezones
+        public List<ComboBoxItem> Timezones
         {
             get
             {
                 var allTimezones = _timeZoneRepository.Query(new Hashtable()).FindAll(x => x.Status == GeneralStatus.Enabled);
-                return allTimezones.Select(x => new NullableSelectableItem { ID = x.TimeZoneID, DisplayName = x.TimeZoneName }).ToList();
+                var items = new List<ComboBoxItem>() {new ComboBoxItem(){ID = 0, DisplayName = ""}};
+                items.AddRange(allTimezones.Select(x => new ComboBoxItem() { ID = x.TimeZoneID, DisplayName = x.TimeZoneName }));
+                return items;
             }
         }
 
