@@ -10,55 +10,51 @@
         <Grid.Background>
             <ImageBrush  ImageSource="/Rld.Acs.WpfApplication;component/Images/loginImage/bg.PNG" />
         </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="115"/>
+            <RowDefinition />
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="405"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="63"/>
+                <RowDefinition Height="63"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Vertical"   >
-
-
-
-
-            <StackPanel Orientation="Horizontal" Margin="400,125,0,0">
-
-                <Label  Width="45" Height="25"  Foreground="#535353" Content="账 号" FontSize="12"></Label>
-                <TextBox x:Name="userName"
-                     Width="150" Height="25" HorizontalAlignment="Left"  VerticalAlignment="Top">
-                    <TextBox.Background>
-                        <ImageBrush  ImageSource="/Rld.Acs.WpfApplication;component/Images/loginImage/输入框.png" />
-                    </TextBox.Background>
-
-                </TextBox>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,10,-5">
+                <Label Width="50" Height="28" HorizontalAlignment="Center"  VerticalAlignment="Center" 
+                       Foreground="#535353" Content="账 号" FontSize="16"/>
+                <TextBox x:Name="userName" Width="175" Height="28"  />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,-5,10,10">
+                <Label Width="50" Height="28" HorizontalAlignment="Center"  VerticalAlignment="Center" 
+                       Foreground="#535353" Content="密 码" FontSize="16"/>
+                <PasswordBox x:Name="passWord"  PasswordChar="*" Width="175" Height="28" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal"  Margin="400,15,0,0">
-                <Label   Width="45" Height="25" Foreground="#535353" Content="密  码"></Label>
-                <PasswordBox x:Name="passWord"  PasswordChar="*" Width="150" Height="25" HorizontalAlignment="Left"  VerticalAlignment="Top">
-                    <PasswordBox.Background>
-                        <ImageBrush  ImageSource="/Rld.Acs.WpfApplication;component/Images/loginImage/输入框.png" />
-                    </PasswordBox.Background>
-
-                </PasswordBox>
-            </StackPanel>
-            <Label x:Name="loginInfo" Height="25" Margin="400,5,0,0" Foreground="Red" />
-
-            <StackPanel Orientation="Horizontal" Margin="420,10,0,0">
-                <Button Name="btnLogin" Margin="0,15,0,0" Width="90" Height="35"  FontSize="16" Foreground="#535353" IsDefault="True"
-                         HorizontalAlignment="Left"  VerticalAlignment="Top" Content="登  陆" Click="userLogin">
+            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <Button Name="btnLogin" Width="90" Height="35" Margin="10,0,30,0"
+                        FontSize="16" Foreground="#535353" IsDefault="True" Content="登 陆" Click="userLogin">
                     <Button.Background>
                         <ImageBrush  ImageSource="/Rld.Acs.WpfApplication;component/Images/loginImage/登录框.png" />
                     </Button.Background>
                 </Button>
 
-                <Button Name="btnClose" Margin="55,15,0,0" Width="90" Height="35"  FontSize="16" Foreground="#535353"   IsCancel="True"
-                         HorizontalAlignment="Left"  VerticalAlignment="Top" Content="退  出" Click="btnClose_Click">
+                <Button Name="btnClose" Width="90" Height="35" Margin="10,0,30,0"
+                        FontSize="16" Foreground="#535353" IsCancel="True" Content="退 出" Click="btnClose_Click">
                     <Button.Background>
                         <ImageBrush  ImageSource="/Rld.Acs.WpfApplication;component/Images/loginImage/登录框.png" />
                     </Button.Background>
                 </Button>
             </StackPanel>
-
-        </StackPanel>
-
-
-
-
+        </Grid>
+        <Label x:Name="loginInfo" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+               VerticalAlignment="Bottom" Height="35" Foreground="Red" />
     </Grid>
 </Window>
