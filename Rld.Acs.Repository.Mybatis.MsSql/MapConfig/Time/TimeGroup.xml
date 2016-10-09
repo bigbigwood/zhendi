@@ -9,6 +9,7 @@
     <resultMap id="TimeGroupResult" class="Rld.Acs.Model.TimeGroup">
       <result property="TimeGroupID" column="TimeGroupID"/>
       <result property="TimeGroupName" column="TimeGroupName"/>
+      <result property="TimeGroupCode" column="TimeGroupCode"/>
       <result property="CreateUserID" column="CreateUserID"/>
       <result property="CreateDate" column="CreateDate"/>
       <result property="Status" column="Status"/>
@@ -29,6 +30,7 @@
     <insert id="TimeGroup.Insert" parameterClass="TimeGroup">
       INSERT INTO [TIME_GROUPS] (
       [TimeGroupName]
+      , [TimeGroupCode]
       , [CreateUserID]
       , [CreateDate]
       , [Status]
@@ -36,6 +38,7 @@
       , [UpdateDate]
       ) VALUES (
       #TimeGroupName#
+      , #TimeGroupCode#
       , #CreateUserID#
       , #CreateDate#
       , #Status#
@@ -50,6 +53,7 @@
     <update id="TimeGroup.Update" parameterClass="TimeGroup">
       UPDATE [TIME_GROUPS] SET
       [TimeGroupName] = #TimeGroupName#
+      , [TimeGroupCode] = #TimeGroupCode#
       , [CreateUserID] = #CreateUserID#
       , [CreateDate] = #CreateDate#
       , [Status] = #Status#
@@ -71,6 +75,9 @@
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="Status">
           Status=#Status#
+        </isNotEmpty>
+              <isNotEmpty prepend="and" property="TimeGroupCode">
+          TimeGroupCode=#TimeGroupCode#
         </isNotEmpty>
       </dynamic>
     </select>

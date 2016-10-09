@@ -60,7 +60,8 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="{DynamicResource TimeZoneView_Label_Name}" Binding="{Binding Name}" Width="200" />
+                    <DataGridTextColumn Header="{DynamicResource TimeZoneView_Label_Name}" Binding="{Binding Name}" Width="150" />
+                    <DataGridTextColumn Header="{DynamicResource TimeZoneView_Label_Code}" Binding="{Binding Code}" Width="150" />
                     <DataGridTemplateColumn Header="{DynamicResource SettingDetail}" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

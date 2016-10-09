@@ -24,6 +24,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public Int32 TimeSegmentID { get; set; }
         public String TimeSegmentName { get; set; }
+        public String TimeSegmentCode { get; set; }
         public String BeginTime { get; set; }
         public String EndTime { get; set; }
         public Int32 CreateUserID { get; set; }

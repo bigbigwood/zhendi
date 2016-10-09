@@ -60,10 +60,13 @@
             <TextBlock Text="时间区详情" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" />
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
-        <DockPanel Grid.Row="2" >
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBlock Text="{DynamicResource TimeZoneView_Label_Name}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
             <TextBox Text="{Binding Name}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" Width="200" IsEnabled="False"/>
-        </DockPanel>
+
+            <TextBlock Text="{DynamicResource TimeZoneView_Label_Code}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+            <TextBox Text="{Binding Code}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" Width="200" IsEnabled="False"/>
+        </StackPanel>
         <ListBox Grid.Row="3" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"
                  ItemsSource="{Binding TimeGroupAssociationsDtos}"
                     ItemTemplate="{StaticResource TimeGroupAssociationsDtoTemplate}" >

@@ -42,6 +42,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 ID = timeZone.TimeZoneID;
                 Name = timeZone.TimeZoneName;
+                Code = timeZone.TimeZoneCode;
             }
 
             Title = (timeZone.TimeZoneID == 0) ? "新增时间区" : "修改时间区";
@@ -51,6 +52,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public string Title { get; set; }
         public Int32 ID { get; set; }
         public string Name { get; set; }
+        public string Code { get; set; }
         public Boolean IsEnabled { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -78,6 +80,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 }
 
                 CurrentTimeZone.TimeZoneName = Name;
+                CurrentTimeZone.TimeZoneCode = Code;
                 CurrentTimeZone.Status = GeneralStatus.Enabled;
                 CurrentTimeZone.TimeGroupAssociations = GetTimeGroupAssociations();
 

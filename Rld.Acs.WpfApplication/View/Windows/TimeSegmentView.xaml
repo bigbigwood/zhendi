@@ -6,7 +6,7 @@
              xmlns:views="clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type=views:TimeSegmentViewModel, IsDesignTimeCreatable=True}"
-             Width="600" Height="200" Unloaded="MetroWindow_Unloaded"
+             Width="600" Height="220" Unloaded="MetroWindow_Unloaded"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.Resources>
@@ -37,6 +37,7 @@
             <RowDefinition Height="5" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
             <RowDefinition Height="35" />
         </Grid.RowDefinitions>
@@ -49,13 +50,20 @@
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                         <TextBlock Text="{DynamicResource TimeSegmentView_Label_Name}" Margin="0"/>
         </TextBlock>
-
         <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding TimeSegmentName}"/>
+        
         <TextBlock Grid.Row="3" Grid.Column="1" >
+                        <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                        <TextBlock Text="{DynamicResource TimeSegmentView_Label_Code}" Margin="0"/>
+        </TextBlock>
+
+        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding TimeSegmentCode}"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                         <TextBlock Text="{DynamicResource TimeSegmentView_Label_Setting}" Margin="0"/>
         </TextBlock>
-        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal">
             <TextBox Width="30" Text="{Binding StartHour}"/>
             <TextBlock Text="{StaticResource TimeSegmentView_Label_Hour}"/>
             <TextBox Width="30" Text="{Binding StartMinute}"/>
@@ -66,7 +74,7 @@
             <TextBox Width="30" Text="{Binding EndMinute}"/>
             <TextBlock Text="{StaticResource TimeSegmentView_Label_Minute}"/>
         </StackPanel>
-        <StackPanel  Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
+        <StackPanel  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Content="{StaticResource Ok}" Command="{Binding SaveCmd}" Margin="3,0" />
             <Button Content="{StaticResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0" />
         </StackPanel>

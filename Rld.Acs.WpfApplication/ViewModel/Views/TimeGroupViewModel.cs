@@ -41,6 +41,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 TimeGroupID = timeGroup.TimeGroupID;
                 Name = timeGroup.TimeGroupName;
+                Code = timeGroup.TimeGroupCode;
 
                 foreach (var timeSegment in timeGroup.TimeSegments)
                 {
@@ -54,6 +55,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public string Title { get { return (TimeGroupID == 0) ? "新增时间组" : "修改时间组"; } }
         public Int32 TimeGroupID { get; set; }
         public string Name { get; set; }
+        public string Code { get; set; }
         public TimeGroup CurrentTimeGroup { get; set; }
         public ObservableCollection<string> SelectedFormattingTimeSegmentList 
         { 
@@ -83,6 +85,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 }
 
                 CurrentTimeGroup.TimeGroupName = Name;
+                CurrentTimeGroup.TimeGroupCode = Code;
                 CurrentTimeGroup.Status = GeneralStatus.Enabled;
                 CurrentTimeGroup.TimeSegments = GetSelectedTimeSegments();
 

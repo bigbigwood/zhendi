@@ -60,6 +60,7 @@
     <sys:String x:Key="TimeSegmentPage_ModifyBtn">修改时间段</sys:String>
     <sys:String x:Key="TimeSegmentPage_DeleteBtn">删除时间段</sys:String>
     <sys:String x:Key="TimeSegmentView_Label_Name">时间段名称</sys:String>
+	<sys:String x:Key="TimeSegmentView_Label_Code">时间段编号</sys:String>
     <sys:String x:Key="TimeSegmentView_Label_Setting">时间段设置</sys:String>
     <sys:String x:Key="TimeSegmentView_Label_Hour">时</sys:String>
     <sys:String x:Key="TimeSegmentView_Label_Minute">分</sys:String>
@@ -68,6 +69,7 @@
     <sys:String x:Key="TimeGroupPage_ModifyBtn">修改时间组</sys:String>
     <sys:String x:Key="TimeGroupPage_DeleteBtn">删除时间组</sys:String>
     <sys:String x:Key="TimeGroupView_Label_Name">时间组名称</sys:String>
+	<sys:String x:Key="TimeGroupView_Label_Code">时间组编号</sys:String>
     <sys:String x:Key="TimeGroupView_Label_SelectedSegment">已选择时间段</sys:String>
     <sys:String x:Key="TimeGroupView_Label_SelectSegment">选择时间段</sys:String>
     
@@ -75,6 +77,7 @@
     <sys:String x:Key="TimeZonePage_ModifyBtn">修改时间区</sys:String>
     <sys:String x:Key="TimeZonePage_DeleteBtn">删除时间区</sys:String>
     <sys:String x:Key="TimeZoneView_Label_Name">时间区名称</sys:String>
+	<sys:String x:Key="TimeZoneView_Label_Code">时间区编号</sys:String>
 
     <sys:String x:Key="DevicePage_AddBtn">增加设备</sys:String>
     <sys:String x:Key="DevicePage_ModifyBtn">修改设备</sys:String>

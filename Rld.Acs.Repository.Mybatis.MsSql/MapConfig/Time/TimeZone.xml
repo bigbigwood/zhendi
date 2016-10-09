@@ -9,6 +9,7 @@
     <resultMap id="TimeZoneResult" class="Rld.Acs.Model.TimeZone">
       <result property="TimeZoneID" column="TimeZoneID"/>
       <result property="TimeZoneName" column="TimeZoneName"/>
+      <result property="TimeZoneCode" column="TimeZoneCode"/>
       <result property="CreateUserID" column="CreateUserID"/>
       <result property="CreateDate" column="CreateDate"/>
       <result property="Status" column="Status"/>
@@ -29,6 +30,7 @@
     <insert id="TimeZone.Insert" parameterClass="TimeZone">
       INSERT INTO [TIME_ZONE] (
       [TimeZoneName]
+      , [TimeZoneCode]
       , [CreateUserID]
       , [CreateDate]
       , [Status]
@@ -36,6 +38,7 @@
       , [UpdateDate]
       ) VALUES (
       #TimeZoneName#
+      , #TimeZoneCode#
       , #CreateUserID#
       , #CreateDate#
       , #Status#
@@ -50,6 +53,7 @@
     <update id="TimeZone.Update" parameterClass="TimeZone">
       UPDATE [TIME_ZONE] SET
       [TimeZoneName] = #TimeZoneName#
+      , [TimeZoneCode] = #TimeZoneCode#
       , [CreateUserID] = #CreateUserID#
       , [CreateDate] = #CreateDate#
       , [Status] = #Status#
@@ -71,6 +75,9 @@
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="Status">
           Status=#Status#
+        </isNotEmpty>
+        <isNotEmpty prepend="and" property="TimeZoneCode">
+          TimeZoneCode=#TimeZoneCode#
         </isNotEmpty>
       </dynamic>
     </select>

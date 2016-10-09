@@ -8,6 +8,7 @@ namespace Rld.Acs.Model
     {
         public virtual Int32 TimeGroupID { get; set; }
         public virtual String TimeGroupName { get; set; }
+        public virtual String TimeGroupCode { get; set; }
         public virtual Int32 CreateUserID { get; set; }
         public virtual DateTime CreateDate { get; set; }
         public virtual GeneralStatus Status { get; set; }

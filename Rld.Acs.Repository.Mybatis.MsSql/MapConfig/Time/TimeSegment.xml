@@ -8,6 +8,8 @@
   <resultMaps>
     <resultMap id="TimeSegmentResult" class="Rld.Acs.Model.TimeSegment">
       <result property="TimeSegmentID" column="TimeSegmentID"/>
+      <result property="TimeSegmentName" column="TimeSegmentName"/>
+      <result property="TimeSegmentCode" column="TimeSegmentCode"/>
       <result property="BeginTime" column="BeginTime"/>
       <result property="EndTime" column="EndTime"/>
       <result property="CreateUserID" column="CreateUserID"/>
@@ -15,7 +17,6 @@
       <result property="Status" column="Status"/>
       <result property="UpdateUserID" column="UpdateUserID"/>
       <result property="UpdateDate" column="UpdateDate"/>
-      <result property="TimeSegmentName" column="TimeSegmentName"/>
     </resultMap>
   </resultMaps>
 
@@ -29,6 +30,7 @@
     <insert id="TimeSegment.Insert" parameterClass="TimeSegment">
       INSERT INTO [TIME_SEGMENTS] (
       [TimeSegmentName]
+      , [TimeSegmentCode]
       , [BeginTime]
       , [EndTime]
       , [CreateUserID]
@@ -38,6 +40,7 @@
       , [UpdateDate]
       ) VALUES (
       #TimeSegmentName#
+      , #TimeSegmentCode#
       , #BeginTime#
       , #EndTime#
       , #CreateUserID#
@@ -54,6 +57,7 @@
     <update id="TimeSegment.Update" parameterClass="TimeSegment">
       UPDATE [TIME_SEGMENTS] SET
       [TimeSegmentName] = #TimeSegmentName#
+      , [TimeSegmentCode] = #TimeSegmentCode#
       , [BeginTime] = #BeginTime#
       , [EndTime] = #EndTime#
       , [CreateUserID] = #CreateUserID#
@@ -76,6 +80,9 @@
       where 1=1
       <isNotEmpty prepend="and" property="Status">
         Status=#Status#
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="TimeSegmentCode">
+        TimeSegmentCode=#TimeSegmentCode#
       </isNotEmpty>
       <isNotNull prepend="and" property="CreateUserID">
         CreateUserID=#CreateUserID#

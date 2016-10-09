@@ -71,14 +71,19 @@
             <TextBlock Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
-        <DockPanel Grid.Row="2" >
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBlock FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0">
                 <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                 <TextBlock Text="{DynamicResource TimeZoneView_Label_Name}" Margin="0"/>
             </TextBlock>
-
             <TextBox Text="{Binding Name}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" Width="200"/>
-        </DockPanel>
+
+            <TextBlock FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0">
+                <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
+                <TextBlock Text="{DynamicResource TimeZoneView_Label_Code}" Margin="0"/>
+            </TextBlock>
+            <TextBox Text="{Binding Code}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0" Width="200"/>
+        </StackPanel>
         <ListBox Grid.Row="3" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible"
                  ItemsSource="{Binding TimeGroupAssociationsDtos}"
                     ItemTemplate="{StaticResource TimeGroupAssociationsDtoTemplate}" >

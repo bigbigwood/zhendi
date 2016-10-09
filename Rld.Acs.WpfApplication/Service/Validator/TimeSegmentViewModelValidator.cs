@@ -13,7 +13,10 @@ namespace Rld.Acs.WpfApplication.Service.Validator
             RuleFor(m => m.TimeSegmentName)
                 .NotEmpty().WithMessage("时间段名称不能为空")
                 .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("时间段名称不能有特殊字符")
-                .Length(1, 50).WithMessage("时间段名称长度为1-50"); 
+                .Length(1, 50).WithMessage("时间段名称长度为1-50");
+            RuleFor(m => m.TimeSegmentCode)
+                .NotEmpty().WithMessage("时间段编号不能为空")
+                .Must(ValidatorToolkit.IsNumeric).WithMessage("时间段编号必须为数字");
             RuleFor(m => m.StartHour)
                 .NotEmpty().WithMessage("开始时间小时数值不能为空")
                 .Must(ValidatorToolkit.VerifyHourFormat).WithMessage("开始时间小时数值无效");

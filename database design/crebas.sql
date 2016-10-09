@@ -841,6 +841,7 @@ go
 create table TIME_GROUPS (
    TimeGroupID          int                  identity(1,1),
    TimeGroupName        nvarchar(100)        not null,
+   TimeGroupCode        nvarchar(100)        not null,
    CreateUserID         int                  not null,
    CreateDate           datetime             not null,
    Status               int                  not null,
@@ -867,6 +868,7 @@ go
 create table TIME_SEGMENTS (
    TimeSegmentID        int                  identity(1,1),
    TimeSegmentName      nvarchar(100)        not null,
+   TimeSegmentCode      nvarchar(100)        not null,
    BeginTime            nvarchar(100)        not null,
    EndTime              nvarchar(100)        not null,
    CreateUserID         int                  not null,
@@ -884,6 +886,7 @@ go
 create table TIME_ZONE (
    TimeZoneID           int                  identity(1,1),
    TimeZoneName         nvarchar(100)        not null,
+   TimeZoneCode         nvarchar(100)        not null,
    CreateUserID         int                  not null,
    CreateDate           datetime             not null,
    Status               int                  not null,
