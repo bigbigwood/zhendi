@@ -10,6 +10,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility;
+using Rld.Acs.Unility.Exceptions;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
@@ -100,9 +101,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 ViewModelAttachment.CoreModel = coreModel;
                 ViewModelAttachment.LastOperationSuccess = true;
             }
+            catch (BusinessException ex)
+            {
+                Log.Error("Update timesegment fails.", ex);
+                SendMessage(ex.Message);
+                return;
+            }
             catch (Exception ex)
             {
-                Log.Error("Update department fails.", ex);
+                Log.Error("Update timesegment fails.", ex);
                 message = "保存时间段失败";
                 SendMessage(message);
                 return;

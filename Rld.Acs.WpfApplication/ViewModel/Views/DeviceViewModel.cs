@@ -11,6 +11,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Model.Extension;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Exceptions;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
@@ -147,6 +148,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
                 ViewModelAttachment.CoreModel = deviceController;
                 ViewModelAttachment.LastOperationSuccess = true;
+            }
+            catch (BusinessException ex)
+            {
+                Log.Error("Update device fails.", ex);
+                SendMessage(ex.Message);
+                return;
             }
             catch (Exception ex)
             {

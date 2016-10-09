@@ -73,6 +73,15 @@ namespace Rld.Acs.WebApi.Controllers
                     }
                 }
 
+                if (timeGroupRepo.Query(new Hashtable() { { "TimeGroupCode", timeGroupInfo.TimeGroupCode } }).Any())
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间组", timeGroupInfo.TimeGroupCode)),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
+                }
+
                 timeGroupRepo.Insert(timeGroupInfo);
                 timeGroupInfo.TimeSegments.ForEach(g => timeGroupSegmentRepo.Insert(new TimeGroupSegment { TimeGroupID = timeGroupInfo.TimeGroupID, TimeSegmentID = g.TimeSegmentID }));
 
@@ -102,6 +111,15 @@ namespace Rld.Acs.WebApi.Controllers
                 if (originaltimeGroupInfo == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeGroup Id={0} does not exist.", id));
+                }
+
+                if (timeGroupRepo.Query(new Hashtable() { { "TimeGroupCode", timeGroupInfo.TimeGroupCode } }).Any(x => x.TimeGroupID != id))
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间组", timeGroupInfo.TimeGroupCode)),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
                 }
 
                 IList<TimeSegment> addedTimeSegments = new List<TimeSegment>();

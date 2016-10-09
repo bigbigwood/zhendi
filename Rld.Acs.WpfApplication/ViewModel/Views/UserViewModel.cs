@@ -15,6 +15,7 @@ using Ninject.Activation.Caching;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility;
+using Rld.Acs.Unility.Exceptions;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
@@ -174,6 +175,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     _userRepo.Update(CurrentUser);
                     message = "修改人员成功!";
                 }
+            }
+            catch (BusinessException ex)
+            {
+                Log.Error("Update user fails.", ex);
+                SendMessage(ex.Message);
+                return;
             }
             catch (Exception ex)
             {

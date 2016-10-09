@@ -2,6 +2,7 @@
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.WebApi.Framework;
 using System;
 using System.Collections;
@@ -55,8 +56,16 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(timeSegmentDto, OperationCodes.ATMSGM, () =>
             {
                 var repo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
-                var timeSegment = repo.Insert(timeSegmentDto);
+                if (repo.Query(new Hashtable() { { "TimeSegmentCode", timeSegmentDto.TimeSegmentCode } }).Any())
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间段", timeSegmentDto.TimeSegmentCode)),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
+                }
 
+                var timeSegment = repo.Insert(timeSegmentDto);
                 return Request.CreateResponse(HttpStatusCode.OK, timeSegment);
 
             }, this);
@@ -70,8 +79,16 @@ namespace Rld.Acs.WebApi.Controllers
             {
                 timeSegmentDto.TimeSegmentID = id;
                 var repo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
-                repo.Update(timeSegmentDto);
+                if (repo.Query(new Hashtable() { { "TimeSegmentCode", timeSegmentDto.TimeSegmentCode } }).Any(x => x.TimeSegmentID != id))
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间段", timeSegmentDto.TimeSegmentCode)),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
+                }
 
+                repo.Update(timeSegmentDto);
                 return Request.CreateResponse(HttpStatusCode.OK);
 
             }, this);

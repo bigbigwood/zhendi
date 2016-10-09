@@ -44,6 +44,7 @@
     <Compile Include="DataHelper.cs" />
     <Compile Include="Encryption\SimpleEncryption.cs" />
     <Compile Include="EnumTool.cs" />
+    <Compile Include="Exceptions\BusinessException.cs" />
     <Compile Include="Extension\ConvertorExtension.cs" />
     <Compile Include="Extension\EnumerableExtension.cs" />
     <Compile Include="FilePathHelper.cs" />

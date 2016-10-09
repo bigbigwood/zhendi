@@ -16,6 +16,7 @@ namespace Rld.Acs.Unility
         public const string HTTP_HEADER_X_Pagination_TotalCount = "X-Pagination-TotalCount";
         public const string PageStart = "PageStart";
         public const string PageEnd = "PageEnd";
+        public const string BusinessLogicError = "BusinessLogicError";
 
         public const string AlarmEmailAccounts = "AlarmEmailAccounts";
         public const string AlarmSMSAccounts = "AlarmSMSAccounts";

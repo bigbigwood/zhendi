@@ -3,6 +3,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.WebApi.Framework;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,15 @@ namespace Rld.Acs.WebApi.Controllers
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "DeviceControllerParameter is null");
                 }
 
+                if (deviceRepo.Query(new Hashtable() { { "Code", deviceInfo.Code } }).Any())
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的设备", deviceInfo.Code)),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
+                }
+
                 deviceControllerParameterRepo.Insert(deviceInfo.DeviceControllerParameter);
                 deviceRepo.Insert(deviceInfo);
 
@@ -95,6 +105,15 @@ namespace Rld.Acs.WebApi.Controllers
                 var originalDeviceInfo = deviceRepo.GetByKey(id);
                 if (originalDeviceInfo == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("Device Id={0} does not exist.", id));
+
+                if (deviceRepo.Query(new Hashtable() { { "Code", deviceInfo.Code } }).Any(x => x.DeviceID != id))
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的设备", deviceInfo.Code)),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
+                }
 
                 #region Doors
                 var addedDeviceDoors = new List<DeviceDoor>();

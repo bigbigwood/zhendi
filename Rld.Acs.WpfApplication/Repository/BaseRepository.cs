@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using Rld.Acs.Repository.Framework.Pagination;
 using Rld.Acs.Unility;
+using Rld.Acs.Unility.Exceptions;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 
@@ -26,10 +27,18 @@ namespace Rld.Acs.WpfApplication.Repository
             using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
             {
                 httpClient.DefaultRequestHeaders.Authorization = BuildAuthHeader();
-                var response = httpClient.PostAsync<TEntity>(RelevantUri, entity, new JsonMediaTypeFormatter()).Result;
-                response.EnsureSuccessStatusCode(); // Throw on error code. 
-                var newEntity = response.Content.ReadAsAsync<TEntity>().Result;
-                return newEntity;
+                var response = httpClient.PostAsync(RelevantUri, entity, new JsonMediaTypeFormatter()).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var newEntity = response.Content.ReadAsAsync<TEntity>().Result;
+                    return newEntity;
+                }
+
+                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                if (response.ReasonPhrase == ConstStrings.BusinessLogicError)
+                    throw new BusinessException(errorMessage);
+                else
+                    throw new Exception(errorMessage);
             }
         }
 
@@ -44,9 +53,17 @@ namespace Rld.Acs.WpfApplication.Repository
             using (var httpClient = new HttpClient() { BaseAddress = new Uri(BASE_ADDRESS) })
             {
                 httpClient.DefaultRequestHeaders.Authorization = BuildAuthHeader();
-                var response = httpClient.PutAsync<TEntity>(string.Format("{0}/{1}", RelevantUri, key), entity, new JsonMediaTypeFormatter()).Result;
-                response.EnsureSuccessStatusCode(); // Throw on error code. 
-                return true;
+                var response = httpClient.PutAsync(string.Format("{0}/{1}", RelevantUri, key), entity, new JsonMediaTypeFormatter()).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+
+                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                if (response.ReasonPhrase == ConstStrings.BusinessLogicError)
+                    throw new BusinessException(errorMessage);
+                else
+                    throw new Exception(errorMessage);
             }
         }
 
@@ -56,8 +73,16 @@ namespace Rld.Acs.WpfApplication.Repository
             {
                 httpClient.DefaultRequestHeaders.Authorization = BuildAuthHeader();
                 var response = httpClient.DeleteAsync(string.Format("{0}/{1}", RelevantUri, key)).Result;
-                response.EnsureSuccessStatusCode(); // Throw on error code. 
-                return true;
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+
+                var errorMessage = response.Content.ReadAsStringAsync().Result;
+                if (response.ReasonPhrase == ConstStrings.BusinessLogicError)
+                    throw new BusinessException(errorMessage);
+                else
+                    throw new Exception(errorMessage);
             }
         }
 

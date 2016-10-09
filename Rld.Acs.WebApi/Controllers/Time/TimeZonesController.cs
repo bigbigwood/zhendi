@@ -66,6 +66,15 @@ namespace Rld.Acs.WebApi.Controllers
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "timeZoneInfo is null");
                 }
 
+                if (timeZoneRepo.Query(new Hashtable() { { "TimeZoneCode", timeZoneInfo.TimeZoneCode } }).Any())
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间区", timeZoneInfo.TimeZoneCode)),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
+                }
+
                 timeZoneRepo.Insert(timeZoneInfo);
                 timeZoneInfo.TimeGroupAssociations.ForEach(t => t.TimeZoneID = timeZoneInfo.TimeZoneID);
                 timeZoneInfo.TimeGroupAssociations.ForEach(t => timeZoneGroupRepo.Insert(t));
@@ -95,6 +104,15 @@ namespace Rld.Acs.WebApi.Controllers
                 if (originalTimeZoneInfo == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("TimeZone Id={0} does not exist.", id));
+                }
+
+                if (timeZoneRepo.Query(new Hashtable() { { "TimeZoneCode", timeZoneInfo.TimeZoneCode } }).Any(x => x.TimeZoneID != id))
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间区", timeZoneInfo.TimeZoneCode)),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
                 }
 
                 var addedTimeGroups = new List<TimeZoneGroup>();

@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.Messaging;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Exceptions;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
@@ -106,9 +107,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     message = "修改时间组成功!";
                 }
             }
+            catch (BusinessException ex)
+            {
+                Log.Error("Update timegroup fails.", ex);
+                SendMessage(ex.Message);
+                return;
+            }
             catch (Exception ex)
             {
-                Log.Error("Update department fails.", ex);
+                Log.Error("Update timegroup fails.", ex);
                 message = "保存时间组失败";
                 SendMessage(message);
                 return;

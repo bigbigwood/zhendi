@@ -71,6 +71,15 @@ namespace Rld.Acs.WebApi.Controllers
                 var userDeviceRoleRepo = RepositoryManager.GetRepository<IUserDeviceRoleRepository>();
                 var userEventRepo = RepositoryManager.GetRepository<IUserEventRepository>();
 
+                if (userRepo.Query(new Hashtable() { { "UserCode", userInfo.UserCode } }).Any())
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的人员", userInfo.UserCode)),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
+                }
+
                 userPropertyRepo.Insert(userInfo.UserPropertyInfo);
                 userRepo.Insert(userInfo);
 
@@ -110,6 +119,15 @@ namespace Rld.Acs.WebApi.Controllers
                 var originalUserInfo = userRepo.GetByKey(id);
                 if (originalUserInfo == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("User Id={0} does not exist.", id));
+
+                if (userRepo.Query(new Hashtable() { { "UserCode", userInfo.UserCode } }).Any(x => x.UserID != id))
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的人员", userInfo.UserCode)),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
+                }
 
                 var addedAuthentications = new List<UserAuthentication>();
                 var deletedAuthenticationIds = new List<int>();

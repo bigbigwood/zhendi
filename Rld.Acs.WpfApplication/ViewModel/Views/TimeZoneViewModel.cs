@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Messaging;
 using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility.Exceptions;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
@@ -99,9 +100,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     message = "修改时间区成功!";
                 }
             }
+            catch (BusinessException ex)
+            {
+                Log.Error("Update timezone fails.", ex);
+                SendMessage(ex.Message);
+                return;
+            }
             catch (Exception ex)
             {
-                Log.Error("Update department fails.", ex);
+                Log.Error("Update timezone fails.", ex);
                 message = "保存时间区失败";
                 SendMessage(message);
                 return;
