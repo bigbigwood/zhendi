@@ -213,7 +213,7 @@ namespace Rld.Acs.DeviceSystem.Service
             var devicePermission = role.DeviceRolePermissions.FirstOrDefault(x => x.DeviceID == deviceId);
 
             var deviceUser = new UserInfo();
-            deviceUser.UserId = user.GetDeviceUserId(deviceInfo);
+            deviceUser.UserId = user.UserCode.ToInt32();
             deviceUser.Role = (Rld.DeviceSystem.Contract.Model.UserRole) devicePermission.PermissionAction.GetHashCode();
             deviceUser.AccessTimeZoneId = devicePermission.AllowedAccessTimeZoneID;
 
@@ -238,7 +238,7 @@ namespace Rld.Acs.DeviceSystem.Service
         private void DeleteUserMS(User user, DeviceController deviceInfo)
         {
             var deviceId = deviceInfo.DeviceID;
-            var deviceUserId = user.GetDeviceUserId(deviceInfo);
+            var deviceUserId = user.UserCode.ToInt32();
             Log.Info("Invoke WebSocketOperation...");
             var operation = new WebSocketOperation(deviceId);
             var deleteUserInfoRequest = new DeleteUserInfoRequest() {Token = operation.Token, UserId = deviceUserId};

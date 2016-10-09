@@ -70,7 +70,7 @@ namespace Rld.Acs.DeviceSystem.Service
 
             Log.Info("Building device user...");
             var deviceUser = new UserInfo();
-            deviceUser.UserId = user.GetDeviceUserId(device);
+            deviceUser.UserId = user.UserCode.ToInt32();
             deviceUser.ExternalUserCode = user.UserID.ToString();
             // user info
             deviceUser.UserName = user.Name;
@@ -166,7 +166,7 @@ namespace Rld.Acs.DeviceSystem.Service
 
             Log.Info("Building device user...");
             var deviceUser = new UserInfo();
-            deviceUser.UserId = user.GetDeviceUserId(device);
+            deviceUser.UserId = user.UserCode.ToInt32();
             deviceUser.ExternalUserCode = user.UserID.ToString();
             // user info
             deviceUser.UserName = user.Name;
@@ -250,7 +250,7 @@ namespace Rld.Acs.DeviceSystem.Service
             var deviceID = device.DeviceID;
             var deviceCode = device.Code.ToInt32();
 
-            var userCode = user.GetDeviceUserId(device);
+            var userCode = user.UserCode.ToInt32();
 
             Log.Info("Invoke WebSocketOperation...");
             var operation = new WebSocketOperation(deviceCode);

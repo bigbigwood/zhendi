@@ -280,7 +280,7 @@ namespace Rld.Acs.DeviceSystem.Service
             var deviceID = device.DeviceID;
             var userAuthenticationsOfDevice = systemUserInfo.UserAuthentications.Where(a => a.DeviceID == deviceID);
             var authenticationsOfDevice = userAuthenticationsOfDevice as IList<UserAuthentication> ?? userAuthenticationsOfDevice.ToList();
-            var deviceUserId = systemUserInfo.GetDeviceUserId(device);
+            var deviceUserId = systemUserInfo.UserCode.ToInt32();
 
             var deviceUser = deviceUserInfo;
             systemUserInfo.Name = deviceUser.UserName;

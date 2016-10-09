@@ -17,25 +17,6 @@ namespace Rld.Acs.Model.Extension
             return deviceIds;
         }
 
-        public static Int32 GetDeviceUserId(this User user, DeviceController device)
-        {
-            const int falseDeviceUserID = 0;
-
-            if (user == null || user.UserAuthentications == null || user.UserAuthentications.Count == 0)
-                return falseDeviceUserID;
-
-            if (device == null || device.DeviceID == 0)
-                return falseDeviceUserID;
-
-            var userAuthenticationsOfDevice = user.UserAuthentications.Where(a => a.DeviceID == device.DeviceID);
-            if (userAuthenticationsOfDevice.Any())
-            {
-                return userAuthenticationsOfDevice.First().DeviceUserID;
-            }
-
-            return falseDeviceUserID;
-        }
-
         public static IEnumerable<DeviceRolePermission> GetUserDeviceRoleAuthorizedPermissions(this User user, List<DeviceRole> deviceRole)
         {
             if (user == null || user.UserDeviceRoles == null || user.UserDeviceRoles.Count == 0)
