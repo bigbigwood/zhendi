@@ -120,7 +120,7 @@ namespace Rld.Acs.WebApi.Controllers
                 if (originalUserInfo == null)
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("User Id={0} does not exist.", id));
 
-                if (userRepo.Query(new Hashtable() { { "UserCode", userInfo.UserCode } }).Any(x => x.UserID != id))
+                if (userRepo.QueryUsersForSummaryData(new Hashtable() { { "UserCode", userInfo.UserCode } }).Any(x => x.UserID != id))
                 {
                     return new HttpResponseMessage(HttpStatusCode.BadRequest)
                     {

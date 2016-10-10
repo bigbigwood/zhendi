@@ -91,6 +91,14 @@ namespace Rld.Acs.DeviceSystem.Service
             return userInfo.UserID != 0;
         }
 
+        private String GetDeviceUserName(UserInfo deviceUserInfo)
+        {
+            if (string.IsNullOrWhiteSpace(deviceUserInfo.UserName))
+                return deviceUserInfo.UserId.ToString();
+
+            return deviceUserInfo.UserName;
+        }
+
         public static void EncodePassword(User user)
         {
             if (user != null && user.UserAuthentications != null)
@@ -107,7 +115,7 @@ namespace Rld.Acs.DeviceSystem.Service
         {
             if (user == null || device == null) return;
             if (user.UserAuthentications == null || user.UserAuthentications.Count == 0) return;
-            if (user.GetUserAccessableDeviceIds().Contains(device.DeviceID) == false) return;
+            //if (user.GetUserAccessableDeviceIds().Contains(device.DeviceID) == false) return;
 
             Log.Info("Getting user authentication infos...");
             var userAuthenticationsOfDevice = user.UserAuthentications.Where(a => a.DeviceID == device.DeviceID);
@@ -140,7 +148,7 @@ namespace Rld.Acs.DeviceSystem.Service
             systemUserInfo.Photo = "avator.jpg";
             systemUserInfo.Type = UserType.Employee;
             systemUserInfo.UserCode = systemUserInfo.UserCode;
-            systemUserInfo.Name = deviceUser.UserName;
+            systemUserInfo.Name = GetDeviceUserName(deviceUser);
             systemUserInfo.Gender = GenderType.Male;
             systemUserInfo.Phone = "";
             systemUserInfo.Status = GeneralStatus.Enabled;
@@ -273,8 +281,8 @@ namespace Rld.Acs.DeviceSystem.Service
         public void UpdateUser(User systemUserInfo, UserInfo deviceUserInfo, DeviceController device)
         {
             if (systemUserInfo == null || device == null) return;
-            if (systemUserInfo.UserAuthentications == null || systemUserInfo.UserAuthentications.Count == 0) return;
-            if (systemUserInfo.GetUserAccessableDeviceIds().Contains(device.DeviceID) == false) return;
+            //if (systemUserInfo.UserAuthentications == null || systemUserInfo.UserAuthentications.Count == 0) return;
+            //if (systemUserInfo.GetUserAccessableDeviceIds().Contains(device.DeviceID) == false) return;
 
             Log.Info("Getting user authentication infos...");
             var deviceID = device.DeviceID;
@@ -283,7 +291,7 @@ namespace Rld.Acs.DeviceSystem.Service
             var deviceUserId = systemUserInfo.UserCode.ToInt32();
 
             var deviceUser = deviceUserInfo;
-            systemUserInfo.Name = deviceUser.UserName;
+            systemUserInfo.Name = GetDeviceUserName(deviceUser);
             //user.Status = deviceUser.UserStatus == true ? GeneralStatus.Enabled : GeneralStatus.Disabled;
             //user.DepartmentID = deviceUser.DepartmentId ?? 0;
             systemUserInfo.Remark = deviceUser.Comment;
