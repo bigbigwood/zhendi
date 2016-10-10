@@ -118,6 +118,26 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     return;
                 }
 
+                var doorCodes = deviceController.DeviceDoors.Select(x => x.Code);
+                var duplicatedDoorCodes = doorCodes.GroupBy(x => x).Where(grp => grp.Count() > 1).Select(grp => grp.Key);
+                if (duplicatedDoorCodes.Any())
+                {
+                    message += string.Format("设备中存在重复的门编号:{0}\n", string.Join(",", duplicatedDoorCodes));
+                }
+
+                var readingCodes = deviceController.DeviceHeadReadings.Select(x => x.Code);
+                var duplicatedReadingCodes = readingCodes.GroupBy(x => x).Where(grp => grp.Count() > 1).Select(grp => grp.Key);
+                if (duplicatedReadingCodes.Any())
+                {
+                    message += string.Format("设备中存在重复的读头编号:{0}\n", string.Join(",", duplicatedReadingCodes));
+                }
+
+                if (!string.IsNullOrWhiteSpace(message))
+                {
+                    SendMessage(message);
+                    return;
+                }
+
                 if (Id == 0)
                 {
                     deviceController.Status = GeneralStatus.Enabled;
