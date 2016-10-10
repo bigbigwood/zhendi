@@ -90,5 +90,10 @@ namespace Rld.Acs.Unility
             var specialChars = @"[，。；？~！：‘“”’【】（）!@#$%^&*()=-_+{}:<>?\|';.,]";
             return specialChars.Any(sc => str.Contains(sc));
         }
+
+        public static bool NotEmpty(string str)
+        {
+            return !string.IsNullOrWhiteSpace(str);
+        }
     }
 }

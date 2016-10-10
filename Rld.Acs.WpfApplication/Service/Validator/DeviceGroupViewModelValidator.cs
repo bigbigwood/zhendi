@@ -12,6 +12,7 @@ namespace Rld.Acs.WpfApplication.Service.Validator
         {
             RuleFor(m => m.DeviceGroupName)
                 .NotEmpty().WithMessage("设备组名称不能为空")
+                .Length(1, 100).WithMessage("设备组名称长度为1-100")
                 .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("设备组名称:[{0}]不能有特殊字符", x => x.DeviceGroupName);
 
             RuleFor(m => m.CheckInDeviceID)

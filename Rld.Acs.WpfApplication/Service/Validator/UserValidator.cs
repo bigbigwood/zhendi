@@ -12,6 +12,7 @@ namespace Rld.Acs.WpfApplication.Service.Validator
         {
             RuleFor(m => m.Name)
                 .NotEmpty().WithMessage("人员名称不能为空")
+                .Length(1, 100).WithMessage("人员名称长度为1-100")
                 .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("人员名称不能有特殊字符");
             
             RuleFor(m => m.UserCode)
@@ -25,6 +26,9 @@ namespace Rld.Acs.WpfApplication.Service.Validator
 
             RuleFor(m => m.StartDate.Date)
                 .LessThan(m => m.EndDate.Value.Date).When(m => m.EndDate.HasValue).WithMessage("开始时间必须小于结束时间");
+
+            RuleFor(m => m.Remark)
+                .Length(1, 1024).When(m => !string.IsNullOrWhiteSpace(m.Remark)).WithMessage("备注长度为1-1024");
 
             RuleFor(m => m.UserPropertyInfo).SetValidator(NinjectBinder.GetValidator<UserPropertyInfoValidator>());
         }

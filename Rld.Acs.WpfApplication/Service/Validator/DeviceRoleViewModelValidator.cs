@@ -14,6 +14,7 @@ namespace Rld.Acs.WpfApplication.Service.Validator
         {
             RuleFor(m => m.Name)
                 .NotEmpty().WithMessage("设备角色名称不能为空")
+                .Length(1, 100).WithMessage("设备角色名称长度为1-100")
                 .Must(m => !ValidatorToolkit.HasSpecialChar(m)).WithMessage("设备角色名称不能有特殊字符");
 
             RuleFor(m => m.DeviceDtos)
