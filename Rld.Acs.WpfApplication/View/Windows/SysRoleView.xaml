@@ -11,7 +11,7 @@
              Dialog:DialogParticipation.Register="{Binding}"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:SysRoleViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="600" Width="300" Unloaded="MetroWindow_Unloaded">
+             Height="600" Width="350" Unloaded="MetroWindow_Unloaded">
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
             <Setter Property="FontSize" Value="12"/>
@@ -43,7 +43,6 @@
         <Style TargetType="CheckBox" BasedOn="{StaticResource ResourceKey={x:Type CheckBox}}" >
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="2,1" />
-            <Setter Property="Width" Value="120" />
         </Style>
     </controls:MetroWindow.Resources>
     <Grid>
@@ -68,7 +67,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition />
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
 
