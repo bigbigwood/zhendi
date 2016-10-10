@@ -6,9 +6,9 @@ using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.Service.Validator
 {
-    public class UserAuthenticationViewModelValidator : AbstractValidator<UserAuthenticationViewModel> 
+    public class PasswordAuthenticationViewModelValidator : AbstractValidator<UserAuthenticationViewModel> 
     {
-        public UserAuthenticationViewModelValidator()
+        public PasswordAuthenticationViewModelValidator()
         {
             RuleFor(m => m.AuthenticationData)
                 .NotEmpty().WithMessage("已启用的人员密码不能为空").When(x => x.IsSelected)

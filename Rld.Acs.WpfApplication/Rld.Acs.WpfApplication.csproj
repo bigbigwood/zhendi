@@ -229,7 +229,8 @@
     <Compile Include="Service\Validator\FloorValidator.cs" />
     <Compile Include="Service\Validator\SysOperatorValidator.cs" />
     <Compile Include="Service\Validator\SyncUserViewModelValidator.cs" />
-    <Compile Include="Service\Validator\UserAuthenticationViewModelValidator.cs" />
+    <Compile Include="Service\Validator\IcCardAuthenticationViewModelValidator.cs" />
+    <Compile Include="Service\Validator\PasswordAuthenticationViewModelValidator.cs" />
     <Compile Include="ViewModel\AutoMapperProfile.cs" />
     <Compile Include="ViewModel\Pages\DataCleanPageViewModel.cs" />
     <Compile Include="ViewModel\Pages\DataSyncPageViewModel.cs" />

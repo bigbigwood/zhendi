@@ -105,10 +105,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 string errorMessage = "";
                 var passwordCredentials = UserDeviceAuthViewModels.Select(x => x.PasswordCredential);
-                var validator = NinjectBinder.GetValidator<UserAuthenticationViewModelValidator>();
-                passwordCredentials.ForEach(p =>
+                var validator = NinjectBinder.GetValidator<PasswordAuthenticationViewModelValidator>();
+                passwordCredentials.ForEach(x =>
                 {
-                    var results = validator.Validate(p);
+                    var results = validator.Validate(x);
+                    if (!results.IsValid)
+                        errorMessage = string.Join("\n", results.Errors);
+                });
+                var icCardCredentials = UserDeviceAuthViewModels.Select(x => x.IcCardCredential);
+                var icCardValidator = NinjectBinder.GetValidator<IcCardAuthenticationViewModelValidator>();
+                icCardCredentials.ForEach(x =>
+                {
+                    var results = icCardValidator.Validate(x);
                     if (!results.IsValid)
                         errorMessage = string.Join("\n", results.Errors);
                 });

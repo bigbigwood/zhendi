@@ -74,7 +74,7 @@ namespace Rld.Acs.WpfApplication.Repository
             InjectionKernel.Bind<DeviceGroupViewModelValidator>().To<DeviceGroupViewModelValidator>();
 
             InjectionKernel.Bind<SyncUserViewModelValidator>().To<SyncUserViewModelValidator>();
-            InjectionKernel.Bind<UserAuthenticationViewModelValidator>().To<UserAuthenticationViewModelValidator>();
+            InjectionKernel.Bind<PasswordAuthenticationViewModelValidator>().To<PasswordAuthenticationViewModelValidator>();
         }
 
         public static TRepositoryOfEntity GetRepository<TRepositoryOfEntity>()
