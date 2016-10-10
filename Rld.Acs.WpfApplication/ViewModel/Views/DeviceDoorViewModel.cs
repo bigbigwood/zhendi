@@ -27,7 +27,6 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public virtual Int32 DeviceID { get; set; }
         public virtual String Name { get; set; }
         public virtual String Code { get; set; }
-        public virtual Int32 DoorIndex { get; set; }
         public virtual Int32? ElectricalAppliances { get; set; }
         public virtual Int32? CheckOutOptions { get; set; }
         public virtual Int32? Status { get; set; }

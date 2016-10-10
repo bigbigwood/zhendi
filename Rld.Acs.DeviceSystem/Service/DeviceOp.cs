@@ -158,7 +158,6 @@ namespace Rld.Acs.DeviceSystem.Service
             var deviceDoor = new DeviceDoor();
             deviceDoor.Name = doorInfo.Name;
             deviceDoor.Code = doorInfo.DoorIndex.ToString();
-            deviceDoor.DoorIndex = doorInfo.DoorIndex;
             deviceDoor.ElectricalAppliances = doorInfo.ElectricalAppliances;
             deviceDoor.CheckOutOptions = doorInfo.CheckOutAction.HasValue ? (int)doorInfo.CheckOutAction : 0;
             deviceDoor.Status = 1;

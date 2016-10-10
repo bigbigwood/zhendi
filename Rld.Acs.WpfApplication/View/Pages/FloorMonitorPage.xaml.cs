@@ -85,7 +85,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
                         var deviceCode = ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.DeviceID == doorInfo.DeviceID).Code.ToInt32();
                         ResultTypes resultTypes;
                         string[] messages;
-                        Int32 doorIndex = doorInfo.DoorIndex;
+                        Int32 doorIndex = doorInfo.Code.ToInt32();
 
                         bool isopened = new DeviceServiceClient().GetDoorState(deviceCode, doorIndex, out resultTypes, out messages);
                         if (resultTypes == ResultTypes.Ok)
@@ -349,7 +349,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
                 {
                     string[] messages;
 
-                    Int32 doorIndex = doorInfo.DoorIndex;
+                    Int32 doorIndex = doorInfo.Code.ToInt32();
                     var selectedOption = (DeviceProxy.DoorControlOption)option.GetHashCode();
 
                     ResultTypes resultTypes = new DeviceServiceClient().UpdateDoorState(deviceCode, doorIndex, selectedOption, out messages);
