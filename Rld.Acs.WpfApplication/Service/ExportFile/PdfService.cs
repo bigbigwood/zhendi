@@ -23,21 +23,22 @@ namespace Rld.Acs.WpfApplication.Service.ExportFile
                     PdfWriter.GetInstance(document, file);
                     document.Open();
 
-                    BaseFont bfChinese = BaseFont.CreateFont("C:\\WINDOWS\\Fonts\\STSONG.TTF", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-                    Font fontChinese = new Font(bfChinese, 12);
+                    Font myFont = FontFactory.GetFont("Arial", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                    //BaseFont bfChinese = BaseFont.CreateFont("C:\\WINDOWS\\Fonts\\STSONG.TTF", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                    //Font fontChinese = new Font(bfChinese, 12);
 
                     PdfPTable table = new PdfPTable(datatable.Columns.Count);
                     //table header
                     for (int j = 0; j < datatable.Columns.Count; j++)
                     {
-                        table.AddCell(new Phrase(datatable.Columns[j].ColumnName, fontChinese));
+                        table.AddCell(new Phrase(datatable.Columns[j].ColumnName, myFont));
                     }
                     //table body
                     for (int i = 0; i < datatable.Rows.Count; i++)
                     {
                         for (int j = 0; j < datatable.Columns.Count; j++)
                         {
-                            table.AddCell(new Phrase(datatable.Rows[i][j].ToString(), fontChinese));
+                            table.AddCell(new Phrase(datatable.Rows[i][j].ToString(), myFont));
                         }
                     }
                     document.Add(table);
