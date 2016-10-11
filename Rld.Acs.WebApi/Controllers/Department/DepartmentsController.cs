@@ -19,7 +19,7 @@ namespace Rld.Acs.WebApi.Controllers
     public class DepartmentsController : ApiController
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        
+
         public HttpResponseMessage Get()
         {
             var conditions = ControllerContext.Request.GetQueryNameValueHashtable();
@@ -88,11 +88,21 @@ namespace Rld.Acs.WebApi.Controllers
 
                 var departmentRepo = RepositoryManager.GetRepository<IDepartmentRepository>();
                 var departmentDeviceRepo = RepositoryManager.GetRepository<IDepartmentDeviceRepository>();
+                var userRepo = RepositoryManager.GetRepository<IUserRepository>();
 
                 var originalDepartmentInfo = departmentRepo.GetByKey(id);
                 if (originalDepartmentInfo == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, string.Format("Department Id={0} does not exist.", id));
+                }
+
+                if (originalDepartmentInfo.DeviceRoleID != departmentInfo.DeviceRoleID) // DeviceRole changed
+                {
+                    var deptUsers = userRepo.Query(new Hashtable() { { "DepartmentID", id } });
+                    if (deptUsers.Any())
+                    {
+                        deptUsers.ForEach(x => UpdateUserDeviceRole(x, originalDepartmentInfo.DeviceRoleID, departmentInfo.DeviceRoleID));
+                    }
                 }
 
                 var addedDevices = new List<DepartmentDevice>();
@@ -118,6 +128,19 @@ namespace Rld.Acs.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK);
 
             }, this);
+        }
+
+        private void UpdateUserDeviceRole(User user, Int32 currentRoleId, Int32 newRoleId)
+        {
+            var userDeviceRoleRepo = RepositoryManager.GetRepository<IUserDeviceRoleRepository>();
+
+            var currentDepartmentRoles = user.UserDeviceRoles.FindAll(x => x.DeviceRoleID == currentRoleId);
+            if (currentDepartmentRoles.Any())
+            {
+                currentDepartmentRoles.ForEach(x =>userDeviceRoleRepo.Delete(x.UserDeviceRoleID));
+            }
+
+            userDeviceRoleRepo.Insert(new UserDeviceRole() {UserID = user.UserID, DeviceRoleID = newRoleId});
         }
 
         [Authorize]
