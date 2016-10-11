@@ -24,7 +24,8 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Dao
             using (var operation = new DeviceLockableOperation(_deviceProxy))
             {
                 var retryablePolicy = Policies.GetRetryablePolicy();
-                bool result = _deviceProxy.DeviceConnection.GetProperty(UserProperty.Enroll, null, ref deviceUser, ref extraData);
+                bool result = retryablePolicy.Execute(
+                    () => _deviceProxy.DeviceConnection.GetProperty(UserProperty.Enroll, null, ref deviceUser, ref extraData));
                 return result ? deviceUser : null;
             }
         }
