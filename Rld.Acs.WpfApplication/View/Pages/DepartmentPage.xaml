@@ -48,13 +48,13 @@
                         </StackPanel>
                     </Button>
                     <Separator/>
-                    <Button Command="{Binding SyncDataCmd}" CommandParameter="{x:Static a:ACL.E_SyncDept}">
+                    <!--<Button Command="{Binding SyncDataCmd}" CommandParameter="{x:Static a:ACL.E_SyncDept}">
                         <StackPanel Orientation="Horizontal" >
                             <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_SyncDataBtn_img}" />
                             <TextBlock Text="{StaticResource DepartmentPage_Toolbar_SyncDataBtn}" />
                         </StackPanel>
                     </Button>
-                    <Separator/>
+                    <Separator/>-->
                 </ToolBar>
             </ToolBarTray>
         </StackPanel>

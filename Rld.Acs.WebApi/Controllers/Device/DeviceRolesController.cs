@@ -3,6 +3,7 @@ using log4net;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
+using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WebApi.Framework;
 using System;
@@ -79,6 +80,7 @@ namespace Rld.Acs.WebApi.Controllers
 
                 var deviceRoleRepo = RepositoryManager.GetRepository<IDeviceRoleRepository>();
                 var deviceRolePermissionRepo = RepositoryManager.GetRepository<IDeviceRolePermissionRepository>();
+                var userDeviceRoleRepo = RepositoryManager.GetRepository<IUserDeviceRoleRepository>();
 
                 var originalDeviceRoleInfo = deviceRoleRepo.GetByKey(id);
                 if (originalDeviceRoleInfo == null)
@@ -99,6 +101,15 @@ namespace Rld.Acs.WebApi.Controllers
                     deletedPermissionIds = originalDeviceRoleInfo.DeviceRolePermissions.Select(d => d.DeviceRolePermissionID).ToList();
                 }
 
+                if (userDeviceRoleRepo.Query(new Hashtable() { { "DeviceRoleID", id } }).Any())
+                {
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent("设备角色已经绑定人员使用，不能修改。"),
+                        ReasonPhrase = ConstStrings.BusinessLogicError,
+                    };
+                }
+
                 deletedPermissionIds.ForEach(d => deviceRolePermissionRepo.Delete(d));
                 addedPermissions.ForEach(d => deviceRolePermissionRepo.Insert(d));
                 deviceRoleInfo.DeviceRolePermissions.FindAll(d => d.DeviceRolePermissionID != 0).ForEach(d => deviceRolePermissionRepo.Update(d));
@@ -109,6 +120,7 @@ namespace Rld.Acs.WebApi.Controllers
 
             }, this);
         }
+
 
         [Authorize]
         public HttpResponseMessage Delete(int id)
