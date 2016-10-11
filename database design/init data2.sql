@@ -182,7 +182,7 @@ INSERT dbo.SYS_MODULE VALUES ('数据字典维护', 'M2_SysDictionary', '数据�
 INSERT dbo.SYS_MODULE VALUES ('角色',       'M2_SystemRole', '角色模块', 4, 'SystemRolePage', 'SystemRolePage', 2, '', '2016-01-01', 1, 1, NULL, NULL)
 INSERT dbo.SYS_MODULE VALUES ('用户',       'M2_Operator','用户模块', 4, 'OperatorPage', 'OperatorPage', 2, '', '2016-01-01', 1, 1, NULL, NULL)
 INSERT dbo.SYS_MODULE VALUES ('数据同步',    'M2_DataSynchorization', '数据同步模块', 5, 'DataSynchorizationPage', 'DataSynchorizationPage', 2, '', '2016-01-01', 1, 1, NULL, NULL)
-INSERT dbo.SYS_MODULE VALUES ('数据同步',    'M2_DataClean', '数据清理模块', 5, 'DataCleanPage', 'DataCleanPage', 2, '', '2016-01-01', 1, 1, NULL, NULL)
+INSERT dbo.SYS_MODULE VALUES ('数据清理',    'M2_DataClean', '数据清理模块', 5, 'DataCleanPage', 'DataCleanPage', 2, '', '2016-01-01', 1, 1, NULL, NULL)
 	
 INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('增加人员', 'E_AddStuff', 6, '', '', '2016-01-01', 1, 1, NULL, NULL)
 INSERT dbo.SYS_MODULE_ELEMENTS VALUES ('修改人员', 'E_MdfStuff', 6, '', '', '2016-01-01', 1, 1, NULL, NULL)

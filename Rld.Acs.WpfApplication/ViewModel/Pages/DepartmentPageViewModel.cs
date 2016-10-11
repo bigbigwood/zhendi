@@ -119,7 +119,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 var departmentUsers = userRepo.Query(new Hashtable() { { "DepartmentID", SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID } });
                 if (departmentUsers.Any())
                 {
-                    assiciationErrorMessage += "选择部门存在人员，请先删除部门所属人员!\n";
+                    assiciationErrorMessage += "选中部门存在人员，请先删除所属人员!\n";
                 }
 
                 if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))
