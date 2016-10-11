@@ -73,6 +73,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 Messenger.Default.Send(new OpenWindowMessage() { DataContext = viewModel }, Tokens.SysRoleView_Open);
                 if (viewModel.ViewModelAttachment.LastOperationSuccess)
                 {
+                    viewModel = Mapper.Map<SysRoleViewModel>(viewModel.ViewModelAttachment.CoreModel);
                     var index = SysRoleViewModels.IndexOf(SelectedSysRoleViewModel);
                     SysRoleViewModels[index] = viewModel;
                 }
