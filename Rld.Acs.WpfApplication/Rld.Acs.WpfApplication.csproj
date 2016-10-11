@@ -716,6 +716,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Content Include="Resources\ARIALUNI.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Service References\DeviceProxy\DeviceService.wsdl" />
     <None Include="Service References\DeviceProxy\DeviceService.xsd">
       <SubType>Designer</SubType>
