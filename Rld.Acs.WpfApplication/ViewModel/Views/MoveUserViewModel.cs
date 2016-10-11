@@ -27,8 +27,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public ViewModelAttachment<User> ViewModelAttachment { get; set; }
         public User CurrentUser { get; set; }
-        public string CurrentDepartmentName { get; set; }
-        public Department DepartmentInfo { get; set; }
+        public Department CurrentDepartment { get; set; }
+        public Department NewDepartment { get; set; }
         public List<Department> AuthorizationDepartments
         {
             get { return ApplicationManager.GetInstance().AuthorizationDepartments.FindAll(x => x.DepartmentID != -1); }
@@ -39,7 +39,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             CancelCmd = new RelayCommand(() => Close(""));
             ViewModelAttachment = new ViewModelAttachment<User>();
             CurrentUser = userInfo;
-            CurrentDepartmentName = AuthorizationDepartments.First(x => x.DepartmentID == userInfo.DepartmentID).Name;
+            CurrentDepartment = AuthorizationDepartments.First(x => x.DepartmentID == userInfo.DepartmentID);
         }
 
         private void Save()
@@ -47,13 +47,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             var message = "";
             try
             {
-                if (DepartmentInfo.Name == CurrentDepartmentName)
+                if (NewDepartment.DepartmentCode == CurrentDepartment.DepartmentCode)
                 {
                     Messenger.Default.Send(new NotificationMessage(this, "不能移动到原部门"), Tokens.MoveUserView_ShowNotification);
                     return;
                 }
 
-                CurrentUser.DepartmentID = DepartmentInfo.DepartmentID;
+                CurrentUser.DepartmentID = NewDepartment.DepartmentID;
+                UpdateDeviceRoleFromNewDepartment(CurrentUser, CurrentDepartment, NewDepartment);
+
                 _userRepo.Update(CurrentUser);
                 message = "移动人员成功!";
             }
@@ -69,6 +71,20 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             ViewModelAttachment.LastOperationSuccess = true;
             RaisePropertyChanged(null);
             Close(message);
+        }
+
+        private void UpdateDeviceRoleFromNewDepartment(User user, Department currentDepartment, Department newDepartment)
+        {
+            var currentDepartmentRoleId = currentDepartment.DeviceRoleID;
+            var newDepartmentRoleId = newDepartment.DeviceRoleID;
+
+            var currentDepartmentRoles = user.UserDeviceRoles.FindAll(x => x.DeviceRoleID == currentDepartmentRoleId);
+            if (currentDepartmentRoles.Any())
+            {
+                currentDepartmentRoles.ForEach(x => user.UserDeviceRoles.Remove(x));
+            }
+
+            user.UserDeviceRoles.Add(new UserDeviceRole() { UserID = user.UserID, DeviceRoleID = newDepartmentRoleId });
         }
  
 

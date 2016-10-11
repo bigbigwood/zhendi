@@ -53,14 +53,14 @@
         <TextBlock Grid.Row="2" Grid.Column="1" Text="姓名"/>
         <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding CurrentUser.Name}" HorizontalAlignment="Left"/>
         <TextBlock Grid.Row="3" Grid.Column="1" Text="当前部门"/>
-        <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding CurrentDepartmentName}" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding CurrentDepartment.Name}" HorizontalAlignment="Left"/>
         <TextBlock Grid.Row="4" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                         <TextBlock Text="移动至" Margin="0"/>
             </TextBlock>
         <ComboBox Grid.Row="4" Grid.Column="2" 
                   ItemsSource="{Binding AuthorizationDepartments, Mode=OneWay}"  
-                  SelectedItem="{Binding DepartmentInfo}" SelectedValuePath="DepartmentID" DisplayMemberPath="Name">
+                  SelectedItem="{Binding NewDepartment}" SelectedValuePath="DepartmentID" DisplayMemberPath="Name">
         </ComboBox>
         <StackPanel  Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Content="{StaticResource Ok}" Command="{Binding SaveCmd}" Margin="3,0" />
