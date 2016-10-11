@@ -104,16 +104,40 @@ namespace Rld.Acs.WpfApplication.Repository
 
         public virtual void Refresh()
         {
-            ObjectCache cache = MemoryCache.Default;
-            if (cache.Contains(CacheKey))
-            {
-                Log.InfoFormat("Remove cache data key= {0}", CacheKey);
-                cache.Remove(CacheKey);
-            }
-
             Log.InfoFormat("Loading data for cacheable repository, cache key= {0}", CacheKey);
             var entities = base.Query(new Hashtable()).ToList();
-            cache.Set(CacheKey, entities, GetPolicy());
+
+            ObjectCache cache = MemoryCache.Default;
+            lock (_locker)
+            {
+                if (cache.Contains(CacheKey))
+                {
+                    Log.InfoFormat("Remove cache data key= {0}", CacheKey);
+                    cache.Remove(CacheKey);
+                }
+                cache.Set(CacheKey, entities, GetPolicy());
+            }
+        }
+
+        public virtual TEntity Refresh(TKey key)
+        {
+            var cachedEntities = CacheableQuery();
+
+            var entity = base.GetByKey(key);
+            if (entity != null)
+            {
+                ObjectCache cache = MemoryCache.Default;
+                var cacheEntity = GetByKey(key);
+                var index = cachedEntities.IndexOf(cacheEntity);
+                cachedEntities[index] = entity;
+
+                lock (_locker)
+                {
+                    cache.Set(CacheKey, cachedEntities, GetPolicy());
+                }
+            }
+
+            return entity;
         }
 
         private CacheItemPolicy GetPolicy()

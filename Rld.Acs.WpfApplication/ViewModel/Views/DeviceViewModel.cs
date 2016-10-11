@@ -162,6 +162,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     deviceController.UpdateDate = DateTime.Now;
 
                     _deviceControllerRepo.Update(deviceController);
+                    var cacheableRepo = _deviceControllerRepo as CacheableRepository<DeviceController, int>;
+                    deviceController = cacheableRepo.Refresh(deviceController.DeviceID);
+
+                    //deviceController = _deviceControllerRepo.GetByKey();
 
                     message = "修改设备成功!";
                 }
