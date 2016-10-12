@@ -52,7 +52,8 @@ namespace Rld.Acs.DeviceSystem.Service
                 {
                     DeviceID = deviceID,
                     DeviceUserID = rawlog.UserId,
-                    DeviceType = 1,
+                    DeviceCode = deviceInfo.Code,
+                    DeviceType = deviceInfo.Model,
                     DeviceSN = deviceInfo.SN,
                     RecordType = rawlog.AccessLogType.ToString(),
                     RecordTime = rawlog.CreateTime,

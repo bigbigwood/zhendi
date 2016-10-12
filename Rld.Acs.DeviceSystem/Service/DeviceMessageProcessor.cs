@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
+using System.Web.UI.WebControls;
 using Rld.Acs.DeviceSystem.Framework;
 using Rld.Acs.DeviceSystem.Message;
 using Rld.Acs.Repository;
@@ -15,27 +17,36 @@ namespace Rld.Acs.DeviceSystem.Service
         public static void ProcessDeviceTrafficEvent(string message)
         {
             var ev = DataContractSerializationHelper.Deserialize<DeviceTrafficEvent>(message);
-            var logInfo = new Rld.Acs.Model.DeviceTrafficLog();
-            logInfo.DeviceID = ev.DeviceTrafficLog.DeviceId;
-            logInfo.DeviceUserID = ev.DeviceTrafficLog.UserId;
-            logInfo.RecordType = ev.DeviceTrafficLog.AccessLogType.ToString();
-            logInfo.RecordTime = ev.DeviceTrafficLog.CreateTime;
-            logInfo.RecordUploadTime = DateTime.Now;
-            logInfo.Remark = ev.DeviceTrafficLog.Message;
-
-            if (ev.DeviceTrafficLog.CheckInOptions.Any())
+           
+            PersistenceOperation.Process("", () =>
             {
-                logInfo.AuthenticationType = 0;
-                ev.DeviceTrafficLog.CheckInOptions.ForEach(option => logInfo.AuthenticationType += (int)option);
-            }
+                var deviceControllerRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
+                var deviceTrafficLogRepo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
 
-            logInfo.DeviceType = 1;
-            logInfo.DeviceSN = "hardcode";
+                var logInfo = new Rld.Acs.Model.DeviceTrafficLog();
+                logInfo.DeviceID = -1;
+                logInfo.DeviceCode = ev.DeviceTrafficLog.DeviceId.ToString();
+                logInfo.DeviceUserID = ev.DeviceTrafficLog.UserId;
+                logInfo.RecordType = ev.DeviceTrafficLog.AccessLogType.ToString();
+                logInfo.RecordTime = ev.DeviceTrafficLog.CreateTime;
+                logInfo.RecordUploadTime = DateTime.Now;
+                logInfo.Remark = ev.DeviceTrafficLog.Message;
 
-            PersistenceOperation.Process(logInfo, () =>
-            {
-                var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
-                repo.Insert(logInfo);
+                if (ev.DeviceTrafficLog.CheckInOptions.Any())
+                {
+                    logInfo.AuthenticationType = 0;
+                    ev.DeviceTrafficLog.CheckInOptions.ForEach(option => logInfo.AuthenticationType += (int)option);
+                }
+
+                var deviceInfo = deviceControllerRepo.Query(new Hashtable() { { "Code", ev.DeviceTrafficLog.DeviceId } }).FirstOrDefault();
+                if (deviceInfo != null)
+                {
+                    logInfo.DeviceID = deviceInfo.DeviceID;
+                    logInfo.DeviceType = deviceInfo.Model;
+                    logInfo.DeviceSN = deviceInfo.SN;
+                }
+
+                deviceTrafficLogRepo.Insert(logInfo);
 
                 return new Message.ResponseBase();
             });
@@ -43,7 +54,7 @@ namespace Rld.Acs.DeviceSystem.Service
 
         public static void ProcessGetDeviceOperationLogRequest(string message)
         {
-            
+
         }
     }
 }

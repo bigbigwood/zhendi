@@ -10,6 +10,7 @@
       xmlns:customControls="clr-namespace:Rld.Acs.WpfApplication.View.CustomControls"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
+      xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro" Dialog:DialogParticipation.Register="{Binding}"
       DataContext="{Binding DeviceTrafficLogPage, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="1000" Unloaded="Page_Unloaded">
@@ -58,12 +59,12 @@
                     <ColumnDefinition Width="0.8*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="记录类型:" Margin="5,0"/>
-                <ComboBox Grid.Column="1" Margin="2,3" HorizontalAlignment="Left"
+                <ComboBox Grid.Column="1" Margin="2,3" HorizontalAlignment="Stretch"
                         ItemsSource="{Binding DeviceTrafficLogTypeDict, Mode=OneWay}" 
                                SelectedValue="{Binding SelectedLogType}" SelectedValuePath="ItemID" DisplayMemberPath="ItemValue" />
-                <TextBlock Grid.Column="2" Text="设备ID:" Margin="5,0"/>
-                <TextBox  Grid.Column="3" Text="{Binding DeviceId}" />
-                <TextBlock Grid.Column="4" Text="用户设备ID:" Margin="5,0"/>
+                <TextBlock Grid.Column="2" Text="设备编号:" Margin="5,0"/>
+                <TextBox  Grid.Column="3" Text="{Binding DeviceCode}" />
+                <TextBlock Grid.Column="4" Text="人员工号:" Margin="5,0"/>
                 <TextBox  Grid.Column="5"  Text="{Binding DeviceUserId}" />
                 <TextBlock Grid.Column="6" Text="时间:" Margin="5,0"/>
                 <DatePicker Grid.Column="7" SelectedDate ="{Binding StartDate}" />
@@ -87,7 +88,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceID}" Binding="{Binding DeviceID}" Width="*" />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceCode}" Binding="{Binding DeviceCode}" Width="*" />
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceType}" Binding="{Binding DeviceType}" Width="*"  />
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceSN}" Binding="{Binding DeviceSN}" Width="*"  />
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceUserID}" Binding="{Binding DeviceUserID}" Width="*"  />

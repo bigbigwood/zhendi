@@ -256,11 +256,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (DeviceCode.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
-                    errors.Add("设备ID的输入值必须是数字");
+                    errors.Add("设备编号的输入值必须是数字");
                 }
                 if (ApplicationManager.GetInstance().AuthorizationDevices.All(x => x.Code != DeviceCode))
                 {
-                    errors.Add("输入的设备ID不存在系统中");
+                    errors.Add("输入的设备编号不存在系统中");
                 }
 
                 conditions.Add("DeviceCode", DeviceCode);
@@ -270,7 +270,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (UserCode.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
-                    errors.Add("用户设备ID的输入值必须是数字");
+                    errors.Add("人员工号的输入值必须是数字");
                 }
 
                 conditions.Add("DeviceUserId", UserCode);
@@ -280,7 +280,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (OperatorId.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
-                    errors.Add("操作人员ID的输入值必须是数字");
+                    errors.Add("操作人员工号的输入值必须是数字");
                 }
 
                 conditions.Add("OperatorId", OperatorId);

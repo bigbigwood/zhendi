@@ -15,7 +15,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public Int32 TrafficID { get; set; }
         public Int32 DeviceID { get; set; }
         public Int32 DeviceUserID { get; set; }
-        public Int32 DeviceType { get; set; }
+        public String DeviceCode { get; set; }
+        public String DeviceType { get; set; }
         public String DeviceSN { get; set; }
         public String RecordType { get; set; }
         public DateTime? RecordTime { get; set; }

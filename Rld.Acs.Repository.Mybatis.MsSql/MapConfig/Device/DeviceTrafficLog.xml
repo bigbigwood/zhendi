@@ -10,6 +10,7 @@
       <result property="TrafficID" column="TrafficID"/>
       <result property="DeviceID" column="DeviceID"/>
       <result property="DeviceUserID" column="DeviceUserID"/>
+      <result property="DeviceCode" column="DeviceCode"/>
       <result property="DeviceType" column="DeviceType"/>
       <result property="DeviceSN" column="DeviceSN"/>
       <result property="RecordType" column="RecordType"/>
@@ -32,6 +33,7 @@
       INSERT INTO [DEVICE_TRAFFIC_LOG] (
       [DeviceID]
       , [DeviceUserID]
+      , [DeviceCode]
       , [DeviceType]
       , [DeviceSN]
       , [RecordType]
@@ -42,6 +44,7 @@
       ) VALUES (
       #DeviceID#
       , #DeviceUserID#
+      , #DeviceCode#
       , #DeviceType#
       , #DeviceSN#
       , #RecordType#
@@ -58,6 +61,7 @@
     <update id="DeviceTrafficLog.Update" parameterClass="DeviceTrafficLog">
       UPDATE [DEVICE_TRAFFIC_LOG] SET
       [DeviceID] = #DeviceID#
+      , [DeviceCode] = #DeviceCode#
       , [DeviceUserID] = #DeviceUserID#
       , [DeviceType] = #DeviceType#
       , [DeviceSN] = #DeviceSN#
@@ -86,6 +90,9 @@
         <isNotEmpty prepend="AND" property="EndDate">
           RecordTime  <![CDATA[<=]]> #EndDate#
         </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceCode">
+          DeviceCode = #DeviceCode#
+        </isNotEmpty>
         <isNotEmpty prepend="AND" property="DeviceId">
           DeviceId = #DeviceId#
         </isNotEmpty>
@@ -108,6 +115,9 @@
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="EndDate">
           RecordTime  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceCode">
+          DeviceCode = #DeviceCode#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="DeviceId">
           DeviceId = #DeviceId#
@@ -133,6 +143,9 @@
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="EndDate">
           L.RecordTime  <![CDATA[<=]]> #EndDate#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceCode">
+          L.DeviceCode = #DeviceCode#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="DeviceId">
           L.DeviceId = #DeviceId#

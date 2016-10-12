@@ -9,6 +9,7 @@
     <resultMap id="DeviceStateHistoryResult" class="Rld.Acs.Model.DeviceStateHistory">
       <result property="DeviceStateHistoryID" column="DeviceStateHistoryID"/>
       <result property="DeviceID" column="DeviceID"/>
+      <result property="DeviceCode" column="DeviceCode"/>
       <result property="DeviceType" column="DeviceType"/>
       <result property="DeviceSN" column="DeviceSN"/>
       <result property="RecordType" column="RecordType"/>
@@ -28,7 +29,8 @@
 
     <insert id="DeviceStateHistory.Insert" parameterClass="DeviceStateHistory">
       INSERT INTO [DEVICE_STATE_HISTORY] (
-      [DeviceID]
+      [DeviceID
+      , [DeviceCode]
       , [DeviceType]
       , [DeviceSN]
       , [RecordType]
@@ -37,6 +39,7 @@
       , [Remark]
       ) VALUES (
       #DeviceID#
+      , #DeviceCode#
       , #DeviceType#
       , #DeviceSN#
       , #RecordType#
@@ -52,6 +55,7 @@
     <update id="DeviceStateHistory.Update" parameterClass="DeviceStateHistory">
       UPDATE [DEVICE_STATE_HISTORY] SET
       [DeviceID] = #DeviceID#
+      , [DeviceCode] = #DeviceCode#
       , [DeviceType] = #DeviceType#
       , [DeviceSN] = #DeviceSN#
       , [RecordType] = #RecordType#
@@ -81,6 +85,9 @@
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="DeviceID">
           DeviceID = #DeviceID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceCode">
+          DeviceCode = #DeviceCode#
         </isNotEmpty>
       </dynamic>
     </select>
