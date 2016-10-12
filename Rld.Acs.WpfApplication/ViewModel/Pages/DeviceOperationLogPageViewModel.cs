@@ -33,8 +33,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public String DeviceId { get; set; }
-        public String DeviceUserId { get; set; }
+        public String DeviceCode { get; set; }
+        public String UserCode { get; set; }
         public String OperatorId { get; set; }
         public ObservableCollection<DeviceOperationLogViewModel> DeviceOperationLogViewModels { get; set; }
 
@@ -177,9 +177,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                         {
                             Log.Info("同步数据中..");
                             var devices = new List<DeviceController>();
-                            if (!string.IsNullOrWhiteSpace(DeviceId))
+                            if (!string.IsNullOrWhiteSpace(DeviceCode))
                             {
-                                var queriedDevice = ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.DeviceID == DeviceId.ToInt32());
+                                var queriedDevice = ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.DeviceID == DeviceCode.ToInt32());
                                 devices.Add(queriedDevice);
                             }
                             else
@@ -252,28 +252,28 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     {"PageEnd", pageEnd},
                 };
 
-            if (!string.IsNullOrWhiteSpace(DeviceId))
+            if (!string.IsNullOrWhiteSpace(DeviceCode))
             {
-                if (DeviceId.ToInt32() == ConvertorExtension.ConvertionFailureValue)
+                if (DeviceCode.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
                     errors.Add("设备ID的输入值必须是数字");
                 }
-                if (ApplicationManager.GetInstance().AuthorizationDevices.All(x => x.DeviceID != DeviceId.ToInt32()))
+                if (ApplicationManager.GetInstance().AuthorizationDevices.All(x => x.DeviceID != DeviceCode.ToInt32()))
                 {
                     errors.Add("输入的设备ID不存在系统中");
                 }
 
-                conditions.Add("DeviceId", DeviceId);
+                conditions.Add("DeviceId", DeviceCode);
             }
 
-            if (!string.IsNullOrWhiteSpace(DeviceUserId))
+            if (!string.IsNullOrWhiteSpace(UserCode))
             {
-                if (DeviceUserId.ToInt32() == ConvertorExtension.ConvertionFailureValue)
+                if (UserCode.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
                     errors.Add("用户设备ID的输入值必须是数字");
                 }
 
-                conditions.Add("DeviceUserId", DeviceUserId);
+                conditions.Add("DeviceUserId", UserCode);
             }
 
             if (!string.IsNullOrWhiteSpace(OperatorId))
@@ -311,8 +311,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             dt.Columns.Remove("LogID");
             dt.Columns.Remove("OperationUploadTime");
             dt.Columns.Remove("IsInDesignMode");
+            dt.Columns.Remove("DeviceId");
 
-            dt.Columns["DeviceId"].SetOrdinal(0);
+            dt.Columns["DeviceCode"].SetOrdinal(0);
             dt.Columns["DeviceType"].SetOrdinal(1);
             dt.Columns["OperatorId"].SetOrdinal(2);
             dt.Columns["DeviceUserId"].SetOrdinal(3);
@@ -321,10 +322,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             dt.Columns["OperationContent"].SetOrdinal(6);
             dt.Columns["OperationTime"].SetOrdinal(7);
 
-            dt.Columns["DeviceId"].ColumnName = "设备ID";
+            dt.Columns["DeviceCode"].ColumnName = "设备编号";
             dt.Columns["DeviceType"].ColumnName = "设备类型";
-            dt.Columns["OperatorId"].ColumnName = "操作人员ID";
-            dt.Columns["DeviceUserId"].ColumnName = "用户设备ID";
+            dt.Columns["OperatorId"].ColumnName = "操作人员工号";
+            dt.Columns["DeviceUserId"].ColumnName = "人员工号";
             dt.Columns["OperationType"].ColumnName = "操作类型";
             dt.Columns["OperationDescription"].ColumnName = "操作描述";
             dt.Columns["OperationContent"].ColumnName = "操作内容";

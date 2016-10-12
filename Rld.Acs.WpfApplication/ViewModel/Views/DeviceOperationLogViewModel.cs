@@ -12,7 +12,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public virtual Int32 LogID { get; set; }
         public virtual Int32? DeviceUserId { get; set; }
         public virtual Int32 DeviceId { get; set; }
-        public virtual Int32 DeviceType { get; set; }
+        public virtual String DeviceCode { get; set; }
+        public virtual String DeviceType { get; set; }
         public virtual Int32 OperationType { get; set; }
         public virtual String OperationDescription { get; set; }
         public virtual Int32 OperatorId { get; set; }

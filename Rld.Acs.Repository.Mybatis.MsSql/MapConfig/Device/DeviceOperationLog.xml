@@ -10,6 +10,7 @@
       <result property="LogID" column="LogID"/>
       <result property="DeviceUserId" column="DeviceUserId"/>
       <result property="DeviceId" column="DeviceId"/>
+      <result property="DeviceCode" column="DeviceCode"/>
       <result property="DeviceType" column="DeviceType"/>
       <result property="OperationType" column="OperationType"/>
       <result property="OperationDescription" column="OperationDescription"/>
@@ -32,6 +33,7 @@
       INSERT INTO [DEVICE_OPERATION_LOG] (
       [DeviceUserId]
       , [DeviceId]
+      , [DeviceCode]
       , [DeviceType]
       , [OperationType]
       , [OperationDescription]
@@ -42,6 +44,7 @@
       ) VALUES (
       #DeviceUserId#
       , #DeviceId#
+      , #DeviceCode#
       , #DeviceType#
       , #OperationType#
       , #OperationDescription#
@@ -59,6 +62,7 @@
       UPDATE [DEVICE_OPERATION_LOG] SET
       [DeviceUserId] = #DeviceUserId#
       , [DeviceId] = #DeviceId#
+      , [DeviceCode] = #DeviceCode#
       , [DeviceType] = #DeviceType#
       , [OperationType] = #OperationType#
       , [OperationDescription] = #OperationDescription#
@@ -90,6 +94,9 @@
         <isNotEmpty prepend="AND" property="DeviceId">
           L.DeviceId = #DeviceId#
         </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceCode">
+          L.DeviceCode = #DeviceCode#
+        </isNotEmpty>
         <isNotEmpty prepend="AND" property="DeviceUserId">
           L.DeviceUserId = #DeviceUserId#
         </isNotEmpty>
@@ -115,6 +122,9 @@
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="DeviceId">
           L.DeviceId = #DeviceId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceCode">
+          L.DeviceCode = #DeviceCode#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="DeviceUserId">
           L.DeviceUserId = #DeviceUserId#
@@ -144,6 +154,9 @@
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="DeviceId">
           L.DeviceId = #DeviceId#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="DeviceCode">
+          L.DeviceCode = #DeviceCode#
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="DeviceUserId">
           L.DeviceUserId = #DeviceUserId#

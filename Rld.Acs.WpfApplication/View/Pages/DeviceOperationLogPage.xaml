@@ -55,12 +55,12 @@
                     <ColumnDefinition Width="0.8*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="操作人员ID:" Margin="5,0"/>
+                <TextBlock Grid.Column="0" Text="操作人员工号:" Margin="5,0"/>
                 <TextBox  Grid.Column="1" Text="{Binding OperatorId}" />
-                <TextBlock Grid.Column="2" Text="设备ID:" Margin="5,0"/>
-                <TextBox  Grid.Column="3"  Text="{Binding DeviceId}" />
-                <TextBlock Grid.Column="4" Text="用户设备ID:" Margin="5,0"/>
-                <TextBox  Grid.Column="5" Text="{Binding DeviceUserId}" />
+                <TextBlock Grid.Column="2" Text="设备编号:" Margin="5,0"/>
+                <TextBox  Grid.Column="3"  Text="{Binding DeviceCode}" />
+                <TextBlock Grid.Column="4" Text="人员工号:" Margin="5,0"/>
+                <TextBox  Grid.Column="5" Text="{Binding UserCode}" />
                 <TextBlock Grid.Column="6" Text="时间:" Margin="5,0"/>
                 <DatePicker Grid.Column="7" SelectedDate ="{Binding StartDate}"/>
                 <TextBlock Grid.Column="8" Text="至" Margin="5,0" />
@@ -83,7 +83,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceID}" Binding="{Binding DeviceId}" Width="*" />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceCode}" Binding="{Binding DeviceCode}" Width="*" />
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceType}" Binding="{Binding DeviceType}" Width="*"  />
                         <DataGridTextColumn Header="{DynamicResource DeviceOperationLogPage_Label_OperatorId}" Binding="{Binding OperatorId}" Width="*"  />
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceUserID}" Binding="{Binding DeviceUserId}" Width="*"  />

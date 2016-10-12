@@ -99,15 +99,16 @@
     <sys:String x:Key="DeviceRolePage_Label_Timezones">关联时间区</sys:String>
 	
 	<sys:String x:Key="DeviceTrafficLogPage_Label_DeviceID">设备ID</sys:String>
+	<sys:String x:Key="DeviceTrafficLogPage_Label_DeviceCode">设备编号</sys:String>
 	<sys:String x:Key="DeviceTrafficLogPage_Label_DeviceType">设备类型</sys:String>
 	<sys:String x:Key="DeviceTrafficLogPage_Label_DeviceSN">设备序列号</sys:String>
-	<sys:String x:Key="DeviceTrafficLogPage_Label_DeviceUserID">用户设备ID</sys:String>
+	<sys:String x:Key="DeviceTrafficLogPage_Label_DeviceUserID">人员工号</sys:String>
 	<sys:String x:Key="DeviceTrafficLogPage_Label_RecordType">日志类型</sys:String>
 	<sys:String x:Key="DeviceTrafficLogPage_Label_RecordTime">记录时间</sys:String>
 	<sys:String x:Key="DeviceTrafficLogPage_Label_AuthenticationType">验证方式</sys:String>
 	<sys:String x:Key="DeviceTrafficLogPage_Label_AuthenticationResult">验证结果</sys:String>
 	
-	<sys:String x:Key="DeviceOperationLogPage_Label_OperatorId">操作人员ID</sys:String>
+	<sys:String x:Key="DeviceOperationLogPage_Label_OperatorId">操作人员工号</sys:String>
 	<sys:String x:Key="DeviceOperationLogPage_Label_OperationType">操作类型</sys:String>
 	<sys:String x:Key="DeviceOperationLogPage_Label_OperationDescription">操作描述</sys:String>
 	<sys:String x:Key="DeviceOperationLogPage_Label_OperationContent">操作内容</sys:String>
