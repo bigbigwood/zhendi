@@ -179,7 +179,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                             var devices = new List<DeviceController>();
                             if (!string.IsNullOrWhiteSpace(DeviceCode))
                             {
-                                var queriedDevice = ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.DeviceID == DeviceCode.ToInt32());
+                                var queriedDevice = ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.Code == DeviceCode);
                                 devices.Add(queriedDevice);
                             }
                             else
@@ -258,12 +258,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 {
                     errors.Add("设备ID的输入值必须是数字");
                 }
-                if (ApplicationManager.GetInstance().AuthorizationDevices.All(x => x.DeviceID != DeviceCode.ToInt32()))
+                if (ApplicationManager.GetInstance().AuthorizationDevices.All(x => x.Code != DeviceCode))
                 {
                     errors.Add("输入的设备ID不存在系统中");
                 }
 
-                conditions.Add("DeviceId", DeviceCode);
+                conditions.Add("DeviceCode", DeviceCode);
             }
 
             if (!string.IsNullOrWhiteSpace(UserCode))
