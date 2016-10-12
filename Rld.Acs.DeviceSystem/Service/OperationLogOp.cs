@@ -54,7 +54,7 @@ namespace Rld.Acs.DeviceSystem.Service
                     DeviceId = deviceID,
                     OperatorId = rawlog.AdminId,
                     DeviceUserId = rawlog.UserId,
-                    DeviceType = 1,
+                    //DeviceType = deviceInfo.Model,
                     OperationType = rawlog.OperationType,
                     OperationDescription = rawlog.Message,
                     OperationContent = rawlog.Enroll.ToInt32() != ConvertorExtension.ConvertionFailureValue ? ((AuthenticationType)rawlog.Enroll.ToInt32()).ToString() : "未知",

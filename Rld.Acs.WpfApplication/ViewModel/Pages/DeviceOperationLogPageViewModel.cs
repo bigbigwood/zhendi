@@ -10,13 +10,17 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using log4net;
+using MahApps.Metro.Controls.Dialogs;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility;
 using Rld.Acs.Unility.Extension;
+using Rld.Acs.WpfApplication.DeviceProxy;
+using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -39,30 +43,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         private async void QueryCommandFunc()
         {
-            await Task.Run(() =>
-            {
-                try
-                {
-                    int totalCount = 0;
-                    var pageIndex = 1;
-                    var conditions = GetConditions();
-                    DeviceOperationLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
-                    if (totalCount % PageSize == 0)
-                    {
-                        TotalPage = (totalCount / PageSize).ToString();
-                    }
-                    else
-                    {
-                        TotalPage = ((totalCount / PageSize) + 1).ToString();
-                    }
-
-                    RaisePropertyChanged(null);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                }
-            });
+            var pageIndex = 1;
+            ProcessQueryPage(pageIndex);
         }
 
         #region 分页相关属性
@@ -72,31 +54,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         /// </summary>
         private async void NextPageSearchCommandFunc()
         {
-            await Task.Run(() =>
-            {
-                try
-                {
-                    int totalCount = 0;
-                    var pageIndex = Convert.ToInt32(CurrentPage);
-                    var conditions = GetConditions();
-                    DeviceOperationLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
-                    if (totalCount%PageSize == 0)
-                    {
-                        TotalPage = (totalCount/PageSize).ToString();
-                    }
-                    else
-                    {
-                        TotalPage = ((totalCount/PageSize) + 1).ToString();
-                    }
-
-                    RaisePropertyChanged(null);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                }
-            });
+            var pageIndex = Convert.ToInt32(CurrentPage);
+            ProcessQueryPage(pageIndex);
         }
+
         private string _totalPage = string.Empty;
 
 
@@ -193,16 +154,81 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             EndDate = DateTime.Now;
         }
 
-
-        private ObservableCollection<DeviceOperationLogViewModel> QueryData(int pageIndex, int pageSize, out int totalCount)
+        private void ProcessQueryPage(int pageIndex)
         {
-            Int32 pageStart = pageSize * (pageIndex - 1) + 1;
-            Int32 pageEnd = pageSize * pageIndex;
+            try
+            {
+                var conditions = new Hashtable();
+                if (!TryGetConditions(pageIndex, PageSize, out conditions))
+                {
+                    return;
+                }
 
-            var conditions = GetConditions();
-            conditions.Add("PageStart", pageStart);
-            conditions.Add("PageEnd", pageEnd);
+                DispatcherHelper.CheckBeginInvokeOnUI(async () =>
+                {
+                    string message = "";
 
+                    var controller = await DialogCoordinator.Instance.ShowProgressAsync(this, "查询数据", "查询数据中，请稍等");
+                    controller.SetIndeterminate();
+
+                    await Task.Run(() =>
+                    {
+                        try
+                        {
+                            Log.Info("同步数据中..");
+                            var devices = new List<DeviceController>();
+                            if (!string.IsNullOrWhiteSpace(DeviceId))
+                            {
+                                var queriedDevice = ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.DeviceID == DeviceId.ToInt32());
+                                devices.Add(queriedDevice);
+                            }
+                            else
+                            {
+                                devices = ApplicationManager.GetInstance().AuthorizationDevices;
+                            }
+
+                            string[] messages;
+                            var resultTypes = new DeviceServiceClient().SyncDeviceOperationLogs(devices.ToArray(), out messages);
+                            message = MessageHandler.GenerateDeviceMessage(resultTypes, "同步数据成功！", "同步数据失败！");
+                            Log.Info(message);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error(ex);
+                        }
+
+                        try
+                        {
+                            Log.Info("查询数据中..");
+                            int totalCount = 0;
+                            DeviceOperationLogViewModels = QueryData(conditions, out totalCount);
+                            if (totalCount % PageSize == 0)
+                            {
+                                TotalPage = (totalCount / PageSize).ToString();
+                            }
+                            else
+                            {
+                                TotalPage = ((totalCount / PageSize) + 1).ToString();
+                            }
+                            RaisePropertyChanged(null);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error(ex);
+                        }
+                    });
+
+                    await controller.CloseAsync();
+                });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
+        }
+
+        private ObservableCollection<DeviceOperationLogViewModel> QueryData(Hashtable conditions, out int totalCount)
+        {
             var paninationResult = _deviceOperationLogRepo.QueryPage(conditions);
             totalCount = paninationResult.TotalCount;
             var logVM = paninationResult.Entities.Select(AutoMapper.Mapper.Map<DeviceOperationLogViewModel>);
@@ -211,14 +237,19 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             return DeviceOperationLogViewModels;
         }
 
-        private Hashtable GetConditions()
+        private bool TryGetConditions(int pageIndex, int pageSize, out Hashtable conditions)
         {
             var errors = new List<string>();
 
-            var conditions = new Hashtable()
+            Int32 pageStart = pageSize * (pageIndex - 1) + 1;
+            Int32 pageEnd = pageSize * pageIndex;
+
+            conditions = new Hashtable()
                 {
                     {"StartDate",StartDate},
                     {"EndDate", EndDate},
+                    {"PageStart", pageStart},
+                    {"PageEnd", pageEnd},
                 };
 
             if (!string.IsNullOrWhiteSpace(DeviceId))
@@ -226,6 +257,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 if (DeviceId.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
                     errors.Add("设备ID的输入值必须是数字");
+                }
+                if (ApplicationManager.GetInstance().AuthorizationDevices.All(x => x.DeviceID != DeviceId.ToInt32()))
+                {
+                    errors.Add("输入的设备ID不存在系统中");
                 }
 
                 conditions.Add("DeviceId", DeviceId);
@@ -258,10 +293,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 {
                     Messenger.Default.Send(new NotificationMessage(message), Tokens.DeviceOperationLogPage_ShowNotification);
                 });
-                throw new Exception("非法输入");
+                return false;
             }
 
-            return conditions;
+            return true;
         }
 
         private void ExportCommandFunc()
