@@ -250,10 +250,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
             Int32 pageStart = pageSize * (pageIndex - 1) + 1;
             Int32 pageEnd = pageSize * pageIndex;
+            var logType = GetLogType();
 
             conditions = new Hashtable()
                 {
-                    {"RecordType", SelectedLogType},
+                    {"RecordType", logType},
                     {"StartDate",StartDate},
                     {"EndDate", EndDate},
                     {"PageStart", pageStart},
@@ -296,6 +297,21 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             }
 
             return true;
+        }
+
+        private string GetLogType()
+        {
+            switch (SelectedLogType)
+            {
+                case 0:
+                    return "General";
+                case 1:
+                    return "Alarm";
+                case 2:
+                    return "Exception";
+                default:
+                    return "General";
+            }
         }
 
         private void ExportCommandFunc()
