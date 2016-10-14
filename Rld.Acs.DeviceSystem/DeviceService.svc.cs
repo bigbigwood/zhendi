@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using System.Threading;
 using log4net;
 using Rld.Acs.DeviceSystem.Framework;
 using Rld.Acs.DeviceSystem.Message;
@@ -14,8 +13,6 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility.Extension;
 using Rld.DeviceSystem.Contract.Message;
 using Rld.DeviceSystem.Contract.Model;
-using ConvertorExtension = Rld.Acs.Unility.Extension.ConvertorExtension;
-using EnumerableExtension = Rld.Acs.Unility.Extension.EnumerableExtension;
 using GetDoorStateRequest = Rld.Acs.DeviceSystem.Message.GetDoorStateRequest;
 using GetDoorStateResponse = Rld.Acs.DeviceSystem.Message.GetDoorStateResponse;
 using UpdateDoorStateRequest = Rld.Acs.DeviceSystem.Message.UpdateDoorStateRequest;
@@ -36,6 +33,50 @@ namespace Rld.Acs.DeviceSystem
             {
                 try
                 {
+                    var userRepo = RepositoryManager.GetRepository<IUserRepository>();
+                    var deviceRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
+
+                    Log.Info("Check offline devices");
+                    var allDevices = deviceRepo.QuerySummaryData(new Hashtable() { { "Status", (int)GeneralStatus.Enabled } });
+                    var offlineDevices = allDevices.FindAll(d => WebSocketClientManager.GetInstance().GetClientById(d.Code.ToInt32()) == null);
+                    var onlineDevices = allDevices.Except(offlineDevices);
+
+                    var requestOfflineDevice = offlineDevices.FindAll(x => request.Devices.Select(xx => xx.DeviceID).Contains(x.DeviceID));
+                    if (requestOfflineDevice.Any())
+                    {
+                        var msg = string.Format("设备:[{0}]未连接", string.Join(",", requestOfflineDevice.Select(x => x.Name)));
+                        return new SyncDeviceUsersResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
+                    }
+
+                    //if (offlineDevices.Any())
+                    //{
+                    //    var msg = string.Format("设备:[{0}]未连接", string.Join(",", offlineDevices.Select(x => x.Name)));
+                    //    return new SyncDBUsersResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
+                    //}
+
+                    Log.Info("Load data for request devices...");
+                    var requestDevices = new List<DeviceController>();
+                    request.Devices.ForEach(x =>
+                    {
+                        var d = onlineDevices.FirstOrDefault(e => e.DeviceID == x.DeviceID);
+                        if (d != null)
+                            requestDevices.Add(d);
+                    });
+                    request.Devices = requestDevices;
+
+                    Log.Info("Load data for request users...");
+                    var requestUsers = new List<User>();
+                    request.Users.ForEach(x =>
+                    {
+                        if (x.UserID != 0)
+                        {
+                            x = userRepo.GetByKey(x.UserID);
+                        }
+                        requestUsers.Add(x);
+                    });
+                    request.Users = requestUsers;
+
+                    Log.Info("Process business...");
                     request.Users.ForEach(user => request.Devices.ForEach(device =>
                     {
                         new DeviceUserOp().SyncUser(request.Option, user, device);
@@ -156,10 +197,11 @@ namespace Rld.Acs.DeviceSystem
             {
                 try
                 {
+                    var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
+                    var op = new OperationLogOp();
                     request.Devices.ForEach(d =>
                     {
-                        var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
-                        var logs = new OperationLogOp().QueryNewOperationLogs(d.DeviceID);
+                        var logs = op.QueryNewOperationLogs(d.DeviceID);
                         foreach (var deviceOperationLog in logs)
                         {
                             repo.Insert(deviceOperationLog);
@@ -173,7 +215,6 @@ namespace Rld.Acs.DeviceSystem
                     return new SyncDeviceOperationLogsResponse() { ResultType = ResultTypes.DeviceNotConnected };
                 }
             });
-
         }
 
         public SyncDeviceTrafficLogsResponse SyncDeviceTrafficLogs(SyncDeviceTrafficLogsRequest request)
@@ -182,10 +223,11 @@ namespace Rld.Acs.DeviceSystem
             {
                 try
                 {
+                    var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
+                    var op = new TrafficLogOp();
                     request.Devices.ForEach(d =>
                     {
-                        var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
-                        var logs = new TrafficLogOp().QueryNewTrafficLogs(d.DeviceID);
+                        var logs = op.QueryNewTrafficLogs(d.DeviceID);
                         foreach (var deviceOperationLog in logs)
                         {
                             repo.Insert(deviceOperationLog);

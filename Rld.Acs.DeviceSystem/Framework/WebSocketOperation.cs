@@ -31,7 +31,7 @@ namespace Rld.Acs.DeviceSystem.Framework
                 {
                     OperationManager.GetInstance().AddOperation(Token, this);
                     webSocketClient.Send(request);
-                    Log.InfoFormat("request {0}", request);
+                    Log.InfoFormat("Request: {0}", request);
 
                     while (!blockToken.IsCancellationRequested)
                     {
@@ -39,7 +39,7 @@ namespace Rld.Acs.DeviceSystem.Framework
                     }
 
                     OperationManager.GetInstance().RemoveOperation(Token);
-                    Log.InfoFormat("return {0}", _response);
+                    Log.InfoFormat("Response: {0}", _response);
                     return _response;
                 }
                 else

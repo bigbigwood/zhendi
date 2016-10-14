@@ -24,29 +24,20 @@ namespace Rld.Acs.DeviceSystem.Service
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IUserRepository _userRepo = RepositoryManager.GetRepository<IUserRepository>();
         private IDeviceRoleRepository _deviceRole = RepositoryManager.GetRepository<IDeviceRoleRepository>();
-        private IDeviceControllerRepository _deviceRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
 
         public void SyncUser(SyncOption option, User user, DeviceController device)
         {
-            var deviceInfo = _deviceRepo.GetByKey(device.DeviceID);
-
-            var deviceCode = deviceInfo.Code.ToInt32();
-            if (WebSocketClientManager.GetInstance().GetClientById(deviceCode) == null)
-                throw new DeviceNotConnectedException();
-
-            var userInfo = _userRepo.GetByKey(user.UserID);
-
             switch (option)
             {
                 case SyncOption.Create:
-                    AddUser(userInfo, deviceInfo);
+                    AddUser(user, device);
                     break;
                 case SyncOption.Delete:
-                    DeleteUser(userInfo, deviceInfo);
+                    DeleteUser(user, device);
                     break;
                 case SyncOption.Update:
                 case SyncOption.Unknown:
-                    UpdateUser(userInfo, deviceInfo);
+                    UpdateUser(user, device);
                     break;
             }
         }
@@ -128,10 +119,7 @@ namespace Rld.Acs.DeviceSystem.Service
             var operation = new WebSocketOperation(deviceCode);
             var createUserInfoRequest = new CreateUserInfoRequest() { Token = operation.Token, UserInfo = deviceUser };
             string rawRequest = DataContractSerializationHelper.Serialize(createUserInfoRequest);
-
-            Log.DebugFormat("Request: {0}", rawRequest);
             var rawResponse = operation.Execute(rawRequest);
-            Log.DebugFormat("Response: {0}", rawResponse);
             if (string.IsNullOrWhiteSpace(rawResponse))
             {
                 throw new Exception(string.Format("Create user id:[{0}], device user id:[{1}] to device id:[{2}] fails. Response is empty, maybe the device is not register to device system.",
@@ -224,10 +212,7 @@ namespace Rld.Acs.DeviceSystem.Service
             var operation = new WebSocketOperation(deviceCode);
             var updateUserInfoRequest = new UpdateUserInfoRequest() { Token = operation.Token, UserInfo = deviceUser };
             string rawRequest = DataContractSerializationHelper.Serialize(updateUserInfoRequest);
-
-            Log.DebugFormat("Request: {0}", rawRequest);
             var rawResponse = operation.Execute(rawRequest);
-            Log.DebugFormat("Response: {0}", rawResponse);
             if (string.IsNullOrWhiteSpace(rawResponse))
             {
                 throw new Exception(string.Format("Update user id:[{0}], device user id:[{1}] to device id:[{2}] fails. Response is empty, maybe the device is not register to device system.",
@@ -256,10 +241,7 @@ namespace Rld.Acs.DeviceSystem.Service
             var operation = new WebSocketOperation(deviceCode);
             var deleteUserInfoRequest = new DeleteUserInfoRequest() { Token = operation.Token, UserId = userCode};
             string rawRequest = DataContractSerializationHelper.Serialize(deleteUserInfoRequest);
-
-            Log.DebugFormat("Request: {0}", rawRequest);
             var rawResponse = operation.Execute(rawRequest);
-            Log.DebugFormat("Response: {0}", rawResponse);
             if (string.IsNullOrWhiteSpace(rawResponse))
             {
                 throw new Exception(string.Format("Delete user id:[{0}], device user id:[{1}] to device id:[{2}] fails. Response is empty, maybe the device is not register to device system.",
@@ -286,10 +268,7 @@ namespace Rld.Acs.DeviceSystem.Service
             var operation = new WebSocketOperation(deviceCode);
             var getUserInfoRequest = new GetUserInfoRequest() { Token = operation.Token, UserId = deviceUserId };
             string rawRequest = DataContractSerializationHelper.Serialize(getUserInfoRequest);
-
-            Log.DebugFormat("Request: {0}", rawRequest);
             var rawResponse = operation.Execute(rawRequest);
-            Log.DebugFormat("Response: {0}", rawResponse);
             if (string.IsNullOrWhiteSpace(rawResponse))
             {
                 throw new Exception(string.Format("Getting user id:[{0}], device user id:[{1}] from device id:[{2}]. Response is empty, maybe the device is not register to device system.",
