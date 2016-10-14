@@ -19,15 +19,9 @@ namespace Rld.Acs.DeviceSystem.Service
     public class OperationLogOp
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public IList<DeviceOperationLog> QueryNewOperationLogs(Int32 deviceID)
+        public IList<DeviceOperationLog> QueryNewOperationLogs(DeviceController device)
         {
-            var repo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
-            var deviceInfo = repo.GetByKey(deviceID);
-            var deviceCode = deviceInfo.Code.ToInt32();
-            if (WebSocketClientManager.GetInstance().GetClientById(deviceCode) == null)
-                throw new DeviceNotConnectedException();
-
-            var operation = new WebSocketOperation(deviceCode);
+            var operation = new WebSocketOperation(device.Code.ToInt32());
             var getDeviceOperationLogRequest = new GetDeviceOperationLogRequest()
             {
                 Token = operation.Token, 
@@ -39,11 +33,11 @@ namespace Rld.Acs.DeviceSystem.Service
             var rawResponse = operation.Execute(rawRequest);
 
             var response = DataContractSerializationHelper.Deserialize<GetDeviceOperationLogResponse>(rawResponse);
-            Log.InfoFormat("GetDeviceOperationLogResponse from device id:{0}, result ={1}", deviceID, response.ResultType);
+            Log.InfoFormat("GetDeviceOperationLogResponse from device id:{0}, result ={1}", device.DeviceID, response.ResultType);
 
             if (response.ResultType != ResultType.OK)
             {
-                throw new Exception(string.Format("GetDeviceOperationLogResponse from device id:{0} fails", deviceID));
+                throw new Exception(string.Format("GetDeviceOperationLogResponse from device id:{0} fails", device.DeviceID));
             }
 
             var deviceOperationLogs = new List<DeviceOperationLog>();
@@ -51,11 +45,11 @@ namespace Rld.Acs.DeviceSystem.Service
             {
                 deviceOperationLogs.Add(new DeviceOperationLog()
                 {
-                    DeviceId = deviceID,
+                    DeviceId = device.DeviceID,
                     OperatorId = rawlog.AdminId,
                     DeviceUserId = rawlog.UserId,
-                    DeviceCode = deviceInfo.Code,
-                    DeviceType = deviceInfo.Model,
+                    DeviceCode = device.Code,
+                    DeviceType = device.Model,
                     OperationType = rawlog.OperationType,
                     OperationDescription = rawlog.Message,
                     OperationContent = rawlog.Enroll.ToInt32() != ConvertorExtension.ConvertionFailureValue ? ((AuthenticationType)rawlog.Enroll.ToInt32()).ToString() : "未知",

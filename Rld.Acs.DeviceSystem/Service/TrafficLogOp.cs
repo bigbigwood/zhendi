@@ -18,15 +18,9 @@ namespace Rld.Acs.DeviceSystem.Service
     public class TrafficLogOp
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public IList<DeviceTrafficLog> QueryNewTrafficLogs(Int32 deviceID)
+        public IList<DeviceTrafficLog> QueryNewTrafficLogs(DeviceController device)
         {
-            var repo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
-            var deviceInfo = repo.GetByKey(deviceID);
-            var deviceCode = deviceInfo.Code.ToInt32();
-            if (WebSocketClientManager.GetInstance().GetClientById(deviceCode) == null)
-                throw new DeviceNotConnectedException();
-
-            var operation = new WebSocketOperation(deviceCode);
+            var operation = new WebSocketOperation(device.Code.ToInt32());
             var getDeviceTrafficLogRequest = new GetDeviceTrafficLogRequest()
             {
                 Token = operation.Token, 
@@ -38,11 +32,11 @@ namespace Rld.Acs.DeviceSystem.Service
             var rawResponse = operation.Execute(rawRequest);
 
             var response = DataContractSerializationHelper.Deserialize<GetDeviceTrafficLogResponse>(rawResponse);
-            Log.InfoFormat("GetDeviceTrafficLogResponse from device id:{0}, result ={1}", deviceID, response.ResultType);
+            Log.InfoFormat("GetDeviceTrafficLogResponse from device id:{0}, result ={1}", device.DeviceID, response.ResultType);
 
             if (response.ResultType != ResultType.OK)
             {
-                throw new Exception(string.Format("GetDeviceTrafficLogResponse from device id:{0} fails", deviceID));
+                throw new Exception(string.Format("GetDeviceTrafficLogResponse from device id:{0} fails", device.DeviceID));
             }
 
             var deviceTrafficLogs = new List<DeviceTrafficLog>();
@@ -50,11 +44,11 @@ namespace Rld.Acs.DeviceSystem.Service
             {
                 var log = new DeviceTrafficLog()
                 {
-                    DeviceID = deviceID,
+                    DeviceID = device.DeviceID,
                     DeviceUserID = rawlog.UserId,
-                    DeviceCode = deviceInfo.Code,
-                    DeviceType = deviceInfo.Model,
-                    DeviceSN = deviceInfo.SN,
+                    DeviceCode = device.Code,
+                    DeviceType = device.Model,
+                    DeviceSN = device.SN,
                     RecordType = rawlog.AccessLogType.ToString(),
                     RecordTime = rawlog.CreateTime,
                     RecordUploadTime = DateTime.Now,

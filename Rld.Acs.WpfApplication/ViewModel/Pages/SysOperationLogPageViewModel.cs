@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using log4net;
+using MahApps.Metro.Controls.Dialogs;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility;
@@ -38,31 +39,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
         private async void QueryCommandFunc()
         {
-            await Task.Run(() =>
-            {
-                try
-                {
-                    int totalCount = 0;
-                    var pageIndex = 1;
-                    var conditions = GetConditions();
-                    SysOperationLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
-                    if (totalCount % PageSize == 0)
-                    {
-                        TotalPage = (totalCount / PageSize).ToString();
-                    }
-                    else
-                    {
-                        TotalPage = ((totalCount / PageSize) + 1).ToString();
-                    }
-
-                    RaisePropertyChanged(null);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                }
-
-            });
+            var pageIndex = 1;
+            ProcessQueryPage(pageIndex);
         }
 
         #region 分页相关属性
@@ -72,30 +50,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         /// </summary>
         private async void NextPageSearchCommandFunc()
         {
-            await Task.Run(() =>
-            {
-                try
-                {
-                    int totalCount = 0;
-                    var pageIndex = Convert.ToInt32(CurrentPage);
-                    var conditions = GetConditions();
-                    SysOperationLogViewModels = QueryData(pageIndex, PageSize, out totalCount);
-                    if (totalCount % PageSize == 0)
-                    {
-                        TotalPage = (totalCount / PageSize).ToString();
-                    }
-                    else
-                    {
-                        TotalPage = ((totalCount / PageSize) + 1).ToString();
-                    }
-
-                    RaisePropertyChanged(null);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                }
-            });
+            var pageIndex = Convert.ToInt32(CurrentPage);
+            ProcessQueryPage(pageIndex);
         }
         private string _totalPage = string.Empty;
 
@@ -193,16 +149,64 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             EndDate = DateTime.Now;
         }
 
-
-        private ObservableCollection<SysOperationLogViewModel> QueryData(int pageIndex, int pageSize, out int totalCount)
+        private void ProcessQueryPage(int pageIndex)
         {
-            Int32 pageStart = pageSize * (pageIndex - 1) + 1;
-            Int32 pageEnd = pageSize * pageIndex;
+            try
+            {
+                var conditions = new Hashtable();
+                if (!TryGetConditions(pageIndex, PageSize, out conditions))
+                {
+                    return;
+                }
+                
+                DispatcherHelper.CheckBeginInvokeOnUI(async () =>
+                {
+                    string message = "";
 
-            var conditions = GetConditions();
-            conditions.Add("PageStart", pageStart);
-            conditions.Add("PageEnd", pageEnd);
+                    var controller = await DialogCoordinator.Instance.ShowProgressAsync(this, "查询数据", "查询数据中，请稍等");
+                    controller.SetIndeterminate();
 
+                    await Task.Run(() =>
+                    {
+                        try
+                        {
+                            Log.Info("查询数据中..");
+                            int totalCount = 0;
+                            SysOperationLogViewModels = QueryData(conditions, out totalCount);
+                            if (totalCount % PageSize == 0)
+                            {
+                                TotalPage = (totalCount / PageSize).ToString();
+                            }
+                            else
+                            {
+                                TotalPage = ((totalCount / PageSize) + 1).ToString();
+                            }
+                            RaisePropertyChanged(null);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error(ex);
+                        }
+                    });
+
+                    await controller.CloseAsync();
+
+                    if (!SysOperationLogViewModels.Any())
+                    {
+                        Messenger.Default.Send(new NotificationMessage("查询数据结果为空"), Tokens.SysOperationLogPage_ShowNotification);
+                    }
+                });
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+
+        private ObservableCollection<SysOperationLogViewModel> QueryData(Hashtable conditions, out int totalCount)
+        {
             var paninationResult = _sysOperationLogRepo.QueryPage(conditions);
             totalCount = paninationResult.TotalCount;
             var logVM = paninationResult.Entities.Select(AutoMapper.Mapper.Map<SysOperationLogViewModel>);
@@ -211,14 +215,20 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             return SysOperationLogViewModels;
         }
 
-        private Hashtable GetConditions()
+        private bool TryGetConditions(int pageIndex, int pageSize, out Hashtable conditions)
         {
             var errors = new List<string>();
 
-            var conditions = new Hashtable()
+            Int32 pageStart = pageSize * (pageIndex - 1) + 1;
+            Int32 pageEnd = pageSize * pageIndex;
+            EndDate = EndDate.AddDays(1).AddSeconds(-1);
+
+            conditions = new Hashtable()
                 {
                     {"StartDate",StartDate},
                     {"EndDate", EndDate},
+                    {"PageStart", pageStart},
+                    {"PageEnd", pageEnd},
                 };
 
             if (!string.IsNullOrWhiteSpace(Keyword))
@@ -241,10 +251,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 {
                     Messenger.Default.Send(new NotificationMessage(message), Tokens.SysOperationLogPage_ShowNotification);
                 });
-                throw new Exception("非法输入");
+                return false;
             }
 
-            return conditions;
+            return true;
         }
 
         private void ExportCommandFunc()

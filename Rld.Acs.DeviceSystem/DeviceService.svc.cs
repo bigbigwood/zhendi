@@ -84,9 +84,9 @@ namespace Rld.Acs.DeviceSystem
 
                     return new SyncDeviceUsersResponse() { ResultType = ResultTypes.Ok };
                 }
-                catch (DeviceNotConnectedException dex)
+                catch (Exception ex)
                 {
-                    return new SyncDeviceUsersResponse() { ResultType = ResultTypes.DeviceNotConnected };
+                    return new SyncDeviceUsersResponse() { ResultType = ResultTypes.UnknownError, Messages = new[] { ex.Message } };
                 }
             });
         }
@@ -170,25 +170,7 @@ namespace Rld.Acs.DeviceSystem
 
         public SyncDepartmentUsersResponse SyncDepartmentUsers(SyncDepartmentUsersRequest request)
         {
-            try
-            {
-                if ((request.Departments == null || !request.Departments.Any()) ||
-                    request.Devices == null || !request.Devices.Any())
-                {
-                    return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.Ok };
-                }
-
-                return PersistenceOperation.Process(request, () =>
-                {
-                    request.Departments.ForEach(department => new DepartmentOp().SyncDepartment(department, request.Devices));
-
-                    return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.Ok };
-                });
-            }
-            catch (DeviceNotConnectedException dex)
-            {
-                return new SyncDepartmentUsersResponse() { ResultType = ResultTypes.DeviceNotConnected };
-            }
+            throw new NotImplementedException();
         }
 
         public SyncDeviceOperationLogsResponse SyncDeviceOperationLogs(SyncDeviceOperationLogsRequest request)
@@ -197,11 +179,41 @@ namespace Rld.Acs.DeviceSystem
             {
                 try
                 {
+                    var deviceRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
+
+                    Log.Info("Check offline devices");
+                    var allDevices = deviceRepo.QuerySummaryData(new Hashtable() { { "Status", (int)GeneralStatus.Enabled } });
+                    var offlineDevices = allDevices.FindAll(d => WebSocketClientManager.GetInstance().GetClientById(d.Code.ToInt32()) == null);
+                    var onlineDevices = allDevices.Except(offlineDevices);
+
+                    var requestOfflineDevice = offlineDevices.FindAll(x => request.Devices.Select(xx => xx.DeviceID).Contains(x.DeviceID));
+                    if (requestOfflineDevice.Any())
+                    {
+                        var msg = string.Format("设备:[{0}]未连接", string.Join(",", requestOfflineDevice.Select(x => x.Name)));
+                        return new SyncDeviceOperationLogsResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
+                    }
+
+                    //if (offlineDevices.Any())
+                    //{
+                    //    var msg = string.Format("设备:[{0}]未连接", string.Join(",", offlineDevices.Select(x => x.Name)));
+                    //    return new SyncDBUsersResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
+                    //}
+
+                    Log.Info("Load data for request devices...");
+                    var requestDevices = new List<DeviceController>();
+                    request.Devices.ForEach(x =>
+                    {
+                        var d = onlineDevices.FirstOrDefault(e => e.DeviceID == x.DeviceID);
+                        if (d != null)
+                            requestDevices.Add(d);
+                    });
+                    request.Devices = requestDevices;
+
                     var repo = RepositoryManager.GetRepository<IDeviceOperationLogRepository>();
                     var op = new OperationLogOp();
                     request.Devices.ForEach(d =>
                     {
-                        var logs = op.QueryNewOperationLogs(d.DeviceID);
+                        var logs = op.QueryNewOperationLogs(d);
                         foreach (var deviceOperationLog in logs)
                         {
                             repo.Insert(deviceOperationLog);
@@ -210,9 +222,9 @@ namespace Rld.Acs.DeviceSystem
 
                     return new SyncDeviceOperationLogsResponse() { ResultType = ResultTypes.Ok };
                 }
-                catch (DeviceNotConnectedException dex)
+                catch (Exception ex)
                 {
-                    return new SyncDeviceOperationLogsResponse() { ResultType = ResultTypes.DeviceNotConnected };
+                    return new SyncDeviceOperationLogsResponse() { ResultType = ResultTypes.UnknownError, Messages = new[] { ex.Message } };
                 }
             });
         }
@@ -223,11 +235,41 @@ namespace Rld.Acs.DeviceSystem
             {
                 try
                 {
+                    var deviceRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
+
+                    Log.Info("Check offline devices");
+                    var allDevices = deviceRepo.QuerySummaryData(new Hashtable() { { "Status", (int)GeneralStatus.Enabled } });
+                    var offlineDevices = allDevices.FindAll(d => WebSocketClientManager.GetInstance().GetClientById(d.Code.ToInt32()) == null);
+                    var onlineDevices = allDevices.Except(offlineDevices);
+
+                    var requestOfflineDevice = offlineDevices.FindAll(x => request.Devices.Select(xx => xx.DeviceID).Contains(x.DeviceID));
+                    if (requestOfflineDevice.Any())
+                    {
+                        var msg = string.Format("设备:[{0}]未连接", string.Join(",", requestOfflineDevice.Select(x => x.Name)));
+                        return new SyncDeviceTrafficLogsResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
+                    }
+
+                    //if (offlineDevices.Any())
+                    //{
+                    //    var msg = string.Format("设备:[{0}]未连接", string.Join(",", offlineDevices.Select(x => x.Name)));
+                    //    return new SyncDBUsersResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
+                    //}
+
+                    Log.Info("Load data for request devices...");
+                    var requestDevices = new List<DeviceController>();
+                    request.Devices.ForEach(x =>
+                    {
+                        var d = onlineDevices.FirstOrDefault(e => e.DeviceID == x.DeviceID);
+                        if (d != null)
+                            requestDevices.Add(d);
+                    });
+                    request.Devices = requestDevices;
+
                     var repo = RepositoryManager.GetRepository<IDeviceTrafficLogRepository>();
                     var op = new TrafficLogOp();
                     request.Devices.ForEach(d =>
                     {
-                        var logs = op.QueryNewTrafficLogs(d.DeviceID);
+                        var logs = op.QueryNewTrafficLogs(d);
                         foreach (var deviceOperationLog in logs)
                         {
                             repo.Insert(deviceOperationLog);
@@ -236,9 +278,9 @@ namespace Rld.Acs.DeviceSystem
 
                     return new SyncDeviceTrafficLogsResponse() { ResultType = ResultTypes.Ok };
                 }
-                catch (DeviceNotConnectedException dex)
+                catch (Exception ex)
                 {
-                    return new SyncDeviceTrafficLogsResponse() { ResultType = ResultTypes.DeviceNotConnected };
+                    return new SyncDeviceTrafficLogsResponse() { ResultType = ResultTypes.UnknownError, Messages = new[] { ex.Message } };
                 }
             });
         }

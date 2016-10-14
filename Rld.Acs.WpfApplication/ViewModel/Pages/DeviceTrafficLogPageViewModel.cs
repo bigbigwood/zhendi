@@ -225,6 +225,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     });
 
                     await controller.CloseAsync();
+
+                    if (!DeviceTrafficLogViewModels.Any())
+                    {
+                        Messenger.Default.Send(new NotificationMessage("查询数据结果为空"), Tokens.DeviceTrafficLogPage_ShowNotification);
+                    }
                 });
             }
             catch (Exception ex)
@@ -250,6 +255,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
             Int32 pageStart = pageSize * (pageIndex - 1) + 1;
             Int32 pageEnd = pageSize * pageIndex;
+            EndDate = EndDate.AddDays(1).AddSeconds(-1);
             var logType = GetLogType();
 
             conditions = new Hashtable()

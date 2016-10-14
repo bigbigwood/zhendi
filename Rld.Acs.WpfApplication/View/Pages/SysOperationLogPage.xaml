@@ -10,6 +10,7 @@
       xmlns:customControls="clr-namespace:Rld.Acs.WpfApplication.View.CustomControls"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
+      xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro" Dialog:DialogParticipation.Register="{Binding}"
       DataContext="{Binding SysOperationLogPage, Source={StaticResource Locator}}"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="1000" Unloaded="Page_Unloaded">
