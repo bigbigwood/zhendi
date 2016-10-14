@@ -64,7 +64,6 @@
       <xs:element minOccurs="0" name="DelayOpenSeconds" type="xs:int" />
       <xs:element minOccurs="0" name="DeviceDoorID" type="xs:int" />
       <xs:element minOccurs="0" name="DeviceID" type="xs:int" />
-      <xs:element minOccurs="0" name="DoorIndex" type="xs:int" />
       <xs:element minOccurs="0" name="DuressAlarm" type="xs:boolean" />
       <xs:element minOccurs="0" name="DuressEnabled" type="xs:boolean" />
       <xs:element minOccurs="0" name="DuressFingerPrintIndex" type="xs:int" />
@@ -286,6 +285,7 @@
       <xs:element minOccurs="0" name="CreateDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CreateUserID" type="xs:int" />
       <xs:element minOccurs="0" name="Status" type="tns:GeneralStatus" />
+      <xs:element minOccurs="0" name="TimeGroupCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TimeGroupID" type="xs:int" />
       <xs:element minOccurs="0" name="TimeGroupName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TimeSegments" nillable="true" type="tns:ArrayOfTimeSegment" />
@@ -307,6 +307,7 @@
       <xs:element minOccurs="0" name="CreateUserID" type="xs:int" />
       <xs:element minOccurs="0" name="EndTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Status" type="tns:GeneralStatus" />
+      <xs:element minOccurs="0" name="TimeSegmentCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TimeSegmentID" type="xs:int" />
       <xs:element minOccurs="0" name="TimeSegmentName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />
@@ -326,6 +327,7 @@
       <xs:element minOccurs="0" name="CreateUserID" type="xs:int" />
       <xs:element minOccurs="0" name="Status" type="tns:GeneralStatus" />
       <xs:element minOccurs="0" name="TimeGroupAssociations" nillable="true" type="tns:ArrayOfTimeZoneGroup" />
+      <xs:element minOccurs="0" name="TimeZoneCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TimeZoneID" type="xs:int" />
       <xs:element minOccurs="0" name="TimeZoneName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UpdateDate" nillable="true" type="xs:dateTime" />

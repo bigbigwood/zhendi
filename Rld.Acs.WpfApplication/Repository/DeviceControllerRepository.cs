@@ -29,5 +29,10 @@ namespace Rld.Acs.WpfApplication.Repository
         {
             return CacheableQuery().FirstOrDefault(x => x.DeviceID == key);
         }
+
+        public IEnumerable<DeviceController> QuerySummaryData(Hashtable conditions)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

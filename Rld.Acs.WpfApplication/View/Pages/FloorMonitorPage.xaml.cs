@@ -353,7 +353,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
                     var selectedOption = (DeviceProxy.DoorControlOption)option.GetHashCode();
 
                     ResultTypes resultTypes = new DeviceServiceClient().UpdateDoorState(deviceCode, doorIndex, selectedOption, out messages);
-                    message = MessageHandler.GenerateDeviceMessage(resultTypes, "操作设备成功！", "操作设备失败！");
+                    message = MessageHandler.GenerateDeviceMessage(resultTypes, messages, "操作设备成功！", "操作设备失败！");
                 }
                 catch (Exception ex)
                 {

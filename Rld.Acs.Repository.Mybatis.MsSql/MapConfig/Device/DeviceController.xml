@@ -32,6 +32,15 @@
       <result property="DeviceDoors" column="DeviceID" select="DeviceDoor.GetByDeviceID"/>
       <result property="DeviceHeadReadings" column="DeviceID" select="DeviceHeadReading.GetByDeviceID"/>
     </resultMap>
+
+    <resultMap id="SummaryDeviceControllerResult" class="Rld.Acs.Model.DeviceController">
+      <result property="DeviceID" column="DeviceID"/>
+      <result property="Name" column="Name"/>
+      <result property="Code" column="Code"/>
+      <result property="SN" column="SN"/>
+      <result property="Model" column="Model"/>
+      <result property="Status" column="Status"/>
+    </resultMap>
   </resultMaps>
 
   <statements>
@@ -142,6 +151,26 @@
         </isNotEmpty>
         <isNotEmpty prepend="AND" property="Status">
           Status = #Status#
+        </isNotEmpty>
+      </dynamic>
+    </select>
+
+    <select id="DeviceController.QuerySummaryData" parameterClass="Hashtable" resultMap="SummaryDeviceControllerResult">
+      SELECT D.DeviceID, D.Name, D.Code, D.SN, D.Model, D.Status 
+      FROM DEVICE_CONTROLLERS D
+      where 1=1
+      <dynamic prepend="AND">
+        <isNotEmpty prepend="AND" property="DeviceID">
+          D.DeviceID = #DeviceID#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Name">
+          D.Name = #Name#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Code">
+          D.Code = #Code#
+        </isNotEmpty>
+        <isNotEmpty prepend="AND" property="Status">
+          D.Status = #Status#
         </isNotEmpty>
       </dynamic>
     </select>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Rld.Acs.Repository.Interfaces
 {
     public interface IDeviceControllerRepository : IRepository<DeviceController, Int32>
     {
+        IEnumerable<DeviceController> QuerySummaryData(Hashtable conditions);
     }
 }

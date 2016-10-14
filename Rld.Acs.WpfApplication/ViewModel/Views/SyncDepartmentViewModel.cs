@@ -125,7 +125,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                         string[] messages;
                         DSProxy.ResultTypes resultTypes = new DSProxy.DeviceServiceClient().SyncDepartmentUsers(departments.ToArray(), devices.ToArray(), out messages);
 
-                        message = MessageHandler.GenerateDeviceMessage(resultTypes, "同步数据成功！", "同步数据失败！");
+                        message = MessageHandler.GenerateDeviceMessage(resultTypes, messages, "同步数据成功！", "同步数据失败！");
                     }
                     catch (Exception ex)
                     {

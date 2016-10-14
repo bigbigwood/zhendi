@@ -274,5 +274,32 @@ namespace Rld.Acs.DeviceSystem.Service
                 throw new Exception(string.Format("Delete user id:[{0}], device user id:[{1}] to device id:[{2}] fails.", user.UserID, userCode, deviceID));
             }
         }
+
+        public UserInfo TryGetUesrInfo(User user, DeviceController device)
+        {
+            if (user == null || device == null) return null;
+
+            Log.Info("Trying to get user device info...");
+            var deviceUserId = user.UserCode.ToInt32();
+            var deviceID = device.Code.ToInt32();
+            var deviceCode = device.Code.ToInt32();
+            var operation = new WebSocketOperation(deviceCode);
+            var getUserInfoRequest = new GetUserInfoRequest() { Token = operation.Token, UserId = deviceUserId };
+            string rawRequest = DataContractSerializationHelper.Serialize(getUserInfoRequest);
+
+            Log.DebugFormat("Request: {0}", rawRequest);
+            var rawResponse = operation.Execute(rawRequest);
+            Log.DebugFormat("Response: {0}", rawResponse);
+            if (string.IsNullOrWhiteSpace(rawResponse))
+            {
+                throw new Exception(string.Format("Getting user id:[{0}], device user id:[{1}] from device id:[{2}]. Response is empty, maybe the device is not register to device system.",
+                    user.UserID, deviceUserId, deviceID));
+            }
+
+            var response = DataContractSerializationHelper.Deserialize<GetUserInfoResponse>(rawResponse);
+            Log.InfoFormat("Getting user id:[{0}], device user id:[{1}] from device id:[{2}], result:[{3}]", user.UserID, deviceUserId, deviceID, response.ResultType);
+
+            return response.ResultType == ResultType.OK ?response.UserInfo : null;
+        }
     }
 }

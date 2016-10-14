@@ -9,7 +9,7 @@ namespace Rld.Acs.WpfApplication.Service
 {
     public class MessageHandler
     {
-        public static string GenerateDeviceMessage(ResultTypes resultTypes, string okMessage = "", string failureMessage = "")
+        public static string GenerateDeviceMessage(ResultTypes resultTypes, string[] messages, string okMessage = "", string failureMessage = "")
         {
             var message = "";
             if (resultTypes == ResultTypes.Ok)
@@ -17,7 +17,7 @@ namespace Rld.Acs.WpfApplication.Service
             else if (resultTypes == ResultTypes.NotSupportError)
                 message = "当前设备无法支持此功能";
             else if (resultTypes == ResultTypes.DeviceNotConnected)
-                message = "设备未连接";
+                message = messages.FirstOrDefault();
             else
                 message = failureMessage;
 

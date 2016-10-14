@@ -195,7 +195,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                             string[] messages;
                             var resultTypes = new DeviceServiceClient().SyncDeviceTrafficLogs(devices.ToArray(), out messages);
-                            message = MessageHandler.GenerateDeviceMessage(resultTypes, "同步数据成功！", "同步数据失败！");
+                            message = MessageHandler.GenerateDeviceMessage(resultTypes, messages, "同步数据成功！", "同步数据失败！");
                             Log.Info(message);
                         }
                         catch (Exception ex)
