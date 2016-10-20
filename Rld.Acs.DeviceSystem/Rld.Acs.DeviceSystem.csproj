@@ -91,7 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Framework\DeviceNotConnectedException.cs" />
-    <Compile Include="Message\Enum.cs" />
+    <Compile Include="Model\DeviceUserDto.cs" />
+    <Compile Include="Model\Enum.cs" />
+    <Compile Include="Message\QueryDeviceUsers.cs" />
     <Compile Include="Service\TrafficLogOp.cs" />
     <Compile Include="Service\DeviceUserOp.cs" />
     <Compile Include="TestHandler.ashx.cs">

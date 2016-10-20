@@ -274,4 +274,34 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="QueryDeviceUsersRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Rld.Acs.Model" minOccurs="0" name="Device" nillable="true" type="q29:DeviceController" />
+        <xs:element minOccurs="0" name="UserCode" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryDeviceUsersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Users" nillable="true" type="tns:ArrayOfDeviceUserDto" />
+        <xs:element minOccurs="0" name="ResultType" type="tns:ResultTypes" />
+        <xs:element xmlns:q30="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Messages" nillable="true" type="q30:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfDeviceUserDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DeviceUserDto" nillable="true" type="tns:DeviceUserDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDeviceUserDto" nillable="true" type="tns:ArrayOfDeviceUserDto" />
+  <xs:complexType name="DeviceUserDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="UserCode" type="xs:int" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeviceUserDto" nillable="true" type="tns:DeviceUserDto" />
 </xs:schema>

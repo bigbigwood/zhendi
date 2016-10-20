@@ -19,9 +19,9 @@ namespace Rld.Acs.Model
         public virtual DateTime StartDate { get; set; }
         public virtual DateTime? EndDate { get; set; }
 
-        public virtual IList<UserAuthentication> UserAuthentications{ get; set; }
+        public virtual List<UserAuthentication> UserAuthentications{ get; set; }
         public virtual UserProperty UserPropertyInfo { get; set; }
-        public virtual IList<UserDeviceRole> UserDeviceRoles { get; set; }
+        public virtual List<UserDeviceRole> UserDeviceRoles { get; set; }
 
         public User()
         {

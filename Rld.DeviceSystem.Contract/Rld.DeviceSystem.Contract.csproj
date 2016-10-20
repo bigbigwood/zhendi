@@ -67,6 +67,8 @@
     <Compile Include="Message\GetSystemInfoResponse.cs" />
     <Compile Include="Message\GetDoorStateRequest.cs" />
     <Compile Include="Message\GetDeviceTrafficLogRequest.cs" />
+    <Compile Include="Message\GetAllUsersRequest.cs" />
+    <Compile Include="Message\GetAllUsersResponse.cs" />
     <Compile Include="Message\UpdateDoorStateResponse.cs" />
     <Compile Include="Message\UpdateDoorStateRequest.cs" />
     <Compile Include="Message\UpdateDeviceInfoRequest.cs" />

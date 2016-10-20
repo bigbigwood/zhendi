@@ -16,6 +16,7 @@ using GalaSoft.MvvmLight.Threading;
 using log4net;
 using MahApps.Metro.Controls.Dialogs;
 using Ninject.Activation.Caching;
+using Org.BouncyCastle.Bcpg;
 using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility;
@@ -41,6 +42,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
         public RelayCommand<TreeViewNode> SelectedTreeNodeChangedCmd { get; private set; }
+        public RelayCommand QueryDeviceUserCmd { get; private set; }
         public RelayCommand MoveToSelectedCmd { get; private set; }
         public RelayCommand RemoveSelectedCmd { get; private set; }
         public RelayCommand SelectedAllSourceUserCmd { get; private set; }
@@ -56,7 +58,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         {
             get { return ApplicationManager.GetInstance().AuthorizationDepartments; }
         }
-
+        public DeviceController SelectedDevice { get; set; }
+        public string UserCode { get; set; }
         public SyncUserType SyncUserType { get; set; }
         public ObservableCollection<SelectableItem> DeviceDtos { get; set; }
 
@@ -78,6 +81,22 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 }
             }
         }
+        private ObservableCollection<SelectableItem> _deviceUserDtos;
+        public ObservableCollection<SelectableItem> DeviceUserDtos
+        {
+            get { return _deviceUserDtos; }
+            set
+            {
+                if (_deviceUserDtos != value)
+                {
+                    _deviceUserDtos = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public SelectableItem SelectedDeviceUser { get; set; }
+
         private ObservableCollection<SelectableItem> _selectedSyncUserDtos;
 
         public ObservableCollection<SelectableItem> SelectedSyncUserDtos
@@ -104,24 +123,28 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             RemoveSelectedCmd = new RelayCommand(RemoveSelected);
             SelectedAllSourceUserCmd = new RelayCommand(SelectAllDepartmentUsers);
             SelectedAllTargetUserCmd = new RelayCommand(RemoveAllSelectedUsers);
+            QueryDeviceUserCmd = new RelayCommand(QueryDeviceUser);
 
             DepartmentUserDtos = new ObservableCollection<SelectableItem>();
             SelectedSyncUserDtos = new ObservableCollection<SelectableItem>();
+            DeviceUserDtos = new ObservableCollection<SelectableItem>();
 
             var dtos = AuthorizationDevices.Select(x => new ListBoxItem {ID = x.DeviceID, DisplayName = x.Name});
             DeviceDtos = new ObservableCollection<SelectableItem>(dtos);
         }
 
-
         private void Save()
         {
-            var validator = NinjectBinder.GetValidator<SyncUserViewModelValidator>();
-            var results = validator.Validate(this);
-            if (!results.IsValid)
+            if (SyncUserType == SyncUserType.SyncUserToDevice)
             {
-                var message = string.Join("\n", results.Errors);
-                SendMessage(message);
-                return;
+                var validator = NinjectBinder.GetValidator<SyncUserViewModelValidator>();
+                var results = validator.Validate(this);
+                if (!results.IsValid)
+                {
+                    var message = string.Join("\n", results.Errors);
+                    SendMessage(message);
+                    return;
+                }
             }
 
             string question = "确定同步数据吗？";
@@ -141,18 +164,27 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 {
                     try
                     {
-                        var devices = DeviceDtos.FindAll(d => d.IsSelected).Select(dd => new DeviceController() { DeviceID = dd.ID });
-                        var users = SelectedSyncUserDtos.Select(u => new User() { UserID = u.ID });
-
+ 
                         DSProxy.ResultTypes resultTypes;
                         string[] messages;
 
                         if (SyncUserType == SyncUserType.SyncDeviceToUser)
                         {
+                            var devices = new[] { SelectedDevice };
+                            var users = SelectedSyncUserDtos.Select(u =>
+                            {
+                                var userId = string.IsNullOrWhiteSpace(u.Description) ? 0 : u.Description.ToInt32();
+                                var userCode = u.ID.ToString();
+                                return new User() {UserID = userId, UserCode = userCode, Name = u.DisplayName};
+                            });
+
                             resultTypes = new DSProxy.DeviceServiceClient().SyncSystemUsers(devices.ToArray(), users.ToArray(), out messages);
                         }
                         else
                         {
+                            var devices = DeviceDtos.FindAll(d => d.IsSelected).Select(dd => new DeviceController() { DeviceID = dd.ID });
+                            var users = SelectedSyncUserDtos.Select(u => new User() { UserID = u.ID, Name = u.DisplayName });
+
                             resultTypes = new DSProxy.DeviceServiceClient().SyncDeviceUsers(devices.ToArray(), DSProxy.SyncOption.Unknown, users.ToArray(),out messages);
                         }
 
@@ -228,16 +260,28 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             }
         }
 
+        private ObservableCollection<SelectableItem> GetSourceUserDtos()
+        {
+            if (SyncUserType == SyncUserType.SyncDeviceToUser)
+            {
+                return DeviceUserDtos;
+            }
+            else
+            {
+                return DepartmentUserDtos;
+            }
+        }
+
         private void MoveToSelected()
         {
-            var selectedUsers = DepartmentUserDtos.FindAll(u => u.IsSelected);
+            var selectedUsers = GetSourceUserDtos().FindAll(u => u.IsSelected);
             if (selectedUsers == null || !selectedUsers.Any()) return;
 
             selectedUsers.ForEach(u =>
             {
                 if (SelectedSyncUserDtos.All(sy => sy.ID != u.ID))
                 {
-                    SelectedSyncUserDtos.Add(new ComboBoxItem() { ID = u.ID, DisplayName = u.DisplayName });
+                    SelectedSyncUserDtos.Add(new ComboBoxItem() { ID = u.ID, DisplayName = u.DisplayName, Description = u.Description});
                 }
             });
         }
@@ -252,10 +296,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         private void SelectAllDepartmentUsers()
         {
-            if (DepartmentUserDtos == null || DepartmentUserDtos.Count == 0)
+            var sourceUserDtos = GetSourceUserDtos();
+            if (sourceUserDtos == null || sourceUserDtos.Count == 0)
                 return;
 
-            DepartmentUserDtos.ForEach(u =>
+            sourceUserDtos.ForEach(u =>
             {
                 if (SelectedSyncUserDtos.All(sy => sy.ID != u.ID))
                 {
@@ -266,11 +311,74 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         private void RemoveAllSelectedUsers()
         {
-            //var temp = SelectedSyncUserDtos;
-            //SelectedSyncUserDtos = new ObservableCollection<SelectableItem>();
-            //temp.ForEach(t => SelectedSyncUserDtos.Add(new ComboBoxItem() { ID = t.ID, DisplayName = t.DisplayName, IsSelected = true }));
-
             SelectedSyncUserDtos = new ObservableCollection<SelectableItem>();
+        }
+
+        private void QueryDeviceUser()
+        {
+            if (SelectedDevice == null)
+            {
+                SendMessage("选择设备不能为空。");
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(UserCode) && UserCode.ToInt32() == ConvertorExtension.ConvertionFailureValue)
+            {
+                SendMessage("输入的人员工号值无效。");
+                return;
+            }
+
+            DispatcherHelper.CheckBeginInvokeOnUI(async () =>
+            {
+                string message = "";
+                DSProxy.DeviceUserDto[] deviceUsers = null;
+
+                var controller = await DialogCoordinator.Instance.ShowProgressAsync(this, "查询设备人员", "查询设备人员中，请稍等");
+                controller.SetIndeterminate();
+
+                await Task.Run(() =>
+                {
+                    try
+                    {
+                        DSProxy.ResultTypes resultTypes;
+                        string[] messages;
+
+                        deviceUsers = new DSProxy.DeviceServiceClient().QueryDeviceUsers(SelectedDevice, UserCode, out resultTypes, out messages);
+                        message = MessageHandler.GenerateDeviceMessage(resultTypes, messages, "", "查询设备人员失败！");
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex);
+                        message = "查询设备人员失败！";
+                    }
+                });
+
+                await controller.CloseAsync();
+
+                if (!string.IsNullOrWhiteSpace(message))
+                {
+                    Messenger.Default.Send(new NotificationMessage(message), Tokens.SyncUserView_ShowNotification);
+                }
+                else
+                {
+                    DeviceUserDtos = new ObservableCollection<SelectableItem>();
+                    if (deviceUsers != null && deviceUsers.Any())
+                    {
+                        deviceUsers.OrderBy(x => x.UserCode).ForEach(x =>
+                        {
+                            var item = new ComboBoxItem() { ID = x.UserCode, DisplayName = x.UserName };
+                            var conditions = new Hashtable() { { "UserCode", x.UserCode} };
+                            var userInfo = _userRepo.QueryUsersForSummaryData(conditions).FirstOrDefault();
+                            if (userInfo != null)
+                            {
+                                item.Description = userInfo.UserID.ToString();
+                            }
+
+                            DeviceUserDtos.Add(item);
+                        });
+                    }
+                }
+            });
         }
     }
 }

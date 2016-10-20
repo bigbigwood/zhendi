@@ -6,6 +6,7 @@ using System.ServiceModel;
 using log4net;
 using Rld.Acs.DeviceSystem.Framework;
 using Rld.Acs.DeviceSystem.Message;
+using Rld.Acs.DeviceSystem.Model;
 using Rld.Acs.DeviceSystem.Service;
 using Rld.Acs.Model;
 using Rld.Acs.Repository;
@@ -159,11 +160,11 @@ namespace Rld.Acs.DeviceSystem
                         systemUserOp.SyncUser(user, request.Devices);
                     });
 
-                    return new SyncDBUsersResponse() { ResultType = ResultTypes.Ok};
+                    return new SyncDBUsersResponse() { ResultType = ResultTypes.Ok };
                 }
                 catch (Exception ex)
                 {
-                    return new SyncDBUsersResponse() { ResultType = ResultTypes.UnknownError, Messages = new []{ex.Message}};
+                    return new SyncDBUsersResponse() { ResultType = ResultTypes.UnknownError, Messages = new[] { ex.Message } };
                 }
             });
         }
@@ -345,6 +346,43 @@ namespace Rld.Acs.DeviceSystem
                 });
 
                 return new SyncDevicesResponse() { ResultType = ResultTypes.Ok, NewDeviceControllers = newDeviceControllers };
+            });
+        }
+
+        public QueryDeviceUsersResponse QueryDeviceUsers(QueryDeviceUsersRequest request)
+        {
+            return PersistenceOperation.Process(request, () =>
+            {
+                var userDtos = new List<DeviceUserDto>();
+                var deviceUsers = new List<UserInfo>();
+                var op = new DeviceUserOp();
+
+                if (!string.IsNullOrWhiteSpace(request.UserCode))
+                {
+                    var userRepo = RepositoryManager.GetRepository<IUserRepository>();
+                    var userInfo = userRepo.QueryUsersForSummaryData(new Hashtable() { { "UserCode", request.UserCode } }).FirstOrDefault();
+                    if (userInfo != null)
+                    {
+                        var deviceUser = op.TryGetUesrInfo(userInfo, request.Device);
+                        if (deviceUser!= null)
+                            deviceUsers.Add(deviceUser);
+                    }
+                }
+                else
+                {
+                    deviceUsers = op.QueryUsersByDevice(request.Device);
+                }
+
+                if (deviceUsers != null)
+                {
+                    deviceUsers.ForEach(x => userDtos.Add(new DeviceUserDto()
+                    {
+                        UserCode = x.UserId,
+                        UserName = string.IsNullOrWhiteSpace(x.UserName) ? "未命名人员" : x.UserName,
+                    }));
+                }
+
+                return new QueryDeviceUsersResponse() { ResultType = ResultTypes.Ok, Users = userDtos };
             });
         }
     }

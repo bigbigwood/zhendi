@@ -9,19 +9,19 @@ using Rld.Acs.Model;
 namespace Rld.Acs.DeviceSystem.Message
 {
     [MessageContract(IsWrapped = true)]
-    public class SyncDeviceUsersRequest : RequestBase
+    public class QueryDeviceUsersRequest : RequestBase
     {
         [MessageBodyMember]
-        public SyncOption Option { get; set; }
-        [MessageBodyMember]
-        public List<User> Users { get; set; }
+        public String UserCode { get; set; }
 
         [MessageBodyMember]
-        public List<DeviceController> Devices { get; set; }
+        public DeviceController Device { get; set; }
     }
 
     [MessageContract(IsWrapped = true)]
-    public class SyncDeviceUsersResponse : ResponseBase
+    public class QueryDeviceUsersResponse : ResponseBase
     {
+        [MessageBodyMember]
+        public List<DeviceUserDto> Users { get; set; }
     }
 }

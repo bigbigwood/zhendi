@@ -112,6 +112,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="QueryDeviceUsers">
+      <soap:operation soapAction="http://www.realand.com/DeviceSystem/IDeviceService/QueryDeviceUsers" style="document" />
+      <wsdl:input name="QueryDeviceUsersRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="QueryDeviceUsersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="DeviceService">
     <wsdl:port name="BasicHttpBinding_IDeviceService" binding="tns:BasicHttpBinding_IDeviceService">

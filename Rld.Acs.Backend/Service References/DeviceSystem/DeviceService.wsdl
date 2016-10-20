@@ -80,6 +80,12 @@
   <wsdl:message name="SearchNewDevicesResponse">
     <wsdl:part name="parameters" element="tns:SearchNewDevicesResponse" />
   </wsdl:message>
+  <wsdl:message name="QueryDeviceUsersRequest">
+    <wsdl:part name="parameters" element="tns:QueryDeviceUsersRequest" />
+  </wsdl:message>
+  <wsdl:message name="QueryDeviceUsersResponse">
+    <wsdl:part name="parameters" element="tns:QueryDeviceUsersResponse" />
+  </wsdl:message>
   <wsdl:portType name="IDeviceService">
     <wsdl:operation name="SyncSystemUsers">
       <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SyncSystemUsers" name="SyncDBUsersRequest" message="tns:SyncDBUsersRequest" />
@@ -128,6 +134,10 @@
     <wsdl:operation name="SearchNewDevices">
       <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevices" name="SearchNewDevicesRequest" message="tns:SearchNewDevicesRequest" />
       <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevicesResponse" name="SearchNewDevicesResponse" message="tns:SearchNewDevicesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryDeviceUsers">
+      <wsdl:input wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/QueryDeviceUsers" name="QueryDeviceUsersRequest" message="tns:QueryDeviceUsersRequest" />
+      <wsdl:output wsaw:Action="http://www.realand.com/DeviceSystem/IDeviceService/QueryDeviceUsersResponse" name="QueryDeviceUsersResponse" message="tns:QueryDeviceUsersResponse" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

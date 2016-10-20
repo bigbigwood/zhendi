@@ -12,7 +12,7 @@ namespace Rld.Acs.DeviceSystem.Message
     public class SyncTimeZonesRequest : RequestBase
     {
         [MessageBodyMember]
-        public List<Model.TimeZone> TimeZones { get; set; }
+        public List<Rld.Acs.Model.TimeZone> TimeZones { get; set; }
 
         [MessageBodyMember]
         public List<DeviceController> Devices { get; set; }

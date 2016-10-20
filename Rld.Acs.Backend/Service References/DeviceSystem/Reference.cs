@@ -10,6 +10,7 @@
 
 namespace Rld.Acs.Backend.DeviceSystem {
     using System.Runtime.Serialization;
+    using System;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -82,6 +83,67 @@ namespace Rld.Acs.Backend.DeviceSystem {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         CancelAlarm = 6,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeviceUserDto", Namespace="http://www.realand.com/DeviceSystem/")]
+    [System.SerializableAttribute()]
+    public partial class DeviceUserDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserCode {
+            get {
+                return this.UserCodeField;
+            }
+            set {
+                if ((this.UserCodeField.Equals(value) != true)) {
+                    this.UserCodeField = value;
+                    this.RaisePropertyChanged("UserCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserName {
+            get {
+                return this.UserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserNameField, value) != true)) {
+                    this.UserNameField = value;
+                    this.RaisePropertyChanged("UserName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -173,6 +235,13 @@ namespace Rld.Acs.Backend.DeviceSystem {
         // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
         [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevices", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/SearchNewDevicesResponse")]
         System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SearchNewDevicesResponse> SearchNewDevicesAsync(Rld.Acs.Backend.DeviceSystem.SearchNewDevicesRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/QueryDeviceUsers", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/QueryDeviceUsersResponse")]
+        Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersResponse QueryDeviceUsers(Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersRequest request);
+        
+        // CODEGEN: 正在生成消息协定，应为该操作具有多个返回值。
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.realand.com/DeviceSystem/IDeviceService/QueryDeviceUsers", ReplyAction="http://www.realand.com/DeviceSystem/IDeviceService/QueryDeviceUsersResponse")]
+        System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersResponse> QueryDeviceUsersAsync(Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -645,6 +714,50 @@ namespace Rld.Acs.Backend.DeviceSystem {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="QueryDeviceUsersRequest", WrapperNamespace="http://www.realand.com/DeviceSystem/", IsWrapped=true)]
+    public partial class QueryDeviceUsersRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
+        public Rld.Acs.Model.DeviceController Device;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
+        public string UserCode;
+        
+        public QueryDeviceUsersRequest() {
+        }
+        
+        public QueryDeviceUsersRequest(Rld.Acs.Model.DeviceController Device, string UserCode) {
+            this.Device = Device;
+            this.UserCode = UserCode;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="QueryDeviceUsersResponse", WrapperNamespace="http://www.realand.com/DeviceSystem/", IsWrapped=true)]
+    public partial class QueryDeviceUsersResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=0)]
+        public Rld.Acs.Backend.DeviceSystem.DeviceUserDto[] Users;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=1)]
+        public Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://www.realand.com/DeviceSystem/", Order=2)]
+        public string[] Messages;
+        
+        public QueryDeviceUsersResponse() {
+        }
+        
+        public QueryDeviceUsersResponse(Rld.Acs.Backend.DeviceSystem.DeviceUserDto[] Users, Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, string[] Messages) {
+            this.Users = Users;
+            this.ResultType = ResultType;
+            this.Messages = Messages;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IDeviceServiceChannel : Rld.Acs.Backend.DeviceSystem.IDeviceService, System.ServiceModel.IClientChannel {
     }
@@ -885,6 +998,25 @@ namespace Rld.Acs.Backend.DeviceSystem {
         
         public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.SearchNewDevicesResponse> SearchNewDevicesAsync(Rld.Acs.Backend.DeviceSystem.SearchNewDevicesRequest request) {
             return base.Channel.SearchNewDevicesAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersResponse Rld.Acs.Backend.DeviceSystem.IDeviceService.QueryDeviceUsers(Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersRequest request) {
+            return base.Channel.QueryDeviceUsers(request);
+        }
+        
+        public Rld.Acs.Backend.DeviceSystem.DeviceUserDto[] QueryDeviceUsers(Rld.Acs.Model.DeviceController Device, string UserCode, out Rld.Acs.Backend.DeviceSystem.ResultTypes ResultType, out string[] Messages) {
+            Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersRequest inValue = new Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersRequest();
+            inValue.Device = Device;
+            inValue.UserCode = UserCode;
+            Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersResponse retVal = ((Rld.Acs.Backend.DeviceSystem.IDeviceService)(this)).QueryDeviceUsers(inValue);
+            ResultType = retVal.ResultType;
+            Messages = retVal.Messages;
+            return retVal.Users;
+        }
+        
+        public System.Threading.Tasks.Task<Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersResponse> QueryDeviceUsersAsync(Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersRequest request) {
+            return base.Channel.QueryDeviceUsersAsync(request);
         }
     }
 }

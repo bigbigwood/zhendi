@@ -15,6 +15,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.UserInfo
     public class UserInfoMapper
     {
         private static readonly ILog Log = LogManager.GetLogger(global::System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly List<int> RoleIdList = new List<int>() { (int)UserRole.User, (int)UserRole.Custom, (int)UserRole.LogQuery, (int)UserRole.Manager, (int)UserRole.Registrar, };
 
         public static Contract.Model.UserInfo ToModel(User deviceUser)
         {
@@ -28,6 +29,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.UserInfo
                 userInfo.UserStatus = deviceUser.Enable;
                 userInfo.DepartmentId = deviceUser.Department;
                 userInfo.AccessTimeZoneId = deviceUser.AccessTimeZone;
+
 
                 var enroll = deviceUser.Enrolls.First();
                 var services = new List<CredentialService>();
@@ -56,6 +58,18 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Mapper.UserInfo
                 Log.Error(ex);
                 throw;
             }
+        }
+
+        public static Contract.Model.UserInfo ToUserSummaryDto(User deviceUser)
+        {
+            var userInfo = new Contract.Model.UserInfo() { UserId = (int)deviceUser.DIN };
+            userInfo.UserName = deviceUser.UserName;
+            if (RoleIdList.Contains(deviceUser.Privilege))
+            {
+                userInfo.Role = (UserRole)deviceUser.Privilege;
+            }
+
+            return userInfo;
         }
 
         public static void UpdateSystemInfo(ref User deviceUser, Contract.Model.UserInfo userInfo)

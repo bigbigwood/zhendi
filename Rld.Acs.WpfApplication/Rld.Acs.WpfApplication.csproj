@@ -733,7 +733,13 @@
     <None Include="Service References\DeviceProxy\DeviceService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.DeviceUserDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.GetDoorStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.QueryDeviceUsersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DeviceProxy\Rld.Acs.WpfApplication.DeviceProxy.ResultTypes.datasource">

@@ -8,7 +8,6 @@ INSERT SYS_OPERATOR VALUES (1, 'operator', 'GF3jBpL337repwI6VrxjgNM6Yci/AgHKdMBs
 INSERT SYS_OPERATOR VALUES (1, 'monitor', 'i4Kv5U6mUts/FSvkNG/JTT/FnTLHx1xv78Mit4QRGJU=', '91d19017-f20a-49e1-935c-04c1c19c7453', 2052, NULL, 1, '2016-01-01', 1, NULL, NULL)
 INSERT SYS_OPERATOR VALUES (1, '管理员', 'GF3jBpL337repwI6VrxjgNM6Yci/AgHKdMBspeUCwK0=', '91d19017-f20a-49e1-935c-04c1c19c7453', 2052, NULL, 1, '2016-01-01', 1, NULL, NULL)
 
-
 INSERT TIME_SEGMENTS VALUES ( N'上午', N'0', N'08:30', N'12:00', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
 INSERT TIME_SEGMENTS VALUES ( N'下午', N'1', N'13:30', N'18:00', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
 INSERT TIME_SEGMENTS VALUES ( N'晚上', N'2', N'19:30', N'21:00', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
@@ -70,8 +69,7 @@ INSERT DEVICE_HEADREADINGS VALUES  ( 1, N'大门读头一', N'1', N'00-00-00-00-
 INSERT DEVICE_HEADREADINGS VALUES  ( 1, N'大门读头二', N'2', N'00-00-00-00-00-00', N'222222', 1, N'', 1)
 INSERT DEVICE_HEADREADINGS VALUES  ( 2, N'财务门读头', N'1', N'00-00-00-00-00-00', N'333333', 1, N'', 1)
 
-INSERT dbo.DEVICE_GROUP VALUES ('设备组一', 7, 8)
-
+INSERT dbo.DEVICE_GROUP VALUES ('设备组一', 1, 2)
 
 INSERT DEVICE_ROLES VALUES (N'管理员', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
 INSERT DEVICE_ROLES VALUES (N'经理', 1, '2016-01-01 00:00:00.000', 1, NULL, NULL)
@@ -333,6 +331,7 @@ INSERT SYS_ROLE_PERMISSIONS VALUES (3, 32, NULL)
 INSERT SYS_ROLE_PERMISSIONS VALUES (3, 33, NULL)
 
 --系统配置
+-- 1.告警服务
 INSERT dbo.SYS_CONFIG VALUES (N'AlarmEmailAccounts', N'32990091@qq.com;', N'The email accounts which will receive a warning email while alarm case trigger.', N'1.0')
 INSERT dbo.SYS_CONFIG VALUES (N'AlarmSMSAccounts', N'', N'The phones which will receive a warning sms while alarm case trigger.', N'1.0')
 INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobScanTime', N'2016-01-01 00:00:00.001', N'last Device Alarm Job Scan Time', N'1.0')
@@ -341,9 +340,12 @@ INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_FromAccountDisplayName', N'�
 INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_Subject', N'设备告警服务标题', N'', N'1.0')
 INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobEmail_Body', N'重要事情说三遍！发现设备告警记录！发现设备告警记录！发现设备告警记录！', N'', N'1.0')
 INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobSms_Body', N'重要事情说三遍！发现设备告警记录！发现设备告警记录！发现设备告警记录！', N'', N'1.0')
-
+-- 2.数据同步
 INSERT dbo.SYS_CONFIG VALUES (N'DataSyncConfig', N'02:00:00', N'', N'1.0')
-INSERT dbo.SYS_CONFIG VALUES (N'DataSyncJobScanTime', N'2016-01-01 00:00:00.001', N'last data sync job scan time', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DataSyncJobScanTime', N'2016-01-01 00:00:00.001', N'同步任务的最后扫描时间', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DataSyncDefaultDepartment', N'1', N'数据同步默认部门', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DataSyncDefaultRole', N'1', N'数据同步默认角色', N'1.0')
+-- 3.数据清理
 INSERT dbo.SYS_CONFIG VALUES (N'AutoCleanConfig', N'SysLogExpireMonths=3;DeviceTrafficLogExpiredMonths=3;DeviceMngtLogExpiredMonths=3;DoorHistoryExpiredMonths=3;', N'', N'1.0')
 
 --楼层

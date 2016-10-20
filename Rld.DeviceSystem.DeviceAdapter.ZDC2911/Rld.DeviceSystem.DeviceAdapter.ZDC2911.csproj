@@ -113,6 +113,7 @@
     <Compile Include="Operations\TimeOperation\GetAllTimeGroupsOp.cs" />
     <Compile Include="Operations\TimeOperation\GetAllTimeSegmentsOp.cs" />
     <Compile Include="Operations\TimeOperation\BatchUpdateTimeSegmentsOp.cs" />
+    <Compile Include="Operations\UserOperation\GetAllUsersOp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\UserEnrollSummary.cs" />
     <Compile Include="Mapper\Device\DeviceInfoMapper.cs" />

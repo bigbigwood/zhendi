@@ -17,5 +17,13 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Helper
                 (ex, timeSpan, context) =>
                     Log.Info("Device reutrn failure, will retry"));
         }
+
+        public static RetryPolicy<Boolean> GetOneRetryPolicy()
+        {
+            return Policy.HandleResult<bool>(b => b == false)
+                .Retry(1,
+                (ex, timeSpan, context) =>
+                    Log.Info("Device reutrn failure, will retry 1 more time."));
+        }
     }
 }

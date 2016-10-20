@@ -5,6 +5,7 @@ using System.Linq;
 using log4net;
 using Rld.Acs.DeviceSystem.Framework;
 using Rld.Acs.DeviceSystem.Message;
+using Rld.Acs.DeviceSystem.Model;
 using Rld.Acs.Model;
 using Rld.Acs.Model.Extension;
 using Rld.Acs.Repository;
@@ -279,6 +280,27 @@ namespace Rld.Acs.DeviceSystem.Service
             Log.InfoFormat("Getting user id:[{0}], device user id:[{1}] from device id:[{2}], result:[{3}]", user.UserID, deviceUserId, deviceID, response.ResultType);
 
             return response.ResultType == ResultType.OK ?response.UserInfo : null;
+        }
+
+        public List<UserInfo> QueryUsersByDevice(DeviceController device)
+        {
+            if (device == null) return null;
+
+            var deviceID = device.Code.ToInt32();
+            var deviceCode = device.Code.ToInt32();
+            var operation = new WebSocketOperation(deviceCode);
+            var getAllUsersRequest = new GetAllUsersRequest() { Token = operation.Token };
+            string rawRequest = DataContractSerializationHelper.Serialize(getAllUsersRequest);
+            var rawResponse = operation.Execute(rawRequest);
+            if (string.IsNullOrWhiteSpace(rawResponse))
+            {
+                throw new Exception(string.Format("Query users from device id:[{0}]. Response is empty, maybe the device is not register to device system.", deviceID));
+            }
+
+            var response = DataContractSerializationHelper.Deserialize<GetAllUsersResponse>(rawResponse);
+            Log.InfoFormat("Query users from device id:[{0}], result:[{1}]", deviceID, response.ResultType);
+
+            return response.ResultType == ResultType.OK ? response.Users.ToList() : null;
         }
     }
 }

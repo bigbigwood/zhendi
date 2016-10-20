@@ -159,6 +159,9 @@
       FROM SYS_USER U left join SYS_USER_PROPERTY P
       On U.UserPropertyID = P.UserPropertyID
       <dynamic prepend="WHERE">
+        <isNotNull prepend="AND" property="UserID">
+          U.UserID = #UserID#
+        </isNotNull>
         <isNotNull prepend="AND" property="DepartmentID">
           U.DepartmentID = #DepartmentID#
         </isNotNull>

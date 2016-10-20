@@ -7,7 +7,6 @@ namespace Rld.DeviceSystem.Contract.Message
     [DataContract(Namespace = Declarations.NameSpace)]
     public class GetUserInfoResponse : ResponseBase
     {
-        [MessageBodyMember]
         [DataMember]
         public UserInfo UserInfo { get; set; }
 

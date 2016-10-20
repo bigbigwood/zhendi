@@ -80,7 +80,7 @@
             </TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="0" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="选择设备" Margin="0"/>
+                        <TextBlock Name="tb_conditions" Text="选择设备" Margin="0"/>
             </TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="0" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
@@ -89,21 +89,44 @@
 
             <ComboBox Grid.Row="0" Grid.Column="1" SelectedItem="{Binding SyncUserType}"
                               ItemsSource="{Binding Source={AppModels:EnumBindingSource {x:Type AppModels:SyncUserType}}}" 
-                      Width="180" Margin="2,3" HorizontalAlignment="Left"/>
+                      Width="180" Margin="2,3" HorizontalAlignment="Left" SelectionChanged="OnSyncUserTypeChanged"/>
 
             <Border Grid.Row="1" Grid.Column="1"  BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
-                <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding DeviceDtos}" HorizontalAlignment="Stretch">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <Grid >
+                    <ListView Name="ListView_DevcieBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding DeviceDtos}" HorizontalAlignment="Stretch" >
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Grid Name="Grid_DevcieUsersSearchBox" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="32"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition  Width="Auto"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="选择设备:" Margin="10"/>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="人员工号:" Margin="10"/>
+
+                        <ComboBox Grid.Row="0" Grid.Column="1" Margin="2,3" HorizontalAlignment="Stretch"
+                              ItemsSource="{Binding AuthorizationDevices, Mode=OneWay}" SelectedItem="{Binding SelectedDevice}" SelectedValuePath="DeviceID" DisplayMemberPath="Name" />
+                        <TextBox  Grid.Row="0" Grid.Column="3" Margin="2,3" Text="{Binding UserCode}"/>
+
+                        <Button Grid.Row="1" Grid.Column="3" Content="查询设备人员" Margin="60,0,0,0" Width="100" Command="{Binding QueryDeviceUserCmd}"/>
+                    </Grid>
+                </Grid>
             </Border>
 
             <Grid Grid.Row="2" Grid.Column="1">
@@ -113,49 +136,73 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
-                    <Grid >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid Name="Grid_SystemUsers">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
 
-                        <TreeView Grid.Column="0"  Name="lstDepartment" ItemsSource="{Binding TreeViewSource}">
-                            <TreeView.Resources>
-                                <Style x:Key="ExpandingImageStyle" TargetType="{x:Type Image}">
-                                    <Setter Property="Source" Value="{DynamicResource icon_treeitem_closed}"/>
-                                    <Setter Property="Width" Value="12" />
-                                    <Setter Property="Height" Value="12" />
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                    <Setter Property="Margin" Value="0,0,3,0" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsExpanded}" Value="True">
-                                            <Setter Property="Source" Value="{DynamicResource icon_treeitem_opened}"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TreeView.Resources>
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectedItemChanged">
-                                    <command:EventToCommand Command="{Binding SelectedTreeNodeChangedCmd}" CommandParameter="{Binding ElementName=lstDepartment,Path=SelectedValue}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <TreeView.ItemTemplate>
-                                <HierarchicalDataTemplate DataType="{x:Type models:TreeViewNode}" ItemsSource="{Binding Path=Children}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Style="{StaticResource ExpandingImageStyle}"/>
-                                        <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
-                                    </StackPanel>
-                                </HierarchicalDataTemplate>
-                            </TreeView.ItemTemplate>
-                        </TreeView>
+                            <TreeView Grid.Column="0" Name="lstDepartment" ItemsSource="{Binding TreeViewSource}">
+                                <TreeView.Resources>
+                                    <Style x:Key="ExpandingImageStyle" TargetType="{x:Type Image}">
+                                        <Setter Property="Source" Value="{DynamicResource icon_treeitem_closed}"/>
+                                        <Setter Property="Width" Value="12" />
+                                        <Setter Property="Height" Value="12" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="Margin" Value="0,0,3,0" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem}, Path=IsExpanded}" Value="True">
+                                                <Setter Property="Source" Value="{DynamicResource icon_treeitem_opened}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TreeView.Resources>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectedItemChanged">
+                                        <command:EventToCommand Command="{Binding SelectedTreeNodeChangedCmd}" CommandParameter="{Binding ElementName=lstDepartment,Path=SelectedValue}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <TreeView.ItemTemplate>
+                                    <HierarchicalDataTemplate DataType="{x:Type models:TreeViewNode}" ItemsSource="{Binding Path=Children}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Style="{StaticResource ExpandingImageStyle}"/>
+                                            <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+                                        </StackPanel>
+                                    </HierarchicalDataTemplate>
+                                </TreeView.ItemTemplate>
+                            </TreeView>
 
-                        <ListBox  Grid.Column="1" ItemsSource="{Binding DepartmentUserDtos}" HorizontalAlignment="Left">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}" Width="Auto"/>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                            <ListBox  Grid.Column="1" ItemsSource="{Binding DepartmentUserDtos}" HorizontalAlignment="Left">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding DisplayName}" Width="Auto"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Grid>
+                        <Grid Name="Grid_DeviceUsers">
+                            <DataGrid ItemsSource="{Binding DeviceUserDtos}"  SelectedItem="{Binding SelectedDeviceUser}" 
+                      AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True" >
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Center">
+                                        </Setter>
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate >
+                                            <DataTemplate>
+                                                <CheckBox Width="25" IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="工号" Binding="{Binding ID}" Width="*"/>
+                                    <DataGridTextColumn Header="名字" Binding="{Binding DisplayName}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
                     </Grid>
                 </Border>
                 <StackPanel Grid.Column="1" Margin="2,8" VerticalAlignment="Bottom">

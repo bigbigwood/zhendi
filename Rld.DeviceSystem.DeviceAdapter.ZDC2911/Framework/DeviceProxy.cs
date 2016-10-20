@@ -41,6 +41,12 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework
                 var response = new GetUserOp().Process(request);
                 return DataContractSerializationHelper.Serialize(response);
             }
+            if (message.Contains("GetAllUsersRequest"))
+            {
+                var request = DataContractSerializationHelper.Deserialize<GetAllUsersRequest>(message);
+                var response = new GetAllUsersOp().Process(request);
+                return DataContractSerializationHelper.Serialize(response);
+            }
             else if (message.Contains("UpdateUserInfoRequest"))
             {
                 var request = DataContractSerializationHelper.Deserialize<UpdateUserInfoRequest>(message);

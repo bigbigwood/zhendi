@@ -38,5 +38,7 @@ namespace Rld.Acs.DeviceSystem
         UpdateDoorStateResponse UpdateDoorState(UpdateDoorStateRequest request);
         [OperationContract]
         SearchNewDevicesResponse SearchNewDevices(SearchNewDevicesRequest request);
+        [OperationContract]
+        QueryDeviceUsersResponse QueryDeviceUsers(QueryDeviceUsersRequest request);
     }
 }

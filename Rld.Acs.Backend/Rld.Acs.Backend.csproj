@@ -134,7 +134,13 @@
     <None Include="Service References\DeviceSystem\DeviceService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.DeviceUserDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.GetDoorStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.QueryDeviceUsersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\DeviceSystem\Rld.Acs.Backend.DeviceSystem.ResultTypes.datasource">
