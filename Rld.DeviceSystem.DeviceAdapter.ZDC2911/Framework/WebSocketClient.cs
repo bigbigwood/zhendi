@@ -59,5 +59,10 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Framework
             Log.InfoFormat("WebSocketClient send message: {0}", message);
             websocket.Send(message);
         }
+
+        public bool CheckConnectionAlive()
+        {
+            return websocket.State != WebSocketState.Closed;
+        }
     }
 }

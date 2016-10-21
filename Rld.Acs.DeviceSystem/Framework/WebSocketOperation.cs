@@ -11,6 +11,7 @@ namespace Rld.Acs.DeviceSystem.Framework
     public class WebSocketOperation
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private const string TokenFormat = "{0}-{1}";
         private String _response;
         private Int32 _websocketClientId;
         private CancellationTokenSource blockToken;
@@ -18,8 +19,8 @@ namespace Rld.Acs.DeviceSystem.Framework
         public WebSocketOperation(int websocketClientId)
         {
             blockToken = new CancellationTokenSource();
-            Token = Guid.NewGuid().ToString();
             _websocketClientId = websocketClientId;
+            Token = string.Format(TokenFormat, websocketClientId, Guid.NewGuid());
         }
 
         public string Execute(string request)

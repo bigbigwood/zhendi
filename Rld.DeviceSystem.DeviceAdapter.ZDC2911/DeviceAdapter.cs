@@ -19,12 +19,14 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
         private DeviceProxy _deviceProxy;
         private UdpListener _udpListener;
         private WebSocketClient _webSocketClient;
+        private HealthThread _healthThread;
 
         private void Init(DeviceConfigurationAdapter deviceConfig)
         {
             _deviceProxy = new DeviceProxy(deviceConfig);
             _udpListener = new UdpListener(deviceConfig.UdpPort, SendMessage);
             _webSocketClient = new WebSocketClient(deviceConfig.WebSocketClientConfig.ServerUrl, ReceiveMessage);
+            _healthThread = new HealthThread(CheckServerConnection, ReopenServerConnection);
         }
 
 
@@ -42,6 +44,7 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
                 _deviceProxy.OpenConnection();
                 _udpListener.Start();
                 _webSocketClient.Start();
+                _healthThread.Start();
                 IsRunning = true;
                 Log.Info("DeviceAdapter starts finished...");
                 return true;
@@ -53,21 +56,15 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             }
         }
 
-        public Boolean ReStart(DeviceConfiguration deviceConfig)
-        {
-            bool bStop = Stop();
-
-            return bStop && Start(deviceConfig);
-        }
-
         public Boolean Stop()
         {
             try
             {
                 Log.Info("DeviceAdapter Stoping...");
-                _deviceProxy.CloseConnection();
+                _healthThread.Stop();
                 _udpListener.Stop();
                 _webSocketClient.Stop();
+                _deviceProxy.CloseConnection();
                 IsRunning = false;
                 Log.Info("DeviceAdapter stops finished...");
                 return true;
@@ -79,6 +76,10 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             }
         }
 
+        /// <summary>
+        /// Receive message from web socket server
+        /// </summary>
+        /// <param name="message"></param>
         public void ReceiveMessage(String message)
         {
             try
@@ -94,9 +95,25 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911
             }
         }
 
+        /// <summary>
+        /// Send message from web socket server
+        /// </summary>
+        /// <param name="message"></param>
         public void SendMessage(String message)
         {
             _webSocketClient.Send(message);
+        }
+
+        public bool CheckServerConnection()
+        {
+            return _webSocketClient.CheckConnectionAlive();
+        }
+
+        public bool ReopenServerConnection()
+        {
+            _webSocketClient.Stop();
+            _webSocketClient.Start();
+            return true;
         }
     }
 }

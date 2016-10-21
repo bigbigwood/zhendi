@@ -80,6 +80,7 @@
     <Compile Include="Framework\DeviceProxyManager.cs" />
     <Compile Include="Framework\DeviceLockableOperation.cs" />
     <Compile Include="Dao\TimeSegmentInfoDao.cs" />
+    <Compile Include="Framework\HealthThread.cs" />
     <Compile Include="Helper\Policies.cs" />
     <Compile Include="Framework\UdpListener.cs" />
     <Compile Include="Mapper\Device\DoorOpenBehaviorServiceMapper.cs" />

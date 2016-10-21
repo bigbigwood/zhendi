@@ -11,7 +11,6 @@ namespace Rld.DeviceSystem.Contract.Interface
     {
         Boolean IsRunning { get; set; }
         Boolean Start(DeviceConfiguration deviceConfig);
-        Boolean ReStart(DeviceConfiguration deviceConfig);
         Boolean Stop();
         void ReceiveMessage(String message);
         void SendMessage(String message);
