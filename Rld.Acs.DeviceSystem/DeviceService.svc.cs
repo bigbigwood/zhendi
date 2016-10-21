@@ -305,7 +305,10 @@ namespace Rld.Acs.DeviceSystem
         public GetDoorStateResponse GetDoorState(GetDoorStateRequest request)
         {
             if (WebSocketClientManager.GetInstance().GetClientById(request.DeviceCode) == null)
-                return new GetDoorStateResponse() { ResultType = ResultTypes.DeviceNotConnected };
+            {
+                var msg = string.Format("设备:[{0}]未连接", string.Join(",", request.DeviceCode));
+                return new GetDoorStateResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
+            }
 
             var bOpened = new DoorStateOp().GetDoorState(request.DeviceCode, request.DoorIndex);
             return new GetDoorStateResponse() { ResultType = ResultTypes.Ok, IsOpened = bOpened };
@@ -313,7 +316,10 @@ namespace Rld.Acs.DeviceSystem
         public UpdateDoorStateResponse UpdateDoorState(UpdateDoorStateRequest request)
         {
             if (WebSocketClientManager.GetInstance().GetClientById(request.DeviceCode) == null)
-                return new UpdateDoorStateResponse() { ResultType = ResultTypes.DeviceNotConnected };
+            {
+                var msg = string.Format("设备:[{0}]未连接", string.Join(",", request.DeviceCode));
+                return new UpdateDoorStateResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
+            }
 
             var op = new DoorStateOp();
             var resultTypes = op.UpdateDoorState(request.DeviceCode, request.DoorIndex, request.Option);
@@ -353,6 +359,12 @@ namespace Rld.Acs.DeviceSystem
         {
             return PersistenceOperation.Process(request, () =>
             {
+                if (WebSocketClientManager.GetInstance().GetClientById(request.Device.Code.ToInt32()) == null)
+                {
+                    var msg = string.Format("设备:[{0}]未连接", string.Join(",", request.Device.Name));
+                    return new QueryDeviceUsersResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
+                }
+
                 var userDtos = new List<DeviceUserDto>();
                 var deviceUsers = new List<UserInfo>();
                 var op = new DeviceUserOp();
@@ -364,7 +376,7 @@ namespace Rld.Acs.DeviceSystem
                     if (userInfo != null)
                     {
                         var deviceUser = op.TryGetUesrInfo(userInfo, request.Device);
-                        if (deviceUser!= null)
+                        if (deviceUser != null)
                             deviceUsers.Add(deviceUser);
                     }
                 }

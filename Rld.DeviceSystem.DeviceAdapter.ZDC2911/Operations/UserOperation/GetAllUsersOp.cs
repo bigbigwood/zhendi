@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using log4net;
 using Rld.Acs.Unility.Extension;
 using Rld.DeviceSystem.Contract.Message;
 using Rld.DeviceSystem.Contract.Model;
@@ -9,16 +11,25 @@ namespace Rld.DeviceSystem.DeviceAdapter.ZDC2911.Operations.UserOperation
 {
     public class GetAllUsersOp
     {
+        private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public GetAllUsersResponse Process(GetAllUsersRequest request)
         {
-            var users = new List<UserInfo>();
-            var userData = new UserInfoDao().GetAllUsers(true);
-            if (userData != null)
+            try
             {
-                userData.ForEach(x => users.Add(UserInfoMapper.ToUserSummaryDto(x)));
-            }
+                var users = new List<UserInfo>();
+                var userData = new UserInfoDao().GetAllUsers(true);
+                if (userData != null)
+                {
+                    userData.ForEach(x => users.Add(UserInfoMapper.ToUserSummaryDto(x)));
+                }
 
-            return new GetAllUsersResponse() { Token = request.Token, ResultType = ResultType.OK, Users = users };
+                return new GetAllUsersResponse() { Token = request.Token, ResultType = ResultType.OK, Users = users };
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return new GetAllUsersResponse() { Token = request.Token, ResultType = ResultType.Error };
+            }
         }
     }
 }

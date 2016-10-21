@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using System.Text.RegularExpressions;
+using log4net;
 using Rld.DeviceSystem.Contract.Interface;
 using Rld.DeviceSystem.Contract.Model.Configuration;
 using Rld.DeviceSystem.DeviceAdapter.ZDC2911.Configuration;
