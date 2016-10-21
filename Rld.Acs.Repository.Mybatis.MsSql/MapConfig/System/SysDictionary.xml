@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
+  <cacheModels>
+    <cacheModel id="SysDictionary-cache"  implementation="MEMORY" >
+      <flushInterval hours="24"/>
+      <flushOnExecute  statement="SysDictionary.Insert"/>
+      <flushOnExecute  statement="SysDictionary.Update"/>
+      <flushOnExecute  statement="SysDictionary.Delete"/>
+      <property name="Type" value="Weak"/>
+    </cacheModel>
+  </cacheModels>
+
   <alias>
     <typeAlias alias="SysDictionary" type="Rld.Acs.Model.SysDictionary" />
   </alias>
@@ -28,7 +38,7 @@
   </resultMaps>
 
   <statements>
-    <select id="SysDictionary.GetByKey" parameterClass="int" resultMap="SysDictionaryResult">
+    <select id="SysDictionary.GetByKey" parameterClass="int" resultMap="SysDictionaryResult" cacheModel="SysDictionary-cache">
       SELECT *
       FROM [SYS_DICTIONARY]
       WHERE
@@ -104,7 +114,7 @@
       [DictionaryID] = #DictionaryID#
     </delete>
 
-    <select id="SysDictionary.Query" parameterClass="Hashtable" resultMap="SysDictionaryResult">
+    <select id="SysDictionary.Query" parameterClass="Hashtable" resultMap="SysDictionaryResult" cacheModel="SysDictionary-cache">
       SELECT * FROM SYS_DICTIONARY L
       Where 1=1
       <dynamic prepend="AND">
@@ -132,7 +142,7 @@
       </dynamic>
     </select>
 
-    <select id="SysDictionary.QueryPage" parameterClass="Hashtable" resultMap="SysDictionaryResult">
+    <select id="SysDictionary.QueryPage" parameterClass="Hashtable" resultMap="SysDictionaryResult" cacheModel="SysDictionary-cache">
       SELECT N.rownum, L.* FROM
       (SELECT TOP $PageEnd$ row_number() OVER (ORDER BY DictionaryID) rownum, DictionaryID FROM SYS_DICTIONARY L
       WHERE 1=1
@@ -164,7 +174,7 @@
       WHERE N.rownum >= $PageStart$
     </select>
 
-    <select id="SysDictionary.QueryCount" parameterClass="Hashtable" resultClass="int">
+    <select id="SysDictionary.QueryCount" parameterClass="Hashtable" resultClass="int" cacheModel="SysDictionary-cache">
       SELECT COUNT(1) FROM SYS_DICTIONARY L
       Where 1=1
       <dynamic prepend="AND">

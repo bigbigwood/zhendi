@@ -27,5 +27,7 @@ namespace Rld.Acs.Unility
         public const string DeviceMngtLogExpiredMonths = "DeviceMngtLogExpiredMonths";
         public const string DoorHistoryExpiredMonths = "DoorHistoryExpiredMonths";
         public const string DataSyncConfig = "DataSyncConfig";
+        public const string DataSyncDefaultDepartment = "DataSyncDefaultDepartment";
+        public const string DataSyncDefaultRole = "DataSyncDefaultRole";
     }
 }

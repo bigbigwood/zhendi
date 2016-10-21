@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <sqlMap namespace="Rld.Acs.Repository.Mybatis.MsSql" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ibatis.apache.org/mapping">
 
+  <cacheModels>
+    <cacheModel id="SysConfig-cache"  implementation="MEMORY" >
+      <flushInterval hours="24"/>
+      <flushOnExecute  statement="SysConfig.Insert"/>
+      <flushOnExecute  statement="SysConfig.Update"/>
+      <flushOnExecute  statement="SysConfig.Delete"/>
+      <property name="Type" value="Weak"/>
+    </cacheModel>
+  </cacheModels>
+
   <alias>
     <typeAlias alias="SysConfig" type="Rld.Acs.Model.SysConfig" />
   </alias>
@@ -16,7 +26,7 @@
   </resultMaps>
 
   <statements>
-    <select id="SysConfig.GetByKey" parameterClass="int" resultMap="SysConfigResult">
+    <select id="SysConfig.GetByKey" parameterClass="int" resultMap="SysConfigResult" cacheModel="SysConfig-cache">
       SELECT *
       FROM [SYS_CONFIG]
       WHERE
@@ -56,7 +66,7 @@
       [ID] = #ID#
     </delete>
 
-    <select id="SysConfig.Query" parameterClass="Hashtable" resultMap="SysConfigResult">
+    <select id="SysConfig.Query" parameterClass="Hashtable" resultMap="SysConfigResult" cacheModel="SysConfig-cache">
       SELECT * FROM SYS_CONFIG
       Where 1=1
       <dynamic prepend="AND">

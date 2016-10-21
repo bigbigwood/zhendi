@@ -9,19 +9,54 @@
       xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
       xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:views="clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
-      DataContext="{Binding DataSyncPage, Source={StaticResource Locator}}"
-      mc:Ignorable="d"  d:DesignHeight="400" d:DesignWidth="600" Unloaded="Page_Unloaded">
+      DataContext="{Binding DataSyncPage, Source={StaticResource Locator}}" Unloaded="Page_Unloaded">
+    <pages:BasePage.Resources>
+        <Style x:Key="bigHeaderGroupBox" BasedOn="{StaticResource DefaultGroupBoxStyle}" TargetType="GroupBox">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" Foreground="Black" FontWeight="Bold" FontSize="14"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </pages:BasePage.Resources>
     <Border Style="{StaticResource ContainerBorderStyle}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="130"></RowDefinition>
+                <RowDefinition Height="400"></RowDefinition>
+                <RowDefinition Height="5"></RowDefinition>
                 <RowDefinition Height="35"></RowDefinition>
             </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="600"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Row="0" Style="{StaticResource bigHeaderGroupBox}" Header="数据同步设置" Margin="10">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal" Height="30">
+                        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Text="缺省部门："/>
+                        <ComboBox Width="150" Margin="0,2" HorizontalAlignment="Left" ItemsSource="{Binding Departments, Mode=OneWay}" 
+                                  SelectedItem="{Binding DefaultDepartment}" SelectedValuePath="DepartmentID" DisplayMemberPath="Name" />
+                        <TextBlock HorizontalAlignment="Right" Foreground="Gray" VerticalAlignment="Center" Text="   （提示：同步人员部门失败时，会应用缺省部门到人员）"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="30">
+                        <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Center" Text="缺省角色："/>
+                        <ComboBox Width="150" Margin="0,2" HorizontalAlignment="Left" ItemsSource="{Binding DeviceRoles, Mode=OneWay}" 
+                                  SelectedItem="{Binding DefaultDeviceRole}" SelectedValuePath="DeviceRoleID" DisplayMemberPath="RoleName" />
+                        <TextBlock HorizontalAlignment="Right" Foreground="Gray"  VerticalAlignment="Center" Text="   （提示：同步人员角色失败时，会应用缺省角色到人员）"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
 
-            <Grid Grid.Row="0" Grid.Column="0" >
-                <DataGrid ItemsSource="{Binding DataSyncConfigViewModels}" SelectedItem="{Binding SelectedSysConfigViewModel}" 
+
+            <GroupBox Grid.Row="1" Style="{StaticResource bigHeaderGroupBox}" Header="同步任务设置" Margin="10" >
+                <DataGrid ItemsSource="{Binding DataSyncJobTimeConfigViewModels}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True" 
-                          LoadingRow ="DataGrid_LoadingRow" UnloadingRow="DataGrid_UnloadingRow" >
+                          LoadingRow ="DataGrid_LoadingRow" UnloadingRow="DataGrid_UnloadingRow" Margin="10" 
+                          BorderBrush="Gray" BorderThickness="1">
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}">
                             <Setter Property="HorizontalContentAlignment" Value="Center">
@@ -43,18 +78,18 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="{DynamicResource DataSyncView_Label_TriggerTime}" Width="250" >
+                        <DataGridTemplateColumn Header="{DynamicResource DataSyncView_Label_TriggerTime}" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <xctk:TimePicker Margin="2,3" FormatString="HH:mm:ss" Value="{Binding Value, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsSelected}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Width="*"/>
                     </DataGrid.Columns>
                 </DataGrid>
-            </Grid>
-            <Button Grid.Row="1" Width="80" Content="保存" Style="{StaticResource GButton}" Command="{Binding SaveCmd}" CommandParameter="{x:Static a:ACL.E_SaveDataSyncConfig}" />
+            </GroupBox>
+            <Separator Grid.Row="2" Grid.ColumnSpan="2" Background="LightGray" />
+            <Button Grid.Row="3" Grid.ColumnSpan="2" Width="80" Content="保存" Style="{StaticResource GButton}" Command="{Binding SaveCmd}" CommandParameter="{x:Static a:ACL.E_SaveDataSyncConfig}" />
         </Grid>
     </Border>
 </pages:BasePage>

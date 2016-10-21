@@ -343,8 +343,8 @@ INSERT dbo.SYS_CONFIG VALUES (N'DeviceAlarmJobSms_Body', N'重要事情说三遍
 -- 2.数据同步
 INSERT dbo.SYS_CONFIG VALUES (N'DataSyncConfig', N'02:00:00', N'', N'1.0')
 INSERT dbo.SYS_CONFIG VALUES (N'DataSyncJobScanTime', N'2016-01-01 00:00:00.001', N'同步任务的最后扫描时间', N'1.0')
-INSERT dbo.SYS_CONFIG VALUES (N'DataSyncDefaultDepartment', N'1', N'数据同步默认部门', N'1.0')
-INSERT dbo.SYS_CONFIG VALUES (N'DataSyncDefaultRole', N'1', N'数据同步默认角色', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DataSyncDefaultDepartment', N'1', N'数据同步缺省部门', N'1.0')
+INSERT dbo.SYS_CONFIG VALUES (N'DataSyncDefaultRole', N'1', N'数据同步缺省角色', N'1.0')
 -- 3.数据清理
 INSERT dbo.SYS_CONFIG VALUES (N'AutoCleanConfig', N'SysLogExpireMonths=3;DeviceTrafficLogExpiredMonths=3;DeviceMngtLogExpiredMonths=3;DoorHistoryExpiredMonths=3;', N'', N'1.0')
 

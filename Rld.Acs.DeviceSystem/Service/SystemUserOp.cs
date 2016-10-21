@@ -26,7 +26,7 @@ namespace Rld.Acs.DeviceSystem.Service
         private IUserAuthenticationRepository _userAuthenticationRepo = RepositoryManager.GetRepository<IUserAuthenticationRepository>();
         private IUserEventRepository _userEventRepo = RepositoryManager.GetRepository<IUserEventRepository>();
         private IDeviceRoleRepository _deviceRole = RepositoryManager.GetRepository<IDeviceRoleRepository>();
-        private IDeviceControllerRepository _deviceRepo = RepositoryManager.GetRepository<IDeviceControllerRepository>();
+        private ISysConfigRepository _sysConfigRepo = RepositoryManager.GetRepository<ISysConfigRepository>();
         private ITimeZoneRepository _timeZoneRepo = RepositoryManager.GetRepository<ITimeZoneRepository>();
         private IEnumerable<DeviceController> deviceCache;
         private Dictionary<Int32, UserInfo> userDeviceInfoDict;
@@ -343,7 +343,9 @@ namespace Rld.Acs.DeviceSystem.Service
             }
             else
             {
-                // if apply a default department?
+                var defaultDepartment = GetDefaultDepartment();
+                if (defaultDepartment != 0)
+                    systemUserInfo.DepartmentID = defaultDepartment;
             }
         }
 
@@ -371,10 +373,13 @@ namespace Rld.Acs.DeviceSystem.Service
             }
             else
             {
-                Log.Info("Cannot find device role for user.");
-
-                // if apply a default role?
-                //userDeviceRoles.Add(new UserDeviceRole() { UserID = systemUserInfo.UserID, UserDeviceRoleID = role.DeviceRoleID });
+                Log.Info("Cannot find existing device roles matches user, trying to apply default role for user.");
+                var defaultRole = GetDefaultRole(deviceRoles);
+                if (defaultRole != null && userDeviceRoles.All(x => x.DeviceRoleID != defaultRole.DeviceRoleID))
+                {
+                    Log.InfoFormat("Apply default role id={0} for user", defaultRole.DeviceRoleID);
+                    userDeviceRoles.Add(new UserDeviceRole() { UserID = systemUserInfo.UserID, DeviceRoleID = defaultRole.DeviceRoleID });
+                }
             }
 
             var addedRoleIds = new List<int>();
@@ -425,6 +430,29 @@ namespace Rld.Acs.DeviceSystem.Service
 
             Log.InfoFormat("Compare permission string {0} == {1}", userDevicePermissionString, rolePermissionString);
             return userDevicePermissionString == rolePermissionString;
+        }
+
+        private int GetDefaultDepartment()
+        {
+            var dataSyncDefaultDepartmentConfig = _sysConfigRepo.Query(new Hashtable { { ConstStrings.Name, ConstStrings.DataSyncDefaultDepartment } }).FirstOrDefault();
+            if (dataSyncDefaultDepartmentConfig != null && !string.IsNullOrWhiteSpace(dataSyncDefaultDepartmentConfig.Value))
+            {
+                return dataSyncDefaultDepartmentConfig.Value.ToInt32();
+            }
+
+            return 0;
+        }
+
+        private DeviceRole GetDefaultRole(List<DeviceRole> roles)
+        {
+            var dataSyncDefaultRoleConfig = _sysConfigRepo.Query(new Hashtable { { ConstStrings.Name, ConstStrings.DataSyncDefaultRole } }).FirstOrDefault();
+            if (dataSyncDefaultRoleConfig != null && !string.IsNullOrWhiteSpace(dataSyncDefaultRoleConfig.Value))
+            {
+                var roleId = dataSyncDefaultRoleConfig.Value.ToInt32();
+                return roles.FirstOrDefault(x => x.DeviceRoleID == roleId);
+            }
+
+            return null;
         }
     }
 }

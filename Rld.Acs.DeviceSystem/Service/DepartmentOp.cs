@@ -19,6 +19,8 @@ namespace Rld.Acs.DeviceSystem.Service
     /// <summary>
     /// 每个部门有一个设备权限角色。这个角色会有对于门禁的权限，比如说，可以开A和B两个门。
     /// 后来，增加了一个门C，这样，需要把这个C门的权限同步到所有的部门的人上。
+    /// 
+    /// 2016-10-20注:这种情况可以修改人员设备角色，添加人员指纹/密码/IC卡数据，然后同步人员数据到设备
     /// </summary>
     public class DepartmentOp
     {
