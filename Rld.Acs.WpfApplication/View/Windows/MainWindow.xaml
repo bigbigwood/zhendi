@@ -111,7 +111,7 @@
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Name="OperatorSettingBtn" Foreground="Black" Command="{Binding ShowSettingCmd}" Click="OperatorSettingBtn_OnClick">
+            <Button Name="OperatorSettingBtn" Foreground="Black" Command="{Binding ShowOperatorCmd}" Click="OperatorSettingBtn_OnClick">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{Binding CurrentOperator.LoginName}" Foreground="Black" Margin="0,0,5,0"/>
                     <!--<Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />-->
@@ -123,7 +123,7 @@
                     <!--<Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />-->
                 </StackPanel>
             </Button>
-            <Button Foreground="Black" >
+            <Button Name="LisenceWindowBtn" Foreground="Black" Command="{Binding ShowLisenceCmd}" Click="LisenceWindowBtn_OnClick">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="许可证" Foreground="Black" Margin="0,0,5,0" />
                     <!--<Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />-->

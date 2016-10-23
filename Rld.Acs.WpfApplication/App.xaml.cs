@@ -28,7 +28,7 @@ namespace Rld.Acs.WpfApplication
 
             DispatcherHelper.Initialize();
 
-            ProvisioningModelMapper.BindModelMap();
+            ModelMapper.BindModelMap();
 
             ApplicationEnvironment.Initialize();
 

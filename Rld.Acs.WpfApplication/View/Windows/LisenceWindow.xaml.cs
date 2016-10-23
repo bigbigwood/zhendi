@@ -27,6 +27,13 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 tbInfo.Text = "请输入有效许可证。";
                 return;
             }
+             var lisence = DataContext as SimpleLicense;
+            if (lisence != null && LisenceTool.ToProductCodeFormat(lisence.LicenseKey) == key)
+            {
+                tbInfo.Text = "此许可证已经被使用了, 请更换新的许可证。";
+                return;
+            }
+
 
             if (LisenceService.UpdateLisence(key))
             {
@@ -35,7 +42,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             }
 
             else
-                tbInfo.Text = "更新许可证失败，，请联系您的软件供应商。";
+                tbInfo.Text = "更新许可证失败， 请联系您的软件供应商。";
         }
 
         private void BtnTrial_OnClick(object sender, RoutedEventArgs e)
@@ -44,6 +51,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             {
                 tbInfo.Text = "您可以试用14天，请及时联系您的软件供应商获取新的许可证。";
                 Lisenced = true;
+                btnTrial.IsEnabled = false;
             }
             else
                 tbInfo.Text = "试用失败，请联系您的软件供应商。";
@@ -60,31 +68,17 @@ namespace Rld.Acs.WpfApplication.View.Windows
             var lisence = DataContext as SimpleLicense;
             if (lisence != null)
             {
+                tbKey.Text = LisenceTool.ToProductCodeFormat(lisence.LicenseKey);
                 if (lisence.IsExpired)
                 {
                     tbInfo.Text = "您的许可证已经到期，请联系您的软件供应商获取新的许可证。";
                     btnTrial.IsEnabled = false;
-                    //btnActivateLater.IsEnabled = false;
                 }
 
-                int days = (lisence.ExpireDateTime - DateTime.Now).Days;
-                if (days < 14)
-                {
-                    tbInfo.Text = string.Format("您的许可证还有{0}天到期，请及时联系您的软件供应商获取新的许可证。", days);
-                    btnTrial.IsEnabled = false;
-                }
+                int days = (lisence.ExpireDateTime - DateTime.Now).Days + 1;
+                tbInfo.Text = string.Format("您的许可证还有{0}天到期，请及时联系您的软件供应商获取新的许可证。", days);
+                btnTrial.IsEnabled = false;
             }
-        }
-
-        private void BtnActivateLater_OnClick(object sender, RoutedEventArgs e)
-        {
-            var lisence = DataContext as SimpleLicense;
-            if (lisence != null && !lisence.IsExpired)
-            {
-                Lisenced = true;
-            }
-
-            Close();
         }
     }
 }

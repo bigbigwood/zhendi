@@ -30,11 +30,11 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             AllowNullCollections = true;
 
-            ProvisioningModelMapper.BindModelMap();
+            ModelMapper.BindModelMap();
         }
     }
 
-    public static class ProvisioningModelMapper
+    public static class ModelMapper
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static readonly String ProfileName = typeof(AutoMapperProfile).Name;

@@ -23,7 +23,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
     {
         private IFrameNavigationService navigationService;
         public RelayCommand<string> NatigatePageCmd { get; set; }
-        public RelayCommand ShowSettingCmd { get; set; }
+        public RelayCommand ShowOperatorCmd { get; set; }
+        public RelayCommand ShowLisenceCmd { get; set; }
         public SysOperator CurrentOperator { get; set; }
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -32,7 +33,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
         {
             this.navigationService = navigationService;
             NatigatePageCmd = new RelayCommand<string>(NatigateToPage);
-            ShowSettingCmd = new RelayCommand(ShowSetting);
+            ShowOperatorCmd = new RelayCommand(ShowOperator);
+            ShowLisenceCmd = new RelayCommand(ShowLisenceWindow);
 
             CurrentOperator = ApplicationManager.GetInstance().CurrentOperatorInfo;
         }
@@ -42,9 +44,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
             navigationService.NavigateTo(pageKey);
         }
 
-        private void ShowSetting()
+        private void ShowOperator()
         {
             
+        }
+
+        private void ShowLisenceWindow()
+        {
+
         }
     }
 }

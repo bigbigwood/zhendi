@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Rld.Acs.WpfApplication.Service.Lisence;
 
 namespace Rld.Acs.WpfApplication.View.Windows
 {
@@ -236,6 +237,21 @@ namespace Rld.Acs.WpfApplication.View.Windows
         private void OperatorSettingBtn_OnClick(object sender, RoutedEventArgs e)
         {
             //popUserInfo.IsOpen = !popUserInfo.IsOpen;
+        }
+
+        private void LisenceWindowBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            var lisence = LisenceService.GetLicense();
+            if (lisence != null)
+            {
+                var lisenceWindow = new LisenceWindow();
+                lisenceWindow.DataContext = lisence;
+                lisenceWindow.ShowDialog();
+                //if (lisenceWindow.Lisenced != true)
+                //{
+                //    Close();
+                //}
+            }
         }
     }
 }
