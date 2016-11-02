@@ -24,7 +24,9 @@ namespace Rld.Acs.DeviceSystem.Service
     {
         private static readonly ILog Log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IUserRepository _userRepo = RepositoryManager.GetRepository<IUserRepository>();
+        private IDepartmentRepository _departmentRepo = RepositoryManager.GetRepository<IDepartmentRepository>();
         private IDeviceRoleRepository _deviceRole = RepositoryManager.GetRepository<IDeviceRoleRepository>();
+        private ITimeZoneRepository _timeZoneRepo = RepositoryManager.GetRepository<ITimeZoneRepository>();
 
         public void SyncUser(SyncOption option, User user, DeviceController device)
         {
@@ -67,11 +69,11 @@ namespace Rld.Acs.DeviceSystem.Service
             // user info
             deviceUser.UserName = user.Name;
             deviceUser.UserStatus = user.Status == GeneralStatus.Enabled;
-            deviceUser.DepartmentId = user.DepartmentID;
+            deviceUser.DepartmentId = GetDepartmentCode(user.DepartmentID);
             deviceUser.Comment = user.Remark;
             // user role
             deviceUser.Role = (Rld.DeviceSystem.Contract.Model.UserRole)userDevicePermission.PermissionAction.GetHashCode();
-            deviceUser.AccessTimeZoneId = userDevicePermission.AllowedAccessTimeZoneID;
+            deviceUser.AccessTimeZoneId = GetTimeZoneCode(userDevicePermission.AllowedAccessTimeZoneID);
 
             //user authentication
             foreach (var userAuthentication in authenticationsOfDevice)
@@ -160,11 +162,11 @@ namespace Rld.Acs.DeviceSystem.Service
             // user info
             deviceUser.UserName = user.Name;
             deviceUser.UserStatus = user.Status == GeneralStatus.Enabled;
-            deviceUser.DepartmentId = user.DepartmentID;
+            deviceUser.DepartmentId = GetDepartmentCode(user.DepartmentID);
             deviceUser.Comment = user.Remark;
             // user role
             deviceUser.Role = (Rld.DeviceSystem.Contract.Model.UserRole)userDevicePermission.PermissionAction.GetHashCode();
-            deviceUser.AccessTimeZoneId = userDevicePermission.AllowedAccessTimeZoneID;
+            deviceUser.AccessTimeZoneId = GetTimeZoneCode(userDevicePermission.AllowedAccessTimeZoneID);
 
             //user authentication
             foreach (var userAuthentication in authenticationsOfDevice)
@@ -301,6 +303,18 @@ namespace Rld.Acs.DeviceSystem.Service
             Log.InfoFormat("Query users from device id:[{0}], result:[{1}]", deviceID, response.ResultType);
 
             return response.ResultType == ResultType.OK ? response.Users.ToList() : null;
+        }
+
+        private int GetDepartmentCode(int departmentId)
+        {
+            var departmentInfo = _departmentRepo.GetByKey(departmentId);
+            return departmentInfo.DepartmentCode.ToInt32();
+        }
+
+        private int GetTimeZoneCode(int timezoneId)
+        {
+            var timezoneInfo = _timeZoneRepo.GetByKey(timezoneId);
+            return timezoneInfo.TimeZoneCode.ToInt32();
         }
     }
 }
