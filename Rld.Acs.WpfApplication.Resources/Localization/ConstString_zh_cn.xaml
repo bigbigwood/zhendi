@@ -33,7 +33,7 @@
     <sys:String x:Key="UserPage_ModifyBtn">修改人员</sys:String>
     <sys:String x:Key="UserPage_DeleteBtn">删除人员</sys:String>
     <sys:String x:Key="UserPage_MoveUserBtn">移动人员</sys:String>
-	<sys:String x:Key="UserPage_UserAuthenticationBtn">更新凭证</sys:String>
+    <sys:String x:Key="UserPage_UserAuthenticationBtn">修改凭证</sys:String>
     <sys:String x:Key="UserPage_SyncDataBtn">同步数据</sys:String>
     <sys:String x:Key="UserPage_Label_Avator">头像</sys:String>
     <sys:String x:Key="UserPage_Label_Name">姓名</sys:String>

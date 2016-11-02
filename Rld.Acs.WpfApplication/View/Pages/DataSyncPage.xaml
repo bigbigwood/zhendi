@@ -31,7 +31,7 @@
             </Grid.RowDefinitions>
             
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="600"/>
+                <ColumnDefinition Width="800"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <GroupBox Grid.Row="0" Style="{StaticResource bigHeaderGroupBox}" Header="数据同步设置" Margin="10">
@@ -40,13 +40,13 @@
                         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Text="缺省部门："/>
                         <ComboBox Width="150" Margin="0,2" HorizontalAlignment="Left" ItemsSource="{Binding Departments, Mode=OneWay}" 
                                   SelectedItem="{Binding DefaultDepartment}" SelectedValuePath="DepartmentID" DisplayMemberPath="Name" />
-                        <TextBlock HorizontalAlignment="Right" Foreground="Gray" VerticalAlignment="Center" Text="   （提示：同步人员部门失败时，会应用缺省部门到人员）"/>
+                        <TextBlock HorizontalAlignment="Right" Foreground="Gray" VerticalAlignment="Center" Text="   （提示：同步时，如果设备中人员数据的部门字段等于0时，自动使用缺省部门到系统的人员数据）"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Height="30">
                         <TextBlock  HorizontalAlignment="Right" VerticalAlignment="Center" Text="缺省角色："/>
                         <ComboBox Width="150" Margin="0,2" HorizontalAlignment="Left" ItemsSource="{Binding DeviceRoles, Mode=OneWay}" 
                                   SelectedItem="{Binding DefaultDeviceRole}" SelectedValuePath="DeviceRoleID" DisplayMemberPath="RoleName" />
-                        <TextBlock HorizontalAlignment="Right" Foreground="Gray"  VerticalAlignment="Center" Text="   （提示：同步人员角色失败时，会应用缺省角色到人员）"/>
+                        <TextBlock HorizontalAlignment="Right" Foreground="Gray"  VerticalAlignment="Center" Text="   （提示：同步时，根据设备中人员数据在系统中找不到匹配的设备角色，自动使用缺省角色到人员）"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>

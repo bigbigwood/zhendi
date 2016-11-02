@@ -76,7 +76,10 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 }
 
                 int days = (lisence.ExpireDateTime - DateTime.Now).Days + 1;
-                tbInfo.Text = string.Format("您的许可证还有{0}天到期，请及时联系您的软件供应商获取新的许可证。", days);
+                if(days <= 0)
+                    tbInfo.Text = "您的许可证已经过期，请及时联系您的软件供应商获取新的许可证。";
+                else
+                    tbInfo.Text = string.Format("您的许可证还有{0}天到期，请及时联系您的软件供应商获取新的许可证。", days);
                 btnTrial.IsEnabled = false;
             }
         }

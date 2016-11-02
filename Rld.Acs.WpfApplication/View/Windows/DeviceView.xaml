@@ -11,7 +11,8 @@
              Dialog:DialogParticipation.Register="{Binding}"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:DeviceViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="335" Width="600" Unloaded="MetroWindow_Unloaded">
+             Height="335" Width="600" 
+             Unloaded="MetroWindow_Unloaded">
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
             <Setter Property="FontSize" Value="12"/>
@@ -58,7 +59,7 @@
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
 
-        <TabControl Grid.Row="2" controls:TabControlHelper.IsUnderlined="True" Name="myTab">
+        <TabControl Grid.Row="2" controls:TabControlHelper.IsUnderlined="True" Name="myTab" Height="280" VerticalAlignment="Top">
             <TabItem Header="基本信息" controls:ControlsHelper.HeaderFontSize="12" >
                 <Grid Margin="5" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
@@ -69,6 +70,7 @@
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -134,7 +136,7 @@
                     <TextBox Grid.Row="5" Grid.Column="5" Text="{Binding Port}"/>
                     <TextBox Grid.Row="6" Grid.Column="5" Text="{Binding ServerURL}"/>
 
-                    <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Center" Orientation="Horizontal" >
                         <Button Content="下一页" Click="OnNextPageClicked" Margin="3,0"/>
                         <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
                     </StackPanel>
@@ -150,6 +152,7 @@
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="28"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -191,7 +194,7 @@
                     <CheckBox Grid.Row="3" Grid.Column="5" Content="{DynamicResource Enabled}" IsChecked="{Binding DeviceExtensionViewModel.DuressOpen}" />
                     <CheckBox Grid.Row="4" Grid.Column="5" Content="{DynamicResource Enabled}" IsChecked="{Binding DeviceExtensionViewModel.DuressAlarm}" />
 
-                    <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Center" Orientation="Horizontal" >
+                    <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="7" HorizontalAlignment="Center" Orientation="Horizontal" >
                         <Button Content="下一页" Click="OnNextPageClicked" Margin="3,0"/>
                         <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
                     </StackPanel>
