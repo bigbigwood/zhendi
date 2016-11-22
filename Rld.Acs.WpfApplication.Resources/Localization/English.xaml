@@ -1,0 +1,233 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="Login">Login</sys:String>
+    <sys:String x:Key="Ok">OK</sys:String>
+    <sys:String x:Key="Cancel">Cancel</sys:String>
+    <sys:String x:Key="Quit">Quit</sys:String>
+    <sys:String x:Key="Enabled">Enabled</sys:String>
+    <sys:String x:Key="Query">Query</sys:String>
+    <sys:String x:Key="Export">Export</sys:String>
+    <sys:String x:Key="Import">Import</sys:String>
+    <sys:String x:Key="Save">Save</sys:String>
+    <sys:String x:Key="Add">Add</sys:String>
+    <sys:String x:Key="Modify">Modify</sys:String>
+    <sys:String x:Key="Delete">Delete</sys:String>
+    <sys:String x:Key="Start">Start</sys:String>
+    <sys:String x:Key="Stop">Stop</sys:String>
+    <sys:String x:Key="Open">Open</sys:String>
+    <sys:String x:Key="Close">Close</sys:String>
+    <sys:String x:Key="Run">Run</sys:String>
+    <sys:String x:Key="Pause">Pause</sys:String>
+    <sys:String x:Key="ExportFile">Export File</sys:String>
+    <sys:String x:Key="ImportFile">Import File</sys:String>
+    <sys:String x:Key="SaveFile">Save File</sys:String>
+    <sys:String x:Key="ExportResult">Export Result</sys:String>
+    <sys:String x:Key="SaveResult">Save Result</sys:String>
+    <sys:String x:Key="SettingDetail">Detail Setting</sys:String>
+    <sys:String x:Key="AppName">Access Control Management System</sys:String>
+    <sys:String x:Key="First">First</sys:String>
+    <sys:String x:Key="Next">Next</sys:String>
+    <sys:String x:Key="Previous">Previous</sys:String>
+    <sys:String x:Key="Last">Last</sys:String>
+    <sys:String x:Key="CurrentPage">Current Page:</sys:String>
+    <sys:String x:Key="Jump">Jump To:</sys:String>
+
+    <sys:String x:Key="Language_Chinese">Chinese</sys:String>
+    <sys:String x:Key="Language_English">English</sys:String>
+
+    <sys:String x:Key="SysLogin_UserName">UserName</sys:String>
+    <sys:String x:Key="SysLogin_Password">Password</sys:String>
+
+    <sys:String x:Key="MainWindow_Home">Home</sys:String>
+    <sys:String x:Key="MainWindow_M1_StuffManagement">Organization</sys:String>
+    <sys:String x:Key="MainWindow_M2_Stuff">User</sys:String>
+    <sys:String x:Key="MainWindow_M2_Department">Department</sys:String>
+    <sys:String x:Key="MainWindow_M1_DeviceManagement">Device Settings</sys:String>
+    <sys:String x:Key="MainWindow_M2_Device">Device</sys:String>
+    <sys:String x:Key="MainWindow_M2_Floor">Floor</sys:String>
+    <sys:String x:Key="MainWindow_M2_TimeSegment">TimeSegment</sys:String>
+    <sys:String x:Key="MainWindow_M2_TimeGroup">TimeGroup</sys:String>
+    <sys:String x:Key="MainWindow_M2_TimeZone">TimeZone</sys:String>
+    <sys:String x:Key="MainWindow_M2_DeviceRole">Device Role</sys:String>
+    <sys:String x:Key="MainWindow_M1_Information">Information Service</sys:String>
+    <sys:String x:Key="MainWindow_M2_Monitor">Monitor</sys:String>
+    <sys:String x:Key="MainWindow_M2_DeviceAccessLog">Device Access History</sys:String>
+    <sys:String x:Key="MainWindow_M2_DeviceOperationLog">Device Operation History</sys:String>
+    <sys:String x:Key="MainWindow_M2_SystemOperationLog">System Operation History</sys:String>
+    <sys:String x:Key="MainWindow_M1_Maintenance">Maintenance Service</sys:String>
+    <sys:String x:Key="MainWindow_M2_DataDictionary">Data Dictionary</sys:String>
+    <sys:String x:Key="MainWindow_M2_Role">Role</sys:String>
+    <sys:String x:Key="MainWindow_M2_Operator">Operator</sys:String>
+    <sys:String x:Key="MainWindow_M1_BackService">Back Service</sys:String>
+    <sys:String x:Key="MainWindow_M2_DataSync">Data Synchorization</sys:String>
+    <sys:String x:Key="MainWindow_M2_DataClean">Data Clean</sys:String>
+
+    <sys:String x:Key="UserPage_AddBtn">Add User</sys:String>
+    <sys:String x:Key="UserPage_ModifyBtn">Modify User</sys:String>
+    <sys:String x:Key="UserPage_DeleteBtn">Delete User</sys:String>
+    <sys:String x:Key="UserPage_MoveUserBtn">Move User</sys:String>
+    <sys:String x:Key="UserPage_UserAuthenticationBtn">Modify Authentication</sys:String>
+    <sys:String x:Key="UserPage_SyncDataBtn">Sync data</sys:String>
+    <sys:String x:Key="UserPage_UserType">User Type</sys:String>
+    <sys:String x:Key="UserPage_Employee">Employee</sys:String>
+    <sys:String x:Key="UserPage_Visitor">Visitor</sys:String>
+    <sys:String x:Key="UserPage_SearchUsers">Search Users</sys:String>
+    <sys:String x:Key="UserPage_Label_Avator">Avator</sys:String>
+    <sys:String x:Key="UserPage_Label_Name">Name</sys:String>
+    <sys:String x:Key="UserPage_Label_Gender">Gender</sys:String>
+    <sys:String x:Key="UserPage_Label_Position">Position</sys:String>
+    <sys:String x:Key="UserPage_Label_UserCode">UserCode</sys:String>
+    <sys:String x:Key="UserPage_Label_Phone">Phone</sys:String>
+    <sys:String x:Key="UserView_Permission">Device Role</sys:String>
+
+    <sys:String x:Key="DepartmentPage_Toolbar_AddBtn">Add Department</sys:String>
+    <sys:String x:Key="DepartmentPage_Toolbar_ModifyBtn">Modify Department</sys:String>
+    <sys:String x:Key="DepartmentPage_Toolbar_DeleteBtn">Delete Department</sys:String>
+    <sys:String x:Key="DepartmentPage_Toolbar_SyncDataBtn">Sync Data</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentID">Department ID:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentName">Name:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentCode">Code:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentRole">Default Device Role:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDevices">Department Owned Devices:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedStuffCount">Stuff Count:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDeviceCount">Number of Owned Devices:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_ParentDepartment">Parent Department:</sys:String>
+
+    <sys:String x:Key="TimeSegmentPage_AddBtn">Add</sys:String>
+    <sys:String x:Key="TimeSegmentPage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="TimeSegmentPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="TimeSegmentView_Label_Name">Name</sys:String>
+    <sys:String x:Key="TimeSegmentView_Label_Code">Code</sys:String>
+    <sys:String x:Key="TimeSegmentView_Label_Setting">Setting</sys:String>
+    <sys:String x:Key="TimeSegmentView_Label_Hour">Hour</sys:String>
+    <sys:String x:Key="TimeSegmentView_Label_Minute">Minute</sys:String>
+
+    <sys:String x:Key="TimeGroupPage_AddBtn">Add</sys:String>
+    <sys:String x:Key="TimeGroupPage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="TimeGroupPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="TimeGroupView_Label_Name">Name</sys:String>
+    <sys:String x:Key="TimeGroupView_Label_Code">Code</sys:String>
+    <sys:String x:Key="TimeGroupView_Label_SelectedSegment">Seletecd Segments</sys:String>
+    <sys:String x:Key="TimeGroupView_Label_SelectSegment">Select Segments</sys:String>
+
+    <sys:String x:Key="TimeZonePage_AddBtn">Add</sys:String>
+    <sys:String x:Key="TimeZonePage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="TimeZonePage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="TimeZoneView_Label_Name">Name</sys:String>
+    <sys:String x:Key="TimeZoneView_Label_Code">Code</sys:String>
+
+    <sys:String x:Key="DevicePage_AddBtn">Add</sys:String>
+    <sys:String x:Key="DevicePage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="DevicePage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="DevicePage_DeviceGroupMgntBtn">Device Groups</sys:String>
+    <sys:String x:Key="DevicePage_SearchBtn">Search</sys:String>
+    <sys:String x:Key="DevicePage_Label_Name">Name</sys:String>
+    <sys:String x:Key="DevicePage_Label_Code">Code</sys:String>
+    <sys:String x:Key="DevicePage_Label_Doors">Doors</sys:String>
+    <sys:String x:Key="DevicePage_Label_HeadReadings">Head Readings</sys:String>
+
+    <sys:String x:Key="DeviceRolePage_AddBtn">Add</sys:String>
+    <sys:String x:Key="DeviceRolePage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="DeviceRolePage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="DeviceRolePage_Label_Name">Name</sys:String>
+    <sys:String x:Key="DeviceRolePage_Label_Code">Code</sys:String>
+    <sys:String x:Key="DeviceRolePage_Label_Device">Devices</sys:String>
+    <sys:String x:Key="DeviceRolePage_Label_DevicePermission">Permissions</sys:String>
+    <sys:String x:Key="DeviceRolePage_Label_Timezones">Timezones</sys:String>
+
+    <sys:String x:Key="DeviceTrafficLogPage_Label_DeviceID">Device ID</sys:String>
+    <sys:String x:Key="DeviceTrafficLogPage_Label_DeviceCode">Device Code</sys:String>
+    <sys:String x:Key="DeviceTrafficLogPage_Label_DeviceType">Device Type</sys:String>
+    <sys:String x:Key="DeviceTrafficLogPage_Label_DeviceSN">Device SN</sys:String>
+    <sys:String x:Key="DeviceTrafficLogPage_Label_DeviceUserID">User No</sys:String>
+    <sys:String x:Key="DeviceTrafficLogPage_Label_RecordType">Record Type</sys:String>
+    <sys:String x:Key="DeviceTrafficLogPage_Label_RecordTime">Recode Time</sys:String>
+    <sys:String x:Key="DeviceTrafficLogPage_Label_AuthenticationType">Authentication Type</sys:String>
+    <sys:String x:Key="DeviceTrafficLogPage_Label_AuthenticationResult">Authentication Result</sys:String>
+
+    <sys:String x:Key="DeviceOperationLogPage_Label_OperatorId">Operator ID</sys:String>
+    <sys:String x:Key="DeviceOperationLogPage_Label_OperationType">Type</sys:String>
+    <sys:String x:Key="DeviceOperationLogPage_Label_OperationDescription">Description</sys:String>
+    <sys:String x:Key="DeviceOperationLogPage_Label_OperationContent">Content</sys:String>
+    <sys:String x:Key="DeviceOperationLogPage_Label_OperationTime">Operation Time</sys:String>
+    <sys:String x:Key="Query_Label_OperatorId">Operator ID:</sys:String>
+    <sys:String x:Key="Query_Label_DeviceCode">Device Code:</sys:String>
+    <sys:String x:Key="Query_Label_UserNo">User No:</sys:String>
+    <sys:String x:Key="Query_Label_StartTime">From:</sys:String>
+    <sys:String x:Key="Query_Label_EndTime">To</sys:String>
+    <sys:String x:Key="Query_Label_DeviceAccessType">Type:</sys:String>
+    <sys:String x:Key="Query_Label_DictionaryType">Type:</sys:String>
+    <sys:String x:Key="Query_Label_Keyword">Keyword:</sys:String>
+
+    <sys:String x:Key="SysOperationLogPage_Label_OperatorId">Operator ID</sys:String>
+    <sys:String x:Key="SysOperationLogPage_Label_OperatorName">Operator Name</sys:String>
+    <sys:String x:Key="SysOperationLogPage_Label_OperationCode">Code</sys:String>
+    <sys:String x:Key="SysOperationLogPage_Label_OperationName">Name</sys:String>
+    <sys:String x:Key="SysOperationLogPage_Label_OperationDetail">Detail</sys:String>
+    <sys:String x:Key="SysOperationLogPage_Label_OperationTime">Operation Time</sys:String>
+
+    <sys:String x:Key="SysDictionaryPage_AddBtn">Add</sys:String>
+    <sys:String x:Key="SysDictionaryPage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="SysDictionaryPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="SysDictionaryPage_Label_Name">Name</sys:String>
+    <sys:String x:Key="SysDictionaryPage_Label_TypeID">Type ID</sys:String>
+    <sys:String x:Key="SysDictionaryPage_Label_TypeName">Type Name</sys:String>
+    <sys:String x:Key="SysDictionaryPage_Label_LanguageID">Language</sys:String>
+    <sys:String x:Key="SysDictionaryPage_Label_ItemID">Item ID</sys:String>
+    <sys:String x:Key="SysDictionaryPage_Label_ItemValue">Item Value</sys:String>
+    <sys:String x:Key="SysDictionaryPage_Label_Description">Description</sys:String>
+
+    <sys:String x:Key="SysRolePage_AddBtn">Add</sys:String>
+    <sys:String x:Key="SysRolePage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="SysRolePage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="SysRolePage_Label_Name">Name</sys:String>
+    <sys:String x:Key="SysRolePage_Label_Description">Description</sys:String>
+    <sys:String x:Key="SysRolePage_Label_AuthorizationModule">Authorizd Modules</sys:String>
+
+    <sys:String x:Key="SysOperatorPage_Label_Name">Login Name</sys:String>
+    <sys:String x:Key="SysOperatorPage_Label_Status">Status</sys:String>
+    <sys:String x:Key="SysOperatorPage_Label_CreateUserID">Create User ID</sys:String>
+    <sys:String x:Key="SysOperatorPage_Label_CreateDate">Create Date</sys:String>
+    <sys:String x:Key="SysOperatorPage_AddBtn">Add</sys:String>
+    <sys:String x:Key="SysOperatorPage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="SysOperatorPage_DeleteBtn">Delete</sys:String>
+
+
+    <sys:String x:Key="SysOperatorView_Label_Name">Name</sys:String>
+    <sys:String x:Key="SysOperatorView_Label_LanguageID">Language</sys:String>
+    <sys:String x:Key="SysOperatorView_Label_Status">Status</sys:String>
+    <sys:String x:Key="SysOperatorView_Label_CurrentPassword">Current Password</sys:String>
+    <sys:String x:Key="SysOperatorView_Label_NewPassword">New Password</sys:String>
+    <sys:String x:Key="SysOperatorView_Label_2ndNewPassword">Confirm Password</sys:String>
+
+    <sys:String x:Key="FloorPage_AddBtn">Add</sys:String>
+    <sys:String x:Key="FloorPage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="FloorPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="FloorPage_Label_Name">Name</sys:String>
+    <sys:String x:Key="FloorPage_Label_Description">Doors</sys:String>
+
+    <sys:String x:Key="FloorMonitorPage_Label_IntervalSeconds">Interval seconds</sys:String>
+
+    <sys:String x:Key="DataSyncPage_AddBtn">Add</sys:String>
+    <sys:String x:Key="DataSyncPage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="DataSyncPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="DataSyncView_Label_Name">Name</sys:String>
+    <sys:String x:Key="DataSyncView_Label_TriggerTime">Trigger Time</sys:String>
+    <sys:String x:Key="DataSyncPage_DataSyncSetting">Data Synchorization Settings</sys:String>
+    <sys:String x:Key="DataSyncPage_SynchorizationTaskSetting">Synchorization Scheduled Time</sys:String>
+    <sys:String x:Key="DataCleanPage_Setting">Data Clean Setting</sys:String>
+    <sys:String x:Key="DataCleanPage_Setting_SystemOperationLog">Clean system operation log,</sys:String>
+    <sys:String x:Key="DataCleanPage_Setting_DeviceOperationLog">Clean device operation log,</sys:String>
+    <sys:String x:Key="DataCleanPage_Setting_DeviceLogLog">Clean device access log,</sys:String>
+    <sys:String x:Key="DataCleanPage_Setting_DoorHistory">Clean door history,</sys:String>
+    <sys:String x:Key="DataCleanPage_Setting_Postfix">Months old data will be clean automatically.</sys:String>
+
+    <sys:String x:Key="DeviceGroupPage_AddBtn">Add</sys:String>
+    <sys:String x:Key="DeviceGroupPage_ModifyBtn">Modify</sys:String>
+    <sys:String x:Key="DeviceGroupPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="DeviceGroupPage_Label_Name">Name</sys:String>
+    <sys:String x:Key="DeviceGroupPage_Label_CheckInDeviceName">Check In Device</sys:String>
+    <sys:String x:Key="DeviceGroupPage_Label_CheckOutDeviceName">Check out Device</sys:String>
+
+</ResourceDictionary>

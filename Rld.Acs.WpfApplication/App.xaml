@@ -20,7 +20,7 @@
                 <ResourceDictionary Source="/Resources/StyleExtension.xaml" />
                 <ResourceDictionary Source="/Resources/Converter.xaml" />
                 <ResourceDictionary Source="/Resources/IntResources.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Rld.Acs.WpfApplication.Resources;component/Localization/ConstString_zh_cn.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Rld.Acs.WpfApplication.Resources;component/Localization/English.xaml" />
 
                 <!-- mvvm light viewmodel locator-->
                 <ResourceDictionary>

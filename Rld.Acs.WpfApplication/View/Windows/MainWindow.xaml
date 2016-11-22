@@ -119,16 +119,16 @@
             </Button>
             <Button Foreground="Black" Command="{Binding NatigatePageCmd}" CommandParameter="SummaryPage">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="首页" Foreground="Black" Margin="0,0,5,0" />
+                    <TextBlock Text="{DynamicResource MainWindow_Home}" Foreground="Black" Margin="0,0,5,0" />
                     <!--<Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />-->
                 </StackPanel>
             </Button>
-            <Button Name="LisenceWindowBtn" Foreground="Black" Command="{Binding ShowLisenceCmd}" Click="LisenceWindowBtn_OnClick">
+            <!--<Button Name="LisenceWindowBtn" Foreground="Black" Command="{Binding ShowLisenceCmd}" Click="LisenceWindowBtn_OnClick">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="许可证" Foreground="Black" Margin="0,0,5,0" />
-                    <!--<Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />-->
+                    --><!--<Image Width="15" Height="5" Source="/Rld.Acs.WpfApplication;component/Images/wintop/tooltip.png" />--><!--
                 </StackPanel>
-            </Button>
+            </Button>-->
 
             <!--<Popup Name="popUserInfo" PlacementTarget="{Binding ElementName=OperatorSettingBtn}" 
                    Placement="Top" PopupAnimation="Fade" StaysOpen="False" >
@@ -213,7 +213,7 @@
                         <StackPanel x:Name="peopleMenu_panel" Visibility="Visible" Panel.ZIndex="10">
                             <StackPanel>
                                 <Border Style="{StaticResource right_border}">
-                                    <MenuItem x:Name="peo_menu_right" FontSize="12" Width="180" Header="人员管理部" Click="tree_showHide_menu"
+                                    <MenuItem x:Name="peo_menu_right" FontSize="12" Width="180" Header="{DynamicResource MainWindow_M1_StuffManagement}" Click="tree_showHide_menu"
                                           IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M1_Stuff}}">
                                         <MenuItem.Icon >
                                             <Image Style="{StaticResource menu_image_o}" Source="/Rld.Acs.WpfApplication;component/Images/centerImage/cen_peo.png"/>
@@ -227,14 +227,14 @@
                             用另一正常样式，以此实现树的功能。
                             -->
                             <StackPanel x:Name="peo_control" Style="{StaticResource stack_tree_open}">
-                                <MenuItem x:Name="peo2_manage"  FontSize="12" Width="180" Header="人员管理" IsCheckable="False" 
+                                <MenuItem x:Name="peo2_manage"  FontSize="12" Width="180" Header="{DynamicResource MainWindow_M2_Stuff}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="UserPage"
                                       IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_Stuff}}">
                                     <MenuItem.Icon >
                                         <Image Style="{StaticResource menu_image_t}" Source="/Rld.Acs.WpfApplication;component/Images/minImage/人员管理.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="depart2_manage"  FontSize="12" Width="180"  Header="部门管理" IsCheckable="False" 
+                                <MenuItem x:Name="depart2_manage"  FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_Department}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="DepartmentPage"
                                       IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_Department}}">
                                     <MenuItem.Icon >
@@ -249,7 +249,7 @@
                         <StackPanel x:Name="devieMenu_panel" Visibility="Visible" Panel.ZIndex="9">
                             <StackPanel>
                                 <Border Style="{StaticResource right_border}">
-                                    <MenuItem x:Name="dev_menu_right" FontSize="12" Width="180" Header="设备管理部"   Click="tree_showHide_menu"
+                                    <MenuItem x:Name="dev_menu_right" FontSize="12" Width="180" Header="{DynamicResource MainWindow_M1_DeviceManagement}"   Click="tree_showHide_menu"
                                           IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M1_Device}}">
                                         <MenuItem.Icon >
                                             <Image Style="{StaticResource menu_image_o}" Source="/Rld.Acs.WpfApplication;component/Images/centerImage/cen_dev.png"/>
@@ -259,42 +259,42 @@
                             </StackPanel>
                             <!--设备管理:折叠节点-->
                             <StackPanel x:Name="dev_control" Style="{StaticResource stack_tree_open}">
-                                <MenuItem x:Name="dev2_shebei" FontSize="12" Width="180" Header="设备管理" IsCheckable="False" 
+                                <MenuItem x:Name="dev2_shebei" FontSize="12" Width="180" Header="{DynamicResource MainWindow_M2_Device}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="DevicePage"
                                         IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_Device}}">
                                     <MenuItem.Icon >
                                         <Image Style="{StaticResource menu_image_t}" Source="/Rld.Acs.WpfApplication;component/Images/minImage/设备管理.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="dev2_doorstate" FontSize="12" Width="180"  Header="楼层管理" IsCheckable="False"
+                                <MenuItem x:Name="dev2_doorstate" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_Floor}" IsCheckable="False"
                                        Command="{Binding NatigatePageCmd}" CommandParameter="FloorPage"
                                        IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_Floor}}">
                                     <MenuItem.Icon >
                                         <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/门状态管理.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="dev2_timeduan" FontSize="12" Width="180"  Header="时间段" IsCheckable="False" 
+                                <MenuItem x:Name="dev2_timeduan" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_TimeSegment}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="TimeSegmentPage"
                                        IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_TimeSegment}}">
                                     <MenuItem.Icon >
                                         <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/时间段.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="dev2_timezu" FontSize="12" Width="180"  Header="时间组" IsCheckable="False" 
+                                <MenuItem x:Name="dev2_timezu" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_TimeGroup}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="TimeGroupPage"
                                       IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_TimeGroup}}">
                                     <MenuItem.Icon >
                                         <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/时间组.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="dev2_timequ" FontSize="12" Width="180"  Header="时间区" IsCheckable="False" 
+                                <MenuItem x:Name="dev2_timequ" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_TimeZone}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="TimeZonePage"
                                               IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_TimeZone}}">
                                     <MenuItem.Icon >
                                         <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/时间区.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="dev2_sbqx" FontSize="12" Width="180"  Header="设备权限管理" IsCheckable="False" 
+                                <MenuItem x:Name="dev2_sbqx" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_DeviceRole}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="DeviceRolePage"
                                              IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_DeviceRole}}">
                                     <MenuItem.Icon >
@@ -308,7 +308,7 @@
                         <StackPanel x:Name="pubMenu_panel" Visibility="Visible" Panel.ZIndex="8">
                             <StackPanel>
                                 <Border Style="{StaticResource right_border}">
-                                    <MenuItem x:Name="pub_menu_right" FontSize="12" Width="180" Header="综合信息展示"   Click="tree_showHide_menu"  
+                                    <MenuItem x:Name="pub_menu_right" FontSize="12" Width="180" Header="{DynamicResource MainWindow_M1_Information}"   Click="tree_showHide_menu"  
                                           IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M1_Dashboard}}">
                                         <MenuItem.Icon >
                                             <Image Style="{StaticResource menu_image_o}" Source="/Rld.Acs.WpfApplication;component/Images/centerImage/cen_pub.png"/>
@@ -318,14 +318,14 @@
                             </StackPanel>
                             <!--综合信息展示:折叠节点-->
                             <StackPanel x:Name="pub_control" Style="{StaticResource stack_tree_open}">
-                                <MenuItem x:Name="pub_ssjk" FontSize="12" Width="180"  Header="实时监控" IsCheckable="False" 
+                                <MenuItem x:Name="pub_ssjk" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_Monitor}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="FloorMonitorPage"
                                       IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_Monitor}}">
                                     <MenuItem.Icon >
                                         <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/操作日志.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="pub_fwjl" FontSize="12" Width="180" Header="设备访问记录" IsCheckable="False" 
+                                <MenuItem x:Name="pub_fwjl" FontSize="12" Width="180" Header="{DynamicResource MainWindow_M2_DeviceAccessLog}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="DeviceTrafficLogPage"
                                       IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_DeviceTrafficLog}}">
                                     <MenuItem.Icon >
@@ -333,7 +333,7 @@
                                     </MenuItem.Icon>
                                 </MenuItem>
 
-                                <MenuItem x:Name="pub_czrz" FontSize="12" Width="180"  Header="设备操作日志" IsCheckable="False" 
+                                <MenuItem x:Name="pub_czrz" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_DeviceOperationLog}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="DeviceOperationLogPage"
                                       IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_DeviceOperationLog}}">
                                     <MenuItem.Icon >
@@ -341,7 +341,7 @@
                                     </MenuItem.Icon>
                                 </MenuItem>
 
-                                <MenuItem x:Name="pub_xtczrz" FontSize="12" Width="180"  Header="系统操作日志" IsCheckable="False" 
+                                <MenuItem x:Name="pub_xtczrz" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_SystemOperationLog}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="SysOperationLogPage"
                                       IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_SystemOperationLog}}">
                                     <MenuItem.Icon >
@@ -357,7 +357,7 @@
                         <StackPanel x:Name="syswhMenu_panel" Visibility="Visible" Panel.ZIndex="7">
                             <StackPanel>
                                 <Border Style="{StaticResource right_border}">
-                                    <MenuItem x:Name="syswh_menu_right" FontSize="12" Width="180" Header="系统维护"   Click="tree_showHide_menu"
+                                    <MenuItem x:Name="syswh_menu_right" FontSize="12" Width="180" Header="{DynamicResource MainWindow_M1_Maintenance}"   Click="tree_showHide_menu"
                                            IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M1_System}}">
                                         <MenuItem.Icon >
                                             <Image Style="{StaticResource menu_image_o}" Source="/Rld.Acs.WpfApplication;component/Images/centerImage/cen_tool.png"/>
@@ -367,7 +367,7 @@
                             </StackPanel>
                             <!--系统维护:折叠节点-->
                             <StackPanel x:Name="syswh_control" Style="{StaticResource stack_tree_open}">
-                                <MenuItem x:Name="syswh_sjzd" FontSize="12" Width="180" Header="数据字典维护"  IsCheckable="False" 
+                                <MenuItem x:Name="syswh_sjzd" FontSize="12" Width="180" Header="{DynamicResource MainWindow_M2_DataDictionary}"  IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="SysDictionaryPage"
                                             IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_SysDictionary}}">
                                     <MenuItem.Icon >
@@ -376,14 +376,14 @@
                                 </MenuItem>
 
 
-                                <MenuItem x:Name="syswh_role" FontSize="12" Width="180" Header="角色" IsCheckable="False" 
+                                <MenuItem x:Name="syswh_role" FontSize="12" Width="180" Header="{DynamicResource MainWindow_M2_Role}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="SysRolePage"
                                       IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_SystemRole}}">
                                     <MenuItem.Icon >
                                         <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/角色.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="syswh_user" FontSize="12" Width="180"  Header="用户" IsCheckable="False" 
+                                <MenuItem x:Name="syswh_user" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_Operator}" IsCheckable="False" 
                                       Command="{Binding NatigatePageCmd}" CommandParameter="SysOperatorPage"
                                            IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_Operator}}">
                                     <MenuItem.Icon >
@@ -401,7 +401,7 @@
                         <StackPanel x:Name="supporMenu_panel" Visibility="Visible" Panel.ZIndex="6">
                             <StackPanel>
                                 <Border Style="{StaticResource right_border}">
-                                    <MenuItem x:Name="suppor_menu_right" FontSize="12" Width="180" Header="后台服务"   Click="tree_showHide_menu"
+                                    <MenuItem x:Name="suppor_menu_right" FontSize="12" Width="180" Header="{DynamicResource MainWindow_M1_BackService}"   Click="tree_showHide_menu"
                                            IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M1_Backend}}">
                                         <MenuItem.Icon >
                                             <Image Style="{StaticResource menu_image_o}" Source="/Rld.Acs.WpfApplication;component/Images/centerImage/cen_test.png"/>
@@ -411,14 +411,14 @@
                             </StackPanel>
                             <!--后台服务:折叠节点-->
                             <StackPanel x:Name="suppor_control" Style="{StaticResource stack_tree_open}">
-                                <MenuItem x:Name="suppor_sjtb" FontSize="12" Width="180"  Header="数据同步" IsCheckable="False" 
+                                <MenuItem x:Name="suppor_sjtb" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_DataSync}" IsCheckable="False" 
                                        Command="{Binding NatigatePageCmd}" CommandParameter="DataSyncPage"
                                          IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_DataSynchorization}}">
                                     <MenuItem.Icon >
                                         <Image Style="{StaticResource menu_image_t}"  Source="/Rld.Acs.WpfApplication;component/Images/minImage/数据同步.png"/>
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem x:Name="suppor_sjql" FontSize="12" Width="180"  Header="数据清理" IsCheckable="False" 
+                                <MenuItem x:Name="suppor_sjql" FontSize="12" Width="180"  Header="{DynamicResource MainWindow_M2_DataClean}" IsCheckable="False" 
                                        Command="{Binding NatigatePageCmd}" CommandParameter="DataCleanPage"
                                          IsEnabled="{authorization:AuthToEnabled {x:Static authorization1:ACL.M2_DataClean}}">
                                     <MenuItem.Icon >

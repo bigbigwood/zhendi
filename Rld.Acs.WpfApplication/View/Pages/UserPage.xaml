@@ -10,7 +10,6 @@
       xmlns:converter1="clr-namespace:Rld.Acs.WpfApplication.View.Converter"
       xmlns:pages="clr-namespace:Rld.Acs.WpfApplication.View.Pages"
       xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
-      mc:Ignorable="d"  d:DesignHeight="400" d:DesignWidth="800"
       DataContext="{Binding UserPage, Source={StaticResource Locator}}" Unloaded="Page_Unloaded" >
     <Border Style="{StaticResource ContainerBorderStyle}">
         <Grid>
@@ -53,6 +52,7 @@
                                 <TextBlock Text="{DynamicResource UserPage_MoveUserBtn}" />
                             </StackPanel>
                         </Button>
+                        <Separator/>
                         <Button Command="{Binding UpdateUserAuthCmd}" CommandParameter="{x:Static a:ACL.E_UpdateUserAuth}" >
                             <StackPanel Orientation="Horizontal" >
                                 <Image Height="10" Source="{StaticResource DepartmentPage_Toolbar_ModifyBtn_img}" />
@@ -72,7 +72,7 @@
             </DockPanel>
             <DockPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
                 <TextBox Name="test2" Margin="0,0,5,0" Width="200" Style="{DynamicResource SearchMetroTextBox}" 
-                         controls:TextBoxHelper.Watermark="查询人员"
+                         controls:TextBoxHelper.Watermark="{DynamicResource UserPage_SearchUsers}"
                          controls:TextBoxHelper.ButtonCommand="{Binding SearchUserCmd, Mode=OneWay}"
                          controls:TextBoxHelper.ButtonCommandParameter="{Binding ElementName=test2, Path=Text}" />
             </DockPanel>
@@ -117,9 +117,9 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock Text="人员类型" VerticalAlignment="Center" Width="60" />
-                        <CheckBox Content="职员" Width="60" IsChecked="{Binding ShowEmployee}" Command="{Binding FilterUserCmd}" />
-                        <CheckBox Content="访客" Width="60"  IsChecked="{Binding ShowVisitor}" Command="{Binding FilterUserCmd}"/>
+                        <TextBlock Text="{DynamicResource UserPage_UserType}" VerticalAlignment="Center" Margin="10,0" />
+                        <CheckBox Content="{DynamicResource UserPage_Employee}"  Margin="10,0" IsChecked="{Binding ShowEmployee}" Command="{Binding FilterUserCmd}" />
+                        <CheckBox Content="{DynamicResource UserPage_Visitor}"  Margin="10,0" IsChecked="{Binding ShowVisitor}" Command="{Binding FilterUserCmd}"/>
                     </StackPanel>
                     <DataGrid Grid.Row="1" ItemsSource="{Binding UserViewModels}" SelectedItem="{Binding Path=SelectedUserViewModel}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True"

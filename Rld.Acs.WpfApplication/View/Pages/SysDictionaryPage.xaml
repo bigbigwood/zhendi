@@ -75,10 +75,10 @@
                         <Separator/>
                     </ToolBar>
                 </ToolBarTray>
-                <TextBlock Grid.Column="1" Text="类型:" Margin="5,0"/>
+                <TextBlock Grid.Column="1" Text="{DynamicResource Query_Label_DictionaryType}" Margin="5,0"/>
                 <ComboBox Grid.Column="2" ItemsSource="{Binding TypeHeadersDict}" 
                            SelectedItem="{Binding SelectedTypeHeader}" SelectedValuePath="ItemID" DisplayMemberPath="ItemValue" />
-                <TextBlock Grid.Column="3" Text="关键字:" Margin="5,0"/>
+                <TextBlock Grid.Column="3" Text="{DynamicResource Query_Label_Keyword}" Margin="5,0"/>
                 <TextBox  Grid.Column="4" Text="{Binding Keyword}" />
 
                 <Button  Grid.Column="5" Margin="5,2" Height="25" Width="60" FontSize ="12" Style="{StaticResource FlatButtonStyle}"

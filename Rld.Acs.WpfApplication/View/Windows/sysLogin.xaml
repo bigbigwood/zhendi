@@ -29,25 +29,25 @@
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,10,-5">
                 <Label Width="50" Height="28" HorizontalAlignment="Center"  VerticalAlignment="Center" 
-                       Foreground="#535353" Content="账 号" FontSize="16"/>
+                       Foreground="#535353" Content="{DynamicResource SysLogin_UserName}" FontSize="16"/>
                 <TextBox x:Name="userName" Width="175" Height="28"  />
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,-5,10,10">
                 <Label Width="50" Height="28" HorizontalAlignment="Center"  VerticalAlignment="Center" 
-                       Foreground="#535353" Content="密 码" FontSize="16"/>
+                       Foreground="#535353" Content="{DynamicResource SysLogin_Password}" FontSize="16"/>
                 <PasswordBox x:Name="passWord"  PasswordChar="*" Width="175" Height="28" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal">
                 <Button Name="btnLogin" Width="90" Height="35" Margin="10,0,30,0"
-                        FontSize="16" Foreground="#535353" IsDefault="True" Content="登 陆" Click="userLogin">
+                        FontSize="16" Foreground="#535353" IsDefault="True" Content="{DynamicResource Login}" Click="userLogin">
                     <Button.Background>
                         <ImageBrush  ImageSource="/Rld.Acs.WpfApplication;component/Images/loginImage/登录框.png" />
                     </Button.Background>
                 </Button>
 
                 <Button Name="btnClose" Width="90" Height="35" Margin="10,0,30,0"
-                        FontSize="16" Foreground="#535353" IsCancel="True" Content="退 出" Click="btnClose_Click">
+                        FontSize="16" Foreground="#535353" IsCancel="True" Content="{DynamicResource Quit}" Click="btnClose_Click">
                     <Button.Background>
                         <ImageBrush  ImageSource="/Rld.Acs.WpfApplication;component/Images/loginImage/登录框.png" />
                     </Button.Background>

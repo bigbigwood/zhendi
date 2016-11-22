@@ -1,10 +1,6 @@
 ﻿<UserControl x:Class="Rld.Acs.WpfApplication.View.CustomControls.PagePicker"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-              d:DesignHeight="50" d:DesignWidth="600">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" >
     <UserControl.Resources>
 
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
@@ -30,26 +26,23 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <Grid Height="50" Width="600">
+    <Grid Height="50">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Margin="5,10,5,10" Foreground="Black" Content="首页" Click="btnFristPage_Click" />
-            <Button Margin="5,10,5,10" Foreground="Black" Content="上一页" Click="btnPreviousPage_Click"/>
-            <Button Margin="5,10,5,10" Foreground="Black" Content="下一页" Click="btnNextPage_Click" />
-            <Button Margin="5,10,5,10" Foreground="Black" Content="末页" Click="btnLastPage_Click"/>
+            <Button Margin="5,10,5,10" Foreground="Black" Content="{DynamicResource First}" Click="btnFristPage_Click" />
+            <Button Margin="5,10,5,10" Foreground="Black" Content="{DynamicResource Previous}" Click="btnPreviousPage_Click"/>
+            <Button Margin="5,10,5,10" Foreground="Black" Content="{DynamicResource Next}" Click="btnNextPage_Click" />
+            <Button Margin="5,10,5,10" Foreground="Black" Content="{DynamicResource Last}" Click="btnLastPage_Click"/>
 
-            <TextBlock Text="当前" Margin="25,5,10,5"/>
+            <TextBlock Text="{DynamicResource CurrentPage}" Margin="25,5,10,5"/>
             <TextBlock Text="{Binding Path=CurrentPage,Mode=TwoWay}" Name="lblCurrentPage" />
-            <TextBlock Text="页" Margin="5,5,10,5"/>
-            <TextBlock Text="共" Margin="5,5,10,5"/>
+            <TextBlock Text="/"/>
             <TextBlock Text="{Binding Path=TotalPage,Mode=TwoWay}" Name="lblTotalPage" />
-            <TextBlock Text="页" Margin="5,5,10,5"/>
-            <TextBlock Text="转到" Margin="0"/>
+            <TextBlock Text="{DynamicResource Jump}" Margin="25,5,5,5"/>
             <TextBox Width="30" Margin="5,0" Style="{StaticResource Test_TextBox}" Height="{Binding ActualHeight, ElementName=btnGo}" Text="{Binding NavigationPage}"/>
-            <TextBlock Text="页" Margin="0"/>
-            <Button Margin="15,10,5,10" Foreground="Black" Content="确定" Name="btnGo"  Click="btnGoPage_Click"/>
+            <Button Margin="15,10,5,10" Foreground="Black" Content="{DynamicResource Query}" Name="btnGo"  Click="btnGoPage_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

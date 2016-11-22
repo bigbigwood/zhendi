@@ -198,6 +198,7 @@
     <Compile Include="Service\ExportFile\ExcelService.cs" />
     <Compile Include="Service\ExportFile\PdfService.cs" />
     <Compile Include="Service\ExportFile\TextExportingService.cs" />
+    <Compile Include="Service\Language\LanguageManager.cs" />
     <Compile Include="Service\Lisence\LisenceService.cs" />
     <Compile Include="Service\MessageHandler.cs" />
     <Compile Include="Service\PasswordService.cs" />

@@ -72,11 +72,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Localization\ConstString_zh_cn.xaml">
+    <Page Include="Localization\Chinese.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Localization\ConstString_en.xaml">
+    <Page Include="Localization\English.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

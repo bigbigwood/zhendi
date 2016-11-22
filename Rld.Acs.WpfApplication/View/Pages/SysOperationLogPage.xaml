@@ -57,13 +57,13 @@
                     <ColumnDefinition Width="0.8*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="操作人员ID:" Margin="5,0"/>
+                <TextBlock Grid.Column="0" Text="{DynamicResource Query_Label_OperatorId}" Margin="5,0"/>
                 <TextBox Grid.Column="1" Text="{Binding OperatorId}" />
-                <TextBlock Grid.Column="2"  Text="关键字:" Margin="5,0"/>
+                <TextBlock Grid.Column="2"  Text="{DynamicResource Query_Label_Keyword}" Margin="5,0"/>
                 <TextBox Grid.Column="3" Text="{Binding Keyword}" />
-                <TextBlock Grid.Column="4" Text="时间:" Margin="5,0"/>
+                <TextBlock Grid.Column="4" Text="{DynamicResource Query_Label_StartTime}" Margin="5,0"/>
                 <DatePicker Grid.Column="5" SelectedDate ="{Binding StartDate}"/>
-                <TextBlock Grid.Column="6" Text="至" Margin="5,0" />
+                <TextBlock Grid.Column="6" Text="{DynamicResource Query_Label_EndTime}" Margin="5,0" />
                 <DatePicker Grid.Column="7"  SelectedDate ="{Binding EndDate}"/>
                 <Button Grid.Column="8"  Margin="5,2" Height="25" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
                          Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_QuerySysOperationLog}" />

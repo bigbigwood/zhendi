@@ -42,4 +42,9 @@ namespace Rld.Acs.WpfApplication.Models
         [Description("同步人员数据到设备")]
         SyncUserToDevice = 1,
     }
+    public enum Languages
+    {
+        English = 1033,
+        Chinese = 2052,
+    }
 }

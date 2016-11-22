@@ -58,17 +58,17 @@
                     <ColumnDefinition Width="0.8*" />
                     <ColumnDefinition Width="0.8*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="记录类型:" Margin="5,0"/>
+                <TextBlock Grid.Column="0" Text="{DynamicResource Query_Label_DeviceAccessType}" Margin="5,0"/>
                 <ComboBox Grid.Column="1" Margin="2,3" HorizontalAlignment="Stretch"
                         ItemsSource="{Binding DeviceTrafficLogTypeDict, Mode=OneWay}" 
                                SelectedValue="{Binding SelectedLogType}" SelectedValuePath="ItemID" DisplayMemberPath="ItemValue" />
-                <TextBlock Grid.Column="2" Text="设备编号:" Margin="5,0"/>
+                <TextBlock Grid.Column="2" Text="{DynamicResource Query_Label_DeviceCode}" Margin="5,0"/>
                 <TextBox  Grid.Column="3" Text="{Binding DeviceCode}" />
-                <TextBlock Grid.Column="4" Text="人员工号:" Margin="5,0"/>
+                <TextBlock Grid.Column="4" Text="{DynamicResource Query_Label_UserNo}" Margin="5,0"/>
                 <TextBox  Grid.Column="5"  Text="{Binding DeviceUserId}" />
-                <TextBlock Grid.Column="6" Text="时间:" Margin="5,0"/>
+                <TextBlock Grid.Column="6" Text="{DynamicResource Query_Label_StartTime}" Margin="5,0"/>
                 <DatePicker Grid.Column="7" SelectedDate ="{Binding StartDate}" />
-                <TextBlock Grid.Column="8" Text="至" Margin="5,0" />
+                <TextBlock Grid.Column="8" Text="{DynamicResource Query_Label_EndTime}" Margin="5,0" />
                 <DatePicker Grid.Column="9" SelectedDate ="{Binding EndDate}" />
                 <Button Grid.Column="10" Margin="5,2" Height="25" FontSize ="12" Style="{StaticResource FlatButtonStyle}"
                          Content="{DynamicResource Query}"  Command="{Binding QueryCommand}" CommandParameter="{x:Static a:ACL.E_QueryDeviceTrafficLog}"/>

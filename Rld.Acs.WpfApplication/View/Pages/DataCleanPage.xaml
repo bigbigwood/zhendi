@@ -9,7 +9,7 @@
       DataContext="{Binding DataCleanPage, Source={StaticResource Locator}}"
       mc:Ignorable="d"  d:DesignHeight="400" d:DesignWidth="600" Unloaded="Page_Unloaded">
     <Border Style="{StaticResource ContainerBorderStyle}">
-        <GroupBox Style="{StaticResource DefaultGroupBoxStyle}" Margin="10" Height="200" VerticalAlignment="Top" Header="数据自动清理配置">
+        <GroupBox Style="{StaticResource DefaultGroupBoxStyle}" Margin="10" Height="200" VerticalAlignment="Top" Header="{DynamicResource DataCleanPage_Setting}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -20,29 +20,29 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding SysLogExpiredMonthsConfigViewModel.IsSelected}"/>
-                    <Label VerticalAlignment="Center" FontSize="12" Content="自动清理系统操作日志, " />
+                    <Label VerticalAlignment="Center" FontSize="12" Content="{DynamicResource DataCleanPage_Setting_SystemOperationLog}" />
                     <xctk:IntegerUpDown Height="25" Minimum="1" Maximum="12" Value="{Binding SysLogExpiredMonthsConfigViewModel.Value}"/>
-                    <Label VerticalAlignment="Center" FontSize="12" Content="个月前的数据将会被自动清理。" />
+                    <Label VerticalAlignment="Center" FontSize="12" Content="{DynamicResource DataCleanPage_Setting_Postfix}" />
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding DeviceMngtLogExpiredMonthsConfigViewModel.IsSelected}"/>
-                    <Label VerticalAlignment="Center" FontSize="12" Content="自动清理设备操作记录, " />
+                    <Label VerticalAlignment="Center" FontSize="12" Content="{DynamicResource DataCleanPage_Setting_DeviceOperationLog}" />
                     <xctk:IntegerUpDown Height="25" Minimum="1" Maximum="12" Value="{Binding DeviceMngtLogExpiredMonthsConfigViewModel.Value}"/>
-                    <Label VerticalAlignment="Center" FontSize="12" Content="个月前的数据将会被自动清理。" />
+                    <Label VerticalAlignment="Center" FontSize="12" Content="{DynamicResource DataCleanPage_Setting_Postfix}" />
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding DeviceTrafficLogExpiredMonthsConfigViewModel.IsSelected}"/>
-                    <Label VerticalAlignment="Center" FontSize="12" Content="自动清理设备访问记录, " />
+                    <Label VerticalAlignment="Center" FontSize="12" Content="{DynamicResource DataCleanPage_Setting_DeviceLogLog}" />
                     <xctk:IntegerUpDown Height="25" Minimum="1" Maximum="12" Value="{Binding DeviceTrafficLogExpiredMonthsConfigViewModel.Value}"/>
-                    <Label VerticalAlignment="Center" FontSize="12" Content="个月前的数据将会被自动清理。" />
+                    <Label VerticalAlignment="Center" FontSize="12" Content="{DynamicResource DataCleanPage_Setting_Postfix}" />
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding DoorHistoryExpiredMonthsConfigViewModel.IsSelected}"/>
-                    <Label VerticalAlignment="Center" FontSize="12" Content="自动清理门历史记录, " />
+                    <Label VerticalAlignment="Center" FontSize="12" Content="{DynamicResource DataCleanPage_Setting_DoorHistory}" />
                     <xctk:IntegerUpDown Height="25" Minimum="1" Maximum="12" Value="{Binding DoorHistoryExpiredMonthsConfigViewModel.Value}"/>
-                    <Label VerticalAlignment="Center" FontSize="12" Content="个月前的数据将会被自动清理。" />
+                    <Label VerticalAlignment="Center" FontSize="12" Content="{DynamicResource DataCleanPage_Setting_Postfix}" />
                 </StackPanel>
-                <Button Grid.Row="4" Style="{StaticResource GButton}" Content="保存" Command="{Binding SaveCmd}"  CommandParameter="{x:Static a:ACL.E_SaveDataCleanConfig}"/>
+                <Button Grid.Row="4" Style="{StaticResource GButton}" Content="{DynamicResource Save}" Command="{Binding SaveCmd}"  CommandParameter="{x:Static a:ACL.E_SaveDataCleanConfig}"/>
             </Grid>
         </GroupBox>
     </Border>

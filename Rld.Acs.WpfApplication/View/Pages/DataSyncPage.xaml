@@ -52,7 +52,7 @@
             </GroupBox>
 
 
-            <GroupBox Grid.Row="1" Style="{StaticResource bigHeaderGroupBox}" Header="同步任务设置" Margin="10" >
+            <GroupBox Grid.Row="1" Style="{StaticResource bigHeaderGroupBox}" Header="{DynamicResource DataSyncPage_SynchorizationTaskSetting}" Margin="10" >
                 <DataGrid ItemsSource="{Binding DataSyncJobTimeConfigViewModels}" 
                       AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" IsReadOnly="True" 
                           LoadingRow ="DataGrid_LoadingRow" UnloadingRow="DataGrid_UnloadingRow" Margin="10" 
@@ -71,7 +71,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="启用" Width="80">
+                        <DataGridTemplateColumn Header="{DynamicResource Enabled}" Width="80">
                             <DataGridTemplateColumn.CellTemplate >
                                 <DataTemplate>
                                     <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
@@ -89,7 +89,7 @@
                 </DataGrid>
             </GroupBox>
             <Separator Grid.Row="2" Grid.ColumnSpan="2" Background="LightGray" />
-            <Button Grid.Row="3" Grid.ColumnSpan="2" Width="80" Content="保存" Style="{StaticResource GButton}" Command="{Binding SaveCmd}" CommandParameter="{x:Static a:ACL.E_SaveDataSyncConfig}" />
+            <Button Grid.Row="3" Grid.ColumnSpan="2" Width="80" Content="{DynamicResource Save}" Style="{StaticResource GButton}" Command="{Binding SaveCmd}" CommandParameter="{x:Static a:ACL.E_SaveDataSyncConfig}" />
         </Grid>
     </Border>
 </pages:BasePage>

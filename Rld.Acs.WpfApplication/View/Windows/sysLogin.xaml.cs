@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using log4net;
 using MahApps.Metro.Controls;
+using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Security;
 using RldModel = Rld.Acs.Model;
 
@@ -63,11 +65,14 @@ namespace Rld.Acs.WpfApplication.View.Windows
                     return;
                 }
 
-                ApplicationManager.GetInstance().UpdateCurrentOperatorAndPermission(ToModel(authenticationResult.OperatorInfo));
+                var sysOperator = ToModel(authenticationResult.OperatorInfo);
+                ApplicationManager.GetInstance().UpdateCurrentOperatorAndPermission(sysOperator);
 
                 ShowMessage("登陆成功...");
                 Dispatcher.Invoke(() =>
                 {
+                    LanguageManager.ChangeLanguage((Languages)sysOperator.LanguageID);
+
                     Window mainWin = new MainWindow();
                     Application.Current.MainWindow = mainWin;
                     mainWin.Show();
