@@ -241,17 +241,17 @@ namespace Rld.Acs.WpfApplication.View.Windows
 
         private void LisenceWindowBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            var lisence = LisenceService.GetLicense();
-            if (lisence != null)
-            {
-                var lisenceWindow = new LisenceWindow();
-                lisenceWindow.DataContext = lisence;
-                lisenceWindow.ShowDialog();
-                //if (lisenceWindow.Lisenced != true)
-                //{
-                //    Close();
-                //}
-            }
+            //var lisence = LisenceService.GetLicense();
+            //if (lisence != null)
+            //{
+            //    var lisenceWindow = new LisenceWindow();
+            //    lisenceWindow.DataContext = lisence;
+            //    lisenceWindow.ShowDialog();
+            //    //if (lisenceWindow.Lisenced != true)
+            //    //{
+            //    //    Close();
+            //    //}
+            //}
         }
     }
 }

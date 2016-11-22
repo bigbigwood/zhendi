@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Rld.Acs.Model;
 
-namespace Rld.Acs.WebApi.SecurityService
+namespace Rld.Acs.WebApi.WebService
 {
     public enum ResultType
     {

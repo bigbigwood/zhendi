@@ -13,7 +13,7 @@ using System.Web.Http;
 using Rld.Acs.Repository.Framework;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility;
-using Rld.Acs.WebApi.SecurityService;
+using Rld.Acs.WebApi.WebService;
 
 namespace Rld.Acs.WebApi.Framework
 {

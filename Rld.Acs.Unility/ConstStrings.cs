@@ -29,5 +29,7 @@ namespace Rld.Acs.Unility
         public const string DataSyncConfig = "DataSyncConfig";
         public const string DataSyncDefaultDepartment = "DataSyncDefaultDepartment";
         public const string DataSyncDefaultRole = "DataSyncDefaultRole";
+        public const string LisenceOnlineCount = "LisenceOnlineCount";
+        
     }
 }

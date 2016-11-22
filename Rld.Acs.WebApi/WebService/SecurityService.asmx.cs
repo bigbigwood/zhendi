@@ -10,7 +10,7 @@ using Rld.Acs.Repository;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WebApi.Framework;
 
-namespace Rld.Acs.WebApi.SecurityService
+namespace Rld.Acs.WebApi.WebService
 {
     /// <summary>
     /// Summary description for SecurityService1

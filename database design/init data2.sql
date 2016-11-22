@@ -347,6 +347,9 @@ INSERT dbo.SYS_CONFIG VALUES (N'DataSyncDefaultDepartment', N'1', N'数据同步
 INSERT dbo.SYS_CONFIG VALUES (N'DataSyncDefaultRole', N'1', N'数据同步缺省角色', N'1.0')
 -- 3.数据清理
 INSERT dbo.SYS_CONFIG VALUES (N'AutoCleanConfig', N'SysLogExpireMonths=3;DeviceTrafficLogExpiredMonths=3;DeviceMngtLogExpiredMonths=3;DoorHistoryExpiredMonths=3;', N'', N'1.0')
+-- 4.许可证管理
+INSERT dbo.SYS_CONFIG VALUES (N'LisenceOnlineCount', N'', N'在线许可证数量', N'1.0')
+
 
 --楼层
 INSERT dbo.FLOOR VALUES ('一楼', '840f3515-34f1-45fc-b49b-7c8c1fb1a258_20160903034944.jpg', 1)

@@ -59,8 +59,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.Backend", "Rld.Acs.
 		{265F3AA8-972D-4722-B182-8D0F593B05F0} = {265F3AA8-972D-4722-B182-8D0F593B05F0}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rld.Acs.WpfApplication.LisenceTool", "Rld.Acs.WpfApplication.LisenceTool\Rld.Acs.WpfApplication.LisenceTool.csproj", "{34CCE799-DE43-4BA5-9654-2EA73298890A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,10 +125,6 @@ Global
 		{4E985E9C-8D81-4C6E-A4DC-32AA35892C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E985E9C-8D81-4C6E-A4DC-32AA35892C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E985E9C-8D81-4C6E-A4DC-32AA35892C17}.Release|Any CPU.Build.0 = Release|Any CPU
-		{34CCE799-DE43-4BA5-9654-2EA73298890A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34CCE799-DE43-4BA5-9654-2EA73298890A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34CCE799-DE43-4BA5-9654-2EA73298890A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34CCE799-DE43-4BA5-9654-2EA73298890A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

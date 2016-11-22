@@ -39,7 +39,7 @@ namespace Rld.Acs.WpfApplication.Service.Security
         /// <remarks/>
         public SecurityService()
         {
-            this.Url = AppConfiguration.BaseServer + "/SecurityService/SecurityService.asmx";
+            this.Url = AppConfiguration.BaseServer + "/WebService/SecurityService.asmx";
         }
 
         /// <remarks/>

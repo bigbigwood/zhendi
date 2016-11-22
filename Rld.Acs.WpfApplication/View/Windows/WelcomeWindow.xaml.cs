@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,16 +33,20 @@ namespace Rld.Acs.WpfApplication.View.Windows
         private void WelcomeWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
             ShowMessage("检查用户许可证...");
-            var lisence = LisenceService.GetLicense();
-            if (lisence == null || lisence.IsExpired)
+            try
             {
-                var lisenceWindow = new LisenceWindow();
-                lisenceWindow.DataContext = lisence;
-                lisenceWindow.ShowDialog();
-                if (lisenceWindow.Lisenced != true)
+                if (!LisenceService.RequestLisence())
                 {
+                    new LisenceWindow().ShowDialog();
                     Close();
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                ShowMessage("检查许可证发生错误， 请联系软件提供商...");
+                Thread.Sleep(2000);
+                Close();
             }
 
             ShowMessage("加载数据中...");
