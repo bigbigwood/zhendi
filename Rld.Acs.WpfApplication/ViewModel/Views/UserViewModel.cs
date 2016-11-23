@@ -21,6 +21,7 @@ using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
@@ -107,7 +108,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             UserType = UserType.Employee;
             ViewModelAttachment = new ViewModelAttachment<User>();
             Avator = _userAvatorService.GetAvator(_userAvatorService.DefaultAvatorFileName);
-            Title = IsAddMode ? "新增人员" : "修改人员";
+            Title = IsAddMode 
+                ? LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObject, Resource.User)
+                : LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObject, Resource.User);
 
             if (!IsAddMode) //Edit mode
             {
@@ -168,12 +171,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 if (IsAddMode)
                 {
                     CurrentUser = _userRepo.Insert(CurrentUser);
-                    message = "增加人员成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObjectSuccess, Resource.User);
                 }
                 else
                 {
                     _userRepo.Update(CurrentUser);
-                    message = "修改人员成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObjectSuccess, Resource.User);
                 }
             }
             catch (BusinessException ex)
@@ -185,7 +188,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             catch (Exception ex)
             {
                 Log.Error("Update user fails.", ex);
-                message = "保存人员失败";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail);
                 SendMessage(message);
                 return;
             }

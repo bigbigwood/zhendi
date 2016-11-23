@@ -17,6 +17,7 @@ using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
@@ -33,11 +34,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public String Title
         {
-            get { return DeviceGroupID == 0 ? "新增设备组" : "修改设备组"; }
+            get
+            {
+                return string.Format(DeviceGroupID == 0
+                     ? LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObject, Resource.DeviceGroup)
+                     : LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObject, Resource.DeviceGroup));
+            }
         }
-        public String CheckInDeviceName 
-        { 
-            get { return ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.DeviceID == CheckInDeviceID).Name;  }
+        public String CheckInDeviceName
+        {
+            get { return ApplicationManager.GetInstance().AuthorizationDevices.First(x => x.DeviceID == CheckInDeviceID).Name; }
         }
         public String CheckOutDeviceName
         {
@@ -81,11 +87,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     string errorMessage = "";
                     if (checkinDeviceIds.Contains(CheckInDeviceID) || checkoutDeviceIds.Contains(CheckInDeviceID))
                     {
-                        errorMessage += string.Format("{0}已绑定别的设备组!\n", CheckInDeviceName);
+                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckInDeviceName);
                     }
                     if (checkinDeviceIds.Contains(CheckOutDeviceID) || checkoutDeviceIds.Contains(CheckOutDeviceID))
                     {
-                        errorMessage += string.Format("{0}已绑定别的设备组!\n", CheckOutDeviceName);
+                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckOutDeviceName);
                     }
                     if (!string.IsNullOrWhiteSpace(errorMessage))
                     {
@@ -94,7 +100,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     }
 
                     coreModel = _deviceGroupRepo.Insert(coreModel);
-                    message = "增加设备组成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObjectSuccess, Resource.DeviceGroup);
                 }
                 else
                 {
@@ -106,11 +112,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     string errorMessage = "";
                     if (checkinDeviceIds.Contains(CheckInDeviceID) || checkoutDeviceIds.Contains(CheckInDeviceID))
                     {
-                        errorMessage += string.Format("{0}已绑定别的设备组!\n", CheckInDeviceName);
+                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckInDeviceName);
                     }
                     if (checkinDeviceIds.Contains(CheckOutDeviceID) || checkoutDeviceIds.Contains(CheckOutDeviceID))
                     {
-                        errorMessage += string.Format("{0}已绑定别的设备组!\n", CheckOutDeviceName);
+                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckOutDeviceName);
                     }
                     if (!string.IsNullOrWhiteSpace(errorMessage))
                     {
@@ -119,7 +125,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     }
 
                     _deviceGroupRepo.Update(coreModel);
-                    message = "修改设备组成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObjectSuccess, Resource.DeviceGroup);
                 }
 
                 ViewModelAttachment.CoreModel = coreModel;
@@ -127,8 +133,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             }
             catch (Exception ex)
             {
-                Log.Error("Update device role fails.", ex);
-                message = "保存设备组失败";
+                Log.Error("Save fails.", ex);
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail);
                 SendMessage(message);
                 return;
             }

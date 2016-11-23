@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel
@@ -68,7 +69,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 if (SelectedTimeGroupViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择时间组!"), Tokens.TimeGroupPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.TimeGroupPage_ShowNotification);
                     return;
                 }
 
@@ -93,7 +94,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 if (SelectedTimeGroupViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择时间组!"), Tokens.TimeGroupPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.TimeGroupPage_ShowNotification);
                     return;
                 }
 
@@ -103,12 +104,12 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     var timeGroupsInUsing = timeZones.SelectMany(x => x.TimeGroupAssociations);
                     if (timeGroupsInUsing.Any(x => x.TimeGroupID == SelectedTimeGroupViewModel.TimeGroupID))
                     {
-                        Messenger.Default.Send(new NotificationMessage("该时间组已经被关联到时间区，不能删除!"), Tokens.TimeGroupPage_ShowNotification);
+                        Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteTimeGroupBecauseOfTimezoneAssociation)), Tokens.TimeGroupPage_ShowNotification);
                         return;
                     }
                 }
 
-                string question = string.Format("确定删除时间组:{0}吗？", SelectedTimeGroupViewModel.Name);
+                string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToDeleteObject), SelectedTimeGroupViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteTimeGroup), Tokens.TimeGroupPage_ShowQuestion);
             }
             catch (Exception ex)
@@ -125,14 +126,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 try
                 {
                     _timeGroupRepo.Delete(SelectedTimeGroupViewModel.CurrentTimeGroup.TimeGroupID);
-                    message = "删除时间组成功!";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteSuccessfully);
 
                     TimeGroupViewModels.Remove(SelectedTimeGroupViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除时间组失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeGroupPage_ShowNotification);
             });

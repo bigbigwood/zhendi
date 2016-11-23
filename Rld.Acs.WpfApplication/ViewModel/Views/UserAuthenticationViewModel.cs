@@ -13,6 +13,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
+using Rld.Acs.WpfApplication.Service.Language;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -98,7 +99,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     (int)AuthenticationType >= (int)AuthenticationType.FingerPrint1 &&
                     IsSelected && string.IsNullOrWhiteSpace(AuthenticationData))
                 {
-                    string message = string.Format("{0}数据为空，不能启用！", Name);
+                    string message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_CannotEnableBecauseDataIsEmpty, Name);
                     Messenger.Default.Send(new NotificationMessage(message), Tokens.UserDeviceAuthView_ShowNotification);
                     IsSelected = false;
                     RaisePropertyChanged("IsSelected");

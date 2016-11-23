@@ -14,6 +14,7 @@ using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
@@ -72,14 +73,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     coreModel.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     coreModel = _sysRoleRepo.Insert(coreModel);
                     RoleID = coreModel.RoleID;
-                    message = "增加成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObjectSuccess, Resource.SysRole);
                 }
                 else
                 {
                     coreModel.UpdateDate = DateTime.Now;
                     coreModel.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     _sysRoleRepo.Update(coreModel);
-                    message = "修改成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObjectSuccess, Resource.SysRole);
                 }
 
                 ViewModelAttachment.CoreModel = coreModel;
@@ -88,7 +89,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             catch (Exception ex)
             {
                 Log.Error("Update sys role fails.", ex);
-                message = "保存失败";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail);
                 SendMessage(message);
                 return;
             }

@@ -12,7 +12,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
-using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 using GalaSoft.MvvmLight.Threading;
 
@@ -64,7 +64,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedSysOperatorViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择有效数据!"), Tokens.SysOperatorPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.SysOperatorPage_ShowNotification);
                     return;
                 }
 
@@ -93,11 +93,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedSysOperatorViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择有效数据!"), Tokens.SysOperatorPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.SysOperatorPage_ShowNotification);
                     return;
                 }
 
-                string question = string.Format("确定删除:{0}吗？", SelectedSysOperatorViewModel.LoginName);
+                string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToDeleteObject), SelectedSysOperatorViewModel.LoginName);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, Delete), Tokens.SysOperatorPage_ShowQuestion);
             }
             catch (Exception ex)
@@ -114,14 +114,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 try
                 {
                     _sysOperatorRepo.Delete(SelectedSysOperatorViewModel.OperatorID);
-                    message = "删除成功!";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteSuccessfully);
 
                     SysOperatorViewModels.Remove(SelectedSysOperatorViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.SysOperatorPage_ShowNotification);
             });

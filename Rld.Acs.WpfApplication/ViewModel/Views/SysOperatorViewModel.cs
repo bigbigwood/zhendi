@@ -14,6 +14,7 @@ using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 
 
@@ -85,12 +86,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 if (NewPasswordEnabled)
                 {
                     if (string.IsNullOrWhiteSpace(NewPassword1))
-                        message += "\n密码不能为空";
+                        message += LanguageManager.GetLocalizationResource(Resource.MSG_PasswordCannotBeEmpty);
                     else if (string.IsNullOrWhiteSpace(NewPassword2))
-                        message += "\n确认密码不能为空";
+                        message += LanguageManager.GetLocalizationResource(Resource.MSG_ConfirmPasswordCannotBeEmpty);
                     else if (NewPassword1 != NewPassword2)
                     {
-                        message += "\n两次输入密码不一致";
+                        message += LanguageManager.GetLocalizationResource(Resource.MSG_PasswordCannotDifferent);
                     }
 
                     if (!string.IsNullOrWhiteSpace(message))
@@ -118,15 +119,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     coreModel.CreateDate = DateTime.Now;
                     coreModel.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     coreModel = _sysOperatorRepo.Insert(coreModel);
-                   
-                    message = "增加成功!";
+
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObjectSuccess, Resource.Operator);
                 }
                 else
                 {
                     coreModel.UpdateDate = DateTime.Now;
                     coreModel.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     _sysOperatorRepo.Update(coreModel);
-                    message = "修改成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObjectSuccess, Resource.Operator);
                 }
 
                 ViewModelAttachment.CoreModel = coreModel;
@@ -134,8 +135,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             }
             catch (Exception ex)
             {
-                Log.Error("Update sys role fails.", ex);
-                message = "保存失败";
+                Log.Error("Update sys operator fails.", ex);
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail);
                 SendMessage(message);
                 return;
             }

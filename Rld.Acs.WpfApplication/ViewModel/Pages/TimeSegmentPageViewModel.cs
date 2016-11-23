@@ -17,6 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel
@@ -68,7 +69,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 if (SelectedTimeSegmentViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择时间段!"), Tokens.TimeSegmentPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.TimeSegmentPage_ShowNotification);
                     return;
                 }
 
@@ -94,7 +95,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 if (SelectedTimeSegmentViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择时间段!"), Tokens.TimeSegmentPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.TimeSegmentPage_ShowNotification);
                     return;
                 }
 
@@ -104,12 +105,12 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     var timesegmentsInUsing = timegroups.SelectMany(x => x.TimeSegments);
                     if (timesegmentsInUsing.Any(x => x.TimeSegmentID == SelectedTimeSegmentViewModel.TimeSegmentID))
                     {
-                        Messenger.Default.Send(new NotificationMessage("该时间段已经被关联到时间组，不能删除!"), Tokens.TimeSegmentPage_ShowNotification);
+                        Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteTimeSegmentBecauseOfTimeGroupAssociation)), Tokens.TimeSegmentPage_ShowNotification);
                         return;
                     }
                 }
 
-                string question = string.Format("确定删除时间段:{0}吗？", SelectedTimeSegmentViewModel.TimeSegmentName);
+                string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToDeleteObject), SelectedTimeSegmentViewModel.TimeSegmentName);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteTimeSegment), Tokens.TimeSegmentPage_ShowQuestion);
             }
             catch (Exception ex)
@@ -126,14 +127,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 try
                 {
                     _timeSegmentRepository.Delete(SelectedTimeSegmentViewModel.TimeSegmentID);
-                    message = "删除时间段成功!";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteSuccessfully);
 
                     TimeSegmentViewModels.Remove(SelectedTimeSegmentViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = string.Format("删除时间段失败!\n{0}", ex.Message);
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeSegmentPage_ShowNotification);
             });

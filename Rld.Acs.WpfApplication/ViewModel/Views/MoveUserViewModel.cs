@@ -14,6 +14,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -49,7 +50,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             {
                 if (NewDepartment.DepartmentCode == CurrentDepartment.DepartmentCode)
                 {
-                    Messenger.Default.Send(new NotificationMessage(this, "不能移动到原部门"), Tokens.MoveUserView_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(this, LanguageManager.GetLocalizationResource(Resource.MSG_DepartmentIsNoChanged)), Tokens.MoveUserView_ShowNotification);
                     return;
                 }
 
@@ -57,12 +58,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 UpdateDeviceRoleFromNewDepartment(CurrentUser, CurrentDepartment, NewDepartment);
 
                 _userRepo.Update(CurrentUser);
-                message = "移动人员成功!";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_MoveUserSuccess);
             }
             catch (Exception ex)
             {
                 Log.Error("Move user fails.", ex);
-                message = "移动人员失败";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_MoveUserFail);
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.MoveUserView_ShowNotification);
                 return;
             }

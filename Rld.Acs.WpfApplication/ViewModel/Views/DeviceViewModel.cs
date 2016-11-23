@@ -16,9 +16,9 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 using Rld.Acs.WpfApplication.ViewModel.Converter;
-using TimeZone = Rld.Acs.Model.TimeZone;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -122,14 +122,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 var duplicatedDoorCodes = doorCodes.GroupBy(x => x).Where(grp => grp.Count() > 1).Select(grp => grp.Key);
                 if (duplicatedDoorCodes.Any())
                 {
-                    message += string.Format("设备中存在重复的门编号:{0}\n", string.Join(",", duplicatedDoorCodes));
+                    message += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ExistDuplicatedDoorCodes, string.Join(",", duplicatedDoorCodes));
                 }
 
                 var readingCodes = deviceController.DeviceHeadReadings.Select(x => x.Code);
                 var duplicatedReadingCodes = readingCodes.GroupBy(x => x).Where(grp => grp.Count() > 1).Select(grp => grp.Key);
                 if (duplicatedReadingCodes.Any())
                 {
-                    message += string.Format("设备中存在重复的读头编号:{0}\n", string.Join(",", duplicatedReadingCodes));
+                    message += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ExistDuplicatedHeaderCodes, string.Join(",", duplicatedReadingCodes));
                 }
 
                 if (!string.IsNullOrWhiteSpace(message))
@@ -154,7 +154,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CreateUserID = newViewModel.CreateUserID;
                     CreateDate = newViewModel.CreateDate;
 
-                    message = "增加设备成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObjectSuccess, Resource.Device);
                 }
                 else
                 {
@@ -167,7 +167,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
                     //deviceController = _deviceControllerRepo.GetByKey();
 
-                    message = "修改设备成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObjectSuccess, Resource.Device);
                 }
 
                 ViewModelAttachment.CoreModel = deviceController;
@@ -182,7 +182,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             catch (Exception ex)
             {
                 Log.Error("Update device fails.", ex);
-                message = "保存设备失败";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail);
                 SendMessage(message);
                 return;
             }

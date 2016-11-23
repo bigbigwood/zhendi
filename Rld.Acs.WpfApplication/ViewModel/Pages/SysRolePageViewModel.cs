@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Media;
 using AutoMapper;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -13,6 +14,7 @@ using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 using GalaSoft.MvvmLight.Threading;
 
@@ -64,7 +66,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedSysRoleViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择有效数据!"), Tokens.SysRolePage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.SysRolePage_ShowNotification);
                     return;
                 }
 
@@ -90,18 +92,18 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedSysRoleViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择有效数据!"), Tokens.SysRolePage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.SysRolePage_ShowNotification);
                     return;
                 }
 
                 var operatorRoles = _sysOperatorRoleRepo.Query(new Hashtable() { { "RoleID", SelectedSysRoleViewModel.RoleID } });
                 if (operatorRoles.Any())
                 {
-                    Messenger.Default.Send(new NotificationMessage("该系统角色已经被系统用户使用，不能删除!"), Tokens.SysRolePage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteSysRoleBecauseOfOperatorAssociation)), Tokens.SysRolePage_ShowNotification);
                     return;
                 }
 
-                string question = string.Format("确定删除:{0}吗？", SelectedSysRoleViewModel.RoleName);
+                string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToDeleteObject), SelectedSysRoleViewModel.RoleName);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, Delete), Tokens.SysRolePage_ShowQuestion);
             }
             catch (Exception ex)
@@ -118,14 +120,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 try
                 {
                     _sysRoleRepo.Delete(SelectedSysRoleViewModel.RoleID);
-                    message = "删除成功!";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteSuccessfully);
 
                     SysRoleViewModels.Remove(SelectedSysRoleViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.SysRolePage_ShowNotification);
             });

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Rld.Acs.Model;
 using Rld.Acs.WpfApplication.Models;
 
 namespace Rld.Acs.WpfApplication.Service.Language
@@ -54,8 +55,27 @@ namespace Rld.Acs.WpfApplication.Service.Language
 
             //Add the new resource to the dictionary
             Application.Current.Resources.MergedDictionaries.Add(dictionary);
+        }
 
-            
+        public static String GetLocalizationResource(Resource resource)
+        {
+            return Application.Current.FindResource(resource.ToString()) as string;
+        }
+
+        public static List<String> GetLocalizationResource(List<Resource> resource)
+        {
+            return resource.Select(GetLocalizationResource).ToList();
+        }
+
+        public static String GetLocalizationResourceFormat(Resource format, params Resource[] agrs)
+        {
+            object[] strList = GetLocalizationResource(agrs.ToList()).ToArray();
+            return string.Format(GetLocalizationResource(format), strList);
+        }
+
+        public static String GetLocalizationResourceFormat(Resource format, params object[] agrs)
+        {
+            return string.Format(GetLocalizationResource(format), agrs);
         }
     }
 }

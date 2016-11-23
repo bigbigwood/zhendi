@@ -13,6 +13,7 @@ using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 using GalaSoft.MvvmLight.Threading;
 
@@ -62,7 +63,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedFloorViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择有效数据!"), Tokens.FloorPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.FloorPage_ShowNotification);
                     return;
                 }
 
@@ -90,11 +91,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedFloorViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择有效数据!"), Tokens.FloorPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.FloorPage_ShowNotification);
                     return;
                 }
 
-                string question = string.Format("确定删除:{0}吗？", SelectedFloorViewModel.Name);
+                string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToDeleteObject), SelectedFloorViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, Delete), Tokens.FloorPage_ShowQuestion);
             }
             catch (Exception ex)
@@ -111,14 +112,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 try
                 {
                     _floorRepo.Delete(SelectedFloorViewModel.FloorID);
-                    message = "删除成功!";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteSuccessfully);
 
                     FloorViewModels.Remove(SelectedFloorViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.FloorPage_ShowNotification);
             });

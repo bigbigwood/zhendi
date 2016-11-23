@@ -19,6 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Converter;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 using Rld.Acs.WpfApplication.DeviceProxy;
@@ -82,7 +83,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 if (SelectedDeviceViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择设备!"), Tokens.DevicePage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.DevicePage_ShowNotification);
                     return;
                 }
 
@@ -112,7 +113,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 if (SelectedDeviceViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择设备!"), Tokens.DevicePage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.DevicePage_ShowNotification);
                     return;
                 }
 
@@ -121,7 +122,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     .SelectMany(x => x.DeviceAssociations).Select(x => x.DeviceID);
                 if (departmentAssiciationDeviceIds.Contains(SelectedDeviceViewModel.Id))
                 {
-                    assiciationErrorMessage += "该设备已经被关联到部门，不能删除!\n";
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeviceBecauseOfDeptAssociation);
                 }
 
                 var deviceRoleAssiciationDeviceIds = ApplicationManager.GetInstance().AuthorizationDeviceRoles
@@ -129,7 +130,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     .Select(x => x.DeviceID);
                 if (deviceRoleAssiciationDeviceIds.Contains(SelectedDeviceViewModel.Id))
                 {
-                    assiciationErrorMessage += "该设备已经被关联到设备角色，不能删除!\n";
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeviceBecauseOfRoleAssociation);
                 }
 
                 if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))
@@ -138,7 +139,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
-                string question = string.Format("确定删除设备:{0}吗？", SelectedDeviceViewModel.Name);
+                string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToDeleteObject), SelectedDeviceViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeviceController), Tokens.DevicePage_ShowQuestion);
 
             }
@@ -156,14 +157,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 try
                 {
                     _deviceControllerRepo.Delete(SelectedDeviceViewModel.Id);
-                    message = "删除设备成功!";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteSuccessfully);
 
                     DeviceControllerViewModels.Remove(SelectedDeviceViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除设备失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
             });
@@ -181,18 +182,18 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     if (deviceCodes != null && deviceCodes.Any())
                     {
                         var deviceCodeString = string.Join(", ", deviceCodes);
-                        string question = string.Format("发现新设备编号:{0}, 现在导入系统吗？", deviceCodeString);
+                        string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToImportNewDevice), deviceCodeString);
                         Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmImportNewController), Tokens.DevicePage_ShowQuestion);
                     }
                     else
                     {
-                        var message = "没有发现新设备";
+                        var message = LanguageManager.GetLocalizationResource(Resource.MSG_NoNewDeviceDetected);
                         Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
                     }
                 }
                 else
                 {
-                    var message = "搜索设备失败！";
+                    var message = LanguageManager.GetLocalizationResource(Resource.MSG_SearchNewDeviceFail);
                     Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
                 }
             }
@@ -221,12 +222,12 @@ namespace Rld.Acs.WpfApplication.ViewModel
                         cacheableRepo.Refresh();
                     }
 
-                    message = "导入新设备成功！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_ImportNewDeviceSuccess);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除设备失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_ImportNewDeviceFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.DevicePage_ShowNotification);
             });

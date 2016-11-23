@@ -18,6 +18,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -163,14 +164,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 {
                     string message = "";
 
-                    var controller = await DialogCoordinator.Instance.ShowProgressAsync(this, "查询数据", "查询数据中，请稍等");
+                    var controller = await DialogCoordinator.Instance.ShowProgressAsync(this,
+                        LanguageManager.GetLocalizationResource(Resource.MSG_QueryData),
+                        LanguageManager.GetLocalizationResource(Resource.MSG_QueryingData));
                     controller.SetIndeterminate();
 
                     await Task.Run(() =>
                     {
                         try
                         {
-                            Log.Info("查询数据中..");
+                            Log.Info("Querying data...");
                             int totalCount = 0;
                             SysOperationLogViewModels = QueryData(conditions, out totalCount);
                             if (totalCount % PageSize == 0)
@@ -193,7 +196,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                     if (!SysOperationLogViewModels.Any())
                     {
-                        Messenger.Default.Send(new NotificationMessage("查询数据结果为空"), Tokens.SysOperationLogPage_ShowNotification);
+                        Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_QueryResultIsEmpty)), Tokens.SysOperationLogPage_ShowNotification);
                     }
                 });
 
@@ -238,7 +241,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (OperatorId.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
-                    errors.Add("操作人员ID的输入值必须是数字");
+                    errors.Add(LanguageManager.GetLocalizationResource(Resource.MSG_OperatorIDMustBeNumber));
                 }
 
                 conditions.Add("UserID", OperatorId);
@@ -261,7 +264,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             if (!SysOperationLogViewModels.Any())
             {
-                Messenger.Default.Send(new NotificationMessage("没有数据可以导出！"), Tokens.SysOperationLogPage_ShowNotification);
+                Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_NoDataToExport)), Tokens.SysOperationLogPage_ShowNotification);
                 return;
             }
 
@@ -271,12 +274,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             dt.Columns.Remove("Remark");
             dt.Columns.Remove("IsInDesignMode");
 
-            dt.Columns["UserID"].ColumnName = "操作人员ID";
-            dt.Columns["UserName"].ColumnName = "操作人员名称";
-            dt.Columns["OperationCode"].ColumnName = "操作代码";
-            dt.Columns["OperationName"].ColumnName = "操作名称";
-            dt.Columns["Detail"].ColumnName = "操作详情";
-            dt.Columns["CreateDate"].ColumnName = "操作时间";
+            dt.Columns["UserID"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperatorID);
+            dt.Columns["UserName"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperatorName);
+            dt.Columns["OperationCode"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperationCode);
+            dt.Columns["OperationName"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperationName);
+            dt.Columns["Detail"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperationDetail);
+            dt.Columns["CreateDate"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperationCreateDate);
 
             Messenger.Default.Send(new OpenWindowMessage() { DataContext = dt }, Tokens.SysOperationLogPage_OpenExportView);
         }

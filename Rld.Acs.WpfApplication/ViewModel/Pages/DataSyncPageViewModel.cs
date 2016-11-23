@@ -18,6 +18,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -118,15 +119,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 var defaultRoleConfig = _sysConfigRepository.Query(new Hashtable()).FirstOrDefault(x => x.Name == ConstStrings.DataSyncDefaultRole);
                 var dataSyncConfig = _sysConfigRepository.Query(new Hashtable()).FirstOrDefault(x => x.Name == ConstStrings.DataSyncConfig);
                 
-                Log.Info("保存缺省部门...");
+                Log.Info("Saving default department...");
                 defaultDepartmentConfig.Value = DefaultDepartment.DepartmentID == 0? "" : DefaultDepartment.DepartmentID.ToString();
                 _sysConfigRepository.Update(defaultDepartmentConfig);
                 
-                Log.Info("保存缺省角色...");
+                Log.Info("Saving default role...");
                 defaultRoleConfig.Value = DefaultDeviceRole.DeviceRoleID == 0 ? "" : DefaultDeviceRole.DeviceRoleID.ToString();
                 _sysConfigRepository.Update(defaultRoleConfig);
 
-                Log.Info("保存同步时间...");
+                Log.Info("Saving schedule time...");
                 string configValues = "";
 
                 var enabledItems = DataSyncJobTimeConfigViewModels.FindAll(x => x.IsSelected);
@@ -142,7 +143,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 dataSyncConfig.Value = configValues;
                 _sysConfigRepository.Update(dataSyncConfig);
 
-                Messenger.Default.Send(new NotificationMessage("保存成功!"), Tokens.DataSyncPage_ShowNotification);
+                Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SaveSuccessfully)), Tokens.DataSyncPage_ShowNotification);
             }
             catch (Exception ex)
             {

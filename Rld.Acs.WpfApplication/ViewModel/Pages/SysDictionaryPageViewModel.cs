@@ -14,6 +14,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 using Rld.Acs.WpfApplication.Models.Messages;
 using GalaSoft.MvvmLight.Messaging;
@@ -228,7 +229,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedSysDictionaryViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择字典项!"), Tokens.SysDictionaryPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.SysDictionaryPage_ShowNotification);
                     return;
                 }
 
@@ -251,11 +252,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedSysDictionaryViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择字典项!"), Tokens.SysDictionaryPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.SysDictionaryPage_ShowNotification);
                     return;
                 }
 
-                string question = string.Format("确定删除字典项:{0}吗？", SelectedSysDictionaryViewModel.ItemValue);
+                string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToDeleteObject), SelectedSysDictionaryViewModel.ItemValue);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDelete), Tokens.SysDictionaryPage_ShowQuestion);
 
             }
@@ -273,14 +274,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 try
                 {
                     _sysDictionaryRepo.Delete(SelectedSysDictionaryViewModel.DictionaryID);
-                    message = "删除成功!";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteSuccessfully);
 
                     SysDictionaryViewModels.Remove(SelectedSysDictionaryViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.SysDictionaryPage_ShowNotification);
             });

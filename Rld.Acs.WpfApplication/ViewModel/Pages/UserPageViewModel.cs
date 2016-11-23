@@ -17,6 +17,7 @@ using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service.Authorization;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -175,7 +176,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedUserViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择人员!"), Tokens.UserPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectUser)), Tokens.UserPage_ShowNotification);
                     return;
                 }
 
@@ -209,11 +210,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedUserViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择人员!"), Tokens.UserPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectUser)), Tokens.UserPage_ShowNotification);
                     return;
                 }
 
-                string question = string.Format("确定删除人员:{0}吗？", SelectedUserViewModel.Name);
+                string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToDeleteObject), SelectedUserViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteUser), Tokens.UserPage_ShowQuestion);
             }
             catch (Exception ex)
@@ -229,14 +230,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 try
                 {
                     _userRepo.Delete(SelectedUserViewModel.CurrentUser.UserID);
-                    message = "删除人员成功!";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteSuccessfully);
 
                     UserViewModels.Remove(SelectedUserViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除人员失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.UserPage_ShowNotification);
             });
@@ -249,7 +250,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedUserViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择人员!"), Tokens.UserPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectUser)), Tokens.UserPage_ShowNotification);
                     return;
                 }
 
@@ -293,7 +294,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedUserViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择人员!"), Tokens.UserPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectUser)), Tokens.UserPage_ShowNotification);
                     return;
                 }
 

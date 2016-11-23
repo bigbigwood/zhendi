@@ -47,7 +47,7 @@
     <sys:String x:Key="DuressPassword">胁迫密码</sys:String>
     <sys:String x:Key="DuressOpen">胁迫时开门</sys:String>
     <sys:String x:Key="DuressAlarm">胁迫时报警</sys:String>
-    <sys:String x:Key="DeviceGroup">设备组管理</sys:String>
+    <sys:String x:Key="DeviceGroupManagement">设备组管理</sys:String>
     <sys:String x:Key="Mac_Address">Mac地址</sys:String>
     <sys:String x:Key="ProductSN">产品序列号</sys:String>
     <sys:String x:Key="ReaderType">读头类型</sys:String>
@@ -115,7 +115,6 @@
     <sys:String x:Key="Postcode">邮政编码</sys:String>
     <sys:String x:Key="Single">未婚</sys:String>
     <sys:String x:Key="Married">已婚</sys:String>
-    <sys:String x:Key="DeviceRole">设备权限管理</sys:String>
 
     <sys:String x:Key="Language_Chinese">中文</sys:String>
     <sys:String x:Key="Language_English">英文</sys:String>
@@ -318,5 +317,97 @@
 
     <sys:String x:Key="LisenceWindow">许可证</sys:String>
     <sys:String x:Key="OutOfLisenceMessage">当前在线的许可证数量已达到最大使用值，请稍后使用，或联系您的软件供应商。</sys:String>
+    <sys:String x:Key="MSG_SaveSuccessfully">保存成功!</sys:String>
+    <sys:String x:Key="MSG_SaveFail">保存失败!</sys:String>
+    <sys:String x:Key="MSG_SelectValidData">请先选择有效数据!</sys:String>
+    <sys:String x:Key="MSG_DoUWantToDeleteObject">确定删除:{0}吗？</sys:String>
+    <sys:String x:Key="MSG_DeleteSuccessfully">删除成功!</sys:String>
+    <sys:String x:Key="MSG_DeleteFail">删除失败!</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeptBecauseOfSubDept">选中部门存在子部门，请先删除所属子部门!\n</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeptBecauseOfExistStaff">选中部门存在人员，请先删除所属人员!\n</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeviceBecauseOfDeptAssociation">该设备已经被关联到部门，不能删除!\n</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeviceBecauseOfRoleAssociation">该设备已经被关联到设备角色，不能删除!\n</sys:String>
+    <sys:String x:Key="MSG_DoUWantToImportNewDevice">发现新设备编号:{0}, 现在导入系统吗？</sys:String>
+    <sys:String x:Key="MSG_NoNewDeviceDetected">没有发现新设备</sys:String>
+    <sys:String x:Key="MSG_SearchNewDeviceFail">搜索设备失败！</sys:String>
+    <sys:String x:Key="MSG_ImportNewDeviceSuccess">导入新设备成功！</sys:String>
+    <sys:String x:Key="MSG_ImportNewDeviceFail">导入新设备失败！</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeviceRoleBecauseOfDeptAssociation">该设备角色已经被部门使用，不能删除!\n</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeviceRoleBecauseOfStuffAssociation">该设备角色已经被人员使用，不能删除!\n</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteSysRoleBecauseOfOperatorAssociation">该系统角色已经被系统用户使用，不能删除!</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteTimeGroupBecauseOfTimezoneAssociation">该时间组已经被关联到时间区，不能删除!</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteTimeSegmentBecauseOfTimeGroupAssociation">该时间段已经被关联到时间组，不能删除!</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteTimeZoneBecauseOfDeviceAssociation">该时间区已经被关联到设备，不能删除!\n</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteTimeZoneBecauseOfRoleAssociation">该时间区已经被关联到设备角色，不能删除!\n</sys:String>
+    <sys:String x:Key="MSG_SelectUser">请先选择人员!</sys:String>
+    <sys:String x:Key="MSG_ObjectHasBindToOtherDeviceGroup">{0}已绑定别的设备组!\n</sys:String>
+    <sys:String x:Key="MSG_AddObject">新增{0}</sys:String>
+    <sys:String x:Key="MSG_ModifyObject">修改{0}</sys:String>
+    <sys:String x:Key="MSG_AddObjectSuccess">增加{0}成功!</sys:String>
+    <sys:String x:Key="MSG_ModifyObjectSuccess">修改{0}成功!</sys:String>
+    <sys:String x:Key="MSG_CannotRemoveDoorBecauseFloorAssociation">门已经和楼层绑定，不能禁用！</sys:String>
+    <sys:String x:Key="MSG_ExistDuplicatedDoorCodes">设备中存在重复的门编号:{0}\n</sys:String>
+    <sys:String x:Key="MSG_ExistDuplicatedHeaderCodes">设备中存在重复的读头编号:{0}\n</sys:String>
+    <sys:String x:Key="MSG_DepartmentIsNoChanged">不能移动到原部门</sys:String>
+    <sys:String x:Key="MSG_MoveUserSuccess">移动人员成功!</sys:String>
+    <sys:String x:Key="MSG_MoveUserFail">移动人员失败!</sys:String>
+    <sys:String x:Key="MSG_PasswordCannotBeEmpty">\n密码不能为空</sys:String>
+    <sys:String x:Key="MSG_ConfirmPasswordCannotBeEmpty">\n确认密码不能为空</sys:String>
+    <sys:String x:Key="MSG_PasswordCannotDifferent">\n两次输入密码不一致</sys:String>
+    <sys:String x:Key="MSG_BeginTiimeCannotGreatThanEndTime">开始时间不能大于结束时间</sys:String>
+    <sys:String x:Key="MSG_CannotEnableBecauseDataIsEmpty">{0}数据为空，不能启用！</sys:String>
+    <sys:String x:Key="MSG_QueryData">查询数据</sys:String>
+    <sys:String x:Key="MSG_QueryingData">查询数据中，请稍等</sys:String>
+    <sys:String x:Key="MSG_SyncDataSuccess">同步数据成功！</sys:String>
+    <sys:String x:Key="MSG_SyncDataFail">同步数据失败！</sys:String>
+    <sys:String x:Key="MSG_QueryResultIsEmpty">查询数据结果为空</sys:String>
+    <sys:String x:Key="MSG_DeviceCodeMustBeNumber">设备编号的输入值必须是数字</sys:String>
+    <sys:String x:Key="MSG_InputDeviceCodeDoesNotExist">输入的设备编号不存在系统中</sys:String>
+    <sys:String x:Key="MSG_UserNoMustBeNumber">人员工号的输入值必须是数字</sys:String>
+    <sys:String x:Key="MSG_InputOperatorIDMustBeNumber">操作人员工号的输入值必须是数字</sys:String>
+    <sys:String x:Key="MSG_NoDataToExport">没有数据可以导出！</sys:String>
+    <sys:String x:Key="MSG_OperatorIDMustBeNumber">操作人员ID的输入值必须是数字</sys:String>
+
+
+    <sys:String x:Key="User">人员</sys:String>
+    <sys:String x:Key="DeviceGroup">设备组</sys:String>
+    <sys:String x:Key="DeviceRole">设备角色</sys:String>
+    <sys:String x:Key="Device">设备</sys:String>
+    <sys:String x:Key="Door">门</sys:String>
+    <sys:String x:Key="HeadReader">读头</sys:String>
+    <sys:String x:Key="DictionaryItem">数据项</sys:String>
+    <sys:String x:Key="Operator">用户</sys:String>
+    <sys:String x:Key="SysRole">系统角色</sys:String>
+    <sys:String x:Key="TimeSegment">时间段</sys:String>
+    <sys:String x:Key="TimeGroup">时间组</sys:String>
+    <sys:String x:Key="TimeZone">时间区</sys:String>
+    <sys:String x:Key="Monday">星期一</sys:String>
+    <sys:String x:Key="Tuesday">星期二</sys:String>
+    <sys:String x:Key="Wednesday">星期三</sys:String>
+    <sys:String x:Key="Thursday">星期四</sys:String>
+    <sys:String x:Key="Friday">星期五</sys:String>
+    <sys:String x:Key="Saturday">星期六</sys:String>
+    <sys:String x:Key="Sunday">星期日</sys:String>
+    <sys:String x:Key="DeviceCode">设备编号</sys:String>
+    <sys:String x:Key="DeviceType">设备类型</sys:String>
+    <sys:String x:Key="OperatorId">操作人员工号</sys:String>
+    <sys:String x:Key="DeviceUserId">人员工号</sys:String>
+    <sys:String x:Key="OperationType">操作类型</sys:String>
+    <sys:String x:Key="OperationDescription">操作描述</sys:String>
+    <sys:String x:Key="OperationContent">操作内容</sys:String>
+    <sys:String x:Key="OperationTime">操作时间</sys:String>
+    <sys:String x:Key="DeviceSN">设备序列号</sys:String>
+    <sys:String x:Key="DeviceUserID">人员工号</sys:String>
+    <sys:String x:Key="AuthenticationString">验证方式</sys:String>
+    <sys:String x:Key="AuthenticationResult">验证结果</sys:String>
+    <sys:String x:Key="RecordTime">记录时间</sys:String>
+    <sys:String x:Key="OperatorID">操作人员ID</sys:String>
+    <sys:String x:Key="OperatorName">操作人员名称</sys:String>
+    <sys:String x:Key="OperationCode">操作代码</sys:String>
+    <sys:String x:Key="OperationName">操作名称</sys:String>
+    <sys:String x:Key="OperationDetail">操作详情</sys:String>
+    <sys:String x:Key="OperationCreateDate">操作时间</sys:String>
+
+
 
 </ResourceDictionary>

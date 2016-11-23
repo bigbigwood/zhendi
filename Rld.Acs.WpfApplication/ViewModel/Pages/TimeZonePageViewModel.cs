@@ -7,10 +7,12 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using log4net;
+using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -63,7 +65,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedTimeZoneViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择时间区!"), Tokens.TimeZonePage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.TimeZonePage_ShowNotification);
                     return;
                 }
 
@@ -89,7 +91,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (SelectedTimeZoneViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择时间区!"), Tokens.TimeZonePage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.TimeZonePage_ShowNotification);
                     return;
                 }
 
@@ -98,7 +100,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     .Select(x => x.DeviceControllerParameter.UnlockOpenTimeZone);
                 if (deviceAssiciationTimeZoneIds.Contains(SelectedTimeZoneViewModel.ID))
                 {
-                    assiciationErrorMessage += "该时间区已经被关联到设备，不能删除!\n";
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteTimeZoneBecauseOfDeviceAssociation);
                 }
 
                 var deviceRoleAssiciationTimeZoneIds = ApplicationManager.GetInstance().AuthorizationDeviceRoles
@@ -106,7 +108,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     .Select(x => x.AllowedAccessTimeZoneID);
                 if (deviceRoleAssiciationTimeZoneIds.Contains(SelectedTimeZoneViewModel.ID))
                 {
-                    assiciationErrorMessage += "该时间区已经被关联到设备角色，不能删除!\n";
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteTimeZoneBecauseOfRoleAssociation);
                 }
 
                 if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))
@@ -115,7 +117,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     return;
                 }
 
-                string question = string.Format("确定删除时间区:{0}吗？", SelectedTimeZoneViewModel.Name);
+                string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToDeleteObject), SelectedTimeZoneViewModel.Name);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, ConfirmDeleteTimeZone), Tokens.TimeZonePage_ShowQuestion);
             }
             catch (Exception ex)
@@ -131,14 +133,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 try
                 {
                     _timeZoneRepo.Delete(SelectedTimeZoneViewModel.CurrentTimeZone.TimeZoneID);
-                    message = "删除时间区成功!";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteSuccessfully);
 
                     TimeZoneViewModels.Remove(SelectedTimeZoneViewModel);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除时间区失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.TimeZonePage_ShowNotification);
             });

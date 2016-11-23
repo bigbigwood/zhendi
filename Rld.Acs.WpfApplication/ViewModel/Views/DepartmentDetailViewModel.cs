@@ -13,6 +13,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel
@@ -102,14 +103,9 @@ namespace Rld.Acs.WpfApplication.ViewModel
 
             DeviceListBoxSource = items;
 
-            if (ID == 0)
-            {
-                Title = "新增部门";
-            }
-            else
-            {
-                Title = "修改部门";
-            }
+            Title = (ID == 0)
+                ? LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObject, Resource.Department)
+                : LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObject, Resource.Department);
         }
 
         private void UpdateSelectedDevices()
@@ -157,7 +153,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     CurrentDepartment.CreateDate = DateTime.Now;
                     CurrentDepartment = _departmentRepository.Insert(CurrentDepartment);
 
-                    message = "增加部门成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObjectSuccess, Resource.Department);
                     
                 }
                 else
@@ -166,13 +162,13 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     CurrentDepartment.UpdateDate = DateTime.Now;
                     _departmentRepository.Update(CurrentDepartment);
 
-                    message = "修改部门成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObjectSuccess, Resource.Department);
                 }
             }
             catch (Exception ex)
             {
                 Log.Error("Update department fails.", ex);
-                message = "保存部门失败";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail);
                 SendMessage(message);
                 return;
             }

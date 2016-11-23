@@ -20,6 +20,7 @@ using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -174,14 +175,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 {
                     string message = "";
 
-                    var controller = await DialogCoordinator.Instance.ShowProgressAsync(this, "查询数据", "查询数据中，请稍等");
+                    var controller = await DialogCoordinator.Instance.ShowProgressAsync(this,
+                        LanguageManager.GetLocalizationResource(Resource.MSG_QueryData),
+                        LanguageManager.GetLocalizationResource(Resource.MSG_QueryingData));
                     controller.SetIndeterminate();
 
                     await Task.Run(() =>
                     {
                         try
                         {
-                            Log.Info("同步数据中..");
+                            Log.Info("Data Synchorizing...");
                             var devices = new List<DeviceController>();
                             if (!string.IsNullOrWhiteSpace(DeviceCode))
                             {
@@ -195,7 +198,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                             string[] messages;
                             var resultTypes = new DeviceServiceClient().SyncDeviceTrafficLogs(devices.ToArray(), out messages);
-                            message = MessageHandler.GenerateDeviceMessage(resultTypes, messages, "同步数据成功！", "同步数据失败！");
+                            message = MessageHandler.GenerateDeviceMessage(resultTypes, messages,
+                                LanguageManager.GetLocalizationResource(Resource.MSG_SyncDataSuccess),
+                                LanguageManager.GetLocalizationResource(Resource.MSG_SyncDataFail));
                             Log.Info(message);
                         }
                         catch (Exception ex)
@@ -205,7 +210,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                         try
                         {
-                            Log.Info("查询数据中..");
+                            Log.Info("Querying data...");
                             int totalCount = 0;
                             DeviceTrafficLogViewModels = QueryData(conditions, out totalCount);
                             if (totalCount % PageSize == 0)
@@ -228,7 +233,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                     if (!DeviceTrafficLogViewModels.Any())
                     {
-                        Messenger.Default.Send(new NotificationMessage("查询数据结果为空"), Tokens.DeviceTrafficLogPage_ShowNotification);
+                        Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_QueryResultIsEmpty)), Tokens.DeviceTrafficLogPage_ShowNotification);
                     }
                 });
             }
@@ -271,11 +276,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (DeviceCode.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
-                    errors.Add("设备编号的输入值必须是数字");
+                    errors.Add(LanguageManager.GetLocalizationResource(Resource.MSG_DeviceCodeMustBeNumber));
                 }
                 if (ApplicationManager.GetInstance().AuthorizationDevices.All(x => x.Code != DeviceCode))
                 {
-                    errors.Add("输入的设备编号不存在系统中");
+                    errors.Add(LanguageManager.GetLocalizationResource(Resource.MSG_InputDeviceCodeDoesNotExist));
                 }
 
                 conditions.Add("DeviceCode", DeviceCode);
@@ -286,7 +291,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (DeviceUserId.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
-                    errors.Add("人员工号的输入值必须是数字");
+                    errors.Add(LanguageManager.GetLocalizationResource(Resource.MSG_UserNoMustBeNumber));
                 }
 
                 conditions.Add("DeviceUserId", DeviceUserId);
@@ -324,7 +329,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             if (!DeviceTrafficLogViewModels.Any())
             {
-                Messenger.Default.Send(new NotificationMessage("没有数据可以导出！"), Tokens.DeviceTrafficLogPage_ShowNotification);
+                Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_NoDataToExport)), Tokens.DeviceTrafficLogPage_ShowNotification);
                 return;
             }
 
@@ -340,13 +345,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             dt.Columns["AuthenticationString"].SetOrdinal(4);
             dt.Columns["RecordTime"].SetOrdinal(6);
 
-            dt.Columns["DeviceCode"].ColumnName = "设备编号";
-            dt.Columns["DeviceType"].ColumnName = "设备类型";
-            dt.Columns["DeviceSN"].ColumnName = "设备序列号";
-            dt.Columns["DeviceUserID"].ColumnName = "人员工号";
-            dt.Columns["AuthenticationString"].ColumnName = "验证方式";
-            dt.Columns["Remark"].ColumnName = "验证结果";
-            dt.Columns["RecordTime"].ColumnName = "记录时间";
+            dt.Columns["DeviceCode"].ColumnName = LanguageManager.GetLocalizationResource(Resource.DeviceCode);
+            dt.Columns["DeviceType"].ColumnName = LanguageManager.GetLocalizationResource(Resource.DeviceType);
+            dt.Columns["DeviceSN"].ColumnName = LanguageManager.GetLocalizationResource(Resource.DeviceSN);
+            dt.Columns["DeviceUserID"].ColumnName = LanguageManager.GetLocalizationResource(Resource.DeviceUserID);
+            dt.Columns["AuthenticationString"].ColumnName = LanguageManager.GetLocalizationResource(Resource.AuthenticationString);
+            dt.Columns["Remark"].ColumnName = LanguageManager.GetLocalizationResource(Resource.AuthenticationResult);
+            dt.Columns["RecordTime"].ColumnName = LanguageManager.GetLocalizationResource(Resource.RecordTime);
 
             Messenger.Default.Send(new OpenWindowMessage() { DataContext = dt }, Tokens.DeviceTrafficLogPage_OpenExportView);
         }

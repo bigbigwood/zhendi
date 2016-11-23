@@ -18,6 +18,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -84,7 +85,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 autoCleanConfig.Value = values;
                 _sysConfigRepository.Update(autoCleanConfig);
 
-                Messenger.Default.Send(new NotificationMessage("保存成功!"), Tokens.DataCleanPage_ShowNotification);
+                Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SaveSuccessfully)), Tokens.DataCleanPage_ShowNotification);
             }
             catch (Exception ex)
             {

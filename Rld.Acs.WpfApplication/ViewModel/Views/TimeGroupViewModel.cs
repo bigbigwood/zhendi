@@ -15,6 +15,7 @@ using Rld.Acs.Unility.Exceptions;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
@@ -53,7 +54,12 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
         public RelayCommand SaveCmd { get; private set; }
         public RelayCommand CancelCmd { get; private set; }
-        public string Title { get { return (TimeGroupID == 0) ? "新增时间组" : "修改时间组"; } }
+        public string Title
+        { 
+            get { return (TimeGroupID == 0) 
+            ? LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObject, Resource.TimeGroup)
+            : LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObject, Resource.TimeGroup);} 
+        }
         public Int32 TimeGroupID { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
@@ -96,7 +102,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentTimeGroup.CreateDate = DateTime.Now;
                     CurrentTimeGroup = _timeGroupRepo.Insert(CurrentTimeGroup);
 
-                    message = "增加时间组成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObjectSuccess, Resource.TimeGroup);
                 }
                 else
                 {
@@ -104,7 +110,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentTimeGroup.UpdateDate = DateTime.Now;
                     _timeGroupRepo.Update(CurrentTimeGroup);
 
-                    message = "修改时间组成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObjectSuccess, Resource.TimeGroup);
                 }
             }
             catch (BusinessException ex)
@@ -116,7 +122,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             catch (Exception ex)
             {
                 Log.Error("Update timegroup fails.", ex);
-                message = "保存时间组失败";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail);
                 SendMessage(message);
                 return;
             }

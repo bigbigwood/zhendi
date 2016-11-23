@@ -16,6 +16,7 @@ using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel
@@ -105,21 +106,21 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 if (SelectedDepartmentDetailViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择部门!"), Tokens.DepartmentPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.DepartmentPage_ShowNotification);
                     return;
                 }
 
                 string assiciationErrorMessage = "";
                 if (AuthorizationDepartments.Any(d => d.Parent != null && d.Parent.DepartmentID == SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID))
                 {
-                    assiciationErrorMessage += "选中部门存在子部门，请先删除所属子部门!\n";
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeptBecauseOfSubDept);
                 }
 
                 var userRepo = NinjectBinder.GetRepository<IUserRepository>();
                 var departmentUsers = userRepo.Query(new Hashtable() { { "DepartmentID", SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID } });
                 if (departmentUsers.Any())
                 {
-                    assiciationErrorMessage += "选中部门存在人员，请先删除所属人员!\n";
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeptBecauseOfExistStaff);
                 }
 
                 if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))
@@ -128,7 +129,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     return;
                 }
 
-                string question = string.Format("确定删除部门:{0}吗？", SelectedDepartmentDetailViewModel.DepartmentName);
+                string question = string.Format(LanguageManager.GetLocalizationResource(Resource.MSG_DoUWantToDeleteObject), SelectedDepartmentDetailViewModel.DepartmentName);
                 Messenger.Default.Send(new NotificationMessageAction(this, question, DeleteDepartment), Tokens.DepartmentPage_ShowQuestion);
 
                 TreeViewSource = BuildTreeViewSource();
@@ -147,7 +148,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 try
                 {
                     _departmentRepository.Delete(SelectedDepartmentDetailViewModel.ID);
-                    message = "删除部门成功!";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteSuccessfully);
 
                     AuthorizationDepartments.Remove(SelectedDepartmentDetailViewModel.CurrentDepartment);
                     TreeViewSource = BuildTreeViewSource();
@@ -155,7 +156,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "删除部门失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeleteFail);
                 }
                 Messenger.Default.Send(new NotificationMessage(message), Tokens.DepartmentPage_ShowNotification);
             });
@@ -183,7 +184,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
             {
                 if (SelectedDepartmentDetailViewModel == null)
                 {
-                    Messenger.Default.Send(new NotificationMessage("请先选择部门!"), Tokens.DepartmentPage_ShowNotification);
+                    Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SelectValidData)), Tokens.DepartmentPage_ShowNotification);
                     return;
                 }
 

@@ -16,6 +16,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 using TimeZone = Rld.Acs.Model.TimeZone;
 
@@ -93,8 +94,10 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 SelectedTimezone = Timezones.FirstOrDefault();
                 SelectedPermissionAction = PermissionActionDict.FirstOrDefault().ItemID.Value;
             }
-            
-            Title = (deviceRole.DeviceRoleID == 0) ? "新增设备角色" : "修改设备角色";
+
+            Title = (deviceRole.DeviceRoleID == 0)
+                ? LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObject, Resource.DeviceRole)
+                : LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObject, Resource.DeviceRole);
         }
 
         private void Save()
@@ -121,7 +124,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentDeviceRole.CreateDate = DateTime.Now;
                     CurrentDeviceRole = _deviceRoleRepo.Insert(CurrentDeviceRole);
 
-                    message = "增加设备角色成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObjectSuccess, Resource.DeviceRole);
                 }
                 else
                 {
@@ -129,7 +132,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentDeviceRole.UpdateDate = DateTime.Now;
                     _deviceRoleRepo.Update(CurrentDeviceRole);
 
-                    message = "修改设备角色成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObjectSuccess, Resource.DeviceRole);
                 }
             }
             catch (BusinessException ex)
@@ -141,7 +144,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             catch (Exception ex)
             {
                 Log.Error("Update device role fails.", ex);
-                message = "保存设备角色失败";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail);
                 SendMessage(message);
                 return;
             }

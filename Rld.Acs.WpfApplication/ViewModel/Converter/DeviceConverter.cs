@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Rld.Acs.Model;
 using Rld.Acs.Unility.Extension;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Converter
@@ -15,13 +16,15 @@ namespace Rld.Acs.WpfApplication.ViewModel.Converter
             deviceViewModel.DoorViewModels = new ObservableCollection<DeviceDoorViewModel>();
             for (int i = 1; i <= 6; i++)
             {
-                deviceViewModel.DoorViewModels.Add(new DeviceDoorViewModel() { DeviceID = t.DeviceID, Name = string.Format("门{0}", i) });
+                deviceViewModel.DoorViewModels.Add(new DeviceDoorViewModel() { DeviceID = t.DeviceID, 
+                    Name = LanguageManager.GetLocalizationResourceFormat(Resource.Door, i) });
             }
 
             deviceViewModel.HeadReadingViewModels = new ObservableCollection<DeviceHeadReadingViewModel>();
             for (int i = 1; i <= 6; i++)
             {
-                deviceViewModel.HeadReadingViewModels.Add(new DeviceHeadReadingViewModel() { DeviceID = t.DeviceID, Name = string.Format("读头{0}", i) });
+                deviceViewModel.HeadReadingViewModels.Add(new DeviceHeadReadingViewModel() { DeviceID = t.DeviceID, 
+                    Name = LanguageManager.GetLocalizationResourceFormat(Resource.HeadReader, i) });
             }
 
             for (int i = 0; i < t.DeviceDoors.Count; i++)

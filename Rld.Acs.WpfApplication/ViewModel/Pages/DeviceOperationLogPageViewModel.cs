@@ -21,6 +21,7 @@ using Rld.Acs.WpfApplication.Models.Command;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Pages
@@ -168,14 +169,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 {
                     string message = "";
 
-                    var controller = await DialogCoordinator.Instance.ShowProgressAsync(this, "查询数据", "查询数据中，请稍等");
+                    var controller = await DialogCoordinator.Instance.ShowProgressAsync(this, 
+                         LanguageManager.GetLocalizationResource(Resource.MSG_QueryData),
+                        LanguageManager.GetLocalizationResource(Resource.MSG_QueryingData));
                     controller.SetIndeterminate();
 
                     await Task.Run(() =>
                     {
                         try
                         {
-                            Log.Info("同步数据中..");
+                            Log.Info("Data Synchorizing...");
                             var devices = new List<DeviceController>();
                             if (!string.IsNullOrWhiteSpace(DeviceCode))
                             {
@@ -189,7 +192,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                             string[] messages;
                             var resultTypes = new DeviceServiceClient().SyncDeviceOperationLogs(devices.ToArray(), out messages);
-                            message = MessageHandler.GenerateDeviceMessage(resultTypes, messages, "同步数据成功！", "同步数据失败！");
+                            message = MessageHandler.GenerateDeviceMessage(resultTypes, messages, 
+                                LanguageManager.GetLocalizationResource(Resource.MSG_SyncDataSuccess), 
+                                LanguageManager.GetLocalizationResource(Resource.MSG_SyncDataFail));
                             Log.Info(message);
                         }
                         catch (Exception ex)
@@ -199,7 +204,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                         try
                         {
-                            Log.Info("查询数据中..");
+                            Log.Info("Querying data...");
                             int totalCount = 0;
                             DeviceOperationLogViewModels = QueryData(conditions, out totalCount);
                             if (totalCount % PageSize == 0)
@@ -222,7 +227,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
 
                     if (!DeviceOperationLogViewModels.Any())
                     {
-                        Messenger.Default.Send(new NotificationMessage("查询数据结果为空"), Tokens.DeviceOperationLogPage_ShowNotification);
+                        Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_QueryResultIsEmpty)), Tokens.DeviceOperationLogPage_ShowNotification);
                     }
                 });
             }
@@ -262,11 +267,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (DeviceCode.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
-                    errors.Add("设备编号的输入值必须是数字");
+                    errors.Add(LanguageManager.GetLocalizationResource(Resource.MSG_DeviceCodeMustBeNumber));
                 }
                 if (ApplicationManager.GetInstance().AuthorizationDevices.All(x => x.Code != DeviceCode))
                 {
-                    errors.Add("输入的设备编号不存在系统中");
+                    errors.Add(LanguageManager.GetLocalizationResource(Resource.MSG_InputDeviceCodeDoesNotExist));
                 }
 
                 conditions.Add("DeviceCode", DeviceCode);
@@ -276,7 +281,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (UserCode.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
-                    errors.Add("人员工号的输入值必须是数字");
+                    errors.Add(LanguageManager.GetLocalizationResource(Resource.MSG_UserNoMustBeNumber));
                 }
 
                 conditions.Add("DeviceUserId", UserCode);
@@ -286,7 +291,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             {
                 if (OperatorId.ToInt32() == ConvertorExtension.ConvertionFailureValue)
                 {
-                    errors.Add("操作人员工号的输入值必须是数字");
+                    errors.Add(LanguageManager.GetLocalizationResource(Resource.MSG_InputOperatorIDMustBeNumber));
                 }
 
                 conditions.Add("OperatorId", OperatorId);
@@ -309,7 +314,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
         {
             if (!DeviceOperationLogViewModels.Any())
             {
-                Messenger.Default.Send(new NotificationMessage("没有数据可以导出！"), Tokens.DeviceOperationLogPage_ShowNotification);
+                Messenger.Default.Send(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_NoDataToExport)), Tokens.DeviceOperationLogPage_ShowNotification);
                 return;
             }
 
@@ -328,14 +333,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             dt.Columns["OperationContent"].SetOrdinal(6);
             dt.Columns["OperationTime"].SetOrdinal(7);
 
-            dt.Columns["DeviceCode"].ColumnName = "设备编号";
-            dt.Columns["DeviceType"].ColumnName = "设备类型";
-            dt.Columns["OperatorId"].ColumnName = "操作人员工号";
-            dt.Columns["DeviceUserId"].ColumnName = "人员工号";
-            dt.Columns["OperationType"].ColumnName = "操作类型";
-            dt.Columns["OperationDescription"].ColumnName = "操作描述";
-            dt.Columns["OperationContent"].ColumnName = "操作内容";
-            dt.Columns["OperationTime"].ColumnName = "操作时间";
+            dt.Columns["DeviceCode"].ColumnName = LanguageManager.GetLocalizationResource(Resource.DeviceCode);
+            dt.Columns["DeviceType"].ColumnName = LanguageManager.GetLocalizationResource(Resource.DeviceType);
+            dt.Columns["OperatorId"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperatorId);
+            dt.Columns["DeviceUserId"].ColumnName = LanguageManager.GetLocalizationResource(Resource.DeviceUserId);
+            dt.Columns["OperationType"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperationType);
+            dt.Columns["OperationDescription"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperationDescription);
+            dt.Columns["OperationContent"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperationContent);
+            dt.Columns["OperationTime"].ColumnName = LanguageManager.GetLocalizationResource(Resource.OperationTime);
 
             Messenger.Default.Send(new OpenWindowMessage() { DataContext = dt }, Tokens.DeviceOperationLogPage_OpenExportView);
         }

@@ -17,6 +17,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 using RldModel = Rld.Acs.Model;
 
@@ -46,7 +47,9 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 Code = timeZone.TimeZoneCode;
             }
 
-            Title = (timeZone.TimeZoneID == 0) ? "新增时间区" : "修改时间区";
+            Title = (timeZone.TimeZoneID == 0)
+                ? LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObject, Resource.TimeZone)
+                : LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObject, Resource.TimeZone);
             TimeGroupAssociationsDtos = InitTimeZoneGroupDtos();
         }
 
@@ -90,14 +93,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     CurrentTimeZone.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentTimeZone.CreateDate = DateTime.Now;
                     CurrentTimeZone = _timeZoneRepo.Insert(CurrentTimeZone);
-                    message = "增加时间区成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObjectSuccess, Resource.TimeZone);
                 }
                 else
                 {
                     CurrentTimeZone.UpdateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     CurrentTimeZone.UpdateDate = DateTime.Now;
                     _timeZoneRepo.Update(CurrentTimeZone);
-                    message = "修改时间区成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObjectSuccess, Resource.TimeZone);
                 }
             }
             catch (BusinessException ex)
@@ -109,7 +112,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
             catch (Exception ex)
             {
                 Log.Error("Update timezone fails.", ex);
-                message = "保存时间区失败";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail);
                 SendMessage(message);
                 return;
             }
@@ -161,13 +164,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
 
             switch (index)
             {
-                case 1: name = "星期一"; break;
-                case 2: name = "星期二"; break;
-                case 3: name = "星期三"; break;
-                case 4: name = "星期四"; break;
-                case 5: name = "星期五"; break;
-                case 6: name = "星期六"; break;
-                case 7: name = "星期日"; break;
+                case 1: name = LanguageManager.GetLocalizationResource(Resource.Monday); break;
+                case 2: name = LanguageManager.GetLocalizationResource(Resource.Tuesday); break;
+                case 3: name = LanguageManager.GetLocalizationResource(Resource.Wednesday); break;
+                case 4: name = LanguageManager.GetLocalizationResource(Resource.Thursday); break;
+                case 5: name = LanguageManager.GetLocalizationResource(Resource.Friday); break;
+                case 6: name = LanguageManager.GetLocalizationResource(Resource.Saturday); break;
+                case 7: name = LanguageManager.GetLocalizationResource(Resource.Sunday); break;
             }
 
             return new TimeZoneGroupMappingInfo()

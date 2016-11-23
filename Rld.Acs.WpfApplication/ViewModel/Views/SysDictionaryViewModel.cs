@@ -10,6 +10,7 @@ using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.WpfApplication.Models.Messages;
 using GalaSoft.MvvmLight.Messaging;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 
 
@@ -86,7 +87,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     coreModel = _sysDictionaryRepo.Insert(coreModel);
 
                     DictionaryID = coreModel.DictionaryID;
-                    message = "增加数据项成功!";
+                    message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_AddObjectSuccess, Resource.DictionaryItem);
                 }
                 else
                 {
@@ -104,13 +105,13 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     }
 
                    _sysDictionaryRepo.Update(coreModel);
-                   message = "修改数据项成功!";
+                   message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ModifyObjectSuccess, Resource.DictionaryItem);
                 }
             }
             catch (Exception ex)
             {
                 Log.Error("Update device fails.", ex);
-                message = "保存数据项失败";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail);
                 SendMessage(message);
                 return;
             }

@@ -14,6 +14,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 
 namespace Rld.Acs.WpfApplication.ViewModel.Views
 {
@@ -107,7 +108,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 {
                     if (FloorDoorManager.GetInstance().AuthorizationFloorDoor.Any(x => x.DoorID == DeviceDoorID))
                     {
-                        string message = "门已经和楼层绑定，不能禁用！";
+                        string message = LanguageManager.GetLocalizationResource(Resource.MSG_CannotRemoveDoorBecauseFloorAssociation);
                         Messenger.Default.Send(new NotificationMessage(message), Tokens.DeviceView_ShowNotification);
                         IsSelected = true;
                         RaisePropertyChanged("IsSelected");
