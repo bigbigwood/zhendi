@@ -58,7 +58,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" >
-            <TextBlock Text="同步数据" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+            <TextBlock Text="{DynamicResource DataSynchorization}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
         <Grid Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
@@ -76,11 +76,11 @@
 
             <TextBlock Grid.Row="1" Grid.Column="0" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="选择设备" Margin="0"/>
+                        <TextBlock Text="{DynamicResource DeviceRolePage_Label_Device}" Margin="0"/>
             </TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="0" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="选择部门" Margin="0"/>
+                        <TextBlock Text="{DynamicResource Department}" Margin="0"/>
             </TextBlock>
 
             <Border Grid.Row="1" Grid.Column="1"  BorderBrush="LightGray" BorderThickness="1" Margin="2,8">

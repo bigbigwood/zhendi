@@ -81,16 +81,16 @@
 
             <TextBlock Grid.Row="0" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="名称" Margin="0"/>
+                        <TextBlock Text="{DynamicResource Name}" Margin="0"/>
             </TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="编号" Margin="0"/>
+                        <TextBlock Text="{DynamicResource Code}" Margin="0"/>
             </TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="1" Text="门继电器"/>
-            <TextBlock Grid.Row="3" Grid.Column="1" Text="响铃类型"/>
-            <TextBlock Grid.Row="4" Grid.Column="1" Text="出门选项"/>
-            <TextBlock Grid.Row="5" Grid.Column="1" Text="开门延时(秒)"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource ElectricalAppliances}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{DynamicResource RingType}"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{DynamicResource CheckOutOptions}"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{DynamicResource DelayOpenSeconds}"/>
             
             <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Name}"/>
             <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Code}"/>
@@ -104,14 +104,14 @@
             <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding DelayOpenSeconds}"/>
 
 
-            <TextBlock Grid.Row="0" Grid.Column="4" Text="开门超时报警(秒)"/>
-            <TextBlock Grid.Row="1" Grid.Column="4" Text="非法开门超时报警(秒)"/>
-            <TextBlock Grid.Row="2" Grid.Column="4" Text="联动报警"/>
-            <TextBlock Grid.Row="3" Grid.Column="4" Text="启用反胁迫"/>
-            <TextBlock Grid.Row="4" Grid.Column="4" Text="胁迫指纹号"/>
-            <TextBlock Grid.Row="5" Grid.Column="4" Text="胁迫密码"/>
-            <TextBlock Grid.Row="6" Grid.Column="4" Text="胁迫时开门"/>
-            <TextBlock Grid.Row="7" Grid.Column="4" Text="胁迫时报警"/>
+            <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource OverTimeOpenSeconds}"/>
+            <TextBlock Grid.Row="1" Grid.Column="4" Text="{DynamicResource IllegalOpenSeconds}"/>
+            <TextBlock Grid.Row="2" Grid.Column="4" Text="{DynamicResource LinkageAlarm}"/>
+            <TextBlock Grid.Row="3" Grid.Column="4" Text="{DynamicResource DuressEnabled}"/>
+            <TextBlock Grid.Row="4" Grid.Column="4" Text="{DynamicResource DuressFingerPrintIndex}"/>
+            <TextBlock Grid.Row="5" Grid.Column="4" Text="{DynamicResource DuressPassword}"/>
+            <TextBlock Grid.Row="6" Grid.Column="4" Text="{DynamicResource DuressOpen}"/>
+            <TextBlock Grid.Row="7" Grid.Column="4" Text="{DynamicResource DuressAlarm}"/>
             <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding OverTimeOpenSeconds}"/>
             <TextBox Grid.Row="1" Grid.Column="5" Text="{Binding IllegalOpenSeconds}"/>
             <CheckBox Grid.Row="2" Grid.Column="5" Content="{DynamicResource Enabled}" IsChecked="{Binding LinkageAlarm}" />

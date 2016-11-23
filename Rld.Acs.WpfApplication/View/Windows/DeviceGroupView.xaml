@@ -30,7 +30,7 @@
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="85"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -52,15 +52,15 @@
 
         <TextBlock Grid.Row="2" Grid.Column="1" >
             <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-            <TextBlock Text="设备组名称" Margin="0"/>
+            <TextBlock Text="{DynamicResource Name}" Margin="0"/>
         </TextBlock>
         <TextBlock Grid.Row="3" Grid.Column="1" >
             <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-            <TextBlock Text="入门设备" Margin="0"/>
+            <TextBlock Text="{DynamicResource DeviceGroupPage_Label_CheckInDeviceName}" Margin="0"/>
         </TextBlock>
         <TextBlock Grid.Row="4" Grid.Column="1" >
             <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-            <TextBlock Text="出门设备" Margin="0"/>
+            <TextBlock Text="{DynamicResource DeviceGroupPage_Label_CheckOutDeviceName}" Margin="0"/>
         </TextBlock>
         
         <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding DeviceGroupName}" HorizontalAlignment="Stretch" Margin="2,3"/>

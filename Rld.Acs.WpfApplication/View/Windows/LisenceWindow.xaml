@@ -20,7 +20,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0" >
-            <TextBlock Text="许可证" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+            <TextBlock Text="{DynamicResource LisenceWindow}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
         <Grid Grid.Row="2">
@@ -38,9 +38,9 @@
 
             <Image Grid.Column="1" Grid.Row="1" Source="{StaticResource icon_app_64}" Margin ="5" VerticalAlignment="Top"/>
             <TextBlock Grid.Column="2" Grid.Row="1" FontSize="14" Margin ="5" TextWrapping="WrapWithOverflow" VerticalAlignment="Top"
-                       Text="当前在线的许可证数量已达到最大使用值，请稍后使用，或联系您的软件供应商。" />
+                       Text="{DynamicResource OutOfLisenceMessage}" />
             <Button Grid.Row="2" Grid.ColumnSpan="4"
-                Name="btnCancel" Content="退出" Margin="0,5" Width="80" FontSize="12" Click="BtnCancel_OnClick"/>
+                Name="btnCancel" Content="{DynamicResource Quit}" Margin="0,5" Width="80" FontSize="12" Click="BtnCancel_OnClick"/>
         </Grid>
     </Grid>
 </windows:BaseWindow>

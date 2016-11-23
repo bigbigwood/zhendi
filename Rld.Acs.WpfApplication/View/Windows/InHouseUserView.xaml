@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="0" >
-            <TextBlock Text="门内人员列表" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
+            <TextBlock Text="{DynamicResource StaffInHouse}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0"/>
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
 

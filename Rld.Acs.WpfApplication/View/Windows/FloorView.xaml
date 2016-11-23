@@ -70,16 +70,16 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="2">
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="楼层名称" Margin="0"/>
+                        <TextBlock Text="{DynamicResource FloorName}" Margin="0"/>
                     </TextBlock>
                     <TextBox Text="{Binding Name}" Width="80"/>
                 </StackPanel>
                 
                 <Button Margin="0,5" FontSize ="12" HorizontalAlignment="Stretch" Width="{Binding}"
-                        Content="上传楼层平面图" Click="UploadPhothBtn_Click"/>
+                        Content="{DynamicResource UploadFloorImage}" Click="UploadPhothBtn_Click"/>
 
                 <Border Height="450">
-                    <GroupBox Style="{StaticResource DefaultGroupBoxStyle}" Header="门列表" Margin="0,5,0,0">
+                    <GroupBox Style="{StaticResource DefaultGroupBoxStyle}" Header="{DynamicResource DoorList}" Margin="0,5,0,0">
                         <ListBox ItemsSource="{Binding Doors}" PreviewMouseLeftButtonDown="ListBox_PreviewMouseLeftButtonDown"
                                  Drop="ListBox_OnDrop" AllowDrop="True" >
                             <ListBox.ItemContainerStyle>

@@ -28,14 +28,14 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10,10,-5">
-                <Label Width="50" Height="28" HorizontalAlignment="Center"  VerticalAlignment="Center" 
+                <Label Width="90" Height="28" HorizontalAlignment="Center"  VerticalAlignment="Center" 
                        Foreground="#535353" Content="{DynamicResource SysLogin_UserName}" FontSize="16"/>
-                <TextBox x:Name="userName" Width="175" Height="28"  />
+                <TextBox x:Name="userName" Width="160" Height="28"  />
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,-5,10,10">
-                <Label Width="50" Height="28" HorizontalAlignment="Center"  VerticalAlignment="Center" 
+                <Label Width="90" Height="28" HorizontalAlignment="Center"  VerticalAlignment="Center" 
                        Foreground="#535353" Content="{DynamicResource SysLogin_Password}" FontSize="16"/>
-                <PasswordBox x:Name="passWord"  PasswordChar="*" Width="175" Height="28" />
+                <PasswordBox x:Name="passWord"  PasswordChar="*" Width="160" Height="28" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal">

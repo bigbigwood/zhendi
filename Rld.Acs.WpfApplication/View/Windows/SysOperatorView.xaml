@@ -85,10 +85,10 @@
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                         <TextBlock Text="{DynamicResource SysOperatorView_Label_Status}" Margin="0"/>
             </TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="1" Text="用户角色" />
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{DynamicResource OperatorRole}" />
             <CheckBox Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Right"
-                      Content="新密码" IsChecked="{Binding NewPasswordEnabled}"/>
-            <TextBlock Grid.Row="1" Grid.Column="4" Text="确认密码" HorizontalAlignment="Right"/>
+                      Content="{DynamicResource SysOperatorView_Label_NewPassword}" IsChecked="{Binding NewPasswordEnabled}"/>
+            <TextBlock Grid.Row="1" Grid.Column="4" Text="{DynamicResource SysOperatorView_Label_2ndNewPassword}" HorizontalAlignment="Right"/>
 
 
             <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding LoginName}"/>
@@ -97,7 +97,7 @@
                 <ComboBoxItem Tag="2052" Content="{DynamicResource Language_Chinese}" IsSelected="True" />
                 <ComboBoxItem Tag="1033" Content="{DynamicResource Language_English}"  />
             </ComboBox>
-            <CheckBox Grid.Row="2" Grid.Column="2" Content="启用" HorizontalAlignment="Left" IsChecked="{Binding Status}"/>
+            <CheckBox Grid.Row="2" Grid.Column="2" Content="{DynamicResource Enabled}" HorizontalAlignment="Left" IsChecked="{Binding Status}"/>
 
             <PasswordBox Grid.Row="0" Grid.Column="5" IsEnabled="{Binding NewPasswordEnabled}" 
                Margin="2,1" models:PasswordBoxHelper.Password="{Binding Path=NewPassword1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">

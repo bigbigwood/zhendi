@@ -73,25 +73,25 @@
 
             <TextBlock Grid.Row="0" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="名称" Margin="0"/>
+                        <TextBlock Text="{DynamicResource Name}" Margin="0"/>
             </TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="编号" Margin="0"/>
+                        <TextBlock Text="{DynamicResource Code}" Margin="0"/>
             </TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="Mac地址" Margin="0"/>
+                        <TextBlock Text="{DynamicResource Mac_Address}" Margin="0"/>
             </TextBlock>
             <TextBlock Grid.Row="3" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="产品序列号" Margin="0"/>
+                        <TextBlock Text="{DynamicResource ProductSN}" Margin="0"/>
             </TextBlock>
             <TextBlock Grid.Row="4" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="读头类型" Margin="0"/>
+                        <TextBlock Text="{DynamicResource ReaderType}" Margin="0"/>
             </TextBlock>
-            <TextBlock Grid.Row="5" Grid.Column="1" Text="读头性能"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{DynamicResource ReaderPerformance}"/>
             <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Name}"/>
             <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Code}"/>
             <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Mac}"/>
