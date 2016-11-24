@@ -47,6 +47,11 @@ namespace Rld.Acs.Model
         OperationName,
         OperationDetail,
         OperationCreateDate,
+        WorkSheet,
+        Comma,
+        Close,
+        Ok,
+        Cancel,
 
         MSG_SaveSuccessfully,
         MSG_SaveFail,
@@ -59,6 +64,8 @@ namespace Rld.Acs.Model
         MSG_AddObjectSuccess,
         MSG_ModifyObjectSuccess,
         MSG_SelectUser,
+        MSG_ExportSuccess,
+        MSG_ExportFail,
 
         MSG_CannotDeleteDeptBecauseOfSubDept,
         MSG_CannotDeleteDeptBecauseOfExistStaff,
@@ -99,5 +106,16 @@ namespace Rld.Acs.Model
         MSG_InputOperatorIDMustBeNumber,
         MSG_NoDataToExport,
         MSG_OperatorIDMustBeNumber,
+        MSG_FloorImageMaxSize,
+        MSG_FloorImageFilter,
+        MSG_UserImageMaxSize,
+        MSG_LoginFail,
+        MSG_LoginSuccess,
+        MSG_LoginException,
+        MSG_CheckingLisence,
+        MSG_LisenceFail,
+        MSG_LoadingData,
+        MSG_LoadDataComplete,
+        MSG_LoadDataFail,
     }
 }

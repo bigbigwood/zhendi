@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using log4net;
 using MahApps.Metro;
+using Rld.Acs.Model;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Lisence;
 
 namespace Rld.Acs.WpfApplication.View.Windows
@@ -32,7 +34,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
 
         private void WelcomeWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            ShowMessage("检查用户许可证...");
+            ShowMessage(LanguageManager.GetLocalizationResource(Resource.MSG_CheckingLisence));
             try
             {
                 if (!LisenceService.RequestLisence())
@@ -44,12 +46,12 @@ namespace Rld.Acs.WpfApplication.View.Windows
             catch (Exception ex)
             {
                 Log.Error(ex);
-                ShowMessage("检查许可证发生错误， 请联系软件提供商...");
+                ShowMessage(LanguageManager.GetLocalizationResource(Resource.MSG_LisenceFail));
                 Thread.Sleep(2000);
                 Close();
             }
 
-            ShowMessage("加载数据中...");
+            ShowMessage(LanguageManager.GetLocalizationResource(Resource.MSG_LoadingData));
             new Task(AppLoad).Start();
         }
 
@@ -71,7 +73,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
 
                 DictionaryManager.Initialize();
 
-                ShowMessage("加载数据完成！");
+                ShowMessage(LanguageManager.GetLocalizationResource(Resource.MSG_LoadDataComplete));
                 Dispatcher.Invoke(() =>
                 {
                     var loginForm = new sysLogin();
@@ -84,7 +86,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             catch (Exception ex)
             {
                 Log.Error(ex);
-                ShowMessage("加载数据出错！");
+                ShowMessage(LanguageManager.GetLocalizationResource(Resource.MSG_LoadDataFail));
             }
 
         }

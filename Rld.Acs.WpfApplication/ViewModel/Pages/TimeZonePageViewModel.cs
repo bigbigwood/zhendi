@@ -100,7 +100,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     .Select(x => x.DeviceControllerParameter.UnlockOpenTimeZone);
                 if (deviceAssiciationTimeZoneIds.Contains(SelectedTimeZoneViewModel.ID))
                 {
-                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteTimeZoneBecauseOfDeviceAssociation);
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteTimeZoneBecauseOfDeviceAssociation) + Environment.NewLine;
                 }
 
                 var deviceRoleAssiciationTimeZoneIds = ApplicationManager.GetInstance().AuthorizationDeviceRoles
@@ -108,7 +108,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     .Select(x => x.AllowedAccessTimeZoneID);
                 if (deviceRoleAssiciationTimeZoneIds.Contains(SelectedTimeZoneViewModel.ID))
                 {
-                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteTimeZoneBecauseOfRoleAssociation);
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteTimeZoneBecauseOfRoleAssociation) + Environment.NewLine;
                 }
 
                 if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))

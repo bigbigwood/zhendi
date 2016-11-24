@@ -19,6 +19,7 @@ using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Validator;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
@@ -77,7 +78,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
         private void UploadPhothBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "jpg文件(*.jpg)|*.jpg|png文件(*.png)|*.png|所有文件(*.*)|*.*";
+            openFileDialog.Filter = LanguageManager.GetLocalizationResource(Resource.MSG_FloorImageFilter);
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() == true)
             {
@@ -85,7 +86,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 var fileInfo = new FileInfo(filename);
                 if (fileInfo.Length > 4*1024*1024)
                 {
-                    ShowSubViewNotification(new NotificationMessage("平面图文件大小不能超过4M"));
+                    ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_FloorImageMaxSize)));
                     return;
                 }
 
@@ -143,34 +144,14 @@ namespace Rld.Acs.WpfApplication.View.Windows
 
                 _floorViewModel.ViewModelAttachment.CoreModel = coreModel;
                 _floorViewModel.ViewModelAttachment.LastOperationSuccess = true;
-                ProcessCloseViewMessage(new NotificationMessage("保存成功"));
+                ProcessCloseViewMessage(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SaveSuccessfully)));
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
-                ShowSubViewNotification(new NotificationMessage("保存失败"));
+                ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_SaveFail)));
             }
         }
-
-        //public void UpdateAuthorizationDoorsForFloor(Floor floor)
-        //{
-        //    var authorizationFloorDoors = FloorDoorManager.GetInstance().AuthorizationFloorDoor;
-        //    foreach (var floorDoor in floor.Doors)
-        //    {
-        //        var i = authorizationFloorDoors.FirstOrDefault(x => x.FloorDoorID == floorDoor.FloorDoorID);
-        //        if (i != null)
-        //        {
-        //            i = floorDoor;
-        //        }
-        //        else
-        //        {
-        //            authorizationFloorDoors.Add(floorDoor);
-        //        }
-        //    }
-
-        //    var removedDoors = authorizationFloorDoors.FindAll(x => x.FloorID == floor.FloorID && floor.Doors.All(y => y.FloorDoorID != x.FloorDoorID));
-        //    removedDoors.ForEach(x => authorizationFloorDoors.Remove(x));
-        //}
 
         private void CancelBtn_Click(object sender, System.Windows.RoutedEventArgs e)
         {

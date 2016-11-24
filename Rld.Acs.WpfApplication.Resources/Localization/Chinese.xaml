@@ -323,8 +323,10 @@
     <sys:String x:Key="MSG_DoUWantToDeleteObject">确定删除:{0}吗？</sys:String>
     <sys:String x:Key="MSG_DeleteSuccessfully">删除成功!</sys:String>
     <sys:String x:Key="MSG_DeleteFail">删除失败!</sys:String>
-    <sys:String x:Key="MSG_CannotDeleteDeptBecauseOfSubDept">选中部门存在子部门，请先删除所属子部门!\n</sys:String>
-    <sys:String x:Key="MSG_CannotDeleteDeptBecauseOfExistStaff">选中部门存在人员，请先删除所属人员!\n</sys:String>
+    <sys:String x:Key="MSG_ExportSuccess">导出成功!</sys:String>
+    <sys:String x:Key="MSG_ExportFail">导出失败!</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeptBecauseOfSubDept">选中部门存在子部门，请先删除所属子部门!</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeptBecauseOfExistStaff">选中部门存在人员，请先删除所属人员!</sys:String>
     <sys:String x:Key="MSG_CannotDeleteDeviceBecauseOfDeptAssociation">该设备已经被关联到部门，不能删除!\n</sys:String>
     <sys:String x:Key="MSG_CannotDeleteDeviceBecauseOfRoleAssociation">该设备已经被关联到设备角色，不能删除!\n</sys:String>
     <sys:String x:Key="MSG_DoUWantToImportNewDevice">发现新设备编号:{0}, 现在导入系统吗？</sys:String>
@@ -332,28 +334,28 @@
     <sys:String x:Key="MSG_SearchNewDeviceFail">搜索设备失败！</sys:String>
     <sys:String x:Key="MSG_ImportNewDeviceSuccess">导入新设备成功！</sys:String>
     <sys:String x:Key="MSG_ImportNewDeviceFail">导入新设备失败！</sys:String>
-    <sys:String x:Key="MSG_CannotDeleteDeviceRoleBecauseOfDeptAssociation">该设备角色已经被部门使用，不能删除!\n</sys:String>
-    <sys:String x:Key="MSG_CannotDeleteDeviceRoleBecauseOfStuffAssociation">该设备角色已经被人员使用，不能删除!\n</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeviceRoleBecauseOfDeptAssociation">该设备角色已经被部门使用，不能删除!</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeviceRoleBecauseOfStuffAssociation">该设备角色已经被人员使用，不能删除!</sys:String>
     <sys:String x:Key="MSG_CannotDeleteSysRoleBecauseOfOperatorAssociation">该系统角色已经被系统用户使用，不能删除!</sys:String>
     <sys:String x:Key="MSG_CannotDeleteTimeGroupBecauseOfTimezoneAssociation">该时间组已经被关联到时间区，不能删除!</sys:String>
     <sys:String x:Key="MSG_CannotDeleteTimeSegmentBecauseOfTimeGroupAssociation">该时间段已经被关联到时间组，不能删除!</sys:String>
-    <sys:String x:Key="MSG_CannotDeleteTimeZoneBecauseOfDeviceAssociation">该时间区已经被关联到设备，不能删除!\n</sys:String>
-    <sys:String x:Key="MSG_CannotDeleteTimeZoneBecauseOfRoleAssociation">该时间区已经被关联到设备角色，不能删除!\n</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteTimeZoneBecauseOfDeviceAssociation">该时间区已经被关联到设备，不能删除!</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteTimeZoneBecauseOfRoleAssociation">该时间区已经被关联到设备角色，不能删除!</sys:String>
     <sys:String x:Key="MSG_SelectUser">请先选择人员!</sys:String>
-    <sys:String x:Key="MSG_ObjectHasBindToOtherDeviceGroup">{0}已绑定别的设备组!\n</sys:String>
+    <sys:String x:Key="MSG_ObjectHasBindToOtherDeviceGroup">{0}已绑定别的设备组!</sys:String>
     <sys:String x:Key="MSG_AddObject">新增{0}</sys:String>
     <sys:String x:Key="MSG_ModifyObject">修改{0}</sys:String>
     <sys:String x:Key="MSG_AddObjectSuccess">增加{0}成功!</sys:String>
     <sys:String x:Key="MSG_ModifyObjectSuccess">修改{0}成功!</sys:String>
     <sys:String x:Key="MSG_CannotRemoveDoorBecauseFloorAssociation">门已经和楼层绑定，不能禁用！</sys:String>
-    <sys:String x:Key="MSG_ExistDuplicatedDoorCodes">设备中存在重复的门编号:{0}\n</sys:String>
-    <sys:String x:Key="MSG_ExistDuplicatedHeaderCodes">设备中存在重复的读头编号:{0}\n</sys:String>
+    <sys:String x:Key="MSG_ExistDuplicatedDoorCodes">设备中存在重复的门编号:{0}</sys:String>
+    <sys:String x:Key="MSG_ExistDuplicatedHeaderCodes">设备中存在重复的读头编号:{0}</sys:String>
     <sys:String x:Key="MSG_DepartmentIsNoChanged">不能移动到原部门</sys:String>
     <sys:String x:Key="MSG_MoveUserSuccess">移动人员成功!</sys:String>
     <sys:String x:Key="MSG_MoveUserFail">移动人员失败!</sys:String>
-    <sys:String x:Key="MSG_PasswordCannotBeEmpty">\n密码不能为空</sys:String>
-    <sys:String x:Key="MSG_ConfirmPasswordCannotBeEmpty">\n确认密码不能为空</sys:String>
-    <sys:String x:Key="MSG_PasswordCannotDifferent">\n两次输入密码不一致</sys:String>
+    <sys:String x:Key="MSG_PasswordCannotBeEmpty">密码不能为空</sys:String>
+    <sys:String x:Key="MSG_ConfirmPasswordCannotBeEmpty">确认密码不能为空</sys:String>
+    <sys:String x:Key="MSG_PasswordCannotDifferent">两次输入密码不一致</sys:String>
     <sys:String x:Key="MSG_BeginTiimeCannotGreatThanEndTime">开始时间不能大于结束时间</sys:String>
     <sys:String x:Key="MSG_CannotEnableBecauseDataIsEmpty">{0}数据为空，不能启用！</sys:String>
     <sys:String x:Key="MSG_QueryData">查询数据</sys:String>
@@ -367,6 +369,17 @@
     <sys:String x:Key="MSG_InputOperatorIDMustBeNumber">操作人员工号的输入值必须是数字</sys:String>
     <sys:String x:Key="MSG_NoDataToExport">没有数据可以导出！</sys:String>
     <sys:String x:Key="MSG_OperatorIDMustBeNumber">操作人员ID的输入值必须是数字</sys:String>
+    <sys:String x:Key="MSG_FloorImageMaxSize">平面图文件大小不能超过4M</sys:String>
+    <sys:String x:Key="MSG_FloorImageFilter">jpg文件(*.jpg)|*.jpg|png文件(*.png)|*.png|所有文件(*.*)|*.*</sys:String>
+    <sys:String x:Key="MSG_UserImageMaxSize">头像文件大小不能超过500Kb</sys:String>
+    <sys:String x:Key="MSG_LoginFail">登陆信息错误...</sys:String>
+    <sys:String x:Key="MSG_LoginSuccess">登陆成功...</sys:String>
+    <sys:String x:Key="MSG_LoginException">登录异常...</sys:String>
+    <sys:String x:Key="MSG_CheckingLisence">检查用户许可证...</sys:String>
+    <sys:String x:Key="MSG_LisenceFail">检查许可证发生错误， 请联系软件提供商...</sys:String>
+    <sys:String x:Key="MSG_LoadingData">加载数据中...</sys:String>
+    <sys:String x:Key="MSG_LoadDataComplete">加载数据完成！</sys:String>
+    <sys:String x:Key="MSG_LoadDataFail">加载数据出错！</sys:String>
 
 
     <sys:String x:Key="User">人员</sys:String>
@@ -407,6 +420,9 @@
     <sys:String x:Key="OperationName">操作名称</sys:String>
     <sys:String x:Key="OperationDetail">操作详情</sys:String>
     <sys:String x:Key="OperationCreateDate">操作时间</sys:String>
+    <sys:String x:Key="WorkSheet">工作簿</sys:String>
+    <sys:String x:Key="Comma">逗号分隔</sys:String>
+    <sys:String x:Key="From">开始时间</sys:String>
 
 
 

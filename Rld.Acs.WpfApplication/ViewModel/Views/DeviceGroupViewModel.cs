@@ -87,11 +87,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     string errorMessage = "";
                     if (checkinDeviceIds.Contains(CheckInDeviceID) || checkoutDeviceIds.Contains(CheckInDeviceID))
                     {
-                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckInDeviceName);
+                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckInDeviceName) + Environment.NewLine;
                     }
                     if (checkinDeviceIds.Contains(CheckOutDeviceID) || checkoutDeviceIds.Contains(CheckOutDeviceID))
                     {
-                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckOutDeviceName);
+                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckOutDeviceName) + Environment.NewLine;
                     }
                     if (!string.IsNullOrWhiteSpace(errorMessage))
                     {
@@ -112,11 +112,11 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     string errorMessage = "";
                     if (checkinDeviceIds.Contains(CheckInDeviceID) || checkoutDeviceIds.Contains(CheckInDeviceID))
                     {
-                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckInDeviceName);
+                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckInDeviceName) + Environment.NewLine;
                     }
                     if (checkinDeviceIds.Contains(CheckOutDeviceID) || checkoutDeviceIds.Contains(CheckOutDeviceID))
                     {
-                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckOutDeviceName);
+                        errorMessage += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ObjectHasBindToOtherDeviceGroup, CheckOutDeviceName) + Environment.NewLine;
                     }
                     if (!string.IsNullOrWhiteSpace(errorMessage))
                     {

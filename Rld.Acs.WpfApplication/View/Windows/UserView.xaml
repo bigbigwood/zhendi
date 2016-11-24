@@ -75,7 +75,7 @@
                         <RowDefinition Height="35"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
+                        <ColumnDefinition Width="1.5*"/>
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="150"/>
@@ -102,7 +102,7 @@
                         <TextBlock Text="{DynamicResource Department}" Margin="0"/>
                     </TextBlock>
                     <TextBlock Grid.Row="5" Grid.Column="0" Text="{DynamicResource SysOperatorPage_Label_Status}"/>
-                    <TextBlock Grid.Row="6" Grid.Column="0" Text="{DynamicResource Query_Label_StartTime}" />
+                    <TextBlock Grid.Row="6" Grid.Column="0" Text="{DynamicResource From}" />
                     <TextBlock Grid.Row="7" Grid.Column="0" Text="{DynamicResource Query_Label_EndTime}"/>
                     <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Name}"/>
                     <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
@@ -165,11 +165,11 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0*" />
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="150"/>
                         <ColumnDefinition />
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition />
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="{DynamicResource EnglishName}" Grid.ColumnSpan="2" Margin="0,6,10,6"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,10,5" >
@@ -227,7 +227,7 @@
                     <TextBox Grid.Row="8" Grid.Column="4" Grid.RowSpan="2" Text="{Binding Remark}" 
                              TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
 
-                    <StackPanel Grid.Row="12" Grid.Column="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" Orientation="Horizontal" Margin="115,0" >
+                    <StackPanel Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="6" HorizontalAlignment="Center" Orientation="Horizontal" Margin="115,0" >
                         <Button Content="{DynamicResource Next}" Click="OnNextPageClicked" Margin="3,0"/>
                         <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
                     </StackPanel>

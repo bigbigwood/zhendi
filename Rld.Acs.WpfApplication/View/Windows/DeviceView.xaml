@@ -11,7 +11,7 @@
              Dialog:DialogParticipation.Register="{Binding}"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:DeviceViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="335" Width="600" 
+             Height="325" Width="600" 
              Unloaded="MetroWindow_Unloaded">
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
@@ -59,7 +59,7 @@
         </DockPanel>
         <Separator Grid.Row="1"  Background="LightGray" />
 
-        <TabControl Grid.Row="2" controls:TabControlHelper.IsUnderlined="True" Name="myTab" Height="280" VerticalAlignment="Top">
+        <TabControl Grid.Row="2" controls:TabControlHelper.IsUnderlined="True" Name="myTab" VerticalAlignment="Stretch">
             <TabItem Header="{DynamicResource BasicInformation}" controls:ControlsHelper.HeaderFontSize="12" >
                 <Grid Margin="5" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
@@ -142,7 +142,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="{DynamicResource ParameterSettings}" controls:ControlsHelper.HeaderFontSize="12" HorizontalAlignment="Right" Width="60">
+            <TabItem Header="{DynamicResource ParameterSettings}" controls:ControlsHelper.HeaderFontSize="12" HorizontalAlignment="Right">
                 <Grid Margin="5" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="28"/>
@@ -226,7 +226,7 @@
                                     <StackPanel Orientation="Horizontal" Height="25" Width="180"  Margin="5">
                                         <controls:Tile Content="{Binding Name}" Command="{Binding ModifyDoorCmd}" CommandParameter="{Binding}"
                                                        Height="25" Width="100" Background="WhiteSmoke" Foreground="Black"/>
-                                        <CheckBox IsChecked="{Binding IsSelected}" Content="启用" Command="{Binding SelectDoorCmd}" />
+                                        <CheckBox IsChecked="{Binding IsSelected}" Content="{DynamicResource Enabled}" Command="{Binding SelectDoorCmd}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -252,7 +252,7 @@
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{DynamicResource ReadersAssociation}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{DynamicResource ReadersAssociation}"/>
                     <Border Grid.Row="0" Grid.Column="2"  BorderBrush="LightGray" BorderThickness="1" Margin="2,8">
                         <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding HeadReadingViewModels}" HorizontalAlignment="Stretch">
                             <ListView.ItemsPanel>

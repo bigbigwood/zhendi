@@ -122,14 +122,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                 var duplicatedDoorCodes = doorCodes.GroupBy(x => x).Where(grp => grp.Count() > 1).Select(grp => grp.Key);
                 if (duplicatedDoorCodes.Any())
                 {
-                    message += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ExistDuplicatedDoorCodes, string.Join(",", duplicatedDoorCodes));
+                    message += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ExistDuplicatedDoorCodes, string.Join(",", duplicatedDoorCodes)) + Environment.NewLine;
                 }
 
                 var readingCodes = deviceController.DeviceHeadReadings.Select(x => x.Code);
                 var duplicatedReadingCodes = readingCodes.GroupBy(x => x).Where(grp => grp.Count() > 1).Select(grp => grp.Key);
                 if (duplicatedReadingCodes.Any())
                 {
-                    message += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ExistDuplicatedHeaderCodes, string.Join(",", duplicatedReadingCodes));
+                    message += LanguageManager.GetLocalizationResourceFormat(Resource.MSG_ExistDuplicatedHeaderCodes, string.Join(",", duplicatedReadingCodes)) + Environment.NewLine;
                 }
 
                 if (!string.IsNullOrWhiteSpace(message))

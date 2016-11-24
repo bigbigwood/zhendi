@@ -14,10 +14,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Messaging;
 using log4net;
+using Rld.Acs.Model;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Service;
 using Rld.Acs.WpfApplication.Service.Excel;
 using Rld.Acs.WpfApplication.Service.ExportFile;
+using Rld.Acs.WpfApplication.Service.Language;
 
 namespace Rld.Acs.WpfApplication.View.Windows
 {
@@ -39,21 +41,21 @@ namespace Rld.Acs.WpfApplication.View.Windows
             {
                 var dlg = new Microsoft.Win32.SaveFileDialog()
                 {
-                    FileName = "工作簿1",
+                    FileName = string.Format("{0}1", LanguageManager.GetLocalizationResource(Resource.WorkSheet)),
                     DefaultExt = ".xls",
-                    Filter = "Excel 工作簿(*.xls)|*.xls",
+                    Filter = string.Format("Excel {0}(*.xls)|*.xls", LanguageManager.GetLocalizationResource(Resource.WorkSheet)),
                 };
                 if (dlg.ShowDialog() == true)
                 {
                     var dt = DataContext as DataTable;
                     ExcelService.ExportDataTableToExcel(dt, dlg.FileName, "Sheet");
-                    ShowSubViewNotification(new NotificationMessage("导出成功"));
+                    ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_ExportSuccess)));
                 }
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
-                ShowSubViewNotification(new NotificationMessage("导出失败"));
+                ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_ExportFail)));
             }
         }
 
@@ -63,7 +65,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             {
                 var dlg = new Microsoft.Win32.SaveFileDialog()
                 {
-                    FileName = "工作簿1",
+                    FileName = string.Format("{0}1", LanguageManager.GetLocalizationResource(Resource.WorkSheet)),
                     DefaultExt = ".pdf",
                     Filter = "PDF (*.pdf)|*.pdf",
                 };
@@ -71,13 +73,13 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 {
                     var dt = DataContext as DataTable;
                     PdfService.ExportDataTable(dt, dlg.FileName);
-                    ShowSubViewNotification(new NotificationMessage("导出成功"));
+                    ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_ExportSuccess)));
                 }
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
-                ShowSubViewNotification(new NotificationMessage("导出失败"));
+                ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_ExportFail)));
             }
         }
 
@@ -87,21 +89,21 @@ namespace Rld.Acs.WpfApplication.View.Windows
             {
                 var dlg = new Microsoft.Win32.SaveFileDialog()
                 {
-                    FileName = "工作簿1",
+                    FileName = string.Format("{0}1", LanguageManager.GetLocalizationResource(Resource.WorkSheet)),
                     DefaultExt = ".xlsx",
-                    Filter = "Excel 工作簿(*.xlsx)|*.xlsx",
+                    Filter = string.Format("Excel {0}(*.xlsx)|*.xlsx", LanguageManager.GetLocalizationResource(Resource.WorkSheet)),
                 };
                 if (dlg.ShowDialog() == true)
                 {
                     var dt = DataContext as DataTable;
                     ExcelService.ExportDataTableToExcel2007(dt, dlg.FileName, "Sheet");
-                    ShowSubViewNotification(new NotificationMessage("导出成功"));
+                    ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_ExportSuccess)));
                 }
                 }
             catch (Exception ex)
             {
                 Log.Error(ex);
-                ShowSubViewNotification(new NotificationMessage("导出失败"));
+                ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_ExportFail)));
             }
         }
 
@@ -111,21 +113,21 @@ namespace Rld.Acs.WpfApplication.View.Windows
             {
                 var dlg = new Microsoft.Win32.SaveFileDialog()
                 {
-                    FileName = "工作簿1",
+                    FileName = string.Format("{0}1", LanguageManager.GetLocalizationResource(Resource.WorkSheet)),
                     DefaultExt = ".csv",
-                    Filter = "CSV (逗号分隔)(*.csv)|*.csv",
+                    Filter = string.Format("CSV ({0})(*.csv)|*.csv", LanguageManager.GetLocalizationResource(Resource.Comma)),
                 };
                 if (dlg.ShowDialog() == true)
                 {
                     var dt = DataContext as DataTable;
                     TextExportingService.ExportDataTable(dt, dlg.FileName, ",");
-                    ShowSubViewNotification(new NotificationMessage("导出成功"));
+                    ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_ExportSuccess)));
                 }
                 }
             catch (Exception ex)
             {
                 Log.Error(ex);
-                ShowSubViewNotification(new NotificationMessage("导出失败"));
+                ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_ExportFail)));
             }
         }
 
@@ -135,7 +137,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             {
                 var dlg = new Microsoft.Win32.SaveFileDialog()
                 {
-                    FileName = "工作簿1",
+                    FileName = string.Format("{0}1", LanguageManager.GetLocalizationResource(Resource.WorkSheet)),
                     DefaultExt = ".txt",
                     Filter = "Txt (*.txt)|*.txt",
                 };
@@ -143,13 +145,13 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 {
                     var dt = DataContext as DataTable;
                     TextExportingService.ExportDataTable(dt, dlg.FileName, " ");
-                    ShowSubViewNotification(new NotificationMessage("导出成功"));
+                    ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_ExportSuccess)));
                 }
             }
             catch (Exception ex)
             {
                 Log.Error(ex);
-                ShowSubViewNotification(new NotificationMessage("导出失败"));
+                ShowSubViewNotification(new NotificationMessage(LanguageManager.GetLocalizationResource(Resource.MSG_ExportFail)));
             }
         }
     }

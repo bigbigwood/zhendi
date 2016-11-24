@@ -5,6 +5,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Rld.Acs.Model;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.Service.Lisence;
 
 namespace Rld.Acs.WpfApplication.View.Windows
@@ -34,7 +36,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
         {
             var mySettings = new MetroDialogSettings()
             {
-                AffirmativeButtonText = "关闭",
+                AffirmativeButtonText = LanguageManager.GetLocalizationResource(Resource.Close),
                 ColorScheme = MetroDialogColorScheme.Theme
             };
             MessageDialogResult result =
@@ -45,8 +47,8 @@ namespace Rld.Acs.WpfApplication.View.Windows
         {
             var mySettings = new MetroDialogSettings()
             {
-                AffirmativeButtonText = "确定",
-                NegativeButtonText = "取消",
+                AffirmativeButtonText = LanguageManager.GetLocalizationResource(Resource.Ok),
+                NegativeButtonText = LanguageManager.GetLocalizationResource(Resource.Cancel),
                 ColorScheme = MetroDialogColorScheme.Theme
             };
             MessageDialogResult result =

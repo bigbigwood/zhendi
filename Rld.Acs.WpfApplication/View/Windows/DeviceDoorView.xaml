@@ -9,7 +9,7 @@
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:DeviceDoorViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="350" Width="500" Unloaded="MetroWindow_Unloaded">
+             Height="305" Width="500" Unloaded="MetroWindow_Unloaded">
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
             <Setter Property="FontSize" Value="12"/>
@@ -64,7 +64,6 @@
                 <RowDefinition Height="28"/>
                 <RowDefinition Height="28"/>
                 <RowDefinition Height="28"/>
-                <RowDefinition Height="28"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
@@ -90,7 +89,8 @@
             <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource ElectricalAppliances}"/>
             <TextBlock Grid.Row="3" Grid.Column="1" Text="{DynamicResource RingType}"/>
             <TextBlock Grid.Row="4" Grid.Column="1" Text="{DynamicResource CheckOutOptions}"/>
-            <TextBlock Grid.Row="5" Grid.Column="1" Text="{DynamicResource DelayOpenSeconds}"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{DynamicResource LinkageAlarm}"/>
+            <TextBlock Grid.Row="6" Grid.Column="1" Text="{DynamicResource DelayOpenSeconds}"/>
             
             <TextBox Grid.Row="0" Grid.Column="2" Text="{Binding Name}"/>
             <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Code}"/>
@@ -101,27 +101,25 @@
             <ComboBox Grid.Row="4" Grid.Column="2" Margin="2,3"
                         ItemsSource="{Binding CheckOutOptionsDict, Mode=OneWay}" DisplayMemberPath="ItemValue"
                         SelectedValue="{Binding CheckOutOptions}" SelectedValuePath="ItemID" />
-            <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding DelayOpenSeconds}"/>
+            <CheckBox Grid.Row="5" Grid.Column="2" Content="{DynamicResource Enabled}" IsChecked="{Binding LinkageAlarm}" />
+            <TextBox Grid.Row="6" Grid.Column="2" Text="{Binding DelayOpenSeconds}"/>
 
 
             <TextBlock Grid.Row="0" Grid.Column="4" Text="{DynamicResource OverTimeOpenSeconds}"/>
             <TextBlock Grid.Row="1" Grid.Column="4" Text="{DynamicResource IllegalOpenSeconds}"/>
-            <TextBlock Grid.Row="2" Grid.Column="4" Text="{DynamicResource LinkageAlarm}"/>
-            <TextBlock Grid.Row="3" Grid.Column="4" Text="{DynamicResource DuressEnabled}"/>
-            <TextBlock Grid.Row="4" Grid.Column="4" Text="{DynamicResource DuressFingerPrintIndex}"/>
-            <TextBlock Grid.Row="5" Grid.Column="4" Text="{DynamicResource DuressPassword}"/>
-            <TextBlock Grid.Row="6" Grid.Column="4" Text="{DynamicResource DuressOpen}"/>
-            <TextBlock Grid.Row="7" Grid.Column="4" Text="{DynamicResource DuressAlarm}"/>
+            <TextBlock Grid.Row="2" Grid.Column="4" Text="{DynamicResource DuressEnabled}"/>
+            <TextBlock Grid.Row="3" Grid.Column="4" Text="{DynamicResource DuressFingerPrintIndex}"/>
+            <TextBlock Grid.Row="4" Grid.Column="4" Text="{DynamicResource DuressPassword}"/>
+            <TextBlock Grid.Row="5" Grid.Column="4" Text="{DynamicResource DuressOpen}"/>
+            <TextBlock Grid.Row="6" Grid.Column="4" Text="{DynamicResource DuressAlarm}"/>
             <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding OverTimeOpenSeconds}"/>
             <TextBox Grid.Row="1" Grid.Column="5" Text="{Binding IllegalOpenSeconds}"/>
-            <CheckBox Grid.Row="2" Grid.Column="5" Content="{DynamicResource Enabled}" IsChecked="{Binding LinkageAlarm}" />
-            <CheckBox Grid.Row="3" Grid.Column="5" Content="{DynamicResource Enabled}" IsChecked="{Binding DuressEnabled}" />
-            <TextBox Grid.Row="4" Grid.Column="5" Text="{Binding DuressFingerPrintIndex}"/>
-            <TextBox Grid.Row="5" Grid.Column="5" Text="{Binding DuressPassword}"/>
-            <CheckBox Grid.Row="6" Grid.Column="5" Content="{DynamicResource Enabled}" IsChecked="{Binding DuressOpen}" />
-            <CheckBox Grid.Row="7" Grid.Column="5" Content="{DynamicResource Enabled}" IsChecked="{Binding DuressAlarm}" />
-
-            <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="7"  HorizontalAlignment="Center" Orientation="Horizontal">
+            <CheckBox Grid.Row="2" Grid.Column="5" Content="{DynamicResource Enabled}" IsChecked="{Binding DuressEnabled}" />
+            <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding DuressFingerPrintIndex}"/>
+            <TextBox Grid.Row="4" Grid.Column="5" Text="{Binding DuressPassword}"/>
+            <CheckBox Grid.Row="5" Grid.Column="5" Content="{DynamicResource Enabled}" IsChecked="{Binding DuressOpen}" />
+            <CheckBox Grid.Row="6" Grid.Column="5" Content="{DynamicResource Enabled}" IsChecked="{Binding DuressAlarm}" />
+            <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="7"  HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0"/>
                 <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
             </StackPanel>

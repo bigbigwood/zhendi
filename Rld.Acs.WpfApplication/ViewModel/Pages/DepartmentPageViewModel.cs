@@ -113,14 +113,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 string assiciationErrorMessage = "";
                 if (AuthorizationDepartments.Any(d => d.Parent != null && d.Parent.DepartmentID == SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID))
                 {
-                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeptBecauseOfSubDept);
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeptBecauseOfSubDept) + Environment.NewLine;
                 }
 
                 var userRepo = NinjectBinder.GetRepository<IUserRepository>();
                 var departmentUsers = userRepo.Query(new Hashtable() { { "DepartmentID", SelectedDepartmentDetailViewModel.CurrentDepartment.DepartmentID } });
                 if (departmentUsers.Any())
                 {
-                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeptBecauseOfExistStaff);
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeptBecauseOfExistStaff) + Environment.NewLine;
                 }
 
                 if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))

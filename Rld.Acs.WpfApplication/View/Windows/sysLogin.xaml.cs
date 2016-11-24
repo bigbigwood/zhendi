@@ -60,7 +60,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 var authenticationResult = service.Authenticate(username, hashpassword);
                 if (authenticationResult.ResultType != ResultType.OK)
                 {
-                    ShowMessage("登陆信息错误...");
+                    ShowMessage(LanguageManager.GetLocalizationResource(RldModel.Resource.MSG_LoginFail));
                     Dispatcher.Invoke(() => ChangeButtonStatues(true));
                     return;
                 }
@@ -68,7 +68,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
                 var sysOperator = ToModel(authenticationResult.OperatorInfo);
                 ApplicationManager.GetInstance().UpdateCurrentOperatorAndPermission(sysOperator);
 
-                ShowMessage("登陆成功...");
+                ShowMessage(LanguageManager.GetLocalizationResource(RldModel.Resource.MSG_LoginSuccess));
                 Dispatcher.Invoke(() =>
                 {
                     LanguageManager.ChangeLanguage((Languages)sysOperator.LanguageID);
@@ -82,7 +82,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
             catch (Exception ex)
             {
                 Log.Error(ex);
-                ShowMessage("登录异常...");
+                ShowMessage(LanguageManager.GetLocalizationResource(RldModel.Resource.MSG_LoginException));
                 Dispatcher.Invoke(() =>ChangeButtonStatues(true));
             }
         }

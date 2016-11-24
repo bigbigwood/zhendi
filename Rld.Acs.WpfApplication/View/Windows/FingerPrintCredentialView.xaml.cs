@@ -5,7 +5,9 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
+using Rld.Acs.Model;
 using Rld.Acs.WpfApplication.Models.Messages;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.ViewModel.Views;
 
 namespace Rld.Acs.WpfApplication.View.Windows
@@ -25,7 +27,7 @@ namespace Rld.Acs.WpfApplication.View.Windows
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "jpg文件(*.jpg)|*.jpg|png文件(*.png)|*.png|所有文件(*.*)|*.*";
+            openFileDialog.Filter = LanguageManager.GetLocalizationResource(Resource.MSG_FloorImageFilter);
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() == true)
             {

@@ -99,14 +99,14 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 var departmentAssiciationRoleIds = ApplicationManager.GetInstance().AuthorizationDepartments.Select(x => x.DeviceRoleID);
                 if (departmentAssiciationRoleIds.Contains(SelectedDeviceRoleViewModel.CurrentDeviceRole.DeviceRoleID))
                 {
-                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeviceRoleBecauseOfDeptAssociation);
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeviceRoleBecauseOfDeptAssociation) + Environment.NewLine;
                 }
 
                 var userDeviceRoleRepo = NinjectBinder.GetRepository<IUserDeviceRoleRepository>();
                 var userDeviceRoleAssiciation = userDeviceRoleRepo.Query(new Hashtable() { { "DeviceRoleID", SelectedDeviceRoleViewModel.CurrentDeviceRole.DeviceRoleID } });
                 if (userDeviceRoleAssiciation.Any())
                 {
-                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeviceRoleBecauseOfStuffAssociation);
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeviceRoleBecauseOfStuffAssociation) + Environment.NewLine;
                 }
 
                 if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))

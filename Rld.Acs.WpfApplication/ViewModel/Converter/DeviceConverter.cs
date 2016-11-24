@@ -17,14 +17,14 @@ namespace Rld.Acs.WpfApplication.ViewModel.Converter
             for (int i = 1; i <= 6; i++)
             {
                 deviceViewModel.DoorViewModels.Add(new DeviceDoorViewModel() { DeviceID = t.DeviceID, 
-                    Name = LanguageManager.GetLocalizationResourceFormat(Resource.Door, i) });
+                    Name = LanguageManager.GetLocalizationResource(Resource.Door) + " " + i });
             }
 
             deviceViewModel.HeadReadingViewModels = new ObservableCollection<DeviceHeadReadingViewModel>();
             for (int i = 1; i <= 6; i++)
             {
                 deviceViewModel.HeadReadingViewModels.Add(new DeviceHeadReadingViewModel() { DeviceID = t.DeviceID, 
-                    Name = LanguageManager.GetLocalizationResourceFormat(Resource.HeadReader, i) });
+                    Name = LanguageManager.GetLocalizationResource(Resource.HeadReader) + "　" +　i });
             }
 
             for (int i = 0; i < t.DeviceDoors.Count; i++)

@@ -122,7 +122,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     .SelectMany(x => x.DeviceAssociations).Select(x => x.DeviceID);
                 if (departmentAssiciationDeviceIds.Contains(SelectedDeviceViewModel.Id))
                 {
-                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeviceBecauseOfDeptAssociation);
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeviceBecauseOfDeptAssociation) + Environment.NewLine;
                 }
 
                 var deviceRoleAssiciationDeviceIds = ApplicationManager.GetInstance().AuthorizationDeviceRoles
@@ -130,7 +130,7 @@ namespace Rld.Acs.WpfApplication.ViewModel
                     .Select(x => x.DeviceID);
                 if (deviceRoleAssiciationDeviceIds.Contains(SelectedDeviceViewModel.Id))
                 {
-                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeviceBecauseOfRoleAssociation);
+                    assiciationErrorMessage += LanguageManager.GetLocalizationResource(Resource.MSG_CannotDeleteDeviceBecauseOfRoleAssociation) + Environment.NewLine;
                 }
 
                 if (!string.IsNullOrWhiteSpace(assiciationErrorMessage))

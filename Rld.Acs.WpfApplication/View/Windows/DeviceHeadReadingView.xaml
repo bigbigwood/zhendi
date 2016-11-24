@@ -8,7 +8,7 @@
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:DeviceHeadReadingViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="300" Width="300" Unloaded="MetroWindow_Unloaded">
+             Height="280" Width="300" Unloaded="MetroWindow_Unloaded">
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >
             <Setter Property="FontSize" Value="12"/>
@@ -62,6 +62,7 @@
                 <RowDefinition Height="28"/>
                 <RowDefinition Height="28"/>
                 <RowDefinition Height="28"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -101,7 +102,7 @@
                         SelectedValue="{Binding HeadReadingType}" SelectedValuePath="ItemID" />
             <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding HeadReadingPerformance}"/>
 
-            <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"  HorizontalAlignment="Center" Orientation="Horizontal">
+            <StackPanel Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"  HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button Content="{DynamicResource Ok}" Command="{Binding SaveCmd}" Margin="3,0"/>
                 <Button Content="{DynamicResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0"/>
             </StackPanel>
