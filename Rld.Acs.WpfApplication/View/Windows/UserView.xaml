@@ -12,7 +12,7 @@
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type= vm:UserViewModel, IsDesignTimeCreatable=True}"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" 
-             Height="430" Width="600" Unloaded="MetroWindow_Unloaded">
+             Height="420" Width="600" Unloaded="MetroWindow_Unloaded">
 
     <controls:MetroWindow.Resources>
         <Style TargetType="TextBlock"  BasedOn="{StaticResource ResourceKey={x:Type TextBlock}}" >

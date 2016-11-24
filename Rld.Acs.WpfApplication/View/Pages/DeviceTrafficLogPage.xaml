@@ -38,9 +38,9 @@
     <Border Style="{StaticResource ContainerBorderStyle}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="28"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="28" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Background="WhiteSmoke">
@@ -92,8 +92,8 @@
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceType}" Binding="{Binding DeviceType}" Width="*"  />
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceSN}" Binding="{Binding DeviceSN}" Width="*"  />
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_DeviceUserID}" Binding="{Binding DeviceUserID}" Width="*"  />
-                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_AuthenticationType}" Binding="{Binding AuthenticationString}"  Width="*" />
-                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_AuthenticationResult}" Binding="{Binding Remark}" Width="*"  />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_AuthenticationType}" Binding="{Binding AuthenticationString}"  Width="Auto" />
+                        <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_AuthenticationResult}" Binding="{Binding Remark}" Width="Auto"  />
                         <DataGridTextColumn Header="{DynamicResource DeviceTrafficLogPage_Label_RecordTime}" Binding="{Binding RecordTime}" Width="1.5*"  />
                     </DataGrid.Columns>
                 </DataGrid>

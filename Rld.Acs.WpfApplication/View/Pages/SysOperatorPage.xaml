@@ -7,9 +7,7 @@
       xmlns:converter1="clr-namespace:Rld.Acs.WpfApplication.View.Converter"
       xmlns:pages="clr-namespace:Rld.Acs.WpfApplication.View.Pages"
       xmlns:a="clr-namespace:Rld.Acs.WpfApplication.Service.Authorization"
-      DataContext="{Binding SysOperatorPage, Source={StaticResource Locator}}"
-      mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600" Unloaded="Page_Unloaded">
+      DataContext="{Binding SysOperatorPage, Source={StaticResource Locator}}" Unloaded="Page_Unloaded">
     <Border Style="{StaticResource ContainerBorderStyle}">
         <Grid>
             <Grid.RowDefinitions>

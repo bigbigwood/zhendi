@@ -10,6 +10,7 @@ using Rld.Acs.Model;
 using Rld.Acs.Repository.Interfaces;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Repository;
+using Rld.Acs.WpfApplication.Service.Language;
 
 namespace Rld.Acs.WpfApplication
 {
@@ -40,14 +41,14 @@ namespace Rld.Acs.WpfApplication
         public List<SysDictionary> GetDictionaryItemsByTypeId(Int32 typeId)
         {
             return _sysDictionaryRepo.Query(new Hashtable())
-                   .FindAll(x => x.Status == GeneralStatus.Enabled && x.Level == (int)DictionaryLevel.TypeItemsLevel & x.TypeID == typeId)
+                   .FindAll(x => x.Status == GeneralStatus.Enabled && x.Level == (int)DictionaryLevel.TypeItemsLevel && x.TypeID == typeId && x.LanguageID == (int)LanguageManager.CurrentLanguage)
                    .ToList();
         }
 
         public List<SysDictionary> GetAllTypeHeaders()
         {
             return _sysDictionaryRepo.Query(new Hashtable())
-                   .FindAll(x => x.Status == GeneralStatus.Enabled && x.Level == (int) DictionaryLevel.TypeHeaderLevel)
+                   .FindAll(x => x.Status == GeneralStatus.Enabled && x.Level == (int)DictionaryLevel.TypeHeaderLevel && x.LanguageID == (int)LanguageManager.CurrentLanguage)
                    .ToList();
         }
     }

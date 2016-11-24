@@ -7,6 +7,7 @@
     <sys:String x:Key="Quit">Quit</sys:String>
     <sys:String x:Key="Enabled">Enabled</sys:String>
     <sys:String x:Key="Query">Query</sys:String>
+    <sys:String x:Key="Go">Go</sys:String>
     <sys:String x:Key="Export">Export</sys:String>
     <sys:String x:Key="Import">Import</sys:String>
     <sys:String x:Key="Save">Save</sys:String>
@@ -82,7 +83,7 @@
     <sys:String x:Key="FloorName">Name</sys:String>
     <sys:String x:Key="UploadFloorImage">Upload Image</sys:String>
     <sys:String x:Key="DoorList">Door List</sys:String>
-    <sys:String x:Key="StaffInHouse">In House Staff</sys:String>
+    <sys:String x:Key="StaffInHouse">Inside Staff</sys:String>
     <sys:String x:Key="PersonName">Name</sys:String>
     <sys:String x:Key="CurrentDepartment">Current Department</sys:String>
     <sys:String x:Key="MoveTo">Move To</sys:String>
@@ -125,24 +126,24 @@
     <sys:String x:Key="MainWindow_M1_StuffManagement">Organization</sys:String>
     <sys:String x:Key="MainWindow_M2_Stuff">User</sys:String>
     <sys:String x:Key="MainWindow_M2_Department">Department</sys:String>
-    <sys:String x:Key="MainWindow_M1_DeviceManagement">Device Settings</sys:String>
+    <sys:String x:Key="MainWindow_M1_DeviceManagement">Device Service</sys:String>
     <sys:String x:Key="MainWindow_M2_Device">Device</sys:String>
     <sys:String x:Key="MainWindow_M2_Floor">Floor</sys:String>
-    <sys:String x:Key="MainWindow_M2_TimeSegment">TimeSegment</sys:String>
-    <sys:String x:Key="MainWindow_M2_TimeGroup">TimeGroup</sys:String>
-    <sys:String x:Key="MainWindow_M2_TimeZone">TimeZone</sys:String>
+    <sys:String x:Key="MainWindow_M2_TimeSegment">Time Segment</sys:String>
+    <sys:String x:Key="MainWindow_M2_TimeGroup">Time Group</sys:String>
+    <sys:String x:Key="MainWindow_M2_TimeZone">Time Zone</sys:String>
     <sys:String x:Key="MainWindow_M2_DeviceRole">Device Role</sys:String>
     <sys:String x:Key="MainWindow_M1_Information">Information Service</sys:String>
-    <sys:String x:Key="MainWindow_M2_Monitor">Monitor</sys:String>
+    <sys:String x:Key="MainWindow_M2_Monitor">Real-time Monitor</sys:String>
     <sys:String x:Key="MainWindow_M2_DeviceAccessLog">Device Access History</sys:String>
     <sys:String x:Key="MainWindow_M2_DeviceOperationLog">Device Operation History</sys:String>
     <sys:String x:Key="MainWindow_M2_SystemOperationLog">System Operation History</sys:String>
     <sys:String x:Key="MainWindow_M1_Maintenance">Maintenance Service</sys:String>
     <sys:String x:Key="MainWindow_M2_DataDictionary">Data Dictionary</sys:String>
-    <sys:String x:Key="MainWindow_M2_Role">Role</sys:String>
-    <sys:String x:Key="MainWindow_M2_Operator">Operator</sys:String>
+    <sys:String x:Key="MainWindow_M2_Role">System Role</sys:String>
+    <sys:String x:Key="MainWindow_M2_Operator">System Operator</sys:String>
     <sys:String x:Key="MainWindow_M1_BackService">Back Service</sys:String>
-    <sys:String x:Key="MainWindow_M2_DataSync">Data Synchorization</sys:String>
+    <sys:String x:Key="MainWindow_M2_DataSync">Data Synchonization</sys:String>
     <sys:String x:Key="MainWindow_M2_DataClean">Data Clean</sys:String>
 
     <sys:String x:Key="UserPage_AddBtn">Add User</sys:String>
@@ -158,8 +159,8 @@
     <sys:String x:Key="UserPage_Label_Avator">Avator</sys:String>
     <sys:String x:Key="UserPage_Label_Name">Name</sys:String>
     <sys:String x:Key="UserPage_Label_Gender">Gender</sys:String>
-    <sys:String x:Key="UserPage_Label_Position">Position</sys:String>
-    <sys:String x:Key="UserPage_Label_UserCode">UserCode</sys:String>
+    <sys:String x:Key="UserPage_Label_Position">Technical Title</sys:String>
+    <sys:String x:Key="UserPage_Label_UserCode">Work Number</sys:String>
     <sys:String x:Key="UserPage_Label_Phone">Phone</sys:String>
     <sys:String x:Key="UserView_Permission">Device Role</sys:String>
 
@@ -171,48 +172,48 @@
     <sys:String x:Key="DepartmentDetail_Label_DepartmentName">Name:</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_DepartmentCode">Code:</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_DepartmentRole">Device Role:</sys:String>
-    <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDevices">Owned Devices:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDevices">Owned Devices</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedStuffCount">Stuff Count:</sys:String>
     <sys:String x:Key="DepartmentDetail_Label_DepartmentOwnedDeviceCount">Number of Owned Devices:</sys:String>
-    <sys:String x:Key="DepartmentDetail_Label_ParentDepartment">Parent Department:</sys:String>
+    <sys:String x:Key="DepartmentDetail_Label_ParentDepartment">Parent:</sys:String>
 
-    <sys:String x:Key="TimeSegmentPage_AddBtn">Add</sys:String>
-    <sys:String x:Key="TimeSegmentPage_ModifyBtn">Modify</sys:String>
-    <sys:String x:Key="TimeSegmentPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="TimeSegmentPage_AddBtn">Add TimeSegment</sys:String>
+    <sys:String x:Key="TimeSegmentPage_ModifyBtn">Modify TimeSegment</sys:String>
+    <sys:String x:Key="TimeSegmentPage_DeleteBtn">Delete TimeSegment</sys:String>
     <sys:String x:Key="TimeSegmentView_Label_Name">Name</sys:String>
     <sys:String x:Key="TimeSegmentView_Label_Code">Code</sys:String>
     <sys:String x:Key="TimeSegmentView_Label_Setting">Setting</sys:String>
     <sys:String x:Key="TimeSegmentView_Label_Hour">Hour</sys:String>
     <sys:String x:Key="TimeSegmentView_Label_Minute">Minute</sys:String>
 
-    <sys:String x:Key="TimeGroupPage_AddBtn">Add</sys:String>
-    <sys:String x:Key="TimeGroupPage_ModifyBtn">Modify</sys:String>
-    <sys:String x:Key="TimeGroupPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="TimeGroupPage_AddBtn">Add TimeGroup</sys:String>
+    <sys:String x:Key="TimeGroupPage_ModifyBtn">Modify TimeGroup</sys:String>
+    <sys:String x:Key="TimeGroupPage_DeleteBtn">Delete TimeGroup</sys:String>
     <sys:String x:Key="TimeGroupView_Label_Name">Name</sys:String>
     <sys:String x:Key="TimeGroupView_Label_Code">Code</sys:String>
     <sys:String x:Key="TimeGroupView_Label_SelectedSegment">Seletecd Segments</sys:String>
-    <sys:String x:Key="TimeGroupView_Label_SelectSegment">Select Segments</sys:String>
+    <sys:String x:Key="TimeGroupView_Label_SelectSegment">Segments</sys:String>
 
-    <sys:String x:Key="TimeZonePage_AddBtn">Add</sys:String>
-    <sys:String x:Key="TimeZonePage_ModifyBtn">Modify</sys:String>
-    <sys:String x:Key="TimeZonePage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="TimeZonePage_AddBtn">Add TimeZone</sys:String>
+    <sys:String x:Key="TimeZonePage_ModifyBtn">Modify TimeZone</sys:String>
+    <sys:String x:Key="TimeZonePage_DeleteBtn">Delete TimeZone</sys:String>
     <sys:String x:Key="TimeZoneView_Label_Name">Name</sys:String>
     <sys:String x:Key="TimeZoneView_Label_Code">Code</sys:String>
     <sys:String x:Key="TimeZoneView_Label_Detail">Timezone Dashboard</sys:String>
 
-    <sys:String x:Key="DevicePage_AddBtn">Add</sys:String>
-    <sys:String x:Key="DevicePage_ModifyBtn">Modify</sys:String>
-    <sys:String x:Key="DevicePage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="DevicePage_AddBtn">Add Device</sys:String>
+    <sys:String x:Key="DevicePage_ModifyBtn">Modify Device</sys:String>
+    <sys:String x:Key="DevicePage_DeleteBtn">Delete Device</sys:String>
     <sys:String x:Key="DevicePage_DeviceGroupMgntBtn">Device Groups</sys:String>
-    <sys:String x:Key="DevicePage_SearchBtn">Search</sys:String>
+    <sys:String x:Key="DevicePage_SearchBtn">Search New Devices</sys:String>
     <sys:String x:Key="DevicePage_Label_Name">Name</sys:String>
     <sys:String x:Key="DevicePage_Label_Code">Code</sys:String>
     <sys:String x:Key="DevicePage_Label_Doors">Doors</sys:String>
     <sys:String x:Key="DevicePage_Label_HeadReadings">Head Readings</sys:String>
 
-    <sys:String x:Key="DeviceRolePage_AddBtn">Add</sys:String>
-    <sys:String x:Key="DeviceRolePage_ModifyBtn">Modify</sys:String>
-    <sys:String x:Key="DeviceRolePage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="DeviceRolePage_AddBtn">Add Device Role</sys:String>
+    <sys:String x:Key="DeviceRolePage_ModifyBtn">Modify Device Role</sys:String>
+    <sys:String x:Key="DeviceRolePage_DeleteBtn">Delete Device Role</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_Name">Name</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_Code">Code</sys:String>
     <sys:String x:Key="DeviceRolePage_Label_Device">Devices</sys:String>
@@ -250,9 +251,9 @@
     <sys:String x:Key="SysOperationLogPage_Label_OperationDetail">Detail</sys:String>
     <sys:String x:Key="SysOperationLogPage_Label_OperationTime">Operation Time</sys:String>
 
-    <sys:String x:Key="SysDictionaryPage_AddBtn">Add</sys:String>
-    <sys:String x:Key="SysDictionaryPage_ModifyBtn">Modify</sys:String>
-    <sys:String x:Key="SysDictionaryPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="SysDictionaryPage_AddBtn">Add Item</sys:String>
+    <sys:String x:Key="SysDictionaryPage_ModifyBtn">Modify Item</sys:String>
+    <sys:String x:Key="SysDictionaryPage_DeleteBtn">Delete Item</sys:String>
     <sys:String x:Key="SysDictionaryPage_Label_Name">Name</sys:String>
     <sys:String x:Key="SysDictionaryPage_Label_TypeID">Type ID</sys:String>
     <sys:String x:Key="SysDictionaryPage_Label_TypeName">Type Name</sys:String>
@@ -261,9 +262,9 @@
     <sys:String x:Key="SysDictionaryPage_Label_ItemValue">Item Value</sys:String>
     <sys:String x:Key="SysDictionaryPage_Label_Description">Description</sys:String>
 
-    <sys:String x:Key="SysRolePage_AddBtn">Add</sys:String>
-    <sys:String x:Key="SysRolePage_ModifyBtn">Modify</sys:String>
-    <sys:String x:Key="SysRolePage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="SysRolePage_AddBtn">Add Role</sys:String>
+    <sys:String x:Key="SysRolePage_ModifyBtn">Modify Role</sys:String>
+    <sys:String x:Key="SysRolePage_DeleteBtn">Delete Role</sys:String>
     <sys:String x:Key="SysRolePage_Label_Name">Name</sys:String>
     <sys:String x:Key="SysRolePage_Label_Description">Description</sys:String>
     <sys:String x:Key="SysRolePage_Label_AuthorizationModule">Authorizd Modules</sys:String>
@@ -272,9 +273,9 @@
     <sys:String x:Key="SysOperatorPage_Label_Status">Status</sys:String>
     <sys:String x:Key="SysOperatorPage_Label_CreateUserID">Create User ID</sys:String>
     <sys:String x:Key="SysOperatorPage_Label_CreateDate">Create Date</sys:String>
-    <sys:String x:Key="SysOperatorPage_AddBtn">Add</sys:String>
-    <sys:String x:Key="SysOperatorPage_ModifyBtn">Modify</sys:String>
-    <sys:String x:Key="SysOperatorPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="SysOperatorPage_AddBtn">Add Operator</sys:String>
+    <sys:String x:Key="SysOperatorPage_ModifyBtn">Modify Operator</sys:String>
+    <sys:String x:Key="SysOperatorPage_DeleteBtn">Delete Operator</sys:String>
 
 
     <sys:String x:Key="SysOperatorView_Label_Name">Name</sys:String>
@@ -284,9 +285,9 @@
     <sys:String x:Key="SysOperatorView_Label_NewPassword">New Password</sys:String>
     <sys:String x:Key="SysOperatorView_Label_2ndNewPassword">Confirm Password</sys:String>
 
-    <sys:String x:Key="FloorPage_AddBtn">Add</sys:String>
-    <sys:String x:Key="FloorPage_ModifyBtn">Modify</sys:String>
-    <sys:String x:Key="FloorPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="FloorPage_AddBtn">Add Floor</sys:String>
+    <sys:String x:Key="FloorPage_ModifyBtn">Modify Floor</sys:String>
+    <sys:String x:Key="FloorPage_DeleteBtn">Delete Floor</sys:String>
     <sys:String x:Key="FloorPage_Label_Name">Name</sys:String>
     <sys:String x:Key="FloorPage_Label_Description">Doors</sys:String>
 
@@ -298,7 +299,7 @@
     <sys:String x:Key="DataSyncView_Label_Name">Name</sys:String>
     <sys:String x:Key="DataSyncView_Label_TriggerTime">Trigger Time</sys:String>
     <sys:String x:Key="DataSyncPage_DataSyncSetting">Data Synchorization Settings</sys:String>
-    <sys:String x:Key="DataSyncPage_SynchorizationTaskSetting">Synchorization Scheduled Time</sys:String>
+    <sys:String x:Key="DataSyncPage_SynchorizationTaskSetting">Scheduled Time</sys:String>
     <sys:String x:Key="DataCleanPage_Setting">Data Clean Setting</sys:String>
     <sys:String x:Key="DataCleanPage_Setting_SystemOperationLog">Clean system operation log,</sys:String>
     <sys:String x:Key="DataCleanPage_Setting_DeviceOperationLog">Clean device operation log,</sys:String>
@@ -306,14 +307,14 @@
     <sys:String x:Key="DataCleanPage_Setting_DoorHistory">Clean door history,</sys:String>
     <sys:String x:Key="DataCleanPage_Setting_Postfix">Months old data will be clean automatically.</sys:String>
 
-    <sys:String x:Key="DeviceGroupPage_AddBtn">Add</sys:String>
-    <sys:String x:Key="DeviceGroupPage_ModifyBtn">Modify</sys:String>
-    <sys:String x:Key="DeviceGroupPage_DeleteBtn">Delete</sys:String>
+    <sys:String x:Key="DeviceGroupPage_AddBtn">Add Device Group</sys:String>
+    <sys:String x:Key="DeviceGroupPage_ModifyBtn">Modify Device Group</sys:String>
+    <sys:String x:Key="DeviceGroupPage_DeleteBtn">Delete Device Group</sys:String>
     <sys:String x:Key="DeviceGroupPage_Label_Name">Name</sys:String>
     <sys:String x:Key="DeviceGroupPage_Label_CheckInDeviceName">Check-In Device</sys:String>
     <sys:String x:Key="DeviceGroupPage_Label_CheckOutDeviceName">Check-Out Device</sys:String>
     <sys:String x:Key="LisenceWindow">Lisence Message</sys:String>
-    <sys:String x:Key="OutOfLisenceMessage">The concurrent lisences are already reaching maximum allowed value, please try again later, or contract your software provider.</sys:String>
+    <sys:String x:Key="OutOfLisenceMessage">The concurrent lisences are already reaching maximum allowed value. Please try again later, or contract your software provider.</sys:String>
     <sys:String x:Key="MSG_SaveSuccessfully">Save Success!</sys:String>
     <sys:String x:Key="MSG_SaveFail">Save Fail!</sys:String>
     <sys:String x:Key="MSG_SelectValidData">Please select valid data!</sys:String>
@@ -397,6 +398,12 @@
     <sys:String x:Key="MSG_DeviceOperationFail">Operation Fails!</sys:String>
     <sys:String x:Key="MSG_SynchorizingData">Synchorizing datam please wait...</sys:String>
     <sys:String x:Key="MSG_DeviceNotSupportError">The feature is not supported by current device.</sys:String>
+    <sys:String x:Key="MSG_SelectParentDept">Select parent department</sys:String>
+    <sys:String x:Key="MSG_SelectDefaultDeviceRole">Select device role</sys:String>
+    <sys:String x:Key="NumberOfUser">Number of User</sys:String>
+    <sys:String x:Key="NumberOfDepartment">Number of Department</sys:String>
+    <sys:String x:Key="NumberOfDevice">Number of Device</sys:String>
+    <sys:String x:Key="NumberOfDoor">Number of Door</sys:String>
     <sys:String x:Key="User">User</sys:String>
     <sys:String x:Key="DeviceGroup">Device Group</sys:String>
     <sys:String x:Key="DeviceRole">Device Role</sys:String>

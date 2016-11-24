@@ -13,6 +13,7 @@ namespace Rld.Acs.WpfApplication.Service.Language
     public static class LanguageManager
     {
         public static Languages DefaultLanguage = Languages.Chinese;
+        public static Languages CurrentLanguage = DefaultLanguage;
 
         public static void ChangeLanguage(Languages selectedLanguage)
         {
@@ -55,6 +56,7 @@ namespace Rld.Acs.WpfApplication.Service.Language
 
             //Add the new resource to the dictionary
             Application.Current.Resources.MergedDictionaries.Add(dictionary);
+            CurrentLanguage = selectedLanguage;
         }
 
         public static String GetLocalizationResource(Resource resource)

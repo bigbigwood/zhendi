@@ -11,7 +11,7 @@
 
     <Grid Margin="30,25,3,3">
         <WrapPanel Width="800" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Controls:Tile Title="人员总数" TiltFactor="2" Style="{StaticResource LargeTileStyle}" Margin="3" Background="#FFD76C1F" 
+            <Controls:Tile Title="{DynamicResource NumberOfUser}" TiltFactor="2" Style="{StaticResource LargeTileStyle}" Margin="3" Background="#FFD76C1F" 
                            Command="{Binding Path=GotoStuffCommand}">
             <Grid Width="160" Height="{Binding Height, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Controls:Tile}}}">
                 <Grid.ColumnDefinitions>
@@ -27,7 +27,7 @@
                 <TextBlock Grid.Column="1" Margin="3,10,3,30" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding StuffCount}" />
             </Grid>
             </Controls:Tile>
-            <Controls:Tile Title="部门总数"
+            <Controls:Tile Title="{DynamicResource NumberOfDepartment}"
                            Style="{StaticResource LargeTileStyle}"
                            Background="#FFB71A1A" 
                            Command="{Binding Path=GotoDepartmentCommand}" >
@@ -45,8 +45,8 @@
                     <TextBlock Grid.Column="1" Margin="3,10,3,30" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding DepartmentCount}" />
                 </Grid>
             </Controls:Tile>
-            
-            <Controls:Tile Title="设备总数"
+
+            <Controls:Tile Title="{DynamicResource NumberOfDevice}"
                            Style="{StaticResource LargeTileStyle}"
                            Background="#FF5D83C6" 
                            Command="{Binding Path=GotoDeviceCommand}" >
@@ -64,7 +64,7 @@
                     <TextBlock Grid.Column="1" Margin="3,10,3,30" FontSize="40" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding DeviceCount}" />
                 </Grid>
             </Controls:Tile>
-            <Controls:Tile Title="门总数"
+            <Controls:Tile Title="{DynamicResource NumberOfDoor}"
                            Style="{StaticResource LargeTileStyle}"
                            Background="#FFC8AE12"
                            Command="{Binding Path=GotoDoorCommand}" >

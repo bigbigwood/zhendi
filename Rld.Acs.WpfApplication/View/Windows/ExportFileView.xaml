@@ -21,11 +21,11 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="0" Name="btnExport2003" Style="{StaticResource FlatButtonStyle}" Height="35" Width="140" Margin="8"  Content="{DynamicResource ExportExcel2003}" Click="BtnExport2003_OnClick"/>
-            <Button Grid.Row="0" Grid.Column="1" Name="btnExportTxt" Style="{StaticResource FlatButtonStyle}" Height="35" Width="140" Margin="8" Content="{DynamicResource ExportExcel2007}" Click="BtnExportTxt_OnClick"/>
-            <Button Grid.Row="1" Grid.Column="0" Name="btnExport2007" Style="{StaticResource FlatButtonStyle}" Height="35" Width="140" Margin="8" Content="{DynamicResource ExportTxt}" Click="BtnExport2007_OnClick"/>
-            <Button Grid.Row="1" Grid.Column="1" Name="btnExportCSV" Style="{StaticResource FlatButtonStyle}" Height="35" Width="140" Margin="8" Content="{DynamicResource ExportCSV}" Click="BtnExportCSV_OnClick"/>
-            <Button Grid.Row="2" Grid.Column="0" Name="btnExportPDF" Style="{StaticResource FlatButtonStyle}" Height="35" Width="140" Margin="8" Content="{DynamicResource ExportPDF}" Click="BtnExportPDF_OnClick"/>
+            <Button Grid.Row="0" Grid.Column="0" Name="btnExport2003" Style="{StaticResource FlatButtonStyle}" Height="35" Width="142" Margin="8"  Content="{DynamicResource ExportExcel2003}" Click="BtnExport2003_OnClick"/>
+            <Button Grid.Row="0" Grid.Column="1" Name="btnExportTxt" Style="{StaticResource FlatButtonStyle}" Height="35" Width="142" Margin="8" Content="{DynamicResource ExportExcel2007}" Click="BtnExportTxt_OnClick"/>
+            <Button Grid.Row="1" Grid.Column="0" Name="btnExport2007" Style="{StaticResource FlatButtonStyle}" Height="35" Width="142" Margin="8" Content="{DynamicResource ExportTxt}" Click="BtnExport2007_OnClick"/>
+            <Button Grid.Row="1" Grid.Column="1" Name="btnExportCSV" Style="{StaticResource FlatButtonStyle}" Height="35" Width="142" Margin="8" Content="{DynamicResource ExportCSV}" Click="BtnExportCSV_OnClick"/>
+            <Button Grid.Row="2" Grid.Column="0" Name="btnExportPDF" Style="{StaticResource FlatButtonStyle}" Height="35" Width="142" Margin="8" Content="{DynamicResource ExportPDF}" Click="BtnExportPDF_OnClick"/>
         </Grid>
     </Grid>
 </windows:BaseWindow>

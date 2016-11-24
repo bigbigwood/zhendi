@@ -83,7 +83,7 @@
         <TextBox   Grid.Row="3" Grid.Column="2" Text="{Binding DepartmentCode}" />
         <ComboBox  Grid.Row="4" Grid.Column="2" Margin="2"
                    Style="{DynamicResource VirtualisedMetroComboBox}"
-                   controls:TextBoxHelper.Watermark="请选择上级部门"
+                   controls:TextBoxHelper.Watermark="{DynamicResource MSG_SelectParentDept}"
                    IsEditable="False"
                    MaxDropDownHeight="100"
                    ItemsSource="{Binding AuthorizationDepartments, Mode=OneWay}" 
@@ -92,7 +92,7 @@
                    DisplayMemberPath="Name" />
         <ComboBox  Grid.Row="5" Grid.Column="2" Margin="2"
                    Style="{DynamicResource VirtualisedMetroComboBox}"
-                   controls:TextBoxHelper.Watermark="请选择默认设备权限角色"
+                   controls:TextBoxHelper.Watermark="{DynamicResource MSG_SelectDefaultDeviceRole}"
                    IsEditable="False"
                    MaxDropDownHeight="100"
                    ItemsSource="{Binding AuthorizationDeviceRoles, Mode=OneWay}" 

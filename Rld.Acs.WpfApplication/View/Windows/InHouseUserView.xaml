@@ -37,7 +37,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{DynamicResource UserPage_Label_Avator}" Width="64" IsReadOnly="True">
+                <DataGridTemplateColumn Header="{DynamicResource UserPage_Label_Avator}" Width="75" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Image Height="48"  Source="{Binding Path=Avator}" Margin="3"/>

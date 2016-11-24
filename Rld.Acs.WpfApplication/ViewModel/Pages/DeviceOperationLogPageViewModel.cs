@@ -59,9 +59,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
             ProcessQueryPage(pageIndex);
         }
 
-        private string _totalPage = string.Empty;
-
-
+        private string _totalPage = "1";
         /// <summary>
         /// 总页数
         /// </summary>
@@ -207,7 +205,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                             Log.Info("Querying data...");
                             int totalCount = 0;
                             DeviceOperationLogViewModels = QueryData(conditions, out totalCount);
-                            if (totalCount % PageSize == 0)
+                            if (totalCount != 0 && totalCount % PageSize == 0)
                             {
                                 TotalPage = (totalCount / PageSize).ToString();
                             }

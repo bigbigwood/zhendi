@@ -89,7 +89,7 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                     int totalCount = 0;
                     var pageIndex = Convert.ToInt32(CurrentPage);
                     SysDictionaryViewModels = QueryData(pageIndex, PageSize, out totalCount);
-                    if (totalCount % PageSize == 0)
+                    if (totalCount !=0 &&totalCount % PageSize == 0)
                     {
                         TotalPage = (totalCount / PageSize).ToString();
                     }
@@ -106,9 +106,8 @@ namespace Rld.Acs.WpfApplication.ViewModel.Pages
                 }
             });
         }
-        private string _totalPage = string.Empty;
 
-
+        private string _totalPage = "1";
         /// <summary>
         /// 总页数
         /// </summary>

@@ -6,6 +6,7 @@
     <sys:String x:Key="Cancel">取消</sys:String>
     <sys:String x:Key="Quit">退出</sys:String>
     <sys:String x:Key="Enabled">启用</sys:String>
+    <sys:String x:Key="Go">查询</sys:String>
     <sys:String x:Key="Query">查询</sys:String>
     <sys:String x:Key="Export">导出</sys:String>
     <sys:String x:Key="Import">导入</sys:String>
@@ -27,8 +28,8 @@
     <sys:String x:Key="SettingDetail">设置详情</sys:String>
     <sys:String x:Key="AppName">门禁管理系统</sys:String>
     <sys:String x:Key="First">首页</sys:String>
-    <sys:String x:Key="Next">上一页</sys:String>
-    <sys:String x:Key="Previous">下一页</sys:String>
+    <sys:String x:Key="Next">下一页</sys:String>
+    <sys:String x:Key="Previous">上一页</sys:String>
     <sys:String x:Key="Last">末页</sys:String>
     <sys:String x:Key="CurrentPage">当前页:</sys:String>
     <sys:String x:Key="Jump">转到页:</sys:String>
@@ -400,8 +401,14 @@
     <sys:String x:Key="MSG_DeviceOperationFail">操作设备失败！</sys:String>
     <sys:String x:Key="MSG_SynchorizingData">同步数据中，请稍等</sys:String>
     <sys:String x:Key="MSG_DeviceNotSupportError">当前设备无法支持此功能</sys:String>
+    <sys:String x:Key="MSG_SelectParentDept">请选择上级部门</sys:String>
+    <sys:String x:Key="MSG_SelectDefaultDeviceRole">请选择默认设备权限角色</sys:String>
 
 
+    <sys:String x:Key="NumberOfUser">人员总数</sys:String>
+    <sys:String x:Key="NumberOfDepartment">部门总数</sys:String>
+    <sys:String x:Key="NumberOfDevice">设备总数</sys:String>
+    <sys:String x:Key="NumberOfDoor">门总数</sys:String>
     <sys:String x:Key="User">人员</sys:String>
     <sys:String x:Key="DeviceGroup">设备组</sys:String>
     <sys:String x:Key="DeviceRole">设备角色</sys:String>
