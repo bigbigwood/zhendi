@@ -105,7 +105,7 @@ namespace Rld.Acs.WebApi.Controllers
                 {
                     return new HttpResponseMessage(HttpStatusCode.BadRequest)
                     {
-                        Content = new StringContent("设备角色已经绑定人员使用，不能修改。"),
+                        Content = new StringContent(Resource.MSG_CannotDeleteDeviceRoleBecauseStaffAssociation.GetHashCode().ToString()),
                         ReasonPhrase = ConstStrings.BusinessLogicError,
                     };
                 }

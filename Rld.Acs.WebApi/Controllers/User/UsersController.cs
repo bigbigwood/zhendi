@@ -75,7 +75,7 @@ namespace Rld.Acs.WebApi.Controllers
                 {
                     return new HttpResponseMessage(HttpStatusCode.BadRequest)
                     {
-                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的人员", userInfo.UserCode)),
+                        Content = new StringContent(Resource.MSG_ExistUserHasSameWorkNumber.GetHashCode().ToString()),
                         ReasonPhrase = ConstStrings.BusinessLogicError,
                     };
                 }
@@ -124,7 +124,7 @@ namespace Rld.Acs.WebApi.Controllers
                 {
                     return new HttpResponseMessage(HttpStatusCode.BadRequest)
                     {
-                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的人员", userInfo.UserCode)),
+                        Content = new StringContent(Resource.MSG_ExistUserHasSameWorkNumber.GetHashCode().ToString()),
                         ReasonPhrase = ConstStrings.BusinessLogicError,
                     };
                 }

@@ -71,7 +71,7 @@ namespace Rld.Acs.WebApi.Controllers
                 {
                     return new HttpResponseMessage(HttpStatusCode.BadRequest)
                     {
-                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的设备", deviceInfo.Code)),
+                        Content = new StringContent(Resource.MSG_ExistDeviceHasSameCode.GetHashCode().ToString()),
                         ReasonPhrase = ConstStrings.BusinessLogicError,
                     };
                 }
@@ -110,7 +110,7 @@ namespace Rld.Acs.WebApi.Controllers
                 {
                     return new HttpResponseMessage(HttpStatusCode.BadRequest)
                     {
-                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的设备", deviceInfo.Code)),
+                        Content = new StringContent(Resource.MSG_ExistDeviceHasSameCode.GetHashCode().ToString()),
                         ReasonPhrase = ConstStrings.BusinessLogicError,
                     };
                 }

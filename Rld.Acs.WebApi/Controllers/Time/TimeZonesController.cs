@@ -70,6 +70,7 @@ namespace Rld.Acs.WebApi.Controllers
                 {
                     return new HttpResponseMessage(HttpStatusCode.BadRequest)
                     {
+                        // code will automatically generated
                         Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间区", timeZoneInfo.TimeZoneCode)),
                         ReasonPhrase = ConstStrings.BusinessLogicError,
                     };

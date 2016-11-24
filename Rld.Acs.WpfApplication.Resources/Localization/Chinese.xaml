@@ -380,6 +380,26 @@
     <sys:String x:Key="MSG_LoadingData">加载数据中...</sys:String>
     <sys:String x:Key="MSG_LoadDataComplete">加载数据完成！</sys:String>
     <sys:String x:Key="MSG_LoadDataFail">加载数据出错！</sys:String>
+    <sys:String x:Key="MSG_ExistUserHasSameWorkNumber">系统中已经存在相同编号的人员</sys:String>
+    <sys:String x:Key="MSG_ExistDeviceHasSameCode">系统中已经存在相同编号的设备</sys:String>
+    <sys:String x:Key="MSG_CannotDeleteDeviceRoleBecauseStaffAssociation">设备角色已经绑定人员使用，不能修改。</sys:String>
+    <sys:String x:Key="MSG_DeviceIsNotConnected">设备:[{0}]未连接</sys:String>
+    <sys:String x:Key="MSG_InternalError">内部错误</sys:String>
+    <sys:String x:Key="MSG_OpenDoor">开门</sys:String>
+    <sys:String x:Key="MSG_CloseDoor">关门</sys:String>
+    <sys:String x:Key="MSG_KeepOpenDoor">常开门</sys:String>
+    <sys:String x:Key="MSG_KeepCloseDoor">常关门</sys:String>
+    <sys:String x:Key="MSG_AutoControl">自动控制</sys:String>
+    <sys:String x:Key="MSG_CancelAlarm">取消报警</sys:String>
+    <sys:String x:Key="MSG_InDoorUser">门内人员列表</sys:String>
+    <sys:String x:Key="MSG_CannotSeeInDoorUser">此设备还未绑定设备组，无法查看人员列表</sys:String>
+    <sys:String x:Key="MSG_PrepareData">准备数据</sys:String>
+    <sys:String x:Key="MSG_PreparingData">准备数据中，请稍等</sys:String>
+    <sys:String x:Key="MSG_SeeInDoorUserFail">查看人员列表失败！</sys:String>
+    <sys:String x:Key="MSG_DeviceOperationSuccess">操作设备成功！</sys:String>
+    <sys:String x:Key="MSG_DeviceOperationFail">操作设备失败！</sys:String>
+    <sys:String x:Key="MSG_SynchorizingData">同步数据中，请稍等</sys:String>
+    <sys:String x:Key="MSG_DeviceNotSupportError">当前设备无法支持此功能</sys:String>
 
 
     <sys:String x:Key="User">人员</sys:String>

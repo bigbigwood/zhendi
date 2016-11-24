@@ -20,6 +20,7 @@ using Rld.Acs.WpfApplication.Models;
 using Rld.Acs.WpfApplication.Models.Messages;
 using Rld.Acs.WpfApplication.Repository;
 using Rld.Acs.WpfApplication.Service;
+using Rld.Acs.WpfApplication.Service.Language;
 using Rld.Acs.WpfApplication.View.Windows;
 using Rld.Acs.WpfApplication.ViewModel.Pages;
 using Rld.Acs.WpfApplication.ViewModel.Views;
@@ -67,7 +68,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
             catch (Exception ex)
             {
                 Log.Error("OnTimedEvent error", ex);
-                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+                MessageBoxSingleton.Instance.ShowDialog(LanguageManager.GetLocalizationResource(Resource.MSG_InternalError), "");
             }
         }
 
@@ -106,7 +107,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
             catch (Exception ex)
             {
                 Log.Error("OnTimedEvent error", ex);
-                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+                MessageBoxSingleton.Instance.ShowDialog(LanguageManager.GetLocalizationResource(Resource.MSG_InternalError), "");
             }
         }
 
@@ -125,7 +126,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
             catch (Exception ex)
             {
                 Log.Error("OnPhotoClick error", ex);
-                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+                MessageBoxSingleton.Instance.ShowDialog(LanguageManager.GetLocalizationResource(Resource.MSG_InternalError), "");
             }
         }
 
@@ -142,7 +143,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
             catch (Exception ex)
             {
                 Log.Error("OnPhotoClick error", ex);
-                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+                MessageBoxSingleton.Instance.ShowDialog(LanguageManager.GetLocalizationResource(Resource.MSG_InternalError), "");
             }
         }
 
@@ -158,7 +159,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
             catch (Exception ex)
             {
                 Log.Error("OnPhotoClick error", ex);
-                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+                MessageBoxSingleton.Instance.ShowDialog(LanguageManager.GetLocalizationResource(Resource.MSG_InternalError), "");
             }
         }
 
@@ -186,7 +187,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
             catch (Exception ex)
             {
                 Log.Error("Resize error", ex);
-                MessageBoxSingleton.Instance.ShowDialog("内部错误", "");
+                MessageBoxSingleton.Instance.ShowDialog(LanguageManager.GetLocalizationResource(Resource.MSG_InternalError), "");
             }
         }
 
@@ -240,13 +241,13 @@ namespace Rld.Acs.WpfApplication.View.Pages
             panel.Children.Add(new TextBlock() { Text = floorDoor.DoorName, FontSize = 16 });
             panel.DataContext = floorDoor;
 
-            var menu_open = new MenuItem() { Header = "开门", Tag = panel };
-            var menu_close = new MenuItem() { Header = "关门", Tag = panel };
-            var menu_keepOpen = new MenuItem() { Header = "常开门", Tag = panel };
-            var menu_keepClose = new MenuItem() { Header = "常关门", Tag = panel };
-            var menu_autoControl = new MenuItem() { Header = "自动控制", Tag = panel };
-            var menu_cancleAlarm = new MenuItem() { Header = "取消报警", Tag = panel };
-            var menu_viewStuffList = new MenuItem() { Header = "门内人员列表", Tag = panel };
+            var menu_open = new MenuItem() { Header = LanguageManager.GetLocalizationResource(Resource.MSG_OpenDoor), Tag = panel };
+            var menu_close = new MenuItem() { Header = LanguageManager.GetLocalizationResource(Resource.MSG_CloseDoor), Tag = panel };
+            var menu_keepOpen = new MenuItem() { Header = LanguageManager.GetLocalizationResource(Resource.MSG_KeepOpenDoor), Tag = panel };
+            var menu_keepClose = new MenuItem() { Header = LanguageManager.GetLocalizationResource(Resource.MSG_KeepCloseDoor), Tag = panel };
+            var menu_autoControl = new MenuItem() { Header = LanguageManager.GetLocalizationResource(Resource.MSG_AutoControl), Tag = panel };
+            var menu_cancleAlarm = new MenuItem() { Header = LanguageManager.GetLocalizationResource(Resource.MSG_CancelAlarm), Tag = panel };
+            var menu_viewStuffList = new MenuItem() { Header = LanguageManager.GetLocalizationResource(Resource.MSG_InDoorUser), Tag = panel };
             menu_open.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.Open);
             menu_close.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.Close);
             menu_keepOpen.Click += (sender, args) => UpdateDoorState(sender, DoorControlOption.KeepOpen);
@@ -282,14 +283,17 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
             if (deviceGroupEnabled == false)
             {
-                MessageBoxSingleton.Instance.ShowDialog("此设备还未绑定设备组，无法查看人员列表", "");
+                MessageBoxSingleton.Instance.ShowDialog(LanguageManager.GetLocalizationResource(Resource.MSG_CannotSeeInDoorUser), "");
                 return;
             }
 
             string errorMessage = "";
             List<User> inHouseUsers = null;
 
-            var controller = await MessageBoxSingleton.Instance.ShowProgressAsync("准备数据", "准备数据中，请稍等", false);
+            var controller = await MessageBoxSingleton.Instance.ShowProgressAsync(
+                LanguageManager.GetLocalizationResource(Resource.MSG_PrepareData),
+                LanguageManager.GetLocalizationResource(Resource.MSG_PreparingData), 
+                false);
             controller.SetIndeterminate();
 
             await Task.Run(() =>
@@ -303,7 +307,7 @@ namespace Rld.Acs.WpfApplication.View.Pages
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    errorMessage = "查看人员列表失败！";
+                    errorMessage = LanguageManager.GetLocalizationResource(Resource.MSG_SeeInDoorUserFail);
                 }
             });
 
@@ -340,7 +344,10 @@ namespace Rld.Acs.WpfApplication.View.Pages
 
             string message = "";
 
-            var controller = await MessageBoxSingleton.Instance.ShowProgressAsync("同步数据", "同步数据中，请稍等", false);
+            var controller = await MessageBoxSingleton.Instance.ShowProgressAsync(
+                LanguageManager.GetLocalizationResource(Resource.DataSynchorization),
+                LanguageManager.GetLocalizationResource(Resource.MSG_SynchorizingData), 
+                false);
             controller.SetIndeterminate();
 
             await Task.Run(() =>
@@ -353,12 +360,14 @@ namespace Rld.Acs.WpfApplication.View.Pages
                     var selectedOption = (DeviceProxy.DoorControlOption)option.GetHashCode();
 
                     ResultTypes resultTypes = new DeviceServiceClient().UpdateDoorState(deviceCode, doorIndex, selectedOption, out messages);
-                    message = MessageHandler.GenerateDeviceMessage(resultTypes, messages, "操作设备成功！", "操作设备失败！");
+                    message = MessageHandler.GenerateDeviceMessage(resultTypes, messages,
+                        LanguageManager.GetLocalizationResource(Resource.MSG_DeviceOperationSuccess),
+                        LanguageManager.GetLocalizationResource(Resource.MSG_DeviceOperationFail));
                 }
                 catch (Exception ex)
                 {
                     Log.Error(ex);
-                    message = "操作设备失败！";
+                    message = LanguageManager.GetLocalizationResource(Resource.MSG_DeviceOperationFail);
                 }
             });
 

@@ -45,7 +45,7 @@ namespace Rld.Acs.DeviceSystem
                     var requestOfflineDevice = offlineDevices.FindAll(x => request.Devices.Select(xx => xx.DeviceID).Contains(x.DeviceID));
                     if (requestOfflineDevice.Any())
                     {
-                        var msg = string.Format("设备:[{0}]未连接", string.Join(",", requestOfflineDevice.Select(x => x.Name)));
+                        var msg = string.Join(",", requestOfflineDevice.Select(x => x.Name));
                         return new SyncDeviceUsersResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
                     }
 
@@ -109,7 +109,7 @@ namespace Rld.Acs.DeviceSystem
                     var requestOfflineDevice = offlineDevices.FindAll(x => request.Devices.Select(xx => xx.DeviceID).Contains(x.DeviceID));
                     if (requestOfflineDevice.Any())
                     {
-                        var msg = string.Format("设备:[{0}]未连接", string.Join(",", requestOfflineDevice.Select(x => x.Name)));
+                        var msg = string.Join(",", requestOfflineDevice.Select(x => x.Name));
                         return new SyncDBUsersResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
                     }
 
@@ -190,7 +190,7 @@ namespace Rld.Acs.DeviceSystem
                     var requestOfflineDevice = offlineDevices.FindAll(x => request.Devices.Select(xx => xx.DeviceID).Contains(x.DeviceID));
                     if (requestOfflineDevice.Any())
                     {
-                        var msg = string.Format("设备:[{0}]未连接", string.Join(",", requestOfflineDevice.Select(x => x.Name)));
+                        var msg = string.Join(",", requestOfflineDevice.Select(x => x.Name));
                         return new SyncDeviceOperationLogsResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
                     }
 
@@ -246,7 +246,7 @@ namespace Rld.Acs.DeviceSystem
                     var requestOfflineDevice = offlineDevices.FindAll(x => request.Devices.Select(xx => xx.DeviceID).Contains(x.DeviceID));
                     if (requestOfflineDevice.Any())
                     {
-                        var msg = string.Format("设备:[{0}]未连接", string.Join(",", requestOfflineDevice.Select(x => x.Name)));
+                        var msg = string.Join(",", requestOfflineDevice.Select(x => x.Name));
                         return new SyncDeviceTrafficLogsResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
                     }
 
@@ -306,7 +306,7 @@ namespace Rld.Acs.DeviceSystem
         {
             if (WebSocketClientManager.GetInstance().GetClientById(request.DeviceCode) == null)
             {
-                var msg = string.Format("设备:[{0}]未连接", string.Join(",", request.DeviceCode));
+                var msg = string.Join(",", request.DeviceCode);
                 return new GetDoorStateResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
             }
 
@@ -317,7 +317,7 @@ namespace Rld.Acs.DeviceSystem
         {
             if (WebSocketClientManager.GetInstance().GetClientById(request.DeviceCode) == null)
             {
-                var msg = string.Format("设备:[{0}]未连接", string.Join(",", request.DeviceCode));
+                var msg = string.Join(",", request.DeviceCode);
                 return new UpdateDoorStateResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
             }
 
@@ -361,7 +361,7 @@ namespace Rld.Acs.DeviceSystem
             {
                 if (WebSocketClientManager.GetInstance().GetClientById(request.Device.Code.ToInt32()) == null)
                 {
-                    var msg = string.Format("设备:[{0}]未连接", string.Join(",", request.Device.Name));
+                    var msg = string.Join(",", request.Device.Name);
                     return new QueryDeviceUsersResponse() { ResultType = ResultTypes.DeviceNotConnected, Messages = new[] { msg } };
                 }
 

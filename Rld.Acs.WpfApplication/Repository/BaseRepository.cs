@@ -3,6 +3,8 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Windows;
+using Rld.Acs.Model;
 using Rld.Acs.Repository.Framework;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,7 @@ using Rld.Acs.Unility;
 using Rld.Acs.Unility.Exceptions;
 using Rld.Acs.Unility.Extension;
 using Rld.Acs.WpfApplication.Models;
+using Rld.Acs.WpfApplication.Service.Language;
 
 namespace Rld.Acs.WpfApplication.Repository
 {
@@ -36,7 +39,10 @@ namespace Rld.Acs.WpfApplication.Repository
 
                 var errorMessage = response.Content.ReadAsStringAsync().Result;
                 if (response.ReasonPhrase == ConstStrings.BusinessLogicError)
-                    throw new BusinessException(errorMessage);
+                {
+                    var localizationMessage = LanguageManager.GetLocalizationResource((Resource)Enum.Parse(typeof(Resource), errorMessage));
+                    throw new BusinessException(localizationMessage);
+                }
                 else
                     throw new Exception(errorMessage);
             }
@@ -61,7 +67,10 @@ namespace Rld.Acs.WpfApplication.Repository
 
                 var errorMessage = response.Content.ReadAsStringAsync().Result;
                 if (response.ReasonPhrase == ConstStrings.BusinessLogicError)
-                    throw new BusinessException(errorMessage);
+                {
+                    var localizationMessage = LanguageManager.GetLocalizationResource((Resource)Enum.Parse(typeof(Resource), errorMessage));
+                    throw new BusinessException(localizationMessage);
+                }
                 else
                     throw new Exception(errorMessage);
             }
@@ -80,7 +89,10 @@ namespace Rld.Acs.WpfApplication.Repository
 
                 var errorMessage = response.Content.ReadAsStringAsync().Result;
                 if (response.ReasonPhrase == ConstStrings.BusinessLogicError)
-                    throw new BusinessException(errorMessage);
+                {
+                    var localizationMessage = LanguageManager.GetLocalizationResource((Resource)Enum.Parse(typeof(Resource), errorMessage));
+                    throw new BusinessException(localizationMessage);
+                }
                 else
                     throw new Exception(errorMessage);
             }

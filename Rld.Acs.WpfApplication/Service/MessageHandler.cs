@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rld.Acs.Model;
 using Rld.Acs.WpfApplication.DeviceProxy;
+using Rld.Acs.WpfApplication.Service.Language;
 
 namespace Rld.Acs.WpfApplication.Service
 {
@@ -15,9 +17,12 @@ namespace Rld.Acs.WpfApplication.Service
             if (resultTypes == ResultTypes.Ok)
                 message = okMessage;
             else if (resultTypes == ResultTypes.NotSupportError)
-                message = "当前设备无法支持此功能";
+                message = LanguageManager.GetLocalizationResource(Resource.MSG_DeviceNotSupportError);
             else if (resultTypes == ResultTypes.DeviceNotConnected)
-                message = messages.FirstOrDefault();
+            {
+                var offlineDeviceIds = messages.FirstOrDefault();
+                message = LanguageManager.GetLocalizationResourceFormat(Resource.MSG_DeviceIsNotConnected, offlineDeviceIds);
+            }
             else
                 message = failureMessage;
 
