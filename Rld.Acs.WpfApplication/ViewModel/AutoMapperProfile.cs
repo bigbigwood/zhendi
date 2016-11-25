@@ -47,10 +47,8 @@ namespace Rld.Acs.WpfApplication.ViewModel
                 .ForMember(dest => dest.CancelCmd, op => op.Ignore())
                 .ForMember(dest => dest.Title, op => op.Ignore())
                 .ForMember(dest => dest.ViewModelAttachment, op => op.Ignore())
-                .ForMember(dest => dest.StartHour, op => op.MapFrom(src => (src.TimeSegmentID != 0) ?  src.BeginTime.Substring(0, 2) : ""))
-                .ForMember(dest => dest.StartMinute, op => op.MapFrom(src => (src.TimeSegmentID != 0) ? src.BeginTime.Substring(3, 2) : ""))
-                .ForMember(dest => dest.EndHour, op => op.MapFrom(src => (src.TimeSegmentID != 0) ? src.EndTime.Substring(0, 2) : ""))
-                .ForMember(dest => dest.EndMinute, op => op.MapFrom(src => (src.TimeSegmentID != 0) ? src.EndTime.Substring(3, 2) : ""))
+                .ForMember(dest => dest.BeginTime, op => op.MapFrom(src => (src.TimeSegmentID != 0) ?  DateTime.Parse(src.BeginTime) : new DateTime(2000, 1, 1, 0, 0, 1)))
+                .ForMember(dest => dest.EndTime, op => op.MapFrom(src => (src.TimeSegmentID != 0) ? DateTime.Parse(src.EndTime) :  new DateTime(2000, 1, 1, 23, 59, 59)))
                 .ForMember(dest => dest.FullSegment, op => op.Ignore());
 
             CreateProvMap<DeviceDoor, DeviceDoorViewModel>()

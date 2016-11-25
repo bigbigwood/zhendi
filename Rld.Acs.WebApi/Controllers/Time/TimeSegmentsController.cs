@@ -56,15 +56,15 @@ namespace Rld.Acs.WebApi.Controllers
             return ActionWarpper.Process(timeSegmentDto, OperationCodes.ATMSGM, () =>
             {
                 var repo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
-                if (repo.Query(new Hashtable() { { "TimeSegmentCode", timeSegmentDto.TimeSegmentCode } }).Any())
-                {
-                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
-                    {
-                        // code will automatically generated
-                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间段", timeSegmentDto.TimeSegmentCode)),
-                        ReasonPhrase = ConstStrings.BusinessLogicError,
-                    };
-                }
+                //if (repo.Query(new Hashtable() { { "TimeSegmentCode", timeSegmentDto.TimeSegmentCode } }).Any())
+                //{
+                //    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                //    {
+                //        // code will automatically generated
+                //        Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间段", timeSegmentDto.TimeSegmentCode)),
+                //        ReasonPhrase = ConstStrings.BusinessLogicError,
+                //    };
+                //}
 
                 var timeSegment = repo.Insert(timeSegmentDto);
                 return Request.CreateResponse(HttpStatusCode.OK, timeSegment);
@@ -80,14 +80,14 @@ namespace Rld.Acs.WebApi.Controllers
             {
                 timeSegmentDto.TimeSegmentID = id;
                 var repo = RepositoryManager.GetRepository<ITimeSegmentRepository>();
-                if (repo.Query(new Hashtable() { { "TimeSegmentCode", timeSegmentDto.TimeSegmentCode } }).Any(x => x.TimeSegmentID != id))
-                {
-                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
-                    {
-                        Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间段", timeSegmentDto.TimeSegmentCode)),
-                        ReasonPhrase = ConstStrings.BusinessLogicError,
-                    };
-                }
+                //if (repo.Query(new Hashtable() { { "TimeSegmentCode", timeSegmentDto.TimeSegmentCode } }).Any(x => x.TimeSegmentID != id))
+                //{
+                //    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                //    {
+                //        Content = new StringContent(string.Format("系统中已经存在编号为{0}的时间段", timeSegmentDto.TimeSegmentCode)),
+                //        ReasonPhrase = ConstStrings.BusinessLogicError,
+                //    };
+                //}
 
                 repo.Update(timeSegmentDto);
                 return Request.CreateResponse(HttpStatusCode.OK);

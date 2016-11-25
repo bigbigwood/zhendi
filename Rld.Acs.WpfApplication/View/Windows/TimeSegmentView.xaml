@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views="clr-namespace:Rld.Acs.WpfApplication.ViewModel.Views"
              xmlns:windows="clr-namespace:Rld.Acs.WpfApplication.View.Windows"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" d:DataContext= "{d:DesignInstance Type=views:TimeSegmentViewModel, IsDesignTimeCreatable=True}"
-             Width="600" Height="220" Unloaded="MetroWindow_Unloaded"
+             Width="300" Height="220" Unloaded="MetroWindow_Unloaded"
              ShowMaxRestoreButton="False" ShowMinButton="False" ShowTitleBar="False" WindowStartupLocation="CenterScreen" >
     <Grid>
         <Grid.Resources>
@@ -18,7 +19,7 @@
             </Style>
             <Style TargetType="TextBox" BasedOn="{StaticResource ResourceKey={x:Type TextBox}}" >
                 <Setter Property="FontSize" Value="12"/>
-                <Setter Property="Margin" Value="3,7" />
+                <Setter Property="Margin" Value="5" />
             </Style>
             <Style TargetType="Button" BasedOn="{StaticResource ResourceKey={x:Type Button}}" >
                 <Setter Property="FontSize" Value="12"/>
@@ -27,10 +28,10 @@
             </Style>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="80"/>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="28" />
@@ -50,30 +51,19 @@
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
                         <TextBlock Text="{DynamicResource TimeSegmentView_Label_Name}" Margin="0"/>
         </TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding TimeSegmentName}"/>
-        
         <TextBlock Grid.Row="3" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="{DynamicResource TimeSegmentView_Label_Code}" Margin="0"/>
+                        <TextBlock Text="{DynamicResource From}" Margin="0"/>
         </TextBlock>
-
-        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding TimeSegmentCode}"/>
-
         <TextBlock Grid.Row="4" Grid.Column="1" >
                         <TextBlock BaselineOffset="10" Text="*" Foreground="Red" FontWeight="Heavy" Width="5" Margin="2,0"/>
-                        <TextBlock Text="{DynamicResource TimeSegmentView_Label_Setting}" Margin="0"/>
+                        <TextBlock Text="{DynamicResource Query_Label_EndTime}" Margin="0"/>
         </TextBlock>
-        <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal">
-            <TextBox Width="30" Text="{Binding StartHour}"/>
-            <TextBlock Text="{StaticResource TimeSegmentView_Label_Hour}"/>
-            <TextBox Width="30" Text="{Binding StartMinute}"/>
-            <TextBlock Text="{StaticResource TimeSegmentView_Label_Minute}"/>
-            <TextBlock Text="-"/>
-            <TextBox Width="30" Text="{Binding EndHour}"/>
-            <TextBlock Text="{StaticResource TimeSegmentView_Label_Hour}"/>
-            <TextBox Width="30" Text="{Binding EndMinute}"/>
-            <TextBlock Text="{StaticResource TimeSegmentView_Label_Minute}"/>
-        </StackPanel>
+
+        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding TimeSegmentName}"/>
+        <xctk:TimePicker Grid.Row="3" Grid.Column="2" Margin="5" FormatString="HH:mm" Value="{Binding BeginTime}" />
+        <xctk:TimePicker Grid.Row="4" Grid.Column="2" Margin="5" FormatString="HH:mm" Value="{Binding EndTime}" />
+
         <StackPanel  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
             <Button Content="{StaticResource Ok}" Command="{Binding SaveCmd}" Margin="3,0" />
             <Button Content="{StaticResource Cancel}" Command="{Binding CancelCmd}" Margin="3,0" />

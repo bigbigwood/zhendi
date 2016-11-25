@@ -27,20 +27,16 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
         public Int32 TimeSegmentID { get; set; }
         public String TimeSegmentName { get; set; }
         public String TimeSegmentCode { get; set; }
-        public String BeginTime { get; set; }
-        public String EndTime { get; set; }
+        public DateTime BeginTime { get; set; }
+        public DateTime EndTime { get; set; }
         public Int32 CreateUserID { get; set; }
         public DateTime CreateDate { get; set; }
         public GeneralStatus Status { get; set; }
         public Int32? UpdateUserID { get; set; }
         public DateTime? UpdateDate { get; set; }
-        public string StartHour { get; set; }
-        public string StartMinute { get; set; }
-        public string EndHour { get; set; }
-        public string EndMinute { get; set; }
         public string FullSegment
         {
-            get { return string.Format("{0}-{1}", BeginTime, EndTime); }
+            get { return string.Format("{0}-{1}", BeginTime.ToString("HH:mm"), EndTime.ToString("HH:mm")); }
         }
 
         public string Title
@@ -79,23 +75,21 @@ namespace Rld.Acs.WpfApplication.ViewModel.Views
                     return;
                 }
 
-                var beginDateTime = new DateTime(2000, 1, 1, StartHour.ToInt32(), StartMinute.ToInt32(), 0);
-                var endDateTime = new DateTime(2000, 1, 1, EndHour.ToInt32(), EndMinute.ToInt32(), 0);
-                if (endDateTime.Ticks - beginDateTime.Ticks < 0)
+                var shortEndTime = new DateTime(2000,1,1,EndTime.Hour, EndTime.Minute,0);
+                var shortBeginTime = new DateTime(2000, 1, 1, BeginTime.Hour, BeginTime.Minute, 0);
+                if (shortEndTime.Ticks - shortBeginTime.Ticks < 0)
                 {
                     message = LanguageManager.GetLocalizationResource(Resource.MSG_BeginTiimeCannotGreatThanEndTime);
                     SendMessage(message);
                     return;
                 }
 
-                BeginTime = beginDateTime.ToString("HH:mm");
-                EndTime = endDateTime.ToString("HH:mm");
                 Status = GeneralStatus.Enabled;
-
                 var coreModel = Mapper.Map<TimeSegment>(this);
 
                 if (TimeSegmentID == 0)
                 {
+                    coreModel.TimeSegmentCode = "0";
                     coreModel.CreateUserID = ApplicationManager.GetInstance().CurrentOperatorInfo.OperatorID;
                     coreModel.CreateDate = DateTime.Now;
                     coreModel = _timeSegmentRepo.Insert(coreModel);
